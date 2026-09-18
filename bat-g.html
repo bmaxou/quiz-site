@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>BAT-G — Cabinet Bouche &amp; Chmura</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F4F1EA; --surface:#FFFFFF; --surface-2:#EAE6D9; --ink:#20241E; --ink-soft:#63695D;
+    --line:#E0D9C9; --accent:#1E3A5F; --accent-ink:#F4F1EA; --accent-soft:#E1E7EC; --terracotta:#A0824C;
+    --progress-bg:#E6E1D3; --progress-fill:#7FBF9E;
+    --shadow: 0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);
+    --verte:#3D6B4F; --verte-bg:#E4EEE8; --orange:#96631E; --orange-bg:#F3E8D2; --rouge:#B4483C; --rouge-bg:#F5DEDA;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',-apple-system,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,h3,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:var(--ink);}
+  .wrap{max-width:520px;margin:0 auto;padding:48px 24px 80px;}
+  .back-top{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--ink-soft);text-decoration:none;margin-bottom:20px;}
+  .back-top:hover{color:var(--ink);}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--ink-soft);display:inline-block;}
+  h1{font-size:28px;margin:0 0 10px;}
+  .intro-text{color:var(--ink-soft);font-size:15px;margin:0 0 28px;}
+
+  .start-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:32px 28px;box-shadow:var(--shadow);}
+  .pills{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 20px;}
+  .pill{font-size:12.5px;font-weight:600;color:var(--ink-soft);background:var(--surface-2);border-radius:999px;padding:6px 13px;display:inline-flex;align-items:center;gap:6px;}
+  .instructions{font-size:14.5px;color:var(--ink-soft);margin:0 0 22px;line-height:1.7;}
+
+  .quiz-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:28px 26px 26px;box-shadow:var(--shadow);}
+  .progress-track{height:8px;border-radius:99px;background:var(--progress-bg);overflow:hidden;margin-bottom:14px;}
+  .progress-fill{height:100%;background:var(--progress-fill);border-radius:99px;width:0%;transition:width .3s ease;}
+  .q-count{font-size:12.5px;color:var(--ink-soft);font-weight:600;margin:0 0 20px;}
+  .q-item{font-size:18px;font-weight:600;color:var(--ink);margin:0 0 26px;font-family:'Cormorant Garamond',Georgia,serif;line-height:1.35;}
+  .options{display:flex;flex-direction:column;gap:10px;}
+  .option-btn{font:inherit;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:14.5px;color:var(--ink);cursor:pointer;transition:border-color .15s ease,background .15s ease,transform .1s ease;}
+  .option-btn:hover{border-color:var(--accent);}
+  .option-btn.selected{border-color:var(--accent);background:var(--accent-soft);font-weight:600;}
+  .back-link{display:inline-flex;align-items:center;gap:6px;margin-top:22px;font-size:13px;color:var(--ink-soft);background:none;border:none;font:inherit;cursor:pointer;padding:0;}
+  .back-link:hover{color:var(--ink);}
+  .back-link[hidden]{display:none;}
+
+  #result{display:none;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:30px 28px;box-shadow:var(--shadow);}
+  #result h2.serif{font-size:22px;margin:0 0 6px;}
+  .meta-line{font-size:13.5px;color:var(--ink-soft);margin:0 0 24px;}
+  .section-title{font-size:12.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft);margin:0 0 12px;padding-top:18px;border-top:1px solid var(--line);}
+  .section-title:first-of-type{border-top:none;padding-top:0;}
+  .score-line{font-size:17px;margin:0 0 14px;}
+  .score-line strong{font-size:22px;color:var(--accent);}
+
+  .global-badge{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;font-weight:700;border-radius:999px;padding:8px 16px;margin:0 0 18px;}
+  .global-badge.verte{color:var(--verte);background:var(--verte-bg);}
+  .global-badge.orange{color:var(--orange);background:var(--orange-bg);}
+  .global-badge.rouge{color:var(--rouge);background:var(--rouge-bg);}
+  .global-badge .dot{width:9px;height:9px;border-radius:50%;background:currentColor;flex-shrink:0;}
+
+  .dim-block{border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:12px;}
+  .dim-block .dim-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:4px;flex-wrap:wrap;}
+  .dim-block .dim-name{font-family:'Cormorant Garamond',Georgia,serif;font-size:17px;font-weight:600;color:var(--ink);}
+  .dim-block .dim-score{font-size:14.5px;font-weight:700;}
+  .dim-block .dim-items{font-size:12px;color:var(--ink-soft);margin:0 0 10px;}
+  .zone-chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;border-radius:999px;padding:4px 11px;}
+  .zone-chip.verte{color:var(--verte);background:var(--verte-bg);}
+  .zone-chip.orange{color:var(--orange);background:var(--orange-bg);}
+  .zone-chip.rouge{color:var(--rouge);background:var(--rouge-bg);}
+  .zone-chip .dot{width:7px;height:7px;border-radius:50%;background:currentColor;}
+  .zone-bar{display:flex;height:8px;border-radius:99px;overflow:hidden;margin-top:10px;}
+  .zone-bar span{display:block;height:100%;}
+  .zone-bar .seg-verte{background:#BFE0CC;}
+  .zone-bar .seg-orange{background:#E9CE9C;}
+  .zone-bar .seg-rouge{background:#E3B0A8;}
+  .zone-bar .marker{position:relative;}
+
+  .dim-note{font-size:13.5px;color:var(--ink-soft);margin:0 0 20px;line-height:1.65;}
+  .answer-block{border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin-bottom:10px;}
+  .answer-block .q-no{font-size:12px;font-weight:700;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.05em;margin:0 0 8px;}
+  .answer-block .item{font-size:14.5px;font-weight:600;color:var(--ink);margin:0 0 8px;}
+  .answer-block .resp{font-size:14px;font-weight:600;color:var(--ink);}
+  .answer-block .resp .sc{font-weight:400;color:var(--ink-soft);}
+
+  .btn{font:inherit;font-size:15px;font-weight:600;padding:13px 30px;border-radius:999px;border:none;background:var(--accent);color:var(--accent-ink);cursor:pointer;transition:background .15s ease;width:100%;}
+  .btn:hover{background:#16273D;}
+  .btn-outline{background:none;border:1px solid var(--accent);color:var(--accent);margin-top:14px;}
+  .btn-outline:hover{background:var(--accent-soft);}
+  .hint{font-size:12.5px;color:var(--ink-soft);margin-top:14px;text-align:center;}
+  .footnote{margin-top:40px;font-size:11.5px;color:var(--ink-soft);border-top:1px solid var(--line);padding-top:16px;line-height:1.7;}
+  [hidden]{display:none !important;}
+
+  @media print{
+    .back-top, .eyebrow, h1, .intro-text, .footnote, .btn-outline{ display:none !important; }
+    body{background:#fff;}
+    #result{box-shadow:none;border:none;padding:0;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back-top" href="index.html">&larr; Tous les tests</a>
+  <div class="eyebrow">Auto-évaluation</div>
+  <h1 class="serif">Outil d'évaluation du burnout : un premier repère</h1>
+  <p class="intro-text">Ce résultat ne remplace pas un échange avec votre praticien, il sert de point de départ pour en discuter ensemble.</p>
+
+  <!-- Écran d'accueil -->
+  <div class="start-card" id="startScreen">
+    <div class="pills">
+      <span class="pill">32 questions</span>
+      <span class="pill">10 minutes</span>
+    </div>
+    <p class="instructions">Veuillez répondre à chaque question aussi honnêtement que possible, en reflétant ce que vous ressentez généralement. Il n'y a pas de bonnes ou de mauvaises réponses, seulement vos propres expériences et sentiments.</p>
+    <button type="button" class="btn" id="startBtn">Commencer</button>
+    <p class="hint">Rien n'est envoyé ni conservé sur un serveur : si vous quittez avant la fin, vos réponses sont perdues et il faudra recommencer.</p>
+  </div>
+
+  <!-- Écran question (une par écran) -->
+  <div class="quiz-card" id="quizScreen" hidden>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <p class="q-count" id="qCount">Question 1/32</p>
+    <p class="q-item" id="qItem"></p>
+    <div class="options" id="qOptions"></div>
+    <button type="button" class="back-link" id="backBtn" hidden>&larr; Question précédente</button>
+  </div>
+
+  <!-- Rapport de résultat -->
+  <div id="result">
+    <h2 class="serif">Outil d'évaluation du burnout — version générale (BAT-G)</h2>
+    <p class="meta-line">Passation : <span id="passationDate"></span></p>
+
+    <p class="section-title">Interprétation générale</p>
+    <div id="globalBadge"></div>
+    <p class="dim-note">Le BAT-G distingue des symptômes primaires (épuisement, distance mentale, dérèglement cognitif, dérèglement émotionnel) et des symptômes secondaires (plaintes psychiques et psychosomatiques). Chaque score est une moyenne (1 à 5) des items concernés, comparée à des seuils de recherche répartissant trois zones : verte (pas de burnout), orange (à risque) et rouge (burnout sévère). La zone globale retenue ci-dessus est la plus sévère parmi l'ensemble des scores détaillés plus bas.</p>
+
+    <p class="section-title">Symptômes primaires</p>
+    <p class="score-line">Score total (22 items) : <strong id="scorePrimary">0.00</strong>/5</p>
+    <div id="dimPrimaryBlocks"></div>
+
+    <p class="section-title">Symptômes secondaires</p>
+    <p class="score-line">Score total (10 items — plaintes psychiques et psychosomatiques) : <strong id="scoreSecondary">0.00</strong>/5</p>
+    <div id="dimSecondaryBlock"></div>
+
+    <p class="section-title">Réponses du patient</p>
+    <div id="answersList"></div>
+
+    <button type="button" class="btn" id="downloadBtn">Télécharger le résultat (PDF)</button>
+    <button type="button" class="btn btn-outline" id="restartBtn">Refaire le test</button>
+  </div>
+
+  <p class="footnote">
+    Burnout Assessment Tool — version générale (BAT-G), Hans De Witte, Wouter Schaufeli &amp; Dorien Huyghebaert (2019/2020).
+    Schaufeli WB, Desart S, De Witte H. Burnout Assessment Tool (BAT)—Development, Validity, and Reliability. Int J Environ Res Public Health. 2020;17(24):9495. https://doi.org/10.3390/ijerph17249495.
+    Ce résultat est un repère, il ne constitue pas un diagnostic.
+  </p>
+</div>
+
+<script>
+(function(){
+  // Les 32 items du BAT-G, regroupés en 6 dimensions.
+  // Les items 9-12 (« Distance mentale ») emploient une formulation centrée
+  // sur le travail (« mon travail ») alors qu'il s'agit officiellement de la
+  // version GÉNÉRALE du BAT (destinée aussi aux personnes sans activité
+  // professionnelle). Ce texte est repris tel quel : c'est exactement ce qui
+  // est affiché en direct par mentaal.fr sur sa page BAT-G au 15/09/2026. Ce
+  // n'est pas une erreur de recopie de notre part — voir la note transmise à
+  // Max au sujet de cette incohérence potentielle du contenu source.
+  const dimensions = [
+    {
+      key: 'epuisement', name: 'Épuisement', group: 'primary',
+      thresholds: {verte: 3.06, orange: 3.31}, // < 3.06 verte, 3.06–3.31 orange, >= 3.31 rouge
+      items: [
+        "Je me sens épuisé/e mentalement",
+        "Tout ce que je fais me demande beaucoup d'efforts",
+        "Après une journée, il m'est difficile de retrouver mon énergie",
+        "Je me sens épuisé physiquement",
+        "Quand je me lève le matin, je manque d'énergie pour commencer une nouvelle journée",
+        "Je veux être actif/ve, mais il m'est impossible d'y arriver",
+        "Quand je fais beaucoup d'efforts, je me fatigue plus que d'habitude",
+        "À la fin de ma journée, je me sens épuisé et vidé mentalement"
+      ]
+    },
+    {
+      key: 'distance', name: 'Distance mentale', group: 'primary',
+      thresholds: {verte: 2.5, orange: 3.1}, // < 2.5 verte, 2.5–3.1 orange, >= 3.1 rouge
+      items: [
+        "J'ai du mal à être enthousiaste à propos de mon travail",
+        "Je ressens une profonde aversion pour mon travail",
+        "Je ressens de l'indifférence à propos de mon travail",
+        "Je ne pense pas que les autres accordent de l'importance à mon travail"
+      ]
+    },
+    {
+      key: 'cognitif', name: 'Dérèglement cognitif', group: 'primary',
+      thresholds: {verte: 2.7, orange: 3.1}, // < 2.7 verte, 2.7–3.1 orange, >= 3.1 rouge
+      items: [
+        "J'ai du mal à rester attentif/ve",
+        "Il m'est difficile de penser de manière claire",
+        "J'oublie des choses et je suis distrait/e",
+        "J'ai du mal à me concentrer",
+        "Je fais des erreurs car mon esprit est ailleurs"
+      ]
+    },
+    {
+      key: 'emotionnel', name: 'Dérèglement émotionnel', group: 'primary',
+      thresholds: {verte: 2.1, orange: 2.9}, // < 2.1 verte, 2.1–2.9 orange, >= 2.9 rouge
+      items: [
+        "Je me sens incapable de contrôler mes émotions",
+        "Je ne me reconnais pas dans mes réactions émotionnelles",
+        "Je deviens irritable quand les choses ne se passent pas comme je voudrais",
+        "Il m'arrive d'être en colère ou triste sans vraiment savoir pourquoi",
+        "Il m'arrive de réagir avec excès sans en avoir l'intention"
+      ]
+    },
+    {
+      key: 'psychique', name: 'Plaintes psychiques', group: 'secondary',
+      items: [
+        "J'ai du mal à m'endormir ou je me réveille en pleine nuit",
+        "J'ai tendance à m'inquiéter",
+        "Je me sens tendu et stressé",
+        "Je me sens anxieux et/ou je souffre d'attaques de panique",
+        "Le bruit et la foule me dérangent"
+      ]
+    },
+    {
+      key: 'psychosomatique', name: 'Plaintes psychosomatiques', group: 'secondary',
+      items: [
+        "Je souffre de palpitations et de douleurs de poitrine",
+        "Je souffre de douleurs d'estomac et/ou intestinales",
+        "Je souffre de migraines",
+        "Je souffre de douleurs musculaires, par exemple dans le cou, l'épaule ou le dos",
+        "Je tombe souvent malade"
+      ]
+    }
+  ];
+
+  const PRIMARY_THRESHOLDS = {verte: 2.59, orange: 3.02}; // < 2.59 verte, 2.59–3.02 orange, >= 3.02 rouge
+  const SECONDARY_THRESHOLDS = {verte: 2.85, orange: 3.35}; // < 2.85 verte, 2.85–3.35 orange, >= 3.35 rouge
+
+  const items = [];
+  dimensions.forEach(function(d){ d.items.forEach(function(it){ items.push(it); }); });
+
+  const options = ["Jamais", "Rarement", "Parfois", "Souvent", "Toujours"];
+  const answers = new Array(items.length).fill(null);
+  let current = 0;
+
+  const startScreen = document.getElementById('startScreen');
+  const quizScreen = document.getElementById('quizScreen');
+  const startBtn = document.getElementById('startBtn');
+  const qCount = document.getElementById('qCount');
+  const qItem = document.getElementById('qItem');
+  const qOptions = document.getElementById('qOptions');
+  const backBtn = document.getElementById('backBtn');
+  const progressFill = document.getElementById('progressFill');
+  const resultBox = document.getElementById('result');
+
+  function pointsFor(idx){
+    // idx 0="Jamais"(1pt) ... 4="Toujours"(5pts)
+    return idx + 1;
+  }
+
+  function zoneFor(avg, thresholds){
+    if (avg < thresholds.verte) return 'verte';
+    if (avg < thresholds.orange) return 'orange';
+    return 'rouge';
+  }
+
+  function zoneLabel(zone){
+    return zone === 'verte' ? 'Zone verte — pas de burnout'
+      : zone === 'orange' ? 'Zone orange — à risque'
+      : 'Zone rouge — burnout sévère';
+  }
+
+  startBtn.addEventListener('click', function(){
+    startScreen.hidden = true;
+    quizScreen.hidden = false;
+    renderQuestion();
+  });
+
+  backBtn.addEventListener('click', function(){
+    if(current > 0){
+      current -= 1;
+      renderQuestion();
+    }
+  });
+
+  function renderQuestion(){
+    qCount.textContent = 'Question ' + (current + 1) + '/' + items.length;
+    qItem.textContent = items[current];
+    progressFill.style.width = (((current) / items.length) * 100) + '%';
+    backBtn.hidden = current === 0;
+
+    qOptions.innerHTML = '';
+    options.forEach(function(label, idx){
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'option-btn';
+      btn.textContent = label;
+      if(answers[current] === idx){ btn.classList.add('selected'); }
+      btn.addEventListener('click', function(){ selectAnswer(idx, btn); });
+      qOptions.appendChild(btn);
+    });
+  }
+
+  function selectAnswer(idx, btnEl){
+    answers[current] = idx;
+    Array.from(qOptions.children).forEach(function(b){ b.classList.remove('selected'); });
+    btnEl.classList.add('selected');
+    progressFill.style.width = (((current + 1) / items.length) * 100) + '%';
+
+    setTimeout(function(){
+      if(current < items.length - 1){
+        current += 1;
+        renderQuestion();
+      } else {
+        showResult();
+      }
+    }, 380);
+  }
+
+  function average(values){
+    return values.reduce(function(s, v){ return s + v; }, 0) / values.length;
+  }
+
+  function renderDimBlock(d, offset){
+    const vals = d.items.map(function(_, i){ return pointsFor(answers[offset + i]); });
+    const avg = average(vals);
+    const zone = zoneFor(avg, d.thresholds);
+    const block = document.createElement('div');
+    block.className = 'dim-block';
+    block.innerHTML =
+      '<div class="dim-head">' +
+        '<span class="dim-name">' + d.name + '</span>' +
+        '<span class="dim-score">' + avg.toFixed(2) + '/5</span>' +
+      '</div>' +
+      '<p class="dim-items">' + d.items.length + ' items — seuils : &lt; ' + d.thresholds.verte.toFixed(2) + ' verte · ' + d.thresholds.verte.toFixed(2) + '–' + d.thresholds.orange.toFixed(2) + ' orange · &ge; ' + d.thresholds.orange.toFixed(2) + ' rouge</p>' +
+      '<span class="zone-chip ' + zone + '"><span class="dot"></span>' + zoneLabel(zone) + '</span>';
+    return { el: block, avg: avg, zone: zone };
+  }
+
+  function zoneRank(zone){ return zone === 'rouge' ? 2 : zone === 'orange' ? 1 : 0; }
+
+  function showResult(){
+    quizScreen.hidden = true;
+
+    document.getElementById('passationDate').textContent = new Date().toLocaleString('fr-FR', {day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit'});
+
+    let offset = 0;
+    const primaryBlocksEl = document.getElementById('dimPrimaryBlocks');
+    primaryBlocksEl.innerHTML = '';
+    const primaryVals = [];
+    let worstZone = 'verte';
+    dimensions.forEach(function(d){
+      if (d.group === 'primary'){
+        const res = renderDimBlock(d, offset);
+        primaryBlocksEl.appendChild(res.el);
+        if (zoneRank(res.zone) > zoneRank(worstZone)) worstZone = res.zone;
+        d.items.forEach(function(_, i){ primaryVals.push(pointsFor(answers[offset + i])); });
+      }
+      offset += d.items.length;
+    });
+    const primaryAvg = average(primaryVals);
+    const primaryZone = zoneFor(primaryAvg, PRIMARY_THRESHOLDS);
+    if (zoneRank(primaryZone) > zoneRank(worstZone)) worstZone = primaryZone;
+    document.getElementById('scorePrimary').textContent = primaryAvg.toFixed(2);
+
+    offset = 0;
+    const secondaryVals = [];
+    dimensions.forEach(function(d){
+      if (d.group === 'secondary'){
+        d.items.forEach(function(_, i){ secondaryVals.push(pointsFor(answers[offset + i])); });
+      }
+      offset += d.items.length;
+    });
+    const secondaryAvg = average(secondaryVals);
+    const secondaryZone = zoneFor(secondaryAvg, SECONDARY_THRESHOLDS);
+    if (zoneRank(secondaryZone) > zoneRank(worstZone)) worstZone = secondaryZone;
+    document.getElementById('scoreSecondary').textContent = secondaryAvg.toFixed(2);
+
+    const secondaryBlockEl = document.getElementById('dimSecondaryBlock');
+    secondaryBlockEl.innerHTML = '';
+    const secBlock = document.createElement('div');
+    secBlock.className = 'dim-block';
+    secBlock.innerHTML =
+      '<div class="dim-head">' +
+        '<span class="dim-name">Plaintes psychiques &amp; psychosomatiques</span>' +
+        '<span class="dim-score">' + secondaryAvg.toFixed(2) + '/5</span>' +
+      '</div>' +
+      '<p class="dim-items">10 items (5 psychiques + 5 psychosomatiques), interprétés ensemble — seuils : &lt; ' + SECONDARY_THRESHOLDS.verte.toFixed(2) + ' verte · ' + SECONDARY_THRESHOLDS.verte.toFixed(2) + '–' + SECONDARY_THRESHOLDS.orange.toFixed(2) + ' orange · &ge; ' + SECONDARY_THRESHOLDS.orange.toFixed(2) + ' rouge</p>' +
+      '<span class="zone-chip ' + secondaryZone + '"><span class="dot"></span>' + zoneLabel(secondaryZone) + '</span>';
+    secondaryBlockEl.appendChild(secBlock);
+
+    const globalBadge = document.getElementById('globalBadge');
+    globalBadge.innerHTML = '<span class="global-badge ' + worstZone + '"><span class="dot"></span>' + zoneLabel(worstZone) + '</span>';
+
+    const answersList = document.getElementById('answersList');
+    answersList.innerHTML = '';
+    items.forEach(function(item, idx){
+      const block = document.createElement('div');
+      block.className = 'answer-block';
+      block.innerHTML =
+        '<p class="q-no">Question ' + (idx + 1) + '</p>' +
+        '<p class="item">' + item + '</p>' +
+        '<p class="resp">' + options[answers[idx]] + ' <span class="sc">(Score : ' + pointsFor(answers[idx]) + ')</span></p>';
+      answersList.appendChild(block);
+    });
+
+    resultBox.style.display = 'block';
+    resultBox.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  document.getElementById('downloadBtn').addEventListener('click', function(){
+    window.print();
+  });
+
+  document.getElementById('restartBtn').addEventListener('click', function(){
+    answers.fill(null);
+    current = 0;
+    resultBox.style.display = 'none';
+    startScreen.hidden = false;
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+})();
+</script>
+</body>
+</html>

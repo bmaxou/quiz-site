@@ -4,74 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<style>
-  :root{color-scheme:light}
-  body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}
-  img{max-width:100%}
-  [hidden]:not([hidden=until-found i]){display:none!important}
-  html.gate-locked body > *:not(#gate){display:none!important}
-  html.gate-locked{overflow:hidden}
-  #gate{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;
-    background:#F4F1EA;padding:24px;}
-  html.gate-locked #gate{display:flex;}
-  #gate .box{width:100%;max-width:330px;text-align:center;}
-  #gate .mark{width:56px;height:56px;border-radius:50%;margin:0 auto 22px;
-    background:linear-gradient(150deg,#27466E,#16273D);
-    border:1px solid rgba(255,255,255,.42);
-    box-shadow:0 10px 22px -8px rgba(10,14,22,.5);
-    display:flex;align-items:center;justify-content:center;}
-  #gate .mark .brand-mark{width:32px;height:32px;}
-  #gate h1{font-family:Georgia,'Times New Roman',serif;font-weight:500;font-size:22px;
-    color:#20241E;margin:0 0 6px;}
-  #gate p{font-size:13.5px;color:#63695D;margin:0 0 26px;line-height:1.6;}
-  #gate input{width:100%;box-sizing:border-box;padding:14px 16px;border-radius:12px;
-    border:1px solid #E0D9C9;background:#fff;font-size:16px;color:#20241E;text-align:center;
-    letter-spacing:.18em;font-family:inherit;}
-  #gate input:focus{outline:none;border-color:#1E3A5F;box-shadow:0 0 0 3px rgba(30,58,95,.12);}
-  #gate button{width:100%;margin-top:12px;padding:14px 16px;border:none;border-radius:12px;
-    background:#1E3A5F;color:#F4F1EA;font-size:15px;font-family:inherit;cursor:pointer;}
-  #gate .err{min-height:20px;margin:12px 0 0;font-size:13px;color:#A03A2B;}
-</style>
-<script>
-  (function(){
-    try{ if(localStorage.getItem('psypsy-apercu') !== 'ok') document.documentElement.classList.add('gate-locked'); }
-    catch(e){ document.documentElement.classList.add('gate-locked'); }
-  })();
-</script>
-</head>
-<body>
-<div id="gate">
-  <div class="box">
-    <div class="mark"><span class="brand-mark" aria-hidden="true"></span></div>
-    <h1>Aper&ccedil;u priv&eacute;</h1>
-    <p>Cette page n'est pas encore publique. Entrez le mot de passe pour la consulter.</p>
-    <form id="gate-form" autocomplete="off">
-      <input id="gate-input" type="password" inputmode="numeric" placeholder="Mot de passe" aria-label="Mot de passe" autofocus>
-      <button type="submit">Entrer</button>
-    </form>
-    <p class="err" id="gate-err"></p>
-  </div>
-</div>
-<script>
-  (function(){
-    var f = document.getElementById('gate-form');
-    var i = document.getElementById('gate-input');
-    var e = document.getElementById('gate-err');
-    f.addEventListener('submit', function(ev){
-      ev.preventDefault();
-      if(i.value.trim() === '1024'){
-        try{ localStorage.setItem('psypsy-apercu','ok'); }catch(err){}
-        document.documentElement.classList.remove('gate-locked');
-        e.textContent = '';
-        setTimeout(function(){ window.dispatchEvent(new Event('resize')); }, 30);
-      } else {
-        e.textContent = 'Mot de passe incorrect.';
-        i.value = ''; i.focus();
-      }
-    });
-  })();
-</script>
-<title>GAD-7 — Cabinet Bouche &amp; Chmura</title>
+<title>IUS — Cabinet Bouche &amp; Chmura</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -97,15 +30,11 @@
   .pills{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 20px;}
   .pill{font-size:12.5px;font-weight:600;color:var(--ink-soft);background:var(--surface-2);border-radius:999px;padding:6px 13px;display:inline-flex;align-items:center;gap:6px;}
   .instructions{font-size:14.5px;color:var(--ink-soft);margin:0 0 22px;line-height:1.7;}
-  .field-label{font-size:12.5px;font-weight:600;color:var(--ink-soft);display:block;margin:0 0 6px;}
-  .field-input{width:100%;font:inherit;font-size:14.5px;padding:11px 13px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);margin-bottom:22px;}
-  .field-input:focus{outline:none;border-color:var(--accent);}
 
   .quiz-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:28px 26px 26px;box-shadow:var(--shadow);}
   .progress-track{height:8px;border-radius:99px;background:var(--progress-bg);overflow:hidden;margin-bottom:14px;}
   .progress-fill{height:100%;background:var(--progress-fill);border-radius:99px;width:0%;transition:width .3s ease;}
   .q-count{font-size:12.5px;color:var(--ink-soft);font-weight:600;margin:0 0 20px;}
-  .q-stem{font-size:13.5px;color:var(--ink-soft);margin:0 0 6px;}
   .q-item{font-size:18px;font-weight:600;color:var(--ink);margin:0 0 26px;font-family:'Cormorant Garamond',Georgia,serif;line-height:1.35;}
   .options{display:flex;flex-direction:column;gap:10px;}
   .option-btn{font:inherit;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:14.5px;color:var(--ink);cursor:pointer;transition:border-color .15s ease,background .15s ease,transform .1s ease;}
@@ -115,7 +44,6 @@
   .back-link:hover{color:var(--ink);}
   .back-link[hidden]{display:none;}
 
-  /* ---- rapport de résultat, format identique à celui de Mentaal ---- */
   #result{display:none;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:30px 28px;box-shadow:var(--shadow);}
   #result h2.serif{font-size:22px;margin:0 0 6px;}
   .meta-line{font-size:13.5px;color:var(--ink-soft);margin:0 0 24px;}
@@ -123,15 +51,9 @@
   .section-title:first-of-type{border-top:none;padding-top:0;}
   .score-line{font-size:17px;margin:0 0 14px;}
   .score-line strong{font-size:22px;color:var(--accent);}
-  .band-table{width:100%;border-collapse:collapse;font-size:14px;margin-bottom:6px;}
-  .band-table td{padding:8px 4px;border-bottom:1px solid var(--line);color:var(--ink-soft);}
-  .band-table tr:last-child td{border-bottom:none;}
-  .band-table td.range{width:70px;font-weight:600;}
-  .band-table tr.active td{color:var(--ink);font-weight:700;}
-  .band-badge{display:inline-block;margin-left:8px;background:var(--accent);color:var(--accent-ink);font-size:11.5px;font-weight:700;border-radius:999px;padding:2px 9px;}
+  .dim-note{font-size:13.5px;color:var(--ink-soft);margin:0 0 20px;line-height:1.65;}
   .answer-block{border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin-bottom:10px;}
   .answer-block .q-no{font-size:12px;font-weight:700;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.05em;margin:0 0 8px;}
-  .answer-block .stem{font-size:12.5px;color:var(--ink-soft);margin:0 0 4px;}
   .answer-block .item{font-size:14.5px;font-weight:600;color:var(--ink);margin:0 0 8px;}
   .answer-block .resp{font-size:14px;font-weight:600;color:var(--ink);}
   .answer-block .resp .sc{font-weight:400;color:var(--ink-soft);}
@@ -155,18 +77,16 @@
 <div class="wrap">
   <a class="back-top" href="index.html">&larr; Tous les tests</a>
   <div class="eyebrow">Auto-évaluation</div>
-  <h1 class="serif">Anxiété : un premier repère</h1>
+  <h1 class="serif">Intolérance à l'incertitude : un premier repère</h1>
   <p class="intro-text">Ce résultat ne remplace pas un échange avec votre praticien, il sert de point de départ pour en discuter ensemble.</p>
 
   <!-- Écran d'accueil -->
   <div class="start-card" id="startScreen">
     <div class="pills">
-      <span class="pill">7 questions</span>
-      <span class="pill">2 minutes</span>
+      <span class="pill">27 questions</span>
+      <span class="pill">8 minutes</span>
     </div>
-    <p class="instructions">Veuillez lire attentivement chaque question et sélectionner la réponse qui correspond le mieux à la fréquence à laquelle vous avez ressenti chaque symptôme au cours des deux dernières semaines.</p>
-    <label class="field-label" for="patientCode">Nom ou code patient (facultatif)</label>
-    <input type="text" id="patientCode" class="field-input" placeholder="Ex : initiales ou code donné par votre praticien">
+    <p class="instructions">Voici une série d'énoncés qui représentent comment les gens peuvent réagir à l'incertitude dans la vie. Indiquez jusqu'à quel point chacun des énoncés suivants vous correspond.</p>
     <button type="button" class="btn" id="startBtn">Commencer</button>
     <p class="hint">Rien n'est envoyé ni conservé sur un serveur : si vous quittez avant la fin, vos réponses sont perdues et il faudra recommencer.</p>
   </div>
@@ -174,26 +94,20 @@
   <!-- Écran question (une par écran) -->
   <div class="quiz-card" id="quizScreen" hidden>
     <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
-    <p class="q-count" id="qCount">Question 1/7</p>
-    <p class="q-stem">Au cours des deux dernières semaines, à quelle fréquence avez-vous été gêné(e) par ce problème :</p>
+    <p class="q-count" id="qCount">Question 1/27</p>
     <p class="q-item" id="qItem"></p>
     <div class="options" id="qOptions"></div>
     <button type="button" class="back-link" id="backBtn" hidden>&larr; Question précédente</button>
   </div>
 
-  <!-- Rapport de résultat (même structure que le compte-rendu Mentaal) -->
+  <!-- Rapport de résultat -->
   <div id="result">
-    <h2 class="serif">Echelle de dépistage du TAG (GAD-7)</h2>
-    <p class="meta-line">Patient : <span id="patientNameOut">Patient</span><br>Passation : <span id="passationDate"></span></p>
+    <h2 class="serif">Échelle d'intolérance à l'incertitude (IUS)</h2>
+    <p class="meta-line">Passation : <span id="passationDate"></span></p>
 
     <p class="section-title">Cotations</p>
-    <p class="score-line">Score : <strong id="scoreVal">0</strong>/21</p>
-    <table class="band-table" id="bandTable">
-      <tr data-min="0" data-max="4"><td class="range">0 – 4</td><td>Anxiété minimale</td></tr>
-      <tr data-min="5" data-max="9"><td class="range">5 – 9</td><td>Anxiété légère</td></tr>
-      <tr data-min="10" data-max="14"><td class="range">10 – 14</td><td>Anxiété modérée</td></tr>
-      <tr data-min="15" data-max="21"><td class="range">15 – 21</td><td>Anxiété sévère</td></tr>
-    </table>
+    <p class="score-line">Score total : <strong id="scoreVal">0</strong> <span style="font-size:14px;color:var(--ink-soft);">(échelle de 27 à 135)</span></p>
+    <p class="dim-note">L'échelle IUS-27 ne dispose pas de seuil clinique validé : un score élevé traduit une intolérance à l'incertitude plus marquée, à interpréter par comparaison avec le reste du bilan plutôt que par un seuil isolé.</p>
 
     <p class="section-title">Réponses du patient</p>
     <div id="answersList"></div>
@@ -203,38 +117,61 @@
   </div>
 
   <p class="footnote">
-    Échelle GAD-7 (Spitzer, Kroenke, Williams &amp; Löwe, 2006), traduction française d'usage courant.
-    Un score de 10 ou plus signale une anxiété qui mérite d'être approfondie en consultation ;
-    ce test ne constitue pas un diagnostic.
+    Intolerance of Uncertainty Scale — IUS / ÉII (Freeston, Rhéaume, Letarte, Dugas &amp; Ladouceur, 1994), échelle développée originalement en français (Université Laval).
+    Ce résultat est un repère, il ne constitue pas un diagnostic.
   </p>
 </div>
 
 <script>
 (function(){
-  const stem = "Au cours des deux dernières semaines, à quelle fréquence avez-vous été gêné(e) par ce problème :";
   const items = [
-    "Un sentiment de nervosité, d'anxiété ou de tension",
-    "Une incapacité à arrêter de s'inquiéter ou à contrôler ses inquiétudes",
-    "Une inquiétude excessive à propos de différentes choses",
-    "Des difficultés à se détendre",
-    "Une agitation telle qu'il est difficile de rester tranquille",
-    "Une tendance à être facilement contrarié(e) ou irritable",
-    "Une peur que quelque chose d'épouvantable puisse arriver"
+    "L'incertitude m'empêche de prendre position.",
+    "Être incertain(e) veut dire qu'on est une personne désorganisée.",
+    "L'incertitude rend la vie intolérable.",
+    "C'est injuste de ne pas avoir de garanties dans la vie.",
+    "Je ne peux pas avoir l'esprit tranquille tant que je ne sais pas ce qui va arriver le lendemain.",
+    "L'incertitude me rend mal à l'aise, anxieux(se) ou stressé(e).",
+    "Les imprévus me dérangent énormément.",
+    "Ça me frustre de ne pas avoir toute l'information dont j'ai besoin.",
+    "L'incertitude m'empêche de profiter pleinement de la vie.",
+    "On devrait tout prévenir pour éviter les surprises.",
+    "Un léger imprévu peut tout gâcher, même la meilleure des planifications.",
+    "Lorsque c'est le temps d'agir, l'incertitude me paralyse.",
+    "Être incertain(e) veut dire que je ne suis pas à la hauteur.",
+    "Lorsque je suis incertain(e), je ne peux pas aller de l'avant.",
+    "Lorsque je suis incertain(e), je ne peux pas bien fonctionner.",
+    "Contrairement à moi, les autres semblent toujours savoir où ils vont dans la vie.",
+    "L'incertitude me rend vulnérable, malheureux(se) ou triste.",
+    "Je veux toujours savoir ce que l'avenir me réserve.",
+    "Je déteste être pris(e) au dépourvu.",
+    "Le moindre doute peut m'empêcher d'agir.",
+    "Je devrais être capable de tout organiser à l'avance.",
+    "Être incertain(e), ça veut dire que je manque de confiance.",
+    "Je trouve injuste que d'autres personnes semblent certaines face à leur avenir.",
+    "L'incertitude m'empêche de bien dormir.",
+    "Je dois me retirer de toute situation incertaine.",
+    "Les ambiguïtés de la vie me stressent.",
+    "Je ne tolère pas d'être indécis(e) au sujet de mon avenir."
   ];
-  const options = ["Jamais","Plusieurs jours","Plus de la moitié du temps","Presque tous les jours"];
+  // Aucun item inversé dans l'IUS-27 : tous les items sont cotés directement (1-5)
+  const options = ["Pas du tout correspondant", "Un peu correspondant", "Assez correspondant", "Très correspondant", "Tout à fait correspondant"];
   const answers = new Array(items.length).fill(null);
   let current = 0;
 
   const startScreen = document.getElementById('startScreen');
   const quizScreen = document.getElementById('quizScreen');
   const startBtn = document.getElementById('startBtn');
-  const patientCode = document.getElementById('patientCode');
   const qCount = document.getElementById('qCount');
   const qItem = document.getElementById('qItem');
   const qOptions = document.getElementById('qOptions');
   const backBtn = document.getElementById('backBtn');
   const progressFill = document.getElementById('progressFill');
   const resultBox = document.getElementById('result');
+
+  function pointsFor(idx){
+    // idx 0="Pas du tout correspondant"(1pt) ... 4="Tout à fait correspondant"(5pts)
+    return idx + 1;
+  }
 
   startBtn.addEventListener('click', function(){
     startScreen.hidden = true;
@@ -285,19 +222,10 @@
 
   function showResult(){
     quizScreen.hidden = true;
-    const total = answers.reduce(function(a,b){ return a + b; }, 0);
+    const total = answers.reduce(function(sum, idx){ return sum + pointsFor(idx); }, 0);
 
-    document.getElementById('patientNameOut').textContent = patientCode.value.trim() || "Patient";
     document.getElementById('passationDate').textContent = new Date().toLocaleString('fr-FR', {day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit'});
     document.getElementById('scoreVal').textContent = total;
-
-    document.querySelectorAll('#bandTable tr').forEach(function(tr){
-      const min = parseInt(tr.dataset.min, 10), max = parseInt(tr.dataset.max, 10);
-      if(total >= min && total <= max){
-        tr.classList.add('active');
-        tr.querySelector('td:last-child').insertAdjacentHTML('beforeend', '<span class="band-badge">Score : ' + total + '</span>');
-      }
-    });
 
     const answersList = document.getElementById('answersList');
     answersList.innerHTML = '';
@@ -306,9 +234,8 @@
       block.className = 'answer-block';
       block.innerHTML =
         '<p class="q-no">Question ' + (idx + 1) + '</p>' +
-        '<p class="stem">' + stem + '</p>' +
         '<p class="item">' + item + '</p>' +
-        '<p class="resp">' + options[answers[idx]] + ' <span class="sc">(Score : ' + answers[idx] + ')</span></p>';
+        '<p class="resp">' + options[answers[idx]] + ' <span class="sc">(Score : ' + pointsFor(answers[idx]) + ')</span></p>';
       answersList.appendChild(block);
     });
 
@@ -323,7 +250,6 @@
   document.getElementById('restartBtn').addEventListener('click', function(){
     answers.fill(null);
     current = 0;
-    patientCode.value = '';
     resultBox.style.display = 'none';
     startScreen.hidden = false;
     window.scrollTo({top:0, behavior:'smooth'});

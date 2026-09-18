@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>ASQ-SF — Cabinet Bouche &amp; Chmura</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F4F1EA; --surface:#FFFFFF; --surface-2:#EAE6D9; --ink:#20241E; --ink-soft:#63695D;
+    --line:#E0D9C9; --accent:#1E3A5F; --accent-ink:#F4F1EA; --accent-soft:#E1E7EC; --terracotta:#A0824C;
+    --progress-bg:#E6E1D3; --progress-fill:#7FBF9E;
+    --shadow: 0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);
+    --verte:#3D6B4F; --verte-bg:#E4EEE8; --orange:#96631E; --orange-bg:#F3E8D2; --rouge:#B4483C; --rouge-bg:#F5DEDA;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',-apple-system,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,h3,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:var(--ink);}
+  .wrap{max-width:520px;margin:0 auto;padding:48px 24px 80px;}
+  .back-top{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--ink-soft);text-decoration:none;margin-bottom:20px;}
+  .back-top:hover{color:var(--ink);}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--ink-soft);display:inline-block;}
+  h1{font-size:28px;margin:0 0 10px;}
+  .intro-text{color:var(--ink-soft);font-size:15px;margin:0 0 28px;}
+
+  .start-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:32px 28px;box-shadow:var(--shadow);}
+  .pills{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 20px;}
+  .pill{font-size:12.5px;font-weight:600;color:var(--ink-soft);background:var(--surface-2);border-radius:999px;padding:6px 13px;display:inline-flex;align-items:center;gap:6px;}
+  .instructions{font-size:14.5px;color:var(--ink-soft);margin:0 0 22px;line-height:1.7;}
+
+  .quiz-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:28px 26px 26px;box-shadow:var(--shadow);}
+  .progress-track{height:8px;border-radius:99px;background:var(--progress-bg);overflow:hidden;margin-bottom:14px;}
+  .progress-fill{height:100%;background:var(--progress-fill);border-radius:99px;width:0%;transition:width .3s ease;}
+  .q-count{font-size:12.5px;color:var(--ink-soft);font-weight:600;margin:0 0 20px;}
+  .stem{font-size:13.5px;color:var(--ink-soft);margin:0 0 6px;}
+  .q-item{font-size:18px;font-weight:600;color:var(--ink);margin:0 0 26px;font-family:'Cormorant Garamond',Georgia,serif;line-height:1.35;}
+  .options{display:flex;flex-direction:column;gap:10px;}
+  .option-btn{font:inherit;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:14.5px;color:var(--ink);cursor:pointer;transition:border-color .15s ease,background .15s ease,transform .1s ease;}
+  .option-btn:hover{border-color:var(--accent);}
+  .option-btn.selected{border-color:var(--accent);background:var(--accent-soft);font-weight:600;}
+  .back-link{display:inline-flex;align-items:center;gap:6px;margin-top:22px;font-size:13px;color:var(--ink-soft);background:none;border:none;font:inherit;cursor:pointer;padding:0;}
+  .back-link:hover{color:var(--ink);}
+  .back-link[hidden]{display:none;}
+
+  #result{display:none;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:30px 28px;box-shadow:var(--shadow);}
+  #result h2.serif{font-size:22px;margin:0 0 6px;}
+  .meta-line{font-size:13.5px;color:var(--ink-soft);margin:0 0 24px;}
+  .section-title{font-size:12.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft);margin:0 0 12px;padding-top:18px;border-top:1px solid var(--line);}
+  .section-title:first-of-type{border-top:none;padding-top:0;}
+  .score-line{font-size:17px;margin:0 0 14px;}
+  .score-line strong{font-size:22px;color:var(--accent);}
+
+  .dim-block{border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:12px;}
+  .dim-block.style-block{border-color:var(--accent);background:var(--accent-soft);}
+  .dim-block .dim-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:4px;flex-wrap:wrap;}
+  .dim-block .dim-name{font-family:'Cormorant Garamond',Georgia,serif;font-size:17px;font-weight:600;color:var(--ink);}
+  .dim-block .dim-score{font-size:14.5px;font-weight:700;}
+  .dim-block .dim-items{font-size:12px;color:var(--ink-soft);margin:0 0 8px;}
+  .dim-block .dim-norm{font-size:12px;color:var(--ink-soft);margin:0 0 10px;font-style:italic;}
+  .dim-block .dim-desc{font-size:13px;color:var(--ink-soft);margin:0;line-height:1.6;}
+
+  .dim-note{font-size:13.5px;color:var(--ink-soft);margin:0 0 20px;line-height:1.65;}
+  .answer-block{border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin-bottom:10px;}
+  .answer-block .q-no{font-size:12px;font-weight:700;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.05em;margin:0 0 8px;}
+  .answer-block .item{font-size:14.5px;font-weight:600;color:var(--ink);margin:0 0 8px;}
+  .answer-block .resp{font-size:14px;font-weight:600;color:var(--ink);}
+  .answer-block .resp .sc{font-weight:400;color:var(--ink-soft);}
+
+  .btn{font:inherit;font-size:15px;font-weight:600;padding:13px 30px;border-radius:999px;border:none;background:var(--accent);color:var(--accent-ink);cursor:pointer;transition:background .15s ease;width:100%;}
+  .btn:hover{background:#16273D;}
+  .btn-outline{background:none;border:1px solid var(--accent);color:var(--accent);margin-top:14px;}
+  .btn-outline:hover{background:var(--accent-soft);}
+  .hint{font-size:12.5px;color:var(--ink-soft);margin-top:14px;text-align:center;}
+  .footnote{margin-top:40px;font-size:11.5px;color:var(--ink-soft);border-top:1px solid var(--line);padding-top:16px;line-height:1.7;}
+  [hidden]{display:none !important;}
+
+  @media print{
+    .back-top, .eyebrow, h1, .intro-text, .footnote, .btn-outline{ display:none !important; }
+    body{background:#fff;}
+    #result{box-shadow:none;border:none;padding:0;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back-top" href="index.html">&larr; Tous les tests</a>
+  <div class="eyebrow">Auto-évaluation</div>
+  <h1 class="serif">Questionnaire des styles d'attachement : un premier repère</h1>
+  <p class="intro-text">Ce résultat ne remplace pas un échange avec votre praticien, il sert de point de départ pour en discuter ensemble.</p>
+
+  <!-- Écran d'accueil -->
+  <div class="start-card" id="startScreen">
+    <div class="pills">
+      <span class="pill">29 questions</span>
+      <span class="pill">7 minutes</span>
+    </div>
+    <p class="instructions">Veuillez lire attentivement chaque affirmation et indiquer dans quelle mesure elle correspond à la manière dont vous vous sentez ou agissez généralement dans vos relations. Répondez honnêtement à chaque question. Il n'y a pas de bonne ou de mauvaise réponse.</p>
+    <button type="button" class="btn" id="startBtn">Commencer</button>
+    <p class="hint">Rien n'est envoyé ni conservé sur un serveur : si vous quittez avant la fin, vos réponses sont perdues et il faudra recommencer.</p>
+  </div>
+
+  <!-- Écran question (une par écran) -->
+  <div class="quiz-card" id="quizScreen" hidden>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <p class="q-count" id="qCount">Question 1/29</p>
+    <p class="stem">Dans quelle mesure êtes-vous d'accord avec l'affirmation suivante ?</p>
+    <p class="q-item" id="qItem"></p>
+    <div class="options" id="qOptions"></div>
+    <button type="button" class="back-link" id="backBtn" hidden>&larr; Question précédente</button>
+  </div>
+
+  <!-- Rapport de résultat -->
+  <div id="result">
+    <h2 class="serif">Questionnaire des styles d'attachement (ASQ-SF)</h2>
+    <p class="meta-line">Passation : <span id="passationDate"></span></p>
+
+    <p class="section-title">Interprétation générale</p>
+    <p class="dim-note">L'ASQ-SF mesure les styles d'attachement adulte à travers 2 dimensions principales — attachement évitant et attachement anxieux — chacune calculée à partir de 5 sous-échelles (échelle de 1 à 6 par item : Pas du tout d'accord à Tout à fait d'accord). Des scores élevés indiquent une expression marquée du style d'attachement concerné ; des scores faibles ou négatifs suggèrent un attachement plus sécure. Les repères de population ci-dessous (moyenne, écart-type, min/max) sont ceux communiqués par Mentaal ; ce résultat reste un repère de discussion, pas un diagnostic.</p>
+
+    <p class="section-title">Styles d'attachement</p>
+    <div id="styleBlocks"></div>
+
+    <p class="section-title">Sous-échelles</p>
+    <div id="dimBlocks"></div>
+
+    <p class="section-title">Réponses du patient</p>
+    <div id="answersList"></div>
+
+    <button type="button" class="btn" id="downloadBtn">Télécharger le résultat (PDF)</button>
+    <button type="button" class="btn btn-outline" id="restartBtn">Refaire le test</button>
+  </div>
+
+  <p class="footnote">
+    Attachment Style Questionnaire — Short Form (ASQ-SF), Alexander, R., Feeney, J., Hohaus, L., &amp; Noller, P. (2001).
+    Ce résultat est un repère, il ne constitue pas un diagnostic.
+  </p>
+</div>
+
+<script>
+(function(){
+  // Les 29 items de l'ASQ-SF, répartis en 5 sous-échelles. reverse:true
+  // signale un item inversé (15, 16, 26) : le score brut (1 à 6) est
+  // recodé en (7 - score) avant d'être additionné dans sa sous-échelle.
+  const items = [
+    { text: "J'ai confiance que les autres seront là pour moi quand j'en aurai besoin", sub: 'confiance', reverse: false },
+    { text: "Je préfère compter sur moi-même plutôt que sur les autres", sub: 'inconfort', reverse: false },
+    { text: "Je préfère rester seul(e)", sub: 'inconfort', reverse: false },
+    { text: "Réussir est plus important que construire des relations", sub: 'secondaire', reverse: false },
+    { text: "Faire de son mieux est plus important que bien s'entendre avec les autres", sub: 'secondaire', reverse: false },
+    { text: "Si un travail doit être fait, il faut le faire même si cela blesse quelqu'un", sub: 'secondaire', reverse: false },
+    { text: "Il est important pour moi que les autres m'apprécient", sub: 'approbation', reverse: false },
+    { text: "J'ai du mal à prendre une décision si je ne sais pas ce que les autres en pensent", sub: 'approbation', reverse: false },
+    { text: "Mes relations avec les autres sont généralement superficielles", sub: 'secondaire', reverse: false },
+    { text: "Parfois, je pense que je ne vaux rien", sub: 'approbation', reverse: false },
+    { text: "J'ai du mal à faire confiance aux autres", sub: 'inconfort', reverse: false },
+    { text: "Il m'est difficile de dépendre des autres", sub: 'inconfort', reverse: false },
+    { text: "J'ai l'impression que les autres hésitent à se rapprocher de moi autant que je le souhaiterais", sub: 'preoccupation', reverse: false },
+    { text: "Je trouve relativement facile de me rapprocher des autres", sub: 'confiance', reverse: false },
+    { text: "Il m'est facile de faire confiance aux autres", sub: 'inconfort', reverse: true },
+    { text: "Je me sens à l'aise de dépendre des autres", sub: 'inconfort', reverse: true },
+    { text: "J'ai peur que les autres ne tiennent pas autant à moi que moi à eux", sub: 'preoccupation', reverse: false },
+    { text: "J'ai peur que les gens deviennent trop proches", sub: 'inconfort', reverse: false },
+    { text: "J'ai peur de ne pas être à la hauteur des autres", sub: 'approbation', reverse: false },
+    { text: "J'ai des sentiments partagés à l'idée d'être proche des autres", sub: 'inconfort', reverse: false },
+    { text: "Je me demande pourquoi quelqu'un voudrait être impliqué avec moi", sub: 'approbation', reverse: false },
+    { text: "Je m'inquiète beaucoup à propos de mes relations", sub: 'preoccupation', reverse: false },
+    { text: "Je me demande comment je ferais face sans quelqu'un pour m'aimer", sub: 'preoccupation', reverse: false },
+    { text: "Je me sens en confiance dans mes relations avec les autres", sub: 'confiance', reverse: false },
+    { text: "Je me sens souvent exclu(e) ou seul(e)", sub: 'preoccupation', reverse: false },
+    { text: "Je m'inquiète souvent de ne pas vraiment trouver ma place parmi les autres", sub: 'confiance', reverse: true },
+    { text: "Les autres ont leurs propres problèmes, donc je n'ose pas les déranger avec les miens", sub: 'inconfort', reverse: false },
+    { text: "Si quelque chose me dérange, les autres s'en rendent généralement compte et s'en préoccupent", sub: 'confiance', reverse: false },
+    { text: "J'ai confiance que les autres m'aimeront et me respecteront", sub: 'confiance', reverse: false }
+  ];
+
+  // Sous-échelles : nom, plage théorique (n items x 1-6), repères de
+  // population (moyenne / écart-type / min / max) et texte d'interprétation
+  // — tous repris tels qu'affichés par mentaal.fr/send/asq (15/09/2026).
+  const SUBSCALES = [
+    { key: 'inconfort', name: 'Inconfort face à la proximité', n: 9, min: 9, max: 54,
+      norm: { mean: 30.88, sd: 9.61, min: 9, max: 54 },
+      desc: "Mesure la tendance d'un individu à maintenir une distance émotionnelle et psychologique dans les relations. Elle reflète des difficultés fondamentales avec l'intimité et la vulnérabilité. Des scores élevés suggèrent une tendance marquée à maintenir des frontières émotionnelles rigides, pouvant indiquer des stratégies défensives (retrait émotionnel, difficulté à faire confiance, résistance à approfondir les relations)." },
+    { key: 'secondaire', name: 'Relations perçues comme secondaires', n: 4, min: 4, max: 24,
+      norm: { mean: 9.05, sd: 4.8, min: 4, max: 24 },
+      desc: "Évalue dans quelle mesure un individu accorde la priorité aux relations par rapport à d'autres aspects de la vie (travail, réussites personnelles, autonomie). Des scores élevés indiquent une tendance à dévaloriser l'importance des relations, par autonomie excessive ou préférence marquée pour l'indépendance." },
+    { key: 'preoccupation', name: 'Préoccupation pour les relations', n: 5, min: 5, max: 30,
+      norm: { mean: 16.3, sd: 5.79, min: 5, max: 30 },
+      desc: "Mesure l'intensité de l'investissement cognitif et émotionnel dans les relations, en particulier les inquiétudes concernant leur statut et leur stabilité. Des scores élevés indiquent une hypervigilance aux signaux relationnels et une préoccupation excessive (surveillance constante, difficultés de concentration, tendance à trop analyser les interactions)." },
+    { key: 'approbation', name: "Besoin d'approbation", n: 5, min: 5, max: 30,
+      norm: { mean: 16.48, sd: 7.11, min: 5, max: 30 },
+      desc: "Évalue dans quelle mesure un individu dépend de la validation et de l'acceptation des autres pour maintenir son estime de soi et sa stabilité émotionnelle. Des scores élevés indiquent une dépendance excessive à la validation externe, une difficulté à prendre des décisions indépendantes et une peur intense du rejet." },
+    { key: 'confiance', name: 'Confiance dans les interactions interpersonnelles', n: 6, min: 6, max: 36,
+      norm: { mean: 23.95, sd: 6.72, min: 6, max: 36 },
+      desc: "Mesure le degré de sécurité et de confort ressenti dans les contextes relationnels. Contrairement aux autres sous-échelles, des scores plus élevés indiquent ici un style d'attachement plus sécure : autonomie saine, capacité à former et maintenir des relations, à demander du soutien et à gérer les défis relationnels." }
+  ];
+
+  // Styles d'attachement composites (formule communiquée par Mentaal) :
+  // Évitant = Inconfort + Relations secondaires - (items 1, 14, 28)
+  // Anxieux = Préoccupation + Besoin d'approbation - (items 24, 26, 29)
+  // Les repères de population (moyenne/écart-type/min-max) sont ceux
+  // affichés tels quels par mentaal.fr ; pour l'attachement anxieux, le
+  // min -18 communiqué par Mentaal ne se retrouve pas exactement en
+  // recalculant la borne théorique de la formule textuelle (qui donne -8) —
+  // écart signalé à Max plutôt que corrigé silencieusement.
+  const STYLES = [
+    { key: 'evitant', name: 'Attachement évitant',
+      norm: { mean: 27.6, sd: 11.46, min: -5, max: 75 },
+      desc: "Cette échelle reflète dans quelle mesure un individu évite l'intimité et éprouve de la méfiance envers les autres." },
+    { key: 'anxieux', name: 'Attachement anxieux',
+      norm: { mean: 21.15, sd: 10.04, min: -18, max: 57 },
+      desc: "Cette échelle reflète un besoin excessif de réassurance, une peur du rejet et un désir de fusion avec les partenaires relationnels." }
+  ];
+
+  const options = ["Pas du tout d'accord", "Pas d'accord", "Plutôt pas d'accord", "Plutôt d'accord", "D'accord", "Tout à fait d'accord"];
+  const answers = new Array(items.length).fill(null);
+  let current = 0;
+
+  const startScreen = document.getElementById('startScreen');
+  const quizScreen = document.getElementById('quizScreen');
+  const startBtn = document.getElementById('startBtn');
+  const qCount = document.getElementById('qCount');
+  const qItem = document.getElementById('qItem');
+  const qOptions = document.getElementById('qOptions');
+  const backBtn = document.getElementById('backBtn');
+  const progressFill = document.getElementById('progressFill');
+  const resultBox = document.getElementById('result');
+
+  function rawPoints(idx){ return idx + 1; } // idx 0="Pas du tout d'accord"(1) ... 5="Tout à fait d'accord"(6)
+  function pointsFor(idx, reverse){ return reverse ? (7 - rawPoints(idx)) : rawPoints(idx); }
+
+  startBtn.addEventListener('click', function(){
+    startScreen.hidden = true;
+    quizScreen.hidden = false;
+    renderQuestion();
+  });
+
+  backBtn.addEventListener('click', function(){
+    if(current > 0){
+      current -= 1;
+      renderQuestion();
+    }
+  });
+
+  function renderQuestion(){
+    qCount.textContent = 'Question ' + (current + 1) + '/' + items.length;
+    qItem.textContent = items[current].text;
+    progressFill.style.width = (((current) / items.length) * 100) + '%';
+    backBtn.hidden = current === 0;
+
+    qOptions.innerHTML = '';
+    options.forEach(function(label, idx){
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'option-btn';
+      btn.textContent = label;
+      if(answers[current] === idx){ btn.classList.add('selected'); }
+      btn.addEventListener('click', function(){ selectAnswer(idx, btn); });
+      qOptions.appendChild(btn);
+    });
+  }
+
+  function selectAnswer(idx, btnEl){
+    answers[current] = idx;
+    Array.from(qOptions.children).forEach(function(b){ b.classList.remove('selected'); });
+    btnEl.classList.add('selected');
+    progressFill.style.width = (((current + 1) / items.length) * 100) + '%';
+
+    setTimeout(function(){
+      if(current < items.length - 1){
+        current += 1;
+        renderQuestion();
+      } else {
+        showResult();
+      }
+    }, 380);
+  }
+
+  function subscaleSum(key){
+    let total = 0;
+    items.forEach(function(it, i){
+      if (it.sub === key){ total += pointsFor(answers[i], it.reverse); }
+    });
+    return total;
+  }
+
+  function rawAnswer(itemNo){ // itemNo is 1-based position in the 29 items
+    return rawPoints(answers[itemNo - 1]);
+  }
+
+  function renderDimBlock(def){
+    const score = subscaleSum(def.key);
+    const block = document.createElement('div');
+    block.className = 'dim-block';
+    block.innerHTML =
+      '<div class="dim-head">' +
+        '<span class="dim-name">' + def.name + '</span>' +
+        '<span class="dim-score">' + score + '/' + def.max + '</span>' +
+      '</div>' +
+      '<p class="dim-items">' + def.n + ' items</p>' +
+      '<p class="dim-norm">Repère population (Mentaal) : moyenne ' + def.norm.mean + ' (écart-type ' + def.norm.sd + '), plage ' + def.norm.min + '–' + def.norm.max + '</p>' +
+      '<p class="dim-desc">' + def.desc + '</p>';
+    return { el: block, score: score };
+  }
+
+  function showResult(){
+    quizScreen.hidden = true;
+
+    document.getElementById('passationDate').textContent = new Date().toLocaleString('fr-FR', {day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit'});
+
+    const dimBlocksEl = document.getElementById('dimBlocks');
+    dimBlocksEl.innerHTML = '';
+    const subScores = {};
+    SUBSCALES.forEach(function(def){
+      const res = renderDimBlock(def);
+      dimBlocksEl.appendChild(res.el);
+      subScores[def.key] = res.score;
+    });
+
+    const evitant = subScores.inconfort + subScores.secondaire - (rawAnswer(1) + rawAnswer(14) + rawAnswer(28));
+    const anxieux = subScores.preoccupation + subScores.approbation - (rawAnswer(24) + rawAnswer(26) + rawAnswer(29));
+    const styleScores = { evitant: evitant, anxieux: anxieux };
+
+    const styleBlocksEl = document.getElementById('styleBlocks');
+    styleBlocksEl.innerHTML = '';
+    STYLES.forEach(function(def){
+      const score = styleScores[def.key];
+      const block = document.createElement('div');
+      block.className = 'dim-block style-block';
+      block.innerHTML =
+        '<div class="dim-head">' +
+          '<span class="dim-name">' + def.name + '</span>' +
+          '<span class="dim-score">' + score + '</span>' +
+        '</div>' +
+        '<p class="dim-norm">Repère population (Mentaal) : moyenne ' + def.norm.mean + ' (écart-type ' + def.norm.sd + '), plage ' + def.norm.min + '–' + def.norm.max + '</p>' +
+        '<p class="dim-desc">' + def.desc + '</p>';
+      styleBlocksEl.appendChild(block);
+    });
+
+    const answersList = document.getElementById('answersList');
+    answersList.innerHTML = '';
+    items.forEach(function(it, idx){
+      const block = document.createElement('div');
+      block.className = 'answer-block';
+      block.innerHTML =
+        '<p class="q-no">Question ' + (idx + 1) + '</p>' +
+        '<p class="item">' + it.text + '</p>' +
+        '<p class="resp">' + options[answers[idx]] + ' <span class="sc">(Score : ' + pointsFor(answers[idx], it.reverse) + ')</span></p>';
+      answersList.appendChild(block);
+    });
+
+    resultBox.style.display = 'block';
+    resultBox.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  document.getElementById('downloadBtn').addEventListener('click', function(){
+    window.print();
+  });
+
+  document.getElementById('restartBtn').addEventListener('click', function(){
+    answers.fill(null);
+    current = 0;
+    resultBox.style.display = 'none';
+    startScreen.hidden = false;
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+})();
+</script>
+</body>
+</html>

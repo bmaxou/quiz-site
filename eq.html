@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>EQ — Cabinet Bouche &amp; Chmura</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F4F1EA; --surface:#FFFFFF; --surface-2:#EAE6D9; --ink:#20241E; --ink-soft:#63695D;
+    --line:#E0D9C9; --accent:#1E3A5F; --accent-ink:#F4F1EA; --accent-soft:#E1E7EC; --terracotta:#A0824C;
+    --progress-bg:#E6E1D3; --progress-fill:#7FBF9E;
+    --shadow: 0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);
+    --verte:#3D6B4F; --verte-bg:#E4EEE8; --orange:#96631E; --orange-bg:#F3E8D2; --rouge:#B4483C; --rouge-bg:#F5DEDA;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',-apple-system,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,h3,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:var(--ink);}
+  .wrap{max-width:520px;margin:0 auto;padding:48px 24px 80px;}
+  .back-top{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--ink-soft);text-decoration:none;margin-bottom:20px;}
+  .back-top:hover{color:var(--ink);}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--ink-soft);display:inline-block;}
+  h1{font-size:28px;margin:0 0 10px;}
+  .intro-text{color:var(--ink-soft);font-size:15px;margin:0 0 28px;}
+
+  .start-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:32px 28px;box-shadow:var(--shadow);}
+  .pills{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 20px;}
+  .pill{font-size:12.5px;font-weight:600;color:var(--ink-soft);background:var(--surface-2);border-radius:999px;padding:6px 13px;display:inline-flex;align-items:center;gap:6px;}
+  .instructions{font-size:14.5px;color:var(--ink-soft);margin:0 0 22px;line-height:1.7;}
+
+  .quiz-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:28px 26px 26px;box-shadow:var(--shadow);}
+  .progress-track{height:8px;border-radius:99px;background:var(--progress-bg);overflow:hidden;margin-bottom:14px;}
+  .progress-fill{height:100%;background:var(--progress-fill);border-radius:99px;width:0%;transition:width .3s ease;}
+  .q-count{font-size:12.5px;color:var(--ink-soft);font-weight:600;margin:0 0 20px;}
+  .stem{font-size:13.5px;color:var(--ink-soft);margin:0 0 6px;}
+  .q-item{font-size:18px;font-weight:600;color:var(--ink);margin:0 0 26px;font-family:'Cormorant Garamond',Georgia,serif;line-height:1.35;}
+  .options{display:flex;flex-direction:column;gap:10px;}
+  .option-btn{font:inherit;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:14.5px;color:var(--ink);cursor:pointer;transition:border-color .15s ease,background .15s ease,transform .1s ease;}
+  .option-btn:hover{border-color:var(--accent);}
+  .option-btn.selected{border-color:var(--accent);background:var(--accent-soft);font-weight:600;}
+  .back-link{display:inline-flex;align-items:center;gap:6px;margin-top:22px;font-size:13px;color:var(--ink-soft);background:none;border:none;font:inherit;cursor:pointer;padding:0;}
+  .back-link:hover{color:var(--ink);}
+  .back-link[hidden]{display:none;}
+
+  #result{display:none;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:30px 28px;box-shadow:var(--shadow);}
+  #result h2.serif{font-size:22px;margin:0 0 6px;}
+  .meta-line{font-size:13.5px;color:var(--ink-soft);margin:0 0 24px;}
+  .section-title{font-size:12.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft);margin:0 0 12px;padding-top:18px;border-top:1px solid var(--line);}
+  .section-title:first-of-type{border-top:none;padding-top:0;}
+  .score-line{font-size:17px;margin:0 0 14px;}
+  .score-line strong{font-size:22px;color:var(--accent);}
+
+  .dim-block{border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:12px;}
+  .dim-block.style-block{border-color:var(--accent);background:var(--accent-soft);}
+  .dim-block .dim-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:4px;flex-wrap:wrap;}
+  .dim-block .dim-name{font-family:'Cormorant Garamond',Georgia,serif;font-size:17px;font-weight:600;color:var(--ink);}
+  .dim-block .dim-score{font-size:14.5px;font-weight:700;}
+  .dim-block .dim-items{font-size:12px;color:var(--ink-soft);margin:0 0 8px;}
+  .dim-block .dim-norm{font-size:12px;color:var(--ink-soft);margin:0 0 4px;font-style:italic;}
+  .dim-block .dim-desc{font-size:13px;color:var(--ink-soft);margin:8px 0 0;line-height:1.6;}
+
+  .dim-note{font-size:13.5px;color:var(--ink-soft);margin:0 0 20px;line-height:1.65;}
+  .answer-block{border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin-bottom:10px;}
+  .answer-block .q-no{font-size:12px;font-weight:700;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.05em;margin:0 0 8px;}
+  .answer-block .item{font-size:14.5px;font-weight:600;color:var(--ink);margin:0 0 8px;}
+  .answer-block .resp{font-size:14px;font-weight:600;color:var(--ink);}
+  .answer-block .resp .sc{font-weight:400;color:var(--ink-soft);}
+
+  .btn{font:inherit;font-size:15px;font-weight:600;padding:13px 30px;border-radius:999px;border:none;background:var(--accent);color:var(--accent-ink);cursor:pointer;transition:background .15s ease;width:100%;}
+  .btn:hover{background:#16273D;}
+  .btn-outline{background:none;border:1px solid var(--accent);color:var(--accent);margin-top:14px;}
+  .btn-outline:hover{background:var(--accent-soft);}
+  .hint{font-size:12.5px;color:var(--ink-soft);margin-top:14px;text-align:center;}
+  .footnote{margin-top:40px;font-size:11.5px;color:var(--ink-soft);border-top:1px solid var(--line);padding-top:16px;line-height:1.7;}
+  [hidden]{display:none !important;}
+
+  @media print{
+    .back-top, .eyebrow, h1, .intro-text, .footnote, .btn-outline{ display:none !important; }
+    body{background:#fff;}
+    #result{box-shadow:none;border:none;padding:0;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back-top" href="index.html">&larr; Tous les tests</a>
+  <div class="eyebrow">Auto-évaluation</div>
+  <h1 class="serif">Quotient empathique : un premier repère</h1>
+  <p class="intro-text">Ce résultat ne remplace pas un échange avec votre praticien, il sert de point de départ pour en discuter ensemble.</p>
+
+  <!-- Écran d'accueil -->
+  <div class="start-card" id="startScreen">
+    <div class="pills">
+      <span class="pill">60 questions</span>
+      <span class="pill">15 minutes</span>
+    </div>
+    <p class="instructions">Veuillez lire attentivement chaque affirmation et indiquer dans quelle mesure vous êtes d'accord avec elle, en vous basant sur ce que vous ressentez ou faites généralement. Répondez honnêtement à chaque question. Il n'y a pas de bonne ou de mauvaise réponse.</p>
+    <button type="button" class="btn" id="startBtn">Commencer</button>
+    <p class="hint">Rien n'est envoyé ni conservé sur un serveur : si vous quittez avant la fin, vos réponses sont perdues et il faudra recommencer.</p>
+  </div>
+
+  <!-- Écran question (une par écran) -->
+  <div class="quiz-card" id="quizScreen" hidden>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <p class="q-count" id="qCount">Question 1/60</p>
+    <p class="stem">Dans quelle mesure êtes-vous d'accord avec l'affirmation suivante ?</p>
+    <p class="q-item" id="qItem"></p>
+    <div class="options" id="qOptions"></div>
+    <button type="button" class="back-link" id="backBtn" hidden>&larr; Question précédente</button>
+  </div>
+
+  <!-- Rapport de résultat -->
+  <div id="result">
+    <h2 class="serif">Quotient empathique (EQ)</h2>
+    <p class="meta-line">Passation : <span id="passationDate"></span></p>
+
+    <p class="section-title">Interprétation générale</p>
+    <p class="dim-note">Le QE mesure la capacité à reconnaître et comprendre les émotions d'autrui, à partir de 40 items cotés (21 formulés positivement, 19 de façon inversée) et de 20 items distracteurs non cotés (échelle en 4 points : Tout à fait d'accord à Pas du tout d'accord). Le score total va de 0 à 80. Les repères de population ci-dessous (moyenne, écart-type, par sexe et combinés) sont ceux communiqués par Mentaal ; ce résultat reste un repère de discussion, pas un diagnostic.</p>
+
+    <p class="section-title">Score total</p>
+    <div id="totalBlock"></div>
+
+    <p class="section-title">Sous-échelles</p>
+    <div id="dimBlocks"></div>
+
+    <p class="section-title">Réponses du patient</p>
+    <div id="answersList"></div>
+
+    <button type="button" class="btn" id="downloadBtn">Télécharger le résultat (PDF)</button>
+    <button type="button" class="btn btn-outline" id="restartBtn">Refaire le test</button>
+  </div>
+
+  <p class="footnote">
+    Empathy Quotient (EQ), Baron-Cohen, S. &amp; Wheelwright, S. (2004).
+    Ce résultat est un repère, il ne constitue pas un diagnostic.
+  </p>
+</div>
+
+<script>
+(function(){
+  // Les 60 items du QE, dans l'ordre affiché par mentaal.fr/send/eq. type
+  // indique comment l'item est coté : 'positive' (items 1, 6, 19, 22, 25,
+  // 26, 35, 36, 37, 38, 41, 42, 43, 44, 52, 54, 55, 57, 58, 59, 60),
+  // 'reverse' (items 4, 8, 10, 11, 12, 14, 15, 18, 21, 27, 28, 29, 32, 34,
+  // 39, 46, 48, 49, 50) ou 'filler' (les 20 items distracteurs, non cotés :
+  // 2, 3, 5, 7, 9, 13, 16, 17, 20, 23, 24, 30, 31, 33, 40, 45, 47, 51, 53,
+  // 56). sub indique la sous-échelle (cognitive / emotional / social) pour
+  // les 28 items concernés, null pour les 12 items cotés hors sous-échelle
+  // et pour les items distracteurs.
+  const items = [
+    { text: 'Je peux facilement deviner quand quelqu\'un veut entamer une conversation.', type: 'positive', sub: 'cognitive' }, // 1
+    { text: 'Je préfère les animaux aux êtres humains.', type: 'filler', sub: null }, // 2
+    { text: 'J\'essaie d\'être à la mode.', type: 'filler', sub: null }, // 3
+    { text: 'Je trouve difficile d\'expliquer aux autres des choses que j\'ai comprises facilement et que eux n\'ont pas comprises du premier coup.', type: 'reverse', sub: 'social' }, // 4
+    { text: 'Je rêve la plupart des nuits.', type: 'filler', sub: null }, // 5
+    { text: 'J\'aime prendre soin des autres.', type: 'positive', sub: 'emotional' }, // 6
+    { text: 'J\'essaie de résoudre mes problèmes moi-même plutôt que d\'en discuter avec d\'autres.', type: 'filler', sub: null }, // 7
+    { text: 'Je trouve difficile de savoir ce qu\'il faut faire dans les relations sociales.', type: 'reverse', sub: 'social' }, // 8
+    { text: 'C\'est le matin que je suis le(la) plus efficace.', type: 'filler', sub: null }, // 9
+    { text: 'On me dit souvent que je vais trop loin quand j\'expose mon point de vue dans une discussion.', type: 'reverse', sub: null }, // 10
+    { text: 'Cela ne m\'ennuie pas trop d\'être en retard à un rendez-vous fixé à un ami.', type: 'reverse', sub: null }, // 11
+    { text: 'Les relations sociales sont si difficiles que j\'essaie de ne pas m\'en soucier.', type: 'reverse', sub: 'social' }, // 12
+    { text: 'Je ne ferais jamais rien d\'illégal même si ce n\'est pas très grave.', type: 'filler', sub: null }, // 13
+    { text: 'J\'ai souvent du mal à juger si quelque chose est grossier ou familier.', type: 'reverse', sub: 'social' }, // 14
+    { text: 'Dans une conversation, j\'ai tendance à me centrer sur mes propres pensées plutôt que sur celles de mon interlocuteur.', type: 'reverse', sub: null }, // 15
+    { text: 'Je préfère les farces aux jeux de mots.', type: 'filler', sub: null }, // 16
+    { text: 'Je vis au jour le jour.', type: 'filler', sub: null }, // 17
+    { text: 'Quand j\'étais enfant, j\'aimais couper des vers de terre pour voir ce qui se passe.', type: 'reverse', sub: null }, // 18
+    { text: 'Je détecte rapidement si quelqu\'un dit une chose qui en signifie une autre.', type: 'positive', sub: 'cognitive' }, // 19
+    { text: 'J\'ai de solides convictions sur la moralité.', type: 'filler', sub: null }, // 20
+    { text: 'Je ne comprends pas comment des choses vexent tant certaines personnes.', type: 'reverse', sub: 'emotional' }, // 21
+    { text: 'Il est pour moi facile de me mettre à la place de quelqu\'un d\'autre.', type: 'positive', sub: 'emotional' }, // 22
+    { text: 'Je pense que les bonnes manières sont la meilleure chose que des parents peuvent apprendre à leurs enfants.', type: 'filler', sub: null }, // 23
+    { text: 'J\'aime agir sur un coup de tête.', type: 'filler', sub: null }, // 24
+    { text: 'Je prédis assez bien le ressenti des autres.', type: 'positive', sub: 'cognitive' }, // 25
+    { text: 'Dans un groupe, je repère facilement quand quelqu\'un se sent gêné ou mal à l\'aise.', type: 'positive', sub: 'cognitive' }, // 26
+    { text: 'Si j\'offense quelqu\'un en parlant, j\'estime que c\'est son problème et pas le mien.', type: 'reverse', sub: 'emotional' }, // 27
+    { text: 'Si quelqu\'un me demandait mon avis sur sa coupe de cheveux, je répondrais honnêtement même si elle ne me plaît pas.', type: 'reverse', sub: null }, // 28
+    { text: 'Je ne comprends pas toujours pourquoi une personne peut être offensée par une remarque.', type: 'reverse', sub: 'emotional' }, // 29
+    { text: 'On me dit souvent que je suis imprévisible.', type: 'filler', sub: null }, // 30
+    { text: 'En groupe, j\'aime être le centre d\'intérêt.', type: 'filler', sub: null }, // 31
+    { text: 'Voir quelqu\'un pleurer ne me touche pas vraiment.', type: 'reverse', sub: 'emotional' }, // 32
+    { text: 'J\'adore parler politique.', type: 'filler', sub: null }, // 33
+    { text: 'Je ne mâche pas mes mots, ce qui est souvent pris pour de la grossièreté même si ce n\'est pas mon intention.', type: 'reverse', sub: null }, // 34
+    { text: 'En général, je comprends facilement les situations sociales.', type: 'positive', sub: 'social' }, // 35
+    { text: 'On me dit généralement que je comprends bien les sentiments et les pensées des autres.', type: 'positive', sub: 'cognitive' }, // 36
+    { text: 'Quand je discute avec quelqu\'un, j\'essaie de parler de ses expériences plutôt que des miennes.', type: 'positive', sub: null }, // 37
+    { text: 'Ça me bouleverse de voir un animal souffrant.', type: 'positive', sub: null }, // 38
+    { text: 'Je suis capable de prendre des décisions sans être influencé(e) par les sentiments des autres.', type: 'reverse', sub: null }, // 39
+    { text: 'Je ne peux pas me détendre sans avoir fait tout ce que j\'avais planifié pour la journée.', type: 'filler', sub: null }, // 40
+    { text: 'Je remarque facilement si quelqu\'un est intéressé ou ennuyé par ce que je dis.', type: 'positive', sub: 'cognitive' }, // 41
+    { text: 'Lorsque je regarde le journal télévisé, je suis triste de voir des personnes qui souffrent.', type: 'positive', sub: 'emotional' }, // 42
+    { text: 'Mes amis me parlent généralement de leurs problèmes car ils disent que je suis très compréhensif(ve).', type: 'positive', sub: 'emotional' }, // 43
+    { text: 'Je peux sentir quand je dérange les autres, même s\'ils ne me le disent pas.', type: 'positive', sub: 'cognitive' }, // 44
+    { text: 'Je commence souvent de nouveaux passe-temps qui m\'ennuient vite et je passe à autre chose.', type: 'filler', sub: null }, // 45
+    { text: 'Des fois, on me dit que j\'exagère quand je charrie les gens.', type: 'reverse', sub: null }, // 46
+    { text: 'Je serais bien trop anxieux(se) de monter sur un manège de montagnes russes.', type: 'filler', sub: null }, // 47
+    { text: 'On me dit souvent que je suis insensible même si je ne vois pas toujours pourquoi.', type: 'reverse', sub: 'emotional' }, // 48
+    { text: 'Si je vois qu\'il y a un nouveau venu dans un groupe de personnes, je pense que c\'est à lui de faire l\'effort de s\'intégrer.', type: 'reverse', sub: null }, // 49
+    { text: 'D\'habitude, je ne m\'implique pas émotionnellement lorsque je regarde un film.', type: 'reverse', sub: 'emotional' }, // 50
+    { text: 'J\'aime être très organisé(e) dans ma vie de tous les jours, et je fais souvent des listes de ce que j\'ai à faire.', type: 'filler', sub: null }, // 51
+    { text: 'Je peux me mettre à l\'écoute du ressenti des autres rapidement et intuitivement.', type: 'positive', sub: 'cognitive' }, // 52
+    { text: 'Je n\'aime pas prendre de risques.', type: 'filler', sub: null }, // 53
+    { text: 'Je peux facilement comprendre ce que quelqu\'un veut dire.', type: 'positive', sub: 'cognitive' }, // 54
+    { text: 'Je peux deviner si quelqu\'un masque ses émotions.', type: 'positive', sub: 'cognitive' }, // 55
+    { text: 'Je pèse toujours le pour et le contre avant de prendre une décision.', type: 'filler', sub: null }, // 56
+    { text: 'Je n\'essaie pas de déchiffrer de façon consciente les règles en jeu dans les situations sociales.', type: 'positive', sub: 'social' }, // 57
+    { text: 'Je suis bon(ne) pour prédire ce que quelqu\'un va faire.', type: 'positive', sub: 'cognitive' }, // 58
+    { text: 'J\'ai tendance à m\'impliquer émotionnellement dans les problèmes de mes amis.', type: 'positive', sub: 'emotional' }, // 59
+    { text: 'Habituellement, je comprends le point de vue des autres même si je ne le partage pas.', type: 'positive', sub: null } // 60
+  ];
+
+  // Repères de population (moyenne / écart-type), tels qu'affichés par
+  // mentaal.fr/send/eq (15/09/2026), pour le score total (population
+  // générale et population présentant un TSA, par sexe et combiné) et pour
+  // chaque sous-échelle (population générale uniquement, Mentaal n'affiche
+  // pas de repère TSA séparé pour les sous-échelles).
+  const TOTAL_NORM = {
+    general: { hommes: {mean:39, sd:11.6}, femmes: {mean:48, sd:11.3}, combine: {mean:44.3, sd:12.2} },
+    tsa: { hommes: {mean:18.7, sd:9.8}, femmes: {mean:18.5, sd:10.1}, combine: {mean:18.6, sd:1.9} }
+  };
+
+  const SUBSCALES = [
+    { key: 'cognitive', name: 'Empathie cognitive', max: 22, n: 11,
+      desc: "La capacité à comprendre l'état mental et la perspective d'une autre personne. L'empathie cognitive implique d'apprécier rationnellement le point de vue et les intentions de quelqu'un d'autre sans nécessairement partager son expérience émotionnelle.",
+      norm: { hommes: {mean:11.9, sd:4.8}, femmes: {mean:14.1, sd:4.7}, combine: {mean:13.2, sd:4.9} } },
+    { key: 'emotional', name: 'Empathie émotionnelle', max: 22, n: 11,
+      desc: "La capacité à partager et à résonner avec les émotions d'une autre personne et la tendance à absorber les émotions des autres.",
+      norm: { hommes: {mean:11.4, sd:4.7}, femmes: {mean:15.9, sd:4.1}, combine: {mean:14.1, sd:4.9} } },
+    { key: 'social', name: 'Habiletés sociales', max: 12, n: 6,
+      desc: "La capacité de communiquer efficacement, de naviguer dans les interactions sociales et de s'engager de manière appropriée avec les autres.",
+      norm: { hommes: {mean:6.9, sd:2.6}, femmes: {mean:7.5, sd:2.4}, combine: {mean:7.3, sd:2.5} } }
+  ];
+
+  const options = ["Tout à fait d'accord", "Plutôt d'accord", "Plutôt pas d'accord", "Pas du tout d'accord"];
+  const answers = new Array(items.length).fill(null);
+  let current = 0;
+
+  const startScreen = document.getElementById('startScreen');
+  const quizScreen = document.getElementById('quizScreen');
+  const startBtn = document.getElementById('startBtn');
+  const qCount = document.getElementById('qCount');
+  const qItem = document.getElementById('qItem');
+  const qOptions = document.getElementById('qOptions');
+  const backBtn = document.getElementById('backBtn');
+  const progressFill = document.getElementById('progressFill');
+  const resultBox = document.getElementById('result');
+
+  // idx 0 = "Tout à fait d'accord" ... 3 = "Pas du tout d'accord". Pour les
+  // items positifs, seules les réponses 0 (2 pts) et 1 (1 pt) rapportent
+  // des points. Pour les items inversés, seules les réponses 2 (1 pt) et 3
+  // (2 pts) en rapportent. Les items distracteurs ne sont jamais cotés.
+  function pointsFor(idx, type){
+    if (idx === null) return 0;
+    if (type === 'positive'){ return idx === 0 ? 2 : idx === 1 ? 1 : 0; }
+    if (type === 'reverse'){ return idx === 2 ? 1 : idx === 3 ? 2 : 0; }
+    return 0;
+  }
+
+  startBtn.addEventListener('click', function(){
+    startScreen.hidden = true;
+    quizScreen.hidden = false;
+    renderQuestion();
+  });
+
+  backBtn.addEventListener('click', function(){
+    if(current > 0){
+      current -= 1;
+      renderQuestion();
+    }
+  });
+
+  function renderQuestion(){
+    qCount.textContent = 'Question ' + (current + 1) + '/' + items.length;
+    qItem.textContent = items[current].text;
+    progressFill.style.width = (((current) / items.length) * 100) + '%';
+    backBtn.hidden = current === 0;
+
+    qOptions.innerHTML = '';
+    options.forEach(function(label, idx){
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'option-btn';
+      btn.textContent = label;
+      if(answers[current] === idx){ btn.classList.add('selected'); }
+      btn.addEventListener('click', function(){ selectAnswer(idx, btn); });
+      qOptions.appendChild(btn);
+    });
+  }
+
+  function selectAnswer(idx, btnEl){
+    answers[current] = idx;
+    Array.from(qOptions.children).forEach(function(b){ b.classList.remove('selected'); });
+    btnEl.classList.add('selected');
+    progressFill.style.width = (((current + 1) / items.length) * 100) + '%';
+
+    setTimeout(function(){
+      if(current < items.length - 1){
+        current += 1;
+        renderQuestion();
+      } else {
+        showResult();
+      }
+    }, 380);
+  }
+
+  function subscaleSum(key){
+    let total = 0;
+    items.forEach(function(it, i){
+      if (it.sub === key){ total += pointsFor(answers[i], it.type); }
+    });
+    return total;
+  }
+
+  function totalScore(){
+    let total = 0;
+    items.forEach(function(it, i){
+      if (it.type !== 'filler'){ total += pointsFor(answers[i], it.type); }
+    });
+    return total;
+  }
+
+  function normLine(norm){
+    return "Repère population générale (Mentaal) : Hommes — moyenne " + norm.hommes.mean + " (écart-type " + norm.hommes.sd + ") · Femmes — moyenne " + norm.femmes.mean + " (écart-type " + norm.femmes.sd + ") · Combiné — moyenne " + norm.combine.mean + " (écart-type " + norm.combine.sd + ")";
+  }
+
+  function renderDimBlock(def){
+    const score = subscaleSum(def.key);
+    const block = document.createElement('div');
+    block.className = 'dim-block';
+    block.innerHTML =
+      '<div class="dim-head">' +
+        '<span class="dim-name">' + def.name + '</span>' +
+        '<span class="dim-score">' + score + '/' + def.max + '</span>' +
+      '</div>' +
+      '<p class="dim-items">' + def.n + ' items</p>' +
+      '<p class="dim-norm">' + normLine(def.norm) + '</p>' +
+      '<p class="dim-desc">' + def.desc + '</p>';
+    return block;
+  }
+
+  function showResult(){
+    quizScreen.hidden = true;
+
+    document.getElementById('passationDate').textContent = new Date().toLocaleString('fr-FR', {day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit'});
+
+    const total = totalScore();
+    const totalBlockEl = document.getElementById('totalBlock');
+    totalBlockEl.innerHTML = '';
+    const totalBlock = document.createElement('div');
+    totalBlock.className = 'dim-block style-block';
+    totalBlock.innerHTML =
+      '<div class="dim-head">' +
+        '<span class="dim-name">Score total</span>' +
+        '<span class="dim-score">' + total + '/80</span>' +
+      '</div>' +
+      '<p class="dim-norm">Population générale — ' + normLine(TOTAL_NORM.general).replace('Repère population générale (Mentaal) : ', '') + '</p>' +
+      '<p class="dim-norm">Population présentant un TSA — Hommes : moyenne ' + TOTAL_NORM.tsa.hommes.mean + ' (écart-type ' + TOTAL_NORM.tsa.hommes.sd + ') · Femmes : moyenne ' + TOTAL_NORM.tsa.femmes.mean + ' (écart-type ' + TOTAL_NORM.tsa.femmes.sd + ') · Combiné : moyenne ' + TOTAL_NORM.tsa.combine.mean + ' (écart-type ' + TOTAL_NORM.tsa.combine.sd + ')</p>' +
+      '<p class="dim-desc">40 items cotés (21 positifs, 19 inversés) sur 60, chacun valant 0 à 2 points ; les 20 items distracteurs ne sont pas comptés. Un score plus élevé indique une capacité empathique auto-rapportée plus marquée ; un score plus bas se rapproche des moyennes observées dans les populations présentant un trouble du spectre de l\'autisme.</p>';
+    totalBlockEl.appendChild(totalBlock);
+
+    const dimBlocksEl = document.getElementById('dimBlocks');
+    dimBlocksEl.innerHTML = '';
+    SUBSCALES.forEach(function(def){
+      dimBlocksEl.appendChild(renderDimBlock(def));
+    });
+
+    const answersList = document.getElementById('answersList');
+    answersList.innerHTML = '';
+    items.forEach(function(it, idx){
+      const block = document.createElement('div');
+      block.className = 'answer-block';
+      const pts = it.type === 'filler' ? 'non coté' : ('Score : ' + pointsFor(answers[idx], it.type));
+      block.innerHTML =
+        '<p class="q-no">Question ' + (idx + 1) + '</p>' +
+        '<p class="item">' + it.text + '</p>' +
+        '<p class="resp">' + options[answers[idx]] + ' <span class="sc">(' + pts + ')</span></p>';
+      answersList.appendChild(block);
+    });
+
+    resultBox.style.display = 'block';
+    resultBox.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  document.getElementById('downloadBtn').addEventListener('click', function(){
+    window.print();
+  });
+
+  document.getElementById('restartBtn').addEventListener('click', function(){
+    answers.fill(null);
+    current = 0;
+    resultBox.style.display = 'none';
+    startScreen.hidden = false;
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+})();
+</script>
+</body>
+</html>

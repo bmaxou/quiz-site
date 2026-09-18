@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>BIG-5 — Fiche — Cabinet Bouche &amp; Chmura</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  img{max-width:100%}
+  [hidden]{display:none!important}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:920px;margin:0 auto;padding:32px 24px 80px;}
+  .crumb{font-size:12.5px;color:#9A9E90;margin:0 0 22px;}
+  .crumb a{color:#63695D;text-decoration:none;}
+  .crumb a:hover{text-decoration:underline;}
+
+  .layout{display:flex;gap:28px;align-items:flex-start;}
+  .main-col{flex:1;min-width:0;}
+
+  .fiche-head{display:flex;gap:22px;align-items:flex-start;margin-bottom:26px;flex-wrap:wrap;}
+  .fiche-photo{position:relative;width:112px;height:112px;flex-shrink:0;border-radius:14px;overflow:hidden;
+    background:linear-gradient(135deg,#6B4423 0%,#B08D57 55%,#3D2B14 100%);}
+  .fiche-photo::before{content:"";position:absolute;width:150px;height:150px;border-radius:50%;
+    background:radial-gradient(circle,rgba(224,196,138,.55),transparent 70%);top:-50px;right:-40px;}
+  .fiche-photo .acronym{position:absolute;left:12px;bottom:10px;font-family:'Cormorant Garamond',Georgia,serif;
+    font-weight:600;font-size:19px;color:#fff;}
+  .fiche-title{flex:1;min-width:220px;}
+  .fiche-title h1{font-size:24px;margin:0 0 14px;}
+  .fiche-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;}
+  .round-btn{width:38px;height:38px;border-radius:50%;background:#F4F1EA;border:1px solid #E0D9C9;
+    display:flex;align-items:center;justify-content:center;cursor:pointer;color:#63695D;font-size:15px;padding:0;}
+  .round-btn.saved{color:#A0824C;}
+
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;transition:opacity .15s ease,background .15s ease,color .15s ease;}
+  .btn:hover{opacity:.85;}
+  .btn-primary{background:#1E3A5F;color:#fff;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-added{background:#E4EEE8;color:#3D6B4F;border-color:#C9DED2;}
+  .btn-added:hover{opacity:1;}
+  .btn[disabled]{cursor:not-allowed;opacity:.55;}
+
+  .desc-text{font-size:15px;color:#3A3E33;margin:0 0 26px;max-width:640px;}
+
+  .meta-list{list-style:none;margin:0 0 32px;padding:0;display:flex;flex-direction:column;gap:9px;max-width:520px;}
+  .meta-list li{display:flex;align-items:center;gap:10px;font-size:13.5px;color:#63695D;}
+  .meta-list .ico{width:18px;text-align:center;flex-shrink:0;}
+  .meta-list a{color:#1E3A5F;font-weight:600;text-decoration:none;}
+  .meta-list a:hover{text-decoration:underline;}
+
+  h2.section{font-size:19px;margin:0 0 14px;padding-top:26px;border-top:1px solid #E0D9C9;}
+  h2.section:first-of-type{border-top:none;padding-top:0;}
+
+  .preview-card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:14px;padding:20px 22px;margin-bottom:14px;}
+  .preview-card .stem{font-size:12.5px;color:#9A9E90;margin:0 0 6px;}
+  .preview-card .item{font-family:'Cormorant Garamond',Georgia,serif;font-size:18px;margin:0 0 16px;}
+  .preview-opts{display:flex;flex-wrap:wrap;gap:8px;}
+  .preview-opts span{font-size:12.5px;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:6px 13px;}
+  .reveal-link{appearance:none;background:none;border:none;font:inherit;color:#1E3A5F;font-weight:700;font-size:13.5px;cursor:pointer;padding:0;}
+  .reveal-link:hover{text-decoration:underline;}
+  .all-questions{list-style:decimal;margin:14px 0 0;padding-left:20px;font-size:13.5px;color:#3A3E33;display:flex;flex-direction:column;gap:8px;}
+
+  .cotation-text{font-size:14px;color:#3A3E33;margin:0 0 16px;max-width:640px;}
+  .band-table{width:100%;max-width:420px;border-collapse:collapse;font-size:13.5px;margin-bottom:16px;}
+  .band-table td{padding:8px 4px;border-bottom:1px solid #E0D9C9;color:#63695D;}
+  .band-table tr:last-child td{border-bottom:none;}
+  .band-table td.range{width:70px;font-weight:600;color:#20241E;}
+  .source-note{font-size:11.5px;color:#9A9E90;margin:0 0 30px;}
+
+  /* Boîte d'envoi (identique à la page d'accueil) */
+  .sendbox{width:296px;flex-shrink:0;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:22px;position:sticky;top:24px;}
+  .sendbox h2.serif{font-size:17px;margin:0 0 16px;padding-top:0;border-top:none;}
+  .sendbox-empty{text-align:center;padding:20px 4px 8px;}
+  .sendbox-empty .mark{width:52px;height:52px;margin:0 auto 14px;border-radius:50%;background:#F4F1EA;display:flex;align-items:center;justify-content:center;font-size:22px;color:#9A9E90;}
+  .sendbox-empty p{font-size:13px;color:#9A9E90;margin:0;}
+  .sendbox-item{display:flex;align-items:center;justify-content:space-between;gap:8px;background:#F4F1EA;border-radius:8px;padding:8px 10px;font-size:13px;font-weight:600;margin-bottom:8px;}
+  .sendbox-item button{appearance:none;border:none;background:none;color:#9A9E90;cursor:pointer;font-size:14px;line-height:1;padding:2px;}
+  .sendbox-item button:hover{color:#B4483C;}
+  .field-label{display:block;font-size:12.5px;font-weight:600;color:#63695D;margin:16px 0 6px;}
+  .field-input{width:100%;font-family:'Inter',sans-serif;font-size:14px;color:#20241E;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:8px;padding:9px 12px;}
+  .field-hint{font-size:11.5px;color:#9A9E90;margin:6px 0 0;}
+  .sendbox .btn-primary{width:100%;justify-content:center;margin-top:14px;}
+  .msg-box{width:100%;font-family:'Inter',sans-serif;font-size:13px;color:#20241E;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:10px;padding:12px;resize:vertical;min-height:132px;margin-top:14px;}
+  .confirm{font-size:12.5px;color:#3D6B4F;margin-top:8px;}
+
+  @media (max-width:760px){
+    .layout{flex-direction:column;}
+    .sendbox{width:100%;position:static;order:-1;}
+  }
+
+  /* Modale « Mode démo » */
+  .modal-overlay{position:fixed;inset:0;background:rgba(32,36,30,.5);display:flex;align-items:center;justify-content:center;padding:24px;z-index:20;}
+  .modal-box{background:#fff;border-radius:18px;max-width:360px;width:100%;max-height:88vh;overflow:auto;padding:20px;}
+  .modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+  .modal-head span{font-family:'Cormorant Garamond',Georgia,serif;font-size:18px;}
+  .modal-head button{appearance:none;border:none;background:#F4F1EA;width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:16px;color:#63695D;}
+  .phone-frame{border:8px solid #20241E;border-radius:32px;overflow:hidden;background:#fff;box-shadow:0 20px 40px -18px rgba(20,26,32,.4);}
+  .phone-frame iframe{display:block;width:100%;height:540px;border:none;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="crumb"><a href="index.html">Accueil</a> &rsaquo; <a href="index.html">Questionnaires</a> &rsaquo; BIG-5</p>
+
+  <div class="layout">
+    <div class="main-col">
+
+      <div class="fiche-head">
+        <div class="fiche-photo"><span class="acronym small">BIG-5</span></div>
+        <div class="fiche-title">
+          <h1 class="serif">Big Five - Modèle des 5 grands facteurs de la personnalité (BIG-5)</h1>
+          <div class="fiche-actions">
+            <button class="btn btn-primary" type="button" data-add>Ajouter à la boîte d'envoi</button>
+            <button class="btn btn-secondary" type="button" data-open-demo>Mode démo</button>
+            <button class="round-btn" type="button" data-bookmark aria-label="Enregistrer dans mes favoris">&#9734;</button>
+          </div>
+        </div>
+      </div>
+
+      <p class="desc-text">Le Big Five est utilisé pour évaluer les aspects clés de la personnalité d'un individu. Contrairement à d'autres modèles de personnalité, il est considéré comme global, couvrant une grande variété de comportements humains, tout en étant suffisamment flexible pour être utilisé dans différentes cultures. Ce modèle est très apprécié pour son efficacité et sa validité empirique, basée sur des décennies de recherches et d'études à travers différentes populations.</p>
+
+      <ul class="meta-list">
+        <li><span class="ico">&#10003;</span> 120 questions</li>
+        <li><span class="ico">&#9201;</span> 30 minutes</li>
+        <li><span class="ico">&#127760;</span> Français</li>
+        <li><span class="ico">&#128214;</span> Big Five Test (IPIP-NEO-120)</li>
+        <li><span class="ico">&#128100;</span> Adulte</li>
+        <li><span class="ico">&#9997;</span> Johnson, J. A. (2014), d'après le modèle des Big Five et le domaine public IPIP</li>
+        <li><span class="ico">&#127991;</span> <a href="index.html">Global</a></li>
+      </ul>
+
+      <h2 class="serif section">Aperçu des questions</h2>
+      <div class="preview-card">
+        <p class="stem">Dans quelle mesure êtes-vous d'accord avec l'affirmation suivante ?</p>
+        <p class="item">Je m'inquiète à propos de choses</p>
+        <div class="preview-opts">
+          <span>Fortement en désaccord</span><span>Plutot en désaccord</span><span>Ni en accord ni en désaccord</span><span>Plutot en accord</span><span>Fortement en accord</span>
+        </div>
+      </div>
+      <button class="reveal-link" type="button" data-reveal-questions>Voir toutes les questions &rsaquo;</button>
+      <ol class="all-questions" data-all-questions hidden>
+        <li>Je me fais des amis facilement</li>
+        <li>J'ai une imagination débordante</li>
+        <li>Je fais confiance aux autres</li>
+        <li>Je complète les tâches avec succès</li>
+        <li>Je me mets en colère facilement</li>
+        <li>J'adore les grandes fêtes</li>
+        <li>Je crois en l'importance de l'art</li>
+        <li>J'utilise les autres pour mes propres fins</li>
+        <li>J'aime faire du rangement</li>
+        <li>Je me sens souvent triste</li>
+        <li>J'aime prendre en charge</li>
+        <li>Je vis mes émotions intensément</li>
+        <li>J'adore aider les autres</li>
+        <li>Je tiens mes promesses</li>
+        <li>J'éprouve de la difficulté à aborder les autres</li>
+        <li>Je suis toujours occupé</li>
+        <li>Je préfère la variété à la routine</li>
+        <li>J'adore une bonne bagarre</li>
+        <li>Je travaille dur</li>
+        <li>Je fais des excès</li>
+        <li>J'adore les sensations fortes</li>
+        <li>J'adore lire des documents stimulants</li>
+        <li>Je crois être meilleur que les autres</li>
+        <li>Je suis toujours préparé</li>
+        <li>Je panique facilement</li>
+        <li>Je respire la joie</li>
+        <li>J'ai tendance à promouvoir des valeurs sociales traditionnelles</li>
+        <li>Je sympathise avec les sans-abri</li>
+        <li>Je me lance dans des choses sans réfléchir</li>
+        <li>Je crains le pire</li>
+        <li>Je me sens confortable avec les gens</li>
+        <li>J'aime me perdre dans mes idées</li>
+        <li>Je crois que les autres ont de bonnes intentions</li>
+        <li>J'excelle dans ce que je fais</li>
+        <li>Je suis irritable facilement</li>
+        <li>Je parle à beaucoup de personnes dans les fêtes</li>
+        <li>Je vois une beauté dans les choses que d'autres pourraient ne pas remarquer</li>
+        <li>Je triche pour avancer</li>
+        <li>J'oublie souvent de remettre les choses à leur place</li>
+        <li>Je n'ai pas beaucoup d'estime pour moi</li>
+        <li>J'essaie de diriger les autres</li>
+        <li>Je ressens les émotions des autres</li>
+        <li>Je me préoccupe des autres</li>
+        <li>Je dis la vérité</li>
+        <li>J'ai peur d'attirer l'attention</li>
+        <li>Je suis toujours en mouvement</li>
+        <li>Je préfère m'en tenir aux choses connues</li>
+        <li>Je crie après les gens</li>
+        <li>Je fais plus que ce que l'on attend de moi</li>
+        <li>Je fais rarement des excès</li>
+        <li>Je recherche l'aventure</li>
+        <li>J'évite les discussions philosophiques</li>
+        <li>J'ai une très grande estime de moi-même</li>
+        <li>Je réalise mes objectifs</li>
+        <li>Je me sens dépassé par les événements</li>
+        <li>J'ai beaucoup de plaisir</li>
+        <li>Je crois qu'il n'y a pas de bon ou de mauvais absolu</li>
+        <li>J'ai de la sympathie pour les gens plus démunis que moi</li>
+        <li>Je prends des décisions impulsives</li>
+        <li>J'ai peur de beaucoup de choses</li>
+        <li>J'évite le contact avec les autres</li>
+        <li>J'adore rêvasser</li>
+        <li>J'ai confiance en ce que les gens disent</li>
+        <li>Je gère les tâches facilement</li>
+        <li>Je perds patience</li>
+        <li>Je préfère être seul</li>
+        <li>Je n'aime pas la poésie</li>
+        <li>Je profite des autres</li>
+        <li>Je laisse ma chambre en désordre</li>
+        <li>Il m'arrive souvent de broyer du noir</li>
+        <li>Je prends le contrôle des choses</li>
+        <li>Je suis rarement sensible à mes réactions émotives</li>
+        <li>Je suis indifférent aux sentiments des autres</li>
+        <li>J'enfreins les règles</li>
+        <li>Je me sens seulement à l'aise avec mes amis</li>
+        <li>Je fais beaucoup de choses pendant mon temps libre</li>
+        <li>Je n'aime pas les changements</li>
+        <li>J'insulte les gens</li>
+        <li>Je fais juste assez de travail pour m'en sortir</li>
+        <li>Je résiste facilement à la tentation</li>
+        <li>J'agis de manière effrénée</li>
+        <li>J'ai des difficultés à comprendre les idées abstraites</li>
+        <li>J'ai une très bonne opinion de moi-même</li>
+        <li>Je perds mon temps</li>
+        <li>Je me sens incapable de gérer les choses</li>
+        <li>J'adore la vie</li>
+        <li>J'ai tendance à promouvoir des valeurs sociales libérales</li>
+        <li>Je ne suis pas intéressé par les problèmes des autres</li>
+        <li>Je me précipite dans l'action</li>
+        <li>Je deviens stressé facilement</li>
+        <li>Je garde les autres à distance</li>
+        <li>J'aime me perdre dans mes pensées</li>
+        <li>Je ne fais pas confiance aux autres</li>
+        <li>Je sais comment faire avancer les choses</li>
+        <li>Je ne suis pas facilement agacé</li>
+        <li>J'évite les foules</li>
+        <li>Je n'apprécie pas visiter des musées d'art</li>
+        <li>J'entrave les plans des autres</li>
+        <li>Je laisse traîner les choses</li>
+        <li>Je suis à l'aise avec moi-même</li>
+        <li>J'attends que les autres prennent les devants</li>
+        <li>Je ne comprends pas les gens émotifs</li>
+        <li>Je ne prends pas de temps pour les autres</li>
+        <li>Je ne tiens pas mes promesses</li>
+        <li>Je ne suis pas dérangé par les situations sociales difficiles</li>
+        <li>J'aime prendre ça mollo</li>
+        <li>Je suis attaché aux méthodes conventionnelles</li>
+        <li>Je m'en prends aux autres</li>
+        <li>Je mets peu de temps et d'efforts dans mon travail</li>
+        <li>Je suis capable de contrôler mes envies</li>
+        <li>J'agis de façon téméraire</li>
+        <li>Je ne suis pas intéressé par les discussions théoriques</li>
+        <li>Je me vante de mes vertus</li>
+        <li>J'ai de la difficulté à commencer les tâches</li>
+        <li>Je demeure calme sous pression</li>
+        <li>Je regarde le bon côté de la vie</li>
+        <li>Je crois que nous devrions être sévères à propos des crimes</li>
+        <li>Je tente de ne pas penser aux gens dans le besoin</li>
+        <li>J'agis sans penser</li>
+      </ol>
+
+      <h2 class="serif section">Cotations &amp; interprétations</h2>
+      <p class="cotation-text">Le questionnaire est composé de 120 affirmations, réparties en 5 domaines de personnalité (24 items chacun) eux-mêmes subdivisés en 6 facettes de 4 items. Chaque item est coté sur une échelle en 5 points (Fortement en désaccord à Fortement en accord = 1 à 5 points) ; les items inversés sont recodés avant addition (Fortement en accord ne rapporte alors que 1 point).</p>
+      <p class="cotation-text">Chaque domaine est restitué sous la forme d'un pourcentage, calculé à partir de la somme brute de ses 24 items (allant de 24 à 120) selon la formule : (somme brute − 24) / 96 × 100, arrondi à l'entier le plus proche. Chaque facette est restituée sous la forme d'un score brut de 4 à 20 (somme de ses 4 items).</p>
+      <p class="cotation-text">Le score est calculé automatiquement à la fin de la passation et remis directement au patient, qui peut le partager avec vous. Exemple de restitution (valeurs affichées par Mentaal, aperçu du 15/09/2026) :</p>
+      <p class="cotation-text"><strong>Ouverture à l'expérience : 51%</strong><br>Ce trait reflète la curiosité, l'imagination et la créativité. Les personnes qui obtiennent des scores élevés dans ce domaine sont souvent ouvertes aux nouvelles idées et expériences, tandis que celles qui obtiennent des scores bas préfèrent la routine et sont plus conservatrices dans leurs pensées et comportements.</p>
+      <table class="band-table">
+        <tr><td class="range">Imagination</td><td>12 / 20</td></tr>
+        <tr><td class="range">Sens Artistique</td><td>9 / 20</td></tr>
+        <tr><td class="range">Affection</td><td>15 / 20</td></tr>
+        <tr><td class="range">Aventure</td><td>13 / 20</td></tr>
+        <tr><td class="range">Intellect</td><td>13 / 20</td></tr>
+        <tr><td class="range">Libéralisme</td><td>11 / 20</td></tr>
+      </table>
+      <p class="cotation-text"><strong>Conscientiosité : 48%</strong><br>Ce trait est lié à la discipline, à l'organisation et à la fiabilité. Les individus consciencieux sont souvent perçus comme étant responsables, méthodiques et capables de suivre des objectifs à long terme. À l'inverse, un faible score indique une tendance à l'impulsivité ou au désordre.</p>
+      <table class="band-table">
+        <tr><td class="range">Auto-efficacité</td><td>11 / 20</td></tr>
+        <tr><td class="range">Organisation</td><td>7 / 20</td></tr>
+        <tr><td class="range">Respect</td><td>14 / 20</td></tr>
+        <tr><td class="range">Persévérance</td><td>13 / 20</td></tr>
+        <tr><td class="range">Auto-discipline</td><td>15 / 20</td></tr>
+        <tr><td class="range">Prudence</td><td>10 / 20</td></tr>
+      </table>
+      <p class="cotation-text"><strong>Extraversion : 66%</strong><br>Ce facteur concerne la sociabilité, l'énergie et la recherche de stimulation. Les personnes extraverties aiment interagir avec les autres, sont énergiques et assertives. À l'opposé, les introvertis préfèrent les environnements calmes et ont besoin de moins de stimulation sociale.</p>
+      <table class="band-table">
+        <tr><td class="range">Bienveillance</td><td>13 / 20</td></tr>
+        <tr><td class="range">Conformisme</td><td>16 / 20</td></tr>
+        <tr><td class="range">Assurance</td><td>16 / 20</td></tr>
+        <tr><td class="range">Activité</td><td>14 / 20</td></tr>
+        <tr><td class="range">Enthousiasme</td><td>11 / 20</td></tr>
+        <tr><td class="range">Gaieté</td><td>17 / 20</td></tr>
+      </table>
+      <p class="cotation-text"><strong>Agréabilité : 56%</strong><br>L'agréabilité mesure la tendance à être compatissant, coopératif et bienveillant envers les autres. Les individus très agréables sont souvent empathiques et se montrent conciliants. Les personnes avec de faibles scores peuvent être plus compétitives ou méfiantes.</p>
+      <table class="band-table">
+        <tr><td class="range">Confiance</td><td>12 / 20</td></tr>
+        <tr><td class="range">Moralité</td><td>14 / 20</td></tr>
+        <tr><td class="range">Altruisme</td><td>16 / 20</td></tr>
+        <tr><td class="range">Coopération</td><td>13 / 20</td></tr>
+        <tr><td class="range">Modestie</td><td>12 / 20</td></tr>
+        <tr><td class="range">Sympathie</td><td>11 / 20</td></tr>
+      </table>
+      <p class="cotation-text"><strong>Névrosisme : 54%</strong><br>Ce trait renvoie à la stabilité émotionnelle et à la propension à éprouver des émotions négatives telles que l'anxiété, la colère ou la dépression. Un score élevé indique une tendance à être plus vulnérable au stress, tandis qu'un score bas suggère une plus grande stabilité émotionnelle.</p>
+      <table class="band-table">
+        <tr><td class="range">Anxiété</td><td>13 / 20</td></tr>
+        <tr><td class="range">Colère</td><td>10 / 20</td></tr>
+        <tr><td class="range">Dépression</td><td>17 / 20</td></tr>
+        <tr><td class="range">Conscience de soi</td><td>11 / 20</td></tr>
+        <tr><td class="range">Immodération</td><td>12 / 20</td></tr>
+        <tr><td class="range">Vulnérabilité</td><td>13 / 20</td></tr>
+      </table>
+      <p class="cotation-text">Il n'existe pas de seuil pathologique pour le Big Five : chaque domaine et chaque facette se lisent comme une position sur un continuum de traits normaux, à mettre en perspective avec le contexte de vie du patient plutôt que comme un signe clinique en soi.</p>
+      <p class="source-note">Source : Johnson, J. A. (2014). Measuring thirty facets of the Five Factor Model with a 120-item public domain inventory: Development of the IPIP-NEO-120. Journal of Research in Personality, 51, 78-89. Items construits à partir de l'International Personality Item Pool (IPIP, Goldberg, 1999), domaine public. Contenu (items, structure des domaines/facettes, formule de cotation et exemple de restitution) vérifié directement sur mentaal.fr/send/big-five (aperçu interactif, 15/09/2026).</p>
+
+    </div>
+
+    <aside class="sendbox">
+      <h2 class="serif">Boîte d'envoi</h2>
+      <div data-sendbox-body>
+        <div class="sendbox-empty">
+          <div class="mark">＋</div>
+          <p>Ajoutez des questionnaires pour créer un lien à transmettre à un patient.</p>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<div class="modal-overlay" id="demoModal" hidden>
+  <div class="modal-box">
+    <div class="modal-head"><span class="serif">Aperçu du questionnaire</span><button type="button" data-close-demo aria-label="Fermer">&times;</button></div>
+    <div class="phone-frame"><iframe id="demoFrame" title="Aperçu BIG-5"></iframe></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var STORAGE_KEY = 'mentaal_envois_apercu';
+  var TEST_NAME = 'BIG-5';
+  var TEST_LINK = 'big-5.html';
+  var selected = [];
+
+  function loadEnvois(){
+    try{
+      var raw = window.localStorage.getItem(STORAGE_KEY);
+      var list = raw ? JSON.parse(raw) : [];
+      return list.map(function(e){
+        if (e.tests) return e;
+        return { label: e.label, tests: e.test ? [e.test] : [], date: e.date };
+      });
+    }catch(e){ return []; }
+  }
+  function saveEnvois(list){
+    try{ window.localStorage.setItem(STORAGE_KEY, JSON.stringify(list)); }catch(e){}
+  }
+  function escapeHtml(s){
+    return String(s).replace(/[&<>"']/g, function(c){
+      return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];
+    });
+  }
+
+  // Favori (visuel)
+  document.querySelectorAll('[data-bookmark]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      btn.classList.toggle('saved');
+      btn.innerHTML = btn.classList.contains('saved') ? '&#9733;' : '&#9734;';
+    });
+  });
+
+  // Voir toutes les questions
+  var revealBtn = document.querySelector('[data-reveal-questions]');
+  var allQuestions = document.querySelector('[data-all-questions]');
+  revealBtn.addEventListener('click', function(){
+    allQuestions.hidden = !allQuestions.hidden;
+    revealBtn.textContent = allQuestions.hidden ? 'Voir toutes les questions ›' : 'Masquer les questions';
+  });
+
+  // Mode démo
+  var demoModal = document.getElementById('demoModal');
+  var demoFrame = document.getElementById('demoFrame');
+  document.querySelector('[data-open-demo]').addEventListener('click', function(){
+    demoFrame.src = TEST_LINK;
+    demoModal.hidden = false;
+  });
+  document.querySelector('[data-close-demo]').addEventListener('click', function(){
+    demoModal.hidden = true;
+    demoFrame.src = '';
+  });
+  demoModal.addEventListener('click', function(e){
+    if (e.target === demoModal){ demoModal.hidden = true; demoFrame.src = ''; }
+  });
+
+  // Ajouter à la boîte d'envoi
+  var addBtn = document.querySelector('.fiche-actions [data-add]');
+  addBtn.addEventListener('click', function(){
+    var idx = selected.findIndex(function(s){ return s.test === TEST_NAME; });
+    if (idx === -1){
+      selected.push({ test: TEST_NAME, link: TEST_LINK });
+      addBtn.textContent = 'Ajouté ✓';
+      addBtn.classList.remove('btn-primary'); addBtn.classList.add('btn-added');
+    } else {
+      selected.splice(idx, 1);
+      addBtn.textContent = "Ajouter à la boîte d'envoi";
+      addBtn.classList.remove('btn-added'); addBtn.classList.add('btn-primary');
+    }
+    renderSendbox();
+  });
+
+  function renderSendbox(){
+    var body = document.querySelector('[data-sendbox-body]');
+    if (selected.length === 0){
+      body.innerHTML = '<div class="sendbox-empty"><div class="mark">＋</div>' +
+        '<p>Ajoutez des questionnaires pour créer un lien à transmettre à un patient.</p></div>';
+      return;
+    }
+    var html = '';
+    selected.forEach(function(s, i){
+      html += '<div class="sendbox-item"><span>' + escapeHtml(s.test) + '</span>' +
+        '<button type="button" data-remove-selected="' + i + '" aria-label="Retirer">&times;</button></div>';
+    });
+    html += '<label class="field-label">Repère patient</label>' +
+      '<input class="field-input" data-patient-label type="text" placeholder="Prénom ou initiales">' +
+      '<p class="field-hint">Reste uniquement dans ce navigateur. Le lien envoyé ne contient aucune information sur le patient.</p>' +
+      '<button class="btn btn-primary" type="button" data-generate>Créer le message</button>' +
+      '<textarea class="msg-box" data-message hidden readonly></textarea>' +
+      '<p class="confirm" data-confirm hidden>Enregistré dans « Mes patients ».</p>' +
+      '<button class="btn btn-secondary" type="button" data-reset hidden>Nouvel envoi</button>';
+    body.innerHTML = html;
+
+    body.querySelectorAll('[data-remove-selected]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var i = parseInt(btn.getAttribute('data-remove-selected'), 10);
+        selected.splice(i, 1);
+        addBtn.textContent = "Ajouter à la boîte d'envoi";
+        addBtn.classList.remove('btn-added'); addBtn.classList.add('btn-primary');
+        renderSendbox();
+      });
+    });
+
+    body.querySelector('[data-generate]').addEventListener('click', function(){
+      var input = body.querySelector('[data-patient-label]');
+      var label = (input.value || '').trim();
+      if (!label){ input.focus(); return; }
+
+      var lines = selected.map(function(s){ return '- ' + s.test + ' : ' + s.link; });
+      var message = 'Bonjour,\n\n' +
+        'Comme convenu, voici le' + (selected.length > 1 ? 's liens' : ' lien') + ' pour compléter, à votre rythme :\n' +
+        lines.join('\n') + '\n\n' +
+        'Cela prend quelques minutes. Une fois terminé, vous pourrez télécharger votre fiche de résultat directement.\n\n' +
+        'À bientôt,\n' +
+        'Cabinet Bouche & Chmura';
+
+      var box = body.querySelector('[data-message]');
+      box.value = message;
+      box.hidden = false;
+
+      var list = loadEnvois();
+      list.push({ label: label, tests: selected.map(function(s){ return s.test; }), date: new Date().toISOString() });
+      saveEnvois(list);
+
+      body.querySelector('[data-confirm]').hidden = false;
+      input.setAttribute('disabled', 'disabled');
+      body.querySelector('[data-generate]').hidden = true;
+      body.querySelectorAll('[data-remove-selected]').forEach(function(btn){ btn.setAttribute('disabled', 'disabled'); });
+      var resetBtn = body.querySelector('[data-reset]');
+      resetBtn.hidden = false;
+      resetBtn.addEventListener('click', function(){ renderSendbox(); });
+
+      addBtn.textContent = "Ajouter à la boîte d'envoi";
+      addBtn.classList.remove('btn-added'); addBtn.classList.add('btn-primary');
+      selected = [];
+    });
+  }
+})();
+</script>
+</body>
+</html>

@@ -4,74 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<style>
-  :root{color-scheme:light}
-  body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}
-  img{max-width:100%}
-  [hidden]:not([hidden=until-found i]){display:none!important}
-  html.gate-locked body > *:not(#gate){display:none!important}
-  html.gate-locked{overflow:hidden}
-  #gate{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;
-    background:#F4F1EA;padding:24px;}
-  html.gate-locked #gate{display:flex;}
-  #gate .box{width:100%;max-width:330px;text-align:center;}
-  #gate .mark{width:56px;height:56px;border-radius:50%;margin:0 auto 22px;
-    background:linear-gradient(150deg,#27466E,#16273D);
-    border:1px solid rgba(255,255,255,.42);
-    box-shadow:0 10px 22px -8px rgba(10,14,22,.5);
-    display:flex;align-items:center;justify-content:center;}
-  #gate .mark .brand-mark{width:32px;height:32px;}
-  #gate h1{font-family:Georgia,'Times New Roman',serif;font-weight:500;font-size:22px;
-    color:#20241E;margin:0 0 6px;}
-  #gate p{font-size:13.5px;color:#63695D;margin:0 0 26px;line-height:1.6;}
-  #gate input{width:100%;box-sizing:border-box;padding:14px 16px;border-radius:12px;
-    border:1px solid #E0D9C9;background:#fff;font-size:16px;color:#20241E;text-align:center;
-    letter-spacing:.18em;font-family:inherit;}
-  #gate input:focus{outline:none;border-color:#1E3A5F;box-shadow:0 0 0 3px rgba(30,58,95,.12);}
-  #gate button{width:100%;margin-top:12px;padding:14px 16px;border:none;border-radius:12px;
-    background:#1E3A5F;color:#F4F1EA;font-size:15px;font-family:inherit;cursor:pointer;}
-  #gate .err{min-height:20px;margin:12px 0 0;font-size:13px;color:#A03A2B;}
-</style>
-<script>
-  (function(){
-    try{ if(localStorage.getItem('psypsy-apercu') !== 'ok') document.documentElement.classList.add('gate-locked'); }
-    catch(e){ document.documentElement.classList.add('gate-locked'); }
-  })();
-</script>
-</head>
-<body>
-<div id="gate">
-  <div class="box">
-    <div class="mark"><span class="brand-mark" aria-hidden="true"></span></div>
-    <h1>Aper&ccedil;u priv&eacute;</h1>
-    <p>Cette page n'est pas encore publique. Entrez le mot de passe pour la consulter.</p>
-    <form id="gate-form" autocomplete="off">
-      <input id="gate-input" type="password" inputmode="numeric" placeholder="Mot de passe" aria-label="Mot de passe" autofocus>
-      <button type="submit">Entrer</button>
-    </form>
-    <p class="err" id="gate-err"></p>
-  </div>
-</div>
-<script>
-  (function(){
-    var f = document.getElementById('gate-form');
-    var i = document.getElementById('gate-input');
-    var e = document.getElementById('gate-err');
-    f.addEventListener('submit', function(ev){
-      ev.preventDefault();
-      if(i.value.trim() === '1024'){
-        try{ localStorage.setItem('psypsy-apercu','ok'); }catch(err){}
-        document.documentElement.classList.remove('gate-locked');
-        e.textContent = '';
-        setTimeout(function(){ window.dispatchEvent(new Event('resize')); }, 30);
-      } else {
-        e.textContent = 'Mot de passe incorrect.';
-        i.value = ''; i.focus();
-      }
-    });
-  })();
-</script>
-<title>GAD-7 — Cabinet Bouche &amp; Chmura</title>
+<title>AQ — Cabinet Bouche &amp; Chmura</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -97,15 +30,11 @@
   .pills{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 20px;}
   .pill{font-size:12.5px;font-weight:600;color:var(--ink-soft);background:var(--surface-2);border-radius:999px;padding:6px 13px;display:inline-flex;align-items:center;gap:6px;}
   .instructions{font-size:14.5px;color:var(--ink-soft);margin:0 0 22px;line-height:1.7;}
-  .field-label{font-size:12.5px;font-weight:600;color:var(--ink-soft);display:block;margin:0 0 6px;}
-  .field-input{width:100%;font:inherit;font-size:14.5px;padding:11px 13px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);margin-bottom:22px;}
-  .field-input:focus{outline:none;border-color:var(--accent);}
 
   .quiz-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:28px 26px 26px;box-shadow:var(--shadow);}
   .progress-track{height:8px;border-radius:99px;background:var(--progress-bg);overflow:hidden;margin-bottom:14px;}
   .progress-fill{height:100%;background:var(--progress-fill);border-radius:99px;width:0%;transition:width .3s ease;}
   .q-count{font-size:12.5px;color:var(--ink-soft);font-weight:600;margin:0 0 20px;}
-  .q-stem{font-size:13.5px;color:var(--ink-soft);margin:0 0 6px;}
   .q-item{font-size:18px;font-weight:600;color:var(--ink);margin:0 0 26px;font-family:'Cormorant Garamond',Georgia,serif;line-height:1.35;}
   .options{display:flex;flex-direction:column;gap:10px;}
   .option-btn{font:inherit;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:14.5px;color:var(--ink);cursor:pointer;transition:border-color .15s ease,background .15s ease,transform .1s ease;}
@@ -115,7 +44,6 @@
   .back-link:hover{color:var(--ink);}
   .back-link[hidden]{display:none;}
 
-  /* ---- rapport de résultat, format identique à celui de Mentaal ---- */
   #result{display:none;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:30px 28px;box-shadow:var(--shadow);}
   #result h2.serif{font-size:22px;margin:0 0 6px;}
   .meta-line{font-size:13.5px;color:var(--ink-soft);margin:0 0 24px;}
@@ -123,15 +51,18 @@
   .section-title:first-of-type{border-top:none;padding-top:0;}
   .score-line{font-size:17px;margin:0 0 14px;}
   .score-line strong{font-size:22px;color:var(--accent);}
-  .band-table{width:100%;border-collapse:collapse;font-size:14px;margin-bottom:6px;}
-  .band-table td{padding:8px 4px;border-bottom:1px solid var(--line);color:var(--ink-soft);}
-  .band-table tr:last-child td{border-bottom:none;}
-  .band-table td.range{width:70px;font-weight:600;}
-  .band-table tr.active td{color:var(--ink);font-weight:700;}
+  .cutoff-table{width:100%;border-collapse:collapse;font-size:14px;margin-bottom:16px;}
+  .cutoff-table td{padding:8px 4px;border-bottom:1px solid var(--line);color:var(--ink-soft);}
+  .cutoff-table tr:last-child td{border-bottom:none;}
+  .cutoff-table td.range{width:60px;font-weight:600;}
+  .cutoff-table tr.active td{color:var(--ink);font-weight:700;}
   .band-badge{display:inline-block;margin-left:8px;background:var(--accent);color:var(--accent-ink);font-size:11.5px;font-weight:700;border-radius:999px;padding:2px 9px;}
+  .subscale-block{margin-bottom:12px;}
+  .subscale-name{font-family:'Cormorant Garamond',Georgia,serif;font-size:16px;margin:0 0 4px;}
+  .subscale-score{font-size:14px;color:var(--ink-soft);margin:0;}
+  .subscale-score strong{color:var(--ink);font-weight:700;}
   .answer-block{border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin-bottom:10px;}
   .answer-block .q-no{font-size:12px;font-weight:700;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.05em;margin:0 0 8px;}
-  .answer-block .stem{font-size:12.5px;color:var(--ink-soft);margin:0 0 4px;}
   .answer-block .item{font-size:14.5px;font-weight:600;color:var(--ink);margin:0 0 8px;}
   .answer-block .resp{font-size:14px;font-weight:600;color:var(--ink);}
   .answer-block .resp .sc{font-weight:400;color:var(--ink-soft);}
@@ -155,18 +86,16 @@
 <div class="wrap">
   <a class="back-top" href="index.html">&larr; Tous les tests</a>
   <div class="eyebrow">Auto-évaluation</div>
-  <h1 class="serif">Anxiété : un premier repère</h1>
+  <h1 class="serif">Traits autistiques : un premier repère</h1>
   <p class="intro-text">Ce résultat ne remplace pas un échange avec votre praticien, il sert de point de départ pour en discuter ensemble.</p>
 
   <!-- Écran d'accueil -->
   <div class="start-card" id="startScreen">
     <div class="pills">
-      <span class="pill">7 questions</span>
-      <span class="pill">2 minutes</span>
+      <span class="pill">50 questions</span>
+      <span class="pill">15 minutes</span>
     </div>
-    <p class="instructions">Veuillez lire attentivement chaque question et sélectionner la réponse qui correspond le mieux à la fréquence à laquelle vous avez ressenti chaque symptôme au cours des deux dernières semaines.</p>
-    <label class="field-label" for="patientCode">Nom ou code patient (facultatif)</label>
-    <input type="text" id="patientCode" class="field-input" placeholder="Ex : initiales ou code donné par votre praticien">
+    <p class="instructions">Merci d'indiquer pour chaque affirmation votre degré d'accord, en choisissant l'option qui correspond le mieux à votre avis.</p>
     <button type="button" class="btn" id="startBtn">Commencer</button>
     <p class="hint">Rien n'est envoyé ni conservé sur un serveur : si vous quittez avant la fin, vos réponses sont perdues et il faudra recommencer.</p>
   </div>
@@ -174,26 +103,24 @@
   <!-- Écran question (une par écran) -->
   <div class="quiz-card" id="quizScreen" hidden>
     <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
-    <p class="q-count" id="qCount">Question 1/7</p>
-    <p class="q-stem">Au cours des deux dernières semaines, à quelle fréquence avez-vous été gêné(e) par ce problème :</p>
+    <p class="q-count" id="qCount">Question 1/50</p>
     <p class="q-item" id="qItem"></p>
     <div class="options" id="qOptions"></div>
     <button type="button" class="back-link" id="backBtn" hidden>&larr; Question précédente</button>
   </div>
 
-  <!-- Rapport de résultat (même structure que le compte-rendu Mentaal) -->
+  <!-- Rapport de résultat -->
   <div id="result">
-    <h2 class="serif">Echelle de dépistage du TAG (GAD-7)</h2>
-    <p class="meta-line">Patient : <span id="patientNameOut">Patient</span><br>Passation : <span id="passationDate"></span></p>
+    <h2 class="serif">Quotient du spectre autistique (AQ)</h2>
+    <p class="meta-line">Passation : <span id="passationDate"></span></p>
 
     <p class="section-title">Cotations</p>
-    <p class="score-line">Score : <strong id="scoreVal">0</strong>/21</p>
-    <table class="band-table" id="bandTable">
-      <tr data-min="0" data-max="4"><td class="range">0 – 4</td><td>Anxiété minimale</td></tr>
-      <tr data-min="5" data-max="9"><td class="range">5 – 9</td><td>Anxiété légère</td></tr>
-      <tr data-min="10" data-max="14"><td class="range">10 – 14</td><td>Anxiété modérée</td></tr>
-      <tr data-min="15" data-max="21"><td class="range">15 – 21</td><td>Anxiété sévère</td></tr>
+    <p class="score-line">Score total : <strong id="scoreVal">0</strong>/50</p>
+    <table class="cutoff-table" id="cutoffTable">
+      <tr data-cutoff="26"><td class="range">&ge; 26</td><td>Seuil de dépistage clinique, plus sensible (Woodbury-Smith et al., 2005)</td></tr>
+      <tr data-cutoff="32"><td class="range">&ge; 32</td><td>Seuil de recherche (Baron-Cohen et al., 2001)</td></tr>
     </table>
+    <div id="subscales"></div>
 
     <p class="section-title">Réponses du patient</p>
     <div id="answersList"></div>
@@ -203,38 +130,97 @@
   </div>
 
   <p class="footnote">
-    Échelle GAD-7 (Spitzer, Kroenke, Williams &amp; Löwe, 2006), traduction française d'usage courant.
-    Un score de 10 ou plus signale une anxiété qui mérite d'être approfondie en consultation ;
-    ce test ne constitue pas un diagnostic.
+    Autism-Spectrum Quotient — AQ (Baron-Cohen, Wheelwright, Skinner, Martin &amp; Clubley, 2001), traduction française (S. Braun &amp; C. Kempenaers), validation française (Kempenaers, Braun, Delvaux &amp; Linkowski, 2017).
+    La structure en 5 sous-échelles se réplique mal en population française : le score total reste l'usage principal en dépistage. Ce résultat est un repère de dépistage, il ne constitue pas un diagnostic.
   </p>
 </div>
 
 <script>
 (function(){
-  const stem = "Au cours des deux dernières semaines, à quelle fréquence avez-vous été gêné(e) par ce problème :";
   const items = [
-    "Un sentiment de nervosité, d'anxiété ou de tension",
-    "Une incapacité à arrêter de s'inquiéter ou à contrôler ses inquiétudes",
-    "Une inquiétude excessive à propos de différentes choses",
-    "Des difficultés à se détendre",
-    "Une agitation telle qu'il est difficile de rester tranquille",
-    "Une tendance à être facilement contrarié(e) ou irritable",
-    "Une peur que quelque chose d'épouvantable puisse arriver"
+    "Je préfère réaliser des activités avec d'autres personnes plutôt que seul(e).",
+    "Je préfère tout faire continuellement de la même manière.",
+    "Quand j'essaye d'imaginer quelque chose, il est très facile de m'en représenter une image mentalement.",
+    "Je suis fréquemment tellement absorbé(e) par une chose que je perds tout le reste de vue.",
+    "Mon attention est souvent attirée par des bruits discrets que les autres ne remarquent pas.",
+    "Je fais habituellement attention aux numéros de plaques d'immatriculation ou à d'autres types d'informations de ce genre.",
+    "Les gens me disent souvent que ce que j'ai dit était impoli, même quand moi je pense que c'était poli.",
+    "Quand je lis une histoire, je peux facilement imaginer à quoi les personnages pourraient ressembler.",
+    "Je suis fasciné(e) par les dates.",
+    "Au sein d'un groupe, je peux facilement suivre les conversations de plusieurs personnes à la fois.",
+    "Je trouve les situations de la vie en société faciles.",
+    "J'ai tendance à remarquer certains détails que les autres ne voient pas.",
+    "Je préférerais aller dans une bibliothèque plutôt qu'à une fête.",
+    "Je trouve facile d'inventer des histoires.",
+    "Je suis plus facilement attiré(e) par les gens que par les objets.",
+    "J'ai tendance à avoir des centres d'intérêt très importants. Je me tracasse lorsque je ne peux m'y consacrer.",
+    "J'apprécie le bavardage en société.",
+    "Quand je parle, il n'est pas toujours facile pour les autres de placer un mot.",
+    "Je suis fasciné(e) par les chiffres.",
+    "Quand je lis une histoire, je trouve qu'il est difficile de me représenter les intentions des personnages.",
+    "Je n'aime pas particulièrement lire des romans.",
+    "Je trouve qu'il est difficile de se faire de nouveaux amis.",
+    "Je remarque sans cesse des schémas réguliers dans les choses qui m'entourent.",
+    "Je préférerais aller au cinéma plutôt qu'au musée.",
+    "Cela ne me dérange pas si mes habitudes quotidiennes sont perturbées.",
+    "Je remarque souvent que je ne sais pas comment entretenir une conversation.",
+    "Je trouve qu'il est facile de « lire entre les lignes » lorsque quelqu'un me parle.",
+    "Je me concentre habituellement plus sur l'ensemble d'une image que sur les petits détails de celle-ci.",
+    "Je ne suis pas très doué(e) pour me souvenir des numéros de téléphone.",
+    "Je ne remarque habituellement pas les petits changements dans une situation ou dans l'apparence de quelqu'un.",
+    "Je sais m'en rendre compte quand mon interlocuteur s'ennuie.",
+    "Je trouve qu'il est facile de faire plus d'une chose à la fois.",
+    "Quand je parle au téléphone, je ne suis pas sûr(e) de savoir quand c'est à mon tour de parler.",
+    "J'aime faire les choses de manière spontanée.",
+    "Je suis souvent le(la) dernier(ère) à comprendre le sens d'une blague.",
+    "Je trouve qu'il est facile de décoder ce que les autres pensent ou ressentent juste en regardant leur visage.",
+    "Si je suis interrompu(e), je peux facilement revenir à ce que j'étais en train de faire.",
+    "Je suis doué(e) pour le bavardage en société.",
+    "Les gens me disent souvent que je répète continuellement les mêmes choses.",
+    "Quand j'étais enfant, j'aimais habituellement jouer à des jeux de rôle (docteur, police, etc.) avec les autres.",
+    "J'aime collectionner des informations sur des catégories de choses (types de voitures, d'oiseaux, de trains, de plantes, ...).",
+    "Je trouve qu'il est difficile de s'imaginer dans la peau d'un autre.",
+    "J'aime planifier avec soin toute activité à laquelle je participe.",
+    "J'aime les événements sociaux.",
+    "Je trouve qu'il est difficile de décoder les intentions des autres.",
+    "Les nouvelles situations me rendent anxieux(se).",
+    "J'aime rencontrer de nouvelles personnes.",
+    "Je suis une personne qui a le sens de la diplomatie.",
+    "Je ne suis pas très doué(e) pour me souvenir des dates de naissance des gens.",
+    "Je trouve qu'il est très facile de jouer à des jeux de rôle avec des enfants."
   ];
-  const options = ["Jamais","Plusieurs jours","Plus de la moitié du temps","Presque tous les jours"];
+  const options = ["Tout à fait d'accord", "Plutôt d'accord", "Plutôt pas d'accord", "Pas du tout d'accord"];
+  // Items pour lesquels le côté "d'accord" (idx 0 ou 1) marque le point ; les autres items marquent
+  // le point du côté "pas d'accord" (idx 2 ou 3).
+  const AGREE_SCORES = [2,4,5,6,7,9,12,13,16,18,19,20,21,22,23,26,33,35,39,41,42,43,45,46];
+  const SUBSCALES = [
+    { key:'social', name:'Aptitudes sociales', items:[1,11,13,15,22,36,44,45,47,48], max:10 },
+    { key:'bascule', name:'Attention et bascule', items:[2,4,10,16,25,32,34,37,43,46], max:10 },
+    { key:'details', name:'Attention aux détails', items:[5,6,9,12,19,23,28,29,30,49], max:10 },
+    { key:'communication', name:'Communication', items:[7,17,18,26,27,31,33,35,38,39], max:10 },
+    { key:'imagination', name:'Imagination', items:[3,8,14,20,21,24,40,41,42,50], max:10 }
+  ];
   const answers = new Array(items.length).fill(null);
   let current = 0;
 
   const startScreen = document.getElementById('startScreen');
   const quizScreen = document.getElementById('quizScreen');
   const startBtn = document.getElementById('startBtn');
-  const patientCode = document.getElementById('patientCode');
   const qCount = document.getElementById('qCount');
   const qItem = document.getElementById('qItem');
   const qOptions = document.getElementById('qOptions');
   const backBtn = document.getElementById('backBtn');
   const progressFill = document.getElementById('progressFill');
   const resultBox = document.getElementById('result');
+
+  function pointsFor(idx, itemNumber){
+    // idx 0,1 = côté "d'accord" ; idx 2,3 = côté "pas d'accord"
+    if(idx === null || idx === undefined) return 0;
+    const isAgreeSide = idx <= 1;
+    const scoresOnAgreeSide = AGREE_SCORES.indexOf(itemNumber) !== -1;
+    if(scoresOnAgreeSide){ return isAgreeSide ? 1 : 0; }
+    return isAgreeSide ? 0 : 1;
+  }
 
   startBtn.addEventListener('click', function(){
     startScreen.hidden = true;
@@ -285,18 +271,29 @@
 
   function showResult(){
     quizScreen.hidden = true;
-    const total = answers.reduce(function(a,b){ return a + b; }, 0);
+    const total = answers.reduce(function(sum, idx, i){ return sum + pointsFor(idx, i + 1); }, 0);
 
-    document.getElementById('patientNameOut').textContent = patientCode.value.trim() || "Patient";
     document.getElementById('passationDate').textContent = new Date().toLocaleString('fr-FR', {day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit'});
     document.getElementById('scoreVal').textContent = total;
 
-    document.querySelectorAll('#bandTable tr').forEach(function(tr){
-      const min = parseInt(tr.dataset.min, 10), max = parseInt(tr.dataset.max, 10);
-      if(total >= min && total <= max){
+    document.querySelectorAll('#cutoffTable tr').forEach(function(tr){
+      const cutoff = parseInt(tr.dataset.cutoff, 10);
+      if(total >= cutoff){
         tr.classList.add('active');
-        tr.querySelector('td:last-child').insertAdjacentHTML('beforeend', '<span class="band-badge">Score : ' + total + '</span>');
+        tr.querySelector('td:last-child').insertAdjacentHTML('beforeend', '<span class="band-badge">Atteint</span>');
       }
+    });
+
+    const subEl = document.getElementById('subscales');
+    subEl.innerHTML = '';
+    SUBSCALES.forEach(function(sub){
+      const score = sub.items.reduce(function(sum, n){ return sum + pointsFor(answers[n - 1], n); }, 0);
+      const block = document.createElement('div');
+      block.className = 'subscale-block';
+      block.innerHTML =
+        '<p class="subscale-name">' + sub.name + '</p>' +
+        '<p class="subscale-score">Score : <strong>' + score + '</strong>/' + sub.max + '</p>';
+      subEl.appendChild(block);
     });
 
     const answersList = document.getElementById('answersList');
@@ -306,9 +303,8 @@
       block.className = 'answer-block';
       block.innerHTML =
         '<p class="q-no">Question ' + (idx + 1) + '</p>' +
-        '<p class="stem">' + stem + '</p>' +
         '<p class="item">' + item + '</p>' +
-        '<p class="resp">' + options[answers[idx]] + ' <span class="sc">(Score : ' + answers[idx] + ')</span></p>';
+        '<p class="resp">' + options[answers[idx]] + ' <span class="sc">(Score : ' + pointsFor(answers[idx], idx + 1) + ')</span></p>';
       answersList.appendChild(block);
     });
 
@@ -323,7 +319,6 @@
   document.getElementById('restartBtn').addEventListener('click', function(){
     answers.fill(null);
     current = 0;
-    patientCode.value = '';
     resultBox.style.display = 'none';
     startScreen.hidden = false;
     window.scrollTo({top:0, behavior:'smooth'});
