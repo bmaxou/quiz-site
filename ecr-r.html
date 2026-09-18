@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>ECR-R — Cabinet Bouche &amp; Chmura</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F4F1EA; --surface:#FFFFFF; --surface-2:#EAE6D9; --ink:#20241E; --ink-soft:#63695D;
+    --line:#E0D9C9; --accent:#1E3A5F; --accent-ink:#F4F1EA; --accent-soft:#E1E7EC; --terracotta:#A0824C;
+    --progress-bg:#E6E1D3; --progress-fill:#7FBF9E;
+    --shadow: 0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);
+    --verte:#3D6B4F; --verte-bg:#E4EEE8; --orange:#96631E; --orange-bg:#F3E8D2; --rouge:#B4483C; --rouge-bg:#F5DEDA;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',-apple-system,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,h3,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:var(--ink);}
+  .wrap{max-width:520px;margin:0 auto;padding:48px 24px 80px;}
+  .back-top{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--ink-soft);text-decoration:none;margin-bottom:20px;}
+  .back-top:hover{color:var(--ink);}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--ink-soft);display:inline-block;}
+  h1{font-size:28px;margin:0 0 10px;}
+  .intro-text{color:var(--ink-soft);font-size:15px;margin:0 0 28px;}
+
+  .start-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:32px 28px;box-shadow:var(--shadow);}
+  .pills{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 20px;}
+  .pill{font-size:12.5px;font-weight:600;color:var(--ink-soft);background:var(--surface-2);border-radius:999px;padding:6px 13px;display:inline-flex;align-items:center;gap:6px;}
+  .instructions{font-size:14.5px;color:var(--ink-soft);margin:0 0 22px;line-height:1.7;}
+
+  .quiz-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:28px 26px 26px;box-shadow:var(--shadow);}
+  .progress-track{height:8px;border-radius:99px;background:var(--progress-bg);overflow:hidden;margin-bottom:14px;}
+  .progress-fill{height:100%;background:var(--progress-fill);border-radius:99px;width:0%;transition:width .3s ease;}
+  .q-count{font-size:12.5px;color:var(--ink-soft);font-weight:600;margin:0 0 20px;}
+  .stem{font-size:13.5px;color:var(--ink-soft);margin:0 0 6px;}
+  .q-item{font-size:18px;font-weight:600;color:var(--ink);margin:0 0 26px;font-family:'Cormorant Garamond',Georgia,serif;line-height:1.35;}
+  .options{display:flex;flex-direction:column;gap:10px;}
+  .option-btn{font:inherit;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:14.5px;color:var(--ink);cursor:pointer;transition:border-color .15s ease,background .15s ease,transform .1s ease;}
+  .option-btn:hover{border-color:var(--accent);}
+  .option-btn.selected{border-color:var(--accent);background:var(--accent-soft);font-weight:600;}
+  .back-link{display:inline-flex;align-items:center;gap:6px;margin-top:22px;font-size:13px;color:var(--ink-soft);background:none;border:none;font:inherit;cursor:pointer;padding:0;}
+  .back-link:hover{color:var(--ink);}
+  .back-link[hidden]{display:none;}
+
+  #result{display:none;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:30px 28px;box-shadow:var(--shadow);}
+  #result h2.serif{font-size:22px;margin:0 0 6px;}
+  .meta-line{font-size:13.5px;color:var(--ink-soft);margin:0 0 24px;}
+  .section-title{font-size:12.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft);margin:0 0 12px;padding-top:18px;border-top:1px solid var(--line);}
+  .section-title:first-of-type{border-top:none;padding-top:0;}
+  .score-line{font-size:17px;margin:0 0 14px;}
+  .score-line strong{font-size:22px;color:var(--accent);}
+
+  .dim-block{border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:12px;}
+  .dim-block .dim-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:4px;flex-wrap:wrap;}
+  .dim-block .dim-name{font-family:'Cormorant Garamond',Georgia,serif;font-size:17px;font-weight:600;color:var(--ink);}
+  .dim-block .dim-score{font-size:14.5px;font-weight:700;}
+  .dim-block .dim-items{font-size:12px;color:var(--ink-soft);margin:0 0 8px;}
+  .dim-block .dim-norm{font-size:12px;color:var(--ink-soft);margin:0 0 10px;font-style:italic;}
+  .dim-block .dim-desc{font-size:13px;color:var(--ink-soft);margin:0;line-height:1.6;}
+
+  .dim-note{font-size:13.5px;color:var(--ink-soft);margin:0 0 20px;line-height:1.65;}
+  .answer-block{border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin-bottom:10px;}
+  .answer-block .q-no{font-size:12px;font-weight:700;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.05em;margin:0 0 8px;}
+  .answer-block .item{font-size:14.5px;font-weight:600;color:var(--ink);margin:0 0 8px;}
+  .answer-block .resp{font-size:14px;font-weight:600;color:var(--ink);}
+  .answer-block .resp .sc{font-weight:400;color:var(--ink-soft);}
+
+  .btn{font:inherit;font-size:15px;font-weight:600;padding:13px 30px;border-radius:999px;border:none;background:var(--accent);color:var(--accent-ink);cursor:pointer;transition:background .15s ease;width:100%;}
+  .btn:hover{background:#16273D;}
+  .btn-outline{background:none;border:1px solid var(--accent);color:var(--accent);margin-top:14px;}
+  .btn-outline:hover{background:var(--accent-soft);}
+  .hint{font-size:12.5px;color:var(--ink-soft);margin-top:14px;text-align:center;}
+  .footnote{margin-top:40px;font-size:11.5px;color:var(--ink-soft);border-top:1px solid var(--line);padding-top:16px;line-height:1.7;}
+  [hidden]{display:none !important;}
+
+  @media print{
+    .back-top, .eyebrow, h1, .intro-text, .footnote, .btn-outline{ display:none !important; }
+    body{background:#fff;}
+    #result{box-shadow:none;border:none;padding:0;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back-top" href="index.html">&larr; Tous les tests</a>
+  <div class="eyebrow">Auto-évaluation</div>
+  <h1 class="serif">Questionnaire sur les expériences dans les relations proches (ECR-R)</h1>
+  <p class="intro-text">Ce résultat ne remplace pas un échange avec votre praticien, il sert de point de départ pour en discuter ensemble.</p>
+
+  <!-- Écran d'accueil -->
+  <div class="start-card" id="startScreen">
+    <div class="pills">
+      <span class="pill">36 questions</span>
+      <span class="pill">9 minutes</span>
+    </div>
+    <p class="instructions">Nous vous invitons à répondre à ce questionnaire le plus sincèrement possible. Il n'y a pas de bonne ou de mauvaise réponse : l'important est de refléter fidèlement votre expérience ou votre ressenti. Les énoncés suivants se rapportent à la manière dont vous vous sentez à l'intérieur de vos relations amoureuses. Nous nous intéressons à la manière dont vous vivez généralement ces relations, et pas seulement à ce que vous vivez dans votre relation actuelle.</p>
+    <button type="button" class="btn" id="startBtn">Commencer</button>
+    <p class="hint">Rien n'est envoyé ni conservé sur un serveur : si vous quittez avant la fin, vos réponses sont perdues et il faudra recommencer.</p>
+  </div>
+
+  <!-- Écran question (une par écran) -->
+  <div class="quiz-card" id="quizScreen" hidden>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <p class="q-count" id="qCount">Question 1/36</p>
+    <p class="q-item" id="qItem"></p>
+    <div class="options" id="qOptions"></div>
+    <button type="button" class="back-link" id="backBtn" hidden>&larr; Question précédente</button>
+  </div>
+
+  <!-- Rapport de résultat -->
+  <div id="result">
+    <h2 class="serif">Questionnaire sur les expériences dans les relations proches (ECR-R)</h2>
+    <p class="meta-line">Passation : <span id="passationDate"></span></p>
+
+    <p class="section-title">Interprétation générale</p>
+    <p class="dim-note">L'ECR-R mesure l'attachement amoureux adulte à travers deux dimensions indépendantes — anxiété d'abandon et évitement de l'intimité — chacune calculée sur 18 items notés de 1 (Fortement en désaccord) à 7 (Fortement en accord). Le score de chaque dimension est la moyenne de ses 18 items (après inversion des items formulés en sens contraire) : il va donc de 1 à 7. Un faible score sur les deux dimensions oriente vers un attachement plus sécure ; un score élevé sur une ou deux dimensions oriente vers un attachement plus anxieux, plus évitant, ou les deux (attachement craintif/anxieux-évitant). Ce résultat reste un repère de discussion, pas un diagnostic.</p>
+
+    <p class="section-title">Sous-échelles</p>
+    <div id="dimBlocks"></div>
+
+    <p class="section-title">Réponses du patient</p>
+    <div id="answersList"></div>
+
+    <button type="button" class="btn" id="downloadBtn">Télécharger le résultat (PDF)</button>
+    <button type="button" class="btn btn-outline" id="restartBtn">Refaire le test</button>
+  </div>
+
+  <p class="footnote">
+    Experiences in Close Relationships-Revised (ECR-R), Fraley, R.C., Waller, N.G., &amp; Brennan, K.A. (2000). Traduction française : Lafontaine, M.-F. &amp; Lussier, Y. (2003) ; Favez, N. &amp; Cairo, S. (2011).
+    Ce résultat est un repère, il ne constitue pas un diagnostic.
+  </p>
+</div>
+
+<script>
+(function(){
+  // Les 36 items de l'ECR-R (traduction Lafontaine & Lussier, 2003 / Favez &
+  // Cairo, 2011), avec leur sous-échelle ('anxiete' ou 'evitement') et leur
+  // sens de cotation (reverse:true = item formulé en sens contraire, recodé
+  // en 8 - réponse sur l'échelle 1-7 avant d'être moyenné dans sa sous-échelle).
+  //
+  // NOTE DE TRANSPARENCE : Max a signalé un bug de coquille sur SA PROPRE
+  // version privée de ce questionnaire (compte Mentaal personnel, module
+  // "Thérapie de couple") : les items en position 3 et 5 y affichaient
+  // exactement le même texte, signe qu'un item de l'ECR-R standard (36 items)
+  // manquait à la position 5. En comparant item par item les 35 autres textes
+  // de la version de Max aux 18 items canoniques de la sous-échelle Anxiété
+  // (Fraley, Waller & Brennan, 2000), un seul item canonique n'avait aucune
+  // correspondance : « I often worry that my partner doesn't really love me »
+  // (item d'anxiété n°3 de l'échelle originale). C'est ce texte, en français,
+  // qui a été restitué ici à la position 5 — jamais inventé, mais identifié
+  // par élimination puis vérifié auprès d'une traduction française indépendante
+  // de l'ECR-R avant d'être harmonisé avec le style de traduction déjà employé
+  // par Max sur les items voisins (ex. item 3 : « Je suis souvent inquiet(e) à
+  // l'idée que... »). Le catalogue public mentaal.fr/send/ecr-r ne propose
+  // aucun contenu de question à ce jour (statut « Bientôt disponible » au
+  // 15/09/2026) : les 36 items ci-dessous proviennent donc de la version
+  // fonctionnelle de Max (mode démo, mentaal.fr/send/lrjnwkpbafhjymw9kj73rqk2,
+  // vérifiée le 15/09/2026), corrigée du doublon comme demandé.
+  const items = [
+    { text: "J'ai peur de perdre l'amour de mon/ma partenaire.", sub: 'anxiete', reverse: false },
+    { text: "Mon/ma partenaire me comprend vraiment bien et comprend ce dont j'ai besoin.", sub: 'evitement', reverse: true },
+    { text: "Je suis souvent inquiet(e) à l'idée que mon partenaire ne veuille pas rester avec moi.", sub: 'anxiete', reverse: false },
+    { text: "Je suis à l'aise pour montrer de l'affection à mon/ma partenaire.", sub: 'evitement', reverse: true },
+    { text: "Je suis souvent inquiet(e) à l'idée que mon/ma partenaire ne m'aime pas vraiment.", sub: 'anxiete', reverse: false },
+    { text: "Il est facile pour moi de compter sur mes partenaires amoureux(ses).", sub: 'evitement', reverse: true },
+    { text: "Je m'inquiète à l'idée que mes partenaires amoureux ne vont pas s'occuper de moi autant que je m'occupe d'eux.", sub: 'anxiete', reverse: false },
+    { text: "Ça ne me gêne pas d'avoir besoin de mon/ma partenaire.", sub: 'evitement', reverse: true },
+    { text: "Il m'arrive souvent de souhaiter que les sentiments de mon/ma partenaire pour moi soient aussi forts que mes sentiments pour lui/elle.", sub: 'anxiete', reverse: false },
+    { text: "Je discute de tout avec mon/ma partenaire.", sub: 'evitement', reverse: true },
+    { text: "Je m'inquiète beaucoup au sujet de mes relations.", sub: 'anxiete', reverse: false },
+    { text: "Je dis à peu près tout à mon/ma partenaire.", sub: 'evitement', reverse: true },
+    { text: "Quand mon partenaire est loin de moi, j'ai peur qu'il/elle s'intéresse à quelqu'un d'autre.", sub: 'anxiete', reverse: false },
+    { text: "Quand je montre mes sentiments à un partenaire, j'ai peur qu'il/elle n'éprouve pas les mêmes sentiments envers moi.", sub: 'anxiete', reverse: false },
+    { text: "J'ai rarement la crainte que mon partenaire me quitte.", sub: 'anxiete', reverse: true },
+    { text: "Mon/ma partenaire amoureux(se) me fait douter de moi.", sub: 'anxiete', reverse: false },
+    { text: "Il ne m'arrive pas souvent de m'inquiéter d'être abandonné(e).", sub: 'anxiete', reverse: true },
+    { text: "Je trouve que mes partenaires ne veulent pas se rapprocher de moi autant que je le voudrais.", sub: 'anxiete', reverse: false },
+    { text: "Cela m'aide de me tourner vers mon/ma partenaire quand j'en ai besoin.", sub: 'evitement', reverse: true },
+    { text: "Il arrive quelquefois que des partenaires amoureux(ses) changent leurs sentiments envers moi sans raison apparente.", sub: 'anxiete', reverse: false },
+    { text: "Il m'est relativement facile de me rapprocher de mon/ma partenaire.", sub: 'evitement', reverse: true },
+    { text: "Mon désir d'être très près des gens les fait fuir parfois.", sub: 'anxiete', reverse: false },
+    { text: "Ce n'est pas difficile pour moi de me rapprocher de mon/ma partenaire.", sub: 'evitement', reverse: true },
+    { text: "J'ai peur que lorsqu'un/une partenaire va me connaître mieux, il/elle n'apprécie pas qui je suis vraiment.", sub: 'anxiete', reverse: false },
+    { text: "Habituellement, je discute de mes préoccupations et de mes problèmes avec mon/ma partenaire.", sub: 'evitement', reverse: true },
+    { text: "Ça me rend furieux(se) de ne pas obtenir l'affection et le soutien dont j'ai besoin de mon/ma partenaire.", sub: 'anxiete', reverse: false },
+    { text: "Je me permets difficilement de compter sur mes partenaires amoureux(ses).", sub: 'evitement', reverse: false },
+    { text: "Je deviens nerveux(se) lorsque mes partenaires se rapprochent trop de moi.", sub: 'evitement', reverse: false },
+    { text: "Je m'inquiète de ne pas être à la hauteur des autres gens.", sub: 'anxiete', reverse: false },
+    { text: "Mon/ma partenaire semble ne me remarquer que lorsque je suis en colère.", sub: 'anxiete', reverse: false },
+    { text: "Je préfère ne pas montrer mes sentiments profonds à mon/ma partenaire.", sub: 'evitement', reverse: false },
+    { text: "Je me sens à l'aise de partager mes pensées intimes et mes sentiments avec mon/ma partenaire.", sub: 'evitement', reverse: true },
+    { text: "Je me sens très à l'aise lorsque je suis près de mon/ma partenaire amoureux(se).", sub: 'evitement', reverse: true },
+    { text: "Je ne me sens pas à l'aise de m'ouvrir à mon/ma partenaire.", sub: 'evitement', reverse: false },
+    { text: "Je préfère ne pas être trop près de mes partenaires amoureux(ses).", sub: 'evitement', reverse: false },
+    { text: "Je deviens mal à l'aise lorsque mon/ma partenaire amoureux(se) veut être très près de moi.", sub: 'evitement', reverse: false }
+  ];
+
+  // Sous-échelles : 18 items chacune, score = moyenne (1 à 7). Repères de
+  // population (moyenne / écart-type) tels qu'affichés par Mentaal sur la
+  // version de Max (mentaal.fr, aperçu du 15/09/2026).
+  const SUBSCALES = [
+    { key: 'anxiete', name: "Anxiété d'abandon", n: 18,
+      norm: { mean: 3.46, sd: 1.10 },
+      desc: "Reflète la peur d'être abandonné(e) ou insuffisamment aimé(e), et le besoin de proximité et de réassurance dans la relation. Un score élevé traduit une hypervigilance aux signaux de rejet et une préoccupation marquée pour la disponibilité affective du/de la partenaire." },
+    { key: 'evitement', name: "Évitement de l'intimité", n: 18,
+      norm: { mean: 2.93, sd: 1.15 },
+      desc: "Reflète l'inconfort face à la proximité émotionnelle et la dépendance envers le/la partenaire, ainsi que la préférence pour l'autonomie et la distance affective. Un score élevé traduit une tendance à limiter l'intimité et l'auto-dévoilement dans la relation." }
+  ];
+
+  const options = ["Fortement en désaccord", "En désaccord", "Légèrement en désaccord", "Neutre / partagé", "Légèrement en accord", "En accord", "Fortement en accord"];
+  const answers = new Array(items.length).fill(null);
+  let current = 0;
+
+  const startScreen = document.getElementById('startScreen');
+  const quizScreen = document.getElementById('quizScreen');
+  const startBtn = document.getElementById('startBtn');
+  const qCount = document.getElementById('qCount');
+  const qItem = document.getElementById('qItem');
+  const qOptions = document.getElementById('qOptions');
+  const backBtn = document.getElementById('backBtn');
+  const progressFill = document.getElementById('progressFill');
+  const resultBox = document.getElementById('result');
+
+  function rawPoints(idx){ return idx + 1; } // idx 0="Fortement en désaccord"(1) ... 6="Fortement en accord"(7)
+  function pointsFor(idx, reverse){ return reverse ? (8 - rawPoints(idx)) : rawPoints(idx); }
+
+  startBtn.addEventListener('click', function(){
+    startScreen.hidden = true;
+    quizScreen.hidden = false;
+    renderQuestion();
+  });
+
+  backBtn.addEventListener('click', function(){
+    if(current > 0){
+      current -= 1;
+      renderQuestion();
+    }
+  });
+
+  function renderQuestion(){
+    qCount.textContent = 'Question ' + (current + 1) + '/' + items.length;
+    qItem.textContent = items[current].text;
+    progressFill.style.width = (((current) / items.length) * 100) + '%';
+    backBtn.hidden = current === 0;
+
+    qOptions.innerHTML = '';
+    options.forEach(function(label, idx){
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'option-btn';
+      btn.textContent = label;
+      if(answers[current] === idx){ btn.classList.add('selected'); }
+      btn.addEventListener('click', function(){ selectAnswer(idx, btn); });
+      qOptions.appendChild(btn);
+    });
+  }
+
+  function selectAnswer(idx, btnEl){
+    answers[current] = idx;
+    Array.from(qOptions.children).forEach(function(b){ b.classList.remove('selected'); });
+    btnEl.classList.add('selected');
+    progressFill.style.width = (((current + 1) / items.length) * 100) + '%';
+
+    setTimeout(function(){
+      if(current < items.length - 1){
+        current += 1;
+        renderQuestion();
+      } else {
+        showResult();
+      }
+    }, 380);
+  }
+
+  function subscaleMean(key){
+    let total = 0, n = 0;
+    items.forEach(function(it, i){
+      if (it.sub === key){ total += pointsFor(answers[i], it.reverse); n += 1; }
+    });
+    return total / n;
+  }
+
+  function renderDimBlock(def){
+    const mean = subscaleMean(def.key);
+    const block = document.createElement('div');
+    block.className = 'dim-block';
+    block.innerHTML =
+      '<div class="dim-head">' +
+        '<span class="dim-name">' + def.name + '</span>' +
+        '<span class="dim-score">' + mean.toFixed(2) + ' / 7</span>' +
+      '</div>' +
+      '<p class="dim-items">' + def.n + ' items (moyenne des réponses, items inversés recodés)</p>' +
+      '<p class="dim-norm">Repère population (Mentaal) : moyenne ' + def.norm.mean.toFixed(2) + ' (écart-type ' + def.norm.sd.toFixed(2) + ')</p>' +
+      '<p class="dim-desc">' + def.desc + '</p>';
+    return block;
+  }
+
+  function showResult(){
+    quizScreen.hidden = true;
+
+    document.getElementById('passationDate').textContent = new Date().toLocaleString('fr-FR', {day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit'});
+
+    const dimBlocksEl = document.getElementById('dimBlocks');
+    dimBlocksEl.innerHTML = '';
+    SUBSCALES.forEach(function(def){
+      dimBlocksEl.appendChild(renderDimBlock(def));
+    });
+
+    const answersList = document.getElementById('answersList');
+    answersList.innerHTML = '';
+    items.forEach(function(it, idx){
+      const block = document.createElement('div');
+      block.className = 'answer-block';
+      block.innerHTML =
+        '<p class="q-no">Question ' + (idx + 1) + '</p>' +
+        '<p class="item">' + it.text + '</p>' +
+        '<p class="resp">' + options[answers[idx]] + ' <span class="sc">(Score : ' + pointsFor(answers[idx], it.reverse) + ')</span></p>';
+      answersList.appendChild(block);
+    });
+
+    resultBox.style.display = 'block';
+    resultBox.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  document.getElementById('downloadBtn').addEventListener('click', function(){
+    window.print();
+  });
+
+  document.getElementById('restartBtn').addEventListener('click', function(){
+    answers.fill(null);
+    current = 0;
+    resultBox.style.display = 'none';
+    startScreen.hidden = false;
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+})();
+</script>
+</body>
+</html>

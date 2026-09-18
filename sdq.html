@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>SDQ — Cabinet Bouche &amp; Chmura</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F4F1EA; --surface:#FFFFFF; --surface-2:#EAE6D9; --ink:#20241E; --ink-soft:#63695D;
+    --line:#E0D9C9; --accent:#1E3A5F; --accent-ink:#F4F1EA; --accent-soft:#E1E7EC; --terracotta:#A0824C;
+    --progress-bg:#E6E1D3; --progress-fill:#7FBF9E;
+    --shadow: 0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);
+    --verte:#3D6B4F; --verte-bg:#E4EEE8; --orange:#96631E; --orange-bg:#F3E8D2; --rouge:#B4483C; --rouge-bg:#F5DEDA;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',-apple-system,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,h3,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:var(--ink);}
+  .wrap{max-width:520px;margin:0 auto;padding:48px 24px 80px;}
+  .back-top{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--ink-soft);text-decoration:none;margin-bottom:20px;}
+  .back-top:hover{color:var(--ink);}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--ink-soft);display:inline-block;}
+  h1{font-size:28px;margin:0 0 10px;}
+  .intro-text{color:var(--ink-soft);font-size:15px;margin:0 0 28px;}
+
+  .start-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:32px 28px;box-shadow:var(--shadow);}
+  .pills{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 20px;}
+  .pill{font-size:12.5px;font-weight:600;color:var(--ink-soft);background:var(--surface-2);border-radius:999px;padding:6px 13px;display:inline-flex;align-items:center;gap:6px;}
+  .instructions{font-size:14.5px;color:var(--ink-soft);margin:0 0 22px;line-height:1.7;}
+
+  .quiz-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:28px 26px 26px;box-shadow:var(--shadow);}
+  .progress-track{height:8px;border-radius:99px;background:var(--progress-bg);overflow:hidden;margin-bottom:14px;}
+  .progress-fill{height:100%;background:var(--progress-fill);border-radius:99px;width:0%;transition:width .3s ease;}
+  .q-count{font-size:12.5px;color:var(--ink-soft);font-weight:600;margin:0 0 20px;}
+  .q-item{font-size:18px;font-weight:600;color:var(--ink);margin:0 0 26px;font-family:'Cormorant Garamond',Georgia,serif;line-height:1.35;}
+  .options{display:flex;flex-direction:column;gap:10px;}
+  .option-btn{font:inherit;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:14.5px;color:var(--ink);cursor:pointer;transition:border-color .15s ease,background .15s ease,transform .1s ease;}
+  .option-btn:hover{border-color:var(--accent);}
+  .option-btn.selected{border-color:var(--accent);background:var(--accent-soft);font-weight:600;}
+  .back-link{display:inline-flex;align-items:center;gap:6px;margin-top:22px;font-size:13px;color:var(--ink-soft);background:none;border:none;font:inherit;cursor:pointer;padding:0;}
+  .back-link:hover{color:var(--ink);}
+  .back-link[hidden]{display:none;}
+
+  #result{display:none;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:30px 28px;box-shadow:var(--shadow);}
+  #result h2.serif{font-size:22px;margin:0 0 6px;}
+  .meta-line{font-size:13.5px;color:var(--ink-soft);margin:0 0 24px;}
+  .section-title{font-size:12.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft);margin:0 0 12px;padding-top:18px;border-top:1px solid var(--line);}
+  .section-title:first-of-type{border-top:none;padding-top:0;}
+  .score-line{font-size:17px;margin:0 0 14px;}
+  .score-line strong{font-size:22px;color:var(--accent);}
+
+  .global-badge{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;font-weight:700;border-radius:999px;padding:8px 16px;margin:0 0 18px;}
+  .global-badge.verte{color:var(--verte);background:var(--verte-bg);}
+  .global-badge.orange{color:var(--orange);background:var(--orange-bg);}
+  .global-badge.rouge{color:var(--rouge);background:var(--rouge-bg);}
+  .global-badge .dot{width:9px;height:9px;border-radius:50%;background:currentColor;flex-shrink:0;}
+
+  .dim-block{border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:12px;}
+  .dim-block .dim-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:4px;flex-wrap:wrap;}
+  .dim-block .dim-name{font-family:'Cormorant Garamond',Georgia,serif;font-size:17px;font-weight:600;color:var(--ink);}
+  .dim-block .dim-score{font-size:14.5px;font-weight:700;}
+  .dim-block .dim-items{font-size:12px;color:var(--ink-soft);margin:0 0 10px;}
+  .zone-chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;border-radius:999px;padding:4px 11px;}
+  .zone-chip.verte{color:var(--verte);background:var(--verte-bg);}
+  .zone-chip.orange{color:var(--orange);background:var(--orange-bg);}
+  .zone-chip.rouge{color:var(--rouge);background:var(--rouge-bg);}
+  .zone-chip .dot{width:7px;height:7px;border-radius:50%;background:currentColor;}
+  .zone-bar{display:flex;height:8px;border-radius:99px;overflow:hidden;margin-top:10px;}
+  .zone-bar span{display:block;height:100%;}
+  .zone-bar .seg-verte{background:#BFE0CC;}
+  .zone-bar .seg-orange{background:#E9CE9C;}
+  .zone-bar .seg-rouge{background:#E3B0A8;}
+  .zone-bar .marker{position:relative;}
+
+  .dim-note{font-size:13.5px;color:var(--ink-soft);margin:0 0 20px;line-height:1.65;}
+  .answer-block{border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin-bottom:10px;}
+  .answer-block .q-no{font-size:12px;font-weight:700;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.05em;margin:0 0 8px;}
+  .answer-block .item{font-size:14.5px;font-weight:600;color:var(--ink);margin:0 0 8px;}
+  .answer-block .resp{font-size:14px;font-weight:600;color:var(--ink);}
+  .answer-block .resp .sc{font-weight:400;color:var(--ink-soft);}
+
+  .btn{font:inherit;font-size:15px;font-weight:600;padding:13px 30px;border-radius:999px;border:none;background:var(--accent);color:var(--accent-ink);cursor:pointer;transition:background .15s ease;width:100%;}
+  .btn:hover{background:#16273D;}
+  .btn-outline{background:none;border:1px solid var(--accent);color:var(--accent);margin-top:14px;}
+  .btn-outline:hover{background:var(--accent-soft);}
+  .hint{font-size:12.5px;color:var(--ink-soft);margin-top:14px;text-align:center;}
+  .footnote{margin-top:40px;font-size:11.5px;color:var(--ink-soft);border-top:1px solid var(--line);padding-top:16px;line-height:1.7;}
+  [hidden]{display:none !important;}
+
+  @media print{
+    .back-top, .eyebrow, h1, .intro-text, .footnote, .btn-outline{ display:none !important; }
+    body{background:#fff;}
+    #result{box-shadow:none;border:none;padding:0;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back-top" href="index.html">&larr; Tous les tests</a>
+  <div class="eyebrow">Auto-évaluation</div>
+  <h1 class="serif">Questionnaire des forces et des difficultés : un premier repère</h1>
+  <p class="intro-text">Ce résultat ne remplace pas un échange avec votre praticien, il sert de point de départ pour en discuter ensemble.</p>
+
+  <!-- Écran d'accueil -->
+  <div class="start-card" id="startScreen">
+    <div class="pills">
+      <span class="pill">25 questions</span>
+      <span class="pill">8 minutes</span>
+    </div>
+    <p class="instructions">Pour chaque affirmation, indiquez si elle correspond au comportement de votre enfant au cours des six derniers mois.</p>
+    <button type="button" class="btn" id="startBtn">Commencer</button>
+    <p class="hint">Rien n'est envoyé ni conservé sur un serveur : si vous quittez avant la fin, vos réponses sont perdues et il faudra recommencer.</p>
+  </div>
+
+  <!-- Écran question (une par écran) -->
+  <div class="quiz-card" id="quizScreen" hidden>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <p class="q-count" id="qCount">Question 1/25</p>
+    <p class="q-item" id="qItem"></p>
+    <div class="options" id="qOptions"></div>
+    <button type="button" class="back-link" id="backBtn" hidden>&larr; Question précédente</button>
+  </div>
+
+  <!-- Rapport de résultat -->
+  <div id="result">
+    <h2 class="serif">Questionnaire des forces et des difficultés (SDQ)</h2>
+    <p class="meta-line">Passation : <span id="passationDate"></span></p>
+
+    <p class="section-title">Interprétation générale</p>
+    <div id="globalBadge"></div>
+    <p class="dim-note">Le SDQ répartit ses 25 items en 5 sous-échelles de 5 items chacune (0 à 10 par sous-échelle) : symptômes émotionnels, problèmes de conduite, hyperactivité/inattention, problèmes relationnels avec les pairs et comportement prosocial. Le score total de difficultés additionne les 4 premières sous-échelles (0 à 40) ; le comportement prosocial est une échelle de force et n'y est pas inclus. Chaque score est comparé à des seuils de recherche répartissant trois zones : verte (normal), orange (limite) et rouge (anormal). La zone globale retenue ci-dessus est la plus sévère parmi le score total de difficultés et les 4 sous-échelles de difficultés (hors comportement prosocial).</p>
+
+    <p class="section-title">Score total de difficultés</p>
+    <p class="score-line">Score total (4 sous-échelles, hors prosocial) : <strong id="scoreTotal">0</strong>/40</p>
+    <div id="totalBlock"></div>
+
+    <p class="section-title">Sous-échelles de difficultés</p>
+    <div id="dimBlocks"></div>
+
+    <p class="section-title">Comportement prosocial</p>
+    <div id="prosocialBlock"></div>
+    <p class="dim-note">Le score prosocial n'est pas inclus dans le score total de difficultés. Un score prosocial bas peut indiquer des difficultés même si le score total est normal.</p>
+
+    <p class="section-title">Réponses du patient</p>
+    <div id="answersList"></div>
+
+    <button type="button" class="btn" id="downloadBtn">Télécharger le résultat (PDF)</button>
+    <button type="button" class="btn btn-outline" id="restartBtn">Refaire le test</button>
+  </div>
+
+  <p class="footnote">
+    Questionnaire des forces et des difficultés — Strengths and Difficulties Questionnaire (SDQ), Robert Goodman (1997). Goodman, R. (1997). The Strengths and Difficulties Questionnaire: A Research Note. Journal of Child Psychology and Psychiatry, 38(5), 581-586.
+    Ce résultat est un repère, il ne constitue pas un diagnostic.
+  </p>
+</div>
+
+<script>
+(function(){
+  // Les 25 items du SDQ (version parent), regroupés en 5 sous-échelles de 5
+  // items chacune. reverse:true signale un item inversé (7, 11, 14, 21) :
+  // "Pas vrai" (0) devient 2 points, "Un peu vrai" (1) reste 1 point,
+  // "Très vrai" (2) devient 0 point.
+  const items = [
+    { text: "Est attentif(ve) aux autres, tient compte de ce qu'ils ressentent", sub: 'prosocial', reverse: false },
+    { text: "Est agité(e), hyperactif(ve), ne tient pas en place", sub: 'hyperactivite', reverse: false },
+    { text: "Se plaint souvent de maux de tête, de ventre ou de nausées", sub: 'emotionnel', reverse: false },
+    { text: "Partage facilement avec les autres enfants (friandises, jouets, crayons, etc.)", sub: 'prosocial', reverse: false },
+    { text: "Fait souvent des crises de colère ou s'emporte facilement", sub: 'conduite', reverse: false },
+    { text: "Est plutôt solitaire, a tendance à jouer seul(e)", sub: 'relationnel', reverse: false },
+    { text: "Est en général obéissant(e), fait habituellement ce que les adultes demandent", sub: 'conduite', reverse: true },
+    { text: "S'inquiète souvent, paraît souvent soucieux(se)", sub: 'emotionnel', reverse: false },
+    { text: "Aide volontiers quand quelqu'un s'est fait mal ou ne se sent pas bien", sub: 'prosocial', reverse: false },
+    { text: "Ne tient pas en place ou se tortille constamment", sub: 'hyperactivite', reverse: false },
+    { text: "A au moins un(e) ami(e)", sub: 'relationnel', reverse: true },
+    { text: "Se bagarre souvent avec les autres enfants ou les tyrannise", sub: 'conduite', reverse: false },
+    { text: "Est souvent malheureux(se), abattu(e) ou pleure souvent", sub: 'emotionnel', reverse: false },
+    { text: "Est généralement aimé(e) des autres enfants", sub: 'relationnel', reverse: true },
+    { text: "Est facilement distrait(e), a du mal à se concentrer", sub: 'hyperactivite', reverse: false },
+    { text: "Est anxieux(se) ou se cramponne aux adultes dans les situations nouvelles", sub: 'emotionnel', reverse: false },
+    { text: "Est gentil(le) avec les enfants plus jeunes", sub: 'prosocial', reverse: false },
+    { text: "Ment ou triche souvent", sub: 'conduite', reverse: false },
+    { text: "Est harcelé(e) ou tyrannisé(e) par d'autres enfants", sub: 'relationnel', reverse: false },
+    { text: "Est toujours prêt(e) à aider les autres", sub: 'prosocial', reverse: false },
+    { text: "Réfléchit avant d'agir", sub: 'hyperactivite', reverse: true },
+    { text: "Vole à la maison, à l'école ou ailleurs", sub: 'conduite', reverse: false },
+    { text: "S'entend mieux avec les adultes qu'avec les autres enfants", sub: 'relationnel', reverse: false },
+    { text: "A de nombreuses peurs, est facilement effrayé(e)", sub: 'emotionnel', reverse: false },
+    { text: "Va jusqu'au bout des tâches ou devoirs, maintient bien son attention", sub: 'hyperactivite', reverse: false }
+  ];
+
+  // Sous-échelles de difficultés (incluses dans le score total de
+  // difficultés) et sous-échelle de force (comportement prosocial, à part).
+  const SUBSCALES = [
+    { key: 'emotionnel', name: 'Symptômes émotionnels', bands: [[0,3,'verte'],[4,4,'orange'],[5,10,'rouge']] },
+    { key: 'conduite', name: 'Problèmes de conduite', bands: [[0,2,'verte'],[3,3,'orange'],[4,10,'rouge']] },
+    { key: 'hyperactivite', name: 'Hyperactivité/inattention', bands: [[0,5,'verte'],[6,6,'orange'],[7,10,'rouge']] },
+    { key: 'relationnel', name: 'Problèmes relationnels avec les pairs', bands: [[0,2,'verte'],[3,3,'orange'],[4,10,'rouge']] }
+  ];
+  const PROSOCIAL = { key: 'prosocial', name: 'Comportement prosocial', bands: [[6,10,'verte'],[5,5,'orange'],[0,4,'rouge']] };
+  const TOTAL_BANDS = [[0,13,'verte'],[14,16,'orange'],[17,40,'rouge']];
+
+  const options = ["Pas vrai", "Un peu vrai", "Très vrai"];
+  const answers = new Array(items.length).fill(null);
+  let current = 0;
+
+  const startScreen = document.getElementById('startScreen');
+  const quizScreen = document.getElementById('quizScreen');
+  const startBtn = document.getElementById('startBtn');
+  const qCount = document.getElementById('qCount');
+  const qItem = document.getElementById('qItem');
+  const qOptions = document.getElementById('qOptions');
+  const backBtn = document.getElementById('backBtn');
+  const progressFill = document.getElementById('progressFill');
+  const resultBox = document.getElementById('result');
+
+  function pointsFor(idx, reverse){
+    // idx 0="Pas vrai" ... 2="Très vrai"
+    return reverse ? (2 - idx) : idx;
+  }
+
+  function zoneForBands(score, bands){
+    for (let i = 0; i < bands.length; i++){
+      if (score >= bands[i][0] && score <= bands[i][1]) return bands[i][2];
+    }
+    return bands[bands.length - 1][2];
+  }
+
+  function zoneLabel(zone){
+    return zone === 'verte' ? 'Zone verte — Normal'
+      : zone === 'orange' ? 'Zone orange — Limite'
+      : 'Zone rouge — Anormal';
+  }
+
+  function zoneRank(zone){ return zone === 'rouge' ? 2 : zone === 'orange' ? 1 : 0; }
+
+  startBtn.addEventListener('click', function(){
+    startScreen.hidden = true;
+    quizScreen.hidden = false;
+    renderQuestion();
+  });
+
+  backBtn.addEventListener('click', function(){
+    if(current > 0){
+      current -= 1;
+      renderQuestion();
+    }
+  });
+
+  function renderQuestion(){
+    qCount.textContent = 'Question ' + (current + 1) + '/' + items.length;
+    qItem.textContent = items[current].text;
+    progressFill.style.width = (((current) / items.length) * 100) + '%';
+    backBtn.hidden = current === 0;
+
+    qOptions.innerHTML = '';
+    options.forEach(function(label, idx){
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'option-btn';
+      btn.textContent = label;
+      if(answers[current] === idx){ btn.classList.add('selected'); }
+      btn.addEventListener('click', function(){ selectAnswer(idx, btn); });
+      qOptions.appendChild(btn);
+    });
+  }
+
+  function selectAnswer(idx, btnEl){
+    answers[current] = idx;
+    Array.from(qOptions.children).forEach(function(b){ b.classList.remove('selected'); });
+    btnEl.classList.add('selected');
+    progressFill.style.width = (((current + 1) / items.length) * 100) + '%';
+
+    setTimeout(function(){
+      if(current < items.length - 1){
+        current += 1;
+        renderQuestion();
+      } else {
+        showResult();
+      }
+    }, 380);
+  }
+
+  function scoreForSub(subKey){
+    let total = 0;
+    items.forEach(function(it, i){
+      if (it.sub === subKey){ total += pointsFor(answers[i], it.reverse); }
+    });
+    return total;
+  }
+
+  function renderDimBlock(def){
+    const score = scoreForSub(def.key);
+    const zone = zoneForBands(score, def.bands);
+    const block = document.createElement('div');
+    block.className = 'dim-block';
+    block.innerHTML =
+      '<div class="dim-head">' +
+        '<span class="dim-name">' + def.name + '</span>' +
+        '<span class="dim-score">' + score + '/10</span>' +
+      '</div>' +
+      '<p class="dim-items">5 items</p>' +
+      '<span class="zone-chip ' + zone + '"><span class="dot"></span>' + zoneLabel(zone) + '</span>';
+    return { el: block, score: score, zone: zone };
+  }
+
+  function showResult(){
+    quizScreen.hidden = true;
+
+    document.getElementById('passationDate').textContent = new Date().toLocaleString('fr-FR', {day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit'});
+
+    const dimBlocksEl = document.getElementById('dimBlocks');
+    dimBlocksEl.innerHTML = '';
+    let worstZone = 'verte';
+    let totalScore = 0;
+    SUBSCALES.forEach(function(def){
+      const res = renderDimBlock(def);
+      dimBlocksEl.appendChild(res.el);
+      totalScore += res.score;
+      if (zoneRank(res.zone) > zoneRank(worstZone)) worstZone = res.zone;
+    });
+
+    document.getElementById('scoreTotal').textContent = totalScore;
+    const totalZone = zoneForBands(totalScore, TOTAL_BANDS);
+    if (zoneRank(totalZone) > zoneRank(worstZone)) worstZone = totalZone;
+
+    const totalBlockEl = document.getElementById('totalBlock');
+    totalBlockEl.innerHTML = '';
+    const totalBlock = document.createElement('div');
+    totalBlock.className = 'dim-block';
+    totalBlock.innerHTML =
+      '<div class="dim-head">' +
+        '<span class="dim-name">Total de difficultés</span>' +
+        '<span class="dim-score">' + totalScore + '/40</span>' +
+      '</div>' +
+      '<p class="dim-items">4 sous-échelles (20 items) — 0–13 verte · 14–16 orange · 17–40 rouge</p>' +
+      '<span class="zone-chip ' + totalZone + '"><span class="dot"></span>' + zoneLabel(totalZone) + '</span>';
+    totalBlockEl.appendChild(totalBlock);
+
+    const globalBadge = document.getElementById('globalBadge');
+    globalBadge.innerHTML = '<span class="global-badge ' + worstZone + '"><span class="dot"></span>' + zoneLabel(worstZone) + '</span>';
+
+    const prosocialRes = renderDimBlock(PROSOCIAL);
+    const prosocialBlockEl = document.getElementById('prosocialBlock');
+    prosocialBlockEl.innerHTML = '';
+    prosocialBlockEl.appendChild(prosocialRes.el);
+
+    const answersList = document.getElementById('answersList');
+    answersList.innerHTML = '';
+    items.forEach(function(it, idx){
+      const block = document.createElement('div');
+      block.className = 'answer-block';
+      block.innerHTML =
+        '<p class="q-no">Question ' + (idx + 1) + '</p>' +
+        '<p class="item">' + it.text + '</p>' +
+        '<p class="resp">' + options[answers[idx]] + ' <span class="sc">(Score : ' + pointsFor(answers[idx], it.reverse) + ')</span></p>';
+      answersList.appendChild(block);
+    });
+
+    resultBox.style.display = 'block';
+    resultBox.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  document.getElementById('downloadBtn').addEventListener('click', function(){
+    window.print();
+  });
+
+  document.getElementById('restartBtn').addEventListener('click', function(){
+    answers.fill(null);
+    current = 0;
+    resultBox.style.display = 'none';
+    startScreen.hidden = false;
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+})();
+</script>
+</body>
+</html>

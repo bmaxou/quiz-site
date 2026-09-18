@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>RAS — Cabinet Bouche &amp; Chmura</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F4F1EA; --surface:#FFFFFF; --surface-2:#EAE6D9; --ink:#20241E; --ink-soft:#63695D;
+    --line:#E0D9C9; --accent:#1E3A5F; --accent-ink:#F4F1EA; --accent-soft:#E1E7EC; --terracotta:#A0824C;
+    --progress-bg:#E6E1D3; --progress-fill:#7FBF9E;
+    --shadow: 0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',-apple-system,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,h3,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:var(--ink);}
+  .wrap{max-width:520px;margin:0 auto;padding:48px 24px 80px;}
+  .back-top{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--ink-soft);text-decoration:none;margin-bottom:20px;}
+  .back-top:hover{color:var(--ink);}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--ink-soft);display:inline-block;}
+  h1{font-size:28px;margin:0 0 10px;}
+  .intro-text{color:var(--ink-soft);font-size:15px;margin:0 0 28px;}
+
+  .start-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:32px 28px;box-shadow:var(--shadow);}
+  .pills{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 20px;}
+  .pill{font-size:12.5px;font-weight:600;color:var(--ink-soft);background:var(--surface-2);border-radius:999px;padding:6px 13px;display:inline-flex;align-items:center;gap:6px;}
+  .instructions{font-size:14.5px;color:var(--ink-soft);margin:0 0 22px;line-height:1.7;}
+
+  .quiz-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:28px 26px 26px;box-shadow:var(--shadow);}
+  .progress-track{height:8px;border-radius:99px;background:var(--progress-bg);overflow:hidden;margin-bottom:14px;}
+  .progress-fill{height:100%;background:var(--progress-fill);border-radius:99px;width:0%;transition:width .3s ease;}
+  .q-count{font-size:12.5px;color:var(--ink-soft);font-weight:600;margin:0 0 20px;}
+  .q-item{font-size:18px;font-weight:600;color:var(--ink);margin:0 0 26px;font-family:'Cormorant Garamond',Georgia,serif;line-height:1.35;}
+  .options{display:flex;flex-direction:column;gap:10px;}
+  .option-btn{font:inherit;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:14.5px;color:var(--ink);cursor:pointer;transition:border-color .15s ease,background .15s ease,transform .1s ease;}
+  .option-btn:hover{border-color:var(--accent);}
+  .option-btn.selected{border-color:var(--accent);background:var(--accent-soft);font-weight:600;}
+  .back-link{display:inline-flex;align-items:center;gap:6px;margin-top:22px;font-size:13px;color:var(--ink-soft);background:none;border:none;font:inherit;cursor:pointer;padding:0;}
+  .back-link:hover{color:var(--ink);}
+  .back-link[hidden]{display:none;}
+
+  #result{display:none;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:30px 28px;box-shadow:var(--shadow);}
+  #result h2.serif{font-size:22px;margin:0 0 6px;}
+  .meta-line{font-size:13.5px;color:var(--ink-soft);margin:0 0 24px;}
+  .section-title{font-size:12.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft);margin:0 0 12px;padding-top:18px;border-top:1px solid var(--line);}
+  .section-title:first-of-type{border-top:none;padding-top:0;}
+  .score-line{font-size:17px;margin:0 0 14px;}
+  .score-line strong{font-size:22px;color:var(--accent);}
+  .dim-note{font-size:13.5px;color:var(--ink-soft);margin:0 0 20px;line-height:1.65;}
+  .answer-block{border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin-bottom:10px;}
+  .answer-block .q-no{font-size:12px;font-weight:700;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.05em;margin:0 0 8px;}
+  .answer-block .item{font-size:14.5px;font-weight:600;color:var(--ink);margin:0 0 8px;}
+  .answer-block .resp{font-size:14px;font-weight:600;color:var(--ink);}
+  .answer-block .resp .sc{font-weight:400;color:var(--ink-soft);}
+
+  .btn{font:inherit;font-size:15px;font-weight:600;padding:13px 30px;border-radius:999px;border:none;background:var(--accent);color:var(--accent-ink);cursor:pointer;transition:background .15s ease;width:100%;}
+  .btn:hover{background:#16273D;}
+  .btn-outline{background:none;border:1px solid var(--accent);color:var(--accent);margin-top:14px;}
+  .btn-outline:hover{background:var(--accent-soft);}
+  .hint{font-size:12.5px;color:var(--ink-soft);margin-top:14px;text-align:center;}
+  .footnote{margin-top:40px;font-size:11.5px;color:var(--ink-soft);border-top:1px solid var(--line);padding-top:16px;line-height:1.7;}
+  [hidden]{display:none !important;}
+
+  @media print{
+    .back-top, .eyebrow, h1, .intro-text, .footnote, .btn-outline{ display:none !important; }
+    body{background:#fff;}
+    #result{box-shadow:none;border:none;padding:0;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back-top" href="index.html">&larr; Tous les tests</a>
+  <div class="eyebrow">Auto-évaluation</div>
+  <h1 class="serif">Affirmation de soi : un premier repère</h1>
+  <p class="intro-text">Ce résultat ne remplace pas un échange avec votre praticien, il sert de point de départ pour en discuter ensemble.</p>
+
+  <!-- Écran d'accueil -->
+  <div class="start-card" id="startScreen">
+    <div class="pills">
+      <span class="pill">30 questions</span>
+      <span class="pill">8 minutes</span>
+    </div>
+    <p class="instructions">Merci d'indiquer, pour chacune des situations suivantes, à quel point elle vous correspond, en sélectionnant l'option qui vous correspond le mieux.</p>
+    <button type="button" class="btn" id="startBtn">Commencer</button>
+    <p class="hint">Rien n'est envoyé ni conservé sur un serveur : si vous quittez avant la fin, vos réponses sont perdues et il faudra recommencer.</p>
+  </div>
+
+  <!-- Écran question (une par écran) -->
+  <div class="quiz-card" id="quizScreen" hidden>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <p class="q-count" id="qCount">Question 1/30</p>
+    <p class="q-item" id="qItem"></p>
+    <div class="options" id="qOptions"></div>
+    <button type="button" class="back-link" id="backBtn" hidden>&larr; Question précédente</button>
+  </div>
+
+  <!-- Rapport de résultat -->
+  <div id="result">
+    <h2 class="serif">Échelle d'affirmation de soi de Rathus (RAS)</h2>
+    <p class="meta-line">Passation : <span id="passationDate"></span></p>
+
+    <p class="section-title">Cotations</p>
+    <p class="score-line">Score total : <strong id="scoreVal">0</strong> <span style="font-size:14px;color:var(--ink-soft);">(échelle de -90 à +90)</span></p>
+    <p class="dim-note">Un score proche de -90 traduit des difficultés d'affirmation de soi (passivité) ; un score proche de 0 traduit un comportement affirmé équilibré ; un score proche de +90 traduit une tendance à l'affirmation agressive. Il n'existe pas de seuils cliniques validés par paliers : le score se lit comme une tendance, pas comme un diagnostic.</p>
+
+    <p class="section-title">Réponses du patient</p>
+    <div id="answersList"></div>
+
+    <button type="button" class="btn" id="downloadBtn">Télécharger le résultat (PDF)</button>
+    <button type="button" class="btn btn-outline" id="restartBtn">Refaire le test</button>
+  </div>
+
+  <p class="footnote">
+    Rathus Assertiveness Schedule — RAS (Rathus, 1973), traduction française J. Cottraux (diffusion AFTCC).
+    Dix-sept items formulés en sens inverse voient leur score inversé avant le calcul du total. Ce résultat est un repère, il ne constitue pas un diagnostic.
+  </p>
+</div>
+
+<script>
+(function(){
+  const items = [
+    "La plupart des gens me semblent être plus agressifs et défendre mieux leurs droits que moi.",
+    "Il m'est arrivé d'hésiter par timidité au moment de donner ou d'accepter des rendez-vous.",
+    "Quand la nourriture dans un restaurant ne me satisfait pas, je m'en plains au serveur ou à la serveuse.",
+    "Je fais attention à ne pas heurter les sentiments des autres, même lorsque je sens que l'on m'a blessé(e).",
+    "Si un vendeur s'est donné beaucoup de mal à me montrer une marchandise qui ne me convient pas parfaitement, j'ai un moment difficile lorsque je dois dire non.",
+    "Lorsqu'on me demande de faire quelque chose, j'insiste pour en savoir la raison.",
+    "Il y a des moments où je cherche une bonne et vigoureuse discussion.",
+    "Je me bats pour arriver aussi bien que les autres dans ma profession.",
+    "À vrai dire, les gens tirent souvent profit de moi.",
+    "J'ai du plaisir à entreprendre des conversations avec de nouvelles connaissances ou des étrangers.",
+    "Souvent, je ne sais rien dire à des personnes séduisantes du sexe opposé.",
+    "J'hésiterais à téléphoner à un grand établissement de commerce ou à une administration.",
+    "Je préférerais poser ma candidature pour un autre travail par lettre plutôt que par un entretien personnel.",
+    "Je trouve embarrassant de renvoyer une marchandise.",
+    "Si un parent proche et respecté est en train de m'ennuyer, j'étoufferais mes sentiments plutôt que d'exprimer cette gêne.",
+    "Il m'est arrivé de poser des questions, par peur de paraître stupide.",
+    "Pendant une discussion serrée, j'ai souvent peur d'être bouleversé(e) au point de trembler de tout mon corps.",
+    "Si un conférencier réputé et respecté dit quelque chose que je pense inexact, j'aimerais que le public entende aussi mon point de vue.",
+    "J'évite de discuter les prix avec les représentants et les vendeurs.",
+    "Lorsque j'ai fait quelque chose d'important et de valable, je m'arrange pour le faire savoir aux autres.",
+    "Je suis ouvert et franc au sujet de mes sentiments.",
+    "Si quelqu'un a répandu des histoires fausses et de mauvais goût à mon sujet, je le vois aussi vite que possible pour une explication.",
+    "J'ai souvent un moment difficile lorsque je dois dire non.",
+    "J'ai tendance à contenir des émotions plutôt que de faire une scène.",
+    "Je me plains lorsque le service est mal fait, dans un restaurant ou ailleurs.",
+    "Souvent je ne sais pas quoi dire lorsqu'on me fait un compliment.",
+    "Au cinéma, au théâtre, ou lors d'une conférence, si un couple près de moi est en train de parler à voix haute, je lui demande de se taire ou d'aller autre part.",
+    "Quiconque cherche à passer devant moi dans une queue risque une bonne explication.",
+    "Je suis rapide dans l'expression de mes opinions.",
+    "Il y a des moments où je ne sais pas quoi dire."
+  ];
+  // Options ordonnées de -3 à +3 (les valeurs numériques ne sont jamais montrées au patient)
+  const options = ["Vraiment non caractéristique", "Plutôt non caractéristique", "Un peu non caractéristique", "Un peu caractéristique", "Plutôt caractéristique", "Très caractéristique"];
+  const values = [-3, -2, -1, 1, 2, 3];
+  // items inversés (numérotation humaine 1..30) : 1,2,4,5,9,11,12,13,14,15,16,17,19,23,24,26,30
+  const reversedList = [1,2,4,5,9,11,12,13,14,15,16,17,19,23,24,26,30];
+  const reversed = items.map(function(_, i){ return reversedList.indexOf(i + 1) !== -1; });
+  const answers = new Array(items.length).fill(null);
+  let current = 0;
+
+  const startScreen = document.getElementById('startScreen');
+  const quizScreen = document.getElementById('quizScreen');
+  const startBtn = document.getElementById('startBtn');
+  const qCount = document.getElementById('qCount');
+  const qItem = document.getElementById('qItem');
+  const qOptions = document.getElementById('qOptions');
+  const backBtn = document.getElementById('backBtn');
+  const progressFill = document.getElementById('progressFill');
+  const resultBox = document.getElementById('result');
+
+  function pointsFor(idx, isReversed){
+    const val = values[idx];
+    return isReversed ? -val : val;
+  }
+
+  startBtn.addEventListener('click', function(){
+    startScreen.hidden = true;
+    quizScreen.hidden = false;
+    renderQuestion();
+  });
+
+  backBtn.addEventListener('click', function(){
+    if(current > 0){
+      current -= 1;
+      renderQuestion();
+    }
+  });
+
+  function renderQuestion(){
+    qCount.textContent = 'Question ' + (current + 1) + '/' + items.length;
+    qItem.textContent = items[current];
+    progressFill.style.width = (((current) / items.length) * 100) + '%';
+    backBtn.hidden = current === 0;
+
+    qOptions.innerHTML = '';
+    options.forEach(function(label, idx){
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'option-btn';
+      btn.textContent = label;
+      if(answers[current] === idx){ btn.classList.add('selected'); }
+      btn.addEventListener('click', function(){ selectAnswer(idx, btn); });
+      qOptions.appendChild(btn);
+    });
+  }
+
+  function selectAnswer(idx, btnEl){
+    answers[current] = idx;
+    Array.from(qOptions.children).forEach(function(b){ b.classList.remove('selected'); });
+    btnEl.classList.add('selected');
+    progressFill.style.width = (((current + 1) / items.length) * 100) + '%';
+
+    setTimeout(function(){
+      if(current < items.length - 1){
+        current += 1;
+        renderQuestion();
+      } else {
+        showResult();
+      }
+    }, 380);
+  }
+
+  function showResult(){
+    quizScreen.hidden = true;
+    const total = answers.reduce(function(sum, idx, i){ return sum + pointsFor(idx, reversed[i]); }, 0);
+
+    document.getElementById('passationDate').textContent = new Date().toLocaleString('fr-FR', {day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit'});
+    document.getElementById('scoreVal').textContent = (total > 0 ? '+' : '') + total;
+
+    const answersList = document.getElementById('answersList');
+    answersList.innerHTML = '';
+    items.forEach(function(item, idx){
+      const block = document.createElement('div');
+      block.className = 'answer-block';
+      const pts = pointsFor(answers[idx], reversed[idx]);
+      block.innerHTML =
+        '<p class="q-no">Question ' + (idx + 1) + '</p>' +
+        '<p class="item">' + item + '</p>' +
+        '<p class="resp">' + options[answers[idx]] + ' <span class="sc">(Score : ' + (pts > 0 ? '+' : '') + pts + ')</span></p>';
+      answersList.appendChild(block);
+    });
+
+    resultBox.style.display = 'block';
+    resultBox.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  document.getElementById('downloadBtn').addEventListener('click', function(){
+    window.print();
+  });
+
+  document.getElementById('restartBtn').addEventListener('click', function(){
+    answers.fill(null);
+    current = 0;
+    resultBox.style.display = 'none';
+    startScreen.hidden = false;
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+})();
+</script>
+</body>
+</html>
