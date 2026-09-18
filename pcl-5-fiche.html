@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>PCL-5 — Fiche — Cabinet Bouche &amp; Chmura</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  img{max-width:100%}
+  [hidden]{display:none!important}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:920px;margin:0 auto;padding:32px 24px 80px;}
+  .crumb{font-size:12.5px;color:#9A9E90;margin:0 0 22px;}
+  .crumb a{color:#63695D;text-decoration:none;}
+  .crumb a:hover{text-decoration:underline;}
+
+  .layout{display:flex;gap:28px;align-items:flex-start;}
+  .main-col{flex:1;min-width:0;}
+
+  .fiche-head{display:flex;gap:22px;align-items:flex-start;margin-bottom:26px;flex-wrap:wrap;}
+  .fiche-photo{position:relative;width:112px;height:112px;flex-shrink:0;border-radius:14px;overflow:hidden;
+    background:linear-gradient(135deg,#5C3A2E 0%,#84503C 55%,#3D2620 100%);}
+  .fiche-photo::before{content:"";position:absolute;width:150px;height:150px;border-radius:50%;
+    background:radial-gradient(circle,rgba(224,196,138,.55),transparent 70%);top:-50px;right:-40px;}
+  .fiche-photo .acronym{position:absolute;left:12px;bottom:10px;font-family:'Cormorant Garamond',Georgia,serif;
+    font-weight:600;font-size:19px;color:#fff;}
+  .fiche-title{flex:1;min-width:220px;}
+  .fiche-title h1{font-size:24px;margin:0 0 14px;}
+  .fiche-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;}
+  .round-btn{width:38px;height:38px;border-radius:50%;background:#F4F1EA;border:1px solid #E0D9C9;
+    display:flex;align-items:center;justify-content:center;cursor:pointer;color:#63695D;font-size:15px;padding:0;}
+  .round-btn.saved{color:#A0824C;}
+
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;transition:opacity .15s ease,background .15s ease,color .15s ease;}
+  .btn:hover{opacity:.85;}
+  .btn-primary{background:#1E3A5F;color:#fff;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-added{background:#E4EEE8;color:#3D6B4F;border-color:#C9DED2;}
+  .btn-added:hover{opacity:1;}
+  .btn[disabled]{cursor:not-allowed;opacity:.55;}
+
+  .desc-text{font-size:15px;color:#3A3E33;margin:0 0 26px;max-width:640px;}
+
+  .meta-list{list-style:none;margin:0 0 32px;padding:0;display:flex;flex-direction:column;gap:9px;max-width:520px;}
+  .meta-list li{display:flex;align-items:center;gap:10px;font-size:13.5px;color:#63695D;}
+  .meta-list .ico{width:18px;text-align:center;flex-shrink:0;}
+  .meta-list a{color:#1E3A5F;font-weight:600;text-decoration:none;}
+  .meta-list a:hover{text-decoration:underline;}
+
+  h2.section{font-size:19px;margin:0 0 14px;padding-top:26px;border-top:1px solid #E0D9C9;}
+  h2.section:first-of-type{border-top:none;padding-top:0;}
+
+  .preview-card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:14px;padding:20px 22px;margin-bottom:14px;}
+  .preview-card .stem{font-size:12.5px;color:#9A9E90;margin:0 0 6px;}
+  .preview-card .item{font-family:'Cormorant Garamond',Georgia,serif;font-size:18px;margin:0 0 16px;}
+  .preview-opts{display:flex;flex-wrap:wrap;gap:8px;}
+  .preview-opts span{font-size:12.5px;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:6px 13px;}
+  .reveal-link{appearance:none;background:none;border:none;font:inherit;color:#1E3A5F;font-weight:700;font-size:13.5px;cursor:pointer;padding:0;}
+  .reveal-link:hover{text-decoration:underline;}
+  .all-questions{list-style:decimal;margin:14px 0 0;padding-left:20px;font-size:13.5px;color:#3A3E33;display:flex;flex-direction:column;gap:8px;}
+
+  .cotation-text{font-size:14px;color:#3A3E33;margin:0 0 16px;max-width:640px;}
+  .band-table{width:100%;max-width:420px;border-collapse:collapse;font-size:13.5px;margin-bottom:16px;}
+  .band-table td{padding:8px 4px;border-bottom:1px solid #E0D9C9;color:#63695D;}
+  .band-table tr:last-child td{border-bottom:none;}
+  .band-table td.range{width:70px;font-weight:600;color:#20241E;}
+  .source-note{font-size:11.5px;color:#9A9E90;margin:0 0 30px;}
+
+  /* Boîte d'envoi (identique à la page d'accueil) */
+  .sendbox{width:296px;flex-shrink:0;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:22px;position:sticky;top:24px;}
+  .sendbox h2.serif{font-size:17px;margin:0 0 16px;padding-top:0;border-top:none;}
+  .sendbox-empty{text-align:center;padding:20px 4px 8px;}
+  .sendbox-empty .mark{width:52px;height:52px;margin:0 auto 14px;border-radius:50%;background:#F4F1EA;display:flex;align-items:center;justify-content:center;font-size:22px;color:#9A9E90;}
+  .sendbox-empty p{font-size:13px;color:#9A9E90;margin:0;}
+  .sendbox-item{display:flex;align-items:center;justify-content:space-between;gap:8px;background:#F4F1EA;border-radius:8px;padding:8px 10px;font-size:13px;font-weight:600;margin-bottom:8px;}
+  .sendbox-item button{appearance:none;border:none;background:none;color:#9A9E90;cursor:pointer;font-size:14px;line-height:1;padding:2px;}
+  .sendbox-item button:hover{color:#B4483C;}
+  .field-label{display:block;font-size:12.5px;font-weight:600;color:#63695D;margin:16px 0 6px;}
+  .field-input{width:100%;font-family:'Inter',sans-serif;font-size:14px;color:#20241E;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:8px;padding:9px 12px;}
+  .field-hint{font-size:11.5px;color:#9A9E90;margin:6px 0 0;}
+  .sendbox .btn-primary{width:100%;justify-content:center;margin-top:14px;}
+  .msg-box{width:100%;font-family:'Inter',sans-serif;font-size:13px;color:#20241E;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:10px;padding:12px;resize:vertical;min-height:132px;margin-top:14px;}
+  .confirm{font-size:12.5px;color:#3D6B4F;margin-top:8px;}
+
+  @media (max-width:760px){
+    .layout{flex-direction:column;}
+    .sendbox{width:100%;position:static;order:-1;}
+  }
+
+  /* Modale « Mode démo » */
+  .modal-overlay{position:fixed;inset:0;background:rgba(32,36,30,.5);display:flex;align-items:center;justify-content:center;padding:24px;z-index:20;}
+  .modal-box{background:#fff;border-radius:18px;max-width:360px;width:100%;max-height:88vh;overflow:auto;padding:20px;}
+  .modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+  .modal-head span{font-family:'Cormorant Garamond',Georgia,serif;font-size:18px;}
+  .modal-head button{appearance:none;border:none;background:#F4F1EA;width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:16px;color:#63695D;}
+  .phone-frame{border:8px solid #20241E;border-radius:32px;overflow:hidden;background:#fff;box-shadow:0 20px 40px -18px rgba(20,26,32,.4);}
+  .phone-frame iframe{display:block;width:100%;height:540px;border:none;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="crumb"><a href="index.html">Accueil</a> &rsaquo; <a href="index.html">Questionnaires</a> &rsaquo; PCL-5</p>
+
+  <div class="layout">
+    <div class="main-col">
+
+      <div class="fiche-head">
+        <div class="fiche-photo"><span class="acronym">PCL-5</span></div>
+        <div class="fiche-title">
+          <h1 class="serif">Échelle de mesure du TSPT pour le DSM-5 (PCL-5)</h1>
+          <div class="fiche-actions">
+            <button class="btn btn-primary" type="button" data-add>Ajouter à la boîte d'envoi</button>
+            <button class="btn btn-secondary" type="button" data-open-demo>Mode démo</button>
+            <button class="round-btn" type="button" data-bookmark aria-label="Enregistrer dans mes favoris">&#9734;</button>
+          </div>
+        </div>
+      </div>
+
+      <p class="desc-text">Ce questionnaire recense les problèmes que certaines personnes éprouvent à la suite d'une expérience stressante. Il se compose de 20 questions portant sur le dernier mois. Les réponses permettent d'obtenir un score global orientant sur la présence éventuelle d'un trouble de stress post-traumatique.</p>
+
+      <ul class="meta-list">
+        <li><span class="ico">&#10003;</span> 20 questions</li>
+        <li><span class="ico">&#9201;</span> 5 minutes</li>
+        <li><span class="ico">&#127760;</span> Français</li>
+        <li><span class="ico">&#128214;</span> PTSD Checklist for DSM-5 (PCL-5)</li>
+        <li><span class="ico">&#128100;</span> Adulte</li>
+        <li><span class="ico">&#9997;</span> Weathers, Litz, Keane, Palmieri, Marx &amp; Schnurr (2013) ; National Center for PTSD</li>
+        <li><span class="ico">&#127991;</span> <a href="index.html">Stress post-traumatique</a></li>
+      </ul>
+
+      <h2 class="serif section">Aperçu des questions</h2>
+      <div class="preview-card">
+        
+        <p class="item">Des souvenirs répétés, pénibles et involontaires de l'expérience stressante ?</p>
+        <div class="preview-opts">
+          <span>Pas du tout</span><span>Un peu</span><span>Modérément</span><span>Beaucoup</span><span>Extrêmement</span>
+        </div>
+      </div>
+      <button class="reveal-link" type="button" data-reveal-questions>Voir toutes les questions &rsaquo;</button>
+      <ol class="all-questions" data-all-questions hidden>
+        <li>Des rêves répétés et pénibles de l'expérience stressante ?</li>
+        <li>Se sentir ou agir soudainement comme si vous viviez à nouveau l'expérience stressante ?</li>
+        <li>Se sentir mal quand quelque chose vous rappelle l'événement ?</li>
+        <li>Avoir de fortes réactions physiques lorsque quelque chose vous rappelle l'événement ?</li>
+        <li>Essayer d'éviter les souvenirs, pensées, et sentiments liés à l'événement ?</li>
+        <li>Essayer d'éviter les personnes et les choses qui vous rappellent l'expérience stressante ?</li>
+        <li>Des difficultés à vous rappeler des parties importantes de l'événement ?</li>
+        <li>Des croyances négatives sur vous-même, les autres, le monde ?</li>
+        <li>Vous blâmer ou blâmer quelqu'un d'autre pour l'événement ?</li>
+        <li>Avoir des sentiments négatifs intenses tels que peur, horreur, colère, culpabilité, ou honte ?</li>
+        <li>Perdre de l'intérêt pour des activités que vous aimiez auparavant ?</li>
+        <li>Vous sentir distant ou coupé des autres ?</li>
+        <li>Avoir du mal à éprouver des sentiments positifs ?</li>
+        <li>Comportement irritable, explosions de colère, ou agir agressivement ?</li>
+        <li>Prendre des risques inconsidérés ou conduites dangereuses ?</li>
+        <li>Être en état de « super-alerte », hyper vigilant ou sur vos gardes ?</li>
+        <li>Sursauter facilement ?</li>
+        <li>Avoir du mal à vous concentrer ?</li>
+        <li>Avoir du mal à trouver le sommeil ou à rester endormi ?</li>
+      </ol>
+
+      <h2 class="serif section">Cotations &amp; interprétations</h2>
+      <p class="cotation-text">Le score est calculé automatiquement à la fin de la passation et remis directement au patient, qui peut le partager avec vous. Il va de 0 à 80 :</p>
+      <table class="band-table">
+        <tr><td class="range">0 – 32</td><td>Sous le seuil de dépistage</td></tr>
+        <tr><td class="range">33 – 80</td><td>Au-dessus du seuil : présence éventuelle d'un TSPT</td></tr>
+      </table>
+      <p class="source-note">Source : Weathers FW, Litz BT, Keane TM, Palmieri PA, Marx BP, Schnurr PP. The PTSD Checklist for DSM-5 (PCL-5). National Center for PTSD, 2013. Traduction française.</p>
+
+    </div>
+
+    <aside class="sendbox">
+      <h2 class="serif">Boîte d'envoi</h2>
+      <div data-sendbox-body>
+        <div class="sendbox-empty">
+          <div class="mark">＋</div>
+          <p>Ajoutez des questionnaires pour créer un lien à transmettre à un patient.</p>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<div class="modal-overlay" id="demoModal" hidden>
+  <div class="modal-box">
+    <div class="modal-head"><span class="serif">Aperçu du questionnaire</span><button type="button" data-close-demo aria-label="Fermer">&times;</button></div>
+    <div class="phone-frame"><iframe id="demoFrame" title="Aperçu PCL-5"></iframe></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var STORAGE_KEY = 'mentaal_envois_apercu';
+  var TEST_NAME = 'PCL-5';
+  var TEST_LINK = 'pcl-5.html';
+  var selected = [];
+
+  function loadEnvois(){
+    try{
+      var raw = window.localStorage.getItem(STORAGE_KEY);
+      var list = raw ? JSON.parse(raw) : [];
+      return list.map(function(e){
+        if (e.tests) return e;
+        return { label: e.label, tests: e.test ? [e.test] : [], date: e.date };
+      });
+    }catch(e){ return []; }
+  }
+  function saveEnvois(list){
+    try{ window.localStorage.setItem(STORAGE_KEY, JSON.stringify(list)); }catch(e){}
+  }
+  function escapeHtml(s){
+    return String(s).replace(/[&<>"']/g, function(c){
+      return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];
+    });
+  }
+
+  // Favori (visuel)
+  document.querySelectorAll('[data-bookmark]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      btn.classList.toggle('saved');
+      btn.innerHTML = btn.classList.contains('saved') ? '&#9733;' : '&#9734;';
+    });
+  });
+
+  // Voir toutes les questions
+  var revealBtn = document.querySelector('[data-reveal-questions]');
+  var allQuestions = document.querySelector('[data-all-questions]');
+  revealBtn.addEventListener('click', function(){
+    allQuestions.hidden = !allQuestions.hidden;
+    revealBtn.textContent = allQuestions.hidden ? 'Voir toutes les questions ›' : 'Masquer les questions';
+  });
+
+  // Mode démo
+  var demoModal = document.getElementById('demoModal');
+  var demoFrame = document.getElementById('demoFrame');
+  document.querySelector('[data-open-demo]').addEventListener('click', function(){
+    demoFrame.src = TEST_LINK;
+    demoModal.hidden = false;
+  });
+  document.querySelector('[data-close-demo]').addEventListener('click', function(){
+    demoModal.hidden = true;
+    demoFrame.src = '';
+  });
+  demoModal.addEventListener('click', function(e){
+    if (e.target === demoModal){ demoModal.hidden = true; demoFrame.src = ''; }
+  });
+
+  // Ajouter à la boîte d'envoi
+  var addBtn = document.querySelector('.fiche-actions [data-add]');
+  addBtn.addEventListener('click', function(){
+    var idx = selected.findIndex(function(s){ return s.test === TEST_NAME; });
+    if (idx === -1){
+      selected.push({ test: TEST_NAME, link: TEST_LINK });
+      addBtn.textContent = 'Ajouté ✓';
+      addBtn.classList.remove('btn-primary'); addBtn.classList.add('btn-added');
+    } else {
+      selected.splice(idx, 1);
+      addBtn.textContent = "Ajouter à la boîte d'envoi";
+      addBtn.classList.remove('btn-added'); addBtn.classList.add('btn-primary');
+    }
+    renderSendbox();
+  });
+
+  function renderSendbox(){
+    var body = document.querySelector('[data-sendbox-body]');
+    if (selected.length === 0){
+      body.innerHTML = '<div class="sendbox-empty"><div class="mark">＋</div>' +
+        '<p>Ajoutez des questionnaires pour créer un lien à transmettre à un patient.</p></div>';
+      return;
+    }
+    var html = '';
+    selected.forEach(function(s, i){
+      html += '<div class="sendbox-item"><span>' + escapeHtml(s.test) + '</span>' +
+        '<button type="button" data-remove-selected="' + i + '" aria-label="Retirer">&times;</button></div>';
+    });
+    html += '<label class="field-label">Repère patient</label>' +
+      '<input class="field-input" data-patient-label type="text" placeholder="Prénom ou initiales">' +
+      '<p class="field-hint">Reste uniquement dans ce navigateur. Le lien envoyé ne contient aucune information sur le patient.</p>' +
+      '<button class="btn btn-primary" type="button" data-generate>Créer le message</button>' +
+      '<textarea class="msg-box" data-message hidden readonly></textarea>' +
+      '<p class="confirm" data-confirm hidden>Enregistré dans « Mes patients ».</p>' +
+      '<button class="btn btn-secondary" type="button" data-reset hidden>Nouvel envoi</button>';
+    body.innerHTML = html;
+
+    body.querySelectorAll('[data-remove-selected]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var i = parseInt(btn.getAttribute('data-remove-selected'), 10);
+        selected.splice(i, 1);
+        addBtn.textContent = "Ajouter à la boîte d'envoi";
+        addBtn.classList.remove('btn-added'); addBtn.classList.add('btn-primary');
+        renderSendbox();
+      });
+    });
+
+    body.querySelector('[data-generate]').addEventListener('click', function(){
+      var input = body.querySelector('[data-patient-label]');
+      var label = (input.value || '').trim();
+      if (!label){ input.focus(); return; }
+
+      var lines = selected.map(function(s){ return '- ' + s.test + ' : ' + s.link; });
+      var message = 'Bonjour,\n\n' +
+        'Comme convenu, voici le' + (selected.length > 1 ? 's liens' : ' lien') + ' pour compléter, à votre rythme :\n' +
+        lines.join('\n') + '\n\n' +
+        'Cela prend quelques minutes. Une fois terminé, vous pourrez télécharger votre fiche de résultat directement.\n\n' +
+        'À bientôt,\n' +
+        'Cabinet Bouche & Chmura';
+
+      var box = body.querySelector('[data-message]');
+      box.value = message;
+      box.hidden = false;
+
+      var list = loadEnvois();
+      list.push({ label: label, tests: selected.map(function(s){ return s.test; }), date: new Date().toISOString() });
+      saveEnvois(list);
+
+      body.querySelector('[data-confirm]').hidden = false;
+      input.setAttribute('disabled', 'disabled');
+      body.querySelector('[data-generate]').hidden = true;
+      body.querySelectorAll('[data-remove-selected]').forEach(function(btn){ btn.setAttribute('disabled', 'disabled'); });
+      var resetBtn = body.querySelector('[data-reset]');
+      resetBtn.hidden = false;
+      resetBtn.addEventListener('click', function(){ renderSendbox(); });
+
+      addBtn.textContent = "Ajouter à la boîte d'envoi";
+      addBtn.classList.remove('btn-added'); addBtn.classList.add('btn-primary');
+      selected = [];
+    });
+  }
+})();
+</script>
+</body>
+</html>
