@@ -1,0 +1,558 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tests en ligne — Cabinet Bouche &amp; Chmura</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  img{max-width:100%}
+  [hidden]{display:none!important}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:920px;margin:0 auto;padding:0 24px 80px;}
+  .topbar{padding:32px 0 0;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:18px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .tabs{display:flex;gap:4px;border-bottom:1px solid #E0D9C9;margin-bottom:32px;}
+  .tab{appearance:none;border:none;background:none;font-family:'Inter',sans-serif;font-size:14px;font-weight:600;color:#63695D;padding:10px 4px 12px;margin-right:24px;cursor:pointer;border-bottom:2px solid transparent;transition:color .15s ease,border-color .15s ease;}
+  .tab:hover{color:#20241E;}
+  .tab.active{color:#1E3A5F;border-bottom-color:#1E3A5F;}
+  .view{padding-top:8px;}
+  h1{font-size:26px;margin:0 0 8px;}
+  .intro-text{color:#63695D;font-size:15px;margin:0 0 28px;}
+
+  .layout{display:flex;gap:28px;align-items:flex-start;}
+  .main-col{flex:1;min-width:0;}
+  .list{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;overflow:hidden;display:flex;flex-direction:column;
+    box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  .card-photo{position:relative;height:148px;background:linear-gradient(135deg,#2A4A6B 0%,#1E3A5F 55%,#16283D 100%);overflow:hidden;}
+  .card-photo.tone-terracotta{background:linear-gradient(135deg,#6E5A3A 0%,#A0824C 55%,#5B4A2E 100%);}
+  .card-photo.tone-sauge{background:linear-gradient(135deg,#3D5A45 0%,#4E7359 55%,#233A29 100%);}
+  .card-photo.tone-prune{background:linear-gradient(135deg,#4A3B5C 0%,#6B5580 55%,#332843 100%);}
+  .card-photo.tone-brique{background:linear-gradient(135deg,#5C3A2E 0%,#84503C 55%,#3D2620 100%);}
+  .card-photo.tone-petrole{background:linear-gradient(135deg,#2E4A52 0%,#3E6873 55%,#1D2F34 100%);}
+  .card-photo.tone-ambre{background:linear-gradient(135deg,#6B3A2E 0%,#A0824C 55%,#4A2A20 100%);}
+  .card-photo.tone-indigo{background:linear-gradient(135deg,#3B3A5C 0%,#585585 55%,#25243B 100%);}
+  .card-photo.tone-ardoise{background:linear-gradient(135deg,#3A4750 0%,#5C7080 55%,#242C31 100%);}
+  .card-photo.tone-corail{background:linear-gradient(135deg,#6B3A3A 0%,#A05C4C 55%,#3D2020 100%);}
+  .card-photo.tone-olive{background:linear-gradient(135deg,#4A4A2E 0%,#6E6E42 55%,#2C2C1B 100%);}
+  .card-photo.tone-cuivre{background:linear-gradient(135deg,#6B4A2E 0%,#A0764C 55%,#3D2A18 100%);}
+  .card-photo.tone-sable{background:linear-gradient(135deg,#5C5240 0%,#8A7C5C 55%,#332C20 100%);}
+  .card-photo.tone-mauve{background:linear-gradient(135deg,#4A3B52 0%,#6E5878 55%,#2B2233 100%);}
+  .card-photo.tone-fumee{background:linear-gradient(135deg,#3E4550 0%,#5C6670 55%,#262A30 100%);}
+  .card-photo.tone-menthe{background:linear-gradient(135deg,#3D5C4E 0%,#5C8873 55%,#253A31 100%);}
+  .card-photo.tone-safran{background:linear-gradient(135deg,#6B4E1E 0%,#A0803C 55%,#4A3510 100%);}
+  .card-photo.tone-lavande{background:linear-gradient(135deg,#4A4A72 0%,#7373A8 55%,#2E2E4A 100%);}
+  .card-photo.tone-cerise{background:linear-gradient(135deg,#6B3350 0%,#A05C7C 55%,#3D1F2E 100%);}
+  .card-photo.tone-grenat{background:linear-gradient(135deg,#5C1F30 0%,#8F2F4E 55%,#3A1420 100%);}
+  .card-photo.tone-givre{background:linear-gradient(135deg,#41586E 0%,#7B9DB6 55%,#28374A 100%);}
+  .card-photo.tone-bronze{background:linear-gradient(135deg,#6B4423 0%,#B08D57 55%,#3D2B14 100%);}
+  .card-photo.tone-nuit{background:linear-gradient(135deg,#1E2A3A 0%,#3A5068 55%,#10161F 100%);}
+  .card-photo.tone-jade{background:linear-gradient(135deg,#1F4A3D 0%,#3D7A63 55%,#12291F 100%);}
+  .card-photo.tone-abricot{background:linear-gradient(135deg,#7A4A2E 0%,#C98A54 55%,#4A2C18 100%);}
+  .card-photo.tone-saphir{background:linear-gradient(135deg,#1E3A6B 0%,#3D66A8 55%,#12234A 100%);}
+  .card-photo.tone-perle{background:linear-gradient(135deg,#4A4A72 0%,#7373A8 55%,#2E2E4A 100%);}
+  .card-photo.tone-ocre{background:linear-gradient(135deg,#6B3350 0%,#A05C7C 55%,#3D1F2E 100%);}
+  .card-photo.tone-cacao{background:linear-gradient(135deg,#5C4A2E 0%,#9C7B45 55%,#2E2414 100%);}
+  .card-photo.tone-bordeaux{background:linear-gradient(135deg,#4A1F3D 0%,#7A3A63 55%,#2E1228 100%);}
+  .card-photo.tone-vermillon{background:linear-gradient(135deg,#7A2E12 0%,#D97B3C 55%,#4A1A0A 100%);}
+  .card-photo.tone-turquoise{background:linear-gradient(135deg,#0E6B6B 0%,#3FBDBD 55%,#083838 100%);}
+  .card-photo.tone-amethyste{background:linear-gradient(135deg,#5B2E7A 0%,#8B4FB0 55%,#3A1A52 100%);}
+  .card-photo.tone-schiste{background:linear-gradient(135deg,#3A4A44 0%,#5C7268 55%,#212B27 100%);}
+  .card-photo.tone-peridot{background:linear-gradient(135deg,#5C6B1E 0%,#96AC3C 55%,#333D10 100%);}
+  .card-photo.tone-poudre{background:linear-gradient(135deg,#8B5A5A 0%,#C48787 55%,#5C3333 100%);}
+  .card-photo.tone-azur{background:linear-gradient(135deg,#1E5A7A 0%,#4FA8D8 55%,#0F3548 100%);}
+  .card-photo.tone-fuchsia{background:linear-gradient(135deg,#8A1F5C 0%,#C43F94 55%,#4D0F33 100%);}
+  .card-photo.tone-rubis{background:linear-gradient(135deg,#8B1E2E 0%,#C4394A 55%,#4A0D14 100%);}
+  .card-photo.tone-aubergine{background:linear-gradient(135deg,#3D2036 0%,#6B3057 55%,#1F0F1C 100%);}
+  .card-photo.tone-cobalt{background:linear-gradient(135deg,#0F3D6E 0%,#1E6FBF 55%,#081D38 100%);}
+  .card-photo.tone-emeraude{background:linear-gradient(135deg,#0F5C3D 0%,#2FA876 55%,#0A3826 100%);}
+  .card-photo.tone-sarcelle{background:linear-gradient(135deg,#1B4B4A 0%,#3D9B8E 55%,#0D2E2D 100%);}
+  .card-photo.tone-acajou{background:linear-gradient(135deg,#8A5A2E 0%,#C99050 55%,#5C3A1A 100%);}
+  .card-photo.tone-mandarine{background:linear-gradient(135deg,#B8541E 0%,#E8935A 55%,#7A3410 100%);}
+  .card-photo.tone-moutarde{background:linear-gradient(135deg,#8A6D1E 0%,#C9A83C 55%,#5C4712 100%);}
+  .card-photo.tone-miel{background:linear-gradient(135deg,#E8A62E 0%,#F3C871 55%,#8A6410 100%);}
+  .card-photo.tone-foret{background:linear-gradient(135deg,#2E6B4E 0%,#5FA27E 55%,#173B29 100%);}
+  .card-photo.tone-sequoia{background:linear-gradient(135deg,#B4483C 0%,#D97B6C 55%,#7A241A 100%);}
+  .card-photo.tone-anthracite{background:linear-gradient(135deg,#3A4750 0%,#5C7080 55%,#242C31 100%);}
+  .card-photo.tone-noisette{background:linear-gradient(135deg,#A0824C 0%,#C9A876 55%,#6B5530 100%);}
+  .card-photo.tone-framboise{background:linear-gradient(135deg,#6B3350 0%,#A05C7C 55%,#3D1F2E 100%);}
+  .card-photo.tone-marine{background:linear-gradient(135deg,#2F5E8C 0%,#6E97BE 55%,#173B5C 100%);}
+  .card-photo.tone-orage{background:linear-gradient(135deg,#3D5A80 0%,#7B9BC4 55%,#22334D 100%);}
+  .card-photo.tone-cannelle{background:linear-gradient(135deg,#C9714F 0%,#E3A47C 55%,#8C4A2E 100%);}
+  .card-photo.tone-froment{background:linear-gradient(135deg,#8C7A3D 0%,#C9AF6E 55%,#5C4F28 100%);}
+  .card-photo.tone-pistache{background:linear-gradient(135deg,#5C8C3D 0%,#8FBE66 55%,#3A5C24 100%);}
+  .card-photo.tone-glycine{background:linear-gradient(135deg,#6B5C8C 0%,#9B8CB8 55%,#453A5C 100%);}
+  .card-photo.tone-ardoise2{background:linear-gradient(135deg,#4A6070 0%,#7C97A8 55%,#2E3E48 100%);}
+  .card-photo.tone-carmin{background:linear-gradient(135deg,#B4483C 0%,#D97B6C 55%,#7A241A 100%);}
+  .card-photo.tone-taupe{background:linear-gradient(135deg,#6B6459 0%,#A39B8B 55%,#423D33 100%);}
+  .card-photo.tone-granit{background:linear-gradient(135deg,#4B5A5E 0%,#7E9296 55%,#2D383B 100%);}
+  .card-photo.tone-lilas{background:linear-gradient(135deg,#7A6B9C 0%,#A99BC4 55%,#4F4568 100%);}
+  .card-photo.tone-blush{background:linear-gradient(135deg,#B8677A 0%,#DDA0AE 55%,#7A3D4A 100%);}
+  .card-photo.tone-encre{background:linear-gradient(135deg,#2E3A52 0%,#5C6E8C 55%,#1A2233 100%);}
+  .card-photo.tone-brume{background:linear-gradient(135deg,#4A6272 0%,#8FAEC0 55%,#2C3E48 100%);}
+  .card-photo.tone-silex{background:linear-gradient(135deg,#43413A 0%,#656256 55%,#26241F 100%);}
+  .card-photo.tone-opale{background:linear-gradient(135deg,#4E7A7A 0%,#8CBAB5 55%,#2E4C4C 100%);}
+  .card-photo.tone-plomb{background:linear-gradient(135deg,#4A4A52 0%,#7A7A85 55%,#2C2C33 100%);}
+  .card-photo.tone-grenadine{background:linear-gradient(135deg,#A83E52 0%,#D97C93 55%,#6B1F30 100%);}
+  .card-photo.tone-cendre{background:linear-gradient(135deg,#52585C 0%,#868D92 55%,#33383B 100%);}
+  .card-photo.tone-lavande2{background:linear-gradient(135deg,#6E5A99 0%,#A594C9 55%,#463A66 100%);}
+  .card-photo.tone-sapin{background:linear-gradient(135deg,#2E6B5C 0%,#5CA08E 55%,#1B4038 100%);}
+  .card-photo.tone-argile{background:linear-gradient(135deg,#8B4A3D 0%,#C97B5F 55%,#5C2E24 100%);}
+  .card-photo.tone-rouille{background:linear-gradient(135deg,#9A4A1E 0%,#D4864C 55%,#5C2A0E 100%);}
+  .card-photo.tone-azur{background:linear-gradient(135deg,#3D6B8C 0%,#6E9BB8 55%,#243F52 100%);}
+  .card-photo.tone-onyx{background:linear-gradient(135deg,#2E3A52 0%,#5C6E8C 55%,#1A2233 100%);}
+  .card-photo.tone-orchidee{background:linear-gradient(135deg,#5C2E7A 0%,#8B4FB0 55%,#3A1A52 100%);}
+  .card-photo.tone-marron{background:linear-gradient(135deg,#8B5A2B 0%,#C99A5B 55%,#4A3418 100%);}
+  .card-photo.tone-myrtille{background:linear-gradient(135deg,#3B3F8C 0%,#6B70B8 55%,#23264F 100%);}
+  .card-photo.tone-magenta{background:linear-gradient(135deg,#7A2E5C 0%,#B0509B 55%,#4A1A38 100%);}
+  .card-photo.tone-graphite{background:linear-gradient(135deg,#2E2E3A 0%,#5A5A70 55%,#141420 100%);}
+  .card-photo.tone-kaki{background:linear-gradient(135deg,#5C7A2E 0%,#8FB04F 55%,#38481A 100%);}
+  .card-photo.tone-malachite{background:linear-gradient(135deg,#1E5A4A 0%,#4FA88E 55%,#0F3528 100%);}
+  .card-photo.tone-bruyere{background:linear-gradient(135deg,#6B4A5C 0%,#A0728C 55%,#3D2833 100%);}
+  .card-photo::before{content:"";position:absolute;width:220px;height:220px;border-radius:50%;
+    background:radial-gradient(circle,rgba(224,196,138,.55),transparent 70%);top:-70px;right:-50px;pointer-events:none;}
+  .photo-link{position:absolute;inset:0;display:block;}
+  .card-photo .acronym{position:absolute;left:16px;bottom:12px;font-family:'Cormorant Garamond',Georgia,serif;
+    font-weight:600;font-size:24px;color:#fff;z-index:1;pointer-events:none;}
+  .card-photo .acronym.small{font-size:19px;}
+  .bookmark-btn{position:absolute;top:10px;right:10px;width:30px;height:30px;border-radius:50%;
+    background:rgba(255,255,255,.92);border:none;display:flex;align-items:center;justify-content:center;
+    cursor:pointer;color:#63695D;font-size:14px;z-index:2;padding:0;}
+  .bookmark-btn.saved{color:#A0824C;}
+  .card-body{padding:18px 20px 20px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#3D6B4F;
+    background:#E4EEE8;padding:4px 10px;border-radius:999px;margin:0 0 10px;}
+  .badge-outil{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#1E3A5F;
+    background:#E1E7EC;padding:4px 10px;border-radius:999px;margin:0 0 10px;}
+  .card .name{font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;margin:0 0 6px;}
+  .card .name a{color:#20241E;text-decoration:none;}
+  .card .name a:hover{text-decoration:underline;}
+  .card .desc{font-size:13.5px;color:#63695D;margin:0 0 12px;}
+  .card .tag{display:inline-block;font-size:12px;font-weight:600;color:#1E3A5F;text-decoration:none;margin:0 0 14px;}
+  .card .tag:hover{text-decoration:underline;}
+  .card-actions{display:flex;flex-wrap:wrap;gap:10px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13px;font-weight:700;border-radius:10px;padding:9px 16px;cursor:pointer;border:1px solid transparent;transition:opacity .15s ease,background .15s ease,color .15s ease;}
+  .btn:hover{opacity:.85;}
+  .btn-primary{background:#1E3A5F;color:#fff;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-small{font-size:12px;padding:6px 12px;border-radius:8px;}
+  .btn-added{background:#E4EEE8;color:#3D6B4F;border-color:#C9DED2;}
+  .btn-added:hover{opacity:1;}
+  .btn[disabled]{cursor:not-allowed;opacity:.55;}
+
+  /* Boîte d'envoi */
+  .sendbox{width:296px;flex-shrink:0;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:22px;position:sticky;top:24px;}
+  .sendbox h2{font-size:17px;margin:0 0 16px;}
+  .sendbox-empty{text-align:center;padding:20px 4px 8px;}
+  .sendbox-empty .mark{width:52px;height:52px;margin:0 auto 14px;border-radius:50%;background:#F4F1EA;display:flex;align-items:center;justify-content:center;font-size:22px;color:#9A9E90;}
+  .sendbox-empty p{font-size:13px;color:#9A9E90;margin:0;}
+  .sendbox-item{display:flex;align-items:center;justify-content:space-between;gap:8px;background:#F4F1EA;border-radius:8px;padding:8px 10px;font-size:13px;font-weight:600;margin-bottom:8px;}
+  .sendbox-item button{appearance:none;border:none;background:none;color:#9A9E90;cursor:pointer;font-size:14px;line-height:1;padding:2px;}
+  .sendbox-item button:hover{color:#B4483C;}
+  .field-label{display:block;font-size:12.5px;font-weight:600;color:#63695D;margin:16px 0 6px;}
+  .field-input{width:100%;font-family:'Inter',sans-serif;font-size:14px;color:#20241E;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:8px;padding:9px 12px;}
+  .field-hint{font-size:11.5px;color:#9A9E90;margin:6px 0 0;}
+  .sendbox .btn-primary{width:100%;justify-content:center;margin-top:14px;}
+  .sendbox .btn-primary[disabled]{background:#C9CDC2;}
+  .msg-box{width:100%;font-family:'Inter',sans-serif;font-size:13px;color:#20241E;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:10px;padding:12px;resize:vertical;min-height:132px;margin-top:14px;}
+  .confirm{font-size:12.5px;color:#3D6B4F;margin-top:8px;}
+
+  @media (max-width:760px){
+    .layout{flex-direction:column;}
+    .sendbox{width:100%;position:static;order:-1;}
+  }
+
+  .empty{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px 24px;text-align:center;}
+  .empty p{font-size:14px;color:#63695D;margin:0 0 4px;}
+  .empty .small{font-size:12.5px;color:#9A9E90;margin-top:10px;}
+  .patient-card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:20px 22px;}
+  .patient-card .pname{font-family:'Cormorant Garamond',Georgia,serif;font-size:18px;margin:0 0 10px;}
+  .send-row{padding:10px 0;border-top:1px solid #EFEBE1;font-size:13px;display:flex;align-items:flex-start;justify-content:space-between;gap:10px;}
+  .send-row:first-of-type{border-top:none;}
+  .send-row .tests{font-weight:600;}
+  .send-row .date{color:#9A9E90;font-size:12px;display:block;margin-top:2px;}
+  .del-btn{appearance:none;border:none;background:none;color:#9A9E90;cursor:pointer;font-size:12px;padding:2px 4px;flex-shrink:0;}
+  .del-btn:hover{color:#B4483C;}
+  .storage-note{font-size:11.5px;color:#9A9E90;margin-top:18px;}
+  .footnote{margin-top:44px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+    <nav class="tabs" role="tablist">
+      <button class="tab active" data-view="questionnaires" role="tab" aria-selected="true">Questionnaires</button>
+      <button class="tab" data-view="patients" role="tab" aria-selected="false">Mes patients</button>
+    </nav>
+  </div>
+
+  <section id="view-questionnaires" class="view">
+    <h1 class="serif">Questionnaires</h1>
+    <p class="intro-text">Ajoutez un ou plusieurs questionnaires à la boîte d'envoi, puis générez un message unique pour votre patient.</p>
+
+    <div class="layout">
+      <div class="main-col">
+        <div class="list">
+          <div class="card" data-test="GAD-7" data-link="gad-7.html">
+            <div class="card-photo">
+              <a class="photo-link" href="gad-7-fiche.html" aria-label="Voir la fiche GAD-7"></a>
+              <span class="acronym">GAD-7</span>
+              <button class="bookmark-btn" type="button" data-bookmark aria-label="Enregistrer dans mes favoris">&#9734;</button>
+            </div>
+            <div class="card-body">
+              <span class="badge-standard">&#10003; Standardisé</span>
+              <p class="name"><a href="gad-7-fiche.html">Échelle de dépistage du trouble anxieux généralisé (GAD-7)</a></p>
+              <p class="desc">Repère la présence et la sévérité d'une anxiété généralisée, 7 questions.</p>
+              <a class="tag" href="gad-7-fiche.html">Anxiété</a>
+              <div class="card-actions">
+                <button class="btn btn-primary" type="button" data-add>Ajouter à l'envoi</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" data-test="RSES" data-link="rses.html">
+            <div class="card-photo tone-terracotta">
+              <a class="photo-link" href="rses-fiche.html" aria-label="Voir la fiche RSES"></a>
+              <span class="acronym">RSES</span>
+              <button class="bookmark-btn" type="button" data-bookmark aria-label="Enregistrer dans mes favoris">&#9734;</button>
+            </div>
+            <div class="card-body">
+              <span class="badge-standard">&#10003; Standardisé</span>
+              <p class="name"><a href="rses-fiche.html">Échelle de l'estime de soi de Rosenberg (RSES)</a></p>
+              <p class="desc">Mesure le niveau global d'estime de soi, 10 questions.</p>
+              <a class="tag" href="rses-fiche.html">Estime de soi</a>
+              <div class="card-actions">
+                <button class="btn btn-primary" type="button" data-add>Ajouter à l'envoi</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" data-test="DASS-21" data-link="dass-21.html">
+            <div class="card-photo tone-sauge">
+              <a class="photo-link" href="dass-21-fiche.html" aria-label="Voir la fiche DASS-21"></a>
+              <span class="acronym small">DASS-21</span>
+              <button class="bookmark-btn" type="button" data-bookmark aria-label="Enregistrer dans mes favoris">&#9734;</button>
+            </div>
+            <div class="card-body">
+              <span class="badge-standard">&#10003; Standardisé</span>
+              <p class="name"><a href="dass-21-fiche.html">Échelles de dépression, d'anxiété et de stress (DASS-21)</a></p>
+              <p class="desc">Évalue conjointement dépression, anxiété et stress, 21 questions.</p>
+              <a class="tag" href="dass-21-fiche.html">Dépression, Anxiété, Stress</a>
+              <div class="card-actions">
+                <button class="btn btn-primary" type="button" data-add>Ajouter à l'envoi</button>
+              </div>
+            </div>
+          </div>
+          <div class="card" data-test="PHQ-9" data-link="phq-9.html">
+            <div class="card-photo tone-prune">
+              <a class="photo-link" href="phq-9-fiche.html" aria-label="Voir la fiche PHQ-9"></a>
+              <span class="acronym">PHQ-9</span>
+              <button class="bookmark-btn" type="button" data-bookmark aria-label="Enregistrer dans mes favoris">&#9734;</button>
+            </div>
+            <div class="card-body">
+              <span class="badge-standard">&#10003; Standardisé</span>
+              <p class="name"><a href="phq-9-fiche.html">Questionnaire sur la santé du patient (PHQ-9)</a></p>
+              <p class="desc">Repère la présence et la sévérité d'un épisode dépressif, 9 questions.</p>
+              <a class="tag" href="phq-9-fiche.html">Dépression</a>
+              <div class="card-actions">
+                <button class="btn btn-primary" type="button" data-add>Ajouter à l'envoi</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" data-test="PCL-5" data-link="pcl-5.html">
+            <div class="card-photo tone-brique">
+              <a class="photo-link" href="pcl-5-fiche.html" aria-label="Voir la fiche PCL-5"></a>
+              <span class="acronym">PCL-5</span>
+              <button class="bookmark-btn" type="button" data-bookmark aria-label="Enregistrer dans mes favoris">&#9734;</button>
+            </div>
+            <div class="card-body">
+              <span class="badge-standard">&#10003; Standardisé</span>
+              <p class="name"><a href="pcl-5-fiche.html">Échelle de mesure du TSPT pour le DSM-5 (PCL-5)</a></p>
+              <p class="desc">Repère la présence éventuelle d'un trouble de stress post-traumatique, 20 questions.</p>
+              <a class="tag" href="pcl-5-fiche.html">Stress post-traumatique</a>
+              <div class="card-actions">
+                <button class="btn btn-primary" type="button" data-add>Ajouter à l'envoi</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" data-test="PSWQ" data-link="pswq.html">
+            <div class="card-photo tone-petrole">
+              <a class="photo-link" href="pswq-fiche.html" aria-label="Voir la fiche PSWQ"></a>
+              <span class="acronym">PSWQ</span>
+              <button class="bookmark-btn" type="button" data-bookmark aria-label="Enregistrer dans mes favoris">&#9734;</button>
+            </div>
+            <div class="card-body">
+              <span class="badge-standard">&#10003; Standardisé</span>
+              <p class="name"><a href="pswq-fiche.html">Questionnaire sur les inquiétudes de Penn State (PSWQ)</a></p>
+              <p class="desc">Mesure la tendance générale à s'inquiéter, 16 questions.</p>
+              <a class="tag" href="pswq-fiche.html">Anxiété, inquiétude</a>
+              <div class="card-actions">
+                <button class="btn btn-primary" type="button" data-add>Ajouter à l'envoi</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" data-test="ASRS" data-link="asrs.html">
+            <div class="card-photo tone-ambre">
+              <a class="photo-link" href="asrs-fiche.html" aria-label="Voir la fiche ASRS"></a>
+              <span class="acronym">ASRS</span>
+              <button class="bookmark-btn" type="button" data-bookmark aria-label="Enregistrer dans mes favoris">&#9734;</button>
+            </div>
+            <div class="card-body">
+              <span class="badge-standard">&#10003; Standardisé</span>
+              <p class="name"><a href="asrs-fiche.html">Échelle d'auto-évaluation du TDAH chez l'adulte (ASRS v1.1)</a></p>
+              <p class="desc">Repère des symptômes évocateurs d'un TDAH adulte, 18 questions.</p>
+              <a class="tag" href="asrs-fiche.html">TDAH adulte</a>
+              <div class="card-actions">
+                <button class="btn btn-primary" type="button" data-add>Ajouter à l'envoi</button>
+              </div>
+            </div>
+          </div>
+          <div class="card" data-test="TAS-20" data-link="tas-20.html">
+            <div class="card-photo tone-indigo">
+              <a class="photo-link" href="tas-20-fiche.html" aria-label="Voir la fiche TAS-20"></a>
+              <span class="acronym">TAS-20</span>
+              <button class="bookmark-btn" type="button" data-bookmark aria-label="Enregistrer dans mes favoris">&#9734;</button>
+            </div>
+            <div class="card-body">
+              <span class="badge-standard">&#10003; Standardisé</span>
+              <p class="name"><a href="tas-20-fiche.html">Échelle d'alexithymie de Toronto (TAS-20)</a></p>
+              <p class="desc">Évalue la difficulté à identifier et exprimer ses émotions, 20 questions.</p>
+              <a class="tag" href="tas-20-fiche.html">Alexithymie</a>
+              <div class="card-actions">
+                <button class="btn btn-primary" type="button" data-add>Ajouter à l'envoi</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="footnote">D'autres tests seront ajoutés ici au fil du temps.</p>
+      </div>
+
+      <aside class="sendbox">
+        <h2 class="serif">Boîte d'envoi</h2>
+        <div data-sendbox-body>
+          <div class="sendbox-empty">
+            <div class="mark">＋</div>
+            <p>Ajoutez des questionnaires pour créer un lien à transmettre à un patient.</p>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section id="view-patients" class="view" hidden>
+    <h1 class="serif">Mes patients</h1>
+    <p class="intro-text">Retrouvez ici la liste de vos patients et les questionnaires envoyés.</p>
+    <div data-patients-list></div>
+    <p class="storage-note">Ces informations restent uniquement dans ce navigateur, sur cet ordinateur : rien n'est envoyé ni conservé sur un serveur.</p>
+  </section>
+</div>
+
+<script>
+(function(){
+  var STORAGE_KEY = 'mentaal_envois_apercu';
+  var selected = []; // { test, link }
+
+  function loadEnvois(){
+    try{
+      var raw = window.localStorage.getItem(STORAGE_KEY);
+      var list = raw ? JSON.parse(raw) : [];
+      // Migration d'un ancien format à un seul test par envoi
+      return list.map(function(e){
+        if (e.tests) return e;
+        return { label: e.label, tests: e.test ? [e.test] : [], date: e.date };
+      });
+    }catch(e){ return []; }
+  }
+  function saveEnvois(list){
+    try{ window.localStorage.setItem(STORAGE_KEY, JSON.stringify(list)); }catch(e){}
+  }
+  function formatDate(iso){
+    var d = new Date(iso);
+    function pad(n){ return n < 10 ? '0' + n : '' + n; }
+    return pad(d.getDate()) + '/' + pad(d.getMonth()+1) + '/' + d.getFullYear();
+  }
+  function escapeHtml(s){
+    return String(s).replace(/[&<>"']/g, function(c){
+      return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];
+    });
+  }
+
+  // Onglets
+  var tabs = document.querySelectorAll('.tab');
+  var views = { questionnaires: document.getElementById('view-questionnaires'), patients: document.getElementById('view-patients') };
+  tabs.forEach(function(tab){
+    tab.addEventListener('click', function(){
+      tabs.forEach(function(t){ t.classList.remove('active'); t.setAttribute('aria-selected','false'); });
+      tab.classList.add('active'); tab.setAttribute('aria-selected','true');
+      var name = tab.getAttribute('data-view');
+      Object.keys(views).forEach(function(k){ views[k].hidden = (k !== name); });
+      if (name === 'patients') renderPatients();
+    });
+  });
+
+  // Favori (visuel uniquement pour l'instant)
+  document.querySelectorAll('[data-bookmark]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      btn.classList.toggle('saved');
+      btn.innerHTML = btn.classList.contains('saved') ? '&#9733;' : '&#9734;';
+    });
+  });
+
+  // Ajouter / retirer un questionnaire de la boîte d'envoi
+  document.querySelectorAll('[data-add]').forEach(function(btn){
+    var card = btn.closest('.card');
+    var testName = card.getAttribute('data-test');
+    var link = card.getAttribute('data-link');
+    btn.addEventListener('click', function(){
+      var idx = selected.findIndex(function(s){ return s.test === testName; });
+      if (idx === -1){
+        selected.push({ test: testName, link: link });
+        btn.textContent = 'Ajouté ✓';
+        btn.classList.remove('btn-primary'); btn.classList.add('btn-added');
+      } else {
+        selected.splice(idx, 1);
+        btn.textContent = "Ajouter à l'envoi";
+        btn.classList.remove('btn-added'); btn.classList.add('btn-primary');
+      }
+      renderSendbox();
+    });
+  });
+
+  function renderSendbox(){
+    var body = document.querySelector('[data-sendbox-body]');
+    if (selected.length === 0){
+      body.innerHTML = '<div class="sendbox-empty"><div class="mark">＋</div>' +
+        '<p>Ajoutez des questionnaires pour créer un lien à transmettre à un patient.</p></div>';
+      return;
+    }
+    var html = '';
+    selected.forEach(function(s, i){
+      html += '<div class="sendbox-item"><span>' + escapeHtml(s.test) + '</span>' +
+        '<button type="button" data-remove-selected="' + i + '" aria-label="Retirer">&times;</button></div>';
+    });
+    html += '<label class="field-label">Repère patient</label>' +
+      '<input class="field-input" data-patient-label type="text" placeholder="Prénom ou initiales">' +
+      '<p class="field-hint">Reste uniquement dans ce navigateur. Le lien envoyé ne contient aucune information sur le patient.</p>' +
+      '<button class="btn btn-primary" type="button" data-generate>Créer le message</button>' +
+      '<textarea class="msg-box" data-message hidden readonly></textarea>' +
+      '<p class="confirm" data-confirm hidden>Enregistré dans « Mes patients ».</p>' +
+      '<button class="btn btn-secondary" type="button" data-reset hidden>Nouvel envoi</button>';
+    body.innerHTML = html;
+
+    body.querySelectorAll('[data-remove-selected]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var i = parseInt(btn.getAttribute('data-remove-selected'), 10);
+        var testName = selected[i].test;
+        selected.splice(i, 1);
+        var cardBtn = document.querySelector('.card[data-test="' + testName + '"] [data-add]');
+        if (cardBtn){
+          cardBtn.textContent = "Ajouter à l'envoi";
+          cardBtn.classList.remove('btn-added'); cardBtn.classList.add('btn-primary');
+        }
+        renderSendbox();
+      });
+    });
+
+    body.querySelector('[data-generate]').addEventListener('click', function(){
+      var input = body.querySelector('[data-patient-label]');
+      var label = (input.value || '').trim();
+      if (!label){ input.focus(); return; }
+
+      var lines = selected.map(function(s){ return '- ' + s.test + ' : ' + s.link; });
+      var message = 'Bonjour,\n\n' +
+        'Comme convenu, voici le' + (selected.length > 1 ? 's liens' : ' lien') + ' pour compléter, à votre rythme :\n' +
+        lines.join('\n') + '\n\n' +
+        'Cela prend quelques minutes. Une fois terminé, vous pourrez télécharger votre fiche de résultat directement.\n\n' +
+        'À bientôt,\n' +
+        'Cabinet Bouche & Chmura';
+
+      var box = body.querySelector('[data-message]');
+      box.value = message;
+      box.hidden = false;
+
+      var list = loadEnvois();
+      list.push({ label: label, tests: selected.map(function(s){ return s.test; }), date: new Date().toISOString() });
+      saveEnvois(list);
+
+      body.querySelector('[data-confirm]').hidden = false;
+
+      // On fige l'affichage (message + confirmation) le temps que la
+      // praticienne copie le message ; la boîte se réinitialise seulement
+      // au clic sur "Nouvel envoi" (ou dès qu'un nouveau test est ajouté).
+      input.setAttribute('disabled', 'disabled');
+      body.querySelector('[data-generate]').hidden = true;
+      body.querySelectorAll('[data-remove-selected]').forEach(function(btn){ btn.setAttribute('disabled', 'disabled'); });
+      var resetBtn = body.querySelector('[data-reset]');
+      resetBtn.hidden = false;
+      resetBtn.addEventListener('click', function(){ renderSendbox(); });
+
+      // Réinitialiser les boutons des cartes pour le prochain patient
+      selected.forEach(function(s){
+        var cardBtn = document.querySelector('.card[data-test="' + s.test + '"] [data-add]');
+        if (cardBtn){
+          cardBtn.textContent = "Ajouter à l'envoi";
+          cardBtn.classList.remove('btn-added'); cardBtn.classList.add('btn-primary');
+        }
+      });
+      selected = [];
+    });
+  }
+
+  // Mes patients
+  function renderPatients(){
+    var container = document.querySelector('[data-patients-list]');
+    var envois = loadEnvois();
+    if (envois.length === 0){
+      container.innerHTML = '<div class="empty"><p>Aucun questionnaire envoyé pour l’instant.</p>' +
+        '<p class="small">Utilisez la boîte d’envoi depuis l’onglet Questionnaires.</p></div>';
+      return;
+    }
+    var byLabel = {};
+    var order = [];
+    envois.forEach(function(e, idx){
+      e._idx = idx;
+      if (!byLabel[e.label]){ byLabel[e.label] = []; order.push(e.label); }
+      byLabel[e.label].push(e);
+    });
+    var html = '<div class="list">';
+    order.forEach(function(label){
+      html += '<div class="patient-card"><p class="pname">' + escapeHtml(label) + '</p>';
+      byLabel[label]
+        .slice()
+        .sort(function(a,b){ return new Date(b.date) - new Date(a.date); })
+        .forEach(function(e){
+          html += '<div class="send-row">' +
+            '<span><span class="tests">' + escapeHtml((e.tests||[]).join(', ')) + '</span>' +
+            '<span class="date">envoyé le ' + formatDate(e.date) + '</span></span>' +
+            '<button class="del-btn" type="button" data-remove="' + e._idx + '">retirer</button>' +
+            '</div>';
+        });
+      html += '</div>';
+    });
+    html += '</div>';
+    container.innerHTML = html;
+    container.querySelectorAll('[data-remove]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var idx = parseInt(btn.getAttribute('data-remove'), 10);
+        var list = loadEnvois();
+        list.splice(idx, 1);
+        saveEnvois(list);
+        renderPatients();
+      });
+    });
+  }
+})();
+</script>
+</body>
+</html>
