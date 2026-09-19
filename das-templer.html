@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DAS — Échelle d'anxiété face à la mort</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:720px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 18px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  h1{font-size:25px;margin:0 0 18px;}
+  .intro{font-size:14.5px;color:#4A4E43;background:#fff;border:1px solid #E0D9C9;border-radius:12px;padding:16px 18px;margin-bottom:24px;}
+  .item{background:#fff;border:1px solid #E0D9C9;border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+  .item p{font-size:14.5px;margin:0 0 12px;}
+  .opts{display:flex;gap:8px;}
+  .opt{display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;padding:8px 16px;border:1px solid #E0D9C9;border-radius:999px;}
+  .opt:hover{background:#F4F1EA;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:12px 22px;cursor:pointer;border:1px solid transparent;background:#2E2E3A;color:#fff;margin-top:10px;}
+  .btn:disabled{opacity:.45;cursor:not-allowed;}
+  #result{display:none;margin-top:30px;}
+  .score-card{background:#fff;border:1px solid #E0D9C9;border-radius:12px;padding:18px 20px;margin-bottom:14px;}
+  .score-card h3{margin:0 0 6px;font-size:16px;font-family:'Cormorant Garamond',Georgia,serif;}
+  .score-val{font-size:22px;font-weight:700;}
+  .cutoffs{font-size:12.5px;color:#63695D;margin-top:6px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <h1 class="serif">Échelle d'anxiété face à la mort (DAS)</h1>
+  <div class="intro">
+    For each statement below, indicate whether it is generally True or False for you.
+  </div>
+  <div id="quiz"></div>
+  <button class="btn" id="submitBtn" type="button" disabled>Voir mes résultats</button>
+
+  <div id="result">
+    <h2 class="serif">Vos résultats</h2>
+    <div id="cards"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var ITEMS = [
+    {t:"I am very much afraid to die.", rev:false},
+    {t:"The thought of death seldom enters my mind.", rev:true},
+    {t:"It doesn't make me nervous when people talk about death.", rev:true},
+    {t:"I dread to think about having to have an operation.", rev:false},
+    {t:"I am not at all afraid to die.", rev:true},
+    {t:"I am not particularly afraid of getting cancer.", rev:true},
+    {t:"The thought of death never bothers me.", rev:true},
+    {t:"I am often distressed by the way time flies so very rapidly.", rev:false},
+    {t:"I fear dying a painful death.", rev:false},
+    {t:"The subject of life after death troubles me greatly.", rev:false},
+    {t:"I am really scared of having a heart attack.", rev:false},
+    {t:"I often think about how short life really is.", rev:false},
+    {t:"I shudder when I hear people talking about a World War III.", rev:false},
+    {t:"The sight of a dead body is horrifying to me.", rev:false},
+    {t:"I feel that the future holds nothing for me to fear.", rev:true}
+  ];
+
+  var answers = {};
+
+  var quizEl = document.getElementById('quiz');
+  var html = '';
+  ITEMS.forEach(function(item, idx){
+    html += '<div class="item"><p>' + (idx+1) + '. ' + item.t + '</p><div class="opts">';
+    ['Vrai','Faux'].forEach(function(opt, val){
+      html += '<label class="opt"><input type="radio" name="q' + idx + '" value="' + val + '" style="display:none" data-idx="' + idx + '">' + opt + '</label>';
+    });
+    html += '</div></div>';
+  });
+  quizEl.innerHTML = html;
+
+  var submitBtn = document.getElementById('submitBtn');
+
+  quizEl.querySelectorAll('.opt').forEach(function(label){
+    label.addEventListener('click', function(){
+      var input = label.querySelector('input');
+      var idx = input.getAttribute('data-idx');
+      var group = quizEl.querySelectorAll('input[name="q' + idx + '"]');
+      group.forEach(function(r){ r.closest('.opt').style.background = ''; r.closest('.opt').style.borderColor = '#E0D9C9'; r.closest('.opt').style.color=''; });
+      label.style.background = '#2E2E3A';
+      label.style.color = '#fff';
+      label.style.borderColor = '#2E2E3A';
+      answers[idx] = parseInt(input.value, 10); // 0 = Vrai, 1 = Faux
+      checkComplete();
+    });
+  });
+
+  function checkComplete(){
+    submitBtn.disabled = Object.keys(answers).length < ITEMS.length;
+  }
+
+  submitBtn.addEventListener('click', function(){
+    var total = 0;
+    ITEMS.forEach(function(item, idx){
+      var respondedTrue = (answers[idx] === 0);
+      var scored = item.rev ? !respondedTrue : respondedTrue;
+      if (scored) total += 1;
+    });
+    var cards = document.getElementById('cards');
+    var html2 = '<div class="score-card"><h3>Score total d\'anxiété face à la mort</h3>' +
+      '<div class="score-val">' + total + ' / 15</div>' +
+      '<p class="cutoffs">Instrument dimensionnel, aucun seuil clinique officiel publié par ' +
+      'l\'auteur — à interpréter comme un niveau relatif plutôt qu\'un diagnostic.</p></div>';
+    cards.innerHTML = html2;
+    document.getElementById('result').style.display = 'block';
+    submitBtn.style.display = 'none';
+    document.getElementById('result').scrollIntoView({behavior:'smooth'});
+  });
+})();
+</script>
+</body>
+</html>

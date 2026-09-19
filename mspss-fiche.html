@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MSPSS — Échelle de soutien social perçu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#8B5A5A 0%,#C48787 55%,#5C3333 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(224,196,138,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:34px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#3D6B4F;background:#E4EEE8;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 28px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .preview-card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:14px;padding:20px 22px;margin-bottom:14px;}
+  .preview-q{font-size:14.5px;font-weight:600;margin:0 0 10px;}
+  .preview-opts{display:flex;flex-direction:column;gap:6px;}
+  .preview-opt{font-size:13.5px;color:#63695D;background:#F4F1EA;border-radius:8px;padding:8px 12px;}
+  .reveal-btn{appearance:none;background:#F4F1EA;color:#1E3A5F;border:1px solid #E0D9C9;border-radius:10px;padding:9px 16px;font-family:'Inter',sans-serif;font-size:13px;font-weight:700;cursor:pointer;}
+  .reveal-list{margin-top:14px;display:none;}
+  .reveal-list.open{display:block;}
+  .reveal-item{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:10px;padding:12px 16px;margin-bottom:8px;font-size:13.5px;}
+  .reveal-item .tag{display:inline-block;font-size:11px;font-weight:700;color:#7A3B3B;background:#F1E6E6;border-radius:999px;padding:2px 8px;margin-right:8px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#8B5A5A;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#1E3A5F;border-color:#E0D9C9;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">MSPSS</span></div>
+
+  <h1 class="serif">Échelle de soutien social perçu</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Multidimensional Scale of Perceived Social Support — Zimet, Dahlem, Zimet &amp; Farley, 1988</p>
+  <div class="meta-row">
+    <span class="pill">12 questions</span>
+    <span class="pill">3 minutes</span>
+    <span class="pill">Échelle 1-7</span>
+    <span class="pill">Anglais</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="mspss.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le MSPSS mesure le soutien social perçu par le répondant, selon trois sources distinctes : une personne significative, la famille et les amis. Les trois dimensions sont indépendantes et peuvent être lues séparément, en plus d'un score total. Instrument très largement utilisé en recherche et en clinique.</p>
+    <p class="source-note">Questionnaire transcrit en anglais (version originale) : aucune traduction française validée n'a été retrouvée lors du sourçage.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Aperçu</h2>
+    <div class="preview-card">
+      <p class="preview-q">1. There is a special person who is around when I am in need.</p>
+      <div class="preview-opts">
+        <div class="preview-opt">Very strongly disagree</div>
+        <div class="preview-opt">Strongly disagree</div>
+        <div class="preview-opt">Mildly disagree</div>
+        <div class="preview-opt">Neutral</div>
+        <div class="preview-opt">Mildly agree</div>
+        <div class="preview-opt">Strongly agree</div>
+        <div class="preview-opt">Very strongly agree</div>
+      </div>
+    </div>
+    <button class="reveal-btn" id="reveal-btn">Voir toutes les questions</button>
+    <div class="reveal-list" id="reveal-list">
+      <div class="reveal-item"><span class="tag">Sig.</span>2. There is a special person with whom I can share my joys and sorrows.</div>
+      <div class="reveal-item"><span class="tag">Famille</span>3. My family really tries to help me.</div>
+      <div class="reveal-item"><span class="tag">Famille</span>4. I get the emotional help and support I need from my family.</div>
+      <div class="reveal-item"><span class="tag">Sig.</span>5. I have a special person who is a real source of comfort to me.</div>
+      <div class="reveal-item"><span class="tag">Amis</span>6. My friends really try to help me.</div>
+      <div class="reveal-item"><span class="tag">Amis</span>7. I can count on my friends when things go wrong.</div>
+      <div class="reveal-item"><span class="tag">Famille</span>8. I can talk about my problems with my family.</div>
+      <div class="reveal-item"><span class="tag">Amis</span>9. I have friends with whom I can share my joys and sorrows.</div>
+      <div class="reveal-item"><span class="tag">Sig.</span>10. There is a special person in my life who cares about my feelings.</div>
+      <div class="reveal-item"><span class="tag">Famille</span>11. My family is willing to help me make decisions.</div>
+      <div class="reveal-item"><span class="tag">Amis</span>12. I can talk about my problems with my friends.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Trois sous-échelles de 4 items chacune, aucun item inversé : Personne significative (items 1, 2, 5, 10), Famille (items 3, 4, 8, 11), Amis (items 6, 7, 9, 12). Chaque sous-échelle est cotée de 4 à 28 (somme des 4 items). Score total = somme des 12 items (12-84). Plus le score est élevé, plus le soutien social perçu est important.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source</h2>
+    <p class="source-note">Zimet, G. D., Dahlem, N. W., Zimet, S. G., &amp; Farley, G. K. (1988). The Multidimensional Scale of Perceived Social Support. Journal of Personality Assessment, 52(1), 30–41. Outil de repérage clinique, ne remplace pas une évaluation complète.</p>
+  </div>
+</div>
+
+<script>
+document.getElementById('reveal-btn').addEventListener('click', function(){
+  var list = document.getElementById('reveal-list');
+  list.classList.toggle('open');
+  this.textContent = list.classList.contains('open') ? 'Masquer les questions' : 'Voir toutes les questions';
+});
+</script>
+</body>
+</html>

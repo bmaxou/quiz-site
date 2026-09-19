@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DOCS — Échelle dimensionnelle du TOC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:720px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 18px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  h1{font-size:25px;margin:0 0 18px;}
+  .intro{font-size:14.5px;color:#4A4E43;background:#fff;border:1px solid #E0D9C9;border-radius:12px;padding:16px 18px;margin-bottom:24px;}
+  .cat-title{font-size:19px;margin:30px 0 6px;}
+  .cat-examples{font-size:13.5px;color:#63695D;font-style:italic;margin:0 0 16px;}
+  .progress{font-size:12px;color:#9A9E90;margin-bottom:6px;}
+  .item{background:#fff;border:1px solid #E0D9C9;border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+  .item p{font-size:14.5px;margin:0 0 12px;}
+  .opts{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:flex-start;gap:10px;font-size:13.5px;cursor:pointer;padding:6px;border-radius:8px;}
+  .opt:hover{background:#F4F1EA;}
+  .opt input{margin-top:2px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:12px 22px;cursor:pointer;border:1px solid transparent;background:#8B5A2B;color:#fff;margin-top:10px;}
+  .btn:disabled{opacity:.45;cursor:not-allowed;}
+  #result{display:none;margin-top:30px;}
+  .score-card{background:#fff;border:1px solid #E0D9C9;border-radius:12px;padding:18px 20px;margin-bottom:14px;}
+  .score-card h3{margin:0 0 6px;font-size:16px;font-family:'Cormorant Garamond',Georgia,serif;}
+  .score-val{font-size:22px;font-weight:700;}
+  .total{background:#F4EEE3;}
+  .cutoffs{font-size:12.5px;color:#63695D;margin-top:6px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <h1 class="serif">Échelle dimensionnelle du TOC (DOCS)</h1>
+  <div class="intro" id="intro">
+    This questionnaire asks you about 4 different types of concerns that you might or might not experience.
+    For each type there is a description of the kinds of thoughts (obsessions) and behaviors (rituals or
+    compulsions) typical of that concern, followed by 5 questions about your experiences with these thoughts
+    and behaviors. Please answer based on your experiences in the last month.
+  </div>
+  <div id="quiz"></div>
+  <button class="btn" id="submitBtn" type="button" disabled>Voir mes résultats</button>
+
+  <div id="result">
+    <h2 class="serif">Vos résultats</h2>
+    <div id="cards"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var ANCHORS = [
+    ["None at all","Less than 1 hour each day","Between 1 and 3 hours each day","Between 3 and 8 hours each day","8 hours or more each day"],
+    ["None at all","A little avoidance","A moderate amount of avoidance","A great deal of avoidance","Extreme avoidance of nearly all things"],
+    ["Not at all distressed/anxious","Mildly","Moderately","Severely","Extremely distressed/anxious"],
+    ["No disruption at all","A little disruption, but I mostly function well","Many things are disrupted, but I can still manage","My life is disrupted in many ways and I have trouble managing","My life is completely disrupted and I cannot function at all"],
+    ["Not at all difficult","A little","Moderately","Very","Extremely difficult"]
+  ];
+
+  var CATEGORIES = [
+    {
+      key: "contamination",
+      label: "Contamination",
+      examples: "Concerns about germs and contamination — e.g. worrying about dirt, germs, chemicals, or bodily fluids; washing, cleaning, or showering to reduce contamination.",
+      items: [
+        "About how much time have you spent each day thinking about contamination and engaging in washing or cleaning behaviors because of contamination?",
+        "To what extent have you avoided situations in order to prevent concerns with contamination or having to spend time washing, cleaning, or showering?",
+        "If you had thoughts about contamination but could not wash, clean, or shower (or otherwise remove the contamination), how distressed or anxious did you become?",
+        "To what extent has your daily routine (work, school, self-care, social life) been disrupted by contamination concerns and excessive washing, showering, cleaning, or avoidance behaviors?",
+        "How difficult is it for you to disregard thoughts about contamination and refrain from behaviors such as washing, showering, cleaning, and other decontamination routines when you try to do so?"
+      ]
+    },
+    {
+      key: "harm",
+      label: "Responsabilité du dommage",
+      examples: "Concerns about being responsible for harm, injury, or bad luck — e.g. checking locks, appliances, or one's own actions; seeking reassurance that nothing bad has happened.",
+      items: [
+        "About how much time have you spent each day thinking about the possibility of harm or disasters and engaging in checking or efforts to get reassurance that such things do not (or did not) occur?",
+        "To what extent have you avoided situations so that you did not have to check for danger or worry about possible harm or disasters?",
+        "When you think about the possibility of harm or disasters, or if you cannot check or get reassurance about these things, how distressed or anxious did you become?",
+        "To what extent has your daily routine (work, school, self-care, social life) been disrupted by thoughts about harm or disasters and excessive checking or asking for reassurance?",
+        "How difficult is it for you to disregard thoughts about possible harm or disasters and refrain from checking or reassurance-seeking behaviors when you try to do so?"
+      ]
+    },
+    {
+      key: "unacceptable",
+      label: "Pensées inacceptables",
+      examples: "Unwanted, unpleasant thoughts (e.g. of a violent, sexual, or blasphemous nature) and mental or behavioral acts to neutralize them.",
+      items: [
+        "About how much time have you spent each day with unwanted unpleasant thoughts and with behavioral or mental actions to deal with them?",
+        "To what extent have you been avoiding situations, places, objects and other reminders (e.g., numbers, people) that trigger unwanted or unpleasant thoughts?",
+        "When unwanted or unpleasant thoughts come to mind against your will how distressed or anxious did you become?",
+        "To what extent has your daily routine (work, school, self-care, social life) been disrupted by unwanted and unpleasant thoughts and efforts to avoid or deal with such thoughts?",
+        "How difficult is it for you to disregard unwanted or unpleasant thoughts and refrain from using behavioral or mental acts to deal with them when you try to do so?"
+      ]
+    },
+    {
+      key: "symmetry",
+      label: "Symétrie / ordre",
+      examples: "Concerns about symmetry, completeness, and the need for things to be \"just right\" — e.g. arranging, ordering, counting, or repeating actions until they feel correct.",
+      items: [
+        "About how much time have you spent each day with unwanted thoughts about symmetry, order, or balance and with behaviors intended to achieve symmetry, order or balance?",
+        "To what extent have you been avoiding situations, places or objects associated with feelings that something is not symmetrical or \"just right?\"",
+        "When you have the feeling of something being \"not just right,\" how distressed or anxious did you become?",
+        "To what extent has your daily routine (work, school, self-care, social life) been disrupted by the feeling of things being \"not just right,\" and efforts to put things in order or make them feel right?",
+        "How difficult is it for you to disregard thoughts about the lack of symmetry and order, and refrain from urges to arrange things in order or repeat certain behaviors when you try to do so?"
+      ]
+    }
+  ];
+
+  var answers = {}; // key: catKey_itemIdx -> value
+
+  var quizEl = document.getElementById('quiz');
+  var html = '';
+  CATEGORIES.forEach(function(cat){
+    html += '<h2 class="cat-title serif">' + cat.label + '</h2>';
+    html += '<p class="cat-examples">' + cat.examples + '</p>';
+    cat.items.forEach(function(text, idx){
+      var name = cat.key + '_' + idx;
+      html += '<div class="item"><p>' + text + '</p><div class="opts">';
+      ANCHORS[idx].forEach(function(opt, val){
+        html += '<label class="opt"><input type="radio" name="' + name + '" value="' + val + '" data-cat="' + cat.key + '" data-idx="' + idx + '">' + opt + '</label>';
+      });
+      html += '</div></div>';
+    });
+  });
+  quizEl.innerHTML = html;
+
+  var radios = quizEl.querySelectorAll('input[type=radio]');
+  var submitBtn = document.getElementById('submitBtn');
+
+  function checkComplete(){
+    var total = CATEGORIES.length * 5;
+    var answered = Object.keys(answers).length;
+    submitBtn.disabled = answered < total;
+  }
+
+  radios.forEach(function(r){
+    r.addEventListener('change', function(){
+      var key = r.getAttribute('data-cat') + '_' + r.getAttribute('data-idx');
+      answers[key] = parseInt(r.value, 10);
+      checkComplete();
+    });
+  });
+
+  submitBtn.addEventListener('click', function(){
+    var cards = document.getElementById('cards');
+    var html2 = '';
+    var total = 0;
+    CATEGORIES.forEach(function(cat){
+      var sum = 0;
+      for (var i = 0; i < 5; i++){ sum += answers[cat.key + '_' + i] || 0; }
+      total += sum;
+      html2 += '<div class="score-card"><h3>' + cat.label + '</h3><div class="score-val">' + sum + ' / 20</div></div>';
+    });
+    html2 += '<div class="score-card total"><h3>Score total</h3><div class="score-val">' + total + ' / 80</div>' +
+      '<p class="cutoffs">Seuils indicatifs publiés par les auteurs (discrimination diagnostique, pas une sévérité graduée) : ' +
+      '≥ 18 distingue un TOC d\'une population non clinique ; ≥ 21 distingue un TOC d\'un autre trouble anxieux. ' +
+      'Aucun seuil léger/modéré/sévère n\'est publié.</p></div>';
+    cards.innerHTML = html2;
+    document.getElementById('result').style.display = 'block';
+    submitBtn.style.display = 'none';
+    document.getElementById('result').scrollIntoView({behavior:'smooth'});
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MHLC — Échelle multidimensionnelle du locus de contrôle de la santé</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#5C6B1E 0%,#96AC3C 55%,#333D10 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(224,196,138,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:34px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#3D6B4F;background:#E4EEE8;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 28px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .preview-card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:14px;padding:20px 22px;margin-bottom:14px;}
+  .preview-q{font-size:14.5px;font-weight:600;margin:0 0 10px;}
+  .preview-opts{display:flex;flex-direction:column;gap:6px;}
+  .preview-opt{font-size:13.5px;color:#63695D;background:#F4F1EA;border-radius:8px;padding:8px 12px;}
+  .reveal-btn{appearance:none;background:#F4F1EA;color:#1E3A5F;border:1px solid #E0D9C9;border-radius:10px;padding:9px 16px;font-family:'Inter',sans-serif;font-size:13px;font-weight:700;cursor:pointer;}
+  .reveal-list{margin-top:14px;display:none;}
+  .reveal-list.open{display:block;}
+  .reveal-item{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:10px;padding:12px 16px;margin-bottom:8px;font-size:13.5px;}
+  .reveal-item .tag{display:inline-block;font-size:11px;font-weight:700;color:#4C561A;background:#EBEFDD;border-radius:999px;padding:2px 8px;margin-right:8px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#6B7A1E;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#1E3A5F;border-color:#E0D9C9;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">MHLC</span></div>
+
+  <h1 class="serif">Échelle multidimensionnelle du locus de contrôle de la santé</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Multidimensional Health Locus of Control Scales (Forme A) — Wallston, Wallston &amp; DeVellis, 1978</p>
+  <div class="meta-row">
+    <span class="pill">18 questions</span>
+    <span class="pill">4 minutes</span>
+    <span class="pill">Échelle 1-6</span>
+    <span class="pill">Anglais</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="mhlc.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le MHLC mesure dans quelle mesure une personne pense que sa santé dépend de son propre comportement (internalité), d'autrui — médecins, entourage (autres personnes puissantes) — ou de la chance et du hasard. Les trois dimensions sont indépendantes : une personne peut être haute ou basse sur chacune, sans qu'il y ait de score global unique.</p>
+    <p class="source-note">Questionnaire transcrit en anglais (version originale, Forme A) : l'auteur le considère dans le domaine public, mais aucune traduction française officiellement validée n'a été retrouvée lors du sourçage.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Aperçu</h2>
+    <div class="preview-card">
+      <p class="preview-q"><span class="reveal-item-inline"></span>1. If I get sick, it is my own behavior which determines how soon I get well again.</p>
+      <div class="preview-opts">
+        <div class="preview-opt">Strongly disagree</div>
+        <div class="preview-opt">Moderately disagree</div>
+        <div class="preview-opt">Slightly disagree</div>
+        <div class="preview-opt">Slightly agree</div>
+        <div class="preview-opt">Moderately agree</div>
+        <div class="preview-opt">Strongly agree</div>
+      </div>
+    </div>
+    <button class="reveal-btn" id="reveal-btn">Voir toutes les questions</button>
+    <div class="reveal-list" id="reveal-list">
+      <div class="reveal-item"><span class="tag">Chance</span>2. No matter what I do, if I am going to get sick, I will get sick.</div>
+      <div class="reveal-item"><span class="tag">Autres</span>3. Having regular contact with my physician is the best way for me to avoid illness.</div>
+      <div class="reveal-item"><span class="tag">Chance</span>4. Most things that affect my health happen to me by accident.</div>
+      <div class="reveal-item"><span class="tag">Autres</span>5. Whenever I don't feel well, I should consult a medically trained professional.</div>
+      <div class="reveal-item"><span class="tag">Interne</span>6. I am in control of my health.</div>
+      <div class="reveal-item"><span class="tag">Autres</span>7. My family has a lot to do with my becoming sick or staying healthy.</div>
+      <div class="reveal-item"><span class="tag">Interne</span>8. When I get sick, I am to blame.</div>
+      <div class="reveal-item"><span class="tag">Chance</span>9. Luck plays a big part in determining how soon I will recover from an illness.</div>
+      <div class="reveal-item"><span class="tag">Autres</span>10. Health professionals control my health.</div>
+      <div class="reveal-item"><span class="tag">Chance</span>11. My good health is largely a matter of good fortune.</div>
+      <div class="reveal-item"><span class="tag">Interne</span>12. The main thing which affects my health is what I myself do.</div>
+      <div class="reveal-item"><span class="tag">Interne</span>13. If I take care of myself, I can avoid illness.</div>
+      <div class="reveal-item"><span class="tag">Autres</span>14. Whenever I recover from an illness, it's usually because other people have been taking good care of me.</div>
+      <div class="reveal-item"><span class="tag">Chance</span>15. No matter what I do, I'm likely to get sick.</div>
+      <div class="reveal-item"><span class="tag">Chance</span>16. If it's meant to be, I will stay healthy.</div>
+      <div class="reveal-item"><span class="tag">Interne</span>17. If I take the right actions, I can stay healthy.</div>
+      <div class="reveal-item"><span class="tag">Autres</span>18. Regarding my health, I can only do what my doctor tells me to do.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Trois sous-échelles indépendantes de 6 items chacune, aucun item inversé : Internalité (IHLC — items 1, 6, 8, 12, 13, 17), Autres personnes puissantes (PHLC — items 3, 5, 7, 10, 14, 18), Chance/Hasard (CHLC — items 2, 4, 9, 11, 15, 16). Chaque score de sous-échelle = somme des 6 items la composant (étendue 6-36). Plus le score est élevé sur une dimension, plus la croyance que la santé est contrôlée par cette dimension est forte. Pas de score global unique : les trois scores forment un profil à interpréter séparément.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source</h2>
+    <p class="source-note">Wallston, K. A., Wallston, B. S., &amp; DeVellis, R. (1978). Development of the Multidimensional Health Locus of Control (MHLC) Scales. Health Education Monographs, 6(1), 160–170. Outil de repérage clinique, ne remplace pas une évaluation complète.</p>
+  </div>
+</div>
+
+<script>
+document.getElementById('reveal-btn').addEventListener('click', function(){
+  var list = document.getElementById('reveal-list');
+  list.classList.toggle('open');
+  this.textContent = list.classList.contains('open') ? 'Masquer les questions' : 'Voir toutes les questions';
+});
+</script>
+</body>
+</html>

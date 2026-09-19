@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Brief COPE — Inventaire abrégé de coping</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#0F5C3D 0%,#2FA876 55%,#0A3826 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(224,196,138,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#3D6B4F;background:#E4EEE8;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .preview-card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:14px;padding:20px 22px;margin-bottom:14px;}
+  .preview-q{font-size:14.5px;font-weight:600;margin:0 0 10px;}
+  .preview-opts{display:flex;flex-direction:column;gap:6px;}
+  .preview-opt{font-size:13.5px;color:#63695D;background:#F4F1EA;border-radius:8px;padding:8px 12px;}
+  .reveal-btn{appearance:none;background:#F4F1EA;color:#0F5C3D;border:1px solid #E0D9C9;border-radius:10px;padding:9px 16px;font-family:'Inter',sans-serif;font-size:13px;font-weight:700;cursor:pointer;}
+  .reveal-list{margin-top:14px;display:none;}
+  .reveal-list.open{display:block;}
+  .reveal-item{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:10px;padding:12px 16px;margin-bottom:8px;font-size:13.5px;}
+  .subs-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 10px;}
+  .subs-item{font-size:13px;color:#20241E;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:8px;padding:8px 12px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#0F5C3D;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#0F5C3D;border-color:#E0D9C9;}
+  @media (max-width:480px){ .subs-grid{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">Brief COPE</span></div>
+
+  <h1 class="serif">Inventaire abrégé de coping</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Brief COPE — Carver, C. S. (1997)</p>
+  <div class="meta-row">
+    <span class="pill">28 questions</span>
+    <span class="pill">6 minutes</span>
+    <span class="pill">14 sous-échelles (pas de score global)</span>
+    <span class="pill">Anglais</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="briefcope.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le Brief COPE explore la manière dont une personne fait face au stress ou à une difficulté, à travers 14 stratégies distinctes (coping actif, déni, soutien émotionnel, humour, religion, auto-accusation...). Il ne produit pas de score global : c'est un profil de stratégies, utile pour ouvrir un dialogue clinique sur les ressources et les évitements de la personne.</p>
+    <p class="source-note">Questionnaire transcrit en anglais (version originale) : aucune traduction française vérifiée n'a pu être consultée en texte intégral lors du sourçage.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Les 14 stratégies mesurées</h2>
+    <div class="subs-grid">
+      <div class="subs-item">Déconnexion par l'activité</div>
+      <div class="subs-item">Coping actif</div>
+      <div class="subs-item">Déni</div>
+      <div class="subs-item">Usage de substances</div>
+      <div class="subs-item">Soutien émotionnel</div>
+      <div class="subs-item">Désengagement comportemental</div>
+      <div class="subs-item">Extériorisation des émotions</div>
+      <div class="subs-item">Soutien instrumental</div>
+      <div class="subs-item">Recadrage positif</div>
+      <div class="subs-item">Auto-accusation</div>
+      <div class="subs-item">Planification</div>
+      <div class="subs-item">Humour</div>
+      <div class="subs-item">Acceptation</div>
+      <div class="subs-item">Religion / spiritualité</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Aperçu</h2>
+    <div class="preview-card">
+      <p class="preview-q">I've been turning to work or other activities to take my mind off things.</p>
+      <div class="preview-opts">
+        <div class="preview-opt">I haven't been doing this at all</div>
+        <div class="preview-opt">I've been doing this a little bit</div>
+        <div class="preview-opt">I've been doing this a medium amount</div>
+        <div class="preview-opt">I've been doing this a lot</div>
+      </div>
+    </div>
+    <button class="reveal-btn" id="reveal-btn">Voir un exemple par stratégie</button>
+    <div class="reveal-list" id="reveal-list">
+      <div class="reveal-item">I've been concentrating my efforts on doing something about the situation I'm in. (coping actif)</div>
+      <div class="reveal-item">I've been getting emotional support from others. (soutien émotionnel)</div>
+      <div class="reveal-item">I've been trying to see it in a different light, to make it seem more positive. (recadrage positif)</div>
+      <div class="reveal-item">I've been making jokes about it. (humour)</div>
+      <div class="reveal-item">I've been trying to find comfort in my religion or spiritual beliefs. (religion)</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque sous-échelle = somme des 2 items qui la composent (échelle 1-4), soit un score de 2 à 8 par stratégie, sans aucune inversion de codage. L'auteur ne recommande pas de score global unique : les 14 scores s'interprètent comme un profil de stratégies de coping, à discuter avec la personne plutôt qu'à réduire à un chiffre.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source</h2>
+    <p class="source-note">Carver, C. S. (1997). You want to measure coping but your protocol's too long: Consider the Brief COPE. International Journal of Behavioral Medicine, 4, 92-100. Usage clinique et de recherche explicitement autorisé par l'auteur (page officielle, University of Miami), sans licence commerciale requise.</p>
+  </div>
+</div>
+
+<script>
+document.getElementById('reveal-btn').addEventListener('click', function(){
+  var list = document.getElementById('reveal-list');
+  list.classList.toggle('open');
+  this.textContent = list.classList.contains('open') ? 'Masquer les exemples' : 'Voir un exemple par stratégie';
+});
+</script>
+</body>
+</html>

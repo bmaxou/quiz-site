@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>IGD-20 — Cabinet Bouche &amp; Chmura</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  h1{font-size:25px;margin:0 0 8px;}
+  .intro{font-size:14.5px;color:#63695D;margin:0 0 6px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 28px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .progress-wrap{position:sticky;top:0;background:#F4F1EA;padding:12px 0;z-index:5;}
+  .progress-track{height:6px;background:#E0D9C9;border-radius:999px;overflow:hidden;}
+  .progress-fill{height:100%;background:#5C2E7A;width:0%;transition:width .2s ease;}
+  .progress-text{font-size:12px;color:#9A9E90;margin:6px 0 0;}
+  .item{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .item p.q{font-size:14.5px;margin:0 0 12px;font-weight:600;}
+  .opts{display:flex;flex-direction:column;gap:8px;}
+  @media (min-width:520px){ .opts{flex-direction:row;flex-wrap:wrap;} }
+  .opt{flex:1;min-width:80px;}
+  .opt input{position:absolute;opacity:0;width:0;height:0;}
+  .opt label{display:block;text-align:center;font-size:11px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:9px;padding:9px 4px;cursor:pointer;transition:background .15s ease,color .15s ease,border-color .15s ease;}
+  .opt input:checked + label{background:#5C2E7A;border-color:#5C2E7A;color:#fff;}
+  .actions{display:flex;gap:12px;margin:24px 0 10px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#5C2E7A;color:#fff;}
+  .btn-primary[disabled]{background:#C9CDC2;cursor:not-allowed;}
+  .btn-secondary{background:#FFFFFF;color:#1A2233;border-color:#E0D9C9;}
+  .hint{font-size:12px;color:#B4483C;margin:0 0 16px;min-height:16px;}
+  [hidden]{display:none!important}
+  .result h2{font-size:19px;margin:26px 0 10px;}
+  .score-card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:14px;padding:18px 20px;margin-bottom:12px;}
+  .score-card .label{font-size:13.5px;font-weight:700;margin:0 0 4px;}
+  .score-card .val{font-size:22px;font-family:'Cormorant Garamond',Georgia,serif;color:#20241E;}
+  .score-card .desc{font-size:12.5px;color:#63695D;margin:6px 0 0;}
+  .footnote{margin-top:44px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="intro-view">
+    <h1 class="serif">Test du trouble du jeu vidéo (IGD-20)</h1>
+    <p class="intro">Internet Gaming Disorder Scale — Pontes, Király, Demetrovics &amp; Griffiths (2014)</p>
+    <div class="meta-row">
+      <span class="pill">20 questions</span>
+      <span class="pill">6 minutes</span>
+      <span class="pill">Anglais</span>
+    </div>
+    <p class="intro">Pour chaque affirmation, indiquez votre degré d'accord.</p>
+    <div class="actions">
+      <button class="btn btn-primary" type="button" id="start-btn">Commencer</button>
+    </div>
+    <p class="intro" style="font-size:12px;color:#9A9E90;">Rien n'est envoyé ni conservé sur un serveur : si vous quittez avant la fin, les réponses sont perdues.</p>
+  </div>
+
+  <form id="quiz-view" hidden>
+    <div class="progress-wrap">
+      <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+      <p class="progress-text" id="progress-text">0 / 20 répondu(e)s</p>
+    </div>
+    <div id="items"></div>
+    <p class="hint" id="hint" hidden>Merci de répondre à toutes les questions avant de valider.</p>
+    <div class="actions">
+      <button class="btn btn-primary" type="submit" id="submit-btn">Voir mon résultat</button>
+    </div>
+  </form>
+
+  <div id="result-view" class="result" hidden>
+    <h1 class="serif">Votre résultat</h1>
+    <p class="intro">Ce résultat n'est pas un diagnostic. Il sert de point de départ pour en discuter avec votre thérapeute.</p>
+    <div id="scores"></div>
+    <div class="actions">
+      <button class="btn btn-secondary" type="button" onclick="location.reload()">Repasser le test</button>
+    </div>
+  </div>
+
+  <p class="footnote">Source : Pontes, H. M., Király, O., Demetrovics, Z., &amp; Griffiths, M. D. (2014). The Conceptualisation and Measurement of DSM-5 Internet Gaming Disorder: The Development of the IGD-20 Test. <em>PLoS ONE, 9</em>(10), e110137. Article en libre accès sous licence Creative Commons Attribution (CC BY 4.0). Questionnaire transcrit en anglais (version originale) : aucune traduction française vérifiée retrouvée lors du sourçage.</p>
+</div>
+
+<script>
+(function(){
+  var options = ["Strongly disagree","Disagree","Neither agree or disagree","Agree","Strongly agree"];
+  // reverse:true = item inversé (2 et 19)
+  var items = [
+    { text: "I often lose sleep because of long gaming sessions.", reverse: false },
+    { text: "I never play games in order to feel better.", reverse: true },
+    { text: "I have significantly increased the amount of time I play games over last year.", reverse: false },
+    { text: "When I am not gaming I feel more irritable.", reverse: false },
+    { text: "I have lost interest in other hobbies because of my gaming.", reverse: false },
+    { text: "I would like to cut down my gaming time but it's difficult to do.", reverse: false },
+    { text: "I usually think about my next gaming session when I am not playing.", reverse: false },
+    { text: "I play games in order to feel better.", reverse: false },
+    { text: "I need to spend increasing amount of time engaged in playing games.", reverse: false },
+    { text: "I feel sad if I am not able to play games.", reverse: false },
+    { text: "I have lied to my family members because of the amount of gaming I do.", reverse: false },
+    { text: "I do not think I could stop gaming.", reverse: false },
+    { text: "I think gaming has become the most time-consuming activity in my life.", reverse: false },
+    { text: "I play games to forget about whatever's bothering me.", reverse: false },
+    { text: "I often think what a whole day is not enough to do everything I need to do in-game.", reverse: false },
+    { text: "I tend to get anxious if I can't play games for any reasons.", reverse: false },
+    { text: "I think my gaming has jeopardized the relationship with my partner.", reverse: false },
+    { text: "I often try to play games less but find I cannot.", reverse: false },
+    { text: "I know my main daily activity (i.e., occupation, education, homemaker, etc.) has not been negatively affected by my gaming.", reverse: true },
+    { text: "I believe my gaming is negatively impacting on important areas of my life.", reverse: false }
+  ];
+
+  var form = document.getElementById('quiz-view');
+  var itemsEl = document.getElementById('items');
+
+  items.forEach(function(it, idx){
+    var n = idx + 1;
+    var name = 'q' + n;
+    var div = document.createElement('div');
+    div.className = 'item';
+    var q = document.createElement('p');
+    q.className = 'q';
+    q.textContent = n + '. ' + it.text;
+    div.appendChild(q);
+    var opts = document.createElement('div');
+    opts.className = 'opts';
+    options.forEach(function(label, oi){
+      var val = oi + 1; // 1-5
+      var wrap = document.createElement('div');
+      wrap.className = 'opt';
+      var id = name + '_' + val;
+      wrap.innerHTML = '<input type="radio" name="' + name + '" id="' + id + '" value="' + val + '">' +
+        '<label for="' + id + '">' + label + '</label>';
+      opts.appendChild(wrap);
+    });
+    div.appendChild(opts);
+    itemsEl.appendChild(div);
+  });
+
+  function updateProgress(){
+    var answered = 0;
+    for (var i = 1; i <= items.length; i++){
+      if (form.querySelector('input[name="q' + i + '"]:checked')) answered++;
+    }
+    document.getElementById('progress-fill').style.width = Math.round(answered / items.length * 100) + '%';
+    document.getElementById('progress-text').textContent = answered + ' / ' + items.length + ' répondu(e)s';
+  }
+  form.addEventListener('change', updateProgress);
+
+  document.getElementById('start-btn').addEventListener('click', function(){
+    document.getElementById('intro-view').hidden = true;
+    form.hidden = false;
+    updateProgress();
+  });
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var missing = false;
+    var total = 0;
+    for (var i = 1; i <= items.length; i++){
+      var checked = form.querySelector('input[name="q' + i + '"]:checked');
+      if (!checked){ missing = true; break; }
+      var raw = parseInt(checked.value, 10);
+      var scored = items[i-1].reverse ? (6 - raw) : raw;
+      total += scored;
+    }
+    if (missing){
+      document.getElementById('hint').hidden = false;
+      window.scrollTo(0,0);
+      return;
+    }
+    document.getElementById('hint').hidden = true;
+
+    var flagged = total >= 71;
+    var scoresHtml =
+      '<div class="score-card"><p class="label">Score total</p>' +
+      '<p class="val">' + total + ' / 100</p>' +
+      '<p class="desc">Seuil de dépistage empirique : ≥ 71 (sensibilité 96 %, spécificité 100 % dans l\'échantillon de validation original). ' +
+      (flagged ? '⚠️ Score au-dessus du seuil de dépistage.' : 'Score sous le seuil de dépistage.') +
+      ' Ce seuil est un repère de recherche, pas un critère diagnostique en soi.</p></div>';
+
+    document.getElementById('scores').innerHTML = scoresHtml;
+    form.hidden = true;
+    document.getElementById('result-view').hidden = false;
+    window.scrollTo(0,0);
+  });
+})();
+</script>
+</body>
+</html>

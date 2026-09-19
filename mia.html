@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MIA — Inventaire de mobilité pour l'agoraphobie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 18px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  h1{font-size:25px;margin:0 0 18px;}
+  .intro{font-size:14.5px;color:#4A4E43;background:#fff;border:1px solid #E0D9C9;border-radius:12px;padding:16px 18px;margin-bottom:24px;}
+  .item{background:#fff;border:1px solid #E0D9C9;border-radius:12px;padding:14px 16px;margin-bottom:10px;}
+  .item p{font-size:13.5px;margin:0 0 10px;font-weight:600;}
+  .rowlabel{font-size:11.5px;color:#63695D;margin:0 0 4px;}
+  .opts{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap;}
+  .opt{font-size:11.5px;padding:6px 9px;border:1px solid #E0D9C9;border-radius:8px;cursor:pointer;}
+  .opt:hover{background:#F4F1EA;}
+  .sec-title{font-size:19px;margin:30px 0 10px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:12px 22px;cursor:pointer;border:1px solid transparent;background:#1E5A4A;color:#fff;margin-top:10px;}
+  .btn:disabled{opacity:.45;cursor:not-allowed;}
+  #result{display:none;margin-top:30px;}
+  .score-card{background:#fff;border:1px solid #E0D9C9;border-radius:12px;padding:18px 20px;margin-bottom:14px;}
+  .score-card h3{margin:0 0 6px;font-size:16px;font-family:'Cormorant Garamond',Georgia,serif;}
+  .score-val{font-size:22px;font-weight:700;}
+  .cutoffs{font-size:12.5px;color:#63695D;margin-top:6px;}
+  .field-input{width:100%;font-family:'Inter',sans-serif;font-size:14px;color:#20241E;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:8px;padding:9px 12px;margin-bottom:10px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <h1 class="serif">Inventaire de mobilité pour l'agoraphobie (MIA)</h1>
+  <div class="intro">
+    Please indicate the degree to which you avoid the following places or situations because of
+    discomfort or anxiety. Rate your amount of avoidance when you are with a trusted companion
+    (Accompanied) and when you are alone (Alone). 1 = never avoid · 5 = always avoid.
+  </div>
+  <div id="quiz"></div>
+
+  <h2 class="sec-title serif">Attaques de panique (7 derniers jours)</h2>
+  <div class="item">
+    <p>Nombre d'attaques de panique au cours des 7 derniers jours</p>
+    <input class="field-input" type="number" min="0" id="panicFreq" placeholder="0">
+    <p class="rowlabel">Intensité moyenne de ces attaques (si au moins une)</p>
+    <div class="opts" id="panicIntensity">
+      <span class="opt" data-val="1">1 (légère)</span>
+      <span class="opt" data-val="2">2</span>
+      <span class="opt" data-val="3">3</span>
+      <span class="opt" data-val="4">4</span>
+      <span class="opt" data-val="5">5 (sévère)</span>
+    </div>
+  </div>
+
+  <button class="btn" id="submitBtn" type="button" disabled>Voir mes résultats</button>
+
+  <div id="result">
+    <h2 class="serif">Vos résultats</h2>
+    <div id="cards"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var SITUATIONS = [
+    "Outside","Inside","Buses","Trains","Subways","Airplanes","Boats","Theaters","Supermarkets",
+    "Shopping malls","Classrooms","Department stores","Restaurants","Museums","Elevators",
+    "Auditoriums/stadiums","Garages","High places","Enclosed spaces",
+    "Driving or riding in a car – At anytime","Driving or riding in a car – On expressways",
+    "Standing in lines","Crossing bridges","Parties or social gatherings","Walking on the street",
+    "Staying home alone","Being far away from home"
+  ];
+
+  var accomp = {};
+  var alone = {};
+  var panicIntensityVal = null;
+
+  var quizEl = document.getElementById('quiz');
+  var html = '';
+  SITUATIONS.forEach(function(s, idx){
+    html += '<div class="item" data-idx="' + idx + '"><p>' + (idx+1) + '. ' + s + '</p>';
+    html += '<p class="rowlabel">Accompagné(e)</p><div class="opts" data-row="accomp" data-idx="' + idx + '">';
+    for (var v=1; v<=5; v++){ html += '<span class="opt" data-val="' + v + '">' + v + '</span>'; }
+    html += '</div>';
+    html += '<p class="rowlabel">Seul(e)</p><div class="opts" data-row="alone" data-idx="' + idx + '">';
+    for (var v2=1; v2<=5; v2++){ html += '<span class="opt" data-val="' + v2 + '">' + v2 + '</span>'; }
+    html += '</div></div>';
+  });
+  quizEl.innerHTML = html;
+
+  function selectOpt(container, storeObj, idx, el, val){
+    container.querySelectorAll('.opt').forEach(function(o){ o.style.background=''; o.style.color=''; o.style.borderColor='#E0D9C9'; });
+    el.style.background = '#1E5A4A'; el.style.color = '#fff'; el.style.borderColor = '#1E5A4A';
+    storeObj[idx] = val;
+    checkComplete();
+  }
+
+  quizEl.querySelectorAll('.opts[data-row]').forEach(function(container){
+    var row = container.getAttribute('data-row');
+    var idx = container.getAttribute('data-idx');
+    container.querySelectorAll('.opt').forEach(function(el){
+      el.addEventListener('click', function(){
+        var val = parseInt(el.getAttribute('data-val'), 10);
+        selectOpt(container, row === 'accomp' ? accomp : alone, idx, el, val);
+      });
+    });
+  });
+
+  var panicIntensityBox = document.getElementById('panicIntensity');
+  panicIntensityBox.querySelectorAll('.opt').forEach(function(el){
+    el.addEventListener('click', function(){
+      panicIntensityBox.querySelectorAll('.opt').forEach(function(o){ o.style.background=''; o.style.color=''; o.style.borderColor='#E0D9C9'; });
+      el.style.background = '#1E5A4A'; el.style.color = '#fff'; el.style.borderColor = '#1E5A4A';
+      panicIntensityVal = parseInt(el.getAttribute('data-val'), 10);
+    });
+  });
+
+  var submitBtn = document.getElementById('submitBtn');
+  function checkComplete(){
+    var ok = Object.keys(accomp).length >= SITUATIONS.length && Object.keys(alone).length >= SITUATIONS.length;
+    submitBtn.disabled = !ok;
+  }
+
+  submitBtn.addEventListener('click', function(){
+    var sumAcc = 0, sumAlone = 0;
+    SITUATIONS.forEach(function(s, idx){ sumAcc += accomp[idx]; sumAlone += alone[idx]; });
+    var meanAcc = (sumAcc / SITUATIONS.length).toFixed(2);
+    var meanAlone = (sumAlone / SITUATIONS.length).toFixed(2);
+    var freq = parseInt(document.getElementById('panicFreq').value, 10) || 0;
+
+    var cards = document.getElementById('cards');
+    var html2 = '<div class="score-card"><h3>Évitement — Accompagné(e)</h3><div class="score-val">' + meanAcc + ' / 5</div></div>' +
+      '<div class="score-card"><h3>Évitement — Seul(e)</h3><div class="score-val">' + meanAlone + ' / 5</div></div>' +
+      '<div class="score-card"><h3>Attaques de panique (7 derniers jours)</h3><div class="score-val">' + freq + '</div>' +
+      (freq > 0 && panicIntensityVal ? '<p class="cutoffs">Intensité moyenne rapportée : ' + panicIntensityVal + ' / 5</p>' : '') +
+      '<p class="cutoffs">Aucun seuil clinique officiel unique — repère de comparaison en littérature ' +
+      '(échantillon clinique agoraphobie avec attaques de panique) : évitement seul moyen ≈ 3,2/5, ' +
+      'intensité de panique moyenne ≈ 3,2/5. À interpréter dans le cadre d\'un échange clinique.</p></div>';
+    cards.innerHTML = html2;
+    document.getElementById('result').style.display = 'block';
+    submitBtn.style.display = 'none';
+    document.getElementById('result').scrollIntoView({behavior:'smooth'});
+  });
+})();
+</script>
+</body>
+</html>

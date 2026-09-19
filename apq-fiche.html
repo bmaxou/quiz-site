@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>APQ — Questionnaire de parentalité de l'Alabama</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#8A5A2E 0%,#C99050 55%,#5C3A1A 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(224,196,138,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#8A5A2E;background:#F1E6D8;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .subs-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 10px;}
+  .subs-item{font-size:13px;color:#20241E;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:8px;padding:8px 12px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#8A5A2E;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#8A5A2E;border-color:#E0D9C9;}
+  @media (max-width:480px){ .subs-grid{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">APQ</span></div>
+
+  <h1 class="serif">Questionnaire de parentalité de l'Alabama</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Alabama Parenting Questionnaire — Shelton, Frick &amp; Wootton (1996)</p>
+  <div class="meta-row">
+    <span class="pill">42 questions</span>
+    <span class="pill">9 minutes</span>
+    <span class="pill">5 sous-échelles + 7 items individuels</span>
+    <span class="pill">Anglais</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="apq.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>L'APQ explore les pratiques éducatives dans le foyer selon 5 dimensions indépendantes (implication parentale, discipline positive, supervision, discipline incohérente, punition corporelle), plus 7 pratiques disciplinaires supplémentaires analysées une à une. Un outil utile pour ouvrir un dialogue sur le fonctionnement parental au quotidien.</p>
+    <p class="source-note">Questionnaire transcrit en anglais (version originale) : aucune traduction française officielle validée par l'auteur n'a été retrouvée lors du sourçage.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Les 5 sous-échelles</h2>
+    <div class="subs-grid">
+      <div class="subs-item">Implication parentale (10 items)</div>
+      <div class="subs-item">Discipline positive (6 items)</div>
+      <div class="subs-item">Supervision déficiente (10 items)</div>
+      <div class="subs-item">Discipline incohérente (6 items)</div>
+      <div class="subs-item">Punition corporelle (3 items)</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque sous-échelle = somme de ses items sur une échelle 1-5, sans item inversé. 7 items supplémentaires portant sur d'autres pratiques disciplinaires (ignorer l'enfant, retirer des privilèges, envoyer dans sa chambre, crier, expliquer calmement, time out, corvées) ne sont pas sommés et se lisent individuellement.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source</h2>
+    <p class="source-note">Shelton, K. K., Frick, P. J., & Wootton, J. M. (1996). Assessment of parenting practices in families of elementary school-age children. Journal of Clinical Child Psychology, 25(3), 317-329. Usage clinique et de recherche explicitement autorisé gratuitement par l'auteur-dépositaire (Paul J. Frick, Louisiana State University), seule condition : ne pas modifier consignes/items/format de réponse.</p>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BES — Échelle d'hyperphagie boulimique (Binge Eating Scale)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#8C7A3D;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:13px;color:#9A9E90;margin:0 0 10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#8C7A3D;background:#F3EDDE;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#5C4F28;border-color:#E0D9C9;}
+  .btn-primary{background:#8C7A3D;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:36px;color:#8C7A3D;margin:0 0 4px;}
+  .result-max{font-size:13px;color:#9A9E90;margin:0 0 16px;}
+  .result-tag{display:inline-flex;font-size:12.5px;font-weight:700;padding:5px 12px;border-radius:999px;margin:0 0 18px;background:#F3EDDE;color:#5C4F28;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">BES — Hyperphagie boulimique</h1>
+    <p class="lead">Ce questionnaire explore votre rapport à l'alimentation à travers 16 questions. Pour chacune, choisissez l'énoncé qui décrit le mieux votre comportement.</p>
+    <p class="lang-note">Questionnaire transcrit en anglais (version originale) : aucune traduction française vérifiée n'a été retrouvée lors du sourçage.</p>
+    <div class="pill-row">
+      <span class="pill">16 questions</span>
+      <span class="pill">4 minutes</span>
+      <span class="pill">Choix graduné</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-score" id="score-total"></p>
+    <p class="result-max">score total (16 items, étendue 0-46)</p>
+    <p class="result-tag" id="result-tag"></p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">BES (Binge Eating Scale) — Gormally, Black, Daston &amp; Rardin, 1982. Seuils : ≤17 pas ou peu de comportement d'hyperphagie boulimique, 18-26 hyperphagie boulimique modérée, ≥27 hyperphagie boulimique sévère. Outil de repérage, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [
+    {q:"1", opts:[
+      {p:0,t:"I don't feel self-conscious about my weight or body size when I am with others."},
+      {p:0,t:"I feel concerned about how I look to others, but it normally does not make me feel disappointed with myself."},
+      {p:1,t:"I do get self-conscious about my appearance and weight which makes me feel disappointed in myself."},
+      {p:3,t:"I feel very self-conscious about my weight and frequently, I feel intense shame and disgust for myself."}
+    ]},
+    {q:"2", opts:[
+      {p:0,t:"I don't have any difficulty eating slowly in the proper manner."},
+      {p:1,t:"Although I seem to 'gobble down' foods, I don't end up feeling stuffed because of eating too much."},
+      {p:2,t:"At times, I tend to eat quickly and then, I feel uncomfortably full afterward."},
+      {p:3,t:"I have the habit of bolting down my food, without really chewing it."}
+    ]},
+    {q:"3", opts:[
+      {p:0,t:"I feel capable of controlling my eating urges when I want to."},
+      {p:0,t:"I feel like I have failed to control my eating more than the average person."},
+      {p:3,t:"I feel utterly helpless when it comes to feeling in control of my eating urges."},
+      {p:3,t:"Because I feel so helpless about controlling my eating I have become very desperate."}
+    ]},
+    {q:"4", opts:[
+      {p:0,t:"I don't have the habit of eating when I'm bored."},
+      {p:0,t:"I sometimes eat when I'm bored, but often I'm able to 'get busy' and get my mind off food."},
+      {p:0,t:"I have a regular habit of eating when I'm bored, but occasionally, I can use some other activity."},
+      {p:2,t:"I have a strong habit of eating when I'm bored. Nothing seems to help me break the habit."}
+    ]},
+    {q:"5", opts:[
+      {p:0,t:"I'm usually physically hungry when I eat something."},
+      {p:1,t:"Occasionally, I eat something on impulse even though I am not hungry."},
+      {p:2,t:"I have the regular habit of eating foods, that I might not enjoy, to satisfy a hungry feeling."},
+      {p:3,t:"Even though I'm not physically hungry, I get a hungry feeling in my mouth that only seems to be satisfied when I eat."}
+    ]},
+    {q:"6", opts:[
+      {p:0,t:"I don't feel any guilt or self-hate after I overeat."},
+      {p:1,t:"After I overeat, occasionally I feel guilt or self-hate."},
+      {p:3,t:"Almost all the time I experience strong guilt or self-hate after I overeat."}
+    ]},
+    {q:"7", opts:[
+      {p:0,t:"I don't lose total control of my eating when dieting even after periods when I overeat."},
+      {p:2,t:"Sometimes when I eat a 'forbidden food' on a diet, I feel like I 'blew it' and eat even more."},
+      {p:3,t:"Frequently, I have the habit of saying to myself, 'I've blown it now, why not go all the way'."},
+      {p:3,t:"I have a regular habit of starting strict diets for myself, but I break the diets by going on eating binges."}
+    ]},
+    {q:"8", opts:[
+      {p:0,t:"I rarely eat so much food that I feel uncomfortably stuffed afterward."},
+      {p:1,t:"Usually, about once a month, I eat such a quantity of food, that I end up feeling very stuffed."},
+      {p:2,t:"I have regular periods during the month when I eat large amounts of food."},
+      {p:3,t:"I eat so much food that I regularly feel quite uncomfortable after eating and sometimes a bit nauseous."}
+    ]},
+    {q:"9", opts:[
+      {p:0,t:"My level of calorie intake does not go up very high or go down very low regularly."},
+      {p:1,t:"Sometimes after I overeat, I will try to reduce my caloric intake to almost nothing."},
+      {p:2,t:"I have a regular habit of overeating during the night. It seems that my routine is not to be hungry in the morning but overeat in the evening."},
+      {p:3,t:"In my adult years, I have had week-long periods where I practically starve myself."}
+    ]},
+    {q:"10", opts:[
+      {p:0,t:"I usually stop eating when I want to. I know when 'enough is enough.'"},
+      {p:1,t:"Every so often, I experience a compulsion to eat which I can't seem to control."},
+      {p:2,t:"Frequently, I experience strong urges to eat which I seem unable to control."},
+      {p:3,t:"I feel incapable of controlling my urges to eat. I have a fear of not being able to stop eating voluntarily."}
+    ]},
+    {q:"11", opts:[
+      {p:0,t:"I don't have any problem stopping eating when I feel full."},
+      {p:1,t:"I usually can stop eating when I feel full but occasionally overeat leaving me uncomfortably stuffed."},
+      {p:2,t:"I have a problem stopping eating once I start and usually, I feel uncomfortably stuffed."},
+      {p:3,t:"Because I have a problem not being able to stop eating when I want, I sometimes have to induce vomiting."}
+    ]},
+    {q:"12", opts:[
+      {p:0,t:"I seem to eat just as much when I'm with others (family, social gatherings) as when I'm by myself."},
+      {p:1,t:"Sometimes, when I'm with other people, I don't eat as much as I want to eat because I'm self-conscious about my eating."},
+      {p:2,t:"Frequently, I eat only a small amount of food when others are present because I'm very embarrassed about my eating."},
+      {p:3,t:"I feel so ashamed about overeating that I pick times to overeat when I know no one will see me."}
+    ]},
+    {q:"13", opts:[
+      {p:0,t:"I eat three meals a day with only an occasional between-meal snack."},
+      {p:0,t:"I eat three meals a day, but I also normally snack between meals."},
+      {p:2,t:"When I am snacking heavily, I get in the habit of skipping regular meals."},
+      {p:3,t:"There are regular periods when I seem to be continually eating, with no planned meals."}
+    ]},
+    {q:"14", opts:[
+      {p:0,t:"I don't think much about trying to control unwanted eating urges."},
+      {p:1,t:"At least some of the time, I feel my thoughts are preoccupied with trying to control my eating urges."},
+      {p:2,t:"I feel that frequently I spend much time thinking about how much I ate or about trying not to eat anymore."},
+      {p:3,t:"It seems to me that most of my waking hours are preoccupied by thoughts about eating or not eating."}
+    ]},
+    {q:"15", opts:[
+      {p:0,t:"I don't think about food a great deal."},
+      {p:1,t:"I have strong cravings for food but they last only for brief periods."},
+      {p:2,t:"I have days when I can't seem to think about anything else but food."},
+      {p:3,t:"Most of my days seem to be preoccupied with thoughts about food. I feel like I live to eat."}
+    ]},
+    {q:"16", opts:[
+      {p:0,t:"I usually know whether or not I'm physically hungry. I take the right portion of food to satisfy me."},
+      {p:1,t:"Occasionally, I feel uncertain about knowing whether or not I'm physically hungry."},
+      {p:2,t:"Even though I might know how many calories I should eat, I don't have any idea what is a 'normal' amount of food for me."}
+    ]}
+  ];
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = 'Question ' + items[idx].q;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    items[idx].opts.forEach(function(o, v){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === v ? ' selected' : '');
+      d.textContent = o.t;
+      d.addEventListener('click', function(){
+        answers[idx] = v;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){
+      idx++; renderQuestion();
+    } else {
+      showResult();
+    }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var total = 0;
+    answers.forEach(function(v, i){ total += items[i].opts[v].p; });
+    document.getElementById('score-total').textContent = total;
+    var tag = document.getElementById('result-tag');
+    if (total <= 17){
+      tag.textContent = 'Pas ou peu de comportement d\'hyperphagie boulimique (≤ 17)';
+    } else if (total <= 26){
+      tag.textContent = 'Hyperphagie boulimique modérée (18-26)';
+    } else {
+      tag.textContent = 'Hyperphagie boulimique sévère (≥ 27)';
+    }
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+</body>
+</html>
