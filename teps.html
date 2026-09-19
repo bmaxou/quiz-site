@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TEPS — Échelle d'expérience temporelle du plaisir</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#A0824C;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#A0824C;background:#F3EBDD;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#A0824C;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:36px;color:#A0824C;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">TEPS — Expérience temporelle du plaisir</h1>
+    <p class="lead">Ce questionnaire explore votre capacité à anticiper et à ressentir du plaisir à travers 18 affirmations, chacune notée de 1 (très faux pour moi) à 6 (très vrai pour moi).</p>
+    <p class="lang-note">Questionnaire transcrit en anglais (version originale) : aucune traduction française vérifiée n'a été retrouvée lors du sourçage.</p>
+    <div class="pill-row">
+      <span class="pill">18 questions</span>
+      <span class="pill">3 minutes</span>
+      <span class="pill">Échelle 1-6</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-score" id="score-ant"></p>
+    <p class="result-max">score anticipatoire (10 items, étendue 10-60)</p>
+    <p class="result-score" id="score-con"></p>
+    <p class="result-max">score consommatoire (8 items, étendue 8-48)</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">TEPS (Temporal Experience of Pleasure Scale) — Gard et al., 2006. Outil dimensionnel d'anhédonie anticipatoire/consommatoire, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [
+    {t:"When something exciting is coming up in my life, I really look forward to it.", sub:"ant"},
+    {t:"The sound of crackling wood in the fireplace is very relaxing.", sub:"con"},
+    {t:"When I think about eating my favorite food, I can almost taste how good it is.", sub:"ant"},
+    {t:"I love the sound of rain on the windows when I'm lying in my warm bed.", sub:"con"},
+    {t:"The smell of freshly cut grass is enjoyable to me.", sub:"con"},
+    {t:"I enjoy taking a deep breath of fresh air when I walk outside.", sub:"con"},
+    {t:"I don't look forward to things like eating out at restaurants.", sub:"ant", r:true},
+    {t:"A hot cup of coffee or tea on a cold morning is very satisfying to me.", sub:"con"},
+    {t:"I love it when people play with my hair.", sub:"con"},
+    {t:"I really enjoy the feeling of a good yawn.", sub:"con"},
+    {t:"When I'm on my way to an amusement park, I can hardly wait to ride the roller coasters.", sub:"ant"},
+    {t:"I get so excited the night before a major holiday I can hardly sleep.", sub:"ant"},
+    {t:"I appreciate the beauty of a fresh snowfall.", sub:"con"},
+    {t:"When I think of something tasty, like a chocolate chip cookie, I have to have one.", sub:"ant"},
+    {t:"Looking forward to a pleasurable experience is in itself pleasurable.", sub:"ant"},
+    {t:"I look forward to a lot of things in my life.", sub:"ant"},
+    {t:"When ordering something off the menu, I imagine how good it will taste.", sub:"ant"},
+    {t:"When I hear about a new movie starring my favorite actor, I can't wait to see it.", sub:"ant"}
+  ];
+  var opts = ["1 — Very false for me","2","3","4","5","6 — Very true for me"];
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx].t;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    opts.forEach(function(label, v){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === v+1 ? ' selected' : '');
+      d.textContent = label;
+      d.addEventListener('click', function(){
+        answers[idx] = v+1;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){
+      idx++; renderQuestion();
+    } else {
+      showResult();
+    }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var ant = 0, con = 0;
+    items.forEach(function(item, i){
+      var v = answers[i];
+      var scored = item.r ? (7 - v) : v;
+      if (item.sub === 'ant') ant += scored; else con += scored;
+    });
+    document.getElementById('score-ant').textContent = ant;
+    document.getElementById('score-con').textContent = con;
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+</body>
+</html>

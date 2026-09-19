@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RRQ — Questionnaire de rumination et de réflexion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#3D2036 0%,#6B3057 55%,#1F0F1C 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(224,196,138,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:30px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#3D6B4F;background:#E4EEE8;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 28px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .preview-card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:14px;padding:20px 22px;margin-bottom:14px;}
+  .preview-q{font-size:14.5px;font-weight:600;margin:0 0 10px;}
+  .preview-opts{display:flex;flex-direction:column;gap:6px;}
+  .preview-opt{font-size:13.5px;color:#63695D;background:#F4F1EA;border-radius:8px;padding:8px 12px;}
+  .reveal-btn{appearance:none;background:#F4F1EA;color:#1E3A5F;border:1px solid #E0D9C9;border-radius:10px;padding:9px 16px;font-family:'Inter',sans-serif;font-size:13px;font-weight:700;cursor:pointer;}
+  .reveal-list{margin-top:14px;display:none;}
+  .reveal-list.open{display:block;}
+  .reveal-item{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:10px;padding:12px 16px;margin-bottom:8px;font-size:13.5px;}
+  .reveal-item .tag{font-size:11px;color:#6B3057;font-weight:700;text-transform:uppercase;letter-spacing:.04em;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#6B3057;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#1E3A5F;border-color:#E0D9C9;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">RRQ</span></div>
+
+  <h1 class="serif">Questionnaire de rumination et de réflexion</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Rumination-Reflection Questionnaire — Trapnell &amp; Campbell, 1999</p>
+  <div class="meta-row">
+    <span class="pill">24 questions</span>
+    <span class="pill">5 minutes</span>
+    <span class="pill">Échelle 1-5</span>
+    <span class="pill">Anglais</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="rrq.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le RRQ distingue deux tendances de l'attention tournée vers soi-même : la rumination (un retour répété et souvent anxieux sur des pensées ou événements passés) et la réflexion (une exploration introspective curieuse et volontaire de soi). Ce sont deux dimensions relativement indépendantes, chacune évaluée par 12 items.</p>
+    <p class="source-note">Questionnaire transcrit en anglais (version originale) : aucune traduction française validée n'a été retrouvée lors du sourçage.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Aperçu</h2>
+    <div class="preview-card">
+      <p class="preview-q">My attention is often focused on aspects of myself I wish I'd stop thinking about.</p>
+      <div class="preview-opts">
+        <div class="preview-opt">Strongly Disagree</div>
+        <div class="preview-opt">Disagree</div>
+        <div class="preview-opt">Neutral</div>
+        <div class="preview-opt">Agree</div>
+        <div class="preview-opt">Strongly Agree</div>
+      </div>
+    </div>
+    <button class="reveal-btn" id="reveal-btn">Voir toutes les questions</button>
+    <div class="reveal-list" id="reveal-list">
+      <div class="reveal-item"><span class="tag">Rumination</span><br>I always seem to be "re-hashing" in my mind recent things I've said or done.</div>
+      <div class="reveal-item"><span class="tag">Rumination</span><br>Sometimes it is hard for me to shut off thoughts about myself.</div>
+      <div class="reveal-item"><span class="tag">Rumination</span><br>Long after an argument or disagreement is over with, my thoughts keep going back to what happened.</div>
+      <div class="reveal-item"><span class="tag">Rumination</span><br>I tend to "ruminate" or dwell over things that happen to me for a really long time afterward.</div>
+      <div class="reveal-item"><span class="tag">Rumination (inversé)</span><br>I don't waste time re-thinking things that are over and done with.</div>
+      <div class="reveal-item"><span class="tag">Rumination</span><br>Often I'm playing back over in my mind how I acted in a past situation.</div>
+      <div class="reveal-item"><span class="tag">Rumination</span><br>I often find myself re-evaluating something I've done.</div>
+      <div class="reveal-item"><span class="tag">Rumination (inversé)</span><br>I never ruminate or dwell on myself for very long.</div>
+      <div class="reveal-item"><span class="tag">Rumination (inversé)</span><br>It is easy for me to put unwanted thoughts out of my mind.</div>
+      <div class="reveal-item"><span class="tag">Rumination</span><br>I often reflect on episodes in my life that I should no longer concern myself with.</div>
+      <div class="reveal-item"><span class="tag">Rumination</span><br>I spend a great deal of time thinking back over my embarrassing or disappointing moments.</div>
+      <div class="reveal-item"><span class="tag">Réflexion (inversé)</span><br>Philosophical or abstract thinking doesn't appeal to me that much.</div>
+      <div class="reveal-item"><span class="tag">Réflexion (inversé)</span><br>I'm not really a meditative type of person.</div>
+      <div class="reveal-item"><span class="tag">Réflexion</span><br>I love exploring my "inner" self.</div>
+      <div class="reveal-item"><span class="tag">Réflexion</span><br>My attitudes and feelings about things fascinate me.</div>
+      <div class="reveal-item"><span class="tag">Réflexion (inversé)</span><br>I don't really care for introspective or self-reflective thinking.</div>
+      <div class="reveal-item"><span class="tag">Réflexion</span><br>I love analyzing why I do things.</div>
+      <div class="reveal-item"><span class="tag">Réflexion</span><br>People often say I'm a "deep", introspective type of person.</div>
+      <div class="reveal-item"><span class="tag">Réflexion (inversé)</span><br>I don't care much for self-analysis.</div>
+      <div class="reveal-item"><span class="tag">Réflexion</span><br>I'm very self-inquisitive by nature.</div>
+      <div class="reveal-item"><span class="tag">Réflexion</span><br>I love to meditate on the nature and meaning of things.</div>
+      <div class="reveal-item"><span class="tag">Réflexion</span><br>I often love to look at my life in philosophical ways.</div>
+      <div class="reveal-item"><span class="tag">Réflexion (inversé)</span><br>Contemplating myself isn't my idea of fun.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Deux scores indépendants, chacun étendue 1 à 5 (moyenne des 12 items de la sous-échelle, après recodage des items inversés selon 1↔5, 2↔4, 3 inchangé). Aucun score global combiné : les deux dimensions s'interprètent séparément, un score élevé sur l'une n'impliquant pas un score élevé ou bas sur l'autre.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source</h2>
+    <p class="source-note">Trapnell, P. D., &amp; Campbell, J. D. (1999). Private self-consciousness and the five-factor model of personality: Distinguishing rumination from reflection. Journal of Personality and Social Psychology, 76(2), 284–304. Outil de repérage clinique, ne remplace pas une évaluation complète.</p>
+  </div>
+</div>
+
+<script>
+document.getElementById('reveal-btn').addEventListener('click', function(){
+  var list = document.getElementById('reveal-list');
+  list.classList.toggle('open');
+  this.textContent = list.classList.contains('open') ? 'Masquer les questions' : 'Voir toutes les questions';
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SHAPS — Échelle de plaisir de Snaith-Hamilton</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#C9714F 0%,#E3A47C 55%,#8C4A2E 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(250,225,205,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#8C4A2E;background:#FBEDE5;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#C9714F;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#8C4A2E;border-color:#E0D9C9;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">SHAPS</span></div>
+
+  <h1 class="serif">Échelle de plaisir de Snaith-Hamilton</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Snaith-Hamilton Pleasure Scale — Snaith, Hamilton, Morley, Humayan, Hargreaves &amp; Trigwell (1995)</p>
+  <div class="meta-row">
+    <span class="pill">14 questions</span>
+    <span class="pill">2 minutes</span>
+    <span class="pill">Cotation binaire</span>
+    <span class="pill">Anglais</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="shaps.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le SHAPS évalue l'anhédonie — la perte de capacité à ressentir du plaisir — à travers 14 affirmations couvrant des situations variées du quotidien (loisirs, relations, sensations, petits plaisirs). Toutes les affirmations sont formulées positivement (« I would enjoy... »).</p>
+    <p class="source-note">Questionnaire transcrit en anglais (version originale) : aucune traduction française vérifiée n'a été retrouvée lors du sourçage. Dans le formulaire imprimé original, l'ordre d'impression des 4 modalités de réponse est inversé sur 5 des 14 items (pour limiter un biais de réponse mécanique) ; il ne s'agit que d'un artefact de mise en page papier, sans conséquence sur le sens des items ni sur la cotation — la présentation en ligne, une question par écran avec un ordre de réponse constant, restitue fidèlement le contenu et la cotation officielle.</p>
+    <p class="source-note">Droits : clause explicite de l'éditeur (British Journal of Psychiatry, reprise par la documentation clinique CamCOPS) autorisant la reproduction pour un usage personnel et de recherche sous le titre exact de l'échelle ; seule une reproduction dans un livre/manuel ou à but commercial nécessiterait une négociation. Usage clinique/personnel libre.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Cotation binaire officielle (Snaith et al., 1995) : chaque item est ramené à 0 ou 1 point — réponse « agree » ou « strongly agree » = 0 point (plaisir préservé), réponse « disagree » ou « strongly disagree » = 1 point (plaisir absent). Score total = somme des 14 items, étendue 0-14. Seuil publié par les auteurs : ≤2 = pas d'anhédonie ; ≥3 = anhédonie cliniquement significative.</p>
+    <p class="source-note">Une méthode de cotation continue alternative existe dans la littérature (Franken, Rassin &amp; Muris, 2007, <em>Journal of Affective Disorders</em>, 99, 83-89) : somme directe des scores Likert 1-4 de chaque item recodés pour qu'un score élevé indique une anhédonie plus marquée, produisant un score continu plus sensible au suivi de l'évolution symptomatique. Cette méthode alternative n'est volontairement pas proposée sur cette page : la convention exacte de recodage diverge légèrement selon les sources secondaires consultées lors du sourçage, et n'a pas pu être vérifiée avec certitude contre l'article original de Franken et al. Seule la cotation binaire officielle, non ambiguë, est calculée ici.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source</h2>
+    <p class="source-note">Snaith, R. P., Hamilton, M., Morley, S., Humayan, A., Hargreaves, D., &amp; Trigwell, P. (1995). A scale for the assessment of hedonic tone: the Snaith–Hamilton Pleasure Scale. <em>British Journal of Psychiatry, 167</em>(1), 99-103.</p>
+  </div>
+</div>
+</body>
+</html>

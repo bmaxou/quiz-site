@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WBSI — Inventaire de suppression de l'ours blanc</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#3A4A44 0%,#5C7268 55%,#212B27 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(224,196,138,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:34px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#3D6B4F;background:#E4EEE8;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 28px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .preview-card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:14px;padding:20px 22px;margin-bottom:14px;}
+  .preview-q{font-size:14.5px;font-weight:600;margin:0 0 10px;}
+  .preview-opts{display:flex;flex-direction:column;gap:6px;}
+  .preview-opt{font-size:13.5px;color:#63695D;background:#F4F1EA;border-radius:8px;padding:8px 12px;}
+  .reveal-btn{appearance:none;background:#F4F1EA;color:#1E3A5F;border:1px solid #E0D9C9;border-radius:10px;padding:9px 16px;font-family:'Inter',sans-serif;font-size:13px;font-weight:700;cursor:pointer;}
+  .reveal-list{margin-top:14px;display:none;}
+  .reveal-list.open{display:block;}
+  .reveal-item{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:10px;padding:12px 16px;margin-bottom:8px;font-size:13.5px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#4A6058;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#1E3A5F;border-color:#E0D9C9;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">WBSI</span></div>
+
+  <h1 class="serif">Inventaire de suppression de l'ours blanc</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">White Bear Suppression Inventory — Wegner &amp; Zanakos, 1994</p>
+  <div class="meta-row">
+    <span class="pill">15 questions</span>
+    <span class="pill">3 minutes</span>
+    <span class="pill">Échelle 1-5</span>
+    <span class="pill">Anglais</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="wbsi.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le WBSI mesure la tendance chronique d'une personne à supprimer des pensées indésirables — inspiré du célèbre paradigme expérimental de l'ours blanc (essayer de ne pas penser à quelque chose renforce souvent son intrusion). Instrument unidimensionnel largement utilisé en recherche et en clinique, notamment dans l'étude de l'anxiété et du TOC.</p>
+    <p class="source-note">Questionnaire transcrit en anglais (version originale) : aucune traduction française validée n'a été retrouvée lors du sourçage.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Aperçu</h2>
+    <div class="preview-card">
+      <p class="preview-q">1. There are things I prefer not to think about.</p>
+      <div class="preview-opts">
+        <div class="preview-opt">Strongly disagree</div>
+        <div class="preview-opt">Disagree</div>
+        <div class="preview-opt">Neutral (or don't know)</div>
+        <div class="preview-opt">Agree</div>
+        <div class="preview-opt">Strongly agree</div>
+      </div>
+    </div>
+    <button class="reveal-btn" id="reveal-btn">Voir toutes les questions</button>
+    <div class="reveal-list" id="reveal-list">
+      <div class="reveal-item">2. Sometimes I wonder why I have the thoughts I do.</div>
+      <div class="reveal-item">3. I have thoughts that I cannot stop.</div>
+      <div class="reveal-item">4. There are images that come to mind that I cannot erase.</div>
+      <div class="reveal-item">5. My thoughts frequently return to one idea.</div>
+      <div class="reveal-item">6. I wish I could stop thinking of certain things.</div>
+      <div class="reveal-item">7. Sometimes my mind races so fast I wish I could stop it.</div>
+      <div class="reveal-item">8. I always try to put problems out of mind.</div>
+      <div class="reveal-item">9. There are thoughts that keep jumping into my head.</div>
+      <div class="reveal-item">10. There are things that I try not to think about.</div>
+      <div class="reveal-item">11. Sometimes I really wish I could stop thinking.</div>
+      <div class="reveal-item">12. I often do things to distract myself from my thoughts.</div>
+      <div class="reveal-item">13. I have thoughts that I try to avoid.</div>
+      <div class="reveal-item">14. There are many thoughts that I have that I don't tell anyone.</div>
+      <div class="reveal-item">15. Sometimes I stay busy just to keep thoughts from intruding on my mind.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque item est coté de 1 (pas du tout d'accord) à 5 (tout à fait d'accord), aucun item inversé. Score total = somme des 15 items (étendue 15–75). Plus le score est élevé, plus la tendance chronique à supprimer des pensées indésirables est marquée. Instrument unidimensionnel, sans sous-échelle ni seuil clinique officiellement validé par les auteurs — mesure dimensionnelle, à interpréter en contexte clinique.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source</h2>
+    <p class="source-note">Wegner, D. M., & Zanakos, S. (1994). Chronic thought suppression. Journal of Personality, 62(4), 615–640. Outil de repérage clinique, ne remplace pas une évaluation complète.</p>
+  </div>
+</div>
+
+<script>
+document.getElementById('reveal-btn').addEventListener('click', function(){
+  var list = document.getElementById('reveal-list');
+  list.classList.toggle('open');
+  this.textContent = list.classList.contains('open') ? 'Masquer les questions' : 'Voir toutes les questions';
+});
+</script>
+</body>
+</html>

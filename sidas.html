@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SIDAS — Échelle des attributs de l'idéation suicidaire</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .warn{font-size:12.5px;background:#FBF0E8;border:1px solid #E7CBB0;border-radius:10px;padding:12px 14px;color:#7A4A20;margin:0 0 24px;}
+  .progress-track{height:6px;background:#E0D9C9;border-radius:99px;overflow:hidden;margin-bottom:28px;}
+  .progress-fill{height:100%;background:#2E3A52;border-radius:99px;transition:width .25s ease;}
+  .qnum{font-size:12px;font-weight:700;color:#2E3A52;letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px;}
+  .qtext{font-size:19px;font-family:'Cormorant Garamond',Georgia,serif;margin:0 0 26px;}
+  .scale-row{display:flex;gap:6px;justify-content:space-between;margin-bottom:10px;}
+  .scale-btn{flex:1;aspect-ratio:1/1;max-width:48px;border-radius:50%;border:1px solid #E0D9C9;background:#F4F1EA;font-family:'Inter',sans-serif;font-weight:700;font-size:13.5px;color:#20241E;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .15s ease,background .15s ease,color .15s ease;}
+  .scale-btn:hover{border-color:#2E3A52;background:#E9EBF0;}
+  .scale-btn.selected{background:#2E3A52;color:#fff;border-color:#2E3A52;}
+  .scale-labels{display:flex;justify-content:space-between;font-size:12px;color:#63695D;margin:0 0 24px;}
+  .scale-labels span:last-child{text-align:right;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#2E3A52;color:#fff;}
+  .btn[disabled]{opacity:.45;cursor:not-allowed;}
+  .start-btn{background:#2E3A52;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 12px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 16px;}
+  .score-val{font-family:'Cormorant Garamond',Georgia,serif;font-size:42px;margin:0 0 6px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  .safety-box{font-size:13.5px;background:#FBEAEA;border:1px solid #E7B0B0;border-radius:10px;padding:16px 18px;color:#7A2020;margin:0 0 20px;}
+  .safety-box strong{display:block;margin-bottom:6px;font-size:14px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">SIDAS — Échelle des attributs de l'idéation suicidaire</h1>
+    <p class="lead">Outil de repérage et de gradation de l'idéation suicidaire au cours du dernier mois, en 5 questions.</p>
+    <p class="warn">Outil de repérage clinique, ne remplace jamais une évaluation complète du risque suicidaire (intentionnalité, accès aux moyens, protocole de sécurité). Vigilance clinique particulière requise, notamment en cas de score élevé ou de réponse évoquant une proximité d'un passage à l'acte (question 3).</p>
+    <p class="lang-note">Version française officielle (SIDAS-FR, CRISE/UQAM). Si la réponse à la première question est « 0 — Jamais », le questionnaire s'arrête automatiquement (score total = 0), conformément aux règles officielles de l'instrument.</p>
+    <div class="pill-row">
+      <span class="pill">5 questions</span>
+      <span class="pill">2 minutes</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+    <div class="qnum" id="qnum">Question 1 / 5</div>
+    <p class="qtext" id="qtext"></p>
+    <div class="scale-row" id="scale-row"></div>
+    <div class="scale-labels" id="scale-labels"><span></span><span></span></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-back" disabled>Précédent</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div class="score-val" id="score-val">0 / 50</div>
+    <div class="safety-box" id="safety-box" hidden>
+      <strong>En cas de détresse importante</strong>
+      Si vous ressentez une détresse importante ou des idées de passage à l'acte, vous pouvez contacter
+      immédiatement le <strong style="display:inline;font-size:inherit;">3114</strong> (Numéro national de
+      prévention du suicide, appel et écoute gratuits, 24h/24 et 7j/7), le <strong style="display:inline;font-size:inherit;">15</strong>
+      (SAMU) ou le <strong style="display:inline;font-size:inherit;">112</strong> en cas d'urgence vitale, ou vous
+      rendre aux urgences les plus proches. Parlez-en aussi à votre thérapeute dès que possible.
+    </div>
+    <p class="result-text" id="score-interp"></p>
+    <div class="nav-row no-print" style="margin-top:20px;">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">SIDAS (Suicidal Ideation Attributes Scale) — Van Spijker, Batterham, Calear, Farrer, Christensen, Reynolds &amp; Kerkhof, 2014. Version française : SIDAS-FR (CRISE/UQAM). Outil de repérage clinique, ne remplace jamais une évaluation complète du risque suicidaire.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [
+    { q: "Au cours du dernier mois, à quelle fréquence avez-vous eu des pensées suicidaires ?", min: "0 — Jamais", max: "10 — Tout le temps", reversed: false },
+    { q: "Au cours du dernier mois, à quel point avez-vous été en contrôle de ces pensées ?", min: "0 — Aucun contrôle", max: "10 — Contrôle total", reversed: true },
+    { q: "Au cours du dernier mois, à quel point avez-vous été proche de faire une tentative de suicide ?", min: "0 — Pas du tout proche", max: "10 — Je suis passé(e) à l'acte", reversed: false },
+    { q: "Au cours du dernier mois, dans quelle mesure vous êtes-vous senti(e) tourmenté(e) par des pensées suicidaires ?", min: "0 — Pas du tout", max: "10 — Extrêmement", reversed: false },
+    { q: "Au cours du dernier mois, à quel point les pensées suicidaires ont-elles interféré avec votre capacité à effectuer vos activités quotidiennes (travail, tâches ménagères, activités sociales) ?", min: "0 — Pas du tout", max: "10 — Extrêmement", reversed: false }
+  ];
+  var answers = new Array(items.length).fill(null);
+  var current = 0;
+  var skipped = false;
+
+  var screenStart = document.getElementById('screen-start');
+  var screenQuiz = document.getElementById('screen-quiz');
+  var screenResult = document.getElementById('screen-result');
+  var qnum = document.getElementById('qnum');
+  var qtext = document.getElementById('qtext');
+  var scaleRow = document.getElementById('scale-row');
+  var scaleLabels = document.getElementById('scale-labels');
+  var progressFill = document.getElementById('progress-fill');
+  var btnBack = document.getElementById('btn-back');
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    screenStart.hidden = true; screenQuiz.hidden = false; renderQuestion();
+  });
+
+  function renderQuestion(){
+    var i = current;
+    qnum.textContent = 'Question ' + (i+1) + ' / ' + items.length;
+    qtext.textContent = items[i].q;
+    progressFill.style.width = Math.round((i / items.length) * 100) + '%';
+    btnBack.disabled = (i === 0);
+    scaleLabels.innerHTML = '<span>' + items[i].min + '</span><span>' + items[i].max + '</span>';
+    scaleRow.innerHTML = '';
+    for (var v = 0; v <= 10; v++){
+      (function(val){
+        var b = document.createElement('button');
+        b.type = 'button'; b.className = 'scale-btn'; b.textContent = val;
+        if (answers[i] === val) b.classList.add('selected');
+        b.addEventListener('click', function(){
+          answers[i] = val;
+          if (i === 0 && val === 0){
+            skipped = true;
+            showResult();
+            return;
+          }
+          skipped = false;
+          if (current < items.length - 1) { current++; renderQuestion(); }
+          else { showResult(); }
+        });
+        scaleRow.appendChild(b);
+      })(v);
+    }
+  }
+
+  btnBack.addEventListener('click', function(){
+    if (current > 0) { current--; renderQuestion(); }
+  });
+
+  function showResult(){
+    screenQuiz.hidden = true; screenResult.hidden = false;
+    var total, interp;
+    var safetyBox = document.getElementById('safety-box');
+    var showSafety = false;
+    if (skipped || answers[0] === 0){
+      total = 0;
+      interp = "Aucune idéation suicidaire rapportée au cours du dernier mois (réponse « 0 » à la première question) : conformément à la règle officielle de l'instrument, les questions suivantes ne sont pas posées et le score total est fixé à 0.";
+    } else {
+      var raw2 = (answers[1] === null) ? 0 : (10 - answers[1]);
+      total = (answers[0]||0) + raw2 + (answers[2]||0) + (answers[3]||0) + (answers[4]||0);
+      interp = 'Score total : ' + total + ' sur 50 (item de contrôlabilité inversé dans le calcul). Repères de sévérité de la version française validée (SIDAS-FR) : 0 = aucune idéation ; 1-12 = sévérité faible ; 13-19 = sévérité moyenne ; 20-50 = sévérité élevée. Le seuil le plus cité dans la littérature anglophone d\'origine est ≥ 21 (haute spécificité). Toute idéation suicidaire rapportée (score ≥ 1) justifie une attention clinique indépendamment du score total, et ce questionnaire ne remplace jamais un entretien clinique structuré du risque suicidaire (intentionnalité, accès aux moyens, protocole de sécurité) — vigilance particulière en cas d\'endossement de la question 3 (proximité d\'un passage à l\'acte).';
+      showSafety = (total >= 13) || ((answers[2]||0) > 0);
+    }
+    safetyBox.hidden = !showSafety;
+    document.getElementById('score-val').textContent = total + ' / 50';
+    document.getElementById('score-interp').textContent = interp;
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null); current = 0; skipped = false;
+    document.getElementById('safety-box').hidden = true;
+    screenResult.hidden = true; screenStart.hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+</body>
+</html>

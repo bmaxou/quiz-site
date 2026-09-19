@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SATAQ-3 — Questionnaire des attitudes socioculturelles envers l'apparence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#B8677A;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#B8677A;background:#F5E6E9;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#7A3D4A;border-color:#E0D9C9;}
+  .btn-primary{background:#B8677A;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 8px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#7A3D4A;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .result-max{font-size:13px;color:#9A9E90;margin:0 0 16px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">SATAQ-3 — Attitudes envers l'apparence</h1>
+    <p class="lead">Ce questionnaire explore l'influence perçue des médias sur l'apparence physique, à travers 30 affirmations, chacune notée de 1 (pas du tout d'accord) à 5 (tout à fait d'accord).</p>
+    <p class="lang-note">Questionnaire transcrit en anglais (version originale) : aucune traduction française officielle validée n'a été retrouvée lors du sourçage.</p>
+    <div class="pill-row">
+      <span class="pill">30 questions</span>
+      <span class="pill">4 minutes</span>
+      <span class="pill">4 sous-échelles</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <table class="result-table" id="result-table"></table>
+    <p class="result-max">Pas de score total global : 4 scores de sous-échelle distincts. Information (9-45) · Pressions (7-35) · Intériorisation générale (9-45) · Intériorisation athlétique (5-25). Aucun seuil clinique officiel publié.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">SATAQ-3 (Sociocultural Attitudes Towards Appearance Questionnaire-3) — Thompson, van den Berg, Roehrig, Guarda &amp; Heinberg, 2004. Outil de repérage, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [
+    {t:"TV programs are an important source of information about fashion and \"being attractive.\"", sub:"Information", rev:false},
+    {t:"I've felt pressure from TV or magazines to lose weight.", sub:"Pressions", rev:false},
+    {t:"I do not care if my body looks like the body of people who are on TV.", sub:"Intériorisation générale", rev:true},
+    {t:"I compare my body to the bodies of people who are on TV.", sub:"Intériorisation générale", rev:false},
+    {t:"TV commercials are an important source of information about fashion and \"being attractive.\"", sub:"Information", rev:false},
+    {t:"I do not feel pressure from TV or magazines to look pretty.", sub:"Pressions", rev:true},
+    {t:"I would like my body to look like the models who appear in magazines.", sub:"Intériorisation générale", rev:false},
+    {t:"I compare my appearance to the appearance of TV and movie stars.", sub:"Intériorisation générale", rev:false},
+    {t:"Music videos on TV are not an important source of information about fashion and \"being attractive.\"", sub:"Information", rev:true},
+    {t:"I've felt pressure from TV and magazines to be thin.", sub:"Pressions", rev:false},
+    {t:"I would like my body to look like the people who are in movies.", sub:"Intériorisation générale", rev:false},
+    {t:"I do not compare my body to the bodies of people who appear in magazines.", sub:"Intériorisation générale", rev:true},
+    {t:"Magazine articles are not an important source of information about fashion and \"being attractive.\"", sub:"Information", rev:true},
+    {t:"I've felt pressure from TV or magazines to have a perfect body.", sub:"Pressions", rev:false},
+    {t:"I wish I looked like the models in music videos.", sub:"Intériorisation générale", rev:false},
+    {t:"I compare my appearance to the appearance of people in magazines.", sub:"Intériorisation générale", rev:false},
+    {t:"Magazine advertisements are an important source of information about fashion and \"being attractive.\"", sub:"Information", rev:false},
+    {t:"I've felt pressure from TV or magazines to diet.", sub:"Pressions", rev:false},
+    {t:"I do not wish to look as athletic as the people in magazines.", sub:"Intériorisation athlétique", rev:true},
+    {t:"I compare my body to that of people in \"good shape.\"", sub:"Intériorisation athlétique", rev:false},
+    {t:"Pictures in magazines are an important source of information about fashion and \"being attractive.\"", sub:"Information", rev:false},
+    {t:"I've felt pressure from TV or magazines to exercise.", sub:"Pressions", rev:false},
+    {t:"I wish I looked as athletic as sports stars.", sub:"Intériorisation athlétique", rev:false},
+    {t:"I compare my body to that of people who are athletic.", sub:"Intériorisation athlétique", rev:false},
+    {t:"Movies are an important source of information about fashion and \"being attractive.\"", sub:"Information", rev:false},
+    {t:"I've felt pressure from TV or magazines to change my appearance.", sub:"Pressions", rev:false},
+    {t:"I do not try to look like the people on TV.", sub:"Intériorisation générale", rev:true},
+    {t:"Movie stars are not an important source of information about fashion and \"being attractive.\"", sub:"Information", rev:true},
+    {t:"Famous people are an important source of information about fashion and \"being attractive.\"", sub:"Information", rev:false},
+    {t:"I try to look like sports athletes.", sub:"Intériorisation athlétique", rev:false}
+  ];
+  var subOrder = ["Information","Pressions","Intériorisation générale","Intériorisation athlétique"];
+  var opts = ["1 — Definitely Disagree","2 — Mostly Disagree","3 — Neither Agree Nor Disagree","4 — Mostly Agree","5 — Definitely Agree"];
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx].t;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    opts.forEach(function(label, v){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === v+1 ? ' selected' : '');
+      d.textContent = label;
+      d.addEventListener('click', function(){
+        answers[idx] = v+1;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){
+      idx++; renderQuestion();
+    } else {
+      showResult();
+    }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var subs = {}; subOrder.forEach(function(s){ subs[s]=0; });
+    items.forEach(function(item, i){
+      var v = answers[i];
+      var score = item.rev ? (6 - v) : v;
+      subs[item.sub] += score;
+    });
+    var table = document.getElementById('result-table');
+    table.innerHTML = '';
+    subOrder.forEach(function(s){
+      var tr = document.createElement('tr');
+      var td1 = document.createElement('td');
+      td1.textContent = s;
+      var td2 = document.createElement('td');
+      td2.textContent = subs[s];
+      tr.appendChild(td1); tr.appendChild(td2);
+      table.appendChild(tr);
+    });
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+</body>
+</html>

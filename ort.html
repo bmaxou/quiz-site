@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ORT — Outil de risque aux opioïdes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 24px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#1E5A7A;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .sex-row{display:flex;gap:10px;margin:0 0 26px;}
+  .sex-btn{flex:1;appearance:none;border:1px solid #E0D9C9;background:#F4F1EA;border-radius:12px;padding:14px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;color:#20241E;cursor:pointer;}
+  .sex-btn.active{background:#1E5A7A;color:#fff;border-color:#1E5A7A;}
+  .cat-title{font-size:12.5px;font-weight:700;color:#1E5A7A;text-transform:uppercase;letter-spacing:.04em;margin:22px 0 10px;}
+  .item{display:flex;align-items:flex-start;gap:12px;border:1px solid #E0D9C9;background:#F4F1EA;border-radius:12px;padding:14px 16px;margin-bottom:10px;cursor:pointer;}
+  .item input{margin-top:3px;width:17px;height:17px;accent-color:#1E5A7A;flex-shrink:0;}
+  .item .itxt{font-size:14px;}
+  .nav-row{display:flex;justify-content:flex-end;margin-top:26px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#1E5A7A;color:#fff;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;margin:0 0 6px;}
+  .result-level{font-size:14.5px;font-weight:700;color:#1E5A7A;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 20px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">ORT — Outil de risque aux opioïdes</h1>
+    <p class="lead">Ce questionnaire évalue le risque de comportements problématiques en cas de traitement opioïde prolongé. Sélectionnez d'abord le sexe du répondant, puis cochez tous les éléments qui s'appliquent.</p>
+    <div class="pill-row">
+      <span class="pill">10 éléments</span>
+      <span class="pill">2 minutes</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <h1 class="serif">Cochez les éléments applicables</h1>
+    <div class="sex-row">
+      <button class="sex-btn active" id="sex-f" type="button">Femme</button>
+      <button class="sex-btn" id="sex-h" type="button">Homme</button>
+    </div>
+    <div id="items"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-primary" id="btn-finish">Voir le résultat</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-score" id="score-total">0</p>
+    <p class="result-level" id="score-level"></p>
+    <p class="result-text">Score ≤ 3 : risque faible. Score 4 à 7 : risque modéré. Score ≥ 8 : risque élevé de comportements problématiques liés aux opioïdes en cas de traitement prolongé.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">ORT (Opioid Risk Tool) — Webster &amp; Webster, 2005. Outil de repérage clinique, ne remplace pas une évaluation complète.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [
+    { cat:"Antécédents familiaux d'abus de substances", label:"Alcool", f:1, h:3 },
+    { cat:"Antécédents familiaux d'abus de substances", label:"Drogues illégales", f:2, h:3 },
+    { cat:"Antécédents familiaux d'abus de substances", label:"Médicaments sur ordonnance", f:4, h:4 },
+    { cat:"Antécédents personnels d'abus de substances", label:"Alcool", f:3, h:3 },
+    { cat:"Antécédents personnels d'abus de substances", label:"Drogues illégales", f:4, h:4 },
+    { cat:"Antécédents personnels d'abus de substances", label:"Médicaments sur ordonnance", f:5, h:5 },
+    { cat:"Âge", label:"Entre 16 et 45 ans", f:1, h:1 },
+    { cat:"Antécédents", label:"Abus sexuel avant la puberté", f:3, h:0 },
+    { cat:"Pathologie psychologique", label:"TDAH, TOC, trouble bipolaire ou schizophrénie", f:2, h:2 },
+    { cat:"Pathologie psychologique", label:"Dépression", f:1, h:1 }
+  ];
+  var checked = new Array(items.length).fill(false);
+  var sex = 'f';
+
+  var screenStart = document.getElementById('screen-start');
+  var screenQuiz = document.getElementById('screen-quiz');
+  var screenResult = document.getElementById('screen-result');
+  var itemsEl = document.getElementById('items');
+  var sexF = document.getElementById('sex-f');
+  var sexH = document.getElementById('sex-h');
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    screenStart.hidden = true; screenQuiz.hidden = false; render();
+  });
+
+  sexF.addEventListener('click', function(){ sex='f'; sexF.classList.add('active'); sexH.classList.remove('active'); });
+  sexH.addEventListener('click', function(){ sex='h'; sexH.classList.add('active'); sexF.classList.remove('active'); });
+
+  function render(){
+    itemsEl.innerHTML = '';
+    var lastCat = null;
+    items.forEach(function(it, i){
+      if (it.cat !== lastCat){
+        var h = document.createElement('div');
+        h.className = 'cat-title'; h.textContent = it.cat;
+        itemsEl.appendChild(h);
+        lastCat = it.cat;
+      }
+      var lbl = document.createElement('label');
+      lbl.className = 'item';
+      var cb = document.createElement('input');
+      cb.type = 'checkbox';
+      cb.addEventListener('change', function(){ checked[i] = cb.checked; });
+      var span = document.createElement('span');
+      span.className = 'itxt'; span.textContent = it.label;
+      lbl.appendChild(cb); lbl.appendChild(span);
+      itemsEl.appendChild(lbl);
+    });
+  }
+
+  document.getElementById('btn-finish').addEventListener('click', function(){
+    var total = 0;
+    items.forEach(function(it, i){ if (checked[i]) total += (sex==='f' ? it.f : it.h); });
+    screenQuiz.hidden = true; screenResult.hidden = false;
+    document.getElementById('score-total').textContent = total;
+    var level = total <= 3 ? 'Risque faible' : (total <= 7 ? 'Risque modéré' : 'Risque élevé');
+    document.getElementById('score-level').textContent = level;
+  });
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    checked = new Array(items.length).fill(false); sex='f';
+    sexF.classList.add('active'); sexH.classList.remove('active');
+    screenResult.hidden = true; screenStart.hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+</body>
+</html>

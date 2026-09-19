@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VOCI — Inventaire obsessionnel-compulsif de Vancouver</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#2E3A52;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#2E3A52;background:#E7E9EE;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1A2233;border-color:#E0D9C9;}
+  .btn-primary{background:#2E3A52;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 8px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#1A2233;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .result-max{font-size:13px;color:#9A9E90;margin:0 0 16px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">VOCI — Trouble obsessionnel-compulsif</h1>
+    <p class="lead">Ce questionnaire explore les symptômes obsessionnels-compulsifs à travers 55 affirmations, chacune notée de 0 (pas du tout) à 4 (énormément).</p>
+    <p class="lang-note">Questionnaire transcrit en anglais (version originale) : aucune traduction française officielle validée n'a été retrouvée lors du sourçage.</p>
+    <div class="pill-row">
+      <span class="pill">55 questions</span>
+      <span class="pill">7 minutes</span>
+      <span class="pill">6 sous-échelles</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <table class="result-table" id="result-table"></table>
+    <p class="result-max">Score total : 0-220. Aucun seuil clinique officiel publié.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">VOCI (Vancouver Obsessional Compulsive Inventory) — Thordarson, Radomsky, Rachman, Shafran, Sawchuk &amp; Hakstian, 2004. Outil de repérage, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [
+    {t:"I feel compelled to check letters over and over before mailing them.", sub:"Perfectionnisme"},
+    {t:"I am often upset by my unwanted thoughts of using a sharp weapon.", sub:"Obsessions"},
+    {t:"I feel very dirty after touching money.", sub:"Contamination"},
+    {t:"I find it very difficult to make even trivial decisions.", sub:"Indécision"},
+    {t:"I feel compelled to be absolutely perfect.", sub:"Perfectionnisme"},
+    {t:"I repeatedly experience the same unwanted thought or image about an accident.", sub:"Obsessions"},
+    {t:"I repeatedly check and recheck things like taps and switches after turning them off.", sub:"Vérification"},
+    {t:"I use an excessive amount of disinfectants to keep my home or myself safe from germs.", sub:"Contamination"},
+    {t:"I often feel compelled to memorize trivial things (e.g., license plate numbers, instructions on labels).", sub:"Perfectionnisme"},
+    {t:"I have trouble carrying out normal household activities because my home is so cluttered with things I have collected.", sub:"Accumulation"},
+    {t:"After I have decided something, I usually worry about my decision for a long time.", sub:"Indécision"},
+    {t:"I find that almost every day I am upset by unpleasant thoughts that come into my mind against my will.", sub:"Obsessions"},
+    {t:"I spend far too much time washing my hands.", sub:"Contamination"},
+    {t:"I often have trouble getting things done because I try to do everything exactly right.", sub:"Perfectionnisme"},
+    {t:"Touching the bottom of my shoes makes me very anxious.", sub:"Contamination"},
+    {t:"I am often upset by my unwanted thoughts or images of sexual acts.", sub:"Obsessions"},
+    {t:"I become very anxious when I have to make even a minor decision.", sub:"Indécision"},
+    {t:"I feel compelled to follow a very strict routine when doing ordinary things.", sub:"Perfectionnisme"},
+    {t:"I feel upset if my furniture or other possessions are not always in exactly the same position.", sub:"Perfectionnisme"},
+    {t:"I repeatedly check that my doors or windows are locked, even though I try to resist the urge to do so.", sub:"Vérification"},
+    {t:"I find it very difficult to touch garbage or garbage bins.", sub:"Contamination"},
+    {t:"I become very tense or upset when I think about throwing anything away.", sub:"Accumulation"},
+    {t:"I am excessively concerned about germs and disease.", sub:"Contamination"},
+    {t:"I am often very late because I can't get through ordinary tasks on time.", sub:"Perfectionnisme"},
+    {t:"I avoid using public telephones because of possible contamination.", sub:"Contamination"},
+    {t:"I am embarrassed to invite people to my home because it is full of piles of worthless things I have saved.", sub:"Accumulation"},
+    {t:"I repeatedly experience the same upsetting thought or image about death.", sub:"Obsessions"},
+    {t:"I am often upset by unwanted thoughts or images of blurting out obscenities or insults in public.", sub:"Obsessions"},
+    {t:"I worry far too much that I might upset other people.", sub:"Indécision"},
+    {t:"I am often frightened by unwanted urges to drive or run into oncoming traffic.", sub:"Obsessions"},
+    {t:"I almost always count when doing a routine task.", sub:"Indécision"},
+    {t:"I feel very contaminated if I touch an animal.", sub:"Contamination"},
+    {t:"One of my major problems is repeated checking.", sub:"Vérification"},
+    {t:"I often experience upsetting and unwanted thoughts about losing control.", sub:"Obsessions"},
+    {t:"I find it almost impossible to decide what to keep and what to throw away.", sub:"Accumulation"},
+    {t:"I am strongly compelled to count things.", sub:"Perfectionnisme"},
+    {t:"I repeatedly check that my stove is turned off, even though I resist the urge to do so.", sub:"Vérification"},
+    {t:"I get very upset if I can't complete my bedtime routine in exactly the same way every night.", sub:"Perfectionnisme"},
+    {t:"I am very afraid of having even slight contact with bodily secretions (blood, urine, sweat, etc.).", sub:"Contamination"},
+    {t:"I am often very upset by my unwanted impulses to harm other people.", sub:"Obsessions"},
+    {t:"I spend a lot of time every day checking things over and over again.", sub:"Vérification"},
+    {t:"I have great trouble throwing anything away because I am very afraid of being wasteful.", sub:"Accumulation"},
+    {t:"I frequently have to check things like switches, faucets, appliances, and doors several times.", sub:"Vérification"},
+    {t:"One of my major problems is that I am excessively concerned about cleanliness.", sub:"Contamination"},
+    {t:"I feel compelled to keep far too many things like old magazines, newspapers, and receipts because I am afraid I might need them in the future.", sub:"Accumulation"},
+    {t:"I repeatedly experience upsetting and unacceptable thoughts of a religious nature.", sub:"Obsessions"},
+    {t:"I tend to get behind in my work because I repeat the same thing over and over again.", sub:"Perfectionnisme"},
+    {t:"I try to put off making decisions because I'm so afraid of making a mistake.", sub:"Indécision"},
+    {t:"I often experience upsetting and unwanted thoughts about illness.", sub:"Contamination"},
+    {t:"I am afraid to use even well kept public toilets because I am so concerned about germs.", sub:"Contamination"},
+    {t:"Although I try to resist, I feel compelled to collect a large quantity of things I never actually use.", sub:"Accumulation"},
+    {t:"I repeatedly experience upsetting and unwanted immoral thoughts.", sub:"Obsessions"},
+    {t:"One of my major problems is that I pay far too much attention to detail.", sub:"Perfectionnisme"},
+    {t:"I am often upset by unwanted urges to harm myself.", sub:"Obsessions"},
+    {t:"I spend far too long getting ready to leave home each day because I have to do everything exactly right.", sub:"Perfectionnisme"}
+  ];
+  var subOrder = ["Contamination","Vérification","Obsessions","Accumulation","Perfectionnisme","Indécision"];
+  var subMax = {"Contamination":48,"Vérification":24,"Obsessions":48,"Accumulation":28,"Perfectionnisme":48,"Indécision":24};
+  var opts = ["0 — Not at all","1 — A little","2 — Some","3 — Much","4 — Very much"];
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx].t;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    opts.forEach(function(label, v){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === v ? ' selected' : '');
+      d.textContent = label;
+      d.addEventListener('click', function(){
+        answers[idx] = v;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){
+      idx++; renderQuestion();
+    } else {
+      showResult();
+    }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var subs = {}; subOrder.forEach(function(s){ subs[s]=0; });
+    var total = 0;
+    items.forEach(function(item, i){
+      subs[item.sub] += answers[i];
+      total += answers[i];
+    });
+    var table = document.getElementById('result-table');
+    table.innerHTML = '';
+    var rows = [["Score total", total, "0-220"]];
+    subOrder.forEach(function(s){ rows.push([s, subs[s], "0-" + subMax[s]]); });
+    rows.forEach(function(r){
+      var tr = document.createElement('tr');
+      var td1 = document.createElement('td');
+      td1.textContent = r[0] + ' (' + r[2] + ')';
+      var td2 = document.createElement('td');
+      td2.textContent = r[1];
+      tr.appendChild(td1); tr.appendChild(td2);
+      table.appendChild(tr);
+    });
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+</body>
+</html>

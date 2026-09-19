@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SHAPS — Échelle de plaisir de Snaith-Hamilton</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#C9714F;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#C9714F;background:#FBEDE5;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#8C4A2E;border-color:#E0D9C9;}
+  .btn-primary{background:#C9714F;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:36px;color:#C9714F;margin:0 0 4px;}
+  .result-max{font-size:13px;color:#9A9E90;margin:0 0 16px;}
+  .result-tag{display:inline-flex;font-size:12.5px;font-weight:700;padding:5px 12px;border-radius:999px;margin:0 0 18px;background:#FBEDE5;color:#8C4A2E;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">SHAPS — Plaisir (anhédonie)</h1>
+    <p class="lead">Ce questionnaire explore votre capacité actuelle à ressentir du plaisir, à travers 14 affirmations. Pour chacune, indiquez à quel point vous seriez d'accord si la situation se présentait en ce moment.</p>
+    <p class="lang-note">Questionnaire transcrit en anglais (version originale) : aucune traduction française vérifiée n'a été retrouvée lors du sourçage.</p>
+    <div class="pill-row">
+      <span class="pill">14 questions</span>
+      <span class="pill">2 minutes</span>
+      <span class="pill">Échelle 1-4</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-score" id="score-total"></p>
+    <p class="result-max">score total (14 items, étendue 0-14, cotation binaire officielle)</p>
+    <p class="result-tag" id="result-tag"></p>
+    <p class="nav-row no-print">
+    </p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">SHAPS (Snaith-Hamilton Pleasure Scale) — Snaith, Hamilton, Morley, Humayan, Hargreaves &amp; Trigwell, 1995. Cotation binaire officielle : réponse « agree »/« strongly agree » = 0 point, réponse « disagree »/« strongly disagree » = 1 point. Seuil publié : ≤2 = pas d'anhédonie ; ≥3 = anhédonie cliniquement significative. Outil de repérage, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [
+    "I would enjoy my favourite television or radio programme.",
+    "I would enjoy being with my family or close friends.",
+    "I would find pleasure in my hobbies and pastimes.",
+    "I would be able to enjoy my favourite meal.",
+    "I would enjoy a warm bath or refreshing shower.",
+    "I would find pleasure in the scent of flowers or the smell of a fresh sea breeze or freshly baked bread.",
+    "I would enjoy seeing other people's smiling faces.",
+    "I would enjoy looking smart when I have made an effort with my appearance.",
+    "I would enjoy reading a book, magazine or newspaper.",
+    "I would enjoy a cup of tea or coffee or my favourite drink.",
+    "I would find pleasure in small things, e.g. a bright sunny day, a telephone call from a friend.",
+    "I would be able to enjoy a beautiful landscape or view.",
+    "I would get pleasure from helping others.",
+    "I would feel pleasure when I receive praise from other people."
+  ];
+  // point: 1 si "disagree"/"strongly disagree" (anhédonie), 0 si "agree"/"strongly agree"
+  var opts = [
+    {label:"1 — Strongly disagree", point:1},
+    {label:"2 — Disagree", point:1},
+    {label:"3 — Agree", point:0},
+    {label:"4 — Strongly agree", point:0}
+  ];
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    opts.forEach(function(o, v){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === v ? ' selected' : '');
+      d.textContent = o.label;
+      d.addEventListener('click', function(){
+        answers[idx] = v;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){
+      idx++; renderQuestion();
+    } else {
+      showResult();
+    }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var total = 0;
+    answers.forEach(function(v){ total += opts[v].point; });
+    document.getElementById('score-total').textContent = total;
+    var tag = document.getElementById('result-tag');
+    if (total <= 2){
+      tag.textContent = 'Pas d\'anhédonie (≤ 2)';
+    } else {
+      tag.textContent = 'Anhédonie cliniquement significative (≥ 3)';
+    }
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+</body>
+</html>

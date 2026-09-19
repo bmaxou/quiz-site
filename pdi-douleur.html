@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PDI — Indice d'incapacité liée à la douleur</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:720px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 18px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  h1{font-size:25px;margin:0 0 18px;}
+  .intro{font-size:14.5px;color:#4A4E43;background:#fff;border:1px solid #E0D9C9;border-radius:12px;padding:16px 18px;margin-bottom:24px;}
+  .item{background:#fff;border:1px solid #E0D9C9;border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+  .item p{font-size:14.5px;margin:0 0 12px;}
+  .scale-labels{display:flex;justify-content:space-between;font-size:11.5px;color:#63695D;margin-bottom:6px;}
+  .opts{display:flex;flex-wrap:wrap;gap:6px;}
+  .opt{display:flex;align-items:center;justify-content:center;gap:6px;font-size:12.5px;cursor:pointer;padding:8px 4px;border:1px solid #E0D9C9;border-radius:8px;width:38px;text-align:center;}
+  .opt:hover{background:#F4F1EA;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:12px 22px;cursor:pointer;border:1px solid transparent;background:#7A2E5C;color:#fff;margin-top:10px;}
+  .btn:disabled{opacity:.45;cursor:not-allowed;}
+  #result{display:none;margin-top:30px;}
+  .score-card{background:#fff;border:1px solid #E0D9C9;border-radius:12px;padding:18px 20px;margin-bottom:14px;}
+  .score-card h3{margin:0 0 6px;font-size:16px;font-family:'Cormorant Garamond',Georgia,serif;}
+  .score-val{font-size:22px;font-weight:700;}
+  .cutoffs{font-size:12.5px;color:#63695D;margin-top:6px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <h1 class="serif">Indice d'incapacité liée à la douleur (PDI)</h1>
+  <div class="intro">
+    Pour chacun des domaines suivants, indiquez à quel point la douleur perturbe votre vie
+    quotidienne, en choisissant une note de 0 (aucune incapacité) à 10 (incapacité totale, toute
+    activité dans ce domaine a été abandonnée).
+  </div>
+  <div id="quiz"></div>
+  <button class="btn" id="submitBtn" type="button" disabled>Voir mes résultats</button>
+
+  <div id="result">
+    <h2 class="serif">Vos résultats</h2>
+    <div id="cards"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var ITEMS = [
+    "Responsabilités familiales et domestiques",
+    "Loisirs",
+    "Vie sociale",
+    "Activité professionnelle",
+    "Vie sexuelle",
+    "Soins personnels (hygiène, habillage...)",
+    "Activités vitales (sommeil, alimentation, respiration...)"
+  ];
+
+  var answers = {};
+
+  var quizEl = document.getElementById('quiz');
+  var html = '';
+  ITEMS.forEach(function(item, idx){
+    html += '<div class="item"><p>' + (idx+1) + '. ' + item + '</p>';
+    html += '<div class="scale-labels"><span>0 = Aucune incapacité</span><span>10 = Incapacité totale</span></div>';
+    html += '<div class="opts">';
+    for (var v = 0; v <= 10; v++){
+      html += '<label class="opt"><input type="radio" name="q' + idx + '" value="' + v + '" style="display:none" data-idx="' + idx + '">' + v + '</label>';
+    }
+    html += '</div></div>';
+  });
+  quizEl.innerHTML = html;
+
+  var submitBtn = document.getElementById('submitBtn');
+
+  quizEl.querySelectorAll('.opt').forEach(function(label){
+    label.addEventListener('click', function(){
+      var input = label.querySelector('input');
+      var idx = input.getAttribute('data-idx');
+      var group = quizEl.querySelectorAll('input[name="q' + idx + '"]');
+      group.forEach(function(r){ r.closest('.opt').style.background = ''; r.closest('.opt').style.borderColor = '#E0D9C9'; r.closest('.opt').style.color=''; });
+      label.style.background = '#7A2E5C';
+      label.style.color = '#fff';
+      label.style.borderColor = '#7A2E5C';
+      answers[idx] = parseInt(input.value, 10);
+      checkComplete();
+    });
+  });
+
+  function checkComplete(){
+    submitBtn.disabled = Object.keys(answers).length < ITEMS.length;
+  }
+
+  submitBtn.addEventListener('click', function(){
+    var total = 0;
+    ITEMS.forEach(function(item, idx){ total += answers[idx] || 0; });
+    var cards = document.getElementById('cards');
+    var html2 = '<div class="score-card"><h3>Score total d\'incapacité</h3>' +
+      '<div class="score-val">' + total + ' / 70</div>' +
+      '<p class="cutoffs">Plus le score est élevé, plus la douleur est perçue comme perturbant les ' +
+      'différents domaines de la vie quotidienne. Aucun seuil clinique officiel n\'est publié pour ' +
+      'cet instrument : le score s\'interprète dans le cadre d\'une évaluation clinique globale, en ' +
+      'observant notamment le profil par domaine plutôt que le seul total.</p></div>';
+    cards.innerHTML = html2;
+    document.getElementById('result').style.display = 'block';
+    submitBtn.style.display = 'none';
+    document.getElementById('result').scrollIntoView({behavior:'smooth'});
+  });
+})();
+</script>
+</body>
+</html>

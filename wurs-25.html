@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WURS-25 — Échelle de Wender Utah pour le TDAH</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 24px;}
+  .progress-track{height:6px;background:#E0D9C9;border-radius:99px;overflow:hidden;margin-bottom:28px;}
+  .progress-fill{height:100%;background:#8A1F5C;border-radius:99px;transition:width .25s ease;}
+  .qnum{font-size:12px;font-weight:700;color:#8A1F5C;letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px;}
+  .qtext{font-size:19px;font-family:'Cormorant Garamond',Georgia,serif;margin:0 0 24px;}
+  .opts{display:flex;flex-direction:column;gap:10px;}
+  .opt{appearance:none;text-align:left;border:1px solid #E0D9C9;background:#F4F1EA;border-radius:12px;padding:14px 18px;font-family:'Inter',sans-serif;font-size:14.5px;color:#20241E;cursor:pointer;transition:border-color .15s ease,background .15s ease;}
+  .opt:hover{border-color:#8A1F5C;background:#F6E7F0;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#8A1F5C;color:#fff;}
+  .btn[disabled]{opacity:.45;cursor:not-allowed;}
+  .start-btn{background:#8A1F5C;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 20px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">WURS-25 — Échelle de Wender Utah</h1>
+    <p class="lead">Ce questionnaire évalue rétrospectivement des symptômes évocateurs d'un TDAH dans l'enfance. Il comprend 25 affirmations à noter selon leur intensité à cette époque.</p>
+    <p class="lang-note">Questionnaire transcrit en anglais (version originale) : aucune traduction française validée n'a été retrouvée lors du sourçage.</p>
+    <div class="pill-row">
+      <span class="pill">25 questions</span>
+      <span class="pill">5 minutes</span>
+      <span class="pill">Échelle 0-4</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+    <div class="qnum" id="qnum">Question 1 / 25</div>
+    <p class="qtext" id="qtext"></p>
+    <div class="opts" id="opts"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-back" disabled>Précédent</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-score" id="score-total">0 / 100</p>
+    <p class="result-text">Score obtenu sur une étendue de 0 à 100. Plusieurs seuils différents circulent dans la littérature secondaire (autour de 36 ou de 46 selon les sources) ; aucun seuil unique validé n'est présenté ici, à interpréter avec prudence et en contexte clinique.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">WURS-25 (Wender Utah Rating Scale, version courte) — Ward, Wender &amp; Reimherr, 1993. Outil de repérage clinique, ne remplace pas une évaluation complète.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [
+    "Concentration problems, easily distracted",
+    "Anxious, worrying",
+    "Nervous, fidgety",
+    "Inattentive, daydreaming",
+    "Hot- or short-tempered, low boiling point",
+    "Temper outbursts, tantrums",
+    "Trouble with stick-to-it-tiveness, not following through, failing to finish things started",
+    "Stubborn, strong-willed",
+    "Sad or blue, depressed, unhappy",
+    "Disobedient with parents, rebellious, sassy",
+    "Low opinion of myself",
+    "Irritable",
+    "Moody, ups and downs",
+    "Angry",
+    "Acting without thinking, impulsive",
+    "Tendency to be immature",
+    "Guilty feelings, regretful",
+    "Losing control of myself",
+    "Tendency to be or act irrational",
+    "Unpopular with other children, didn't keep friends for long, didn't get along with other children",
+    "Trouble seeing things from someone else's point of view",
+    "Trouble with authorities, trouble with school, visits to principal's office",
+    "Overall a poor student, slow learner",
+    "Trouble with mathematics or numbers",
+    "Not achieving up to potential"
+  ];
+  var opts5 = [["Not at all or very slightly",0],["Mildly",1],["Moderately",2],["Quite a bit",3],["Very much",4]];
+  var answers = new Array(items.length).fill(null);
+  var current = 0;
+
+  var screenStart = document.getElementById('screen-start');
+  var screenQuiz = document.getElementById('screen-quiz');
+  var screenResult = document.getElementById('screen-result');
+  var qnum = document.getElementById('qnum');
+  var qtext = document.getElementById('qtext');
+  var opts = document.getElementById('opts');
+  var progressFill = document.getElementById('progress-fill');
+  var btnBack = document.getElementById('btn-back');
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    screenStart.hidden = true; screenQuiz.hidden = false; renderQuestion();
+  });
+
+  function renderQuestion(){
+    var i = current;
+    qnum.textContent = 'Question ' + (i+1) + ' / ' + items.length;
+    qtext.textContent = 'As a child I was / had: ' + items[i];
+    progressFill.style.width = Math.round((i / items.length) * 100) + '%';
+    btnBack.disabled = (i === 0);
+    opts.innerHTML = '';
+    opts5.forEach(function(pair){
+      var b = document.createElement('button');
+      b.className = 'opt'; b.type = 'button'; b.textContent = pair[0];
+      if (answers[i] === pair[1]) { b.style.borderColor = '#8A1F5C'; b.style.background = '#F6E7F0'; }
+      b.addEventListener('click', function(){
+        answers[i] = pair[1];
+        if (current < items.length - 1) { current++; renderQuestion(); }
+        else { showResult(); }
+      });
+      opts.appendChild(b);
+    });
+  }
+
+  btnBack.addEventListener('click', function(){
+    if (current > 0) { current--; renderQuestion(); }
+  });
+
+  function showResult(){
+    screenQuiz.hidden = true; screenResult.hidden = false;
+    var total = 0;
+    for (var i=0;i<items.length;i++){ total += (answers[i] || 0); }
+    document.getElementById('score-total').textContent = total + ' / 100';
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null); current = 0;
+    screenResult.hidden = true; screenStart.hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+</body>
+</html>
