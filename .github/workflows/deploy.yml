@@ -20,6 +20,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftp
           port: 21
+          state-name: .ftp-deploy-sync-state-2026-09-25.json
           server-dir: /mentaal-git/
           exclude: |
             **/.git*
