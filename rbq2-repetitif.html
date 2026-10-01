@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RBQ-2 - Questionnaire des comportements répétitifs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#6B3A3A;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#6B3A3A;background:#F1E2E2;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#6B3A3A;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:36px;color:#6B3A3A;margin:0 0 4px;}
+  .result-max{font-size:13px;color:#9A9E90;margin:0 0 20px;}
+  .subscore-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 20px;}
+  .subscore{background:#F4F1EA;border:1px solid #E0D9C9;border-radius:10px;padding:10px 14px;}
+  .subscore .lbl{font-size:11.5px;font-weight:700;color:#63695D;text-transform:uppercase;letter-spacing:.03em;margin-bottom:4px;}
+  .subscore .val{font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;color:#20241E;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+  @media (max-width:480px){ .subscore-grid{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">RBQ-2 - Comportements répétitifs</h1>
+    <p class="lead">Repetitive Behaviour Questionnaire. Questionnaire hétéro-rempli par un parent au sujet de son enfant. ⚠️ Le catalogue appelle cet instrument « RBQ-3 », mais le contenu retrouvé et vérifié correspond au RBQ-2 (Leekam et al. 2007), très probablement le même instrument sous un nom de version différent.</p>
+    <div class="pill-row">
+      <span class="pill">20 questions</span>
+      <span class="pill">5 minutes</span>
+      <span class="pill">Hétéro-administré (parent)</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-score" id="score-total"></p>
+    <p class="result-max">score total RBQ-2, sur 60 (min 20)</p>
+    <div class="subscore-grid" id="subscore-grid"></div>
+    <p class="lead">Aucun seuil clinique publié. Ce résultat ne peut en aucun cas remplacer une évaluation clinique.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Leekam, S., Tandos, J., McConachie, H., Meins, E., Parkinson, K., Wright, C., Turner, M., Arnott, B., Vittorini, L., &amp; Le Couteur, A. (2007). Repetitive behaviours in typically developing 2-year-olds. Journal of Child Psychology and Psychiatry, 48(11), 1131-1138. Outil de repérage, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var scaleA = ["1 - Jamais ou rarement","2 - Une fois ou plus par jour","3 - 15 fois ou plus par jour (ou au moins une fois par heure)","4 - 30 fois ou plus par jour (ou deux fois par heure)"];
+  var scaleB = ["1 - Jamais ou rarement","2 - Léger ou occasionnel","3 - Marqué ou notable"];
+  var scaleC = ["1 - Jamais ou rarement","2 - Léger ou occasionnel (n'affecte pas les autres)","3 - Marqué ou notable (affecte régulièrement les autres)"];
+  var scaleD = ["1 - Jamais ou rarement","2 - Léger ou occasionnel (tolère des alternatives si nécessaire)","3 - Marqué ou notable (ne tolère aucune alternative)"];
+  var scaleE = [
+    "1 - Une gamme d'activités variées et flexibles choisies par lui/elle-même",
+    "2 - Quelques intérêts variés et flexibles mais choisit couramment les mêmes activités",
+    "3 - Choisit presque toujours parmi une gamme restreinte d'activités répétitives"
+  ];
+
+  var items = [
+    {t:"1. Arrange des jouets ou d'autres objets en rangées ou motifs ?", opts:scaleA},
+    {t:"2. Manipule de façon répétitive des jouets ou objets (tourne, tortille, tape, cogne, tapote, ou fait claquer quelque chose de façon répétée) ?", opts:scaleA},
+    {t:"3. Tourne sur lui/elle-même de façon répétée ?", opts:scaleA},
+    {t:"4. Se balance d'avant en arrière, ou d'un côté à l'autre, assis ou debout ?", opts:scaleA},
+    {t:"5. Fait les cent pas ou se déplace de façon répétitive (va et vient dans une pièce, tourne en rond au jardin) ?", opts:scaleA},
+    {t:"6. Fait des mouvements répétitifs des mains et/ou des doigts (bat des mains, agite, ou fait claquer ses mains/doigts de façon répétée) ?", opts:scaleA},
+    {t:"7. A une fascination pour des objets spécifiques (trains, panneaux routiers, etc.) ?", opts:scaleB},
+    {t:"8. Aime regarder les objets sous des angles particuliers ou inhabituels ?", opts:scaleB},
+    {t:"9. A un intérêt particulier pour l'odeur des gens ou des objets ?", opts:scaleB},
+    {t:"10. A un intérêt particulier pour le toucher de différentes surfaces ?", opts:scaleB},
+    {t:"11. A des objets spéciaux qu'il/elle aime porter avec lui/elle (doudou, couverture, livre, bâton) ?", opts:scaleB},
+    {t:"12. Collectionne ou amasse des objets de toute sorte ?", opts:scaleB},
+    {t:"13. Insiste pour que les choses à la maison restent identiques (meubles à la même place, objets rangés/disposés d'une certaine façon) ?", opts:scaleC},
+    {t:"14. Se bouleverse pour des changements mineurs sur des objets (taches sur ses vêtements, petites rayures sur des jouets) ?", opts:scaleC},
+    {t:"15. Insiste pour que les aspects de la routine quotidienne restent identiques ?", opts:scaleC},
+    {t:"16. Insiste pour faire les choses d'une certaine façon ou les refaire jusqu'à ce que ce soit « exactement bien » ?", opts:scaleC},
+    {t:"17. Joue la même musique, le même jeu ou la même vidéo, ou lit le même livre de façon répétée ?", opts:scaleD},
+    {t:"18. Insiste pour porter les mêmes vêtements ou refuse de porter des vêtements neufs ?", opts:scaleD},
+    {t:"19. Insiste pour manger les mêmes aliments, ou une très petite gamme d'aliments, à chaque repas ?", opts:scaleC},
+    {t:"20. Quel type d'activité votre enfant choisira-t-il s'il est laissé libre de s'occuper lui-même ?", opts:scaleE}
+  ];
+
+  var factors = [
+    {label:"Mouvements moteurs répétitifs", idxs:[1,2,3,4,5]},
+    {label:"Rigidité / adhérence aux routines", idxs:[12,13,14,15,16,17,18]},
+    {label:"Intérêts restreints", idxs:[0,6,7,9,10,11,16]},
+    {label:"Intérêt sensoriel inhabituel", idxs:[7,8,9,17]}
+  ];
+
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx].t;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    items[idx].opts.forEach(function(label, i){
+      var v = i + 1;
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === v ? ' selected' : '');
+      d.textContent = label;
+      d.addEventListener('click', function(){
+        answers[idx] = v;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var total = 0;
+    for (var i = 0; i < answers.length; i++){
+      var v = answers[i];
+      if (i < 6) v = Math.min(v, 3);
+      total += v;
+    }
+    document.getElementById('score-total').textContent = total;
+    var grid = document.getElementById('subscore-grid');
+    grid.innerHTML = '';
+    factors.forEach(function(f){
+      var sum = f.idxs.reduce(function(a,i){ return a + answers[i]; }, 0);
+      var div = document.createElement('div');
+      div.className = 'subscore';
+      div.innerHTML = '<div class="lbl">' + f.label + '</div><div class="val">' + sum + '</div>';
+      grid.appendChild(div);
+    });
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RBQ-2 - Questionnaire des comportements répétitifs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#6B3A3A 0%,#A05C4C 55%,#3D2020 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(200,215,235,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#22334D;background:#E9EEF5;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .caveat{background:#FBF3E7;border:1px solid #E7D9BC;border-radius:12px;padding:14px 16px;font-size:13.5px;color:#5A4A2A;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#6B3A3A;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#22334D;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <div class="fiche-photo"><span class="acronym">RBQ-2</span></div>
+  <h1 class="serif">Questionnaire des comportements répétitifs (RBQ-2)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Repetitive Behaviour Questionnaire - Leekam, Tandos, McConachie et al. (2007)</p>
+  <div class="meta-row">
+    <span class="pill">20 questions</span>
+    <span class="pill">5 minutes</span>
+    <span class="pill">Hétéro-administré (parent)</span>
+    <span class="pill">Français</span>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" href="rbq2-repetitif.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p class="caveat">⚠️ Réserve d'identité : le catalogue appelle cet instrument « RBQ-3 », mais la recherche n'a permis de confirmer et de retrouver en texte intégral que le RBQ-2 (Leekam et al. 2007, 20 items), dont la structure correspond exactement aux éléments partiels déjà repérés sous le nom « RBQ-3 ». Il s'agit très probablement du même instrument avec un nom de version légèrement différent selon les sources.</p>
+    <p>Le RBQ-2 est un questionnaire hétéro-rempli par un parent au sujet de son enfant, portant sur les comportements répétitifs, la rigidité et les intérêts restreints. 20 items, avec 5 formats de réponse différents selon les groupes de questions (échelles à 3 ou 4 points).</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Score total = somme des 20 items (min 20, max 60 ; les réponses 3 et 4 des items 1-6 sont combinées pour une échelle homogène à 3 points dans le calcul du total). 4 facteurs (calculés sur l'échelle brute, non plafonnée) : Mouvements moteurs répétitifs (items 2, 3, 4, 5, 6), Rigidité/adhérence aux routines (items 13 à 19), Préoccupation pour des intérêts restreints (items 1, 7, 8, 10, 11, 12, 17), Intérêt sensoriel inhabituel (items 8, 9, 10, 18). L'item 20 est exclu de l'analyse factorielle. Aucun seuil clinique publié.</p>
+    <p class="source-note">Une version alternative à 2 facteurs existe également (Moteur/Sensoriel vs Rigidité/Routines/Intérêts restreints), non implémentée ici.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Source</h2>
+    <p class="source-note">Leekam, S., Tandos, J., McConachie, H., Meins, E., Parkinson, K., Wright, C., Turner, M., Arnott, B., Vittorini, L., &amp; Le Couteur, A. (2007). Repetitive behaviours in typically developing 2-year-olds. Journal of Child Psychology and Psychiatry, 48(11), 1131-1138. Page officielle de l'équipe (Newcastle University / CARGO North East) : « This measure is free to use. » Outil de repérage, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

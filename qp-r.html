@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>QP-R - Questionnaire de perfectionnisme révisé</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#2F5E8C;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 10px;}
+  .q-flag{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 14px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#2F5E8C;background:#E6EDF5;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#173B5C;border-color:#E0D9C9;}
+  .btn-primary{background:#2F5E8C;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-max{font-size:13px;color:#9A9E90;margin:0 0 16px;}
+  .subresult{font-size:13.5px;margin:6px 0;padding:8px 10px;border-bottom:1px solid #E0D9C9;display:flex;justify-content:space-between;}
+  .subresult span:last-child{font-weight:700;color:#2F5E8C;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">QP-R - Questionnaire de perfectionnisme révisé</h1>
+    <p class="lead">Voici des affirmations concernant la tendance à être perfectionniste. Cotez jusqu'à quel point chacune vous décrit bien, de « ne me décrit pas du tout » à « me décrit tout à fait ».</p>
+    <p class="lang-note">Langlois, Rhéaume &amp; Gosselin (2009), Université du Québec à Trois-Rivières — document de recherche inédit, texte français original.</p>
+    <div class="pill-row">
+      <span class="pill">20 questions</span>
+      <span class="pill">5 minutes</span>
+      <span class="pill">Échelle 1-5</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <p class="q-flag" id="q-flag" hidden>⚠️ Item extrait d'un scan de qualité moyenne — sens conservé mais formulation exacte à revérifier.</p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-max">Score par sous-échelle (aucun score total combiné publié) :</p>
+    <div id="subscales"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Langlois, F., Rhéaume, J., &amp; Gosselin, P. (2009). Le questionnaire de perfectionnisme révisé. Document inédit, Université du Québec à Trois-Rivières. Aucun seuil clinique publié : score continu, à lire en profil relatif. Les items 4, 6 et 16 ont été extraits d'un scan de qualité moyenne lors du sourçage — sens général cohérent avec le reste du document mais formulation exacte à revérifier si possible avant diffusion répétée à des patients. Outil de repérage, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var subNames = {
+    RHS: "Recherche de hauts standards",
+    PP: "Préoccupations perfectionnistes"
+  };
+  var subMax = { RHS:35, PP:65 };
+  var items = [
+    {sub:'RHS', t:"J'essaie de toujours bien réussir toutes les choses que j'entreprends."},
+    {sub:'RHS', t:"Je continue à m'appliquer tant que je ne sens pas que c'est correct."},
+    {sub:'RHS', t:"J'aime que les choses que je fais soient parfaites."},
+    {sub:'RHS', flag:true, t:"Peu importe si les autres considèrent que j'ai réussi, en dernière analyse, ce sont mes propres normes de réussite qui sont importantes."},
+    {sub:'RHS', t:"Je ne peux rester longtemps sans me fixer des objectifs élevés à atteindre."},
+    {sub:'RHS', flag:true, t:"Même si j'aime la compétition, c'est d'abord par rapport à mes propres idéaux que je me mesure."},
+    {sub:'RHS', t:"Peu importe combien les autres reconnaissent mes efforts, j'ai besoin que les choses soient parfaites selon mes propres standards."},
+    {sub:'PP', t:"Pour être entièrement satisfait(e) de moi, j'ai parfois l'impression que j'aurais besoin d'une garantie que ce que j'ai fait ne peut pas être mieux."},
+    {sub:'PP', t:"Mes tendances perfectionnistes m'amènent à douter de mes performances."},
+    {sub:'PP', t:"Je me sens inconfortable tant que les choses ne sont pas parfaites."},
+    {sub:'PP', t:"Tant que je n'ai pas de preuve que c'est parfait, j'ai tendance à croire que c'est mauvais."},
+    {sub:'PP', t:"Même lorsque j'échoue partiellement, j'ai tendance à m'en vouloir autant que si j'avais tout raté."},
+    {sub:'PP', t:"J'ai tendance à conclure facilement que tout est mal dès que ce n'est pas parfait."},
+    {sub:'PP', t:"J'ai souvent l'impression que les choses ne sont pas faites correctement et ça me dérange."},
+    {sub:'PP', t:"Je me sens en confiance seulement quand j'ai l'impression que tout est parfait."},
+    {sub:'PP', flag:true, t:"Si la perfection m'a échappé, tout en devient gâché à mes yeux."},
+    {sub:'PP', t:"Peu importe combien j'en fais, ce n'est jamais assez pour moi."},
+    {sub:'PP', t:"Si je réduis mes critères personnels, je vais me sentir diminué(e)."},
+    {sub:'PP', t:"De temps à autre, j'aimerais être moins perfectionniste mais je crains de me laisser aller."},
+    {sub:'PP', t:"Quand j'essaie de viser un peu moins haut, j'ai peur de fournir un rendement de deuxième classe."}
+  ];
+  var opts = ["5 - Me décrit tout à fait","4 - Me décrit très bien","3 - Me décrit assez bien","2 - Me décrit un peu","1 - Ne me décrit pas du tout"];
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx].t;
+    document.getElementById('q-flag').hidden = !items[idx].flag;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    opts.forEach(function(label, v){
+      var value = 5 - v;
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === value ? ' selected' : '');
+      d.textContent = label;
+      d.addEventListener('click', function(){
+        answers[idx] = value;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var subs = {RHS:0, PP:0};
+    items.forEach(function(it, i){
+      subs[it.sub] += answers[i];
+    });
+    var html = '';
+    ['RHS','PP'].forEach(function(k){
+      html += '<div class="subresult"><span>' + subNames[k] + '</span><span>' + subs[k] + ' / ' + subMax[k] + '</span></div>';
+    });
+    document.getElementById('subscales').innerHTML = html;
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>QP-R - Questionnaire de perfectionnisme révisé</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#2F5E8C 0%,#6E97BE 55%,#173B5C 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(200,220,240,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#173B5C;background:#E6EDF5;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;flex-wrap:wrap;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#2F5E8C;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#173B5C;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <div class="fiche-photo"><span class="acronym small">QP-R</span></div>
+  <h1 class="serif">Questionnaire de perfectionnisme révisé</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Langlois, Rhéaume &amp; Gosselin (2009), Université du Québec à Trois-Rivières</p>
+  <div class="meta-row">
+    <span class="pill">20 questions</span>
+    <span class="pill">5 minutes</span>
+    <span class="pill">Échelle 1-5</span>
+    <span class="pill">Français</span>
+    <span class="pill">Perfectionnisme</span>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" href="qp-r.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le QP-R est un instrument québécois distinct du FMPS (Frost) et du HMPS (Hewitt &amp; Flett) déjà présents dans ce catalogue. Il distingue deux dimensions du perfectionnisme : la Recherche de hauts standards (7 items, une tendance perfectionniste souvent vécue comme adaptative), et les Préoccupations perfectionnistes (13 items, le versant plus problématique — doute, insatisfaction chronique, rigidité).</p>
+    <p class="source-note">Document de recherche inédit, non publié commercialement (aucun éditeur type Pearson/PAR/MHS/Mind Garden identifié), reproduit en annexe de plusieurs thèses doctorales en libre accès du dépôt institutionnel de l'UQTR. Texte original en français (outil élaboré directement en français, pas une traduction).</p>
+    <p class="source-note">⚠️ Les items 4, 6 et 16 ont été extraits d'un scan de qualité moyenne lors du sourçage : le sens général est cohérent avec le reste du document, mais leur formulation exacte gagnerait à être revérifiée avant une diffusion répétée à des patients. Un repère visuel les signale pendant la passation.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque item est coté de 1 (ne me décrit pas du tout) à 5 (me décrit tout à fait). Le score de chaque sous-échelle est la somme des items qui la composent : Recherche de hauts standards (items 1-7, sur 35) et Préoccupations perfectionnistes (items 8-20, sur 65).</p>
+    <p class="source-note">Aucun score total combiné n'est publié pour cet outil : les deux sous-échelles se lisent séparément. Aucun seuil clinique n'a été retrouvé ; la cohérence interne rapportée dans les thèses consultées varie selon les échantillons (Préoccupations perfectionnistes α = .795 à .94 ; Recherche de hauts standards α = .80 à .92).</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Source</h2>
+    <p class="source-note">Langlois, F., Rhéaume, J., &amp; Gosselin, P. (2009). Le questionnaire de perfectionnisme révisé. Document inédit, Université du Québec à Trois-Rivières. Structure factorielle également confirmée dans Langlois, Vanasse-Larochelle, Roy &amp; Aubé (2010), communication EABCT Milan. Texte et structure recoupés dans trois thèses doctorales UQTR en libre accès (dépôt-e.uqtr.ca). Outil de repérage, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

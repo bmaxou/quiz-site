@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MDQ - Questionnaire sur les troubles de l'humeur</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#5A4A78;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .step-label{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 18px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#5A4A78;background:#E9E3F0;}
+  .toggle-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid #EFEBE1;font-size:13.5px;}
+  .toggle-row:last-child{border-bottom:none;}
+  .toggle-btns{display:flex;gap:6px;flex-shrink:0;}
+  .toggle-btn{font:inherit;font-size:12.5px;font-weight:600;padding:6px 12px;border-radius:8px;border:1px solid #E0D9C9;background:#F4F1EA;color:#63695D;cursor:pointer;}
+  .toggle-btn.selected{background:#5A4A78;color:#fff;border-color:#5A4A78;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#5A4A78;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:28px;margin:0 0 4px;}
+  .result-score.positif{color:#8B1E2E;}
+  .result-score.negatif{color:#3D6B4F;}
+  .result-max{font-size:13px;color:#9A9E90;margin:0 0 20px;}
+  .detail-row{font-size:13.5px;color:#63695D;margin:0 0 6px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">MDQ - Questionnaire sur les troubles de l'humeur</h1>
+    <p class="lead">Mood Disorder Questionnaire. Il porte sur des périodes de votre vie où vous n'étiez pas comme d'habitude, pour repérer d'éventuels symptômes évocateurs d'un trouble bipolaire.</p>
+    <div class="pill-row">
+      <span class="pill">15 questions</span>
+      <span class="pill">3 minutes</span>
+      <span class="pill">Auto-administré</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-q1" class="card" hidden>
+    <p class="step-label">Questions 1 à 13 / 15</p>
+    <p class="q-text">Y a-t-il déjà eu des périodes où vous n'étiez pas comme d'habitude et où :</p>
+    <div id="q1-fields"></div>
+    <div class="nav-row no-print"><span></span><button class="btn btn-primary" id="btn-q1-next" disabled>Continuer</button></div>
+  </div>
+
+  <div id="screen-q14" class="card" hidden>
+    <p class="step-label">Question 14 / 15</p>
+    <p class="q-text">Si vous avez répondu « oui » à plus d'une des questions ci-dessus, est-ce que plusieurs de ces caractéristiques se sont produites durant la même période ?</p>
+    <div class="opt-row" id="q14-opts"></div>
+    <div class="nav-row no-print"><button class="btn btn-secondary" id="btn-q14-prev">Précédent</button><span></span></div>
+  </div>
+
+  <div id="screen-q15" class="card" hidden>
+    <p class="step-label">Question 15 / 15</p>
+    <p class="q-text">À quel point ces comportements ou impressions vous ont-ils causé des problèmes (par exemple : être incapable de travailler, avoir des problèmes familiaux, légaux, d'argent, avoir des disputes ou des bagarres) ?</p>
+    <div class="opt-row" id="q15-opts"></div>
+    <div class="nav-row no-print"><button class="btn btn-secondary" id="btn-q15-prev">Précédent</button><button class="btn btn-primary" id="btn-q15-next">Voir le résultat</button></div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-score" id="score-total"></p>
+    <p class="result-max" id="score-label"></p>
+    <p class="detail-row" id="detail-1"></p>
+    <p class="detail-row" id="detail-2"></p>
+    <p class="detail-row" id="detail-3"></p>
+    <p class="lead">Dépistage positif si les 3 critères sont réunis : au moins 7 « oui » aux questions 1 à 13, symptômes survenus durant la même période, et gêne modérée à sérieuse. Un résultat positif n'implique pas un diagnostic mais justifie une évaluation clinique plus poussée. Ce résultat ne peut en aucun cas remplacer une évaluation clinique.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Hirschfeld, R. M. A. et al. (2000). Mood Disorder Questionnaire (MDQ). Validation française : Rouget et al. (2005) ; Gervasoni et al. (2009). Instrument académique de diffusion libre pour l'usage clinique. Ce résultat est un repère, il ne constitue pas un diagnostic.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var q1Items = [
+    "Vous vous sentiez tellement bien et plein d'énergie que les autres trouvaient que ce n'était pas normal (ou pensaient que vous risquiez d'avoir des ennuis)",
+    "Vous étiez si irritable que vous criez après les gens (ou vous provoquiez des bagarres ou des disputes)",
+    "Vous vous sentiez beaucoup plus sûr(e) de vous que d'habitude",
+    "Vous dormiez beaucoup moins que d'habitude et trouviez que cela ne vous manquait pas vraiment",
+    "Vous étiez beaucoup plus bavard(e) et parliez beaucoup plus vite que d'habitude",
+    "Des pensées traversaient rapidement votre tête et vous ne pouviez pas les ralentir",
+    "Vous étiez si facilement distrait(e) par ce qui vous entourait que vous aviez des difficultés à vous concentrer ou à poursuivre la même idée",
+    "Vous aviez beaucoup plus d'énergie que d'habitude",
+    "Vous étiez beaucoup plus actif(ve) ou que vous faisiez beaucoup plus de choses que d'habitude",
+    "Vous étiez beaucoup plus sociable ou extraverti(e) que d'habitude, par exemple, vous téléphoniez à vos amis au milieu de la nuit",
+    "Vous étiez beaucoup plus intéressé(e) par le sexe que d'habitude",
+    "Vous faisiez des choses inhabituelles pour vous ou que d'autres gens pensaient être excessives, imprudentes ou risquées",
+    "Vous dépensiez de l'argent de manière si inadaptée que cela vous attirait des ennuis ou à votre famille"
+  ];
+  var q1Answers = new Array(q1Items.length).fill(null);
+  var q1Fields = document.getElementById('q1-fields');
+  q1Items.forEach(function(item, i){
+    var row = document.createElement('div');
+    row.className = 'toggle-row';
+    row.innerHTML = '<span>' + (i+1) + '. ' + item + '</span>';
+    var btns = document.createElement('div');
+    btns.className = 'toggle-btns';
+    ['Non','Oui'].forEach(function(label, v){
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'toggle-btn'; b.textContent = label;
+      b.addEventListener('click', function(){
+        q1Answers[i] = v;
+        Array.from(btns.children).forEach(function(x){ x.classList.remove('selected'); });
+        b.classList.add('selected');
+        document.getElementById('btn-q1-next').disabled = q1Answers.some(function(a){ return a === null; });
+      });
+      btns.appendChild(b);
+    });
+    row.appendChild(btns);
+    q1Fields.appendChild(row);
+  });
+
+  function buildOpts(containerId, labels, onSelect){
+    var row = document.getElementById(containerId);
+    row.innerHTML = '';
+    labels.forEach(function(label, v){
+      var d = document.createElement('div');
+      d.className = 'opt';
+      d.textContent = label;
+      d.addEventListener('click', function(){
+        Array.from(row.children).forEach(function(x){ x.classList.remove('selected'); });
+        d.classList.add('selected');
+        onSelect(v);
+      });
+      row.appendChild(d);
+    });
+  }
+
+  var q14Answer = null, q15Answer = null;
+  buildOpts('q14-opts', ["Non","Oui"], function(v){ q14Answer = v; setTimeout(function(){ show('screen-q15'); }, 200); });
+  buildOpts('q15-opts', ["Aucun problème","Problème mineur","Problème modéré","Problème sérieux"], function(v){ q15Answer = v; });
+
+  function show(id){
+    ['screen-start','screen-q1','screen-q14','screen-q15','screen-result'].forEach(function(s){
+      document.getElementById(s).hidden = (s !== id);
+    });
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){ show('screen-q1'); });
+  document.getElementById('btn-q1-next').addEventListener('click', function(){ show('screen-q14'); });
+  document.getElementById('btn-q14-prev').addEventListener('click', function(){ show('screen-q1'); });
+  document.getElementById('btn-q15-prev').addEventListener('click', function(){ show('screen-q14'); });
+
+  document.getElementById('btn-q1-next').disabled = true;
+
+  document.getElementById('btn-q15-prev').addEventListener('click', function(){ show('screen-q14'); });
+  document.getElementById('btn-q15-next').addEventListener('click', function(){
+    if (q15Answer === null){ return; }
+    showResult();
+  });
+
+  function showResult(){
+    var yesCount = q1Answers.reduce(function(a,b){ return a + b; }, 0);
+    var critA = yesCount >= 7;
+    var critB = q14Answer === 1;
+    var critC = (q15Answer === 2 || q15Answer === 3);
+    var positive = critA && critB && critC;
+
+    var scoreEl = document.getElementById('score-total');
+    scoreEl.textContent = positive ? 'Dépistage positif' : 'Dépistage négatif';
+    scoreEl.className = 'result-score ' + (positive ? 'positif' : 'negatif');
+    document.getElementById('score-label').textContent = yesCount + ' « oui » sur 13 (questions 1 à 13)';
+    document.getElementById('detail-1').textContent = (critA ? '✓' : '✗') + ' Au moins 7 « oui » aux questions 1 à 13';
+    document.getElementById('detail-2').textContent = (critB ? '✓' : '✗') + ' Symptômes survenus durant la même période';
+    document.getElementById('detail-3').textContent = (critC ? '✓' : '✗') + ' Gêne modérée à sérieuse';
+
+    show('screen-result');
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    q1Answers.fill(null);
+    document.querySelectorAll('#q1-fields .toggle-btn').forEach(function(b){ b.classList.remove('selected'); });
+    document.getElementById('btn-q1-next').disabled = true;
+    q14Answer = null; q15Answer = null;
+    document.querySelectorAll('.opt.selected').forEach(function(o){ o.classList.remove('selected'); });
+    show('screen-start');
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MDQ - Questionnaire sur les troubles de l'humeur</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#5A4A78 0%,#8A76AC 55%,#2D2440 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(220,205,235,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#22334D;background:#E9EEF5;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#5A4A78;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#22334D;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <div class="fiche-photo"><span class="acronym">MDQ</span></div>
+  <h1 class="serif">Questionnaire sur les troubles de l'humeur (MDQ)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Mood Disorder Questionnaire - Hirschfeld et al. (2000)</p>
+  <div class="meta-row">
+    <span class="pill">15 questions</span>
+    <span class="pill">3 minutes</span>
+    <span class="pill">Auto-administré</span>
+    <span class="pill">Adulte</span>
+    <span class="pill">Français</span>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" href="mdq.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le MDQ est un outil de dépistage des troubles bipolaires. Il interroge 13 symptômes évocateurs d'un épisode hypomaniaque ou maniaque (énergie inhabituelle, irritabilité, confiance en soi accrue, diminution du sommeil, logorrhée, fuite des idées, distractibilité, hyperactivité, désinhibition sociale ou sexuelle, prises de risque, dépenses inconsidérées), puis leur simultanéité et leur retentissement fonctionnel.</p>
+    <p>Instrument académique original de Hirschfeld et coll. (2000), sans signal de propriété exclusive ni de licence commerciale ; deux validations françaises publiées (Rouget et al., 2005 ; Gervasoni et al., 2009).</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Dépistage positif si les 3 critères suivants sont réunis : réponse « oui » à au moins 7 des 13 premiers items ; les symptômes sont survenus durant la même période (item 14 = oui) ; ils ont causé une gêne modérée à sérieuse dans la vie quotidienne (item 15 = « problème modéré » ou « problème sérieux »).</p>
+    <p>Un résultat positif n'implique pas un diagnostic mais justifie une évaluation clinique plus poussée pour explorer un éventuel trouble bipolaire.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Source</h2>
+    <p class="source-note">Hirschfeld, R. M. A. et al. (2000). Development and validation of a screening instrument for bipolar spectrum disorder: The Mood Disorder Questionnaire. American Journal of Psychiatry, 157(11), 1873-1875. Validation française : Rouget et al. (2005) ; Gervasoni et al. (2009). Ce résultat est un repère, il ne constitue pas un diagnostic.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

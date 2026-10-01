@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TEC - Expériences traumatiques</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}}
+  .card{{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}}
+  h1{{font-size:26px;margin:0 0 12px;}}
+  .lead{{font-size:14.5px;color:#63695D;margin:0 0 20px;}}
+  .lang-note{{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}}
+  .pill-row{{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}}
+  .pill{{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}}
+  .start-btn{{background:#6B4A4A;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}}
+  .progress{{font-size:12px;color:#9A9E90;margin:0 0 6px;}}
+  .domain-tag{{font-size:11.5px;font-weight:700;color:#6B4A4A;text-transform:uppercase;letter-spacing:.05em;margin:0 0 10px;}}
+  .domain-intro{{font-size:13px;color:#63695D;background:#EFF3F1;border-radius:10px;padding:10px 14px;margin:0 0 14px;}}
+  .q-text{{font-size:16px;margin:0 0 20px;}}
+  .opt-row{{display:flex;flex-direction:column;gap:8px;}}
+  .opt{{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}}
+  .opt.selected{{border-color:#6B4A4A;background:#6B4A4ALIGHT;}}
+  .nav-row{{display:flex;justify-content:space-between;margin-top:24px;}}
+  .btn{{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}}
+  .btn-secondary{{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}}
+  .btn-primary{{background:#6B4A4A;color:#fff;}}
+  .btn[disabled]{{opacity:.4;cursor:not-allowed;}}
+  .result-score{{font-family:'Cormorant Garamond',Georgia,serif;font-size:36px;color:#6B4A4A;margin:0 0 4px;}}
+  .result-max{{font-size:13px;color:#9A9E90;margin:0 0 20px;}}
+  .subscore-grid{{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 20px;}}
+  .subscore{{background:#F4F1EA;border:1px solid #E0D9C9;border-radius:10px;padding:10px 14px;}}
+  .subscore .lbl{{font-size:11.5px;font-weight:700;color:#63695D;text-transform:uppercase;letter-spacing:.03em;margin-bottom:4px;}}
+  .subscore .val{{font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;color:#20241E;}}
+  .footnote{{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}}
+  .caveat{{background:#FBF3E7;border:1px solid #E7D9BC;border-radius:12px;padding:14px 16px;font-size:13.5px;color:#5A4A2A;margin:0 0 20px;}}
+  .answers-table{{width:100%;border-collapse:collapse;margin:8px 0 20px;font-size:12.5px;max-height:520px;overflow-y:auto;display:block;}}
+  .answers-table td{{padding:7px 8px;border-bottom:1px solid #E0D9C9;vertical-align:top;}}
+  .answers-table td:first-child{{color:#20241E;width:70%;}}
+  .answers-table td:last-child{{color:#6B4A4A;font-weight:700;text-align:right;white-space:nowrap;}}
+  .check-list{{display:flex;flex-direction:column;gap:6px;margin:0 0 20px;}}
+  .check-item{{display:flex;align-items:flex-start;gap:10px;padding:9px 12px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:13.5px;}}
+  .check-item input{{margin-top:3px;}}
+  .rank-row{{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 14px;border:1px solid #E0D9C9;border-radius:10px;margin-bottom:8px;font-size:13.5px;}}
+  .rank-row select{{font-family:'Inter',sans-serif;font-size:13.5px;border:1px solid #E0D9C9;border-radius:8px;padding:6px 8px;}}
+  .field-row{{display:flex;flex-direction:column;gap:6px;margin:0 0 16px;}}
+  .field-row label{{font-size:12px;font-weight:700;color:#63695D;text-transform:uppercase;letter-spacing:.03em;}}
+  .field-row input[type=number], .field-row input[type=text]{{font-family:'Inter',sans-serif;font-size:14px;border:1px solid #E0D9C9;border-radius:8px;padding:10px 12px;}}
+  .yn-row{{display:flex;gap:10px;margin:0 0 12px;}}
+  .yn-btn{{flex:1;text-align:center;padding:10px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:13.5px;font-weight:600;}}
+  .yn-btn.selected{{border-color:#6B4A4A;background:#6B4A4ALIGHT;}}
+  .cat-block{{margin:0 0 22px;}}
+  .cat-block h3{{font-size:15px;margin:0 0 8px;color:#6B4A4A;}}
+  @media print{{ .no-print{{display:none!important;}} body{{background:#fff;}} .card{{box-shadow:none;border:none;}} .answers-table{{display:table;max-height:none;overflow:visible;}} }}
+  @media (max-width:480px){{ .subscore-grid{{grid-template-columns:1fr;}} }}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">TEC - Expériences traumatiques</h1>
+    <p class="lead">Traumatic Experiences Checklist. Pour chaque événement, indiquez s'il est survenu, à quel(s) âge(s), puis l'impact subjectif qu'il a eu sur vous.</p>
+    <div class="pill-row">
+      <span class="pill">29 items cotés</span>
+      <span class="pill">4 items complémentaires</span>
+      <span class="pill">12 minutes</span>
+      <span class="pill">5 sous-échelles</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <p class="domain-tag">Cet événement est-il survenu ?</p>
+    <div class="yn-row" id="yn-row">
+      <div class="yn-btn" data-yn="oui">Oui</div>
+      <div class="yn-btn" data-yn="non">Non</div>
+    </div>
+    <div id="detail-wrap" hidden>
+      <div class="field-row">
+        <label for="age-field">À quel(s) âge(s) ?</label>
+        <input type="text" id="age-field" placeholder="ex. 8 ans, puis 12-14 ans">
+      </div>
+      <p class="domain-tag">Impact subjectif</p>
+      <div class="opt-row" id="impact-row">
+        <div class="opt" data-impact="1">1 - Aucun</div>
+        <div class="opt" data-impact="2">2 - Peu d'effet</div>
+        <div class="opt" data-impact="3">3 - Effet modéré</div>
+        <div class="opt" data-impact="4">4 - Effet important</div>
+        <div class="opt" data-impact="5">5 - Effet extrêmement important</div>
+      </div>
+    </div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-comp" class="card" hidden>
+    <h1 class="serif">Questions complémentaires (non scorées)</h1>
+    <p class="lead">Ces 4 questions ne rentrent dans aucun score : elles servent uniquement de support clinique.</p>
+    <div id="comp-fields"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-primary" id="btn-see-result">Voir le résultat</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat par sous-échelle</h1>
+    <p class="caveat">Le TEC n'est pas un outil diagnostique catégoriel : c'est un inventaire descriptif d'événements et de leur impact subjectif, précisé explicitement par les auteurs. Aucun seuil clinique standardisé.</p>
+    <div class="subscore-grid" id="subscore-grid"></div>
+    <p class="lead" id="global-note"></p>
+    <p class="lead">Ce résultat ne peut en aucun cas remplacer une évaluation clinique.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Nijenhuis, E. R. S., Van der Hart, O., &amp; Kruger, K. (2002). The psychometric characteristics of the Traumatic Experiences Checklist (TEC). Clinical Psychology &amp; Psychotherapy, 9(3), 200-210. Traduction française officielle (IRPT, trad. Carruzzo, Zimmermann &amp; Rougemont-Bücking, v2_2012). Outil de repérage, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["Vous occupez de vos parents et/ou frères et sœurs lorsque vous étiez enfant.", "Problèmes familiaux (par exemple, parent avec un problème d'alcool ou psychiatrique, pauvreté).", "Perte d'un membre de votre famille (frère, sœur, parent) lorsque vous étiez ENFANT.", "Perte d'un membre de votre famille (conjoint ou enfant) à l'âge ADULTE.", "Blessures corporelles graves.", "Vie menacée par une maladie, une opération ou un accident.", "Divorce de vos parents.", "Votre propre divorce.", "Etre menacé de mort par quelqu'un.", "Douleur intense.", "Expériences traumatiques en temps de guerre.", "Victime de guerre de seconde génération.", "Témoin de traumatismes vécus par d'autres personnes.", "Négligence émotionnelle par vos parents, frères/sœurs.", "Négligence émotionnelle par des membres plus éloignés de votre famille.", "Négligence émotionnelle par des personnes ne faisant pas partie de votre famille.", "Maltraitance émotionnelle par vos parents, frères ou sœurs.", "Maltraitance émotionnelle par des membres plus éloignés de votre famille.", "Maltraitance émotionnelle par des personnes ne faisant pas partie de votre famille.", "Maltraitance physique par vos parents, frères ou sœurs.", "Maltraitance physique par des membres plus éloignés de votre famille.", "Maltraitance physique par des personnes ne faisant pas partie de votre famille.", "Punitions bizarres ou inhabituelles.", "Harcèlement sexuel par vos parents, frères ou sœurs.", "Harcèlement sexuel par des membres plus éloignés de votre famille.", "Harcèlement sexuel par des personnes ne faisant pas partie de votre famille.", "Abus sexuel par vos parents, frères ou sœurs.", "Abus sexuel par des membres plus éloignés de votre famille.", "Abus sexuel par des personnes ne faisant pas partie de votre famille."];
+  var compItems = ["Si vous avez répondu « oui » à plusieurs items ci-dessus, combien d'auteurs différents étaient impliqués au total, par catégorie d'événement ?", "Quel était votre lien avec le ou les auteur(s) de ces événements ?", "Y a-t-il d'autres événements marquants, non listés ci-dessus, que vous souhaitez mentionner ?", "Avez-vous reçu du soutien de la part de votre entourage suite à ces événements ? Si oui, lequel ?"];
+  var subscales = [{"label": "Négligence émotionnelle", "idxs": [13, 14, 15]}, {"label": "Maltraitance émotionnelle", "idxs": [16, 17, 18]}, {"label": "Maltraitance physique", "idxs": [19, 20, 21]}, {"label": "Harcèlement sexuel", "idxs": [23, 24, 25]}, {"label": "Abus sexuel", "idxs": [26, 27, 28]}];
+  var occurred = new Array(items.length).fill(null); // 'oui'|'non'
+  var ages = new Array(items.length).fill('');
+  var impacts = new Array(items.length).fill(null);
+  var compAnswers = new Array(compItems.length).fill('');
+  var idx = 0;
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Item ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    Array.prototype.forEach.call(document.getElementById('yn-row').children, function(el){
+      el.classList.toggle('selected', el.getAttribute('data-yn') === occurred[idx]);
+    });
+    var detailWrap = document.getElementById('detail-wrap');
+    if (occurred[idx] === 'oui'){
+      detailWrap.hidden = false;
+      document.getElementById('age-field').value = ages[idx];
+      Array.prototype.forEach.call(document.getElementById('impact-row').children, function(el){
+        el.classList.toggle('selected', parseInt(el.getAttribute('data-impact'),10) === impacts[idx]);
+      });
+    } else {
+      detailWrap.hidden = true;
+    }
+    updateNext();
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Continuer' : 'Suivant';
+  }
+
+  function updateNext(){
+    var ok = occurred[idx] === 'non' || (occurred[idx] === 'oui' && impacts[idx] !== null);
+    document.getElementById('btn-next').disabled = !ok;
+  }
+
+  document.getElementById('yn-row').addEventListener('click', function(e){
+    var el = e.target.closest('.yn-btn');
+    if (!el) return;
+    occurred[idx] = el.getAttribute('data-yn');
+    if (occurred[idx] === 'non'){ impacts[idx] = null; ages[idx] = ''; }
+    renderQuestion();
+  });
+  document.getElementById('age-field').addEventListener('input', function(e){ ages[idx] = e.target.value; });
+  document.getElementById('impact-row').addEventListener('click', function(e){
+    var el = e.target.closest('.opt');
+    if (!el) return;
+    impacts[idx] = parseInt(el.getAttribute('data-impact'), 10);
+    renderQuestion();
+  });
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!(occurred[idx] === 'non' || (occurred[idx] === 'oui' && impacts[idx] !== null))) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showComp(); }
+  });
+
+  function showComp(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-comp').hidden = false;
+    var wrap = document.getElementById('comp-fields');
+    wrap.innerHTML = '';
+    compItems.forEach(function(text, i){
+      var row = document.createElement('div');
+      row.className = 'field-row';
+      var label = document.createElement('label');
+      label.textContent = text;
+      var ta = document.createElement('textarea');
+      ta.rows = 2;
+      ta.style = "font-family:'Inter',sans-serif;font-size:14px;border:1px solid #E0D9C9;border-radius:8px;padding:10px 12px;";
+      ta.addEventListener('input', function(e){ compAnswers[i] = e.target.value; });
+      row.appendChild(label);
+      row.appendChild(ta);
+      wrap.appendChild(row);
+    });
+  }
+
+  document.getElementById('btn-see-result').addEventListener('click', function(){
+    document.getElementById('screen-comp').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var grid = document.getElementById('subscore-grid');
+    grid.innerHTML = '';
+    var globalSum = 0;
+    var catCount = 0;
+    for (var i = 0; i < items.length; i++){ if (impacts[i]) { globalSum += impacts[i]; catCount++; } }
+    subscales.forEach(function(s){
+      var sum = 0;
+      s.idxs.forEach(function(i){ sum += impacts[i] || 0; });
+      var div = document.createElement('div');
+      div.className = 'subscore';
+      div.innerHTML = '<div class="lbl">' + s.label + '</div><div class="val">' + sum + ' / 15</div>';
+      grid.appendChild(div);
+    });
+    document.getElementById('global-note').textContent = 'Charge traumatique globale (non standardisée, informative) : ' + catCount + ' des 29 événements endossés, somme des scores d\'impact = ' + globalSum + '.';
+  });
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    occurred = new Array(items.length).fill(null);
+    ages = new Array(items.length).fill('');
+    impacts = new Array(items.length).fill(null);
+    compAnswers = new Array(compItems.length).fill('');
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TEC - Expériences traumatiques</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#6B4A4A 0%,#A07A7A 55%,#3A2424 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(200,215,235,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:22px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#22334D;background:#E9EEF5;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .caveat{background:#FBF3E7;border:1px solid #E7D9BC;border-radius:12px;padding:14px 16px;font-size:13.5px;color:#5A4A2A;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#6B4A4A;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#22334D;border-color:#E0D9C9;}
+
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <div class="fiche-photo"><span class="acronym">TEC</span></div>
+  <h1 class="serif">Inventaire des expériences traumatiques (TEC)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Traumatic Experiences Checklist - Nijenhuis, Van der Hart &amp; Kruger (2002)</p>
+  <div class="meta-row">
+    <span class="pill">29 items cotés</span><span class="pill">4 items complémentaires</span><span class="pill">12 minutes</span><span class="pill">Français</span>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" href="tec.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    
+    <p>Le TEC recense un ensemble d'événements potentiellement traumatiques survenus au cours de la vie, en évaluant pour chacun sa survenue, l'âge (ou les âges) auquel il s'est produit, et son impact subjectif. 5 catégories (négligence émotionnelle, maltraitance émotionnelle, maltraitance physique, harcèlement sexuel, abus sexuel) sont composées de 3 items chacune et donnent lieu à un score de sous-échelle.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Pour chaque item : survenue (Oui/Non), âge(s), impact subjectif (1 = Aucun à 5 = Effet extrêmement important). Sous-échelles (0-15 chacune, somme des scores d'impact des 3 items de la catégorie) : Négligence émotionnelle (items 14-16), Maltraitance émotionnelle (17-19), Maltraitance physique (20-22), Harcèlement sexuel (24-26), Abus sexuel (27-29). Un score global de charge traumatique peut être calculé (nombre de catégories endossées et/ou somme des scores d'impact, affiché sur cette page à titre informatif et non standardisé). Aucun seuil clinique standardisé — c'est un inventaire descriptif d'événements, pas un outil diagnostique catégoriel (précisé explicitement par les auteurs). 4 items complémentaires (30-33 : nombre d'auteurs, lien avec l'auteur, autres événements, soutien reçu) sont proposés en fin de passation à titre de support clinique, sans entrer dans le score.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Source</h2>
+    <p class="source-note">Nijenhuis, E. R. S., Van der Hart, O., &amp; Kruger, K. (2002). The psychometric characteristics of the Traumatic Experiences Checklist (TEC): First findings among psychiatric outpatients. Clinical Psychology &amp; Psychotherapy, 9(3), 200-210. Droits académiques libres (mention de copyright simple, sans restriction d'usage clinique/recherche, 11 traductions librement téléchargeables). Traduction française officielle (IRPT, trad. Carruzzo, Zimmermann &amp; Rougemont-Bücking, v2_2012). Outil de repérage, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

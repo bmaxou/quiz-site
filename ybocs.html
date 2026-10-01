@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Y-BOCS — Échelle du trouble obsessionnel-compulsif de Yale-Brown</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 24px;}
+  .progress-track{height:6px;background:#E0D9C9;border-radius:99px;overflow:hidden;margin-bottom:28px;}
+  .progress-fill{height:100%;background:#5B2E7A;border-radius:99px;transition:width .25s ease;}
+  .qnum{font-size:12px;font-weight:700;color:#5B2E7A;letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center;}
+  .subscale-tag{font-size:10.5px;font-weight:700;background:#F1E9F6;color:#5B2E7A;border-radius:999px;padding:3px 10px;text-transform:none;letter-spacing:0;}
+  .qtext{font-size:18px;font-family:'Cormorant Garamond',Georgia,serif;margin:0 0 4px;}
+  .qhint{font-size:13px;color:#63695D;font-style:italic;margin:0 0 22px;}
+  .opts{display:flex;flex-direction:column;gap:9px;}
+  .opt{appearance:none;text-align:left;border:1px solid #E0D9C9;background:#F4F1EA;border-radius:12px;padding:13px 16px;font-family:'Inter',sans-serif;font-size:13.5px;color:#20241E;cursor:pointer;transition:border-color .15s ease,background .15s ease;}
+  .opt:hover{border-color:#5B2E7A;background:#F1E9F6;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#5B2E7A;color:#fff;}
+  .btn[disabled]{opacity:.45;cursor:not-allowed;}
+  .start-btn{background:#5B2E7A;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:52px;margin:6px 0 4px;color:#5B2E7A;}
+  .result-band{display:inline-block;font-size:13px;font-weight:700;border-radius:999px;padding:6px 14px;margin-bottom:18px;}
+  .band-sub{background:#E4EEE8;color:#3D6B4F;}
+  .band-leger{background:#EAF0E0;color:#5C7A2E;}
+  .band-modere{background:#FBF0DC;color:#8A6416;}
+  .band-severe{background:#FBE4D4;color:#A85A26;}
+  .band-extreme{background:#FBE4E1;color:#B4483C;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 20px;}
+  .subscore-row{display:flex;gap:12px;margin:0 0 20px;}
+  .subscore-box{flex:1;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:12px;padding:14px 16px;}
+  .subscore-label{font-size:11.5px;font-weight:700;color:#63695D;text-transform:uppercase;letter-spacing:.06em;margin:0 0 4px;}
+  .subscore-val{font-family:'Cormorant Garamond',Georgia,serif;font-size:28px;color:#5B2E7A;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">Y-BOCS — Échelle du trouble obsessionnel-compulsif de Yale-Brown</h1>
+    <p class="lead">Ce questionnaire évalue la sévérité des symptômes obsessionnels et compulsifs. Il comprend 10 questions réparties en deux parties : Obsessions (1 à 5) puis Compulsions (6 à 10), chacune avec 5 niveaux de réponse.</p>
+    <div class="pill-row">
+      <span class="pill">10 questions</span>
+      <span class="pill">5 minutes</span>
+      <span class="pill">2 sous-échelles</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+    <div class="qnum"><span id="qnum">Question 1 / 10</span><span class="subscale-tag" id="qtag">Obsessions</span></div>
+    <p class="qtext" id="qtext"></p>
+    <p class="qhint" id="qhint"></p>
+    <div class="opts" id="opts"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-back" disabled>Précédent</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div class="result-score" id="result-score">0 / 40</div>
+    <div class="result-band" id="result-band"></div>
+    <p class="result-text" id="result-text"></p>
+    <div class="subscore-row">
+      <div class="subscore-box">
+        <p class="subscore-label">Obsessions</p>
+        <p class="subscore-val" id="score-obs">0 / 20</p>
+      </div>
+      <div class="subscore-box">
+        <p class="subscore-label">Compulsions</p>
+        <p class="subscore-val" id="score-comp">0 / 20</p>
+      </div>
+    </div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Y-BOCS (Yale-Brown Obsessive Compulsive Scale) — Goodman, Price, Rasmussen &amp; Mazure, 1989, Université Yale. Outil de repérage, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [
+    { tag:'Obsessions', q:"Vos pensées obsédantes occupent quelle partie de votre temps ?", opts:[
+      ["Aucun",0],["Moins de 1 heure par jour (Occasionnelles)",1],["1 à 3 heures par jour (Fréquentes)",2],["3 à 8 heures par jour (Très fréquentes)",3],["Plus de 8 heures par jour (Presque constantes)",4]
+    ]},
+    { tag:'Obsessions', q:"À quel point vos pensées obsédantes nuisent-elles à votre travail, à vos études ou aux autres activités importantes de votre vie ? Y a-t-il des choses que vous ne faites pas à cause de vos obsessions ?", opts:[
+      ["Aucune interférence",0],["Nuisent un peu à mes activités sociales ou autres, mais ne m'empêchent pas de fonctionner normalement",1],["Nuisent sans aucun doute à mes activités sociales ou professionnelles, mais j'arrive quand même à fonctionner",2],["Nuisent considérablement à ma vie sociale ou à mon travail",3],["M'empêchent de fonctionner",4]
+    ]},
+    { tag:'Obsessions', q:"Vos pensées obsédantes vous dérangent-elles ?", opts:[
+      ["Pas du tout",0],["Un peu",1],["À un niveau tolérable",2],["Enormément",3],["Je me sens presque constamment dans un état de détresse invalidante",4]
+    ]},
+    { tag:'Obsessions', q:"Quels efforts faites-vous pour résister à vos pensées obsédantes ? Essayez-vous de ne pas en tenir compte ou de les chasser de votre esprit ?", opts:[
+      ["J'essaie toujours de leur résister",0],["J'essaie de leur résister la plupart du temps",1],["Je fais certains efforts pour leur résister",2],["Je cède à toutes mes obsessions sans essayer de les dominer, mais un peu à contrecœur",3],["Je cède complètement et volontiers à toutes mes obsessions",4]
+    ]},
+    { tag:'Obsessions', q:"Quelle emprise avez-vous sur vos pensées obsédantes ? À quel point réussissez-vous à refréner ou à détourner votre attention de vos obsessions ? Pouvez-vous les chasser de votre esprit ?", opts:[
+      ["Je les maîtrise complètement",0],["J'arrive généralement à les refréner ou à les détourner avec des efforts et de la concentration",1],["J'arrive parfois à les refréner ou à les détourner",2],["J'arrive rarement et avec peine à les refréner ou à les chasser de mon esprit",3],["Je n'ai aucune emprise sur mes obsessions, j'arrive rarement à détourner mon attention même momentanément",4]
+    ]},
+    { tag:'Compulsions', q:"Quelle partie de votre temps passez-vous à accomplir des actes compulsifs ? Combien de temps supplémentaire (par rapport à la plupart des gens) vous faut-il pour effectuer vos activités journalières à cause de vos rituels ? Quelle est la fréquence de vos rituels ?", opts:[
+      ["Aucune",0],["Moins d'une heure par jour (Occasionnels)",1],["1 à 3 heures par jour (Fréquents)",2],["3 à 8 heures par jour (Très fréquents)",3],["Plus de 8 heures par jour (Presque constants)",4]
+    ]},
+    { tag:'Compulsions', q:"À quel point vos comportements compulsifs nuisent-ils à votre travail, à vos études ou à d'autres activités importantes de votre vie ? Y a-t-il des choses que vous ne faites pas à cause de vos compulsions ?", opts:[
+      ["Aucune interférence",0],["Nuisent un peu à mes activités sociales ou autres, mais ne m'empêchent pas de fonctionner normalement",1],["Nuisent sans aucun doute à mes activités sociales ou professionnelles, mais j'arrive quand même à fonctionner",2],["Nuisent considérablement à ma vie sociale ou à mon travail",3],["M'empêchent de fonctionner",4]
+    ]},
+    { tag:'Compulsions', q:"Comment vous sentiriez-vous si on vous empêchait de donner libre cours à vos compulsions ? Est-ce que cela vous angoisserait ?", opts:[
+      ["Je ne me sentirais nullement angoissé(e)",0],["Je me sentirais un peu angoissé(e)",1],["Je me sentirais angoissé(e) mais à un niveau tolérable",2],["Je me sentirais très angoissé(e)",3],["Je me sentirais extrêmement angoissé(e) au point d'être incapable de fonctionner",4]
+    ]},
+    { tag:'Compulsions', q:"Quels efforts faites-vous pour resister a vos compulsions ?", opts:[
+      ["J'essaie toujours de leur résister",0],["J'essaie de leur résister la plupart du temps",1],["Je fais certains efforts pour leur résister",2],["Je cède à toutes mes compulsions sans essayer de les dominer, mais un peu à contrecœur",3],["Je cède complètement et volontiers à toutes mes compulsions",4]
+    ]},
+    { tag:'Compulsions', q:"Quelle emprise avez-vous sur vos compulsions ? À quel point vous sentez-vous contraint(e) d'accomplir un acte compulsif ?", opts:[
+      ["Je les maîtrise complètement",0],["Je me sens poussé(e) à accomplir un acte compulsif mais j'arrive généralement à me dominer",1],["Je ressens une forte envie d'accomplir un acte compulsif mais j'arrive à me dominer avec beaucoup d'efforts",2],["J'éprouve un besoin pressant d'accomplir un acte compulsif, j'arrive seulement à en retarder l'accomplissement et avec peine",3],["J'éprouve un besoin irrésistible d'accomplir un acte compulsif, je n'ai aucune emprise sur mes compulsions, j'arrive rarement à me retenir ne serait-ce que quelques instants",4]
+    ]}
+  ];
+  var answers = new Array(items.length).fill(null);
+  var current = 0;
+
+  var screenStart = document.getElementById('screen-start');
+  var screenQuiz = document.getElementById('screen-quiz');
+  var screenResult = document.getElementById('screen-result');
+  var qnum = document.getElementById('qnum');
+  var qtag = document.getElementById('qtag');
+  var qtext = document.getElementById('qtext');
+  var opts = document.getElementById('opts');
+  var progressFill = document.getElementById('progress-fill');
+  var btnBack = document.getElementById('btn-back');
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    screenStart.hidden = true; screenQuiz.hidden = false; renderQuestion();
+  });
+
+  function renderQuestion(){
+    var i = current;
+    qnum.textContent = 'Question ' + (i+1) + ' / ' + items.length;
+    qtag.textContent = items[i].tag;
+    qtext.textContent = items[i].q;
+    progressFill.style.width = Math.round((i / items.length) * 100) + '%';
+    btnBack.disabled = (i === 0);
+    opts.innerHTML = '';
+    items[i].opts.forEach(function(pair){
+      var b = document.createElement('button');
+      b.className = 'opt'; b.type = 'button'; b.textContent = pair[0];
+      if (answers[i] === pair[1]) { b.style.borderColor = '#5B2E7A'; b.style.background = '#F1E9F6'; }
+      b.addEventListener('click', function(){
+        answers[i] = pair[1];
+        if (current < items.length - 1) { current++; renderQuestion(); }
+        else { showResult(); }
+      });
+      opts.appendChild(b);
+    });
+  }
+
+  btnBack.addEventListener('click', function(){
+    if (current > 0) { current--; renderQuestion(); }
+  });
+
+  function showResult(){
+    screenQuiz.hidden = true; screenResult.hidden = false;
+    var total = 0, obs = 0, comp = 0;
+    for (var i=0;i<answers.length;i++){
+      var v = answers[i] || 0;
+      total += v;
+      if (i < 5) { obs += v; } else { comp += v; }
+    }
+    document.getElementById('result-score').textContent = total + ' / 40';
+    document.getElementById('score-obs').textContent = obs + ' / 20';
+    document.getElementById('score-comp').textContent = comp + ' / 20';
+    var band = document.getElementById('result-band');
+    var text = document.getElementById('result-text');
+    if (total <= 7){
+      band.textContent = 'Subclinique'; band.className = 'result-band band-sub';
+      text.textContent = "Le score obtenu se situe dans la zone subclinique.";
+    } else if (total <= 15){
+      band.textContent = 'TOC léger'; band.className = 'result-band band-leger';
+      text.textContent = "Le score obtenu correspond à un TOC léger.";
+    } else if (total <= 23){
+      band.textContent = 'TOC modéré'; band.className = 'result-band band-modere';
+      text.textContent = "Le score obtenu correspond à un TOC modéré.";
+    } else if (total <= 31){
+      band.textContent = 'TOC sévère'; band.className = 'result-band band-severe';
+      text.textContent = "Le score obtenu correspond à un TOC sévère.";
+    } else {
+      band.textContent = 'TOC extrêmement sévère'; band.className = 'result-band band-extreme';
+      text.textContent = "Le score obtenu correspond à un TOC extrêmement sévère.";
+    }
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null); current = 0;
+    screenResult.hidden = true; screenStart.hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Y-BOCS — Échelle du trouble obsessionnel-compulsif de Yale-Brown</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#5B2E7A 0%,#8B4FB0 55%,#3A1A52 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(224,196,138,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:34px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#3D6B4F;background:#E4EEE8;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 28px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .preview-card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:14px;padding:20px 22px;margin-bottom:14px;}
+  .preview-q{font-size:14.5px;font-weight:600;margin:0 0 10px;}
+  .preview-opts{display:flex;flex-direction:column;gap:6px;}
+  .preview-opt{font-size:13.5px;color:#63695D;background:#F4F1EA;border-radius:8px;padding:8px 12px;}
+  .reveal-btn{appearance:none;background:#F4F1EA;color:#1E3A5F;border:1px solid #E0D9C9;border-radius:10px;padding:9px 16px;font-family:'Inter',sans-serif;font-size:13px;font-weight:700;cursor:pointer;}
+  .reveal-list{margin-top:14px;display:none;}
+  .reveal-list.open{display:block;}
+  .reveal-item{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:10px;padding:12px 16px;margin-bottom:8px;font-size:13.5px;}
+  .reveal-item .tag{display:inline-block;font-size:10px;font-weight:700;color:#5B2E7A;background:#F1E9F6;border-radius:999px;padding:2px 8px;margin-right:8px;text-transform:uppercase;letter-spacing:.04em;}
+  .cotation-table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:10px;}
+  .cotation-table th,.cotation-table td{border:1px solid #E0D9C9;padding:8px 12px;text-align:left;}
+  .cotation-table th{background:#F4F1EA;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#5B2E7A;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#1E3A5F;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">Y-BOCS</span></div>
+
+  <h1 class="serif">Échelle du trouble obsessionnel-compulsif de Yale-Brown</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Yale-Brown Obsessive Compulsive Scale — Goodman, Price, Rasmussen &amp; Mazure, 1989, Université Yale</p>
+  <div class="meta-row">
+    <span class="pill">10 questions</span>
+    <span class="pill">5 minutes</span>
+    <span class="pill">2 sous-échelles</span>
+    <span class="pill">Adultes avec TOC</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="ybocs.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>La Y-BOCS évalue la sévérité des symptômes obsessionnels et compulsifs chez les patients souffrant de trouble obsessionnel-compulsif (TOC). Développée à l'Université de Yale, elle est largement reconnue pour sa fiabilité et sa validité dans le diagnostic et le suivi de l'évolution du TOC. Le questionnaire se divise en deux parties de cinq questions : Obsessions, puis Compulsions.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Aperçu</h2>
+    <div class="preview-card">
+      <p class="preview-q">1. Vos pensées obsédantes occupent quelle partie de votre temps ?</p>
+      <div class="preview-opts">
+        <div class="preview-opt">Aucun</div>
+        <div class="preview-opt">Moins de 1 heure par jour (Occasionnelles)</div>
+        <div class="preview-opt">1 à 3 heures par jour (Fréquentes)</div>
+        <div class="preview-opt">3 à 8 heures par jour (Très fréquentes)</div>
+        <div class="preview-opt">Plus de 8 heures par jour (Presque constantes)</div>
+      </div>
+    </div>
+    <button class="reveal-btn" id="reveal-btn">Voir toutes les questions</button>
+    <div class="reveal-list" id="reveal-list">
+      <div class="reveal-item"><span class="tag">Obsessions</span>2. Interférence causée par les pensées obsédantes dans le travail, les études ou les autres activités</div>
+      <div class="reveal-item"><span class="tag">Obsessions</span>3. Détresse occasionnée par les pensées obsédantes</div>
+      <div class="reveal-item"><span class="tag">Obsessions</span>4. Résistance opposée aux obsessions</div>
+      <div class="reveal-item"><span class="tag">Obsessions</span>5. Degré d'emprise sur les pensées obsédantes</div>
+      <div class="reveal-item"><span class="tag">Compulsions</span>6. Temps accaparé par les comportements compulsifs</div>
+      <div class="reveal-item"><span class="tag">Compulsions</span>7. Interférence causée par les comportements compulsifs</div>
+      <div class="reveal-item"><span class="tag">Compulsions</span>8. Détresse occasionnée par les comportements compulsifs</div>
+      <div class="reveal-item"><span class="tag">Compulsions</span>9. Résistance opposée aux compulsions</div>
+      <div class="reveal-item"><span class="tag">Compulsions</span>10. Degré d'emprise sur les compulsions</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque item est coté de 0 à 4 (sévérité croissante). Score d'obsessions = somme des items 1 à 5 (0–20). Score de compulsions = somme des items 6 à 10 (0–20). Score total = somme des 10 items (0–40). Aucun item inversé.</p>
+    <table class="cotation-table">
+      <tr><th>Score total</th><th>Interprétation</th></tr>
+      <tr><td>0–7</td><td>Subclinique</td></tr>
+      <tr><td>8–15</td><td>TOC léger</td></tr>
+      <tr><td>16–23</td><td>TOC modéré</td></tr>
+      <tr><td>24–31</td><td>TOC sévère</td></tr>
+      <tr><td>32–40</td><td>TOC extrêmement sévère</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source</h2>
+    <p class="source-note">Goodman, W. K., Price, L. H., Rasmussen, S. A., &amp; Mazure, C. (1989). The Yale-Brown Obsessive Compulsive Scale (Y-BOCS). Université Yale. Outil de repérage clinique, ne remplace pas une évaluation complète.</p>
+  </div>
+</div>
+
+<script>
+document.getElementById('reveal-btn').addEventListener('click', function(){
+  var list = document.getElementById('reveal-list');
+  list.classList.toggle('open');
+  this.textContent = list.classList.contains('open') ? 'Masquer les questions' : 'Voir toutes les questions';
+});
+</script>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SDSC - Échelle de dépistage des troubles du sommeil de l'enfant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#3D5A80;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#3D5A80;background:#E9EEF5;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#3D5A80;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:36px;color:#3D5A80;margin:0 0 4px;}
+  .result-max{font-size:13px;color:#9A9E90;margin:0 0 16px;}
+  .sub-scores{margin:8px 0 20px;}
+  .sub-score-row{display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .sub-score-row .name{color:#20241E;font-weight:600;}
+  .sub-score-row .val{color:#3D5A80;font-weight:700;}
+  .sub-score-row .flag{display:block;font-size:12px;color:#9A9E90;font-weight:400;margin-top:2px;}
+  .flag-above{color:#B3521E !important;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">SDSC - Sommeil de l'enfant</h1>
+    <p class="lead">Sleep Disturbance Scale for Children. Questionnaire à remplir par le parent, en pensant au sommeil de l'enfant au cours des 6 derniers mois.</p>
+    <div class="pill-row">
+      <span class="pill">25 questions</span>
+      <span class="pill">5 minutes</span>
+      <span class="pill">Hétéro-questionnaire (parent)</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-score" id="score-total"></p>
+    <p class="result-max" id="score-total-flag">score total SDSC, sur 125 (seuil indicatif : 45)</p>
+    <div class="sub-scores" id="sub-scores"></div>
+    <p class="lead">Ces scores ne peuvent en aucun cas remplacer le diagnostic d'un spécialiste du sommeil. Si les scores A, C ou E dépassent leur seuil, consultez un spécialiste.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Bruni, O., Ottaviano, S., Guidetti, V., Romoli, M., Innocenzi, M., Cortesi, F., &amp; Giannotti, F. (1996). The Sleep Disturbance Scale for Children (SDSC). Journal of Sleep Research, 5(4), 251-261. Adaptation française : Putois, B., et al. (2017). Sleep Medicine, 32, 56-65. Outil de repérage, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var optsDuree = [
+    "1 - Plus de 9h",
+    "2 - 8h à 9h",
+    "3 - 7h à 8h",
+    "4 - 5h à 7h",
+    "5 - Moins de 5h"
+  ];
+  var optsEndormissement = [
+    "1 - Moins de 15 min",
+    "2 - 15-30 min",
+    "3 - 30-45 min",
+    "4 - 45-60 min",
+    "5 - Plus de 60 min"
+  ];
+  var optsFrequence = [
+    "1 - Jamais",
+    "2 - Rarement, 1 à 3 fois/mois",
+    "3 - Parfois, 1 à 2 fois/semaine",
+    "4 - Souvent, 3 à 5 fois/semaine",
+    "5 - Toujours, tous les jours"
+  ];
+
+  var items = [
+    { t: "1. Combien d'heures l'enfant dort-il la plupart des nuits ?", opts: optsDuree },
+    { t: "2. Combien de temps après sa mise au lit l'enfant met-il habituellement pour s'endormir ?", opts: optsEndormissement },
+    { t: "3. L'enfant va au lit avec réticence.", opts: optsFrequence },
+    { t: "4. L'enfant a des difficultés à s'endormir.", opts: optsFrequence },
+    { t: "5. L'enfant ressent de l'anxiété ou des peurs au moment de s'endormir.", opts: optsFrequence },
+    { t: "6. Lorsque l'enfant s'endort, il semble vivre ses rêves.", opts: optsFrequence },
+    { t: "7. L'enfant transpire excessivement à l'endormissement.", opts: optsFrequence },
+    { t: "8. L'enfant se réveille plus de 2 fois par nuit.", opts: optsFrequence },
+    { t: "9. L'enfant a des difficultés à s'endormir à nouveau après s'être réveillé dans la nuit.", opts: optsFrequence },
+    { t: "10. Dans son sommeil, l'enfant a des mouvements brusques ou des secousses des jambes ou il change souvent de position durant la nuit ou encore il jette les couvertures au pied de son lit.", opts: optsFrequence },
+    { t: "11. L'enfant a des difficultés à respirer durant la nuit.", opts: optsFrequence },
+    { t: "12. L'enfant fait des pauses respiratoires ou cherche sa respiration pendant son sommeil.", opts: optsFrequence },
+    { t: "13. L'enfant ronfle.", opts: optsFrequence },
+    { t: "14. L'enfant transpire excessivement pendant la nuit.", opts: optsFrequence },
+    { t: "15. Vous avez assisté à un épisode de somnambulisme de l'enfant (il se lève et déambule pendant son sommeil).", opts: optsFrequence },
+    { t: "16. Vous avez déjà entendu l'enfant parler dans son sommeil.", opts: optsFrequence },
+    { t: "17. L'enfant grince des dents pendant son sommeil.", opts: optsFrequence },
+    { t: "18. L'enfant se réveille en hurlant ou est confus au point qu'il est impossible de l'approcher, mais il n'a aucun souvenir de ces événements le matin suivant.", opts: optsFrequence },
+    { t: "19. L'enfant fait des cauchemars dont il ne se rappelle pas le matin venu.", opts: optsFrequence },
+    { t: "20. L'enfant est difficile à réveiller le matin.", opts: optsFrequence },
+    { t: "21. L'enfant se réveille le matin en se sentant fatigué.", opts: optsFrequence },
+    { t: "22. L'enfant se sent incapable de bouger quand il se réveille le matin.", opts: optsFrequence },
+    { t: "23. L'enfant est somnolent durant la journée.", opts: optsFrequence },
+    { t: "24. L'enfant s'endort brutalement, de façon inattendue, à l'école ou lors de ses activités.", opts: optsFrequence },
+    { t: "25. Lorsque l'enfant rit, il a une perte de tonus musculaire qui peut entraîner un affaissement du corps ou une chute.", opts: optsFrequence }
+  ];
+
+  var subscales = [
+    { key: "A", name: "A. Insomnies", indices: [0,1,2,3,4,7,8], threshold: 21 },
+    { key: "B", name: "B. Parasomnies", indices: [5,9,14,15,16,17,18], threshold: 17 },
+    { key: "C", name: "C. Problèmes respiratoires", indices: [6,10,11,12,13], threshold: 12 },
+    { key: "D", name: "D. Sommeil non réparateur", indices: [19,20,21], threshold: 11 },
+    { key: "E", name: "E. Somnolence diurne excessive", indices: [22,23,24], threshold: 5 }
+  ];
+  var TOTAL_THRESHOLD = 45;
+
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx].t;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    items[idx].opts.forEach(function(label, v){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === v+1 ? ' selected' : '');
+      d.textContent = label;
+      d.addEventListener('click', function(){
+        answers[idx] = v+1;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+
+    var total = answers.reduce(function(a,b){ return a + b; }, 0);
+    document.getElementById('score-total').textContent = total;
+    var totalAbove = total > TOTAL_THRESHOLD;
+    document.getElementById('score-total-flag').innerHTML = 'score total SDSC, sur 125 (seuil indicatif : ' + TOTAL_THRESHOLD + ') - <span class="' + (totalAbove ? 'flag-above' : '') + '">' + (totalAbove ? 'au-dessus du seuil indicatif' : 'sous le seuil indicatif') + '</span>';
+
+    var wrap = document.getElementById('sub-scores');
+    wrap.innerHTML = '';
+    subscales.forEach(function(s){
+      var sum = s.indices.reduce(function(acc, i){ return acc + answers[i]; }, 0);
+      var above = sum > s.threshold;
+      var row = document.createElement('div');
+      row.className = 'sub-score-row';
+      row.innerHTML = '<span class="name">' + s.name + '<span class="flag ' + (above ? 'flag-above' : '') + '">' + (above ? 'au-dessus du seuil indicatif (> ' + s.threshold + ')' : 'sous le seuil indicatif (> ' + s.threshold + ')') + '</span></span><span class="val">' + sum + '</span>';
+      wrap.appendChild(row);
+    });
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SDSC - Échelle de dépistage des troubles du sommeil de l'enfant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#3D5A80 0%,#7B9BC4 55%,#22334D 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(200,215,235,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#22334D;background:#E9EEF5;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .thresholds{width:100%;border-collapse:collapse;margin:6px 0 12px;}
+  .thresholds td{padding:8px 10px;border-bottom:1px solid #E0D9C9;font-size:13.5px;}
+  .thresholds td:last-child{text-align:right;font-weight:700;color:#3D5A80;}
+  .caveat{background:#FBF3E7;border:1px solid #E7D9BC;border-radius:12px;padding:14px 16px;font-size:13.5px;color:#5A4A2A;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#3D5A80;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#22334D;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <div class="fiche-photo"><span class="acronym">SDSC</span></div>
+  <h1 class="serif">SDSC - Échelle de dépistage des troubles du sommeil de l'enfant</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Sleep Disturbance Scale for Children - Bruni, Ottaviano, Guidetti et al. (1996) ; adaptation française Putois et al. (2017)</p>
+  <div class="meta-row">
+    <span class="pill">25 questions</span>
+    <span class="pill">5 minutes</span>
+    <span class="pill">Hétéro-questionnaire (parent)</span>
+    <span class="pill">Français</span>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" href="sdsc.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le SDSC est un questionnaire hétéro-rempli par le parent, portant sur le sommeil de l'enfant au cours des 6 derniers mois. Les deux premiers items portent sur la durée de sommeil et le délai d'endormissement (échelles propres à ces items) ; les 23 items suivants sont cotés sur une échelle de fréquence commune en 5 points, de « jamais » à « toujours, tous les jours ».</p>
+    <p>L'instrument couvre 5 dimensions cliniques du sommeil de l'enfant :</p>
+    <p>A. Insomnies (7 items) ; B. Parasomnies (7 items) ; C. Problèmes respiratoires (5 items) ; D. Sommeil non réparateur (3 items) ; E. Somnolence diurne excessive (3 items).</p>
+    <p class="source-note">Ne pas confondre avec le SDQ (Strengths and Difficulties Questionnaire de Goodman) ni avec le DIS-Q, instruments distincts également présents dans ce catalogue.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Score de chaque sous-échelle = somme des items qui la composent. Score total = somme des 5 sous-échelles (étendue : 25 à 125).</p>
+    <table class="thresholds">
+      <tr><td>Score total</td><td>&gt; 45</td></tr>
+      <tr><td>A. Insomnies (7 items, 7-35)</td><td>&gt; 21</td></tr>
+      <tr><td>B. Parasomnies (7 items, 7-35)</td><td>&gt; 17</td></tr>
+      <tr><td>C. Problèmes respiratoires (5 items, 5-25)</td><td>&gt; 12</td></tr>
+      <tr><td>D. Sommeil non réparateur (3 items, 3-15)</td><td>&gt; 11</td></tr>
+      <tr><td>E. Somnolence diurne excessive (3 items, 3-15)</td><td>&gt; 5</td></tr>
+    </table>
+    <p class="caveat">Ces scores ne peuvent en aucun cas remplacer le diagnostic d'un spécialiste du sommeil. Si les scores A, C ou E dépassent leur seuil, consultez un spécialiste.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Source</h2>
+    <p class="source-note">Bruni, O., Ottaviano, S., Guidetti, V., Romoli, M., Innocenzi, M., Cortesi, F., &amp; Giannotti, F. (1996). The Sleep Disturbance Scale for Children (SDSC). Journal of Sleep Research, 5(4), 251-261. Adaptation française : Putois, B., et al. (2017). Sleep Medicine, 32, 56-65. Diffusion libre officielle via la Société Française de Recherche et Médecine du Sommeil (sfrms-sommeil.org). Outil de repérage, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

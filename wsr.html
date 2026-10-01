@@ -1,0 +1,591 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>WSR — Inventaire des symptômes Weiss</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:680px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:25px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#5B4636;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 4px;}
+  .section-label{font-size:11.5px;font-weight:700;color:#5B4636;text-transform:uppercase;letter-spacing:.04em;margin:0 0 4px;}
+  .section-threshold{font-size:12.5px;color:#63695D;margin:0 0 18px;}
+  .item{background:#FBFAF6;border:1px solid #E0D9C9;border-radius:14px;padding:16px 18px;margin-bottom:12px;}
+  .item p.q{font-size:14px;margin:0 0 10px;font-weight:600;}
+  .opts{display:flex;flex-direction:column;gap:6px;}
+  @media (min-width:560px){ .opts{flex-direction:row;flex-wrap:wrap;} }
+  .opt{flex:1;min-width:70px;}
+  .opt input{position:absolute;opacity:0;width:0;height:0;}
+  .opt label{display:block;text-align:center;font-size:10.5px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:9px;padding:8px 3px;cursor:pointer;}
+  .opt input:checked + label{background:#5B4636;border-color:#5B4636;color:#fff;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:20px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#5B4636;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .hint{font-size:12px;color:#B4483C;margin:0 0 14px;min-height:16px;}
+  .result-cat{background:#F4F1EA;border:1px solid #E0D9C9;border-radius:12px;padding:14px 16px;margin-bottom:10px;}
+  .result-cat.flagged{border-color:#B4483C;background:#FBEDEA;}
+  .result-cat .lbl{font-size:13.5px;font-weight:700;margin:0 0 4px;}
+  .result-cat .val{font-size:13px;color:#3A3F33;margin:0 0 4px;}
+  .result-cat .items-list{font-size:12px;color:#63695D;margin:4px 0 0;}
+  .alert-box{background:#FBEDEA;border:1px solid #B4483C;border-radius:12px;padding:14px 16px;margin:0 0 20px;font-size:13.5px;color:#6E241C;font-weight:600;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  .caveat{font-size:12px;color:#63695D;margin:4px 0 0;font-style:italic;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">WSR — Inventaire des symptômes Weiss</h1>
+    <p class="lead">Weiss Symptom Record. Relevé clinique structuré selon les critères DSM-IV, rempli par un parent au sujet de son enfant. Pour chaque item, indiquez la fréquence observée.</p>
+    <div class="pill-row">
+      <span class="pill">140 questions</span>
+      <span class="pill">20-25 minutes</span>
+      <span class="pill">Rempli par un parent</span>
+      <span class="pill">Français</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="section-label" id="section-label"></p>
+    <p class="section-threshold" id="section-threshold"></p>
+    <div id="items-container"></div>
+    <p class="hint" id="hint" hidden>Merci de répondre à tous les items de cette section avant de continuer.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next">Continuer</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="lead">Relevé clinique structuré : chaque catégorie DSM-IV est présentée séparément, avec son seuil de repérage quand un seuil officiel existe. Un item coté « Moyennement » ou « Beaucoup » est considéré positif ; une réponse « N/A » n'est pas comptée comme positive. Le WSR n'est pas un outil diagnostique autonome : ce relevé est à confirmer par un examen clinique complet.</p>
+    <div id="alert-container"></div>
+    <div id="result-grid"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Weiss, M.D. (2011). <em>Weiss Symptom Record (WSR)</em>. University of British Columbia. Diffusé par le CADDRA (Canadian ADHD Resource Alliance), version française officielle. « Toute partie de ce document peut être librement reproduite sans l'autorisation écrite préalable du propriétaire, à condition qu'aucune modification ne soit apportée au texte et que l'avis de droits d'auteur soit inclus en son intégralité. » ©University of British Columbia 2011. Ce résultat ne peut en aucun cas remplacer une évaluation clinique.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var OPTS = ["Non","À l'occasion","Moyennement","Beaucoup","N/A"];
+
+  function mk(t, counted, cardinal){
+    return {t:t, counted: counted !== false, cardinal: !!cardinal};
+  }
+
+  var SECTIONS = [
+    {key:'inatt', label:'Inattention', code:'DSM-IV 314.00', threshold:6, thresholdOf:9,
+      items:[
+        mk("Commet des erreurs d'inattention"),
+        mk("A de la difficulté à rester attentif à la tâche ou dans les activités plaisantes"),
+        mk("Ne semble pas écouter quand on lui parle"),
+        mk("A de la difficulté à suivre les instructions et à terminer la tâche"),
+        mk("Est désorganisé dans ses tâches et activités"),
+        mk("Attend à la dernière minute et évite les tâches nécessitant un effort mental soutenu"),
+        mk("Perd des choses"),
+        mk("Est facilement distrait"),
+        mk("A tendance à oublier dans la vie de tous les jours")
+      ]},
+    {key:'hyper', label:'Hyperactivité / impulsivité', code:'DSM-IV 314.01', threshold:6, thresholdOf:9,
+      items:[
+        mk("S'agite ou bouge sur son siège"),
+        mk("A de la difficulté à rester en place ou assis"),
+        mk("A la bougeotte"),
+        mk("A de la misère à rester silencieux dans les activités stimulantes"),
+        mk("Est toujours en action ou comme « poussé par un moteur »"),
+        mk("Parle trop"),
+        mk("Répond avant la fin de la question"),
+        mk("A de la misère à attendre son tour"),
+        mk("A tendance à interrompre ou à déranger les autres")
+      ]},
+    {key:'top', label:"Trouble d'opposition avec provocation", code:'DSM-IV 313.81', threshold:4, thresholdOf:8,
+      items:[
+        mk("Perd le contrôle de ses humeurs"),
+        mk("Argumente avec les adultes"),
+        mk("Est défiant ou refuse de suivre les consignes"),
+        mk("Embête les autres délibérément"),
+        mk("Blâme les autres plutôt que lui-même"),
+        mk("Est susceptible"),
+        mk("Est colérique ou rancunier"),
+        mk("Est méchant ou cherche à se venger")
+      ]},
+    {key:'tics', label:'Tics', code:'DSM-IV 307.2', threshold:null, thresholdOf:null,
+      items:[
+        mk("Mouvements involontaires répétés"),
+        mk("Sons involontaires répétitifs")
+      ]},
+    {key:'conduct', label:'Trouble des conduites', code:'DSM-IV 312.8', threshold:3, thresholdOf:15,
+      items:[
+        mk("Intimide ou menace les autres"),
+        mk("Débute des altercations physiques"),
+        mk("A utilisé une arme"),
+        mk("Est cruel envers les personnes"),
+        mk("Est cruel envers les animaux"),
+        mk("A volé la personne qu'il confrontait"),
+        mk("A forcé une personne à une activité sexuelle"),
+        mk("Met le feu avec l'intention de causer des dommages"),
+        mk("Détruit les biens des autres"),
+        mk("S'est introduit dans une maison/immeuble/auto"),
+        mk("Ment pour obtenir ce qu'il veut ou éviter des responsabilités"),
+        mk("Vole des biens sans confronter la victime"),
+        mk("Ne rentre pas le soir malgré couvre-feu"),
+        mk("A fugué la nuit au moins deux fois"),
+        mk("S'absente de l'école ou du travail")
+      ]},
+    {key:'anx', label:'Anxiété', code:null, threshold:null, thresholdOf:null,
+      items:[
+        mk("Se tracasse concernant la santé/les êtres aimés/les catastrophes"),
+        mk("Incapable de relaxer, est nerveux"),
+        mk("Se plaint de douleurs chroniques inexpliquées"),
+        mk("Ne peut se départir de pensées étranges/fait la même chose plusieurs fois"),
+        mk("Attaques de panique soudaines"),
+        mk("Extrêmement timide"),
+        mk("Refuse de faire des choses devant les autres"),
+        mk("Refuse d'aller à l'école/travail ou de se séparer des autres"),
+        mk("Peurs irrationnelles qui interfèrent avec activités"),
+        mk("Tire ses cheveux/sourcils"),
+        mk("Ronge ses ongles"),
+        mk("Refuse de parler en public mais parle à la maison")
+      ]},
+    {key:'dep', label:'Dépression', code:'DSM-IV 296.2/.3', threshold:5, thresholdOf:9,
+      cardinalNote:"critère cardinal requis (au moins un des 2 items cardinaux)",
+      durationNote:"Critère de durée non évaluable par ce relevé : le DSM-IV exige une durée de plus de 2 semaines, à confirmer cliniquement.",
+      denomCaveat:"Écart documenté dans la source : l'en-tête du WSR indique un seuil « ≥5/9 », alors que 12 items comptabilisables (2 cardinaux + 10 « autres ») sont effectivement listés dans cette section — reproduit tel quel, sans sélection arbitraire d'un item à exclure.",
+      items:[
+        mk("Se sent triste/malheureux/dépressif", true, true),
+        mk("A perdu l'intérêt, est démotivé", true, true),
+        mk("Se sent sans valeur"),
+        mk("A moins d'énergie"),
+        mk("Est sans espoir"),
+        mk("Sentiment de culpabilité excessif"),
+        mk("Pensées d'automutilation ou de suicide"),
+        mk("Retrait social"),
+        mk("Perte/gain de poids significatif"),
+        mk("Changement de sommeil"),
+        mk("Agité ou ralenti"),
+        mk("Changement de concentration"),
+        mk("Tentatives de suicide (hors comptage — item d'alerte clinique)", false)
+      ]},
+    {key:'manie', label:'Manie', code:'DSM-IV 296.0/.6/.5', threshold:3, thresholdOf:6,
+      cardinalNote:"critère cardinal requis (l'item cardinal)",
+      durationNote:"Critère de durée non évaluable par ce relevé : le DSM-IV exige une durée de plus d'une semaine, à confirmer cliniquement.",
+      items:[
+        mk("Variations importantes d'humeur, élévation ou irritabilité persistante", true, true),
+        mk("Augmentation soudaine de l'estime de soi"),
+        mk("Baisse du besoin de sommeil"),
+        mk("Pensées rapides"),
+        mk("Parle trop/discours sous pression"),
+        mk("Augmentation soudaine de motivation, agité"),
+        mk("Activités à haut risque")
+      ]},
+    {key:'social', label:'Habiletés sociales', code:'DSM-IV 299', threshold:null, thresholdOf:null,
+      items:[
+        mk("Ne maintient pas de contact visuel/langage corporel étrange"),
+        mk("A de la misère à se faire des amis"),
+        mk("Difficulté à partager spontanément les émotions positives"),
+        mk("Manque de réciprocité émotionnelle"),
+        mk("Retard de langage"),
+        mk("Problèmes de communication"),
+        mk("Voix bizarre"),
+        mk("Pensée concrète, manque de jeu imaginatif"),
+        mk("Idées fixes intenses"),
+        mk("Routines/rituels rigides"),
+        mk("Préoccupé par des objets/parties d'objet"),
+        mk("Maniérismes moteurs répétitifs")
+      ]},
+    {key:'psychose', label:'Psychose', code:'DSM-IV 295', threshold:null, thresholdOf:null,
+      items:[
+        mk("Idées bizarres/désorganisées"),
+        mk("Entend des voix ou voit des choses absentes"),
+        mk("Convaincu que les autres sont contre lui"),
+        mk("Croit lire les pensées ou vice versa"),
+        mk("Impression que la télévision parle de lui"),
+        mk("Idée fixe hors réalité"),
+        mk("Idées entremêlées illogiquement")
+      ]},
+    {key:'subst', label:'Abus de substance', code:'DSM-IV 305', threshold:null, thresholdOf:null,
+      items:[
+        mk("Alcool en excès"),
+        mk("Cigarette"),
+        mk("Marijuana quotidienne"),
+        mk("Autres drogues"),
+        mk("Abus de médicaments sous prescription")
+      ]},
+    {key:'sommeil', label:'Trouble du sommeil', code:'DSM-IV 307.4', threshold:null, thresholdOf:null,
+      items:[
+        mk("Agité/ralenti"),
+        mk("Difficulté à s'endormir"),
+        mk("Difficulté à rester endormi"),
+        mk("Profil de sommeil anormal le jour"),
+        mk("S'endort sans avertissement"),
+        mk("Somnambulisme"),
+        mk("Cauchemars"),
+        mk("S'endort tard/réveil tard"),
+        mk("Changements quotidiens d'horaire"),
+        mk("Ronflement excessif"),
+        mk("Jambes sans repos"),
+        mk("Coups de pied brusques"),
+        mk("Difficulté à respirer pendant le sommeil")
+      ]},
+    {key:'elim', label:"Trouble d'élimination", code:'DSM-IV 307', threshold:null, thresholdOf:null,
+      items:[
+        mk("Incontinence nocturne"),
+        mk("Incontinence diurne"),
+        mk("Salit ses sous-vêtements")
+      ]},
+    {key:'tca', label:'Trouble des conduites alimentaires', code:'DSM-IV 307', threshold:null, thresholdOf:null,
+      items:[
+        mk("Vomit après les repas ou mange par excès"),
+        mk("Sous son poids santé, refuse de manger"),
+        mk("Image déformée du corps"),
+        mk("Difficile/capricieux pour la nourriture"),
+        mk("Mange beaucoup de malbouffe")
+      ]},
+    {key:'appr', label:"Trouble d'apprentissage", code:'DSM-IV 315', threshold:null, thresholdOf:null,
+      items:[
+        mk("Retard de langage expressif"),
+        mk("Bégaiement"),
+        mk("Difficulté à articuler"),
+        mk("Performance sous la moyenne en lecture/mathématiques"),
+        mk("Difficulté à écrire"),
+        mk("Performance scolaire variable/sous son potentiel")
+      ]},
+    {key:'coord', label:'Trouble du développement de la coordination', code:null, threshold:null, thresholdOf:null,
+      items:[
+        mk("Difficulté motricité globale"),
+        mk("Est maladroit"),
+        mk("Difficulté motricité fine")
+      ]},
+    {key:'perso', label:'Personnalité', code:'DSM-IV 301', threshold:5, thresholdOf:9,
+      subLabel:'Seuil de repérage borderline',
+      items:[
+        mk("Difficulté à maintenir des relations"),
+        mk("Peur de l'abandon"),
+        mk("Idées suicidaires récurrentes"),
+        mk("Colères intenses"),
+        mk("Changements majeurs d'humeur"),
+        mk("Comportement autodestructeur"),
+        mk("Image de soi/identité fragile"),
+        mk("Se sent vide"),
+        mk("Réagit au stress par dissociation/paranoïa transitoire"),
+        mk("Centré sur lui-même/« tout lui est dû » (marqueur narcissique, hors décompte)", false),
+        mk("Trompeur/agressif/absence de remords (marqueur antisocial, hors décompte)", false)
+      ]}
+  ];
+
+  var TOTAL = SECTIONS.reduce(function(a,s){ return a + s.items.length; }, 0);
+  var answers = SECTIONS.map(function(s){ return new Array(s.items.length).fill(null); });
+  var secIdx = 0;
+
+  function answeredSoFar(){
+    var n = 0;
+    for (var i = 0; i < secIdx; i++){ n += answers[i].filter(function(v){ return v !== null; }).length; }
+    n += answers[secIdx].filter(function(v){ return v !== null; }).length;
+    return n;
+  }
+
+  function renderSection(){
+    var s = SECTIONS[secIdx];
+    document.getElementById('progress-text').textContent = 'Section ' + (secIdx+1) + ' / ' + SECTIONS.length + ' — ' + answeredSoFar() + ' / ' + TOTAL + ' items répondus';
+    document.getElementById('section-label').textContent = s.label + (s.code ? ' (' + s.code + ')' : '');
+    var countedN = s.items.filter(function(it){ return it.counted; }).length;
+    var thresholdTxt = s.threshold ? ('Seuil de repérage : ≥ ' + s.threshold + ' item(s) sur ' + countedN + ' cotés « Moyennement » ou « Beaucoup »' + (s.cardinalNote ? ', ' + s.cardinalNote : '') + '.') : 'Aucun seuil officiel publié pour cette catégorie — relevé descriptif.';
+    if (s.denomCaveat){ thresholdTxt += ' ' + s.denomCaveat; }
+    document.getElementById('section-threshold').textContent = thresholdTxt;
+
+    var container = document.getElementById('items-container');
+    container.innerHTML = '';
+    s.items.forEach(function(item, i){
+      var div = document.createElement('div');
+      div.className = 'item';
+      var q = document.createElement('p');
+      q.className = 'q';
+      q.textContent = (i+1) + '. ' + item.t;
+      div.appendChild(q);
+      var opts = document.createElement('div');
+      opts.className = 'opts';
+      OPTS.forEach(function(label, oi){
+        var wrap = document.createElement('div');
+        wrap.className = 'opt';
+        var id = 'sec' + secIdx + '_i' + i + '_' + oi;
+        var name = 'sec' + secIdx + '_i' + i;
+        var checked = answers[secIdx][i] === oi ? ' checked' : '';
+        wrap.innerHTML = '<input type="radio" name="' + name + '" id="' + id + '" value="' + oi + '"' + checked + '>' +
+          '<label for="' + id + '">' + label + '</label>';
+        opts.appendChild(wrap);
+      });
+      div.appendChild(opts);
+      container.appendChild(div);
+    });
+    container.querySelectorAll('input[type=radio]').forEach(function(inp){
+      inp.addEventListener('change', function(){
+        var parts = inp.name.split('_i');
+        var itemIdx = parseInt(parts[1], 10);
+        answers[secIdx][itemIdx] = parseInt(inp.value, 10);
+        document.getElementById('progress-text').textContent = 'Section ' + (secIdx+1) + ' / ' + SECTIONS.length + ' — ' + answeredSoFar() + ' / ' + TOTAL + ' items répondus';
+      });
+    });
+
+    document.getElementById('btn-prev').disabled = secIdx === 0;
+    document.getElementById('btn-next').textContent = secIdx === SECTIONS.length - 1 ? 'Voir le résultat' : 'Continuer';
+    document.getElementById('hint').hidden = true;
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderSection();
+  });
+
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (secIdx > 0){ secIdx--; renderSection(); window.scrollTo(0,0); }
+  });
+
+  document.getElementById('btn-next').addEventListener('click', function(){
+    var complete = answers[secIdx].every(function(v){ return v !== null; });
+    if (!complete){
+      document.getElementById('hint').hidden = false;
+      return;
+    }
+    if (secIdx < SECTIONS.length - 1){
+      secIdx++;
+      renderSection();
+      window.scrollTo(0,0);
+    } else {
+      showResult();
+    }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+
+    var alertHtml = '';
+    var grid = document.getElementById('result-grid');
+    grid.innerHTML = '';
+
+    SECTIONS.forEach(function(s, si){
+      var countedIdxs = [];
+      s.items.forEach(function(item, i){ if (item.counted) countedIdxs.push(i); });
+      var positiveCount = countedIdxs.filter(function(i){ return answers[si][i] >= 2; }).length;
+      var nonScoredPositive = [];
+      s.items.forEach(function(item, i){ if (!item.counted && answers[si][i] >= 2) nonScoredPositive.push(item.t); });
+
+      var flagged = false;
+      var valTxt = positiveCount + ' item(s) positif(s) sur ' + countedIdxs.length;
+      if (s.threshold){
+        var cardinalOk = true;
+        if (s.cardinalNote){
+          cardinalOk = s.items.some(function(item, i){ return item.cardinal && answers[si][i] >= 2; });
+        }
+        flagged = (positiveCount >= s.threshold) && cardinalOk;
+        valTxt = positiveCount + ' item(s) positif(s) sur ' + countedIdxs.length + ' (seuil ≥ ' + s.threshold + ')' + (s.cardinalNote ? (cardinalOk ? ' — critère cardinal rempli' : ' — critère cardinal non rempli') : '');
+      }
+
+      var div = document.createElement('div');
+      div.className = 'result-cat' + (flagged ? ' flagged' : '');
+      var html = '<p class="lbl">' + s.label + (s.subLabel ? ' — ' + s.subLabel : '') + '</p>' +
+        '<p class="val">' + valTxt + (s.threshold ? (flagged ? ' — ⚠️ seuil atteint' : ' — sous le seuil') : '') + '</p>';
+      if (s.durationNote){ html += '<p class="caveat">' + s.durationNote + '</p>'; }
+      if (s.denomCaveat){ html += '<p class="caveat">' + s.denomCaveat + '</p>'; }
+      if (nonScoredPositive.length){ html += '<p class="items-list">Item(s) hors comptage signalé(s) positif(s) : ' + nonScoredPositive.join(' ; ') + '</p>'; }
+      div.innerHTML = html;
+      grid.appendChild(div);
+
+      if (s.key === 'dep'){
+        var suicideIdx = s.items.length - 1;
+        if (answers[si][suicideIdx] >= 2){
+          alertHtml += '<div class="alert-box">⚠️ L\'item « Tentatives de suicide » a été coté positif dans la section Dépression. Ce point nécessite une attention clinique immédiate, indépendamment du score de la section.</div>';
+        }
+      }
+    });
+
+    var combined = SECTIONS[0].items.filter(function(it,i){ return answers[0][i] >= 2; }).length >= SECTIONS[0].threshold &&
+                   SECTIONS[1].items.filter(function(it,i){ return answers[1][i] >= 2; }).length >= SECTIONS[1].threshold;
+    alertHtml += '<div class="result-cat' + (combined ? ' flagged' : '') + '"><p class="lbl">TDAH combiné</p><p class="val">' + (combined ? 'Critères Inattention et Hyperactivité/impulsivité réunis ensemble' : 'Critères non réunis ensemble') + '</p></div>';
+
+    document.getElementById('alert-container').innerHTML = alertHtml;
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = SECTIONS.map(function(s){ return new Array(s.items.length).fill(null); });
+    secIdx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WSR — Inventaire des symptômes Weiss</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#5B4636 0%,#8A6B52 55%,#332619 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(220,200,175,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:26px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#1A2233;background:#E7E9EE;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .section ul{font-size:14.5px;margin:0 0 10px;padding-left:20px;}
+  .section ul li{margin-bottom:4px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#5B4636;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#1A2233;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">WSR</span></div>
+
+  <h1 class="serif">Inventaire des symptômes Weiss (WSR)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Weiss Symptom Record — Weiss, M.D. (2011), University of British Columbia, diffusé par le CADDRA</p>
+  <div class="meta-row">
+    <span class="pill">140 questions</span>
+    <span class="pill">20-25 minutes</span>
+    <span class="pill">Rempli par un parent</span>
+    <span class="pill">Français</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="wsr.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le WSR est un relevé clinique structuré selon les critères DSM-IV, rempli par un parent au
+    sujet de son enfant. Il n'est pas un instrument psychométrique validé au sens strict (pas
+    d'étude de fidélité/validité propre publiée), mais un outil de repérage clinique très largement
+    diffusé par le CADDRA (Canadian ADHD Resource Alliance) dans sa trousse d'évaluation du TDAH,
+    aux côtés d'échelles comme l'ASRS, le WFIRS ou le SNAP-IV. Il couvre le TDAH et ses comorbidités
+    les plus fréquentes (trouble oppositionnel avec provocation, trouble des conduites, tics,
+    anxiété, dépression, manie, difficultés sociales/TSA, psychose, abus de substance, troubles du
+    sommeil, de l'élimination, des conduites alimentaires, des apprentissages, de la coordination, et
+    traits de personnalité) en 17 catégories DSM-IV distinctes.</p>
+    <p class="source-note">Droits : « Toute partie de ce document peut être librement reproduite sans
+    l'autorisation écrite préalable du propriétaire, à condition qu'aucune modification ne soit
+    apportée au texte et que l'avis de droits d'auteur soit inclus en son intégralité. »
+    ©University of British Columbia 2011 — republication en ligne explicitement autorisée sous cette
+    condition. Version française officielle diffusée par le CADDRA.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque item est coté sur une échelle en 4 points (Non / À l'occasion / Moyennement / Beaucoup)
+    plus une option N/A. Un item coté « Moyennement » ou « Beaucoup » est considéré positif ; une
+    réponse « N/A » n'est pas comptée comme positive. Les 17 catégories, avec leur seuil de
+    repérage quand un seuil officiel existe :</p>
+    <ul>
+      <li>Inattention (DSM-IV 314.00, 9 items) — seuil ≥6/9</li>
+      <li>Hyperactivité/impulsivité (DSM-IV 314.01, 9 items) — seuil ≥6/9</li>
+      <li>TDAH combiné — les deux seuils ci-dessus réunis ensemble</li>
+      <li>Trouble d'opposition avec provocation (DSM-IV 313.81, 8 items) — seuil ≥4/8</li>
+      <li>Tics (DSM-IV 307.2, 2 items) — aucun seuil publié, relevé descriptif</li>
+      <li>Trouble des conduites (DSM-IV 312.8, 15 items) — seuil ≥3/15</li>
+      <li>Anxiété (12 items) — aucun seuil publié, relevé descriptif</li>
+      <li>Dépression (DSM-IV 296.2/.3, 2 items cardinaux + 10 items « autres » + 1 item hors
+      comptage) — critère cardinal requis (au moins un des 2 items cardinaux) et seuil ≥5, durée de
+      plus de 2 semaines non évaluable par ce relevé</li>
+      <li>Manie (DSM-IV 296.0/.6/.5, 1 item cardinal + 6 items « autres ») — critère cardinal requis
+      et seuil ≥3, durée de plus d'une semaine non évaluable par ce relevé</li>
+      <li>Habiletés sociales (DSM-IV 299, 12 items) — aucun seuil publié, relevé descriptif</li>
+      <li>Psychose (DSM-IV 295, 7 items) — aucun seuil publié, relevé descriptif</li>
+      <li>Abus de substance (DSM-IV 305, 5 items) — aucun seuil publié, relevé descriptif</li>
+      <li>Trouble du sommeil (DSM-IV 307.4, 13 items) — aucun seuil publié, relevé descriptif</li>
+      <li>Trouble d'élimination (DSM-IV 307, 3 items) — aucun seuil publié, relevé descriptif</li>
+      <li>Trouble des conduites alimentaires (DSM-IV 307, 5 items) — aucun seuil publié, relevé
+      descriptif</li>
+      <li>Trouble d'apprentissage (DSM-IV 315, 6 items) — aucun seuil publié, relevé descriptif</li>
+      <li>Trouble du développement de la coordination (3 items) — aucun seuil publié, relevé
+      descriptif</li>
+      <li>Personnalité (DSM-IV 301, 9 items + 2 items marqueurs hors comptage) — seuil de repérage
+      borderline ≥5/9</li>
+    </ul>
+    <p><strong>Écart documenté dans la source, reproduit tel quel</strong> : l'en-tête de la section
+    Dépression du document indique un seuil « ≥5/9 », alors que 12 items comptabilisables (2
+    cardinaux + 10 « autres ») sont effectivement listés dans cette section — cet écart n'a pas été
+    corrigé ni comblé par la suppression arbitraire d'un item ; le relevé affiche le compte réel sur
+    les items effectivement listés, tout en citant le seuil littéral de la source.</p>
+    <p><strong>Items hors comptage</strong> : l'item « Tentatives de suicide » (section Dépression)
+    et les deux marqueurs « centré sur lui-même » (narcissique) et « trompeur/agressif/absence de
+    remords » (antisocial) (section Personnalité) sont explicitement exclus du calcul des seuils par
+    le document source, mais restent posés comme items d'alerte clinique — une réponse positive à
+    l'item suicide déclenche un message d'alerte distinct dans le résultat.</p>
+    <p>Le WSR n'est pas un outil diagnostique autonome : c'est un repérage clinique structuré à
+    confirmer par un examen clinique complet, incluant l'appréciation des critères de durée et de
+    retentissement fonctionnel que ce relevé ne permet pas d'évaluer seul.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source</h2>
+    <p class="source-note">Weiss, M.D. (2011). <em>Weiss Symptom Record (WSR)</em>. University of
+    British Columbia.</p>
+    <p class="source-note">Diffusé par le CADDRA (Canadian ADHD Resource Alliance) dans sa trousse
+    d'évaluation clinique du TDAH (eToolkit), version française officielle.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

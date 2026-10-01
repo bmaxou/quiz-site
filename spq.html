@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SPQ - Questionnaire des phobies spécifiques</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#6B5C8C;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .item-text{font-size:18px;margin:0 0 22px;font-family:'Cormorant Garamond',Georgia,serif;}
+  .dim-block{margin-bottom:20px;}
+  .dim-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#6B5C8C;margin:0 0 8px;}
+  .scale-row{display:flex;gap:6px;}
+  .scale-btn{flex:1;text-align:center;padding:10px 4px;border:1px solid #E0D9C9;border-radius:8px;cursor:pointer;font-size:13px;background:#F4F1EA;}
+  .scale-btn.selected{border-color:#6B5C8C;background:#EDE8F5;font-weight:700;}
+  .scale-anchors{display:flex;justify-content:space-between;font-size:10.5px;color:#9A9E90;margin-top:4px;}
+  .textarea-block textarea{width:100%;min-height:70px;border:1px solid #E0D9C9;border-radius:10px;padding:10px;font-family:'Inter',sans-serif;font-size:14px;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#6B5C8C;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:32px;color:#6B5C8C;margin:0 0 4px;}
+  .result-max{font-size:13px;color:#9A9E90;margin:0 0 20px;}
+  .subscore-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 20px;}
+  .subscore{background:#F4F1EA;border:1px solid #E0D9C9;border-radius:10px;padding:10px 14px;}
+  .subscore.flagged{border-color:#C97A5A;background:#FBEDE6;}
+  .subscore .lbl{font-size:11.5px;font-weight:700;color:#63695D;text-transform:uppercase;letter-spacing:.03em;margin-bottom:4px;}
+  .subscore .val{font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;color:#20241E;}
+  .subscore .thr{font-size:10.5px;color:#9A9E90;margin-top:2px;}
+  .footnote{margin-top:20px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+  @media (max-width:480px){ .subscore-grid{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">SPQ - Phobies spécifiques</h1>
+    <p class="lead">Specific Phobia Questionnaire. Voici 45 situations différentes que les gens peuvent craindre et éviter. Pour chacune, indiquez (1) à quel point vous en avez peur, et (2) à quel point cette peur interfère avec votre vie (travail, vie sociale, famille, loisirs).</p>
+    <div class="pill-row">
+      <span class="pill">43 situations notées</span>
+      <span class="pill">2 items libres</span>
+      <span class="pill">10 minutes</span>
+      <span class="pill">Échelle 0-4 x2</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="item-text" id="item-text"></p>
+    <div id="quiz-body"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-score" id="score-total"></p>
+    <p class="result-max" id="score-total-label">score total de peur (43 items principaux, items libres non standardisés exclus)</p>
+    <p class="lead" id="score-interf-label"></p>
+    <div class="subscore-grid" id="subscore-grid"></div>
+    <p class="lead">Aucun score composite officiel des 2 items libres. Ce résultat ne peut en aucun cas remplacer une évaluation clinique.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Fairbrother, N., &amp; Antony, M. M. (2012). Specific Phobia Questionnaire. Diffusé via Ovanessian et al. (2019), Journal of Psychopathology and Behavioral Assessment, et Mathews, Wootton &amp; Moses (2025), Australian Journal of Psychology (CC-BY). Traduction française de travail. Outil de repérage, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var fearOpts = ["0","1","2","3","4"];
+  var itemsRaw = [
+    "Les hauteurs en plein air","L'obscurité","Les oiseaux","Les tunnels",
+    "Regarder quelqu'un d'autre se faire faire une injection","Les chats","Conduire sur l'autoroute","Les chiens",
+    "Subir une chirurgie mineure","Regarder quelqu'un d'autre se faire faire des points de suture","Les abeilles ou guêpes","S'étouffer",
+    "Se tenir debout sur une échelle","Nager dans une piscine","Visiter un hôpital","Les endroits fermés",
+    "Donner son sang","Se faire prendre la tension","Aller chez le dentiste","Vomir",
+    "Regarder quelqu'un d'autre donner son sang","Voyager en avion","Nager en lac ou en mer","Regarder une chirurgie à la télévision",
+    "S'occuper d'une coupure de quelqu'un d'autre","Conduire par mauvais temps","Regarder par la fenêtre du dernier étage d'un immeuble","S'occuper de sa propre coupure",
+    "Les ascenseurs","Les papillons de nuit ou papillons","Les rongeurs (souris, rats)","Faire du bateau en eau profonde",
+    "Le tonnerre et les éclairs","Conduire dans des endroits nouveaux","Recevoir une injection","Les serpents",
+    "Les insectes","La pluie forte","Les vers","Les ponts",
+    "Développer une maladie","Les analyses de sang","Les araignées"
+  ];
+  var items = itemsRaw.map(function(t, i){ return {t: (i+1) + '. ' + t, open:false}; });
+  items.push({t:"44. Autre (préciser)", open:true});
+  items.push({t:"45. Autre (préciser)", open:true});
+
+  var subscales = [
+    {label:"Animaux", idxs:[2,5,7,10,29,30,35,36,38,42], thr:8},
+    {label:"Environnement naturel", idxs:[0,1,12,13,22,26,31,32,37], thr:15},
+    {label:"Situationnel", idxs:[3,6,15,21,25,28,33,39], thr:4},
+    {label:"Sang-injection-blessure", idxs:[4,8,9,14,16,17,18,20,23,24,27,34,40,41], thr:20},
+    {label:"Autre", idxs:[11,19], thr:6}
+  ];
+
+  var fear = new Array(items.length).fill(null);
+  var interf = new Array(items.length).fill(null);
+  var freeText = ["", ""];
+  var idx = 0;
+
+  function currentAnswered(){
+    if (items[idx].open) return true;
+    return fear[idx] !== null && interf[idx] !== null;
+  }
+
+  function renderScaleRow(container, arr, label, arrName){
+    var block = document.createElement('div');
+    block.className = 'dim-block';
+    var lab = document.createElement('div');
+    lab.className = 'dim-label';
+    lab.textContent = label;
+    block.appendChild(lab);
+    var row = document.createElement('div');
+    row.className = 'scale-row';
+    fearOpts.forEach(function(l, v){
+      var b = document.createElement('div');
+      b.className = 'scale-btn' + (arr[idx] === v ? ' selected' : '');
+      b.textContent = l;
+      b.addEventListener('click', function(){
+        arr[idx] = v;
+        renderQuestion();
+      });
+      row.appendChild(b);
+    });
+    block.appendChild(row);
+    var anchors = document.createElement('div');
+    anchors.className = 'scale-anchors';
+    anchors.innerHTML = arrName === 'fear' ? '<span>Aucune peur</span><span>Peur extrême</span>' : '<span>Aucune interférence</span><span>Interférence extrême</span>';
+    block.appendChild(anchors);
+    container.appendChild(block);
+  }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Item ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('item-text').textContent = items[idx].t;
+    var body = document.getElementById('quiz-body');
+    body.innerHTML = '';
+    if (items[idx].open){
+      var d = document.createElement('div');
+      d.className = 'textarea-block';
+      var ta = document.createElement('textarea');
+      ta.placeholder = 'Facultatif — précisez une autre situation si vous le souhaitez.';
+      ta.value = freeText[idx - 43] || '';
+      ta.addEventListener('input', function(){ freeText[idx - 43] = ta.value; });
+      d.appendChild(ta);
+      body.appendChild(d);
+    } else {
+      renderScaleRow(body, fear, 'Peur', 'fear');
+      renderScaleRow(body, interf, 'Interférence avec la vie quotidienne', 'interf');
+    }
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !currentAnswered();
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!currentAnswered()) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var totalFear = 0, totalInterf = 0;
+    for (var i = 0; i < 43; i++){ totalFear += fear[i]; totalInterf += interf[i]; }
+    document.getElementById('score-total').textContent = totalFear;
+    document.getElementById('score-interf-label').textContent = 'Score total d\'interférence (informatif, sans seuil publié) : ' + totalInterf;
+    var grid = document.getElementById('subscore-grid');
+    grid.innerHTML = '';
+    subscales.forEach(function(s){
+      var sum = s.idxs.reduce(function(a,i){ return a + fear[i]; }, 0);
+      var div = document.createElement('div');
+      div.className = 'subscore' + (sum >= s.thr ? ' flagged' : '');
+      div.innerHTML = '<div class="lbl">' + s.label + '</div><div class="val">' + sum + '</div><div class="thr">seuil indicatif ≥ ' + s.thr + '</div>';
+      grid.appendChild(div);
+    });
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    fear = new Array(items.length).fill(null);
+    interf = new Array(items.length).fill(null);
+    freeText = ["", ""];
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SPQ - Questionnaire des phobies spécifiques</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#6B5C8C 0%,#9B8CB8 55%,#453A5C 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(200,215,235,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#22334D;background:#E9EEF5;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .caveat{background:#FBF3E7;border:1px solid #E7D9BC;border-radius:12px;padding:14px 16px;font-size:13.5px;color:#5A4A2A;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#6B5C8C;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#22334D;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <div class="fiche-photo"><span class="acronym">SPQ</span></div>
+  <h1 class="serif">Questionnaire des phobies spécifiques (SPQ)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Specific Phobia Questionnaire - Fairbrother &amp; Antony (2012)</p>
+  <div class="meta-row">
+    <span class="pill">43 situations + 2 items libres</span>
+    <span class="pill">10 minutes</span>
+    <span class="pill">Auto-questionnaire</span>
+    <span class="pill">Français (traduction de travail)</span>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" href="spq.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p class="caveat">⚠️ À ne pas confondre avec le Schizotypal Personality Questionnaire de Raine, ni avec le Specific Phobia Questionnaire de Cutshall/Watson : il s'agit ici du SPQ de Fairbrother &amp; Antony (2012).</p>
+    <p>Le SPQ liste 45 situations pouvant être craintes/évitées (43 situations standardisées + 2 items libres « Autre »). Pour chacune, le répondant note à la fois son niveau de peur et le niveau d'interférence de cette peur avec sa vie quotidienne, sur deux échelles indépendantes de 0 à 4.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Score total = somme des scores de peur des 43 items principaux (les 2 items libres ne sont pas standardisés et donc exclus du score). 5 sous-échelles (score = somme des scores de peur des items la composant), avec seuils cliniques indicatifs (Ovanessian et al. 2018/2019, repris par la validation australienne 2025) : Animaux ≥ 8 ; Environnement naturel ≥ 15 ; Sang-injection-blessure ≥ 20 ; Situationnel ≥ 4 ; Autre ≥ 6. Fiabilité rapportée : α total = 0,95-0,97.</p>
+    <p class="source-note">⚠️ L'article australien de 2025 donne aussi des « scores maximums possibles » par sous-échelle légèrement incohérents entre eux (non repris comme bornes strictes ici) ; les seuils cliniques eux-mêmes restent cohérents entre les deux articles.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Source</h2>
+    <p class="source-note">Fairbrother, N., &amp; Antony, M. M. (2012). Specific Phobia Questionnaire. Diffusé via ses articles de validation : Ovanessian, M.M., Fairbrother, N., Vorstenbosch, V., McCabe, R.E., Rowa, K., &amp; Antony, M.M. (2019), Journal of Psychopathology and Behavioral Assessment, 41(1), 36-52 ; Mathews, J., Wootton, B. M., &amp; Moses, K. (2025), Australian Journal of Psychology, 77(1), PMC12218438, licence CC-BY. Outil de repérage, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

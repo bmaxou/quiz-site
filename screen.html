@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>SCREEN — Cabinet Bouche &amp; Chmura</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F4F1EA; --surface:#FFFFFF; --surface-2:#EAE6D9; --ink:#20241E; --ink-soft:#63695D;
+    --line:#E0D9C9; --accent:#B4483C; --accent-ink:#F4F1EA; --accent-soft:#F5E1DD;
+    --progress-bg:#E6E1D3; --progress-fill:#D97B6C;
+    --shadow: 0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',-apple-system,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,h3,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:var(--ink);}
+  .wrap{max-width:520px;margin:0 auto;padding:48px 24px 80px;}
+  .back-top{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--ink-soft);text-decoration:none;margin-bottom:20px;}
+  .back-top:hover{color:var(--ink);}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--ink-soft);display:inline-block;}
+  h1{font-size:26px;margin:0 0 10px;}
+  .intro-text{color:var(--ink-soft);font-size:15px;margin:0 0 28px;}
+  .start-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:32px 28px;box-shadow:var(--shadow);}
+  .pills{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 20px;}
+  .pill{font-size:12.5px;font-weight:600;color:var(--ink-soft);background:var(--surface-2);border-radius:999px;padding:6px 13px;display:inline-flex;align-items:center;gap:6px;}
+  .instructions{font-size:14.5px;color:var(--ink-soft);margin:0 0 22px;line-height:1.7;}
+  .quiz-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:28px 26px 26px;box-shadow:var(--shadow);}
+  .progress-track{height:8px;border-radius:99px;background:var(--progress-bg);overflow:hidden;margin-bottom:14px;}
+  .progress-fill{height:100%;background:var(--progress-fill);border-radius:99px;width:0%;transition:width .3s ease;}
+  .q-count{font-size:12.5px;color:var(--ink-soft);font-weight:600;margin:0 0 20px;}
+  .q-item{font-size:18px;font-weight:600;color:var(--ink);margin:0 0 26px;font-family:'Cormorant Garamond',Georgia,serif;line-height:1.35;}
+  .options{display:flex;flex-direction:column;gap:10px;}
+  .option-btn{font:inherit;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:14.5px;color:var(--ink);cursor:pointer;transition:border-color .15s ease,background .15s ease;}
+  .option-btn:hover{border-color:var(--accent);}
+  .option-btn.selected{border-color:var(--accent);background:var(--accent-soft);font-weight:600;}
+  .back-link{display:inline-flex;align-items:center;gap:6px;margin-top:22px;font-size:13px;color:var(--ink-soft);background:none;border:none;font:inherit;cursor:pointer;padding:0;}
+  .back-link:hover{color:var(--ink);}
+  .back-link[hidden]{display:none;}
+  #result{display:none;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:30px 28px;box-shadow:var(--shadow);}
+  #result h2.serif{font-size:22px;margin:0 0 6px;}
+  .meta-line{font-size:13.5px;color:var(--ink-soft);margin:0 0 24px;}
+  .section-title{font-size:12.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft);margin:0 0 12px;padding-top:18px;border-top:1px solid var(--line);}
+  .section-title:first-of-type{border-top:none;padding-top:0;}
+  .score-line{font-size:17px;margin:0 0 10px;}
+  .score-line strong{font-size:22px;color:var(--accent);}
+  .note-informel{font-size:12.5px;color:var(--ink-soft);margin:0 0 6px;line-height:1.65;}
+  .subscore{border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;}
+  .subscore .lbl{font-size:13.5px;font-weight:600;}
+  .subscore .val{font-family:'Cormorant Garamond',Georgia,serif;font-size:17px;color:var(--accent);}
+  .btn{font:inherit;font-size:15px;font-weight:600;padding:13px 30px;border-radius:999px;border:none;background:var(--accent);color:var(--accent-ink);cursor:pointer;transition:background .15s ease;width:100%;}
+  .btn:hover{background:#8C3830;}
+  .btn-outline{background:none;border:1px solid var(--accent);color:var(--accent);margin-top:14px;}
+  .btn-outline:hover{background:var(--accent-soft);}
+  .hint{font-size:12.5px;color:var(--ink-soft);margin-top:14px;text-align:center;}
+  .footnote{margin-top:40px;font-size:11.5px;color:var(--ink-soft);border-top:1px solid var(--line);padding-top:16px;line-height:1.7;}
+  [hidden]{display:none !important;}
+  @media print{
+    .back-top, .eyebrow, h1, .intro-text, .footnote, .btn-outline{ display:none !important; }
+    body{background:#fff;}
+    #result{box-shadow:none;border:none;padding:0;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back-top" href="index.html">&larr; Tous les tests</a>
+  <div class="eyebrow">Refus scolaire anxieux</div>
+  <h1 class="serif">Questionnaire de repérage du refus scolaire anxieux (SCREEN)</h1>
+  <p class="intro-text">Ce résultat ne remplace pas un échange avec votre praticien, il sert de point de départ pour en discuter ensemble.</p>
+
+  <div class="start-card" id="startScreen">
+    <div class="pills">
+      <span class="pill">18 questions</span>
+      <span class="pill">4 minutes</span>
+      <span class="pill">Français</span>
+    </div>
+    <p class="instructions">Les phrases ci-dessous décrivent ce que les enfants ou les adolescents
+    font ou ressentent parfois. Pour chacune, indique à quel point cela te correspond en ce moment.
+    Il n'y a pas de bonne ou de mauvaise réponse.</p>
+    <button type="button" class="btn" id="startBtn">Commencer</button>
+    <p class="hint">Rien n'est envoyé ni conservé sur un serveur : si vous quittez avant la fin, vos réponses sont perdues et il faudra recommencer.</p>
+  </div>
+
+  <div class="quiz-card" id="quizScreen" hidden>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <p class="q-count" id="qCount">Question 1/18</p>
+    <p class="q-item" id="qItem"></p>
+    <div class="options" id="qOptions"></div>
+    <button type="button" class="back-link" id="backBtn" hidden>&larr; Question précédente</button>
+  </div>
+
+  <div id="result">
+    <h2 class="serif">Questionnaire de repérage du refus scolaire anxieux (SCREEN)</h2>
+    <p class="meta-line">Passation : <span id="passationDate"></span></p>
+
+    <p class="section-title">Score global</p>
+    <p class="score-line">Score total : <strong id="scoreVal">0</strong>/90</p>
+    <p class="note-informel" id="interpretText"></p>
+    <p class="note-informel">Ce score est un repère de dépistage, complété par un examen clinique — il ne constitue pas un diagnostic.</p>
+
+    <p class="section-title">Sous-échelles</p>
+    <div id="subscoreList"></div>
+
+    <button type="button" class="btn" id="downloadBtn">Télécharger le résultat (PDF)</button>
+    <button type="button" class="btn btn-outline" id="restartBtn">Refaire le test</button>
+  </div>
+
+  <p class="footnote">
+    School Refusal Evaluation Scale for Adolescents (SCREEN) — Gallé-Tessonneau, M., &amp; Gana, K.
+    (2019). Journal of Pediatric Psychology, 44(2), 153-163. Licence CC BY-NC-ND 3.0 France.
+    Ce résultat est un repère, il ne constitue pas un diagnostic.
+  </p>
+</div>
+
+<script>
+(function(){
+  const ITEMS = [
+    "En classe j'ai peur de ce que les autres pensent de moi",
+    "Je dis à mes parents que je ne veux pas aller à l'école et que je veux rester à la maison",
+    "J'ai du mal à expliquer pourquoi je n'arrive pas à aller à l'école",
+    "Quand j'arrive devant l'école je ne me sens pas bien au moment de rentrer dans l'établissement",
+    "En classe j'ai peur de mal faire mon travail",
+    "Je suis plus souvent absent que l'année dernière",
+    "J'ai l'impression que j'ai un blocage pour aller à l'école, que je ne vais pas réussir à y aller",
+    "Le matin je ne veux pas aller à l'école",
+    "Je vais souvent à l'infirmerie ou à la vie scolaire car je ne me sens pas bien",
+    "Je suis fragile et sensible",
+    "J'ai peur d'aller à l'école",
+    "C'est difficile de retourner à l'école après les vacances",
+    "Je suis régulièrement absent car je ne me sens pas bien",
+    "En classe je me sens à l'aise, je me sens bien",
+    "À l'école je me sens très à l'aise avec mes camarades",
+    "C'est difficile pour moi de retourner à l'école le lundi",
+    "À l'école, je demande souvent qu'on appelle mes parents pour qu'ils viennent me chercher",
+    "Quand je vais à l'école, sur le chemin je ne me sens pas bien"
+  ];
+  const REVERSED = [13, 14]; // items 14 et 15 (index 0-based)
+  const SUBSCALES = {
+    "Anticipation anxieuse": [2, 3, 6, 10, 17],
+    "Transition difficile": [1, 7, 11, 15],
+    "Malaise interpersonnel": [0, 4, 9, 13, 14],
+    "Évitement de l'école": [5, 8, 12, 16]
+  };
+  const OPTS = [
+    "Ne me correspond pas du tout",
+    "Me correspond un peu",
+    "Me correspond moyennement",
+    "Me correspond beaucoup",
+    "Me correspond complètement"
+  ];
+  const answers = new Array(ITEMS.length).fill(null);
+  let current = 0;
+
+  const startScreen = document.getElementById('startScreen');
+  const quizScreen = document.getElementById('quizScreen');
+  const startBtn = document.getElementById('startBtn');
+  const qCount = document.getElementById('qCount');
+  const qItem = document.getElementById('qItem');
+  const qOptions = document.getElementById('qOptions');
+  const backBtn = document.getElementById('backBtn');
+  const progressFill = document.getElementById('progressFill');
+  const resultBox = document.getElementById('result');
+
+  startBtn.addEventListener('click', function(){
+    startScreen.hidden = true;
+    quizScreen.hidden = false;
+    renderQuestion();
+  });
+
+  backBtn.addEventListener('click', function(){
+    if(current > 0){ current -= 1; renderQuestion(); }
+  });
+
+  function renderQuestion(){
+    qCount.textContent = 'Question ' + (current + 1) + '/' + ITEMS.length;
+    qItem.textContent = (current + 1) + '. ' + ITEMS[current];
+    progressFill.style.width = ((current / ITEMS.length) * 100) + '%';
+    backBtn.hidden = current === 0;
+    qOptions.innerHTML = '';
+    OPTS.forEach(function(opt, idx){
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'option-btn';
+      btn.textContent = opt;
+      if(answers[current] === idx){ btn.classList.add('selected'); }
+      btn.addEventListener('click', function(){ selectAnswer(idx, btn); });
+      qOptions.appendChild(btn);
+    });
+  }
+
+  function selectAnswer(idx, btnEl){
+    answers[current] = idx;
+    Array.from(qOptions.children).forEach(function(b){ b.classList.remove('selected'); });
+    btnEl.classList.add('selected');
+    progressFill.style.width = (((current + 1) / ITEMS.length) * 100) + '%';
+    setTimeout(function(){
+      if(current < ITEMS.length - 1){ current += 1; renderQuestion(); }
+      else { showResult(); }
+    }, 300);
+  }
+
+  function scoreOf(idx){
+    const raw = answers[idx] + 1; // 1..5
+    return REVERSED.indexOf(idx) !== -1 ? (6 - raw) : raw;
+  }
+
+  function showResult(){
+    quizScreen.hidden = true;
+    document.getElementById('passationDate').textContent = new Date().toLocaleString('fr-FR', {day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit'});
+
+    let total = 0;
+    ITEMS.forEach(function(t, idx){ total += scoreOf(idx); });
+    document.getElementById('scoreVal').textContent = total;
+
+    let interp;
+    if (total <= 31) interp = "Zone « pas de risque » (score ≤ 31).";
+    else if (total <= 40) interp = "Zone « symptomatologie modérée » (32 à 40).";
+    else interp = "Zone « refus scolaire anxieux avéré » (≥ 41) — seuil de sensibilité 94 %, spécificité 88 % dans l'étude de validation.";
+    document.getElementById('interpretText').textContent = interp;
+
+    const listEl = document.getElementById('subscoreList');
+    listEl.innerHTML = '';
+    Object.keys(SUBSCALES).forEach(function(label){
+      const idxs = SUBSCALES[label];
+      let sum = 0;
+      idxs.forEach(function(i){ sum += scoreOf(i); });
+      const div = document.createElement('div');
+      div.className = 'subscore';
+      div.innerHTML = '<span class="lbl">' + label + '</span><span class="val">' + sum + ' / ' + (idxs.length * 5) + '</span>';
+      listEl.appendChild(div);
+    });
+
+    resultBox.style.display = 'block';
+    resultBox.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  document.getElementById('downloadBtn').addEventListener('click', function(){ window.print(); });
+  document.getElementById('restartBtn').addEventListener('click', function(){
+    answers.fill(null);
+    current = 0;
+    resultBox.style.display = 'none';
+    startScreen.hidden = false;
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SCREEN — Repérage du refus scolaire anxieux</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#B4483C 0%,#D97B6C 55%,#7A241A 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(240,190,170,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#1A2233;background:#E7E9EE;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .section ul{font-size:14.5px;margin:0 0 10px;padding-left:20px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;flex-wrap:wrap;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#B4483C;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#1A2233;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">SCREEN</span></div>
+
+  <h1 class="serif">Questionnaire de repérage du refus scolaire anxieux</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">School Refusal Evaluation Scale for Adolescents (SCREEN) — Gallé-Tessonneau &amp; Gana (2019)</p>
+  <div class="meta-row">
+    <span class="pill">18 items</span>
+    <span class="pill">4 minutes</span>
+    <span class="pill">Français (officiel)</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="screen.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Repère le refus scolaire anxieux chez le collégien (10-16 ans) à travers 4 dimensions :
+    anticipation anxieuse, transition difficile, malaise interpersonnel, évitement de l'école.
+    Développé et validé en France (Université de Bordeaux, Inserm U897).</p>
+    <p class="source-note">Droits : licence Creative Commons Attribution — Pas d'Utilisation
+    Commerciale — Pas de Modification 3.0 France, diffusion autorisée à des fins cliniques ou de
+    recherche avec citation de la référence.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>18 items, échelle 1-5 (items 14 et 15 inversés avant calcul). Score global = somme des 18
+    items (18-90). Score de chaque sous-échelle = somme des items la composant.</p>
+    <ul>
+      <li>Anticipation anxieuse : items 3, 4, 7, 11, 18</li>
+      <li>Transition difficile : items 2, 8, 12, 16</li>
+      <li>Malaise interpersonnel : items 1, 5, 10, 14, 15</li>
+      <li>Évitement de l'école : items 6, 9, 13, 17</li>
+    </ul>
+    <p>Seuils validés (N = 656 collégiens) : &lt; 31 pas de risque ; 32-40 symptomatologie modérée ;
+    &ge; 41 refus scolaire anxieux avéré (sensibilité 94 %, spécificité 88 %). L'autrice précise que
+    l'outil doit être complété par un examen clinique.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source</h2>
+    <p class="source-note">Gallé-Tessonneau, M., &amp; Gana, K. (2019). Development and Validation
+    of the School Refusal Evaluation Scale for Adolescents. <em>Journal of Pediatric Psychology,
+    44</em>(2), 153-163. https://doi.org/10.1093/jpepsy/jsy061. Formulaire officiel et notice
+    d'utilisation hébergés par l'autrice sur rsa.cwebcreations.fr.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

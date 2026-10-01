@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>SPAQ — Cabinet Bouche &amp; Chmura</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:700px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 18px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  h1{font-size:25px;margin:0 0 18px;}
+  .intro{font-size:14.5px;color:#4A4E43;background:#fff;border:1px solid #E0D9C9;border-radius:12px;padding:16px 18px;margin-bottom:24px;}
+  .item{background:#fff;border:1px solid #E0D9C9;border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+  .item p{font-size:14.5px;margin:0 0 12px;font-weight:600;}
+  .scale{display:flex;gap:6px;flex-wrap:wrap;}
+  .scale-opt{flex:1;min-width:34px;text-align:center;font-size:12px;padding:8px 4px;border:1px solid #E0D9C9;border-radius:8px;cursor:pointer;}
+  .scale-opt:hover{background:#F4F1EA;}
+  .scale-opt.selected{background:#6B5580;border-color:#6B5580;color:#fff;font-weight:700;}
+  .scale-labels{display:flex;justify-content:space-between;font-size:11px;color:#9A9E90;margin-top:8px;}
+  .priority{background:#fff;border:1px solid #E0D9C9;border-radius:12px;padding:18px 20px;margin-top:10px;}
+  .priority p{font-size:14.5px;margin:0 0 12px;font-weight:600;}
+  .prio-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #E0D9C9;}
+  .prio-item:last-child{border-bottom:none;}
+  .prio-item label{font-size:13.5px;flex:1;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:12px 22px;cursor:pointer;border:1px solid transparent;background:#6B5580;color:#fff;margin-top:10px;}
+  .btn:disabled{opacity:.45;cursor:not-allowed;}
+  #result{display:none;margin-top:30px;}
+  .score-card{background:#fff;border:1px solid #E0D9C9;border-radius:12px;padding:14px 18px;margin-bottom:10px;}
+  .score-card h3{margin:0 0 6px;font-size:15px;font-family:'Cormorant Garamond',Georgia,serif;}
+  .score-val{font-size:14px;color:#63695D;}
+  .footnote{margin-top:40px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;line-height:1.7;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <h1 class="serif">Questionnaire de satisfaction et des zones de problèmes (couple, SPAQ)</h1>
+  <div class="intro">
+    Voilà une liste de secteurs dans lesquels les couples sont souvent peu satisfaits et où chacun
+    est en désaccord sur le comportement de l'autre. Cochez ce qui représente votre insatisfaction,
+    quant à la façon dont votre relation fonctionne sur chacune de ces zones (1 = complètement
+    heureux/satisfait, 7 = complètement malheureux/insatisfait).
+  </div>
+  <div id="quiz"></div>
+  <div class="priority">
+    <p>Entourez les trois secteurs les plus importants sur lesquels vous voudriez travailler au
+    cours de la thérapie (3 maximum) :</p>
+    <div id="priorityList"></div>
+  </div>
+  <button class="btn" id="submitBtn" type="button" disabled>Voir mes résultats</button>
+
+  <div id="result">
+    <h2 class="serif">Vos résultats</h2>
+    <p class="score-val">Le SPAQ n'a pas de score composite standardisé : il s'affiche ici comme un
+    profil brut, item par item, à discuter en séance — sur le même modèle que le CPQ déjà présent
+    dans ce catalogue.</p>
+    <div id="cards"></div>
+  </div>
+  <p class="footnote">
+    Satisfaction and Problem Areas Questionnaire (IBCT) — Heavey, C. L., Christensen, A., &amp;
+    Malamuth, N. M. (1995), laboratoire IBCT d'Andrew Christensen (UCLA). Traduction française :
+    ibct-france.fr. Outil de repérage clinique, ne remplace pas une évaluation complète.
+  </p>
+</div>
+
+<script>
+(function(){
+  var ITEMS = [
+    "Organisation familiale et finances",
+    "Enfants ou parentage, éducation",
+    "Démonstrations d'affection",
+    "Relations sexuelles",
+    "Décisions sur carrière/job",
+    "Tâches ménagères",
+    "Confiance/jalousie",
+    "Attitude envers parents/beaux-parents/(amis)",
+    "Temps de loisir/récréation ensemble",
+    "Drogues et alcool",
+    "Religion",
+    "Humeur/caractère/émotions",
+    "Valeurs/buts, priorités, décisions majeures dans la vie",
+    "Comportement approprié ou apparence",
+    "Autre"
+  ];
+
+  var scores = {};
+  var quizEl = document.getElementById('quiz');
+  var html = '';
+  ITEMS.forEach(function(s, idx){
+    html += '<div class="item" data-idx="' + idx + '"><p>' + (idx+1) + '. ' + s + '</p>';
+    html += '<div class="scale">';
+    for (var v=1; v<=7; v++){
+      html += '<span class="scale-opt" data-idx="' + idx + '" data-val="' + v + '">' + v + '</span>';
+    }
+    html += '</div><div class="scale-labels"><span>Heureux / satisfait</span><span>Malheureux / insatisfait</span></div></div>';
+  });
+  quizEl.innerHTML = html;
+
+  var priorityList = document.getElementById('priorityList');
+  ITEMS.forEach(function(s, idx){
+    var div = document.createElement('div');
+    div.className = 'prio-item';
+    div.innerHTML = '<input type="checkbox" id="prio' + idx + '" data-prio="' + idx + '"><label for="prio' + idx + '">' + s + '</label>';
+    priorityList.appendChild(div);
+  });
+
+  var submitBtn = document.getElementById('submitBtn');
+
+  function checkComplete(){
+    var ok = true;
+    ITEMS.forEach(function(s, idx){ if (scores[idx] === undefined) ok = false; });
+    submitBtn.disabled = !ok;
+  }
+
+  quizEl.querySelectorAll('.scale-opt').forEach(function(el){
+    el.addEventListener('click', function(){
+      var idx = el.getAttribute('data-idx');
+      var val = parseInt(el.getAttribute('data-val'), 10);
+      var item = el.closest('.item');
+      item.querySelectorAll('.scale-opt').forEach(function(o){ o.classList.remove('selected'); });
+      el.classList.add('selected');
+      scores[idx] = val;
+      checkComplete();
+    });
+  });
+
+  priorityList.addEventListener('change', function(e){
+    var checked = priorityList.querySelectorAll('input:checked');
+    if (checked.length > 3){
+      e.target.checked = false;
+    }
+  });
+
+  submitBtn.addEventListener('click', function(){
+    var cards = document.getElementById('cards');
+    var html2 = '';
+    ITEMS.forEach(function(s, idx){
+      html2 += '<div class="score-card"><h3>' + s + '</h3><div class="score-val">' + scores[idx] + ' / 7</div></div>';
+    });
+    var prioNames = [];
+    priorityList.querySelectorAll('input:checked').forEach(function(c){
+      prioNames.push(ITEMS[parseInt(c.getAttribute('data-prio'), 10)]);
+    });
+    if (prioNames.length){
+      html2 += '<div class="score-card"><h3>Secteurs prioritaires choisis</h3><div class="score-val">' + prioNames.join(', ') + '</div></div>';
+    }
+    cards.innerHTML = html2;
+    document.getElementById('result').style.display = 'block';
+    submitBtn.style.display = 'none';
+    document.getElementById('result').scrollIntoView({behavior:'smooth'});
+  });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SPAQ — Satisfaction et zones de problèmes (couple)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#4A3B5C 0%,#6B5580 55%,#332843 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(210,190,230,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#1A2233;background:#E7E9EE;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .warn-note{font-size:12.5px;color:#4A3B5C;background:#F0E9F5;border:1px solid #D9C9E7;border-radius:10px;padding:10px 14px;}
+  .actions{display:flex;gap:12px;flex-wrap:wrap;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#4A3B5C;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#1A2233;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">SPAQ</span></div>
+
+  <h1 class="serif">Questionnaire de satisfaction et des zones de problèmes (couple)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Satisfaction and Problem Areas Questionnaire (IBCT) — Heavey, Christensen &amp; Malamuth (1995)</p>
+  <div class="meta-row">
+    <span class="pill">15 items</span>
+    <span class="pill">4 minutes</span>
+    <span class="pill">Français</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="spaq-couple.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <p class="warn-note">⚠️ Le sigle SPAQ est partagé avec le « Questionnaire d'évaluation du
+    schéma saisonnier » (Seasonal Pattern Assessment Questionnaire), instrument totalement
+    distinct et non construit à ce jour — fichier nommé <code>spaq-couple</code> pour éviter toute
+    confusion.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Outil clinique de la thérapie de couple comportementale intégrative (Integrative Behavioral
+    Couple Therapy, Christensen &amp; Jacobson), dérivé de la lignée des « Areas of Change
+    Questionnaire » (Weiss, Hops &amp; Patterson, 1973). Rempli par chacun des deux membres du
+    couple séparément, il balaie 15 secteurs de satisfaction/insatisfaction conjugale.</p>
+    <p class="source-note">Droits : diffusé librement à but clinique par le laboratoire officiel
+    d'Andrew Christensen (UCLA, ibct.psych.ucla.edu) et repris/traduit par le réseau français de
+    formation IBCT (ibct-france.fr). Usage clinique personnel non commercial conforme.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Échelle visuelle 1-7 par secteur (1 = complètement heureux/satisfait, 7 = complètement
+    malheureux/insatisfait). Pas de sous-échelle ni de score global standardisé : profil item par
+    item, complété par le choix des trois secteurs les plus importants à travailler en thérapie.
+    Aucun seuil clinique publié — outil qualitatif d'orientation du travail thérapeutique, comme le
+    CPQ déjà présent dans ce catalogue.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source</h2>
+    <p class="source-note">Version française : ibct-france.fr (« Zones de problèmes et de
+    satisfaction, questionnaire IBCT »). Version originale : « Problem Areas Questionnaire »
+    (Heavey, Christensen &amp; Malamuth, 1995), copie hébergée par le laboratoire IBCT.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

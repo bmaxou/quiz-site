@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>TFEQ-51 — Cabinet Bouche &amp; Chmura</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F4F1EA; --surface:#FFFFFF; --surface-2:#EAE6D9; --ink:#20241E; --ink-soft:#63695D;
+    --line:#E0D9C9; --accent:#A0824C; --accent-ink:#F4F1EA; --accent-soft:#EFE7D6;
+    --progress-bg:#E6E1D3; --progress-fill:#C9A876;
+    --shadow: 0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',-apple-system,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,h3,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:var(--ink);}
+  .wrap{max-width:560px;margin:0 auto;padding:48px 24px 80px;}
+  .back-top{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--ink-soft);text-decoration:none;margin-bottom:20px;}
+  .back-top:hover{color:var(--ink);}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--ink-soft);display:inline-block;}
+  h1{font-size:26px;margin:0 0 10px;}
+  .intro-text{color:var(--ink-soft);font-size:15px;margin:0 0 28px;}
+  .start-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:32px 28px;box-shadow:var(--shadow);}
+  .pills{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 20px;}
+  .pill{font-size:12.5px;font-weight:600;color:var(--ink-soft);background:var(--surface-2);border-radius:999px;padding:6px 13px;display:inline-flex;align-items:center;gap:6px;}
+  .instructions{font-size:14.5px;color:var(--ink-soft);margin:0 0 22px;line-height:1.7;}
+  .quiz-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:28px 26px 26px;box-shadow:var(--shadow);}
+  .progress-track{height:8px;border-radius:99px;background:var(--progress-bg);overflow:hidden;margin-bottom:14px;}
+  .progress-fill{height:100%;background:var(--progress-fill);border-radius:99px;width:0%;transition:width .3s ease;}
+  .q-count{font-size:12.5px;color:var(--ink-soft);font-weight:600;margin:0 0 20px;}
+  .q-item{font-size:18px;font-weight:600;color:var(--ink);margin:0 0 26px;font-family:'Cormorant Garamond',Georgia,serif;line-height:1.35;}
+  .options{display:flex;flex-direction:column;gap:10px;}
+  .option-btn{font:inherit;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:14.5px;color:var(--ink);cursor:pointer;transition:border-color .15s ease,background .15s ease;}
+  .option-btn:hover{border-color:var(--accent);}
+  .option-btn.selected{border-color:var(--accent);background:var(--accent-soft);font-weight:600;}
+  .back-link{display:inline-flex;align-items:center;gap:6px;margin-top:22px;font-size:13px;color:var(--ink-soft);background:none;border:none;font:inherit;cursor:pointer;padding:0;}
+  .back-link:hover{color:var(--ink);}
+  .back-link[hidden]{display:none;}
+  #result{display:none;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:30px 28px;box-shadow:var(--shadow);}
+  #result h2.serif{font-size:22px;margin:0 0 6px;}
+  .meta-line{font-size:13.5px;color:var(--ink-soft);margin:0 0 24px;}
+  .note-informel{font-size:12.5px;color:var(--ink-soft);margin:0 0 6px;line-height:1.65;}
+  .subscore{border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;}
+  .subscore .lbl{font-size:13.5px;font-weight:600;}
+  .subscore .val{font-family:'Cormorant Garamond',Georgia,serif;font-size:17px;color:var(--accent);}
+  .btn{font:inherit;font-size:15px;font-weight:600;padding:13px 30px;border-radius:999px;border:none;background:var(--accent);color:var(--accent-ink);cursor:pointer;transition:background .15s ease;width:100%;}
+  .btn:hover{background:#7A6337;}
+  .btn-outline{background:none;border:1px solid var(--accent);color:var(--accent);margin-top:14px;}
+  .btn-outline:hover{background:var(--accent-soft);}
+  .hint{font-size:12.5px;color:var(--ink-soft);margin-top:14px;text-align:center;}
+  .footnote{margin-top:40px;font-size:11.5px;color:var(--ink-soft);border-top:1px solid var(--line);padding-top:16px;line-height:1.7;}
+  [hidden]{display:none !important;}
+  @media print{
+    .back-top, .eyebrow, h1, .intro-text, .footnote, .btn-outline{ display:none !important; }
+    body{background:#fff;}
+    #result{box-shadow:none;border:none;padding:0;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back-top" href="index.html">&larr; Tous les tests</a>
+  <div class="eyebrow">TCA</div>
+  <h1 class="serif">Questionnaire des trois facteurs de l'alimentation (TFEQ-51)</h1>
+  <p class="intro-text">Ce résultat ne remplace pas un échange avec votre praticien, il sert de point de départ pour en discuter ensemble.</p>
+
+  <div class="start-card" id="startScreen">
+    <div class="pills">
+      <span class="pill">51 questions</span>
+      <span class="pill">10 minutes</span>
+      <span class="pill">Français</span>
+    </div>
+    <p class="instructions">Partie 1 (36 items) : répondez Vrai ou Faux à chaque affirmation. Partie
+    2 (15 items) : répondez sur l'échelle proposée pour chaque question.</p>
+    <button type="button" class="btn" id="startBtn">Commencer</button>
+    <p class="hint">Rien n'est envoyé ni conservé sur un serveur : si vous quittez avant la fin, vos réponses sont perdues et il faudra recommencer.</p>
+  </div>
+
+  <div class="quiz-card" id="quizScreen" hidden>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <p class="q-count" id="qCount">Question 1/51</p>
+    <p class="q-item" id="qItem"></p>
+    <div class="options" id="qOptions"></div>
+    <button type="button" class="back-link" id="backBtn" hidden>&larr; Question précédente</button>
+  </div>
+
+  <div id="result">
+    <h2 class="serif">Questionnaire des trois facteurs de l'alimentation (TFEQ-51)</h2>
+    <p class="meta-line">Passation : <span id="passationDate"></span></p>
+    <div id="subscoreList"></div>
+    <p class="note-informel">Pas de seuil clinique officiel dans l'article original — seulement les
+    plages de score par facteur. Ce résultat est un repère, il ne constitue pas un diagnostic.</p>
+    <button type="button" class="btn" id="downloadBtn">Télécharger le résultat (PDF)</button>
+    <button type="button" class="btn btn-outline" id="restartBtn">Refaire le test</button>
+  </div>
+
+  <p class="footnote">
+    Three-Factor Eating Questionnaire (TFEQ) — Stunkard, A. J., &amp; Messick, S. (1985). Journal of
+    Psychosomatic Research, 29(1), 71-83. Instrument académique classique, librement réutilisé et
+    reproduit depuis 40 ans. Ce résultat est un repère, il ne constitue pas un diagnostic.
+  </p>
+</div>
+
+<script>
+(function(){
+  // Partie I : 36 items Vrai/Faux, [texte, réponse cotée ("V" ou "F"), facteur]
+  const PART1 = [
+    ["Quand je sens un steak grésiller ou vois un morceau de viande juteux, j'ai beaucoup de mal à ne pas manger, même si je viens de finir un repas.","V","F2"],
+    ["Je mange généralement trop lors des occasions sociales, comme les fêtes et pique-niques.","V","F2"],
+    ["J'ai généralement si faim que je mange plus de trois fois par jour.","V","F3"],
+    ["Quand j'ai mangé mon quota de calories, j'arrive généralement bien à ne plus manger.","F","F1"],
+    ["Faire un régime est si dur pour moi car j'ai trop faim.","V","F3"],
+    ["Je prends délibérément de petites portions pour contrôler mon poids.","V","F1"],
+    ["Parfois les choses ont si bon goût que je continue à manger même sans plus avoir faim.","V","F2"],
+    ["Comme j'ai souvent faim, je souhaiterais parfois qu'un expert me dise, pendant que je mange, que j'en ai eu assez ou que je peux encore manger.","V","F3"],
+    ["Quand je me sens anxieux(se), je me surprends à manger.","V","F2"],
+    ["La vie est trop courte pour se soucier des régimes.","F","F1"],
+    ["Comme mon poids varie, j'ai fait plusieurs régimes amaigrissants.","V","F2"],
+    ["J'ai souvent si faim que je dois manger quelque chose.","V","F3"],
+    ["Quand je suis avec quelqu'un qui mange trop, je mange généralement trop aussi.","V","F2"],
+    ["J'ai une assez bonne idée du nombre de calories des aliments courants.","V","F1"],
+    ["Parfois, une fois que je commence à manger, je n'arrive pas à m'arrêter.","V","F2"],
+    ["Ce n'est pas difficile pour moi de laisser quelque chose dans mon assiette.","F","F2"],
+    ["À certains moments de la journée, j'ai faim car j'ai pris l'habitude de manger à ce moment-là.","V","F3"],
+    ["Pendant un régime, si je mange un aliment interdit, je mange consciemment moins pendant un moment pour compenser.","V","F1"],
+    ["Être avec quelqu'un qui mange me donne souvent assez faim pour manger aussi.","V","F3"],
+    ["Quand je me sens triste, je mange souvent trop.","V","F2"],
+    ["J'aime trop manger pour gâcher ça en comptant les calories ou en surveillant mon poids.","F","F1"],
+    ["Quand je vois un vrai mets délicieux, j'ai souvent si faim que je dois manger tout de suite.","V","F3"],
+    ["J'arrête souvent de manger sans être vraiment rassasié(e), pour limiter consciemment la quantité que je mange.","V","F1"],
+    ["J'ai si faim que mon estomac semble souvent un puits sans fond.","V","F3"],
+    ["Mon poids a très peu changé ces dix dernières années.","F","F2"],
+    ["J'ai toujours faim donc j'ai du mal à arrêter de manger avant d'avoir fini mon assiette.","V","F3"],
+    ["Quand je me sens seul(e), je me console en mangeant.","V","F2"],
+    ["Je me retiens consciemment aux repas pour ne pas prendre de poids.","V","F1"],
+    ["J'ai parfois très faim tard le soir ou la nuit.","V","F3"],
+    ["Je mange ce que je veux, quand je veux.","F","F1"],
+    ["Sans même y penser, je mets longtemps à manger.","F","F2"],
+    ["Je compte les calories consciemment pour contrôler mon poids.","V","F1"],
+    ["Je ne mange pas certains aliments parce qu'ils font grossir.","V","F1"],
+    ["J'ai toujours assez faim pour manger à n'importe quel moment.","V","F3"],
+    ["Je fais très attention aux changements de ma silhouette.","V","F1"],
+    ["Pendant un régime, si je mange un aliment interdit, je craque souvent ensuite et mange d'autres aliments très caloriques.","V","F2"]
+  ];
+  // Partie II : items 37-49, 4 options chacun, [texte, [options], facteur, direction "+"/"-"]
+  const PART2 = [
+    ["À quelle fréquence faites-vous un régime pour contrôler consciemment votre poids ?", ["Rarement","Parfois","Habituellement","Toujours"], "F1", "+"],
+    ["Une variation de poids de 2,5 kg affecterait-elle votre façon de vivre ?", ["Pas du tout","Légèrement","Modérément","Beaucoup"], "F1", "+"],
+    ["À quelle fréquence avez-vous faim ?", ["Seulement aux repas","Parfois entre les repas","Souvent entre les repas","Presque toujours"], "F3", "+"],
+    ["Votre culpabilité de trop manger vous aide-t-elle à contrôler votre alimentation ?", ["Jamais","Rarement","Souvent","Toujours"], "F1", "+"],
+    ["À quel point serait-il difficile d'arrêter de manger à mi-repas et de ne rien manger pendant 4 heures ?", ["Facile","Légèrement difficile","Modérément difficile","Très difficile"], "F3", "+"],
+    ["À quel point êtes-vous conscient(e) de ce que vous mangez ?", ["Pas du tout","Légèrement","Modérément","Extrêmement"], "F1", "+"],
+    ["À quelle fréquence évitez-vous de « stocker » des aliments tentants ?", ["Presque jamais","Rarement","Habituellement","Presque toujours"], "F1", "+"],
+    ["Est-il probable que vous achetiez des aliments peu caloriques ?", ["Improbable","Légèrement improbable","Modérément probable","Très probable"], "F1", "+"],
+    ["Mangez-vous raisonnablement devant les autres et craquez-vous seul(e) ?", ["Jamais","Rarement","Souvent","Toujours"], "F2", "+"],
+    ["Est-il probable que vous mangiez consciemment lentement pour manger moins ?", ["Improbable","Légèrement probable","Modérément probable","Très probable"], "F1", "+"],
+    ["À quelle fréquence sautez-vous le dessert car vous n'avez plus faim ?", ["Presque jamais","Rarement","Au moins une fois par semaine","Presque tous les jours"], "F3", "-"],
+    ["Est-il probable que vous mangiez consciemment moins que ce que vous voulez ?", ["Improbable","Légèrement probable","Modérément probable","Très probable"], "F1", "+"],
+    ["Faites-vous des crises alimentaires même sans avoir faim ?", ["Jamais","Rarement","Parfois","Au moins une fois par semaine"], "F2", "+"]
+  ];
+  const ITEM50 = { text: "Sur une échelle de 0 à 5, où 0 = aucune restriction alimentaire (mange ce qu'il/elle veut quand il/elle veut) et 5 = restriction totale (limite constamment son alimentation, ne « craque » jamais), quel chiffre vous donneriez-vous ?", options: ["0","1","2","3","4","5"], factor: "F1" };
+  const ITEM51 = { text: "Dans quelle mesure cette phrase décrit-elle votre comportement alimentaire ? « Je commence un régime le matin, mais à cause de plusieurs choses qui arrivent dans la journée, le soir j'ai abandonné et je mange ce que je veux, en me promettant de recommencer le régime demain. »", options: ["Pas du tout","Un peu","Assez bien","Parfaitement"], factor: "F2" };
+
+  const ITEMS = [];
+  PART1.forEach(function(row){ ITEMS.push({ type:"tf", text: row[0], key: row[1], factor: row[2] }); });
+  PART2.forEach(function(row){ ITEMS.push({ type:"likert4", text: row[0], options: row[1], factor: row[2], dir: row[3] }); });
+  ITEMS.push({ type:"likert6", text: ITEM50.text, options: ITEM50.options, factor: ITEM50.factor, dir: "+" });
+  ITEMS.push({ type:"likert4", text: ITEM51.text, options: ITEM51.options, factor: ITEM51.factor, dir: "+" });
+
+  const answers = new Array(ITEMS.length).fill(null);
+  let current = 0;
+
+  const startScreen = document.getElementById('startScreen');
+  const quizScreen = document.getElementById('quizScreen');
+  const startBtn = document.getElementById('startBtn');
+  const qCount = document.getElementById('qCount');
+  const qItem = document.getElementById('qItem');
+  const qOptions = document.getElementById('qOptions');
+  const backBtn = document.getElementById('backBtn');
+  const progressFill = document.getElementById('progressFill');
+  const resultBox = document.getElementById('result');
+
+  startBtn.addEventListener('click', function(){
+    startScreen.hidden = true;
+    quizScreen.hidden = false;
+    renderQuestion();
+  });
+
+  backBtn.addEventListener('click', function(){
+    if(current > 0){ current -= 1; renderQuestion(); }
+  });
+
+  function optionsFor(item){
+    if (item.type === "tf") return ["Vrai","Faux"];
+    return item.options;
+  }
+
+  function renderQuestion(){
+    const item = ITEMS[current];
+    qCount.textContent = 'Question ' + (current + 1) + '/' + ITEMS.length;
+    qItem.textContent = (current + 1) + '. ' + item.text;
+    progressFill.style.width = ((current / ITEMS.length) * 100) + '%';
+    backBtn.hidden = current === 0;
+    qOptions.innerHTML = '';
+    optionsFor(item).forEach(function(opt, idx){
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'option-btn';
+      btn.textContent = opt;
+      if(answers[current] === idx){ btn.classList.add('selected'); }
+      btn.addEventListener('click', function(){ selectAnswer(idx, btn); });
+      qOptions.appendChild(btn);
+    });
+  }
+
+  function selectAnswer(idx, btnEl){
+    answers[current] = idx;
+    Array.from(qOptions.children).forEach(function(b){ b.classList.remove('selected'); });
+    btnEl.classList.add('selected');
+    progressFill.style.width = (((current + 1) / ITEMS.length) * 100) + '%';
+    setTimeout(function(){
+      if(current < ITEMS.length - 1){ current += 1; renderQuestion(); }
+      else { showResult(); }
+    }, 260);
+  }
+
+  function pointsFor(item, idx){
+    if (item.type === "tf"){
+      const chosen = idx === 0 ? "V" : "F";
+      return chosen === item.key ? 1 : 0;
+    }
+    if (item.type === "likert4"){
+      const upper = idx >= 2; // options 3 et 4 (indices 2,3)
+      return (item.dir === "+") ? (upper ? 1 : 0) : (upper ? 0 : 1);
+    }
+    if (item.type === "likert6"){
+      const upper = idx >= 3; // 3,4,5 sur 0-5
+      return (item.dir === "+") ? (upper ? 1 : 0) : (upper ? 0 : 1);
+    }
+    return 0;
+  }
+
+  function showResult(){
+    quizScreen.hidden = true;
+    document.getElementById('passationDate').textContent = new Date().toLocaleString('fr-FR', {day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit'});
+
+    const totals = { F1: 0, F2: 0, F3: 0 };
+    ITEMS.forEach(function(item, idx){
+      totals[item.factor] += pointsFor(item, answers[idx]);
+    });
+
+    const labels = {
+      F1: ["Restriction cognitive", 21],
+      F2: ["Désinhibition", 16],
+      F3: ["Faim", 14]
+    };
+    const listEl = document.getElementById('subscoreList');
+    listEl.innerHTML = '';
+    ["F1","F2","F3"].forEach(function(k){
+      const div = document.createElement('div');
+      div.className = 'subscore';
+      div.innerHTML = '<span class="lbl">' + labels[k][0] + '</span><span class="val">' + totals[k] + ' / ' + labels[k][1] + '</span>';
+      listEl.appendChild(div);
+    });
+
+    resultBox.style.display = 'block';
+    resultBox.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  document.getElementById('downloadBtn').addEventListener('click', function(){ window.print(); });
+  document.getElementById('restartBtn').addEventListener('click', function(){
+    answers.fill(null);
+    current = 0;
+    resultBox.style.display = 'none';
+    startScreen.hidden = false;
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TFEQ-51 — Questionnaire des trois facteurs de l'alimentation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#6B4A2E 0%,#A0764C 55%,#3D2A18 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(230,200,150,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:24px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#1A2233;background:#E7E9EE;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .section ul{font-size:14.5px;margin:0 0 10px;padding-left:20px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .warn-note{font-size:12.5px;color:#7A5A1E;background:#FBF3E3;border:1px solid #E7D2A0;border-radius:10px;padding:10px 14px;}
+  .actions{display:flex;gap:12px;flex-wrap:wrap;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#6B4A2E;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#1A2233;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">TFEQ-51</span></div>
+
+  <h1 class="serif">Questionnaire des trois facteurs de l'alimentation</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Three-Factor Eating Questionnaire (TFEQ) — Stunkard &amp; Messick (1985)</p>
+  <div class="meta-row">
+    <span class="pill">51 items</span>
+    <span class="pill">10 minutes</span>
+    <span class="pill">Français</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="tfeq-51.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <p class="warn-note">⚠️ Réserve de cotation pour la Partie 2 (items 37-51) : la source ne donne
+    pas la correspondance point-par-point de chaque échelon, seulement la direction de cotation et
+    une « coupure au milieu de l'échelle ». La cotation implémentée ici applique la convention
+    standard du TFEQ (les deux premiers échelons d'une échelle à 4 niveaux valent 0 point, les deux
+    derniers valent 1 point, sens inversé pour les items à direction négative) plutôt qu'un chiffre
+    inventé — à revérifier contre l'article original si une cotation exacte est nécessaire.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Mesure trois dimensions du comportement alimentaire : la restriction cognitive (contrôle
+    volontaire de l'alimentation), la désinhibition (perte de contrôle face aux stimuli alimentaires
+    ou émotionnels) et la faim perçue (sensations subjectives de faim).</p>
+    <p class="source-note">Droits : article protégé par le copyright du <em>Journal of Psychosomatic
+    Research</em> (Elsevier), mais aucun éditeur de test commercial ne vend de licence d'utilisation
+    clinique du TFEQ — instrument académique classique, librement réutilisé et reproduit dans des
+    dizaines d'études de validation depuis 40 ans. Usage clinique/personnel considéré comme libre,
+    même traitement que d'autres instruments déjà sourcés dans ce catalogue depuis une revue
+    académique payante (HAM-A, MADRS, MOCI).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Partie 1 (36 items) : Vrai/Faux, 1 point si la réponse correspond à la clé. Partie 2 (15
+    items) : 1 point si la réponse tombe dans la moitié de l'échelle indiquant le trait mesuré.</p>
+    <ul>
+      <li>Facteur 1 — Restriction cognitive : 21 points (12 items Partie 1 + 9 items Partie 2)</li>
+      <li>Facteur 2 — Désinhibition : 16 points (13 items Partie 1 + 3 items Partie 2)</li>
+      <li>Facteur 3 — Faim : 14 points (11 items Partie 1 + 3 items Partie 2)</li>
+    </ul>
+    <p>Pas de seuil clinique officiel dans l'article original — seulement les plages de score par
+    facteur.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source</h2>
+    <p class="source-note">Stunkard, A. J., &amp; Messick, S. (1985). The three-factor eating
+    questionnaire to measure dietary restraint, disinhibition and hunger. <em>Journal of
+    Psychosomatic Research, 29</em>(1), 71-83. Appendice (pages 81-83), copie d'archive :
+    wp.ufpel.edu.br/renataabib.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

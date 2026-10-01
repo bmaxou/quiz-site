@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>YFAS - Échelle d'addiction alimentaire de Yale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#3D5A80;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#3D5A80;background:#E9EEF5;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#3D5A80;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;color:#3D5A80;margin:0 0 4px;}
+  .crit-heading{font-size:15px;margin:22px 0 8px;color:#20241E;}
+  .crit-heading:first-of-type{margin-top:6px;}
+  .answers-table{width:100%;border-collapse:collapse;margin:0 0 4px;}
+  .answers-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:13px;vertical-align:top;}
+  .answers-table td:first-child{color:#20241E;width:66%;padding-right:10px;}
+  .answers-table td:last-child{color:#3D5A80;font-weight:600;text-align:right;white-space:nowrap;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">YFAS - Addiction alimentaire</h1>
+    <p class="lead">Yale Food Addiction Scale. Cette enquête porte sur vos habitudes alimentaires au cours de l'année écoulée. Il arrive parfois d'avoir du mal à contrôler sa consommation de certains aliments (sucreries, féculents, snacks salés, aliments gras, boissons sucrées...). Pour les questions suivantes, pensez à tout aliment similaire à ceux listés, ou tout autre aliment qui vous a posé problème durant l'année écoulée.</p>
+    <div class="pill-row">
+      <span class="pill">25 questions</span>
+      <span class="pill">6 minutes</span>
+      <span class="pill">Auto-questionnaire</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Relevé par critère DSM-IV</h1>
+    <p class="lead">Les règles exactes de seuil par critère (à partir de quelle fréquence un item est « endossé ») ne sont définies que dans l'article original et n'ont pas pu être retranscrites avec certitude lors du sourçage. Comme pour l'OAS déjà présent dans ce catalogue, cette page affiche donc un relevé brut de vos réponses, regroupées par critère, sans calculer le score de symptômes (0 à 7) ni le diagnostic catégoriel de dépendance alimentaire.</p>
+    <div id="crit-body"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Gearhardt, A.N., Corbin, W.R., &amp; Brownell, K.D. (2009). Preliminary validation of the Yale Food Addiction Scale. Appetite, 52(2), 430-436. Instrument académique diffusé librement par l'équipe de recherche de l'Université du Michigan. Outil de repérage, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var FREQ = 'freq', FREQ25 = 'freq25', YN = 'yn';
+  var freqOpts = ["0 - Jamais","1 - Une fois par mois","2 - 2 à 4 fois par mois","3 - 2 à 3 fois par semaine","4 - 4 fois par semaine ou plus / quotidiennement"];
+  var freq25Opts = ["1 fois ou moins","2 fois","3 fois","4 fois","5 fois ou plus"];
+  var ynOpts = ["Oui","Non"];
+
+  var items = [
+    { t: "1. Je trouve que quand je commence à manger certains aliments, j'en mange finalement beaucoup plus que prévu.", type: FREQ },
+    { t: "2. Je continue à consommer certains aliments même si je n'ai plus faim.", type: FREQ },
+    { t: "3. Je mange jusqu'à me sentir physiquement malade.", type: FREQ },
+    { t: "4. Ne pas manger certains types d'aliments, ou réduire leur consommation, est quelque chose qui m'inquiète.", type: FREQ },
+    { t: "5. Je passe beaucoup de temps à me sentir léthargique ou fatigué(e) à cause de trop manger.", type: FREQ },
+    { t: "6. Je me surprends à manger constamment certains aliments tout au long de la journée.", type: FREQ },
+    { t: "7. Quand certains aliments ne sont pas disponibles, je fais des efforts pour me les procurer (ex. aller en voiture au magasin alors que j'ai d'autres options à la maison).", type: FREQ },
+    { t: "8. Il m'est arrivé de manger certains aliments si souvent ou en telles quantités que j'ai commencé à manger au lieu de travailler, passer du temps avec ma famille/mes amis, ou faire d'autres activités importantes ou récréatives que j'apprécie.", type: FREQ },
+    { t: "9. Il m'est arrivé de manger certains aliments si souvent ou en telles quantités que j'ai passé du temps à gérer les émotions négatives liées au fait de trop manger, au lieu de travailler, voir mes proches, etc.", type: FREQ },
+    { t: "10. Il m'est arrivé d'éviter des situations professionnelles ou sociales où certains aliments étaient disponibles, par peur de trop manger.", type: FREQ },
+    { t: "11. Il m'est arrivé d'éviter des situations professionnelles ou sociales parce que je ne pouvais pas y consommer certains aliments.", type: FREQ },
+    { t: "12. J'ai eu des symptômes de sevrage (agitation, anxiété, autres symptômes physiques) en réduisant ou arrêtant certains aliments (hors caféine).", type: FREQ },
+    { t: "13. J'ai consommé certains aliments pour prévenir des sentiments d'anxiété, d'agitation ou d'autres symptômes physiques naissants (hors caféine).", type: FREQ },
+    { t: "14. J'ai constaté une envie/un désir accru pour certains aliments quand je réduis ou arrête d'en manger.", type: FREQ },
+    { t: "15. Mon comportement alimentaire cause une détresse significative.", type: FREQ },
+    { t: "16. J'éprouve des problèmes significatifs de fonctionnement (routine, travail/école, activités sociales/familiales, santé) à cause de l'alimentation.", type: FREQ },
+    { t: "17. Ma consommation alimentaire a causé des problèmes psychologiques significatifs (dépression, anxiété, dévalorisation, culpabilité).", type: YN },
+    { t: "18. Ma consommation alimentaire a causé des problèmes physiques significatifs ou aggravé un problème physique.", type: YN },
+    { t: "19. J'ai continué à consommer les mêmes types/quantités d'aliments malgré des problèmes émotionnels et/ou physiques.", type: YN },
+    { t: "20. Avec le temps, j'ai constaté que je dois manger de plus en plus pour obtenir l'effet recherché (réduction des émotions négatives ou plaisir accru).", type: YN },
+    { t: "21. J'ai constaté que manger la même quantité de nourriture ne réduit plus mes émotions négatives ni n'augmente le plaisir comme avant.", type: YN },
+    { t: "22. Je veux réduire ou arrêter de manger certains types d'aliments.", type: YN },
+    { t: "23. J'ai essayé de réduire ou arrêter de manger certains types d'aliments.", type: YN },
+    { t: "24. J'ai réussi à réduire ou arrêter de manger ces aliments.", type: YN },
+    { t: "25. Combien de fois avez-vous essayé de réduire ou d'arrêter complètement certains aliments dans l'année écoulée ?", type: FREQ25 }
+  ];
+
+  var criteria = [
+    { name: "Critère 1 — Prise en quantité ou durée plus importante que prévu", indices: [0,1,2] },
+    { name: "Critère 2 — Désir persistant / tentatives infructueuses d'arrêt", indices: [3,21,23,24] },
+    { name: "Critère 3 — Temps et effort importants consacrés", indices: [4,5,6] },
+    { name: "Critère 4 — Abandon d'activités sociales, professionnelles ou récréatives", indices: [7,8,9,10] },
+    { name: "Critère 5 — Poursuite malgré les conséquences", indices: [18] },
+    { name: "Critère 6 — Tolérance", indices: [19,20] },
+    { name: "Critère 7 — Sevrage", indices: [11,12,13] },
+    { name: "Critère 8 — Détresse ou altération cliniquement significative", indices: [14,15] }
+  ];
+  var autresIndices = [16,17,22];
+
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function optsFor(type){
+    if (type === FREQ) return freqOpts;
+    if (type === FREQ25) return freq25Opts;
+    return ynOpts;
+  }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx].t;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    optsFor(items[idx].type).forEach(function(label, v){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === v ? ' selected' : '');
+      d.textContent = label;
+      d.addEventListener('click', function(){
+        answers[idx] = v;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le relevé' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function answerLabel(i){
+    var it = items[i], a = answers[i];
+    return optsFor(it.type)[a];
+  }
+
+  function buildTable(indices){
+    var html = '<table class="answers-table"><tbody>';
+    indices.forEach(function(i){
+      html += '<tr><td>' + items[i].t + '</td><td>' + answerLabel(i) + '</td></tr>';
+    });
+    html += '</tbody></table>';
+    return html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var body = document.getElementById('crit-body');
+    var html = '';
+    criteria.forEach(function(c){
+      html += '<h2 class="crit-heading serif">' + c.name + '</h2>' + buildTable(c.indices);
+    });
+    html += '<h2 class="crit-heading serif">Autres réponses (non rattachées à un critère formel dans le sourçage)</h2>' + buildTable(autresIndices);
+    body.innerHTML = html;
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>YFAS - Échelle d'addiction alimentaire de Yale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#7A4A1E 0%,#C08434 55%,#4A2C0E 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,232,190,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#22334D;background:#E9EEF5;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .caveat{background:#FBF3E7;border:1px solid #E7D9BC;border-radius:12px;padding:14px 16px;font-size:13.5px;color:#5A4A2A;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#3D5A80;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#22334D;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <div class="fiche-photo"><span class="acronym">YFAS</span></div>
+  <h1 class="serif">Échelle d'addiction alimentaire de Yale (YFAS)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Yale Food Addiction Scale - Gearhardt, Corbin &amp; Brownell (2009)</p>
+  <div class="meta-row">
+    <span class="pill">25 questions</span>
+    <span class="pill">6 minutes</span>
+    <span class="pill">Auto-questionnaire</span>
+    <span class="pill">TCA</span>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" href="yfas.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le YFAS transpose les critères DSM-IV de dépendance à une substance au comportement alimentaire, sur l'année écoulée. 16 items (1 à 16) et l'item 25 sont cotés sur une échelle de fréquence en 5 points (de « jamais » à « 4 fois par semaine ou plus / quotidiennement », l'item 25 comptant plutôt un nombre de tentatives de réduction). Les items 17 à 24 sont cotés en Oui/Non. Les items se regroupent, dans la publication originale, en 7 critères de dépendance (prise en quantité/durée excessive, désir persistant d'arrêt, temps/effort consacrés, abandon d'activités, poursuite malgré les conséquences, tolérance, sevrage) auxquels s'ajoute un critère de détresse ou d'altération cliniquement significative, condition supplémentaire nécessaire au diagnostic.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Dans la publication originale, un score de symptômes (0 à 7) compte le nombre de critères de dépendance endossés, et un diagnostic catégorique de « dépendance alimentaire » (food addiction) est posé si 3 critères ou plus sont endossés ET que le critère de détresse/altération cliniquement significative (items 15 ou 16) l'est aussi.</p>
+    <p class="caveat">Les règles précises qui transforment chaque réponse brute en endossement d'un critère (par exemple, à partir de quelle fréquence un item de la partie 1-16/25 compte comme « positif », ou comment combiner plusieurs items d'un même critère) ne sont données que dans l'article original et n'ont pas pu être retranscrites avec certitude lors du sourçage. Comme pour l'OAS déjà présent dans ce catalogue, cette page affiche donc un relevé brut de vos réponses regroupées par critère, sans calculer le score de symptômes (0-7) ni le diagnostic catégoriel, tant que cette règle de seuil n'est pas confirmée par une source primaire.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Source</h2>
+    <p class="source-note">Gearhardt, A.N., Corbin, W.R., &amp; Brownell, K.D. (2009). Preliminary validation of the Yale Food Addiction Scale. Appetite, 52(2), 430-436. Instrument académique diffusé librement par l'équipe de recherche de l'Université du Michigan (Ashley Gearhardt / FAST Lab), aucune licence commerciale identifiée. Texte retrouvé via deux copies PDF tierces indépendantes et concordantes citant explicitement la référence originale (assets.precisionnutrition.com ; redwillowcounseling.com). Outil de repérage, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

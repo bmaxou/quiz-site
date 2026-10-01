@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>SST — Cabinet Bouche &amp; Chmura</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F4F1EA; --surface:#FFFFFF; --surface-2:#EAE6D9; --ink:#20241E; --ink-soft:#63695D;
+    --line:#E0D9C9; --accent:#1F4A3D; --accent-ink:#F4F1EA; --accent-soft:#DCE9E3;
+    --progress-bg:#E6E1D3; --progress-fill:#3D7A63;
+    --shadow: 0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',-apple-system,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,h3,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:var(--ink);}
+  .wrap{max-width:600px;margin:0 auto;padding:48px 24px 80px;}
+  .back-top{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--ink-soft);text-decoration:none;margin-bottom:20px;}
+  .back-top:hover{color:var(--ink);}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--ink-soft);display:inline-block;}
+  h1{font-size:26px;margin:0 0 10px;}
+  .intro-text{color:var(--ink-soft);font-size:15px;margin:0 0 28px;}
+  .start-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:32px 28px;box-shadow:var(--shadow);}
+  .pills{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 20px;}
+  .pill{font-size:12.5px;font-weight:600;color:var(--ink-soft);background:var(--surface-2);border-radius:999px;padding:6px 13px;display:inline-flex;align-items:center;gap:6px;}
+  .instructions{font-size:14.5px;color:var(--ink-soft);margin:0 0 22px;line-height:1.7;}
+  .quiz-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:28px 26px 26px;box-shadow:var(--shadow);}
+  .progress-track{height:8px;border-radius:99px;background:var(--progress-bg);overflow:hidden;margin-bottom:14px;}
+  .progress-fill{height:100%;background:var(--progress-fill);border-radius:99px;width:0%;transition:width .3s ease;}
+  .q-count{font-size:12.5px;color:var(--ink-soft);font-weight:600;margin:0 0 18px;}
+  .story-text{font-size:15px;color:var(--ink);margin:0 0 16px;background:var(--surface-2);border-radius:12px;padding:16px 18px;}
+  .story-q{font-size:14px;font-weight:600;color:var(--ink-soft);margin:0 0 6px;}
+  .story-q2{font-size:16px;font-weight:600;color:var(--ink);margin:0 0 18px;font-family:'Cormorant Garamond',Georgia,serif;}
+  .options{display:flex;flex-direction:column;gap:10px;}
+  .option-btn{font:inherit;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 16px;font-size:13.5px;color:var(--ink);cursor:pointer;transition:border-color .15s ease,background .15s ease;}
+  .option-btn:hover{border-color:var(--accent);}
+  .option-btn.selected{border-color:var(--accent);background:var(--accent-soft);font-weight:600;}
+  .option-btn .sc{font-weight:700;color:var(--accent);margin-right:6px;}
+  .back-link{display:inline-flex;align-items:center;gap:6px;margin-top:22px;font-size:13px;color:var(--ink-soft);background:none;border:none;font:inherit;cursor:pointer;padding:0;}
+  .back-link:hover{color:var(--ink);}
+  .back-link[hidden]{display:none;}
+  #result{display:none;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:30px 28px;box-shadow:var(--shadow);}
+  #result h2.serif{font-size:22px;margin:0 0 6px;}
+  .meta-line{font-size:13.5px;color:var(--ink-soft);margin:0 0 24px;}
+  .score-line{font-size:17px;margin:0 0 10px;}
+  .score-line strong{font-size:22px;color:var(--accent);}
+  .note-informel{font-size:12.5px;color:var(--ink-soft);margin:0 0 6px;line-height:1.65;}
+  .btn{font:inherit;font-size:15px;font-weight:600;padding:13px 30px;border-radius:999px;border:none;background:var(--accent);color:var(--accent-ink);cursor:pointer;transition:background .15s ease;width:100%;}
+  .btn:hover{background:#153A30;}
+  .btn-outline{background:none;border:1px solid var(--accent);color:var(--accent);margin-top:14px;}
+  .btn-outline:hover{background:var(--accent-soft);}
+  .hint{font-size:12.5px;color:var(--ink-soft);margin-top:14px;text-align:center;}
+  .footnote{margin-top:40px;font-size:11.5px;color:var(--ink-soft);border-top:1px solid var(--line);padding-top:16px;line-height:1.7;}
+  [hidden]{display:none !important;}
+  @media print{
+    .back-top, .eyebrow, h1, .intro-text, .footnote, .btn-outline{ display:none !important; }
+    body{background:#fff;}
+    #result{box-shadow:none;border:none;padding:0;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back-top" href="index.html">&larr; Tous les tests</a>
+  <div class="eyebrow">Théorie de l'esprit, enfance</div>
+  <h1 class="serif">Test des histoires étranges (SST)</h1>
+  <p class="intro-text">Outil hétéro-administré : lisez chaque histoire à l'enfant (ou laissez-le la
+  lire), posez les deux questions, puis cotez sa réponse de justification selon les critères
+  proposés. Ce résultat ne remplace pas un échange avec votre praticien.</p>
+
+  <div class="start-card" id="startScreen">
+    <div class="pills">
+      <span class="pill">24 histoires</span>
+      <span class="pill">20 minutes</span>
+      <span class="pill">Français (résumé)</span>
+    </div>
+    <p class="instructions">Voici des histoires, et des questions. Je vais vous lire les histoires
+    et j'aimerais que vous écoutiez attentivement, et que vous m'aidiez à répondre aux questions à
+    la fin de chaque histoire.</p>
+    <button type="button" class="btn" id="startBtn">Commencer</button>
+    <p class="hint">Rien n'est envoyé ni conservé sur un serveur : si vous quittez avant la fin, les réponses saisies sont perdues et il faudra recommencer.</p>
+  </div>
+
+  <div class="quiz-card" id="quizScreen" hidden>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <p class="q-count" id="qCount">Histoire 1/24</p>
+    <p class="story-text" id="storyText"></p>
+    <p class="story-q" id="story-q1"></p>
+    <p class="story-q2" id="story-q2"></p>
+    <div class="options" id="qOptions"></div>
+    <button type="button" class="back-link" id="backBtn" hidden>&larr; Histoire précédente</button>
+  </div>
+
+  <div id="result">
+    <h2 class="serif">Test des histoires étranges (SST)</h2>
+    <p class="meta-line">Passation : <span id="passationDate"></span></p>
+    <p class="score-line">Score total : <strong id="scoreVal">0</strong>/48</p>
+    <p class="note-informel">Pas de seuil clinique officiel — comparaison à un groupe contrôle
+    typique du même âge. Ce résultat est un repère, il ne constitue pas un diagnostic.</p>
+    <button type="button" class="btn" id="downloadBtn">Télécharger le résultat (PDF)</button>
+    <button type="button" class="btn btn-outline" id="restartBtn">Refaire le test</button>
+  </div>
+
+  <p class="footnote">
+    Strange Stories Test — Happé, F. G. E. (1994). An advanced test of theory of mind. Journal of
+    Autism and Developmental Disorders, 24(2), 129-154. Matériel reproduit via Johnson, A. (2001),
+    thèse University of Surrey (Appendice Cinq), licence CC BY-NC-SA 4.0, autrice originale
+    consultée. Résumés en français, cotation selon les critères de Happé (0 = incorrect, 1 =
+    justification mentaliste correcte mais simple, 2 = justification mentaliste correcte et
+    complète). Ce résultat est un repère, il ne constitue pas un diagnostic.
+  </p>
+</div>
+
+<script>
+(function(){
+  const STORIES = [
+    { title: "Sausages [Persuasion]", text: "Brian, garçon très gourmand, a droit à deux saucisses comme tout le monde mais dit au moment d'être servi : « Puis-je avoir quatre saucisses, car je serai quatre personnes à ne pas avoir de goûter en rentrant ! »", q1: "Est-ce vrai, ce que Brian a dit ?", q2: "Pourquoi Brian dit-il cela ?" },
+    { title: "Swings [Émotion contraire]", text: "Katy veut aller sur les balançoires mais doit passer devant le chien méchant de M. Jones qui lui fait très peur. Sa mère lui demande si elle veut aller au parc. Katy dit « Non ».", q1: "Est-ce vrai ?", q2: "Pourquoi Katy dit-elle ne pas vouloir y aller, alors qu'elle en a très envie ?" },
+    { title: "Kittens [Persuasion]", text: "Jill veut acheter un chaton chez Mme Smith, mais tous les chatons sont mâles alors qu'elle en voulait un femelle. Mme Smith dit : « Si personne n'achète les chatons, je n'aurai qu'à les noyer ! »", q1: "Est-ce vrai ?", q2: "Pourquoi Mme Smith dit-elle cela à Jill ?" },
+    { title: "Painting [Émotion contraire]", text: "Jane et Sarah, meilleures amies, participent au même concours de peinture. Sarah gagne. Jane dit à Sarah « Bravo, je suis si contente que tu aies gagné ! » et dit à sa mère « Je suis triste de ne pas avoir gagné. »", q1: "Est-ce vrai, ce que Jane a dit à Sarah ? Et à sa mère ?", q2: "Pourquoi dit-elle les deux, en étant heureuse et triste en même temps ?" },
+    { title: "Doll [Faire semblant]", text: "Yvonne joue dans le jardin avec sa poupée, l'oublie dehors, puis dit par erreur à sa mère qu'elle l'a rentrée.", q1: "Est-ce vrai ?", q2: "Pourquoi dit-elle cela ?" },
+    { title: "Ghost [Apparence/Réalité]", text: "C'est Halloween, Chris est déguisé en fantôme avec un drap blanc. Il bouscule M. Brown dans le noir, qui demande « Qui est-ce ? » Chris répond « Je suis un fantôme ! »", q1: "Est-ce vrai ?", q2: "Pourquoi dit-il cela ?" },
+    { title: "Dentist [Mensonge]", text: "John déteste le dentiste. Il a mal aux dents mais quand sa mère lui demande, il dit « Non maman » pour éviter d'y aller.", q1: "Est-ce vrai ?", q2: "Pourquoi dit-il cela ?" },
+    { title: "Ship [Faire semblant]", text: "Mark et Adam jouent, la table de cuisine renversée est un « bateau pirate » imaginaire. Adam dit à sa mère qu'elle est « dans la mer » et va « couler ».", q1: "Est-ce vrai ?", q2: "Pourquoi dit-il cela ?" },
+    { title: "Banana [Faire semblant]", text: "Katie et Emma jouent, Emma prend une banane, la met à son oreille et dit « Regarde, cette banane est un téléphone ! »", q1: "Est-ce vrai ?", q2: "Pourquoi dit-elle cela ?" },
+    { title: "Vase [Mensonge]", text: "Anna casse accidentellement le vase préféré de sa mère et lui ment : « C'est le chien qui l'a fait tomber, ce n'est pas ma faute ! »", q1: "Est-ce vrai ?", q2: "Pourquoi dit-elle cela ?" },
+    { title: "Ping-pong bat [Double bluff]", text: "Simon est un grand menteur, connu de tous pour cela. Son frère Jim lui demande où est sa raquette de ping-pong volée, en lui donnant deux options (placard ou sous le lit). Simon répond « sous le lit ».", q1: "Est-ce vrai ? Où Jim va-t-il chercher sa raquette ?", q2: "Pourquoi Simon a-t-il répondu ainsi ?" },
+    { title: "Politeness [Sarcasme]", text: "La mère d'Ann a cuisiné son plat préféré ; Ann ne la remercie même pas, absorbée par la télé. Sa mère dit avec sarcasme : « Eh bien, c'est du joli ! C'est ce que j'appelle de la politesse ! »", q1: "Est-ce vrai ?", q2: "Pourquoi dit-elle cela ?" },
+    { title: "Cough [Idiome]", text: "Emma tousse pendant tout le repas. Son père dit : « Pauvre Emma, tu dois avoir une grenouille dans la gorge ! »", q1: "Est-ce vrai ?", q2: "Pourquoi dit-il cela ?" },
+    { title: "Glove [Malentendu]", text: "Un cambrioleur s'enfuit. Un policier le voit laisser tomber son gant et lui crie « Hé, vous ! Stop ! » pour lui rendre le gant. Le cambrioleur, croyant être démasqué, se rend.", q1: "Le policier est-il surpris ?", q2: "Pourquoi le cambrioleur a-t-il fait ça, alors que le policier voulait juste lui rendre son gant ?" },
+    { title: "Soldier [Double bluff]", text: "Un prisonnier de guerre, sachant que ses ennemis s'attendent à ce qu'il mente, leur dit la vérité (les chars sont dans les montagnes) en misant sur le fait qu'ils ne le croiront pas et iront donc chercher ailleurs.", q1: "Est-ce vrai ? Où l'autre armée va-t-elle chercher ?", q2: "Pourquoi le prisonnier a-t-il dit ça ?" },
+    { title: "Picnic [Sarcasme]", text: "Tom prédit une belle journée pour un pique-nique, mais il se met à pleuvoir et ils sont trempés. Sarah dit avec sarcasme : « Ah oui, une belle journée pour un pique-nique, en effet ! »", q1: "Est-ce vrai ?", q2: "Pourquoi dit-elle cela ?" },
+    { title: "Hat [Pieux mensonge]", text: "Tante Jane rend visite à Peter avec un nouveau chapeau que Peter trouve très laid. Elle lui demande son avis ; il répond « Oh, il est très joli » par politesse.", q1: "Est-ce vrai ?", q2: "Pourquoi dit-il cela ?" },
+    { title: "Hairdresser [Blague]", text: "Mme Thompson sort du coiffeur avec une coupe très courte. Daniel dit à Ian : « Elle a dû se battre avec une tondeuse à gazon ! »", q1: "Est-ce vrai ?", q2: "Pourquoi dit-il cela ?" },
+    { title: "Mrs Peabody [Malentendu]", text: "Mme Peabody, très nerveuse, marche seule la nuit. Un homme s'approche pour lui demander l'heure ; elle croit être agressée et dit « Prenez mon sac, ne me faites pas de mal ! »", q1: "L'homme est-il surpris ?", q2: "Pourquoi dit-elle cela, alors qu'il voulait juste demander l'heure ?" },
+    { title: "Pigsty [Idiome]", text: "William est un garçon désordonné. Sa chambre est particulièrement en désordre. Sa mère dit : « Cette chambre est une porcherie ! »", q1: "Est-ce vrai ?", q2: "Pourquoi dit-elle cela ?" },
+    { title: "Santa Claus [Apparence/Réalité]", text: "Alice reconnaît son voisin M. Brown déguisé en Père Noël dans un magasin et lui demande qui il est. Il répond « Je suis le Père Noël ! »", q1: "Est-ce vrai ?", q2: "Pourquoi dit-il cela ?" },
+    { title: "School [Oubli]", text: "John était absent (malade) mais Ben, ayant oublié, répond à sa mère que tout le monde était présent.", q1: "Est-ce vrai ?", q2: "Pourquoi Ben dit-il cela ?" },
+    { title: "Elephant [Blague]", text: "James rend visite à Claire, dont le chien est énorme, presque aussi grand que lui. James dit : « Claire, tu n'as pas un chien, tu as un éléphant ! »", q1: "Est-ce vrai ?", q2: "Pourquoi dit-il cela ?" },
+    { title: "Rabbit [Pieux mensonge]", text: "Helen espérait un lapin à Noël mais reçoit une encyclopédie. Elle dit quand même à ses parents « C'est adorable, merci, c'est exactement ce que je voulais. »", q1: "Est-ce vrai ?", q2: "Pourquoi dit-elle cela ?" }
+  ];
+  const SCORE_LABELS = [
+    "0 — Justification incorrecte ou réponse factuelle non mentaliste",
+    "1 — Justification mentaliste correcte mais simple ou incomplète",
+    "2 — Justification mentaliste correcte et complète (intention de tromper, persuader, ou faire ressentir quelque chose)"
+  ];
+  const answers = new Array(STORIES.length).fill(null);
+  let current = 0;
+
+  const startScreen = document.getElementById('startScreen');
+  const quizScreen = document.getElementById('quizScreen');
+  const startBtn = document.getElementById('startBtn');
+  const qCount = document.getElementById('qCount');
+  const storyText = document.getElementById('storyText');
+  const storyQ1 = document.getElementById('story-q1');
+  const storyQ2 = document.getElementById('story-q2');
+  const qOptions = document.getElementById('qOptions');
+  const backBtn = document.getElementById('backBtn');
+  const progressFill = document.getElementById('progressFill');
+  const resultBox = document.getElementById('result');
+
+  startBtn.addEventListener('click', function(){
+    startScreen.hidden = true;
+    quizScreen.hidden = false;
+    renderQuestion();
+  });
+
+  backBtn.addEventListener('click', function(){
+    if(current > 0){ current -= 1; renderQuestion(); }
+  });
+
+  function renderQuestion(){
+    const s = STORIES[current];
+    qCount.textContent = 'Histoire ' + (current + 1) + '/' + STORIES.length + ' — ' + s.title;
+    storyText.textContent = s.text;
+    storyQ1.textContent = s.q1;
+    storyQ2.textContent = s.q2;
+    progressFill.style.width = ((current / STORIES.length) * 100) + '%';
+    backBtn.hidden = current === 0;
+    qOptions.innerHTML = '';
+    SCORE_LABELS.forEach(function(opt, idx){
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'option-btn';
+      btn.textContent = opt;
+      if(answers[current] === idx){ btn.classList.add('selected'); }
+      btn.addEventListener('click', function(){ selectAnswer(idx, btn); });
+      qOptions.appendChild(btn);
+    });
+  }
+
+  function selectAnswer(idx, btnEl){
+    answers[current] = idx;
+    Array.from(qOptions.children).forEach(function(b){ b.classList.remove('selected'); });
+    btnEl.classList.add('selected');
+    progressFill.style.width = (((current + 1) / STORIES.length) * 100) + '%';
+    setTimeout(function(){
+      if(current < STORIES.length - 1){ current += 1; renderQuestion(); }
+      else { showResult(); }
+    }, 260);
+  }
+
+  function showResult(){
+    quizScreen.hidden = true;
+    document.getElementById('passationDate').textContent = new Date().toLocaleString('fr-FR', {day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit'});
+    let total = 0;
+    answers.forEach(function(a){ total += a; });
+    document.getElementById('scoreVal').textContent = total;
+    resultBox.style.display = 'block';
+    resultBox.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  document.getElementById('downloadBtn').addEventListener('click', function(){ window.print(); });
+  document.getElementById('restartBtn').addEventListener('click', function(){
+    answers.fill(null);
+    current = 0;
+    resultBox.style.display = 'none';
+    startScreen.hidden = false;
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SST — Test des histoires étranges</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#1F4A3D 0%,#3D7A63 55%,#12291F 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(170,220,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#1A2233;background:#E7E9EE;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .section ul{font-size:14.5px;margin:0 0 10px;padding-left:20px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .warn-note{font-size:12.5px;color:#7A5A1E;background:#FBF3E3;border:1px solid #E7D2A0;border-radius:10px;padding:10px 14px;}
+  .actions{display:flex;gap:12px;flex-wrap:wrap;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#1F4A3D;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#1A2233;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">SST</span></div>
+
+  <h1 class="serif">Test des histoires étranges</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Strange Stories Test — Happé, F. G. E. (1994)</p>
+  <div class="meta-row">
+    <span class="pill">24 histoires</span>
+    <span class="pill">20 minutes</span>
+    <span class="pill">Hétéro-administré</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="sst.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <p class="warn-note">⚠️ Outil hétéro-administré : les histoires sont lues à voix haute à
+    l'enfant (ou lues par lui), texte et illustration sous les yeux. C'est vous, en tant que
+    clinicien, qui cotez la réponse de justification de l'enfant à la seconde question de chaque
+    histoire, selon les critères de Happé (0/1/2), directement dans l'outil. Réserve de fidélité :
+    deux passages du document source (fin de la question « Painting », réponse de Chris dans
+    « Ghost ») portaient une numérisation peu lisible et ont été reconstitués par déduction logique
+    du contexte plutôt que lus mot pour mot.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Test avancé de théorie de l'esprit : 24 courtes histoires réparties en 12 types (persuasion,
+    émotion contraire, faire semblant, apparence/réalité, mensonge, double bluff, sarcasme, idiome,
+    malentendu, oubli, blague, pieux mensonge), 2 histoires par type. Chaque histoire est suivie
+    d'une question de compréhension factuelle et d'une question de justification (« Pourquoi
+    [personnage] dit-il/elle cela ? »), seule celle-ci étant cotée.</p>
+    <p class="source-note">Droits : reproduction intégrale du matériel de Happé (1994) via la thèse
+    de doctorat de Johnson, A. (2001, University of Surrey, Appendice Cinq), qui précise que
+    l'autrice originale a été personnellement consultée. Licence CC BY-NC-SA 4.0, dépôt
+    institutionnel officiel (openresearch.surrey.ac.uk). Usage clinique/personnel non commercial
+    conforme.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Un seul score par histoire, selon les critères de Happé (validés par consultation de
+    l'auteure) : 0 point = justification incorrecte ou réponse factuelle non mentaliste ; 1 point =
+    justification mentaliste correcte mais simple/incomplète ; 2 points = justification mentaliste
+    correcte et complète (référence explicite à une intention de tromper, persuader, ou faire
+    ressentir quelque chose). Score total 0 à 48 sur les 24 histoires. Pas de seuil clinique
+    officiel — comparaison à un groupe contrôle typique du même âge.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source</h2>
+    <p class="source-note">Happé, F. G. E. (1994). An advanced test of theory of mind:
+    Understanding of story characters' thoughts and feelings by able autistic, mentally handicapped,
+    and normal children and adults. <em>Journal of Autism and Developmental Disorders, 24</em>(2),
+    129-154. Johnson, A. (2001). <em>Happé's "Strange Stories" — An Advanced Test of "Theory of
+    Mind"</em>. Thèse de Doctorat (PsychD), University of Surrey.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

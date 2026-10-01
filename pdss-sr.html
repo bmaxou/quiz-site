@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PDSS-SR - Échelle de sévérité du trouble panique (auto-évaluation)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#3D5A80;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#3D5A80;background:#E9EEF5;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#3D5A80;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:36px;color:#3D5A80;margin:0 0 4px;}
+  .result-max{font-size:13px;color:#9A9E90;margin:0 0 16px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">PDSS-SR - Sévérité du trouble panique</h1>
+    <p class="lead">Panic Disorder Severity Scale, auto-évaluation. Répondez en pensant à la semaine écoulée.</p>
+    <p class="lang-note">Plusieurs questions se réfèrent aux attaques de panique et aux attaques à symptômes limités (montée soudaine de peur ou de malaise avec au moins 4 des symptômes suivants, atteignant leur pic en quelques minutes : battements cardiaques rapides ou forts, douleur ou gêne thoracique, frissons ou bouffées de chaleur, transpiration, nausée, peur de perdre le contrôle ou de devenir fou, tremblements, vertiges ou évanouissement, peur de mourir, souffle court, sentiment d'irréalité, sensation d'étouffement, engourdissement ou fourmillements. Les épisodes similaires mais comportant moins de 4 de ces symptômes sont des attaques à symptômes limités.</p>
+    <div class="pill-row">
+      <span class="pill">7 questions</span>
+      <span class="pill">3 minutes</span>
+      <span class="pill">Semaine écoulée</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-score" id="score-total"></p>
+    <p class="result-max" id="score-total-flag"></p>
+    <p class="lead">Ce score composite est la moyenne des 7 items (chacun coté 0 à 4). L'article original propose une table de conversion du score brut (somme sur 28) vers un score composite ; cette page affiche directement la moyenne, mathématiquement équivalente, faute de reproduire ici la table complète. Ce résultat ne peut en aucun cas remplacer une évaluation clinique.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Shear, M.K., Brown, T.A., Barlow, D.H., Money, R., Sholomskas, D.E., Woods, S.W., Gorman, J.M., &amp; Papp, L.A. (1997). Multicenter collaborative panic disorder severity scale. American Journal of Psychiatry, 154(11), 1571-1575. Version auto-administrée reproduite avec autorisation dans Lauria-Horner, B. (2016). The Primary Care Toolkit for Anxiety and Related Disorders. Outil de repérage, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [
+    {
+      t: "1. Combien d'attaques de panique et d'attaques à symptômes limités avez-vous eues au cours de la semaine ?",
+      opts: [
+        "0 - Aucun épisode de panique ou de symptômes limités",
+        "1 - Léger : aucune attaque de panique complète, pas plus d'une attaque à symptômes limités par jour",
+        "2 - Modéré : 1 ou 2 attaques complètes et/ou de multiples attaques à symptômes limités par jour",
+        "3 - Sévère : plus de 2 attaques complètes mais pas plus d'une par jour en moyenne",
+        "4 - Extrême : des attaques complètes se sont produites plus d'une fois par jour, la plupart des jours"
+      ]
+    },
+    {
+      t: "2. Si vous avez eu des attaques de panique au cours de la semaine passée, à quel point étaient-elles pénibles (inconfortables, effrayantes) pendant qu'elles se produisaient ?",
+      opts: [
+        "0 - Pas du tout pénible, ou aucune attaque durant la semaine passée",
+        "1 - Légèrement pénible (pas trop intense)",
+        "2 - Modérément pénible (intense mais encore gérable)",
+        "3 - Sévèrement pénible (très intense)",
+        "4 - Extrêmement pénible (détresse extrême durant toutes les attaques)"
+      ]
+    },
+    {
+      t: "3. Au cours de la semaine passée, combien vous êtes-vous inquiété(e) ou avez-vous ressenti de l'anxiété à propos du moment où surviendrait votre prochaine attaque de panique, ou à propos de craintes liées aux attaques ?",
+      opts: [
+        "0 - Pas du tout",
+        "1 - Occasionnellement ou seulement légèrement",
+        "2 - Fréquemment ou modérément",
+        "3 - Très souvent ou à un degré très perturbant",
+        "4 - Presque constamment et à un degré invalidant"
+      ]
+    },
+    {
+      t: "4. Au cours de la semaine passée, y a-t-il eu des lieux ou des situations que vous avez évités ou dont vous avez eu peur par peur d'avoir une attaque de panique ?",
+      opts: [
+        "0 - Aucun(e) : aucune peur ni évitement",
+        "1 - Léger : peur et/ou évitement occasionnels, mais je pouvais généralement affronter ou endurer la situation, peu ou pas de modification de mon mode de vie",
+        "2 - Modéré : peur et/ou évitement notables mais encore gérables, certaine modification de mon mode de vie mais mon fonctionnement global n'était pas altéré",
+        "3 - Sévère : évitement étendu, modification substantielle de mon mode de vie nécessaire",
+        "4 - Extrême : peur et/ou évitement envahissants et invalidants, modification étendue de mon mode de vie, des tâches importantes n'étaient pas accomplies"
+      ]
+    },
+    {
+      t: "5. Au cours de la semaine passée, y a-t-il eu des activités (effort physique, relations sexuelles, douche ou bain chaud, café, film excitant ou effrayant...) que vous avez évitées ou redoutées parce qu'elles provoquaient des sensations physiques semblables à celles des attaques de panique ?",
+      opts: [
+        "0 - Aucune peur ni évitement de situations ou d'activités en raison de sensations physiques pénibles",
+        "1 - Léger : peur et/ou évitement occasionnels, généralement je pouvais endurer avec peu de détresse, peu de modification de mon mode de vie",
+        "2 - Modéré : évitement notable mais encore gérable, modification définie mais limitée de mon mode de vie",
+        "3 - Sévère : évitement étendu, modification substantielle de mon mode de vie ou interférence dans mon fonctionnement",
+        "4 - Extrême : évitement envahissant et invalidant, modification étendue de mon mode de vie"
+      ]
+    },
+    {
+      t: "6. Au cours de la semaine passée, à quel point les symptômes ci-dessus pris ensemble ont-ils interféré avec votre capacité à travailler ou à assumer vos responsabilités à la maison ?",
+      opts: [
+        "0 - Aucune interférence avec le travail ou les responsabilités domestiques",
+        "1 - Légère interférence, mais je pouvais faire presque tout ce que je pourrais faire sans ces problèmes",
+        "2 - Interférence significative, mais je parvenais encore à gérer ce que je devais faire",
+        "3 - Altération substantielle, il y avait de nombreuses choses importantes que je ne pouvais pas faire",
+        "4 - Altération extrême et incapacitante, essentiellement incapable de gérer le travail ou les responsabilités domestiques"
+      ]
+    },
+    {
+      t: "7. Au cours de la semaine passée, à quel point les attaques de panique et à symptômes limités, l'inquiétude à leur propos, et la peur des situations ou activités liées ont-elles interféré avec votre vie sociale ?",
+      opts: [
+        "0 - Aucune interférence",
+        "1 - Légère interférence avec les activités sociales, mais je pouvais faire presque tout ce que je pourrais faire sans ces problèmes",
+        "2 - Interférence significative, mais je parvenais à faire la plupart des choses en faisant un effort",
+        "3 - Altération substantielle, il y a de nombreuses choses sociales que je ne pouvais pas faire",
+        "4 - Altération extrême et incapacitante, presque rien de social que je pouvais faire"
+      ]
+    }
+  ];
+
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx].t;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    items[idx].opts.forEach(function(label, v){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === v ? ' selected' : '');
+      d.textContent = label;
+      d.addEventListener('click', function(){
+        answers[idx] = v;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var sum = answers.reduce(function(a,b){ return a + b; }, 0);
+    var composite = sum / items.length;
+    document.getElementById('score-total').textContent = composite.toFixed(2);
+    document.getElementById('score-total-flag').textContent = 'score composite PDSS-SR (0,00 à 4,00) - somme brute : ' + sum + ' / 28';
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PDSS-SR - Échelle de sévérité du trouble panique (auto-évaluation)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#1E2A3A 0%,#3A5068 55%,#10161F 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(200,215,235,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#22334D;background:#E9EEF5;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .caveat{background:#FBF3E7;border:1px solid #E7D9BC;border-radius:12px;padding:14px 16px;font-size:13.5px;color:#5A4A2A;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#3D5A80;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#22334D;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <div class="fiche-photo"><span class="acronym small">PDSS-SR</span></div>
+  <h1 class="serif">Échelle de sévérité du trouble panique, auto-évaluation (PDSS-SR)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Panic Disorder Severity Scale, Self-Report - Shear, Brown, Barlow et al. (1997)</p>
+  <div class="meta-row">
+    <span class="pill">7 questions</span>
+    <span class="pill">3 minutes</span>
+    <span class="pill">Auto-questionnaire</span>
+    <span class="pill">Semaine écoulée</span>
+    <span class="pill">Trouble panique</span>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" href="pdss-sr.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>La PDSS mesure la sévérité globale du trouble panique sur 7 dimensions : fréquence des attaques, pénibilité des attaques, anxiété anticipatoire, peur/évitement des situations, peur/évitement des activités provoquant des sensations physiques, interférence avec le travail ou les responsabilités domestiques, interférence avec la vie sociale. Chaque item est coté de 0 à 4 selon des ancrages détaillés propres à chaque dimension. La version PDSS-SR (self-report) reprend l'échelle hétéro-administrée originale sous forme d'auto-questionnaire.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Score composite = moyenne des 7 items (chacun coté 0 à 4), soit une étendue de 0,00 à 4,00. La publication originale fournit une table de conversion du score brut (somme sur 28) vers ce score composite ; cette page affiche directement la moyenne, mathématiquement équivalente à cette conversion, faute de reproduire ici la table complète (non reproduite dans la source consultée par souci de concision). Aucune sous-échelle.</p>
+    <p class="caveat">Ce score ne peut en aucun cas remplacer une évaluation clinique du trouble panique.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Source</h2>
+    <p class="source-note">Shear, M.K., Brown, T.A., Barlow, D.H., Money, R., Sholomskas, D.E., Woods, S.W., Gorman, J.M., &amp; Papp, L.A. (1997). Multicenter collaborative panic disorder severity scale. American Journal of Psychiatry, 154(11), 1571-1575. Copyright M. Katherine Shear, M.D. Autorisation explicite de reproduction pour l'usage clinique (pas seulement la recherche) citée dans Lauria-Horner, B. (2016). The Primary Care Toolkit for Anxiety and Related Disorders, Brush Education. Outil de repérage, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

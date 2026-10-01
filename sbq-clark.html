@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>SBQ — Cabinet Bouche &amp; Chmura</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F4F1EA; --surface:#FFFFFF; --surface-2:#EAE6D9; --ink:#20241E; --ink-soft:#63695D;
+    --line:#E0D9C9; --accent:#3E5C8A; --accent-ink:#F4F1EA; --accent-soft:#E3E9F2;
+    --progress-bg:#E6E1D3; --progress-fill:#7FA0BF;
+    --shadow: 0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',-apple-system,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,h3,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:var(--ink);}
+  .wrap{max-width:560px;margin:0 auto;padding:48px 24px 80px;}
+  .back-top{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--ink-soft);text-decoration:none;margin-bottom:20px;}
+  .back-top:hover{color:var(--ink);}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--ink-soft);display:inline-block;}
+  h1{font-size:26px;margin:0 0 10px;}
+  .intro-text{color:var(--ink-soft);font-size:15px;margin:0 0 28px;}
+  .start-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:32px 28px;box-shadow:var(--shadow);}
+  .pills{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 20px;}
+  .pill{font-size:12.5px;font-weight:600;color:var(--ink-soft);background:var(--surface-2);border-radius:999px;padding:6px 13px;display:inline-flex;align-items:center;gap:6px;}
+  .instructions{font-size:14.5px;color:var(--ink-soft);margin:0 0 22px;line-height:1.7;}
+  .quiz-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:28px 26px 26px;box-shadow:var(--shadow);}
+  .progress-track{height:8px;border-radius:99px;background:var(--progress-bg);overflow:hidden;margin-bottom:14px;}
+  .progress-fill{height:100%;background:var(--progress-fill);border-radius:99px;width:0%;transition:width .3s ease;}
+  .q-count{font-size:12.5px;color:var(--ink-soft);font-weight:600;margin:0 0 20px;}
+  .q-item{font-size:19px;font-weight:600;color:var(--ink);margin:0 0 26px;font-family:'Cormorant Garamond',Georgia,serif;line-height:1.35;}
+  .options{display:flex;flex-direction:column;gap:10px;}
+  .option-btn{font:inherit;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:14.5px;color:var(--ink);cursor:pointer;transition:border-color .15s ease,background .15s ease;}
+  .option-btn:hover{border-color:var(--accent);}
+  .option-btn.selected{border-color:var(--accent);background:var(--accent-soft);font-weight:600;}
+  .back-link{display:inline-flex;align-items:center;gap:6px;margin-top:22px;font-size:13px;color:var(--ink-soft);background:none;border:none;font:inherit;cursor:pointer;padding:0;}
+  .back-link:hover{color:var(--ink);}
+  .back-link[hidden]{display:none;}
+  #result{display:none;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:30px 28px;box-shadow:var(--shadow);}
+  #result h2.serif{font-size:22px;margin:0 0 6px;}
+  .meta-line{font-size:13.5px;color:var(--ink-soft);margin:0 0 24px;}
+  .note-informel{font-size:12.5px;color:var(--ink-soft);margin:0 0 20px;line-height:1.65;}
+  .answer-block{border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin-bottom:8px;}
+  .answer-block .q-no{font-size:11.5px;font-weight:700;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.05em;margin:0 0 6px;}
+  .answer-block .item{font-size:13.5px;color:var(--ink);margin:0 0 6px;}
+  .answer-block .resp{font-size:13.5px;font-weight:600;color:var(--accent);}
+  .btn{font:inherit;font-size:15px;font-weight:600;padding:13px 30px;border-radius:999px;border:none;background:var(--accent);color:var(--accent-ink);cursor:pointer;transition:background .15s ease;width:100%;}
+  .btn:hover{background:#2E4568;}
+  .btn-outline{background:none;border:1px solid var(--accent);color:var(--accent);margin-top:14px;}
+  .btn-outline:hover{background:var(--accent-soft);}
+  .hint{font-size:12.5px;color:var(--ink-soft);margin-top:14px;text-align:center;}
+  .footnote{margin-top:40px;font-size:11.5px;color:var(--ink-soft);border-top:1px solid var(--line);padding-top:16px;line-height:1.7;}
+  [hidden]{display:none !important;}
+  @media print{
+    .back-top, .eyebrow, h1, .intro-text, .footnote, .btn-outline{ display:none !important; }
+    body{background:#fff;}
+    #result{box-shadow:none;border:none;padding:0;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back-top" href="index.html">&larr; Tous les tests</a>
+  <div class="eyebrow">Anxiété sociale</div>
+  <h1 class="serif">Questionnaire de comportement social (SBQ)</h1>
+  <p class="intro-text">Ce résultat ne remplace pas un échange avec votre praticien, il sert de point de départ pour en discuter ensemble.</p>
+
+  <div class="start-card" id="startScreen">
+    <div class="pills">
+      <span class="pill">29 questions</span>
+      <span class="pill">6 minutes</span>
+      <span class="pill">Français</span>
+    </div>
+    <p class="instructions">Veuillez encercler le mot qui décrit le mieux la fréquence à laquelle vous faites les choses suivantes lorsque vous êtes anxieux dans ou avant une situation sociale.</p>
+    <button type="button" class="btn" id="startBtn">Commencer</button>
+    <p class="hint">Rien n'est envoyé ni conservé sur un serveur : si vous quittez avant la fin, vos réponses sont perdues et il faudra recommencer.</p>
+  </div>
+
+  <div class="quiz-card" id="quizScreen" hidden>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <p class="q-count" id="qCount">Question 1/29</p>
+    <p class="q-item" id="qItem"></p>
+    <div class="options" id="qOptions"></div>
+    <button type="button" class="back-link" id="backBtn" hidden>&larr; Question précédente</button>
+  </div>
+
+  <div id="result">
+    <h2 class="serif">Questionnaire de comportement social (SBQ)</h2>
+    <p class="meta-line">Passation : <span id="passationDate"></span></p>
+    <p class="note-informel">Le SBQ n'a ni score composite ni seuil clinique : c'est un outil de repérage des comportements de sécurité utilisés en situation sociale anxiogène, à discuter item par item en séance plutôt qu'à additionner.</p>
+    <div id="answersList"></div>
+    <button type="button" class="btn" id="downloadBtn">Télécharger le résultat (PDF)</button>
+    <button type="button" class="btn btn-outline" id="restartBtn">Refaire le test</button>
+  </div>
+
+  <p class="footnote">
+    Social Behaviour Questionnaire (Clark, D. M., Butler, G., Fennell, M., Hackmann, A., McManus, F.,
+    &amp; Wells, A., 1995). Manuscrit non publié, diffusé par l'université d'Oxford (oxcadatresources.com).
+    Traduction française : Levesque, Tchambo &amp; Wang, Guide de pratique pour le trouble d'anxiété
+    sociale, TCC Montréal. Ce résultat est un repère, il ne constitue pas un diagnostic.
+  </p>
+</div>
+
+<script>
+(function(){
+  const ITEMS = [
+    "Prendre de l'alcool pour gérer mon anxiété",
+    "Essayer de ne pas attirer l'attention",
+    "Faire un effort pour m'exprimer correctement avec les bons mots",
+    "Vous assurer que vous vous présentez bien",
+    "Éviter le contact visuel",
+    "Parler moins",
+    "Éviter de poser des questions",
+    "Essayer d'imaginer comment les autres vous perçoivent",
+    "Tenir fermement les tasses ou les verres",
+    "Vous positionner pour ne pas vous faire remarquer",
+    "Essayer de contrôler les tremblements",
+    "Choisir des vêtements qui empêchent ou dissimulent la transpiration",
+    "Porter des vêtements ou du maquillage pour cacher le rougissement",
+    "Préparer des phrases dans votre tête",
+    "Censurer ce que vous allez dire",
+    "Essayer de penser à autre chose ou d'oublier ce qui est en train de se passer",
+    "Éviter de parler de vous",
+    "Éviter de bouger",
+    "Poser beaucoup de questions",
+    "Penser positivement",
+    "Rester en périphérie des groupes",
+    "Éviter les pauses lorsque vous parlez",
+    "Cacher votre visage",
+    "Essayer de penser à d'autres choses",
+    "Parler davantage",
+    "Essayer d'agir comme une personne normale",
+    "Essayer de garder un contrôle étroit sur votre comportement",
+    "Faire un effort pour bien paraître aux yeux des autres",
+    "Planifier des sujets de conversation à l'avance"
+  ];
+  const OPTS = ["Jamais","Parfois","Souvent","Toujours"];
+  const answers = new Array(ITEMS.length).fill(null);
+  let current = 0;
+
+  const startScreen = document.getElementById('startScreen');
+  const quizScreen = document.getElementById('quizScreen');
+  const startBtn = document.getElementById('startBtn');
+  const qCount = document.getElementById('qCount');
+  const qItem = document.getElementById('qItem');
+  const qOptions = document.getElementById('qOptions');
+  const backBtn = document.getElementById('backBtn');
+  const progressFill = document.getElementById('progressFill');
+  const resultBox = document.getElementById('result');
+
+  startBtn.addEventListener('click', function(){
+    startScreen.hidden = true;
+    quizScreen.hidden = false;
+    renderQuestion();
+  });
+
+  backBtn.addEventListener('click', function(){
+    if(current > 0){ current -= 1; renderQuestion(); }
+  });
+
+  function renderQuestion(){
+    qCount.textContent = 'Question ' + (current + 1) + '/' + ITEMS.length;
+    qItem.textContent = (current + 1) + '. ' + ITEMS[current];
+    progressFill.style.width = ((current / ITEMS.length) * 100) + '%';
+    backBtn.hidden = current === 0;
+    qOptions.innerHTML = '';
+    OPTS.forEach(function(opt, idx){
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'option-btn';
+      btn.textContent = opt;
+      if(answers[current] === idx){ btn.classList.add('selected'); }
+      btn.addEventListener('click', function(){ selectAnswer(idx, btn); });
+      qOptions.appendChild(btn);
+    });
+  }
+
+  function selectAnswer(idx, btnEl){
+    answers[current] = idx;
+    Array.from(qOptions.children).forEach(function(b){ b.classList.remove('selected'); });
+    btnEl.classList.add('selected');
+    progressFill.style.width = (((current + 1) / ITEMS.length) * 100) + '%';
+    setTimeout(function(){
+      if(current < ITEMS.length - 1){ current += 1; renderQuestion(); }
+      else { showResult(); }
+    }, 300);
+  }
+
+  function showResult(){
+    quizScreen.hidden = true;
+    document.getElementById('passationDate').textContent = new Date().toLocaleString('fr-FR', {day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit'});
+    const answersList = document.getElementById('answersList');
+    answersList.innerHTML = '';
+    ITEMS.forEach(function(text, idx){
+      const block = document.createElement('div');
+      block.className = 'answer-block';
+      block.innerHTML =
+        '<p class="q-no">Item ' + (idx + 1) + '</p>' +
+        '<p class="item">' + text + '</p>' +
+        '<p class="resp">' + OPTS[answers[idx]] + '</p>';
+      answersList.appendChild(block);
+    });
+    resultBox.style.display = 'block';
+    resultBox.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  document.getElementById('downloadBtn').addEventListener('click', function(){ window.print(); });
+  document.getElementById('restartBtn').addEventListener('click', function(){
+    answers.fill(null);
+    current = 0;
+    resultBox.style.display = 'none';
+    startScreen.hidden = false;
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SBQ — Questionnaire de comportement social</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#3E5C8A 0%,#6E8CBB 55%,#22375C 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(180,200,230,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#1A2233;background:#E7E9EE;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;flex-wrap:wrap;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#3E5C8A;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#1A2233;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">SBQ</span></div>
+
+  <h1 class="serif">Questionnaire de comportement social</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Social Behaviour Questionnaire (SBQ) — Clark, Butler, Fennell, Hackmann, McManus &amp; Wells (1995)</p>
+  <div class="meta-row">
+    <span class="pill">29 items</span>
+    <span class="pill">6 minutes</span>
+    <span class="pill">Français</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="sbq-clark.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Mesure-compagnon du modèle cognitif de la phobie sociale de Clark &amp; Wells (1995) : relève
+    les comportements de sécurité (contrôle du regard, du discours, de l'apparence, de l'attention
+    portée à soi) que la personne met en œuvre avant ou pendant une situation sociale anxiogène.</p>
+    <p class="source-note">⚠️ Sigle partagé avec le SBQ-R (Suicide Behaviors Questionnaire-Revised,
+    déjà présent dans ce catalogue sous le nom « SBQ-R ») — deux instruments totalement distincts,
+    fichier nommé <code>sbq-clark</code> pour éviter toute confusion.</p>
+    <p class="source-note">Droits : manuscrit académique non publié, diffusé librement par
+    l'université d'Oxford (oxcadatresources.com) à des fins cliniques/de formation. Traduction
+    française officielle par Camille Levesque MD, Hervé Tchambo MD et Sophie Wang MD (TCC Montréal).
+    Usage clinique/personnel libre.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Échelle à 4 modalités par item (Jamais / Parfois / Souvent / Toujours). Aucune sous-échelle
+    ni score composite : c'est un outil de processus thérapeutique, utilisé item par item pour
+    repérer et discuter les comportements de sécurité en séance, pas un instrument diagnostique à
+    score seuil.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source</h2>
+    <p class="source-note">Clark, D. M., Butler, G., Fennell, M., Hackmann, A., McManus, F., &amp;
+    Wells, A. (1995). <em>Social behaviour questionnaire</em>. Manuscrit non publié. Récupéré de
+    www.oxcadatresources.com.</p>
+    <p class="source-note">Traduction : « Guide de pratique pour le trouble d'anxiété sociale »,
+    TCC Montréal, section 7.4 (tccmontreal.com).</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

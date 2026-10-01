@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>PBI - Questionnaire du lien parental</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#4A3B5C;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 6px;}
+  .form-tag{font-size:11.5px;font-weight:700;color:#4A3B5C;text-transform:uppercase;letter-spacing:.05em;margin:0 0 10px;}
+  .q-text{font-size:18px;margin:0 0 20px;font-family:'Cormorant Garamond',Georgia,serif;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#4A3B5C;background:#EBE6F0;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#4A3B5C;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-h{font-size:20px;margin:22px 0 10px;}
+  .result-h:first-of-type{margin-top:0;}
+  .subscore-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 12px;}
+  .subscore{background:#F4F1EA;border:1px solid #E0D9C9;border-radius:10px;padding:10px 14px;}
+  .subscore .lbl{font-size:11.5px;font-weight:700;color:#63695D;text-transform:uppercase;letter-spacing:.03em;margin-bottom:4px;}
+  .subscore .val{font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;color:#20241E;}
+  .quadrant{font-size:14px;font-weight:700;color:#4A3B5C;background:#EBE6F0;border-radius:10px;padding:10px 14px;margin:0 0 20px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+  @media (max-width:480px){ .subscore-grid{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">PBI - Lien parental</h1>
+    <p class="lead">Parental Bonding Instrument. Ce questionnaire énumère diverses attitudes et comportements des parents. En pensant à votre MÈRE puis à votre PÈRE au cours de vos 16 premières années, cochez la case la plus appropriée à côté de chaque question (25 questions par parent, 50 au total).</p>
+    <div class="pill-row">
+      <span class="pill">50 questions</span>
+      <span class="pill">10 minutes</span>
+      <span class="pill">Échelle 4 points</span>
+      <span class="pill">2 formulaires (Mère/Père)</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="form-tag" id="form-tag"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-h serif">Formulaire Mère</p>
+    <div class="subscore-grid" id="grid-mere"></div>
+    <p class="quadrant" id="quad-mere"></p>
+    <p class="result-h serif">Formulaire Père</p>
+    <div class="subscore-grid" id="grid-pere"></div>
+    <p class="quadrant" id="quad-pere"></p>
+    <p class="lead">Mesure rétrospective, sur la perception du style parental durant l'enfance. Ce résultat ne peut en aucun cas remplacer une évaluation clinique.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Parker, G., Tupling, H., &amp; Brown, L.B. (1979). A Parental Bonding Instrument. British Journal of Medical Psychology, 52(1), 1-10. Validation française référencée : Mohr, Preisig, Fenton &amp; Ferrero (1999), Personality and Individual Differences, 26(6), 1065-1074 (traduction reprise d'une fiche technique française de diffusion clinique, sans garantie du libellé mot pour mot). Le PBI n'est pas protégé par le droit d'auteur (mention officielle UCL/NSHD). Outil de repérage, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var opts = ["Très semblable/caractéristique","Modérément semblable/caractéristique","Modérément différent(e)/non caractéristique","Très différent(e)/non caractéristique"];
+
+  var mereItems = [
+    "M'a parlé d'une voix chaleureuse et amicale",
+    "Ne m'a pas aidé autant que j'en avais besoin",
+    "M'a laissé faire les choses que j'aimais faire",
+    "M'a semblé émotionnellement froide",
+    "Semblait comprendre mes problèmes et mes inquiétudes",
+    "A été affectueuse avec moi",
+    "A aimé que je prenne mes propres décisions",
+    "Ne voulait pas que je grandisse",
+    "A essayé de contrôler tout ce que je faisais",
+    "S'immisçait dans ma vie privée",
+    "Appréciait les discussions avec moi",
+    "Me souriait souvent",
+    "Avait tendance à me chouchouter",
+    "Ne semblait pas comprendre ce dont j'avais besoin ou ce que je voulais",
+    "Me laissait décider par moi-même",
+    "Me fait sentir qu'on ne veut pas de moi",
+    "Me permettait de me sentir mieux quand j'étais contrarié(e)",
+    "Ne parlait pas beaucoup avec moi",
+    "A essayé de me faire sentir dépendant(e) d'elle",
+    "J'ai eu l'impression de ne pas pouvoir m'occuper de moi-même si elle n'était pas là",
+    "M'a laissé autant de liberté que je le souhaitais",
+    "Me laissait sortir aussi souvent que je le souhaite",
+    "M'a surprotégé",
+    "Ne m'a pas félicité",
+    "Me laissait m'habiller comme je voulais"
+  ];
+  var pereItems = [
+    "M'a parlé d'une voix chaleureuse et amicale",
+    "Ne m'a pas aidé autant que j'en avais besoin",
+    "M'a laissé faire les choses que j'aimais faire",
+    "M'a semblé émotionnellement froid",
+    "Semblait comprendre mes problèmes et mes inquiétudes",
+    "A été affectueux avec moi",
+    "A aimé que je prenne mes propres décisions",
+    "Ne voulait pas que je grandisse",
+    "A essayé de contrôler tout ce que je faisais",
+    "S'immisçait dans ma vie privée",
+    "Appréciait les discussions avec moi",
+    "Me souriait souvent",
+    "Avait tendance à me chouchouter",
+    "Ne semblait pas comprendre ce dont j'avais besoin ou ce que je voulais",
+    "Me laissait décider par moi-même",
+    "Me faisait sentir qu'on ne voulait pas de moi",
+    "Me permettait de me sentir mieux quand j'étais contrarié(e)",
+    "Ne parlait pas beaucoup avec moi",
+    "A essayé de me faire sentir dépendant(e) de lui",
+    "A eu l'impression que je ne pouvais pas me débrouiller seul(e) s'il n'était pas là",
+    "M'a laissé autant de liberté que je le souhaitais",
+    "Me laissait sortir aussi souvent que je le souhaitais",
+    "M'a surprotégé",
+    "Ne m'a pas félicité",
+    "Me laissait m'habiller comme je voulais"
+  ];
+
+  // 0-indexé : direct => score = 3 - choix ; inverse => score = choix
+  var careDirect = [0,4,5,10,11,16];
+  var careInverse = [1,3,13,15,17,23];
+  var overDirect = [7,8,9,12,18,19,22];
+  var overInverse = [2,6,14,20,21,24];
+
+  var items = []; // {form:'mere'/'pere', t:...}
+  mereItems.forEach(function(t){ items.push({form:'mere', t:t}); });
+  pereItems.forEach(function(t){ items.push({form:'pere', t:t}); });
+
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('form-tag').textContent = items[idx].form === 'mere' ? 'Formulaire — MÈRE' : 'Formulaire — PÈRE';
+    document.getElementById('q-text').textContent = items[idx].t;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    opts.forEach(function(label, v){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === v ? ' selected' : '');
+      d.textContent = label;
+      d.addEventListener('click', function(){
+        answers[idx] = v;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function scoreOf(baseIdx, i){
+    var v = answers[baseIdx + i];
+    if (careDirect.indexOf(i) !== -1 || overDirect.indexOf(i) !== -1) return 3 - v;
+    return v;
+  }
+
+  function computeForm(base){
+    var care = 0, over = 0;
+    for (var i = 0; i < 25; i++){
+      var s = scoreOf(base, i);
+      if (careDirect.indexOf(i) !== -1 || careInverse.indexOf(i) !== -1) care += s;
+      else over += s;
+    }
+    return {care:care, over:over};
+  }
+
+  function quadrant(care, over, careThr, overThr){
+    var careHigh = care >= careThr, overHigh = over >= overThr;
+    if (careHigh && !overHigh) return "Lien optimal (soin élevé, surprotection faible)";
+    if (!careHigh && overHigh) return "Contrôle sans affection (soin faible, surprotection élevée)";
+    if (!careHigh && !overHigh) return "Absence de lien (soin faible, surprotection faible)";
+    return "Contrôle affectueux (soin élevé, surprotection élevée)";
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var mere = computeForm(0);
+    var pere = computeForm(25);
+
+    var gm = document.getElementById('grid-mere');
+    gm.innerHTML = '<div class="subscore"><div class="lbl">Soin</div><div class="val">' + mere.care + ' / 36</div></div>' +
+      '<div class="subscore"><div class="lbl">Surprotection</div><div class="val">' + mere.over + ' / 39</div></div>';
+    document.getElementById('quad-mere').textContent = quadrant(mere.care, mere.over, 27.0, 13.5);
+
+    var gp = document.getElementById('grid-pere');
+    gp.innerHTML = '<div class="subscore"><div class="lbl">Soin</div><div class="val">' + pere.care + ' / 36</div></div>' +
+      '<div class="subscore"><div class="lbl">Surprotection</div><div class="val">' + pere.over + ' / 39</div></div>';
+    document.getElementById('quad-pere').textContent = quadrant(pere.care, pere.over, 24.0, 12.5);
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PBI - Questionnaire du lien parental</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#4A3B5C 0%,#6B5580 55%,#332843 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(200,215,235,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#22334D;background:#E9EEF5;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#4A3B5C;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#22334D;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <div class="fiche-photo"><span class="acronym">PBI</span></div>
+  <h1 class="serif">Questionnaire du lien parental (PBI)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Parental Bonding Instrument - Parker, Tupling &amp; Brown (1979)</p>
+  <div class="meta-row">
+    <span class="pill">50 questions (2 x 25)</span>
+    <span class="pill">10 minutes</span>
+    <span class="pill">Auto-questionnaire</span>
+    <span class="pill">Français</span>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" href="pbi.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Mesure rétrospective de deux dimensions du style parental perçu par l'enfant durant ses 16 premières années : Soin (Care) et Surprotection/Contrôle (Overprotection). 25 items, remplis deux fois (formulaire Mère puis formulaire Père).</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Échelle 4 points (Très semblable=3 … Très différent=0, ou l'inverse selon le sens de l'item). Soin — 12 items, score 0-36. Surprotection — 13 items, score 0-39. Chaque formulaire coté séparément. Quatre quadrants du lien parental : Lien optimal (soin élevé + surprotection faible), Contrôle sans affection (soin faible + surprotection élevée), Absence de lien (soin faible + surprotection faible), Contrôle affectueux (soin élevé + surprotection élevée). Seuils : Mère — Soin ≥ 27,0 = élevé, Surprotection ≥ 13,5 = élevée. Père — Soin ≥ 24,0 = élevé, Surprotection ≥ 12,5 = élevée.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Source</h2>
+    <p class="source-note">Parker, G., Tupling, H., &amp; Brown, L.B. (1979). A Parental Bonding Instrument. British Journal of Medical Psychology, 52(1), 1-10. Validation française référencée : Mohr, S., Preisig, M., Fenton, B.T., &amp; Ferrero, F. (1999). Personality and Individual Differences, 26(6), 1065-1074 (non consultée en texte intégral ; traduction reprise d'une fiche technique française de diffusion clinique largement utilisée, sans garantie du libellé mot pour mot de Mohr et al.). Le PBI n'est pas protégé par le droit d'auteur (mention officielle UCL/NSHD : « clinicians and researchers are free to use the measure without obtaining permission »). Outil de repérage, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

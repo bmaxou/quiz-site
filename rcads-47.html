@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RCADS-47 - Échelle révisée d'anxiété et de dépression chez l'enfant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#2E4A52;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#2E4A52;background:#E1E9EA;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#2E4A52;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:36px;color:#2E4A52;margin:0 0 4px;}
+  .result-max{font-size:13px;color:#9A9E90;margin:0 0 20px;}
+  .subscore-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 20px;}
+  .subscore{background:#F4F1EA;border:1px solid #E0D9C9;border-radius:10px;padding:10px 14px;}
+  .subscore .lbl{font-size:11.5px;font-weight:700;color:#63695D;text-transform:uppercase;letter-spacing:.03em;margin-bottom:4px;}
+  .subscore .val{font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;color:#20241E;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+  @media (max-width:480px){ .subscore-grid{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">RCADS-47 - Anxiété et dépression chez l'enfant</h1>
+    <p class="lead">Revised Children's Anxiety and Depression Scale. Cochez la réponse qui montre avec quelle fréquence chacune de ces choses vous arrivent. Il n'y a pas de bonnes ou de mauvaises réponses.</p>
+    <div class="pill-row">
+      <span class="pill">47 questions</span>
+      <span class="pill">15 minutes</span>
+      <span class="pill">Auto-administré (enfant/ado)</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-score" id="score-total"></p>
+    <p class="result-max">score total (anxiété + dépression), sur 141</p>
+    <div class="subscore-grid" id="subscore-grid"></div>
+    <p class="lead">Score brut par sous-échelle = somme des cotations (0-3) des items la composant. Score Anxiété totale = somme des 5 sous-échelles d'anxiété (37 items). Score Total = somme des 47 items. Les scores T normés par âge/sexe existent dans le guide officiel mais n'ont pas pu être extraits de façon fiable pour cet outil — se référer au PDF officiel (RCADS Users Guide) pour cette conversion ; aucun seuil clinique n'est affiché ici. Ce résultat ne peut en aucun cas remplacer une évaluation clinique.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Chorpita, B. F., Yim, L., Moffitt, C., Umemoto, L. A., &amp; Francis, S. E. (2000). Assessment of symptoms of DSM-IV anxiety and depression in children: A revised child anxiety and depression scale. Behaviour Research and Therapy, 38(8), 835-855. Copyright © 1998 Bruce F. Chorpita &amp; Susan H. Spence, mis à disposition gratuitement pour l'usage clinique et de recherche via la page ressource officielle UCLA. Traduction française officielle UCLA/Child FIRST. Ce résultat est un repère, il ne constitue pas un diagnostic.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var opts = ["0 - Jamais","1 - Quelquefois","2 - Souvent","3 - Toujours"];
+
+  var items = [
+    {t:"1. Je m'inquiète de certaines choses", sub:"GAD"},
+    {t:"2. Je me sens triste ou vide", sub:"MDD"},
+    {t:"3. Lorsque j'ai un problème, j'ai une drôle de sensation dans l'estomac", sub:"PD"},
+    {t:"4. Je m'inquiète lorsque je pense que j'ai mal fait quelque chose", sub:"SOC"},
+    {t:"5. J'aurais peur d'être laissé seul à la maison", sub:"SAD"},
+    {t:"6. Plus rien n'est amusant", sub:"MDD"},
+    {t:"7. J'ai peur quand je dois passer un examen", sub:"SOC"},
+    {t:"8. Je me sens inquiet(e) quand je pense que quelqu'un est fâché contre moi", sub:"SOC"},
+    {t:"9. Je m'inquiète d'être loin de mes parents", sub:"SAD"},
+    {t:"10. Je suis tracassé(e) par des mauvaises ou stupides pensées ou images dans mon esprit", sub:"OCD"},
+    {t:"11. J'ai du mal à dormir", sub:"MDD"},
+    {t:"12. Je m'inquiète de mal faire mon travail à l'école", sub:"SOC"},
+    {t:"13. Je crains que quelque chose d'horrible n'arrive à un membre de ma famille", sub:"GAD"},
+    {t:"14. J'ai soudain l'impression de ne plus pouvoir respirer alors qu'il n'y a aucune raison pour cela", sub:"PD"},
+    {t:"15. J'ai des problèmes d'appétit", sub:"MDD"},
+    {t:"16. Je dois constamment vérifier que j'ai bien fait les choses (lumière éteinte, porte fermée à clé)", sub:"OCD"},
+    {t:"17. J'ai peur si je dois dormir seul(e)", sub:"SAD"},
+    {t:"18. J'ai du mal à aller à l'école le matin car je me sens nerveux(se) ou j'ai peur", sub:"SAD"},
+    {t:"19. Je n'ai aucune énergie pour quoi que ce soit", sub:"MDD"},
+    {t:"20. Je crains d'avoir l'air ridicule", sub:"SOC"},
+    {t:"21. Je suis très fatigué(e)", sub:"MDD"},
+    {t:"22. Je crains que de mauvaises choses ne m'arrivent", sub:"GAD"},
+    {t:"23. Je n'arrive pas à chasser des pensées mauvaises ou idiotes de ma tête", sub:"OCD"},
+    {t:"24. Lorsque j'ai un problème, mon cœur bat très vite", sub:"PD"},
+    {t:"25. Je n'arrive pas à penser clairement", sub:"MDD"},
+    {t:"26. Je me mets soudainement à trembler ou à m'agiter alors qu'il n'y a aucune raison", sub:"PD"},
+    {t:"27. Je m'inquiète que de mauvaises choses ne m'arrivent", sub:"GAD"},
+    {t:"28. Quand j'ai un problème, je me sens tremblant(e)", sub:"PD"},
+    {t:"29. Je me sens dévalorisé(e)", sub:"MDD"},
+    {t:"30. Je crains de faire des erreurs", sub:"SOC"},
+    {t:"31. Je dois réfléchir à des pensées particulières (nombres, mots) pour empêcher que de mauvaises choses ne se produisent", sub:"OCD"},
+    {t:"32. Je m'inquiète de ce que les autres pensent de moi", sub:"SOC"},
+    {t:"33. J'ai peur d'être dans des endroits bondés (centres commerciaux, cinéma, bus, terrains de jeux très fréquentés)", sub:"SAD"},
+    {t:"34. Tout d'un coup, j'ai vraiment peur sans aucune raison", sub:"PD"},
+    {t:"35. Je m'inquiète de ce qui va se passer", sub:"GAD"},
+    {t:"36. J'ai soudainement des vertiges ou je m'évanouis alors que je n'ai aucune raison", sub:"PD"},
+    {t:"37. Je pense à la mort", sub:"GAD"},
+    {t:"38. J'ai peur si je dois parler devant ma classe", sub:"SOC"},
+    {t:"39. Mon cœur se met soudainement à battre trop vite sans raison", sub:"PD"},
+    {t:"40. Je n'ai pas envie de bouger", sub:"MDD"},
+    {t:"41. Je m'inquiète de ressentir soudainement une sensation de peur quand il n'y a rien à craindre", sub:"PD"},
+    {t:"42. Je dois faire certaines choses encore et encore (laver mes mains, nettoyer, ranger dans un certain ordre)", sub:"OCD"},
+    {t:"43. J'ai peur de me ridiculiser devant les gens", sub:"SOC"},
+    {t:"44. Je dois faire certaines choses juste de la bonne manière pour éviter que de mauvaises choses ne se produisent", sub:"OCD"},
+    {t:"45. Je m'inquiète quand je vais au lit le soir", sub:"SAD"},
+    {t:"46. J'aurais peur si je devais rester loin de chez moi pour la nuit", sub:"SAD"},
+    {t:"47. Je me sens agité(e)", sub:"MDD"}
+  ];
+
+  var subLabels = {
+    SAD:"Anxiété de séparation", SOC:"Phobie sociale", GAD:"Anxiété généralisée",
+    PD:"Trouble panique", OCD:"TOC", MDD:"Dépression majeure"
+  };
+  var subOrder = ["SAD","SOC","GAD","PD","OCD","MDD"];
+
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx].t;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    opts.forEach(function(label, i){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === i ? ' selected' : '');
+      d.textContent = label;
+      d.addEventListener('click', function(){
+        answers[idx] = i;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var total = answers.reduce(function(a,b){ return a + b; }, 0);
+    document.getElementById('score-total').textContent = total;
+
+    var subTotals = {};
+    subOrder.forEach(function(s){ subTotals[s] = 0; });
+    items.forEach(function(it, i){ subTotals[it.sub] += answers[i]; });
+    var anxietyTotal = subOrder.filter(function(s){ return s !== 'MDD'; }).reduce(function(a,s){ return a + subTotals[s]; }, 0);
+
+    var grid = document.getElementById('subscore-grid');
+    grid.innerHTML = '';
+    subOrder.forEach(function(s){
+      var div = document.createElement('div');
+      div.className = 'subscore';
+      div.innerHTML = '<div class="lbl">' + subLabels[s] + '</div><div class="val">' + subTotals[s] + '</div>';
+      grid.appendChild(div);
+    });
+    var divA = document.createElement('div');
+    divA.className = 'subscore';
+    divA.innerHTML = '<div class="lbl">Anxiété totale (37 items)</div><div class="val">' + anxietyTotal + '</div>';
+    grid.appendChild(divA);
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RCADS-47 - Échelle révisée d'anxiété et de dépression chez l'enfant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#2E4A52 0%,#3E6873 55%,#1D2F34 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(235,225,190,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:24px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#22334D;background:#E9EEF5;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#2E4A52;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#22334D;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <div class="fiche-photo"><span class="acronym">RCADS-47</span></div>
+  <h1 class="serif">Échelle révisée d'anxiété et de dépression chez l'enfant (RCADS-47)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Revised Children's Anxiety and Depression Scale - Chorpita, Yim, Moffitt, Umemoto &amp; Francis (2000)</p>
+  <div class="meta-row">
+    <span class="pill">47 questions</span>
+    <span class="pill">15 minutes</span>
+    <span class="pill">Auto-administré (enfant/ado)</span>
+    <span class="pill">Enfant / Adolescent</span>
+    <span class="pill">Français</span>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" href="rcads-47.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le RCADS-47 mesure conjointement 6 dimensions chez l'enfant ou l'adolescent : anxiété de séparation (7 items), phobie sociale (9 items), anxiété généralisée (6 items), trouble panique (9 items), TOC (6 items) et dépression majeure (10 items). Chaque item est coté de 0 (Jamais) à 3 (Toujours).</p>
+    <p>Mis à disposition gratuitement par les auteurs via la page ressource officielle UCLA, pour un usage de recherche et éducatif ; la distribution commerciale par un tiers est interdite et la création de dérivés destinés à une diffusion publique est soumise à autorisation — couvre l'usage clinique individuel de Max. Traduction française officielle hébergée par UCLA/Child FIRST (RCADS-47-Y-FR), dont la validation psychométrique française n'a pas pu être confirmée solidement à ce jour (Bouvard, Dacquin &amp; Denis, 2012).</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Score brut par sous-échelle = somme des cotations des items la composant. Score Anxiété totale = somme des 5 sous-échelles d'anxiété (37 items). Score Total = somme des 47 items (0 à 141).</p>
+    <p>Les scores T normés par âge et par sexe existent dans les annexes du guide officiel (RCADS Users Guide) mais n'ont pas pu être extraits avec une fiabilité suffisante pour être reproduits ici — se référer au PDF officiel pour cette conversion. Aucun seuil clinique n'est affiché sur cette page.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Source</h2>
+    <p class="source-note">Chorpita, B. F., Yim, L., Moffitt, C., Umemoto, L. A., &amp; Francis, S. E. (2000). Assessment of symptoms of DSM-IV anxiety and depression in children: A revised child anxiety and depression scale. Behaviour Research and Therapy, 38(8), 835-855. Copyright © 1998 Bruce F. Chorpita &amp; Susan H. Spence. PDF officiel : childfirst.ucla.edu. Traduction française : rcads.ucla.edu. Ce résultat est un repère, il ne constitue pas un diagnostic.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>
