@@ -1,0 +1,608 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>C-SSRS — Échelle de Columbia sur la gravité du risque suicidaire</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:660px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:25px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 16px;}
+  .warn{font-size:12.5px;background:#FBF0E8;border:1px solid #E7CBB0;border-radius:10px;padding:12px 14px;color:#7A4A20;margin:0 0 20px;}
+  .progress-track{height:6px;background:#E0D9C9;border-radius:99px;overflow:hidden;margin-bottom:28px;}
+  .progress-fill{height:100%;background:#2E3A52;border-radius:99px;transition:width .25s ease;}
+  .qnum{font-size:12px;font-weight:700;color:#2E3A52;letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center;}
+  .section-tag{font-size:10.5px;font-weight:700;background:#E9EBF0;color:#2E3A52;border-radius:999px;padding:3px 10px;text-transform:none;letter-spacing:0;}
+  .qtitle{font-size:19px;font-family:'Cormorant Garamond',Georgia,serif;margin:0 0 4px;}
+  .qhint{font-size:13px;color:#63695D;font-style:italic;margin:0 0 16px;}
+  .qtext{font-size:15.5px;font-weight:600;margin:0 0 18px;}
+  .opts{display:flex;flex-direction:column;gap:9px;}
+  .opt{appearance:none;text-align:left;border:1px solid #E0D9C9;background:#F4F1EA;border-radius:12px;padding:13px 16px;font-family:'Inter',sans-serif;font-size:13.5px;color:#20241E;cursor:pointer;transition:border-color .15s ease,background .15s ease;}
+  .opt:hover{border-color:#2E3A52;background:#E9EBF0;}
+  .opt.selected{border-color:#2E3A52;background:#E9EBF0;}
+  .yesno-row{display:flex;gap:12px;}
+  .yesno-row .opt{flex:1;text-align:center;font-weight:700;}
+  .count-box{margin-top:16px;padding-top:16px;border-top:1px dashed #E0D9C9;}
+  .count-box label{display:block;font-size:13px;font-weight:600;color:#63695D;margin-bottom:8px;}
+  .count-box input{width:100px;padding:9px 12px;border:1px solid #E0D9C9;border-radius:10px;font-family:'Inter',sans-serif;font-size:14px;}
+  .count-box .btn{margin-top:14px;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#2E3A52;color:#fff;}
+  .btn[disabled]{opacity:.45;cursor:not-allowed;}
+  .start-btn{background:#2E3A52;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 12px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .result-block{margin:0 0 18px;}
+  .result-block h2{font-size:16px;margin:0 0 8px;}
+  .result-line{font-size:14px;margin:0 0 6px;padding:10px 14px;background:#F4F1EA;border-radius:10px;border:1px solid #E0D9C9;}
+  .result-line strong{color:#2E3A52;}
+  .safety-box{font-size:13.5px;background:#FBEAEA;border:1px solid #E7B0B0;border-radius:10px;padding:16px 18px;color:#7A2020;margin:0 0 20px;}
+  .safety-box strong{display:block;margin-bottom:6px;font-size:14px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">C-SSRS — Échelle de Columbia sur la gravité du risque suicidaire</h1>
+    <p class="lead">Hétéro-questionnaire structuré (entretien mené par un clinicien formé), version « Depuis la dernière visite ». Quatre parties : Idéation suicidaire, Intensité de l'idéation, Comportement suicidaire, Létalité.</p>
+    <p class="warn">⚠️ Contenu sensible (idéation, intention et comportements suicidaires). Cette échelle est destinée à être utilisée par une personne formée à son administration : la détermination finale de l'existence d'une idéation ou de comportements suicidaires repose sur l'appréciation clinique de l'évaluateur, pas sur le résultat affiché ici. Ne remplace jamais un entretien clinique complet ni le protocole de sécurité de votre pratique.</p>
+    <p class="warn">Version transcrite : « Depuis la dernière visite » (suivi entre deux consultations), datée du 14/01/09, traduction française Mapi Research Trust du 07/04/14. Distincte de la version « Baseline/Lifetime » (évaluation initiale, questions posées « au cours de votre vie ») — voir la fiche complète.</p>
+    <div class="pill-row">
+      <span class="pill">4 parties</span>
+      <span class="pill">Hétéro-administré</span>
+      <span class="pill">Sans score total unique</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+    <div class="qnum"><span id="qnum"></span><span class="section-tag" id="qtag"></span></div>
+    <p class="qtitle" id="qtitle"></p>
+    <p class="qhint" id="qhint"></p>
+    <p class="qtext" id="qtext"></p>
+    <div id="opts"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-back" disabled>Précédent</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Synthèse de l'entretien</h1>
+    <div class="safety-box" id="safety-box" hidden>
+      <strong>Vigilance clinique</strong>
+      Un ou plusieurs éléments de risque ont été rapportés (idéation active avec intention et/ou scénario, comportement suicidaire récent, ou létalité). Engagez, si ce n'est déjà fait, votre protocole de sécurité habituel (évaluation approfondie de l'intentionnalité et de l'accès aux moyens, contrat de sécurité, orientation en urgence si nécessaire — 15/SAMU, 3114 [numéro national de prévention du suicide, 24h/24 7j/7], 112, ou service d'urgences le plus proche).
+    </div>
+
+    <div class="result-block">
+      <h2 class="serif">Idéation suicidaire</h2>
+      <p class="result-line" id="res-ideation"></p>
+    </div>
+    <div class="result-block" id="block-intensite" hidden>
+      <h2 class="serif">Intensité de l'idéation (type le plus grave)</h2>
+      <p class="result-line" id="res-frequence"></p>
+      <p class="result-line" id="res-duree"></p>
+      <p class="result-line" id="res-maitrise"></p>
+      <p class="result-line" id="res-dissuasifs"></p>
+      <p class="result-line" id="res-causes"></p>
+    </div>
+    <div class="result-block">
+      <h2 class="serif">Comportement suicidaire</h2>
+      <p class="result-line" id="res-avere"></p>
+      <p class="result-line" id="res-interrompue"></p>
+      <p class="result-line" id="res-avortee"></p>
+      <p class="result-line" id="res-prep"></p>
+      <p class="result-line" id="res-synth"></p>
+      <p class="result-line" id="res-deces"></p>
+    </div>
+    <div class="result-block" id="block-letalite" hidden>
+      <h2 class="serif">Létalité / lésions médicales</h2>
+      <p class="result-line" id="res-let-observee"></p>
+      <p class="result-line" id="res-let-potentielle" hidden></p>
+    </div>
+
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">C-SSRS (Columbia-Suicide Severity Rating Scale), version « Depuis la dernière visite » — Posner, Brent, Lucas, Gould, Stanley, Brown, Fisher, Zelazny, Burke, Oquendo &amp; Mann, version du 14/01/09. &copy; 2008 The Research Foundation for Mental Hygiene, Inc. Traduction française : Mapi Research Trust, version du 07/04/14 (ID7651). Outil de repérage clinique administré par un professionnel formé, ne remplace pas une évaluation complète du risque suicidaire.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var YES_NO = [["Oui",1],["Non",0]];
+
+  var steps = [
+    { id:'q1', section:'Idéation suicidaire', title:"1. Désir d'être mort(e)",
+      hint:"Le sujet souscrit à des pensées concernant le désir de mourir ou de ne plus être en vie, ou le désir de s'endormir et de ne pas se réveiller.",
+      text:"Avez-vous souhaité être mort(e) ou vous endormir et ne jamais vous réveiller ?", type:'yesno' },
+    { id:'q2', section:'Idéation suicidaire', title:"2. Pensées suicidaires actives non spécifiques",
+      hint:"Pensées d'ordre général non spécifiques autour de la volonté de mettre fin à ses jours/se suicider, non associées à des pensées sur les manières permettant de se suicider, ni à une intention ou à un scénario.",
+      text:"Avez-vous réellement pensé à vous suicider ?", type:'yesno' },
+    { id:'q3', section:'Idéation suicidaire', title:"3. Idéation active avec définition de méthodes (sans scénario), sans intention de passage à l'acte",
+      hint:"Le sujet pense au suicide et a envisagé au moins une méthode pour y parvenir, sans scénario précis (moment, lieu, méthode) ni intention.",
+      text:"Avez-vous pensé à la manière dont vous vous y prendriez ?", type:'yesno',
+      visible:function(a){ return a.q2 === 1; } },
+    { id:'q4', section:'Idéation suicidaire', title:"4. Idéation active avec intention de passage à l'acte, sans scénario précis",
+      hint:"Pensées suicidaires actives, le sujet exprime une intention plus ou moins forte de passer à l'acte.",
+      text:"Avez-vous eu des pensées de ce genre et l'intention de passer à l'acte ?", type:'yesno',
+      visible:function(a){ return a.q2 === 1; } },
+    { id:'q5', section:'Idéation suicidaire', title:"5. Idéation active avec scénario précis et intention de passage à l'acte",
+      hint:"Pensées suicidaires associées à l'élaboration complète ou partielle d'un scénario détaillé, avec intention de le mettre à exécution.",
+      text:"Avez-vous commencé ou fini d'élaborer un scénario détaillé sur la manière dont vous voulez vous suicider ? Avez-vous l'intention de mettre ce scénario à exécution ?", type:'yesno',
+      visible:function(a){ return a.q2 === 1; } },
+
+    { id:'int_freq', section:"Intensité de l'idéation", title:"Fréquence",
+      text:"Combien de fois avez-vous eu ces pensées ?", type:'choice',
+      visible:function(a){ return a.q1 === 1 || a.q2 === 1; },
+      options:[
+        ["Moins d'une fois par semaine",1],["Une fois par semaine",2],["2 à 5 fois par semaine",3],["Tous les jours ou presque",4],["Plusieurs fois par jour",5]
+      ] },
+    { id:'int_duree', section:"Intensité de l'idéation", title:"Durée",
+      text:"Lorsque vous avez ces pensées, combien de temps durent-elles ?", type:'choice',
+      visible:function(a){ return a.q1 === 1 || a.q2 === 1; },
+      options:[
+        ["Quelques instants : quelques secondes ou quelques minutes",1],["Moins d'une heure / un certain temps",2],["1 à 4 heures / longtemps",3],["4 à 8 heures / une grande partie de la journée",4],["Plus de 8 heures / en permanence ou tout le temps",5]
+      ] },
+    { id:'int_maitrise', section:"Intensité de l'idéation", title:"Maîtrise des pensées suicidaires",
+      text:"Pourriez-vous/pouvez-vous arrêter de penser au suicide ou à votre envie de mourir si vous le voul(i)ez ?", type:'choice',
+      visible:function(a){ return a.q1 === 1 || a.q2 === 1; },
+      options:[
+        ["Maîtrise facilement ses pensées",1],["Capable de maîtriser ses pensées avec de légères difficultés",2],["Capable de maîtriser ses pensées avec quelques difficultés",3],["Capable de maîtriser ses pensées avec de grandes difficultés",4],["Incapable de maîtriser ses pensées",5],["N'essaie pas de maîtriser ses pensées",0]
+      ] },
+    { id:'int_dissuasifs', section:"Intensité de l'idéation", title:"Éléments dissuasifs",
+      text:"Y a-t-il quelque chose ou quelqu'un (par ex. votre famille, votre religion ou la douleur au moment de la mort) qui vous a dissuadé(e) de vouloir mourir ou de mettre à exécution vos pensées suicidaires ?", type:'choice',
+      visible:function(a){ return a.q1 === 1 || a.q2 === 1; },
+      options:[
+        ["Des éléments dissuasifs vous ont véritablement empêché(e) de tenter de vous suicider",1],["Des éléments dissuasifs vous ont probablement arrêté(e)",2],["Vous ne savez pas si des éléments dissuasifs vous ont arrêté(e)",3],["Vous n'avez très probablement été arrêté(e) par aucun élément dissuasif",4],["Les éléments dissuasifs ne vous ont pas du tout arrêté(e)",5],["Sans objet",0]
+      ] },
+    { id:'int_causes', section:"Intensité de l'idéation", title:"Causes de l'idéation",
+      text:"Quelles sont les raisons pour lesquelles vous avez souhaité mourir ou vous suicider ? Était-ce pour faire cesser la douleur ou ne plus ressentir votre mal-être, ou bien pour attirer l'attention, vous venger ou faire réagir les autres ? Ou tout cela à la fois ?", type:'choice',
+      visible:function(a){ return a.q1 === 1 || a.q2 === 1; },
+      options:[
+        ["Uniquement pour attirer l'attention, vous venger ou faire réagir les autres",1],["Principalement pour attirer l'attention, vous venger ou faire réagir les autres",2],["Autant pour attirer l'attention / vous venger / faire réagir les autres que pour faire cesser la douleur",3],["Principalement pour faire cesser la douleur (vous ne pouviez pas continuer à vivre avec cette douleur ou ce mal-être)",4],["Uniquement pour faire cesser la douleur",5],["Sans objet",0]
+      ] },
+
+    { id:'beh_avere', section:'Comportement suicidaire', title:"Tentative avérée",
+      hint:"Acte potentiellement auto-agressif commis avec l'intention plus ou moins forte de mourir suite à cet acte. La présence de blessures n'est pas obligatoire, seulement potentielle.",
+      text:"Avez-vous fait une tentative de suicide ? Avez-vous cherché à vous faire du mal ou fait quelque chose de dangereux qui aurait pu entraîner votre mort, avec une intention (même partielle) de mourir ?", type:'yesno_count',
+      countLabel:"Nombre total de tentatives avérées :" },
+    { id:'beh_interrompue', section:'Comportement suicidaire', title:"Tentative interrompue",
+      hint:"Interruption par des facteurs extérieurs de la mise en œuvre d'un acte potentiellement auto-agressif (sinon, une tentative avérée aurait eu lieu).",
+      text:"Vous est-il arrivé de commencer à faire quelque chose pour tenter de mettre fin à vos jours, mais d'en être empêché(e) par quelqu'un ou quelque chose avant de véritablement passer à l'acte ?", type:'yesno_count',
+      countLabel:"Nombre total de tentatives interrompues :" },
+    { id:'beh_avortee', section:'Comportement suicidaire', title:"Tentative avortée",
+      hint:"La personne se prépare à se suicider mais s'interrompt d'elle-même avant d'avoir réellement eu un comportement autodestructeur.",
+      text:"Vous est-il arrivé de commencer à faire quelque chose pour tenter de mettre fin à vos jours, mais de vous arrêter de vous-même avant de véritablement passer à l'acte ?", type:'yesno_count',
+      countLabel:"Nombre total de tentatives avortées :" },
+    { id:'beh_prep', section:'Comportement suicidaire', title:"Préparatifs",
+      hint:"Actes ou préparatifs en vue d'une tentative de suicide imminente, au-delà de la verbalisation ou de la pensée.",
+      text:"Avez-vous pris certaines mesures pour faire une tentative de suicide ou pour préparer votre suicide (par ex. rassembler des comprimés, vous procurer une arme à feu, donner vos objets de valeur ou écrire une lettre d'adieu) ?", type:'yesno' },
+    { id:'beh_synth', section:'Comportement suicidaire', title:"Comportement suicidaire (synthèse)",
+      text:"Un comportement suicidaire a-t-il été observé au cours de la période d'évaluation ?", type:'yesno' },
+    { id:'beh_deces', section:'Comportement suicidaire', title:"Suicide réussi",
+      text:"Un suicide a-t-il été constaté (décès) ?", type:'yesno' },
+
+    { id:'let_observee', section:'Létalité', title:"Létalité / lésions médicales observées",
+      hint:"À répondre en tenant compte des tentatives avérées uniquement (tentative la plus létale).",
+      text:"Quel est le niveau d'atteinte physique constaté ?", type:'choice',
+      visible:function(a){ return (a.beh_avere_count||0) > 0; },
+      options:[
+        ["Aucune atteinte physique, ou atteinte très légère (ex. égratignures)",0],
+        ["Atteinte physique légère (ex. élocution ralentie, brûlures au 1er degré, légers saignements, entorses)",1],
+        ["Atteinte physique modérée nécessitant une prise en charge médicale (ex. conscient mais somnolent, brûlures au 2e degré, saignement d'un vaisseau important)",2],
+        ["Atteinte physique grave, hospitalisation et soins intensifs probablement nécessaires (ex. coma avec réflexes intacts, brûlures au 3e degré sur moins de 20% de la surface corporelle, hémorragie importante sans risque vital, fractures importantes)",3],
+        ["Atteinte physique très grave, hospitalisation et soins intensifs nécessaires (ex. coma sans réflexes, brûlures au 3e degré sur plus de 20% de la surface corporelle, hémorragie avec instabilité des signes vitaux, atteinte majeure d'un organe vital)",4],
+        ["Décès",5]
+      ] },
+    { id:'let_potentielle', section:'Létalité', title:"Létalité potentielle",
+      hint:"À répondre uniquement si la létalité observée = 0 (absence de lésion médicale).",
+      text:"Quelle était la létalité probable de la tentative avérée, en l'absence de lésions médicales ?", type:'choice',
+      visible:function(a){ return (a.beh_avere_count||0) > 0 && a.let_observee === 0; },
+      options:[
+        ["Comportement peu enclin à engendrer des blessures",0],
+        ["Comportement susceptible d'engendrer des blessures mais ne pouvant causer la mort",1],
+        ["Comportement susceptible de causer la mort malgré des soins médicaux disponibles",2]
+      ] }
+  ];
+
+  var answers = {};
+  var order = []; // ids of steps actually shown, built as we progress
+  var current = -1; // index within order
+
+  var screenStart = document.getElementById('screen-start');
+  var screenQuiz = document.getElementById('screen-quiz');
+  var screenResult = document.getElementById('screen-result');
+  var qnum = document.getElementById('qnum');
+  var qtag = document.getElementById('qtag');
+  var qtitle = document.getElementById('qtitle');
+  var qhint = document.getElementById('qhint');
+  var qtext = document.getElementById('qtext');
+  var opts = document.getElementById('opts');
+  var progressFill = document.getElementById('progress-fill');
+  var btnBack = document.getElementById('btn-back');
+
+  function stepById(id){
+    for (var i=0;i<steps.length;i++) if (steps[i].id === id) return steps[i];
+    return null;
+  }
+  function isVisible(step){
+    return !step.visible || step.visible(answers);
+  }
+  function nextIndexFrom(fromStepIndex){
+    for (var i = fromStepIndex + 1; i < steps.length; i++){
+      if (isVisible(steps[i])) return i;
+    }
+    return -1; // end
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    screenStart.hidden = true; screenQuiz.hidden = false;
+    order = [];
+    var idx = nextIndexFrom(-1);
+    goTo(idx);
+  });
+
+  function goTo(stepIndex){
+    if (stepIndex === -1){ showResult(); return; }
+    var alreadyAt = order.indexOf(stepIndex);
+    if (alreadyAt === -1){ order.push(stepIndex); current = order.length - 1; }
+    else { current = alreadyAt; }
+    renderStep(stepIndex);
+  }
+
+  function renderStep(stepIndex){
+    var step = steps[stepIndex];
+    qnum.textContent = 'Étape ' + (current+1);
+    qtag.textContent = step.section;
+    qtitle.textContent = step.title || '';
+    qhint.textContent = step.hint || '';
+    qtext.textContent = step.text;
+    progressFill.style.width = Math.min(96, Math.round((stepIndex / steps.length) * 100)) + '%';
+    btnBack.disabled = (current === 0);
+    opts.innerHTML = '';
+
+    if (step.type === 'choice'){
+      var wrap = document.createElement('div'); wrap.className = 'opts';
+      step.options.forEach(function(pair){
+        var b = document.createElement('button');
+        b.type = 'button'; b.className = 'opt';
+        if (answers[step.id] === pair[1]) b.classList.add('selected');
+        b.textContent = pair[0];
+        b.addEventListener('click', function(){
+          answers[step.id] = pair[1];
+          advance(stepIndex);
+        });
+        wrap.appendChild(b);
+      });
+      opts.appendChild(wrap);
+    } else if (step.type === 'yesno'){
+      var row = document.createElement('div'); row.className = 'yesno-row';
+      YES_NO.forEach(function(pair){
+        var b = document.createElement('button');
+        b.type = 'button'; b.className = 'opt';
+        if (answers[step.id] === pair[1]) b.classList.add('selected');
+        b.textContent = pair[0];
+        b.addEventListener('click', function(){
+          answers[step.id] = pair[1];
+          advance(stepIndex);
+        });
+        row.appendChild(b);
+      });
+      opts.appendChild(row);
+    } else if (step.type === 'yesno_count'){
+      var row2 = document.createElement('div'); row2.className = 'yesno-row';
+      YES_NO.forEach(function(pair){
+        var b = document.createElement('button');
+        b.type = 'button'; b.className = 'opt';
+        if (answers[step.id] === pair[1]) b.classList.add('selected');
+        b.textContent = pair[0];
+        b.addEventListener('click', function(val){
+          return function(){
+            answers[step.id] = val;
+            if (val === 0){
+              answers[step.id + '_count'] = 0;
+              advance(stepIndex);
+            } else {
+              renderCountBox(step, stepIndex);
+            }
+          };
+        }(pair[1]));
+        row2.appendChild(b);
+      });
+      opts.appendChild(row2);
+      if (answers[step.id] === 1){ renderCountBox(step, stepIndex); }
+    }
+  }
+
+  function renderCountBox(step, stepIndex){
+    var existing = opts.querySelector('.count-box');
+    if (existing) existing.remove();
+    var box = document.createElement('div'); box.className = 'count-box';
+    var label = document.createElement('label'); label.textContent = step.countLabel || 'Nombre total :';
+    var input = document.createElement('input'); input.type = 'number'; input.min = '1'; input.step = '1';
+    var savedCount = answers[step.id + '_count'];
+    input.value = savedCount ? savedCount : '1';
+    var go = document.createElement('button'); go.type='button'; go.className='btn btn-primary'; go.textContent='Continuer';
+    go.addEventListener('click', function(){
+      var n = parseInt(input.value, 10);
+      answers[step.id + '_count'] = (isNaN(n) || n < 1) ? 1 : n;
+      advance(stepIndex);
+    });
+    box.appendChild(label); box.appendChild(input); box.appendChild(go);
+    opts.appendChild(box);
+  }
+
+  function advance(fromStepIndex){
+    var idx = nextIndexFrom(fromStepIndex);
+    goTo(idx);
+  }
+
+  btnBack.addEventListener('click', function(){
+    if (current > 0){
+      current--;
+      renderStep(order[current]);
+      order = order.slice(0, current+1);
+    }
+  });
+
+  function labelFor(step, val){
+    if (val === null || typeof val === 'undefined') return null;
+    if (step.type === 'yesno' || step.type === 'yesno_count'){
+      return val === 1 ? 'Oui' : 'Non';
+    }
+    for (var i=0;i<step.options.length;i++){
+      if (step.options[i][1] === val) return step.options[i][0];
+    }
+    return null;
+  }
+
+  function showResult(){
+    screenQuiz.hidden = true; screenResult.hidden = false;
+
+    // Idéation la plus grave
+    var ideationSteps = ['q5','q4','q3','q2','q1'];
+    var worst = null, worstNum = 0;
+    var ideationTitles = { q1:"Désir d'être mort(e)", q2:"Pensées suicidaires actives non spécifiques", q3:"Idéation active avec définition de méthodes, sans intention de passage à l'acte", q4:"Idéation active avec intention de passage à l'acte, sans scénario précis", q5:"Idéation active avec scénario précis et intention de passage à l'acte" };
+    for (var i=0;i<ideationSteps.length;i++){
+      var id = ideationSteps[i];
+      if (answers[id] === 1){ worst = id; worstNum = parseInt(id.substring(1),10); break; }
+    }
+    var resIdeation = document.getElementById('res-ideation');
+    if (worst){
+      resIdeation.innerHTML = '<strong>Type ' + worstNum + '</strong> — ' + ideationTitles[worst];
+    } else {
+      resIdeation.innerHTML = 'Aucune idéation suicidaire rapportée (réponses négatives aux questions 1 et 2).';
+    }
+
+    var intensiteVisible = (answers.q1 === 1 || answers.q2 === 1);
+    document.getElementById('block-intensite').hidden = !intensiteVisible;
+    if (intensiteVisible){
+      setResLine('res-frequence', 'Fréquence', stepById('int_freq'), answers.int_freq);
+      setResLine('res-duree', 'Durée', stepById('int_duree'), answers.int_duree);
+      setResLine('res-maitrise', 'Maîtrise des pensées', stepById('int_maitrise'), answers.int_maitrise);
+      setResLine('res-dissuasifs', 'Éléments dissuasifs', stepById('int_dissuasifs'), answers.int_dissuasifs);
+      setResLine('res-causes', "Causes de l'idéation", stepById('int_causes'), answers.int_causes);
+    }
+
+    setBehLine('res-avere', 'Tentative avérée', 'beh_avere');
+    setBehLine('res-interrompue', 'Tentative interrompue', 'beh_interrompue');
+    setBehLine('res-avortee', 'Tentative avortée', 'beh_avortee');
+    document.getElementById('res-prep').innerHTML = '<strong>Préparatifs</strong> : ' + (labelFor(stepById('beh_prep'), answers.beh_prep) || '—');
+    document.getElementById('res-synth').innerHTML = '<strong>Comportement suicidaire (synthèse)</strong> : ' + (labelFor(stepById('beh_synth'), answers.beh_synth) || '—');
+    document.getElementById('res-deces').innerHTML = '<strong>Suicide réussi</strong> : ' + (labelFor(stepById('beh_deces'), answers.beh_deces) || '—');
+
+    var letaliteVisible = (answers.beh_avere_count||0) > 0;
+    document.getElementById('block-letalite').hidden = !letaliteVisible;
+    if (letaliteVisible){
+      document.getElementById('res-let-observee').innerHTML = '<strong>Létalité observée</strong> : ' + (labelFor(stepById('let_observee'), answers.let_observee) || '—');
+      var potBlock = document.getElementById('res-let-potentielle');
+      if (answers.let_observee === 0 && typeof answers.let_potentielle !== 'undefined'){
+        potBlock.hidden = false;
+        potBlock.innerHTML = '<strong>Létalité potentielle</strong> : ' + (labelFor(stepById('let_potentielle'), answers.let_potentielle) || '—');
+      } else {
+        potBlock.hidden = true;
+      }
+    }
+
+    var risk = (worstNum >= 4) || (answers.beh_synth === 1) || (answers.beh_avere_count||0) > 0 || (answers.beh_interrompue_count||0) > 0 || (answers.beh_avortee_count||0) > 0 || (typeof answers.let_observee !== 'undefined' && answers.let_observee >= 3);
+    document.getElementById('safety-box').hidden = !risk;
+  }
+
+  function setResLine(elId, label, step, val){
+    document.getElementById(elId).innerHTML = '<strong>' + label + '</strong> : ' + (labelFor(step, val) || '—');
+  }
+  function setBehLine(elId, label, stepId){
+    var step = stepById(stepId);
+    var val = answers[stepId];
+    var count = answers[stepId + '_count'];
+    var txt = (labelFor(step, val) || '—');
+    if (val === 1 && count){ txt += ' (nombre : ' + count + ')'; }
+    document.getElementById(elId).innerHTML = '<strong>' + label + '</strong> : ' + txt;
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = {}; order = []; current = -1;
+    screenResult.hidden = true; screenStart.hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>C-SSRS — Échelle de Columbia sur la gravité du risque suicidaire</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#5C7A78 0%,#9DBDB8 55%,#3A524F 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(224,196,138,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:30px;color:#fff;}
+  h1{font-size:26px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#3D6B4F;background:#E4EEE8;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .warn{font-size:12.5px;background:#FBF0E8;border:1px solid #E7CBB0;border-radius:10px;padding:12px 14px;color:#7A4A20;margin:0 0 16px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .section ul{font-size:14.5px;margin:0 0 10px;padding-left:20px;}
+  .section li{margin:0 0 6px;}
+  .preview-card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:14px;padding:20px 22px;margin-bottom:14px;}
+  .preview-q{font-size:14.5px;font-weight:600;margin:0 0 6px;}
+  .preview-hint{font-size:13px;color:#63695D;font-style:italic;margin:0 0 10px;}
+  .reveal-btn{appearance:none;background:#F4F1EA;color:#1E3A5F;border:1px solid #E0D9C9;border-radius:10px;padding:9px 16px;font-family:'Inter',sans-serif;font-size:13px;font-weight:700;cursor:pointer;}
+  .reveal-list{margin-top:14px;display:none;}
+  .reveal-list.open{display:block;}
+  .reveal-item{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:10px;padding:12px 16px;margin-bottom:8px;font-size:13.5px;}
+  .reveal-item .tag{display:inline-block;font-size:10px;font-weight:700;color:#2E3A52;background:#E9EBF0;border-radius:999px;padding:2px 8px;margin-right:8px;text-transform:uppercase;letter-spacing:.04em;}
+  .cotation-table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:10px;}
+  .cotation-table th,.cotation-table td{border:1px solid #E0D9C9;padding:8px 12px;text-align:left;vertical-align:top;}
+  .cotation-table th{background:#F4F1EA;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#2E3A52;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#1E3A5F;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">C-SSRS</span></div>
+
+  <h1 class="serif">Échelle de Columbia sur la gravité du risque suicidaire</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Columbia-Suicide Severity Rating Scale (C-SSRS), version « Depuis la dernière visite » — Posner, Brent, Lucas, Gould, Stanley, Brown, Fisher, Zelazny, Burke, Oquendo &amp; Mann, version du 14/01/09</p>
+  <div class="meta-row">
+    <span class="pill">4 parties</span>
+    <span class="pill">Hétéro-administré</span>
+    <span class="pill">Sans score total unique</span>
+    <span class="pill">Traduction française officielle (Mapi)</span>
+  </div>
+  <p class="warn">⚠️ Contenu sensible (idéation, intention et comportements suicidaires). Cette échelle est destinée à être utilisée par une personne formée à son administration. Les questions sont des suggestions à titre indicatif : la détermination finale de l'existence d'une idéation ou de comportements suicidaires repose sur l'appréciation de la personne qui administre l'échelle, jamais sur l'outil seul.</p>
+  <p class="warn">Version transcrite ici : « Depuis la dernière visite » (Since Last Visit), utilisée pour le suivi entre deux consultations — questions orientées sur la période depuis la dernière évaluation, sans référence explicite à toute la vie. Elle est distincte de la version « Baseline/Lifetime » (évaluation initiale, questions posées « au cours de votre vie »), dont aucune traduction française officielle accessible n'a été localisée à ce jour ; le contenu clinique des items d'idéation et de comportement est identique entre les deux versions, seul le cadre temporel des questions diffère.</p>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="c-ssrs.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le C-SSRS est un entretien structuré, administré par un clinicien, qui explore successivement quatre dimensions : l'<strong>idéation suicidaire</strong> (5 niveaux de gravité croissante), l'<strong>intensité de l'idéation</strong> (fréquence, durée, maîtrise, éléments dissuasifs, causes — évaluée sur le type d'idéation le plus grave rapporté), le <strong>comportement suicidaire</strong> (tentative avérée, interrompue, avortée, préparatifs, décès) et la <strong>létalité</strong> (atteinte physique observée, ou létalité potentielle en l'absence de lésion).</p>
+    <p>Consigne d'origine : les questions 1 et 2 (idéation) sont toujours posées. Si les deux réponses sont négatives, l'entretien passe directement à la section « Comportement suicidaire ». Si la réponse à la question 2 est « oui », les questions 3, 4 et 5 sont posées. Si la réponse à la question 1 et/ou 2 est « oui », la section « Intensité de l'idéation » est complétée, en se basant sur le type d'idéation le plus grave identifié.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Idéation suicidaire — les 5 niveaux (gravité croissante)</h2>
+    <div class="preview-card">
+      <p class="preview-q">1. Désir d'être mort(e)</p>
+      <p class="preview-hint">Le sujet souscrit à des pensées concernant le désir de mourir ou de ne plus être en vie, ou le désir de s'endormir et de ne pas se réveiller.</p>
+      <p class="preview-q" style="font-weight:400;">« Avez-vous souhaité être mort(e) ou vous endormir et ne jamais vous réveiller ? »</p>
+    </div>
+    <button class="reveal-btn" id="reveal-btn">Voir les niveaux 2 à 5</button>
+    <div class="reveal-list" id="reveal-list">
+      <div class="reveal-item"><span class="tag">2</span>Pensées suicidaires actives non spécifiques — « Avez-vous réellement pensé à vous suicider ? »</div>
+      <div class="reveal-item"><span class="tag">3</span>Idéation active avec définition de méthodes (sans scénario), sans intention de passage à l'acte — « Avez-vous pensé à la manière dont vous vous y prendriez ? »</div>
+      <div class="reveal-item"><span class="tag">4</span>Idéation active avec intention de passage à l'acte, sans scénario précis — « Avez-vous eu des pensées de ce genre et l'intention de passer à l'acte ? »</div>
+      <div class="reveal-item"><span class="tag">5</span>Idéation active avec scénario précis et intention de passage à l'acte — « Avez-vous commencé ou fini d'élaborer un scénario détaillé sur la manière dont vous voulez vous suicider ? Avez-vous l'intention de mettre ce scénario à exécution ? »</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Intensité de l'idéation (si idéation rapportée)</h2>
+    <p>Évaluée en fonction du type d'idéation le plus grave rapporté ci-dessus, sur cinq aspects : <strong>Fréquence</strong> (1 = moins d'une fois par semaine, à 5 = plusieurs fois par jour), <strong>Durée</strong> (1 = quelques instants, à 5 = plus de 8 heures ou en permanence), <strong>Maîtrise des pensées</strong> (1 = maîtrise facilement, à 5 = incapable de maîtriser ; 0 = n'essaie pas), <strong>Éléments dissuasifs</strong> (1 = véritablement empêché, à 5 = pas du tout arrêté ; 0 = sans objet) et <strong>Causes de l'idéation</strong> (1 = uniquement pour attirer l'attention/se venger/faire réagir les autres, à 5 = uniquement pour faire cesser la douleur ; 0 = sans objet).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Comportement suicidaire</h2>
+    <p>Cinq catégories, à cocher pour tout événement distinct rapporté :</p>
+    <ul>
+      <li><strong>Tentative avérée</strong> — acte potentiellement auto-agressif commis avec une intention (même partielle) de mourir ; la présence de blessures n'est pas obligatoire, seulement potentielle. Une « intention présumée » peut être retenue cliniquement même si la personne nie son intention, d'après le comportement ou les circonstances.</li>
+      <li><strong>Tentative interrompue</strong> — interruption par un facteur extérieur avant le passage à l'acte.</li>
+      <li><strong>Tentative avortée</strong> — la personne s'arrête elle-même avant le passage à l'acte.</li>
+      <li><strong>Préparatifs</strong> — actes en vue d'une tentative imminente, au-delà de la pensée ou de la verbalisation (se procurer des comprimés ou une arme, dons d'objets, lettre d'adieu).</li>
+      <li><strong>Comportement suicidaire (synthèse)</strong> et <strong>suicide réussi</strong> — questions de clôture de la section.</li>
+    </ul>
+    <p class="source-note">Un comportement auto-agressif réalisé SANS aucune intention de mourir (pour se sentir mieux, obtenir de la compassion, etc.) est distingué cliniquement d'une tentative avérée par la source, mais n'est pas repris comme catégorie séparée dans cet outil interactif — à documenter par ailleurs si observé.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Létalité / lésions médicales (si tentative avérée)</h2>
+    <table class="cotation-table">
+      <tr><th>Niveau</th><th>Description</th></tr>
+      <tr><td>0</td><td>Aucune atteinte physique, ou atteinte très légère (ex. égratignures)</td></tr>
+      <tr><td>1</td><td>Atteinte physique légère (élocution ralentie, brûlures au 1er degré, légers saignements, entorses)</td></tr>
+      <tr><td>2</td><td>Atteinte physique modérée nécessitant une prise en charge médicale (conscient mais somnolent, brûlures au 2e degré, saignement d'un vaisseau important)</td></tr>
+      <tr><td>3</td><td>Atteinte physique grave, hospitalisation et soins intensifs probablement nécessaires (coma avec réflexes intacts, brûlures au 3e degré sur moins de 20% de la surface corporelle, hémorragie importante sans risque vital, fractures importantes)</td></tr>
+      <tr><td>4</td><td>Atteinte physique très grave, hospitalisation et soins intensifs nécessaires (coma sans réflexes, brûlures au 3e degré sur plus de 20% de la surface corporelle, hémorragie avec instabilité des signes vitaux, atteinte majeure d'un organe vital)</td></tr>
+      <tr><td>5</td><td>Décès</td></tr>
+    </table>
+    <p>Si la létalité observée est 0 (aucune lésion), une <strong>létalité potentielle</strong> est cotée séparément : 0 = comportement peu enclin à engendrer des blessures ; 1 = susceptible d'engendrer des blessures mais ne pouvant causer la mort ; 2 = susceptible de causer la mort malgré des soins médicaux disponibles.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Le C-SSRS ne produit pas de score total chiffré unique : c'est un outil de repérage structuré qui synthétise le type d'idéation le plus grave rapporté, ses cinq aspects d'intensité, les comportements suicidaires observés (avec leur nombre) et le niveau de létalité. L'outil interactif de cette fiche affiche cette synthèse en fin d'entretien, à des fins de documentation clinique — l'appréciation du niveau de risque et la décision d'action restent entièrement de la responsabilité du clinicien.</p>
+    <div class="warn" style="margin-top:14px;">Un encart de vigilance clinique s'affiche automatiquement sur la page de résultat lorsque le type d'idéation le plus grave est de niveau 4 ou 5, qu'un comportement suicidaire de synthèse est rapporté, qu'une tentative (avérée, interrompue ou avortée) est rapportée, ou que la létalité observée est cotée 3 ou plus — ceci est un repère indicatif, jamais un substitut à votre propre évaluation clinique ni à votre protocole de sécurité habituel.</div>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source</h2>
+    <p class="source-note">Posner, K.; Brent, D.; Lucas, C.; Gould, M.; Stanley, B.; Brown, G.; Fisher, P.; Zelazny, J.; Burke, A.; Oquendo, M.; Mann, J. — Columbia-Suicide Severity Rating Scale (C-SSRS), version « Depuis la dernière visite » (Since Last Visit), version originale du 14/01/09. Définitions des comportements suicidaires basées sur The Columbia Suicide History Form (Mann &amp; Oquendo, Conte Center for the Neuroscience of Mental Disorders, New York State Psychiatric Institute). &copy; 2008 The Research Foundation for Mental Hygiene, Inc. Traduction française officielle : Mapi Research Trust, version du 07/04/14 (référence ID7651 / C-SSRS-SinceLastVisit_AU5.1_fra-FR). Pour obtenir des copies de l'échelle ou pour toute question de formation : contacter Kelly Posner, Ph.D., New York State Psychiatric Institute (posnerk@nyspi.columbia.edu). Diffusion gratuite pour l'usage clinique ; une formation à l'administration est recommandée par le document source lui-même. Outil de repérage clinique administré par un professionnel formé, ne remplace pas une évaluation complète du risque suicidaire.</p>
+  </div>
+</div>
+
+<script>
+document.getElementById('reveal-btn').addEventListener('click', function(){
+  var list = document.getElementById('reveal-list');
+  list.classList.toggle('open');
+  this.textContent = list.classList.contains('open') ? 'Masquer les niveaux 2 à 5' : 'Voir les niveaux 2 à 5';
+});
+</script>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

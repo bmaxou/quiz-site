@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GPTS - Échelles de pensées paranoïaques de Green révisées</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#2E7A78;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .domain-label{font-size:12px;font-weight:700;color:#2E7A78;text-transform:uppercase;letter-spacing:.06em;margin:0 0 6px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#2E7A78;background:#E1EFEE;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#153F3E;border-color:#E0D9C9;}
+  .btn-primary{background:#2E7A78;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .domain-block{margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid #E0D9C9;}
+  .domain-block:last-of-type{border-bottom:none;}
+  .domain-title{font-size:13px;font-weight:700;color:#2E7A78;text-transform:uppercase;letter-spacing:.04em;margin:0 0 8px;}
+  .sub-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;font-size:13.5px;}
+  .sub-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:18px;color:#2E7A78;}
+  .band{font-size:12.5px;color:#153F3E;padding:2px 0;}
+  .band b{color:#2E7A78;}
+  .flag{font-size:12px;font-weight:700;color:#8A5A3B;}
+  .caveat{font-size:12.5px;color:#8A5A3B;background:#F1E7DD;border-radius:10px;padding:12px 14px;margin:0 0 18px;}
+  .total-row{display:flex;justify-content:space-between;align-items:center;padding:14px 0 4px;font-size:15px;font-weight:700;border-top:2px solid #E0D9C9;margin-top:6px;}
+  .total-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;color:#2E7A78;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">GPTS - Pensées paranoïaques</h1>
+    <p class="lead">Revised Green et al., Paranoid Thoughts Scale. 18 questions sur des pensées et sentiments éprouvés au cours du mois écoulé, réparties en 2 sous-échelles.</p>
+    <div class="pill-row">
+      <span class="pill">18 questions</span>
+      <span class="pill">5 minutes</span>
+      <span class="pill">2 sous-échelles</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="domain-label" id="domain-label"></p>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div class="caveat">Score de chaque sous-échelle = somme brute des items qui la composent. Catégorie de sévérité déterminée par les bandes publiées par Freeman et al. (2019) pour chaque sous-échelle. Pour la sous-échelle « idées de persécution », un score &ge; 18 correspond au seuil clinique indicatif retenu par les auteurs (probable présence d'idées persécutoires d'intensité délirante) ; l'évaluation de la conviction reste de toute façon clinique, pas automatique.</div>
+    <div id="domain-list"></div>
+    <div class="total-row">
+      <span>Score total</span>
+      <span class="total-score" id="total-score"></span>
+    </div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">GPTS — Revised Green et al., Paranoid Thoughts Scale (Freeman et al., 2019/2021, <em>Psychological Medicine</em>, 51(2), 244-253), version française validée par Latteur, Larøi &amp; Bortolon (2022), licence CC BY 4.0. Ce résultat est un repère, il ne constitue pas un diagnostic et ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var SCALE = ["0 · Pas du tout","1","2","3","4 · Tout à fait"];
+
+  var domains = [
+    { key:'A', name:"Partie A — Idées de référence sociale", max:32,
+      bands:[ {max:9,label:"Moyen"}, {max:15,label:"Élevé"}, {max:20,label:"Modérément sévère"}, {max:24,label:"Sévère"}, {max:32,label:"Très sévère"} ] },
+    { key:'B', name:"Partie B — Idées de persécution", max:40, clinicalCutoff:18,
+      bands:[ {max:5,label:"Moyen"}, {max:10,label:"Élevé"}, {max:17,label:"Modérément sévère"}, {max:27,label:"Sévère"}, {max:40,label:"Très sévère"} ] }
+  ];
+
+  var items = [
+    {n:1, sub:'A', text:"J'ai passé du temps à penser que des ami.e.s disent des ragots à mon sujet."},
+    {n:2, sub:'A', text:"J'ai souvent entendu des gens parler de moi."},
+    {n:3, sub:'A', text:"J'ai été contrarié.e par des ami.e.s et collègues qui m'ont jugé.e de manière critique."},
+    {n:4, sub:'A', text:"Des gens ont clairement ri de moi dans mon dos."},
+    {n:5, sub:'A', text:"J'ai beaucoup pensé au fait que des gens m'évitent."},
+    {n:6, sub:'A', text:"Des gens ont fait allusion à mon égard."},
+    {n:7, sub:'A', text:"J'ai cru que certaines personnes n'étaient pas ce qu'elles semblaient être."},
+    {n:8, sub:'A', text:"Je me suis senti.e contrarié.e par les gens qui parlent de moi dans mon dos."},
+    {n:1, sub:'B', text:"Certaines personnes m'en veulent."},
+    {n:2, sub:'B', text:"Des gens m'ont fixé.e du regard pour que je me sente menacé.e."},
+    {n:3, sub:'B', text:"J'ai été certain.e que des gens ont fait des choses dans le but de m'énerver."},
+    {n:4, sub:'B', text:"J'ai été convaincu.e qu'il y avait un complot contre moi."},
+    {n:5, sub:'B', text:"J'ai été sûr.e que quelqu'un voulait me faire du mal."},
+    {n:6, sub:'B', text:"Je ne pouvais pas m'empêcher de penser que des gens voulaient me rendre confus.e."},
+    {n:7, sub:'B', text:"J'ai été en détresse car j'étais persécuté.e."},
+    {n:8, sub:'B', text:"Je ne pouvais pas m'empêcher de penser aux personnes qui voulaient que je me sente mal."},
+    {n:9, sub:'B', text:"Des gens ont fait exprès d'être hostiles envers moi."},
+    {n:10, sub:'B', text:"J'ai été en colère parce que quelqu'un voulait me faire du mal."}
+  ];
+
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function domainName(sub){
+    for (var i=0;i<domains.length;i++){ if (domains[i].key===sub) return domains[i].name; }
+    return '';
+  }
+
+  function renderQuestion(){
+    var it = items[idx];
+    document.getElementById('domain-label').textContent = domainName(it.sub);
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = it.n + '. ' + it.text;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    SCALE.forEach(function(label, v){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === v ? ' selected' : '');
+      d.textContent = label;
+      d.addEventListener('click', function(){
+        answers[idx] = v;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function subScore(sub){
+    var scored = [];
+    items.forEach(function(it, i){ if (it.sub === sub && answers[i] !== null) scored.push(answers[i]); });
+    if (!scored.length) return null;
+    return scored.reduce(function(a,b){ return a+b; }, 0);
+  }
+
+  function bandLabel(dom, score){
+    for (var i=0;i<dom.bands.length;i++){ if (score <= dom.bands[i].max) return dom.bands[i].label; }
+    return dom.bands[dom.bands.length-1].label;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var list = document.getElementById('domain-list');
+    list.innerHTML = '';
+    var total = 0;
+    domains.forEach(function(dom){
+      var s = subScore(dom.key);
+      if (s !== null) total += s;
+      var block = document.createElement('div');
+      block.className = 'domain-block';
+      var band = '';
+      var flag = '';
+      if (s !== null){
+        band = '<div class="band">Catégorie : <b>' + bandLabel(dom, s) + '</b></div>';
+        if (dom.clinicalCutoff && s >= dom.clinicalCutoff) flag = '<div class="flag">Seuil clinique indicatif atteint (&ge; ' + dom.clinicalCutoff + ')</div>';
+      }
+      block.innerHTML = '<p class="domain-title">' + dom.name + '</p>' +
+        '<div class="sub-row"><span>Score</span><span class="sub-score">' + (s === null ? '—' : s + ' / ' + dom.max) + '</span></div>' + band + flag;
+      list.appendChild(block);
+    });
+    document.getElementById('total-score').textContent = total + ' / 72';
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GPTS - Échelles de pensées paranoïaques de Green révisées</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#2E7A78 0%,#5FB8B3 55%,#153F3E 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(220,240,238,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#153F3E;background:#E1EFEE;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .caveat{font-size:13px;color:#8A5A3B;background:#F1E7DD;border-radius:10px;padding:12px 14px;margin:0 0 14px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#2E7A78;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#153F3E;border-color:#E0D9C9;}
+  .preview-card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:14px;padding:20px 22px;margin-bottom:14px;}
+  .preview-q{font-size:14.5px;font-weight:600;margin:0 0 10px;}
+  table.domains{width:100%;border-collapse:collapse;font-size:13.5px;margin:0 0 12px;}
+  table.domains th, table.domains td{text-align:left;padding:8px 10px;border-bottom:1px solid #E0D9C9;}
+  table.domains th{font-size:12px;color:#63695D;text-transform:uppercase;letter-spacing:.03em;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">GPTS</span></div>
+
+  <h1 class="serif">Échelles de pensées paranoïaques de Green révisées (GPTS)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Revised Green et al., Paranoid Thoughts Scale (R-GPTS) — Freeman, D., Loe, B. S., Kingdon, D. et al. (2019), version française validée par Latteur, A., Larøi, F., &amp; Bortolon, C. (2022)</p>
+  <div class="meta-row">
+    <span class="pill">18 questions</span>
+    <span class="pill">5 minutes</span>
+    <span class="pill">Auto-administré</span>
+    <span class="pill">Adulte</span>
+    <span class="pill">Français</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="gpts.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le GPTS évalue l'intensité de pensées paranoïaques éprouvées au cours du mois écoulé, à travers 18 questions réparties en deux sous-échelles : idées de référence sociale (le sentiment d'être observé, jugé ou moqué) et idées de persécution (le sentiment d'être menacé ou visé par la malveillance d'autrui). Instrument académique mis à disposition librement par ses auteurs (Université d'Oxford, Department of Experimental Psychology) ; version française publiée en libre accès (licence Creative Commons Attribution 4.0) dans <em>Psychologica Belgica</em>.</p>
+    <p class="source-note">Aucun signal de propriété exclusive ni de licence commerciale identifié — usage libre en recherche et en pratique clinique.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Structure</h2>
+    <table class="domains">
+      <tr><th>Sous-échelle</th><th>Items</th><th>Score</th></tr>
+      <tr><td>Partie A — Idées de référence sociale</td><td>8 items (1 à 8)</td><td>0 à 32</td></tr>
+      <tr><td>Partie B — Idées de persécution</td><td>10 items (1 à 10)</td><td>0 à 40</td></tr>
+    </table>
+    <p class="source-note">Score total = somme des deux sous-échelles (0 à 72). Un score plus élevé indique une paranoïa plus sévère.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Aperçu</h2>
+    <div class="preview-card">
+      <p class="preview-q">Partie A, item 1. J'ai passé du temps à penser que des ami.e.s disent des ragots à mon sujet.</p>
+      <p class="source-note">Échelle en 5 points, ancrages verbaux confirmés uniquement aux deux extrémités : 0 = Pas du tout … 4 = Tout à fait (1, 2 et 3 sont des degrés intermédiaires, sans libellé confirmé avec certitude par la source).</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Score de chaque sous-échelle = somme brute des items qui la composent (pas de score total combiné officiel : les deux parties s'interprètent séparément). Bandes de sévérité publiées par Freeman et al. (2019) :</p>
+    <table class="domains">
+      <tr><th>Catégorie</th><th>Partie A (0-32)</th><th>Partie B (0-40)</th></tr>
+      <tr><td>Moyen</td><td>0-9</td><td>0-5</td></tr>
+      <tr><td>Élevé</td><td>10-15</td><td>6-10</td></tr>
+      <tr><td>Modérément sévère</td><td>16-20</td><td>11-17</td></tr>
+      <tr><td>Sévère</td><td>21-24</td><td>18-27</td></tr>
+      <tr><td>Très sévère</td><td>25-32</td><td>28-40</td></tr>
+    </table>
+    <div class="caveat">Seuil clinique indicatif retenu par les auteurs : un score de la sous-échelle « idées de persécution » (Partie B) &ge; 18 suggère une probable présence d'idées persécutoires d'intensité délirante. L'évaluation de la conviction reste de toute façon clinique, pas automatique.</div>
+    <p>Ce résultat est un repère de sévérité, il ne constitue pas un diagnostic et ne remplace pas une évaluation clinique complète.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source</h2>
+    <p class="source-note">Freeman, D., Loe, B. S., Kingdon, D., Startup, H., Molodynski, A., Rosebrock, L., Brown, P., Sheaves, B., Waite, F., &amp; Bird, J. C. (2019/2021). The revised Green et al., Paranoid Thoughts Scale (R-GPTS): psychometric properties, severity ranges, and clinical cut-offs. <em>Psychological Medicine</em>, 51(2), 244-253. DOI 10.1017/S0033291719003155. Version française : Latteur, T., Larøi, F., &amp; Bortolon, C. (2022). Translation and Validation of the French Version of the Revised Green et al., Paranoid Thoughts Scale (R-GPTS) in Two Samples: Non-Clinical and Clinical Adults. <em>Psychologica Belgica</em>, 62(1), 208-217. DOI 10.5334/pb.1134. Licence Creative Commons Attribution 4.0 (CC BY 4.0).</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

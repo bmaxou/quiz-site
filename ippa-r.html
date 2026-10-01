@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IPPA-R - Inventaire des liens d'attachement aux parents et aux pairs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#A8677A;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .section-label{font-size:12px;font-weight:700;color:#A8677A;text-transform:uppercase;letter-spacing:.06em;margin:0 0 10px;}
+  .instr-text{font-size:14.5px;color:#20241E;margin:0 0 22px;}
+  .skip-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#A8677A;background:#F3E7EA;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#A8677A;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-block{margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid #E0D9C9;}
+  .result-block:last-of-type{border-bottom:none;}
+  .result-name{font-size:13.5px;font-weight:700;color:#63695D;text-transform:uppercase;letter-spacing:.04em;margin:0 0 4px;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:30px;color:#A8677A;margin:0;}
+  .result-max{font-size:12.5px;color:#9A9E90;margin:2px 0 0;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  .caveat{font-size:12.5px;color:#8A5A3B;background:#F1E7DD;border-radius:10px;padding:12px 14px;margin:0 0 20px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">IPPA-R - Liens d'attachement</h1>
+    <p class="lead">Inventaire des liens d'attachement aux parents et aux pairs. 75 affirmations réparties en trois parties (Mère, Père, Amis proches), à coter selon leur degré de vérité aujourd'hui.</p>
+    <div class="pill-row">
+      <span class="pill">75 questions</span>
+      <span class="pill">18 minutes</span>
+      <span class="pill">3 parties</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-section-intro" class="card" hidden>
+    <p class="section-label" id="intro-label"></p>
+    <p class="instr-text" id="intro-text"></p>
+    <div class="skip-row no-print">
+      <button class="btn btn-primary" id="btn-section-go">Répondre</button>
+      <button class="btn btn-secondary" id="btn-section-skip" hidden>Passer cette partie</button>
+    </div>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="section-label" id="quiz-section-label"></p>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div class="caveat">La clé exacte de répartition des items en trois sous-échelles (Confiance / Communication / Aliénation) n'est pas confirmée à la source pour cette version révisée : seuls les trois scores totaux par figure d'attachement sont calculés, sans détail de sous-échelle ni inversion des items d'aliénation (non identifiés avec certitude).</div>
+    <div id="result-list"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">IPPA-R — Inventory of Parent and Peer Attachment, forme révisée (Armsden, G. C., &amp; Greenberg, M. T., 1987). Les auteurs précisent que l'IPPA ne comporte ni normes ni seuils cliniques et n'a pas été conçu pour classer un « style » d'attachement : les scores s'interprètent par comparaison avec des échantillons semblables, ou d'une passation à l'autre chez un même patient. Ce résultat est un repère, il ne constitue pas un diagnostic.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var SCALE5 = ["Presque jamais ou jamais vrai","Pas souvent vrai","Parfois vrai","Souvent vrai","Presque toujours ou toujours vrai"];
+
+  var mereItems = [
+    "Ma mère respecte mes sentiments.",
+    "Je pense que ma mère fait un bon travail en tant que mère.",
+    "J'aimerais avoir une mère différente.",
+    "Ma mère m'accepte comme je suis.",
+    "J'aime avoir le point de vue de ma mère sur les choses qui me préoccupent.",
+    "Je pense qu'il ne sert à rien de laisser transparaître mes sentiments en présence de ma mère.",
+    "Ma mère sait que je suis contrarié par quelque chose.",
+    "Parler de mes problèmes avec ma mère me fait me sentir honteux ou idiot.",
+    "Ma mère attend trop de moi.",
+    "Je m'énerve facilement en présence de ma mère.",
+    "Je m'énerve beaucoup plus que ma mère ne le sait.",
+    "Lorsque nous discutons des choses, ma mère s'intéresse à mon point de vue.",
+    "Ma mère a confiance en mon jugement.",
+    "Ma mère a ses propres problèmes, alors je ne l'embête pas avec les miens.",
+    "Ma mère m'aide à mieux me comprendre.",
+    "Je parle à ma mère de mes problèmes et difficultés.",
+    "Je me sens en colère contre ma mère.",
+    "Je ne reçois pas beaucoup d'attention de la part de ma mère.",
+    "Ma mère m'aide à parler de mes difficultés.",
+    "Ma mère me comprend.",
+    "Quand je suis en colère à propos de quelque chose, ma mère essaie d'être compréhensive.",
+    "Je fais confiance à ma mère.",
+    "Ma mère ne comprend pas ce que je traverse en ce moment.",
+    "Je peux compter sur ma mère quand j'ai quelque chose sur le cœur.",
+    "Si ma mère sait que quelque chose me tracasse, elle me questionne à ce sujet."
+  ];
+  var pereItems = [
+    "Mon père respecte mes sentiments.",
+    "Je pense que mon père fait un bon travail en tant que père.",
+    "J'aimerais avoir un père différent.",
+    "Mon père m'accepte tel que je suis.",
+    "J'aime avoir le point de vue de mon père sur les choses qui me préoccupent.",
+    "Je pense qu'il ne sert à rien de laisser transparaître mes sentiments en présence de mon père.",
+    "Mon père peut voir quand je suis contrarié par quelque chose.",
+    "Parler de mes problèmes avec mon père me fait me sentir honteux ou idiot.",
+    "Mon père attend trop de choses de ma part.",
+    "Je m'énerve facilement en présence de mon père.",
+    "Je m'énerve beaucoup plus que mon père ne le sait.",
+    "Lorsque nous discutons de choses, mon père s'intéresse à mon point de vue.",
+    "Mon père a confiance en mon jugement.",
+    "Mon père a ses propres problèmes, alors je ne l'embête pas avec les miens.",
+    "Mon père m'aide à mieux me comprendre.",
+    "Je parle à mon père de mes problèmes et difficultés.",
+    "Je me sens en colère contre mon père.",
+    "Je n'ai pas beaucoup d'attention de la part de mon père.",
+    "Mon père m'aide à parler de mes difficultés.",
+    "Mon père me comprend.",
+    "Quand je suis en colère à propos de quelque chose, mon père essaie d'être compréhensif.",
+    "Je fais confiance à mon père.",
+    "Mon père ne comprend pas ce que je traverse en ce moment.",
+    "Je peux compter sur mon père quand j'ai besoin d'exprimer quelque chose que j'ai sur le cœur.",
+    "Si mon père sait que quelque chose me tracasse, il me pose des questions à ce sujet."
+  ];
+  var amisItems = [
+    "J'aime connaître le point de vue de mes amis sur les choses qui me préoccupent.",
+    "Mes amis peuvent savoir quand je suis contrarié par quelque chose.",
+    "Lorsque nous discutons de choses, mes amis s'intéressent à mon point de vue.",
+    "Parler de mes problèmes avec mes amis me fait me sentir honteux ou idiot.",
+    "J'aimerais avoir d'autres amis.",
+    "Mes amis me comprennent.",
+    "Mes amis m'aident à parler de mes difficultés.",
+    "Mes amis m'acceptent comme je suis.",
+    "Je ressens le besoin d'être plus souvent en contact avec mes amis.",
+    "Mes amis ne comprennent pas ce que je vis en ce moment.",
+    "Je me sens seul ou à part quand je suis avec mes amis.",
+    "Mes amis écoutent ce que j'ai à dire.",
+    "Je sens que mes amis sont de bons amis.",
+    "Mes amis sont assez faciles à aborder pour parler avec eux.",
+    "Lorsque je suis en colère contre quelque chose, mes amis essaient d'être compréhensifs.",
+    "Mes amis m'aident à mieux me comprendre.",
+    "Mes amis se soucient de mon état.",
+    "Je suis en colère contre mes amis.",
+    "Je peux compter sur mes amis quand j'ai besoin d'exprimer quelque chose.",
+    "Je fais confiance à mes amis.",
+    "Mes amis respectent mes sentiments.",
+    "Je m'énerve beaucoup plus que mes amis ne le savent.",
+    "J'ai l'impression que mes amis sont irrités sans raison.",
+    "Je peux parler à mes amis de mes problèmes et difficultés.",
+    "Si mes amis savent que quelque chose me perturbe, ils me posent des questions à ce sujet."
+  ];
+
+  var sections = [
+    { key:'mere', label:'Partie 1 — Mère', skippable:true,
+      intro:"Les affirmations suivantes concernent votre mère (ou la femme qui a joué ce rôle). Si plus d'une personne a joué ce rôle, répondez pour celle qui, selon vous, vous a le plus influencé. Indiquez dans quelle mesure chaque affirmation est vraie pour vous aujourd'hui.",
+      items: mereItems, skipLabel:"Mère absente : passer cette partie" },
+    { key:'pere', label:'Partie 2 — Père', skippable:true,
+      intro:"Les affirmations suivantes concernent votre père (ou l'homme qui a joué ce rôle). Si plus d'une personne a joué ce rôle, répondez pour celle qui, selon vous, vous a le plus influencé. Indiquez dans quelle mesure chaque affirmation est vraie pour vous aujourd'hui.",
+      items: pereItems, skipLabel:"Père absent : passer cette partie" },
+    { key:'amis', label:'Partie 3 — Amis proches', skippable:false,
+      intro:"Les affirmations suivantes concernent vos relations avec vos amis proches. Indiquez dans quelle mesure chaque affirmation est vraie pour vous aujourd'hui.",
+      items: amisItems }
+  ];
+  var labels = { mere:'Attachement à la mère', pere:'Attachement au père', amis:'Attachement aux pairs' };
+
+  sections.forEach(function(s){ s.answers = new Array(s.items.length).fill(null); s.skipped = false; });
+
+  var secIdx = 0, itemIdx = 0;
+
+  var screenStart = document.getElementById('screen-start');
+  var screenIntro = document.getElementById('screen-section-intro');
+  var screenQuiz = document.getElementById('screen-quiz');
+  var screenResult = document.getElementById('screen-result');
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    screenStart.hidden = true;
+    showIntro();
+  });
+
+  function showIntro(){
+    var s = sections[secIdx];
+    screenQuiz.hidden = true; screenResult.hidden = true;
+    screenIntro.hidden = false;
+    document.getElementById('intro-label').textContent = s.label;
+    document.getElementById('intro-text').textContent = s.intro;
+    var skipBtn = document.getElementById('btn-section-skip');
+    skipBtn.hidden = !s.skippable;
+    skipBtn.textContent = s.skipLabel || '';
+  }
+
+  document.getElementById('btn-section-go').addEventListener('click', function(){
+    screenIntro.hidden = true;
+    itemIdx = 0;
+    screenQuiz.hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-section-skip').addEventListener('click', function(){
+    sections[secIdx].skipped = true;
+    nextSection();
+  });
+
+  function renderQuestion(){
+    var s = sections[secIdx];
+    document.getElementById('quiz-section-label').textContent = s.label;
+    document.getElementById('progress-text').textContent = 'Question ' + (itemIdx+1) + ' / ' + s.items.length + ' (' + s.label + ')';
+    document.getElementById('q-text').textContent = s.items[itemIdx];
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    SCALE5.forEach(function(label, v){
+      var d = document.createElement('div');
+      d.className = 'opt' + (s.answers[itemIdx] === v ? ' selected' : '');
+      d.textContent = (v+1) + ' — ' + label;
+      d.addEventListener('click', function(){
+        s.answers[itemIdx] = v;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = itemIdx === 0;
+    document.getElementById('btn-next').disabled = s.answers[itemIdx] === null;
+    document.getElementById('btn-next').textContent = itemIdx === s.items.length - 1 ? 'Continuer' : 'Suivant';
+  }
+
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (itemIdx > 0){ itemIdx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    var s = sections[secIdx];
+    if (s.answers[itemIdx] === null) return;
+    if (itemIdx < s.items.length - 1){ itemIdx++; renderQuestion(); }
+    else { nextSection(); }
+  });
+
+  function nextSection(){
+    screenQuiz.hidden = true;
+    screenIntro.hidden = true;
+    if (secIdx < sections.length - 1){
+      secIdx++;
+      showIntro();
+    } else {
+      showResult();
+    }
+  }
+
+  function showResult(){
+    screenResult.hidden = false;
+    var list = document.getElementById('result-list');
+    list.innerHTML = '';
+    sections.forEach(function(s){
+      var block = document.createElement('div');
+      block.className = 'result-block';
+      if (s.skipped){
+        block.innerHTML = '<p class="result-name">' + labels[s.key] + '</p>' +
+          '<p class="result-score">Non renseigné</p><p class="result-max">partie passée (figure absente)</p>';
+      } else {
+        var total = s.answers.reduce(function(a,b){ return a + (b + 1); }, 0);
+        block.innerHTML = '<p class="result-name">' + labels[s.key] + '</p>' +
+          '<p class="result-score">' + total + '</p><p class="result-max">score total, sur 125 (25 items, échelle 1-5, somme brute sans inversion)</p>';
+      }
+      list.appendChild(block);
+    });
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    sections.forEach(function(s){ s.answers.fill(null); s.skipped = false; });
+    secIdx = 0; itemIdx = 0;
+    screenResult.hidden = true;
+    screenStart.hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IPPA-R - Inventaire des liens d'attachement aux parents et aux pairs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#A8677A 0%,#D19DAA 55%,#5C2E3B 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(240,220,220,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#5C2E3B;background:#F3E7EA;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .caveat{font-size:13px;color:#8A5A3B;background:#F1E7DD;border-radius:10px;padding:12px 14px;margin:0 0 14px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#A8677A;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#5C2E3B;border-color:#E0D9C9;}
+  .preview-card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:14px;padding:20px 22px;margin-bottom:14px;}
+  .preview-q{font-size:14.5px;font-weight:600;margin:0 0 10px;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">IPPA-R</span></div>
+
+  <h1 class="serif">Inventaire des liens d'attachement aux parents et aux pairs (IPPA-R)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Inventory of Parent and Peer Attachment, forme révisée — Armsden, G. C., &amp; Greenberg, M. T. (1987)</p>
+  <div class="meta-row">
+    <span class="pill">75 questions</span>
+    <span class="pill">18 minutes</span>
+    <span class="pill">Auto-administré</span>
+    <span class="pill">Adolescent, jeune adulte</span>
+    <span class="pill">Français</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="ippa-r.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>L'IPPA-R évalue la qualité perçue des liens d'attachement à trois figures : la mère, le père et les amis proches. 75 affirmations réparties en trois parties de 25 items chacune, cotées de 1 (presque jamais ou jamais vrai) à 5 (presque toujours ou toujours vrai). Les parties Mère et Père peuvent être passées si la figure correspondante est absente.</p>
+    <p class="source-note">Instrument académique très largement diffusé en recherche et en clinique. Aucun signal de propriété exclusive ni de licence commerciale identifié.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Aperçu</h2>
+    <div class="preview-card">
+      <p class="preview-q">1. Ma mère respecte mes sentiments.</p>
+      <p class="source-note">Échelle de réponse (identique pour les 75 items) : Presque jamais ou jamais vrai (1) / Pas souvent vrai (2) / Parfois vrai (3) / Souvent vrai (4) / Presque toujours ou toujours vrai (5).</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <div class="caveat">La répartition exacte des 25 items de chaque partie entre les trois sous-échelles (Confiance, Communication, Aliénation) n'est pas confirmée à la source pour cette version révisée. Les auteurs eux-mêmes recommandent, dans cette version, de s'en tenir aux trois scores totaux (Mère / Père / Pairs) plutôt qu'au détail des sous-échelles. La construction ici se limite donc à ces trois totaux, sans inversion des items d'aliénation (non identifiés avec certitude) ni calcul de sous-échelle.</div>
+    <p>Score total par figure d'attachement = somme brute des 25 items de la partie correspondante (échelle 1-5), étendue 25-125. Une partie passée (figure absente) n'est pas chiffrée.</p>
+    <p class="source-note">Les auteurs précisent que l'IPPA ne comporte ni normes ni seuils cliniques et n'a pas été conçu pour classer un « style » d'attachement : les scores s'interprètent par comparaison avec des échantillons semblables, ou d'une passation à l'autre chez un même patient (manuel IPPA, Armsden &amp; Greenberg, octobre 2023).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source</h2>
+    <p class="source-note">Armsden, G. C., &amp; Greenberg, M. T. (1987). The Inventory of Parent and Peer Attachment: Individual differences and their relationship to psychological well-being in adolescence. Journal of Youth and Adolescence, 16(5), 427-454. Ce résultat est un repère, il ne constitue pas un diagnostic.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

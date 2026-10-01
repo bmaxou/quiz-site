@@ -1,0 +1,524 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CDSS — Échelle de dépression de Calgary pour la schizophrénie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#8A4A26;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .sec{font-size:12.5px;color:#63695D;background:#F4F1EA;border-radius:8px;padding:8px 12px;margin:0 0 16px;}
+  .q-text{font-size:16px;margin:0 0 6px;}
+  .q-desc{font-size:13px;color:#63695D;margin:0 0 18px;white-space:pre-line;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#8A4A26;background:#F6E6DA;}
+  .num-row{display:flex;flex-wrap:wrap;gap:6px;}
+  .num{min-width:44px;text-align:center;padding:10px 0;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600;background:#fff;}
+  .num.selected{border-color:#8A4A26;background:#F6E6DA;}
+  .num-ends{display:flex;justify-content:space-between;gap:12px;font-size:12px;color:#63695D;margin-top:8px;}
+  .vas-box{padding:8px 0;}
+  .vas-val{font-family:'Cormorant Garamond',Georgia,serif;font-size:40px;color:#8A4A26;margin:0 0 6px;}
+  .vas-box input[type=range]{width:100%;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#8A4A26;border-color:#E0D9C9;}
+  .btn-primary{background:#8A4A26;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:40px;color:#8A4A26;margin:0 0 4px;}
+  .result-max{font-size:13px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 14px;}
+  .result-list{font-size:14px;margin:0 0 16px;padding-left:20px;}
+  .result-list li{margin-bottom:4px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">CDSS — Échelle de dépression de Calgary pour la schizophrénie</h1>
+    <p class="lead">Neuf items cotés de 0 à 3 par le clinicien à l'issue de l'entretien, pour évaluer la dépression chez une personne atteinte de schizophrénie (période de rappel : deux dernières semaines). Chaque item donne la question à poser et les descripteurs de cotation.</p>
+    <p class="lang-note">Hétéro-évaluation, à utiliser par un évaluateur formé. Version française (France) diffusée par l'Université de Calgary / Mapi (version du 8 septembre 2017).</p>
+    <div class="pill-row">
+      <span class="pill">9 items</span>
+      <span class="pill">15 minutes</span>
+      <span class="pill">Cotation 0-3</span>
+      <span class="pill">Hétéro-évaluation</span>
+      <span class="pill">Français</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="sec" id="sec-text" hidden></p>
+    <p class="q-text" id="q-text"></p>
+    <p class="q-desc" id="q-desc"></p>
+    <div id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Addington D., Addington J., Maticka-Tyndale E. &amp; Joyce J. (1992). Reliability and validity of a depression rating scale for schizophrenics. Schizophrenia Research, 6, 201-208. Version française (France), Mapi, 2017. © Dr Donald Addington et Dr Jean Addington. Ce résultat est un repère, il ne constitue pas un diagnostic.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [
+ {
+  "t": "1. Dépression",
+  "d": "Question à poser : « Comment décririez-vous votre humeur au cours des deux dernières semaines ? Avez-vous pu demeurer assez joyeux(-se) ou est-ce que vous avez été très déprimé(e) ou démoralisé(e) ces derniers temps ? Durant les deux dernières semaines, combien de fois par jour vous êtes-vous senti(e) (ici, utilisez vos propres mots) ? Toute la journée ? »",
+  "opts": [
+   [
+    0,
+    "0 — Aucune"
+   ],
+   [
+    1,
+    "1 — Limitée : exprime une certaine tristesse ou un certain découragement lorsqu'on le/la questionne."
+   ],
+   [
+    2,
+    "2 — Modérée : humeur dépressive distincte présente tous les jours et persistante pendant au moins 50 % du temps au cours des deux dernières semaines."
+   ],
+   [
+    3,
+    "3 — Sévère : humeur dépressive marquée persistant tous les jours plus de la moitié du temps et interférant avec le fonctionnement moteur et social normal."
+   ]
+  ],
+  "sec": "Hétéro-évaluation : à remplir par le clinicien (période de rappel : 2 dernières semaines)"
+ },
+ {
+  "t": "2. Désespoir",
+  "d": "Question à poser : « Comment imaginez-vous votre futur ? Est-ce que vous pouvez envisager un avenir pour vous ? Ou est-ce que la vie vous paraît plutôt sans espoir ? Est-ce que vous avez perdu espoir ou est-ce qu'il vous paraît y avoir encore des raisons d'essayer ? »",
+  "opts": [
+   [
+    0,
+    "0 — Absent"
+   ],
+   [
+    1,
+    "1 — Léger : à certains moments, il/elle s'est senti(e) désespéré(e) au cours des deux dernières semaines mais il/elle maintient toujours un certain degré d'espoir pour l'avenir."
+   ],
+   [
+    2,
+    "2 — Modéré : sentiment persistant mais modéré de désespoir au cours de la dernière semaine. On peut cependant le/la persuader d'admettre la possibilité que les choses peuvent s'améliorer."
+   ],
+   [
+    3,
+    "3 — Sévère : sentiment persistant et éprouvant de désespoir."
+   ]
+  ],
+  "sec": "Hétéro-évaluation : à remplir par le clinicien (période de rappel : 2 dernières semaines)"
+ },
+ {
+  "t": "3. Auto-dépréciation",
+  "d": "Question à poser : « Quelle est votre opinion de vous-même en comparaison avec d'autres personnes ? Est-ce que vous vous sentez meilleur(e), pas aussi bon(ne), ou à peu près comparable aux autres personnes en général ? Vous sentez-vous inférieur(e) ou même sans aucune valeur ? »",
+  "opts": [
+   [
+    0,
+    "0 — Aucune"
+   ],
+   [
+    1,
+    "1 — Légère : une légère infériorité ; pas au point de se sentir sans valeur."
+   ],
+   [
+    2,
+    "2 — Modérée : le sujet se sent sans valeur, mais moins de 50 % du temps."
+   ],
+   [
+    3,
+    "3 — Sévère : le sujet se sent sans valeur plus de 50 % du temps. Il est possible de persuader le sujet que son estime de lui-même n'est pas si basse."
+   ]
+  ],
+  "sec": "Hétéro-évaluation : à remplir par le clinicien (période de rappel : 2 dernières semaines)"
+ },
+ {
+  "t": "4. Idées de référence associées à la culpabilité",
+  "d": "Question à poser : « Avez-vous l'impression que l'on vous blâme pour certaines choses ou même que l'on vous accuse sans raison ? À propos de quoi ? » (Ne pas inclure ici des blâmes ou des accusations justifiés. Exclure les délires de culpabilité.)",
+  "opts": [
+   [
+    0,
+    "0 — Aucune"
+   ],
+   [
+    1,
+    "1 — Légères : le sujet se sent blâmé mais non accusé moins de 50 % du temps."
+   ],
+   [
+    2,
+    "2 — Modérées : sentiment persistant d'être blâmé(e), et/ou un sentiment occasionnel d'être accusé(e)."
+   ],
+   [
+    3,
+    "3 — Sévères : sentiment persistant d'être accusé(e). Lorsqu'on le contredit, il/elle reconnaît que ce n'est pas vrai."
+   ]
+  ],
+  "sec": "Hétéro-évaluation : à remplir par le clinicien (période de rappel : 2 dernières semaines)"
+ },
+ {
+  "t": "5. Culpabilité pathologique",
+  "d": "Question à poser : « Avez-vous tendance à vous blâmer pour des petites choses que vous pourriez avoir faites dans le passé ? Pensez-vous que vous méritez d'être aussi préoccupé(e) à propos de cela ? »",
+  "opts": [
+   [
+    0,
+    "0 — Aucune"
+   ],
+   [
+    1,
+    "1 — Légère : le sujet se sent coupable de certaines peccadilles, mais moins de 50 % du temps."
+   ],
+   [
+    2,
+    "2 — Modérée : le sujet se sent habituellement coupable (plus de 50 % du temps) d'actes dont il exagère la signification."
+   ],
+   [
+    3,
+    "3 — Sévère : le sujet sent habituellement qu'il est à blâmer pour tout ce qui va mal, même lorsque ce n'est pas de sa faute."
+   ]
+  ],
+  "sec": "Hétéro-évaluation : à remplir par le clinicien (période de rappel : 2 dernières semaines)"
+ },
+ {
+  "t": "6. Dépression matinale",
+  "d": "Question à poser : « Lorsque vous vous êtes senti(e) déprimé(e) au cours des 2 dernières semaines, avez-vous remarqué que la dépression était pire à certains moments de la journée ? »",
+  "opts": [
+   [
+    0,
+    "0 — Aucune : pas de dépression."
+   ],
+   [
+    1,
+    "1 — Limitée : dépression présente mais sans variation diurne."
+   ],
+   [
+    2,
+    "2 — Modérée : le sujet mentionne spontanément que la dépression est pire le matin."
+   ],
+   [
+    3,
+    "3 — Sévère : la dépression est nettement pire le matin, avec un fonctionnement perturbé qui s'améliore l'après-midi."
+   ]
+  ],
+  "sec": "Hétéro-évaluation : à remplir par le clinicien (période de rappel : 2 dernières semaines)"
+ },
+ {
+  "t": "7. Réveil précoce",
+  "d": "Question à poser : « Vous réveillez-vous plus tôt le matin que vous le faites d'habitude ? Combien de fois par semaine cela vous arrive-t-il ? »",
+  "opts": [
+   [
+    0,
+    "0 — Aucun : pas de réveil précoce."
+   ],
+   [
+    1,
+    "1 — Occasionnel : se réveille occasionnellement (jusqu'à 2 fois par semaine) une heure ou plus avant son heure de réveil habituelle ou l'heure de son réveil-matin."
+   ],
+   [
+    2,
+    "2 — Fréquent : se réveille fréquemment plus tôt (jusqu'à 5 fois par semaine) une heure ou plus avant son heure de réveil habituelle ou l'heure de son réveil-matin."
+   ],
+   [
+    3,
+    "3 — Quotidien : se réveille tous les jours une heure ou plus avant son heure de réveil habituelle."
+   ]
+  ],
+  "sec": "Hétéro-évaluation : à remplir par le clinicien (période de rappel : 2 dernières semaines)"
+ },
+ {
+  "t": "8. Suicide",
+  "d": "Question à poser : « Avez-vous déjà eu l'impression que la vie ne valait pas la peine d'être vécue ? Avez-vous déjà pensé mettre fin à tout cela ? Qu'est-ce que vous pensez que vous auriez pu faire ? Avez-vous, effectivement, essayé ? »",
+  "opts": [
+   [
+    0,
+    "0 — Aucune intention"
+   ],
+   [
+    1,
+    "1 — Intention limitée : pense fréquemment qu'il/elle serait mieux mort(e) ou a des idées occasionnelles de suicide."
+   ],
+   [
+    2,
+    "2 — Intention modérée : il/elle a délibérément envisagé le suicide avec un plan, mais sans faire de tentative."
+   ],
+   [
+    3,
+    "3 — Intention ferme : tentative de suicide apparemment conçue pour se terminer par la mort (c'est-à-dire accidentellement interrompu(e), ou moyens qui se sont avérés inefficaces)."
+   ]
+  ],
+  "sec": "Hétéro-évaluation : à remplir par le clinicien (période de rappel : 2 dernières semaines)"
+ },
+ {
+  "t": "9. Dépression observée",
+  "d": "D'après les observations de l'interviewer durant l'entretien complet. La question « Est-ce que vous ressentez une envie de pleurer ? », posée à des moments appropriés durant l'entretien, peut permettre d'obtenir des informations utiles à cette observation.",
+  "opts": [
+   [
+    0,
+    "0 — Aucune"
+   ],
+   [
+    1,
+    "1 — Limitée : le sujet apparaît triste et sombre même durant des portions de l'entretien touchant des sujets neutres sur le plan affectif."
+   ],
+   [
+    2,
+    "2 — Modérée : le sujet apparaît triste et sombre durant tout l'entretien avec une voix monotone et morne, est en larmes ou au bord des larmes à certains moments."
+   ],
+   [
+    3,
+    "3 — Sévère : le sujet a la gorge serrée lorsqu'il parle de sujets pénibles, soupire profondément fréquemment et pleure ouvertement, ou est de façon persistante dans un état de souffrance figée constatée par l'examinateur."
+   ]
+  ],
+  "sec": "Hétéro-évaluation : à remplir par le clinicien (période de rappel : 2 dernières semaines)"
+ }
+];
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+  var RESULT = function(a){
+    var s = 0;
+    a.forEach(function(v){ s += v; });
+    var pos = s > 6;
+    var suic = a[7];
+    return '<p class="result-score">' + s + ' / 27</p>' +
+      '<p class="result-max">score total (somme des 9 items cotés de 0 à 3)</p>' +
+      '<p class="result-text">' + (pos ? 'Score <strong>supérieur à 6</strong> : seuil au-dessus duquel la présence d\'un épisode dépressif caractérisé est probable (sensibilité 85 %, spécificité 82 % selon la page officielle de l\'échelle).' : 'Score <strong>inférieur ou égal à 6</strong> : en dessous du seuil habituellement retenu pour prédire un épisode dépressif caractérisé (seuil &gt; 6 : sensibilité 85 %, spécificité 82 %).') + '</p>' +
+      (suic > 0 ? '<p class="result-text"><strong>Item 8 (suicide) coté ' + suic + ' / 3</strong> : une évaluation clinique du risque suicidaire est à conduire sans attendre le score total.</p>' : '') +
+      '<p class="result-text">L\'échelle est conçue pour un évaluateur formé ; elle ne pose pas à elle seule le diagnostic et se lit avec l\'ensemble de la clinique.</p>';
+  };
+
+  function vis(i){
+    var c = items[i].cond;
+    return !c || answers[c[0]] === c[1];
+  }
+  function step(i, dir){
+    var j = i + dir;
+    while (j >= 0 && j < items.length && !vis(j)) j += dir;
+    return j;
+  }
+  function visCount(){ var n = 0; for (var i = 0; i < items.length; i++) if (vis(i)) n++; return n; }
+  function visRank(i){ var n = 0; for (var k = 0; k <= i; k++) if (vis(k)) n++; return n; }
+  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+
+  function renderQuestion(){
+    var it = items[idx];
+    document.getElementById('progress-text').textContent = 'Question ' + visRank(idx) + ' / ' + visCount();
+    var secEl = document.getElementById('sec-text');
+    if (it.sec){ secEl.textContent = it.sec; secEl.hidden = false; } else { secEl.hidden = true; }
+    document.getElementById('q-text').textContent = it.t;
+    document.getElementById('q-desc').textContent = it.d || '';
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    if (it.kind === 'num'){
+      var nr = document.createElement('div'); nr.className = 'num-row';
+      for (var v = it.min; v <= it.max; v++){
+        (function(v){
+          var b = document.createElement('div');
+          b.className = 'num' + (answers[idx] === v ? ' selected' : '');
+          b.textContent = v;
+          b.addEventListener('click', function(){ answers[idx] = v; renderQuestion(); });
+          nr.appendChild(b);
+        })(v);
+      }
+      row.appendChild(nr);
+      var ends = document.createElement('div'); ends.className = 'num-ends';
+      ends.innerHTML = '<span>' + esc(it.lo) + '</span><span style="text-align:right">' + esc(it.hi) + '</span>';
+      row.appendChild(ends);
+    } else if (it.kind === 'inp'){
+      var ib = document.createElement('div'); ib.className = 'vas-box';
+      ib.innerHTML = '<input type="number" id="inp-val" inputmode="decimal" min="' + it.min + '" max="' + it.max + '" step="any" value="' + (answers[idx] === null ? '' : answers[idx]) + '" aria-label="' + esc(it.unit) + '" style="font-size:22px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;width:140px;font-family:inherit"> <span style="font-size:15px;color:#63695D;margin-left:6px">' + esc(it.unit) + '</span>' +
+        '<p class="q-desc" style="margin-top:14px">Valeur attendue entre ' + it.min + ' et ' + it.max + ' ' + esc(it.unit) + '.</p>';
+      row.appendChild(ib);
+      var iv = document.getElementById('inp-val');
+      function setI(){
+        var x = parseFloat(String(iv.value).replace(',', '.'));
+        answers[idx] = (isFinite(x) && x >= it.min && x <= it.max) ? x : null;
+        document.getElementById('btn-next').disabled = answers[idx] === null;
+      }
+      iv.addEventListener('input', setI);
+      iv.addEventListener('change', setI);
+    } else if (it.kind === 'vas'){
+      var box = document.createElement('div'); box.className = 'vas-box';
+      var cur = answers[idx] === null ? 50 : answers[idx];
+      box.innerHTML = '<p class="vas-val" id="vas-val">' + (answers[idx] === null ? '—' : answers[idx]) + '</p>' +
+        '<input type="range" id="vas-range" min="' + it.min + '" max="' + it.max + '" step="1" value="' + cur + '" aria-label="Échelle visuelle analogique">' +
+        '<div class="num-ends"><span>' + esc(it.lo) + '</span><span style="text-align:right">' + esc(it.hi) + '</span></div>' +
+        '<p class="q-desc" style="margin-top:14px">Déplacez le curseur (ou utilisez les flèches du clavier) jusqu\'à la valeur qui correspond à votre état de santé aujourd\'hui.</p>';
+      row.appendChild(box);
+      var rg = document.getElementById('vas-range');
+      function setV(){
+        answers[idx] = parseInt(rg.value, 10);
+        document.getElementById('vas-val').textContent = answers[idx];
+        document.getElementById('btn-next').disabled = false;
+      }
+      rg.addEventListener('input', setV);
+      rg.addEventListener('change', setV);
+      rg.addEventListener('click', setV);
+    } else {
+      var list = document.createElement('div'); list.className = 'opt-row';
+      it.opts.forEach(function(pair){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx] === pair[0] ? ' selected' : '');
+        d.textContent = pair[1];
+        d.addEventListener('click', function(){ answers[idx] = pair[0]; renderQuestion(); });
+        list.appendChild(d);
+      });
+      row.appendChild(list);
+    }
+    document.getElementById('btn-prev').disabled = step(idx, -1) < 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = step(idx, 1) >= items.length ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    var j = step(idx, -1);
+    if (j >= 0){ idx = j; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    var j = step(idx, 1);
+    if (j < items.length){ idx = j; renderQuestion(); } else { showResult(); }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var a = answers.map(function(v, i){ return vis(i) ? v : null; });
+    document.getElementById('result-body').innerHTML = RESULT(a);
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CDSS — Échelle de dépression de Calgary pour la schizophrénie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#6E3A1E 0%,#B06A3C 55%,#3E2010 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,210,.40),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#8A4A26;background:#F6E6DA;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .section ul{font-size:14.5px;margin:0 0 10px;padding-left:20px;}
+  .section li{margin-bottom:4px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#8A4A26;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#8A4A26;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <div class="fiche-photo"><span class="acronym">CDSS</span></div>
+  <h1 class="serif">CDSS — Échelle de dépression de Calgary pour la schizophrénie</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Calgary Depression Scale for Schizophrenia — Addington D., Addington J., Maticka-Tyndale E. &amp; Joyce J. (1992)</p>
+  <div class="meta-row">
+    <span class="pill">9 items</span>
+    <span class="pill">15 minutes</span>
+    <span class="pill">Cotation 0-3</span>
+    <span class="pill">Adulte et adolescent</span>
+    <span class="pill">Français</span>
+    <span class="pill">Hétéro-évaluation</span>
+    <span class="pill">Licence requise : oui</span>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" href="cdss.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>La CDSS est une échelle de dépression à neuf items, cotés par le clinicien, conçue pour évaluer la dépression chez les personnes atteintes d'un trouble du spectre de la schizophrénie, en distinguant les symptômes dépressifs des symptômes positifs, négatifs et extrapyramidaux. Elle fonctionne en phase de rechute comme de rémission et est sensible au changement. Les items sont : dépression, désespoir, auto-dépréciation, idées de référence associées à la culpabilité, culpabilité pathologique, dépression matinale, réveil précoce, suicide et dépression observée. La période de rappel est de deux semaines, sauf mention contraire ; le neuvième item repose sur l'observation de l'ensemble de l'entretien.</p>
+    <p>L'échelle est destinée à un évaluateur expérimenté, qui pose la première question telle qu'écrite puis utilise des relances à sa discrétion. Elle n'est pas faite pour l'auto-évaluation.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque item est coté de 0 (absent) à 3 (sévère) d'après les critères opérationnels donnés. Le score total, de 0 à 27, est la somme des neuf items. Un score supérieur à 6 prédit la présence d'un épisode dépressif caractérisé avec une spécificité de 82 % et une sensibilité de 85 % (page officielle de l'échelle, Université de Calgary). Différence minimale cliniquement importante indiquée sur cette page : 1,5 point.</p>
+    <p>L'item 8 (suicide) mérite une attention propre : toute cotation supérieure à 0 appelle une évaluation clinique du risque, indépendamment du score total.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p>Addington D., Addington J., Maticka-Tyndale E. &amp; Joyce J. (1992), <em>Schizophrenia Research</em>, 6(3), 201-208. Version française validée : Reine G., Bernard D., Auquier P., Le Fur B. &amp; Lançon C. (2000), <em>L'Encéphale</em>, 26(1), 52-61. Texte transcrit depuis la version française (France) diffusée par l'Université de Calgary (Cumming School of Medicine), « CDSS - France/French - Version of 08 Sep 2017 - Mapi », qui reproduit l'échelle d'origine (© Dr Donald Addington et Dr Jean Addington).</p>
+    <p class="source-note"><strong>Licence requise : oui.</strong> Le Dr Donald Addington détient les droits d'auteur de la version anglaise et des traductions ; l'échelle peut être utilisée sans frais, avec autorisation, par des cliniciens dans une pratique clinique courante, et toute demande d'usage (notamment son intégration dans un dossier électronique) passe par la plateforme ePROVIDE de Mapi Research Trust, gratuitement. Construit malgré tout sur décision du cabinet (30/09/2026). Hétéro-évaluation à réserver à un évaluateur formé.</p>
+  </div>
+
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

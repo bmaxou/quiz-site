@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HCL-32 - Questionnaire d'hypomanie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#C9714F;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .progress-track{height:6px;background:#E0D9C9;border-radius:99px;overflow:hidden;margin-bottom:14px;}
+  .progress-fill{height:100%;background:#C9714F;border-radius:99px;transition:width .25s ease;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .qtext{font-size:19px;font-family:'Cormorant Garamond',Georgia,serif;margin:0 0 24px;}
+  .opts{display:flex;flex-direction:column;gap:10px;}
+  .opt{appearance:none;text-align:left;border:1px solid #E0D9C9;background:#F4F1EA;border-radius:12px;padding:14px 18px;font-family:'Inter',sans-serif;font-size:14.5px;color:#20241E;cursor:pointer;transition:border-color .15s ease,background .15s ease;}
+  .opt:hover{border-color:#C9714F;background:#F7E8E0;}
+  .opt.selected{border-color:#C9714F;background:#F7E8E0;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#C9714F;color:#fff;}
+  .btn[disabled]{opacity:.45;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:40px;margin:6px 0 4px;color:#C9714F;}
+  .result-max{font-size:13px;color:#9A9E90;margin:0 0 20px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">HCL-32 — Questionnaire d'hypomanie</h1>
+    <p class="lead">Hypomania Checklist. Pensez à une période où vous vous sentiez « au top », plus en forme que d'habitude. Pour chacune des 32 propositions suivantes, indiquez si cela correspondait à votre état à ce moment-là.</p>
+    <div class="pill-row">
+      <span class="pill">32 questions</span>
+      <span class="pill">6 minutes</span>
+      <span class="pill">Oui / Non</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+    <p class="progress" id="progress-text"></p>
+    <p class="qtext" id="qtext"></p>
+    <div class="opts" id="opts"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-back" disabled>Précédent</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div class="result-score" id="score-total">0 / 32</div>
+    <div class="result-max">nombre de réponses « Oui »</div>
+    <p class="lead">Plus le score est élevé, plus la personne rapporte avoir présenté, durant la période évoquée, un nombre important de signes évocateurs d'hypomanie. La littérature distingue parfois une dimension « activité/énergie » et une dimension « humeur/irritabilité », mais cette répartition n'est pas consensuelle selon les études factorielles : seul le score total est proposé ici, pour ne pas afficher une répartition non confirmée.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Angst, J., Adolfsson, R., Benazzi, F., Gamma, A., Hantouche, E., Meyer, T.D., et al. (2005). The HCL-32: Towards a self-assessment tool for hypomanic symptoms in outpatients. Journal of Affective Disorders, 88(2), 217-233. Ce résultat est un repère, il ne constitue pas un diagnostic.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [
+    "J'ai besoin de moins de sommeil",
+    "Je me sens plus énergique et plus actif/active",
+    "J'ai davantage confiance en moi",
+    "J'apprécie davantage mon travail",
+    "Je suis plus sociable (plus d'appels téléphoniques, je sors plus)",
+    "J'ai envie de voyager et/ou je voyage davantage",
+    "J'ai tendance à conduire plus vite ou à prendre plus de risques au volant",
+    "Je dépense plus d'argent/trop d'argent",
+    "Je prends plus de risques dans ma vie quotidienne (dans mon travail et/ou d'autres activités)",
+    "Je suis physiquement plus actif/active (sport, etc.)",
+    "Je planifie plus d'activités ou de projets",
+    "J'ai plus d'idées, je suis plus créatif/créative",
+    "Je suis moins timide ou moins inhibé(e)",
+    "Je porte des vêtements/du maquillage plus colorés et plus extravagants",
+    "J'ai envie de rencontrer, ou je rencontre effectivement, plus de gens",
+    "Je m'intéresse davantage au sexe et/ou j'ai un désir sexuel accru",
+    "Je flirte davantage et/ou je suis plus actif/active sexuellement",
+    "Je parle davantage",
+    "Je pense plus vite",
+    "Je fais plus de blagues ou de jeux de mots quand je parle",
+    "Je me laisse plus facilement distraire",
+    "Je me lance dans beaucoup de nouvelles choses",
+    "Mes pensées sautent d'un sujet à l'autre",
+    "Je fais les choses plus rapidement et/ou plus facilement",
+    "Je suis plus impatient(e) et/ou je m'irrite plus facilement",
+    "Je peux être épuisant(e) ou irritant(e) pour les autres",
+    "Je me dispute davantage",
+    "Mon humeur est plus haute, plus optimiste",
+    "Je bois plus de café",
+    "Je fume plus de cigarettes",
+    "Je bois plus d'alcool",
+    "Je prends plus de substances (sédatifs, anxiolytiques, stimulants…)"
+  ];
+  var opts2 = [["Non",0],["Oui",1]];
+  var answers = new Array(items.length).fill(null);
+  var current = 0;
+
+  var screenStart = document.getElementById('screen-start');
+  var screenQuiz = document.getElementById('screen-quiz');
+  var screenResult = document.getElementById('screen-result');
+  var progressFill = document.getElementById('progress-fill');
+  var progressText = document.getElementById('progress-text');
+  var qtext = document.getElementById('qtext');
+  var opts = document.getElementById('opts');
+  var btnBack = document.getElementById('btn-back');
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    screenStart.hidden = true; screenQuiz.hidden = false; renderQuestion();
+  });
+
+  function renderQuestion(){
+    var i = current;
+    progressText.textContent = 'Question ' + (i+1) + ' / ' + items.length;
+    qtext.textContent = (i+1) + '. ' + items[i];
+    progressFill.style.width = Math.round((i / items.length) * 100) + '%';
+    btnBack.disabled = (i === 0);
+    opts.innerHTML = '';
+    opts2.forEach(function(pair){
+      var b = document.createElement('button');
+      b.className = 'opt' + (answers[i] === pair[1] ? ' selected' : ''); b.type = 'button'; b.textContent = pair[0];
+      b.addEventListener('click', function(){
+        answers[i] = pair[1];
+        if (current < items.length - 1) { current++; renderQuestion(); }
+        else { showResult(); }
+      });
+      opts.appendChild(b);
+    });
+  }
+
+  btnBack.addEventListener('click', function(){
+    if (current > 0) { current--; renderQuestion(); }
+  });
+
+  function showResult(){
+    screenQuiz.hidden = true; screenResult.hidden = false;
+    var total = 0;
+    for (var i=0;i<items.length;i++){ total += (answers[i] || 0); }
+    document.getElementById('score-total').textContent = total + ' / 32';
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null); current = 0;
+    screenResult.hidden = true; screenStart.hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HCL-32 - Questionnaire d'hypomanie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#C9714F 0%,#E3A47C 55%,#8C4A2E 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,220,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#22334D;background:#E9EEF5;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .section ol{font-size:14.5px;margin:0 0 10px;padding-left:20px;column-count:2;column-gap:24px;}
+  .section li{margin-bottom:4px;}
+  .caveat{font-size:13px;color:#63695D;background:#FBF3E4;border:1px solid #E7D6AE;border-radius:12px;padding:12px 16px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#C9714F;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#22334D;border-color:#E0D9C9;}
+  @media (max-width:560px){ .section ol{column-count:1;} }
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <div class="fiche-photo"><span class="acronym">HCL-32</span></div>
+  <h1 class="serif">Questionnaire d'hypomanie (HCL-32)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Hypomania Checklist - Angst, J., Adolfsson, R., Benazzi, F., Gamma, A., Hantouche, E., Meyer, T.D., et al. (2005)</p>
+  <div class="meta-row">
+    <span class="pill">32 questions</span>
+    <span class="pill">6 minutes</span>
+    <span class="pill">Auto-administré</span>
+    <span class="pill">Adulte</span>
+    <span class="pill">Français</span>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" href="hcl-32.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le HCL-32 est un auto-questionnaire de repérage des symptômes hypomaniaques. La personne pense à une période où elle se sentait « au top », plus en forme que d'habitude, et indique par oui ou par non, pour chacune des 32 propositions, si cela correspondait à son état à ce moment-là.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Les 32 items</h2>
+    <ol>
+      <li>J'ai besoin de moins de sommeil</li>
+      <li>Je me sens plus énergique et plus actif/active</li>
+      <li>J'ai davantage confiance en moi</li>
+      <li>J'apprécie davantage mon travail</li>
+      <li>Je suis plus sociable (plus d'appels téléphoniques, je sors plus)</li>
+      <li>J'ai envie de voyager et/ou je voyage davantage</li>
+      <li>J'ai tendance à conduire plus vite ou à prendre plus de risques au volant</li>
+      <li>Je dépense plus d'argent/trop d'argent</li>
+      <li>Je prends plus de risques dans ma vie quotidienne (dans mon travail et/ou d'autres activités)</li>
+      <li>Je suis physiquement plus actif/active (sport, etc.)</li>
+      <li>Je planifie plus d'activités ou de projets</li>
+      <li>J'ai plus d'idées, je suis plus créatif/créative</li>
+      <li>Je suis moins timide ou moins inhibé(e)</li>
+      <li>Je porte des vêtements/du maquillage plus colorés et plus extravagants</li>
+      <li>J'ai envie de rencontrer, ou je rencontre effectivement, plus de gens</li>
+      <li>Je m'intéresse davantage au sexe et/ou j'ai un désir sexuel accru</li>
+      <li>Je flirte davantage et/ou je suis plus actif/active sexuellement</li>
+      <li>Je parle davantage</li>
+      <li>Je pense plus vite</li>
+      <li>Je fais plus de blagues ou de jeux de mots quand je parle</li>
+      <li>Je me laisse plus facilement distraire</li>
+      <li>Je me lance dans beaucoup de nouvelles choses</li>
+      <li>Mes pensées sautent d'un sujet à l'autre</li>
+      <li>Je fais les choses plus rapidement et/ou plus facilement</li>
+      <li>Je suis plus impatient(e) et/ou je m'irrite plus facilement</li>
+      <li>Je peux être épuisant(e) ou irritant(e) pour les autres</li>
+      <li>Je me dispute davantage</li>
+      <li>Mon humeur est plus haute, plus optimiste</li>
+      <li>Je bois plus de café</li>
+      <li>Je fume plus de cigarettes</li>
+      <li>Je bois plus d'alcool</li>
+      <li>Je prends plus de substances (sédatifs, anxiolytiques, stimulants…)</li>
+    </ol>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Score = nombre de réponses « Oui » (0 à 32). Plus le score est élevé, plus le nombre de signes évocateurs d'hypomanie rapportés durant la période évoquée est important.</p>
+    <p class="caveat">La littérature distingue parfois une dimension « activité/énergie » et une dimension « humeur/irritabilité » selon certaines études factorielles, mais cette répartition n'est pas consensuelle d'une étude à l'autre. Pour ne rien inventer, cette page ne propose qu'un score total, sans sous-échelle.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p>Angst, J., Adolfsson, R., Benazzi, F., Gamma, A., Hantouche, E., Meyer, T.D., et al. (2005). The HCL-32: Towards a self-assessment tool for hypomanic symptoms in outpatients. <em>Journal of Affective Disorders</em>, 88(2), 217-233.</p>
+    <p class="source-note">Texte intégral obtenu via la base SABI (UNC). Diffusion académique, citation de l'article demandée par les auteurs, usage commercial exclu — usage strictement personnel et non commercial de ce cabinet, conforme à cette réserve. Outil de repérage clinique, ne remplace pas une évaluation complète.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

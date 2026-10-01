@@ -1,0 +1,688 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>EAT-26 — Cabinet Bouche &amp; Chmura</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F4F1EA; --surface:#FFFFFF; --surface-2:#EAE6D9; --ink:#20241E; --ink-soft:#63695D;
+    --line:#E0D9C9; --accent:#1E3A5F; --accent-ink:#F4F1EA; --accent-soft:#E1E7EC; --terracotta:#A0824C;
+    --progress-bg:#E6E1D3; --progress-fill:#7FBF9E;
+    --shadow: 0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',-apple-system,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,h3,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:var(--ink);}
+  .wrap{max-width:520px;margin:0 auto;padding:48px 24px 80px;}
+  .back-top{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--ink-soft);text-decoration:none;margin-bottom:20px;}
+  .back-top:hover{color:var(--ink);}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--ink-soft);display:inline-block;}
+  h1{font-size:28px;margin:0 0 10px;}
+  .intro-text{color:var(--ink-soft);font-size:15px;margin:0 0 28px;}
+
+  .start-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:32px 28px;box-shadow:var(--shadow);}
+  .pills{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 20px;}
+  .pill{font-size:12.5px;font-weight:600;color:var(--ink-soft);background:var(--surface-2);border-radius:999px;padding:6px 13px;display:inline-flex;align-items:center;gap:6px;}
+  .instructions{font-size:14.5px;color:var(--ink-soft);margin:0 0 22px;line-height:1.7;}
+
+  .quiz-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:28px 26px 26px;box-shadow:var(--shadow);}
+  .progress-track{height:8px;border-radius:99px;background:var(--progress-bg);overflow:hidden;margin-bottom:14px;}
+  .progress-fill{height:100%;background:var(--progress-fill);border-radius:99px;width:0%;transition:width .3s ease;}
+  .q-count{font-size:12.5px;color:var(--ink-soft);font-weight:600;margin:0 0 20px;}
+  .q-item{font-size:18px;font-weight:600;color:var(--ink);margin:0 0 26px;font-family:'Cormorant Garamond',Georgia,serif;line-height:1.35;}
+  .options{display:flex;flex-direction:column;gap:10px;}
+  .option-btn{font:inherit;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:14.5px;color:var(--ink);cursor:pointer;transition:border-color .15s ease,background .15s ease,transform .1s ease;}
+  .option-btn:hover{border-color:var(--accent);}
+  .option-btn.selected{border-color:var(--accent);background:var(--accent-soft);font-weight:600;}
+  .back-link{display:inline-flex;align-items:center;gap:6px;margin-top:22px;font-size:13px;color:var(--ink-soft);background:none;border:none;font:inherit;cursor:pointer;padding:0;}
+  .back-link:hover{color:var(--ink);}
+  .back-link[hidden]{display:none;}
+
+  #result{display:none;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:30px 28px;box-shadow:var(--shadow);}
+  #result h2.serif{font-size:22px;margin:0 0 6px;}
+  .meta-line{font-size:13.5px;color:var(--ink-soft);margin:0 0 24px;}
+  .section-title{font-size:12.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft);margin:0 0 12px;padding-top:18px;border-top:1px solid var(--line);}
+  .section-title:first-of-type{border-top:none;padding-top:0;}
+  .score-line{font-size:17px;margin:0 0 14px;}
+  .score-line strong{font-size:22px;color:var(--accent);}
+  .dim-note{font-size:13.5px;color:var(--ink-soft);margin:0 0 20px;line-height:1.65;}
+  .band-table{width:100%;border-collapse:collapse;font-size:14px;margin-bottom:20px;}
+  .band-table td{padding:8px 4px;border-bottom:1px solid var(--line);color:var(--ink-soft);}
+  .band-table tr:last-child td{border-bottom:none;}
+  .band-table td.range{width:70px;font-weight:600;}
+  .band-table tr.active td{color:var(--ink);font-weight:700;}
+  .band-badge{display:inline-block;margin-left:8px;background:var(--accent);color:var(--accent-ink);font-size:11.5px;font-weight:700;border-radius:999px;padding:2px 9px;}
+
+  .dim-block{border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:12px;}
+  .dim-block .dim-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:6px;flex-wrap:wrap;}
+  .dim-block .dim-name{font-family:'Cormorant Garamond',Georgia,serif;font-size:17px;font-weight:600;color:var(--ink);}
+  .dim-block .dim-score{font-size:15px;font-weight:700;color:var(--accent);}
+  .dim-block .dim-desc{font-size:12.5px;color:var(--ink-soft);margin:0;}
+
+  .answer-block{border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin-bottom:10px;}
+  .answer-block .q-no{font-size:12px;font-weight:700;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.05em;margin:0 0 8px;}
+  .answer-block .item{font-size:14.5px;font-weight:600;color:var(--ink);margin:0 0 8px;}
+  .answer-block .resp{font-size:14px;font-weight:600;color:var(--ink);}
+  .answer-block .resp .sc{font-weight:400;color:var(--ink-soft);}
+
+  .btn{font:inherit;font-size:15px;font-weight:600;padding:13px 30px;border-radius:999px;border:none;background:var(--accent);color:var(--accent-ink);cursor:pointer;transition:background .15s ease;width:100%;}
+  .btn:hover{background:#16273D;}
+  .btn-outline{background:none;border:1px solid var(--accent);color:var(--accent);margin-top:14px;}
+  .btn-outline:hover{background:var(--accent-soft);}
+  .hint{font-size:12.5px;color:var(--ink-soft);margin-top:14px;text-align:center;}
+  .footnote{margin-top:40px;font-size:11.5px;color:var(--ink-soft);border-top:1px solid var(--line);padding-top:16px;line-height:1.7;}
+  [hidden]{display:none !important;}
+
+  @media print{
+    .back-top, .eyebrow, h1, .intro-text, .footnote, .btn-outline{ display:none !important; }
+    body{background:#fff;}
+    #result{box-shadow:none;border:none;padding:0;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back-top" href="index.html">&larr; Tous les tests</a>
+  <div class="eyebrow">Auto-évaluation</div>
+  <h1 class="serif">Test des attitudes alimentaires (EAT-26)</h1>
+  <p class="intro-text">Ce résultat ne remplace pas un échange avec votre praticien, il sert de point de départ pour en discuter ensemble.</p>
+
+  <!-- Écran d'accueil -->
+  <div class="start-card" id="startScreen">
+    <div class="pills">
+      <span class="pill">26 questions</span>
+      <span class="pill">6 minutes</span>
+    </div>
+    <p class="instructions">Le Test des attitudes alimentaires (Eating Attitudes Test, EAT-26) explore les attitudes et comportements liés à l'alimentation. Pour chaque énoncé, indiquez à quelle fréquence il vous correspond au cours de la période récente.</p>
+    <button type="button" class="btn" id="startBtn">Commencer</button>
+    <p class="hint">Rien n'est envoyé ni conservé sur un serveur : si vous quittez avant la fin, vos réponses sont perdues et il faudra recommencer.</p>
+  </div>
+
+  <!-- Écran question (une par écran) -->
+  <div class="quiz-card" id="quizScreen" hidden>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <p class="q-count" id="qCount">Question 1/26</p>
+    <p class="q-item" id="qItem"></p>
+    <div class="options" id="qOptions"></div>
+    <button type="button" class="back-link" id="backBtn" hidden>&larr; Question précédente</button>
+  </div>
+
+  <!-- Rapport de résultat -->
+  <div id="result">
+    <h2 class="serif">Test des attitudes alimentaires (EAT-26)</h2>
+    <p class="meta-line">Passation : <span id="passationDate"></span></p>
+
+    <p class="section-title">Score global</p>
+    <p class="score-line">Score total : <strong id="scoreTotal">0</strong>/78</p>
+    <table class="band-table" id="bandTable">
+      <tr data-min="0" data-max="20"><td class="range">0 – 20</td><td>Faible probabilité de TCA</td></tr>
+      <tr data-min="21" data-max="78"><td class="range">21 – 78</td><td>Suspicion de TCA</td></tr>
+    </table>
+    <p class="dim-note">Chaque item est coté de 0 à 3 (0 pour les trois réponses les plus « neutres », 1 à 3 pour les réponses les plus extrêmes ; l'item 25 est inversé). Un score de 21 ou plus est le seuil habituellement retenu pour orienter vers un entretien clinique approfondi ; ce résultat reste un repère de dépistage, pas un diagnostic.</p>
+
+    <p class="section-title">Sous-échelles</p>
+    <div id="dimBlocks"></div>
+
+    <p class="section-title">Réponses données</p>
+    <div id="answersList"></div>
+
+    <button type="button" class="btn" id="downloadBtn">Télécharger le résultat (PDF)</button>
+    <button type="button" class="btn btn-outline" id="restartBtn">Refaire le test</button>
+  </div>
+
+  <p class="footnote">
+    Eating Attitudes Test-26 (EAT-26) — Garner, Olmsted, Bohr &amp; Garfinkel (1982), traduction française d'usage courant.
+    Ce résultat est un repère, il ne constitue pas un diagnostic.
+  </p>
+</div>
+
+<script>
+(function(){
+  // Échelle de réponse (6 points), identique pour les 26 items.
+  const options = ["Jamais","Rarement","Parfois","Souvent","Très souvent","Toujours"];
+
+  // Les 26 items de l'EAT-26, dans l'ordre exact de la source (mentaal.fr/send/eat-26, mode démo).
+  // sub = clé de sous-échelle (académique standard, cohérente avec les maxima 39/18/21 affichés par la source).
+  // reverse = cotation inversée (seul l'item 25).
+  const items = [
+    { text: "Je suis terrifié(e) à l'idée d'être trop gros(se)", sub: 'restriction' },
+    { text: "J'évite de manger quand j'ai faim", sub: 'controle' },
+    { text: "Je suis trop soucieux(se) de la nourriture", sub: 'bulimie' },
+    { text: "J'ai fait des excès alimentaires au cours desquels je pensais ne pas pouvoir m'arrêter", sub: 'bulimie' },
+    { text: "Je découpe mes aliments en petits morceaux", sub: 'controle' },
+    { text: "J'ai conscience de la valeur calorique des aliments quand je mange", sub: 'restriction' },
+    { text: "J'évite particulièrement les aliments tels le sucre, le pain ou les pommes de terre", sub: 'restriction' },
+    { text: "J'ai l'impression que les autres préféreraient que je mange davantage", sub: 'controle' },
+    { text: "Je vomis après avoir mangé", sub: 'bulimie' },
+    { text: "Je me sens très coupable après avoir mangé", sub: 'restriction' },
+    { text: "Le désir d'être plus mince me préoccupe", sub: 'restriction' },
+    { text: "Quand je me dépense physiquement il me vient à l'idée que je brule des calories", sub: 'restriction' },
+    { text: "Les autres pensent que je suis trop mince", sub: 'controle' },
+    { text: "Je suis préoccupé(e) par le fait d'avoir trop de graisse sur le corps", sub: 'restriction' },
+    { text: "Je prends plus de temps que les autres à prendre mes repas", sub: 'controle' },
+    { text: "J'évite de manger des aliments trop sucrés", sub: 'restriction' },
+    { text: "Je mange des aliments diététiques", sub: 'restriction' },
+    { text: "J'ai l'impression que la nourriture domine ma vie", sub: 'bulimie' },
+    { text: "Je parle volontiers de mes capacités à contrôler mon alimentation", sub: 'controle' },
+    { text: "J'ai l'impression que les autres me poussent à manger", sub: 'controle' },
+    { text: "J'accorde trop de temps et je pense trop à la nourriture", sub: 'bulimie' },
+    { text: "Je me sens mal à l'aise après avoir mangé des sucreries", sub: 'restriction' },
+    { text: "Je m'oblige à me mettre à la diète", sub: 'restriction' },
+    { text: "J'aime avoir l'estomac vide", sub: 'restriction' },
+    { text: "J'aime essayer des aliments nouveaux et riches", sub: 'restriction', reverse: true },
+    { text: "Je ressens le besoin de vomir après les repas", sub: 'bulimie' }
+  ];
+
+  const SUBSCALES = [
+    { key:'restriction', name:'Restriction alimentaire', max: 39, desc:"Préoccupation pour la minceur et le contrôle du poids, restriction volontaire de l'alimentation." },
+    { key:'bulimie', name:'Boulimie et préoccupations alimentaires', max: 18, desc:"Pensées intrusives à propos de la nourriture et épisodes de perte de contrôle alimentaire." },
+    { key:'controle', name:'Contrôle alimentaire', max: 21, desc:"Sentiment de pression de l'entourage à manger davantage et comportements de contrôle du repas." }
+  ];
+
+  const answers = new Array(items.length).fill(null);
+  let current = 0;
+
+  const startScreen = document.getElementById('startScreen');
+  const quizScreen = document.getElementById('quizScreen');
+  const startBtn = document.getElementById('startBtn');
+  const qCount = document.getElementById('qCount');
+  const qItem = document.getElementById('qItem');
+  const qOptions = document.getElementById('qOptions');
+  const backBtn = document.getElementById('backBtn');
+  const progressFill = document.getElementById('progressFill');
+  const resultBox = document.getElementById('result');
+
+  // idx : 0=Jamais 1=Rarement 2=Parfois 3=Souvent 4=Très souvent 5=Toujours
+  function pointsFor(idx, reversed){
+    if (reversed){
+      if (idx === 0) return 3;
+      if (idx === 1) return 2;
+      if (idx === 2) return 1;
+      return 0;
+    }
+    if (idx === 5) return 3;
+    if (idx === 4) return 2;
+    if (idx === 3) return 1;
+    return 0;
+  }
+
+  startBtn.addEventListener('click', function(){
+    startScreen.hidden = true;
+    quizScreen.hidden = false;
+    renderQuestion();
+  });
+
+  backBtn.addEventListener('click', function(){
+    if(current > 0){
+      current -= 1;
+      renderQuestion();
+    }
+  });
+
+  function renderQuestion(){
+    qCount.textContent = 'Question ' + (current + 1) + '/' + items.length;
+    qItem.textContent = items[current].text;
+    progressFill.style.width = (((current) / items.length) * 100) + '%';
+    backBtn.hidden = current === 0;
+
+    qOptions.innerHTML = '';
+    options.forEach(function(label, idx){
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'option-btn';
+      btn.textContent = label;
+      if(answers[current] === idx){ btn.classList.add('selected'); }
+      btn.addEventListener('click', function(){ selectAnswer(idx, btn); });
+      qOptions.appendChild(btn);
+    });
+  }
+
+  function selectAnswer(idx, btnEl){
+    answers[current] = idx;
+    Array.from(qOptions.children).forEach(function(b){ b.classList.remove('selected'); });
+    btnEl.classList.add('selected');
+    progressFill.style.width = (((current + 1) / items.length) * 100) + '%';
+
+    setTimeout(function(){
+      if(current < items.length - 1){
+        current += 1;
+        renderQuestion();
+      } else {
+        showResult();
+      }
+    }, 380);
+  }
+
+  function subItems(subKey){
+    return items.map(function(it, i){ return { it: it, idx: i }; }).filter(function(o){ return o.it.sub === subKey; });
+  }
+
+  function scoreForSub(subKey){
+    let total = 0;
+    subItems(subKey).forEach(function(o){ total += pointsFor(answers[o.idx], !!o.it.reverse); });
+    return total;
+  }
+
+  function renderDimBlock(def){
+    const score = scoreForSub(def.key);
+    const block = document.createElement('div');
+    block.className = 'dim-block';
+    block.innerHTML =
+      '<div class="dim-head">' +
+        '<span class="dim-name">' + def.name + '</span>' +
+        '<span class="dim-score">' + score + '/' + def.max + '</span>' +
+      '</div>' +
+      '<p class="dim-desc">' + def.desc + '</p>';
+    return block;
+  }
+
+  function showResult(){
+    quizScreen.hidden = true;
+
+    document.getElementById('passationDate').textContent = new Date().toLocaleString('fr-FR', {day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit'});
+
+    let totalScore = 0;
+    items.forEach(function(it, idx){ totalScore += pointsFor(answers[idx], !!it.reverse); });
+    document.getElementById('scoreTotal').textContent = totalScore;
+
+    document.querySelectorAll('#bandTable tr').forEach(function(tr){
+      const min = parseInt(tr.dataset.min, 10), max = parseInt(tr.dataset.max, 10);
+      if(totalScore >= min && totalScore <= max){
+        tr.classList.add('active');
+        tr.querySelector('td:last-child').insertAdjacentHTML('beforeend', '<span class="band-badge">Score : ' + totalScore + '</span>');
+      }
+    });
+
+    const dimBlocksEl = document.getElementById('dimBlocks');
+    dimBlocksEl.innerHTML = '';
+    SUBSCALES.forEach(function(def){
+      dimBlocksEl.appendChild(renderDimBlock(def));
+    });
+
+    const answersList = document.getElementById('answersList');
+    answersList.innerHTML = '';
+    items.forEach(function(it, idx){
+      const block = document.createElement('div');
+      block.className = 'answer-block';
+      block.innerHTML =
+        '<p class="q-no">Question ' + (idx + 1) + '</p>' +
+        '<p class="item">' + it.text + '</p>' +
+        '<p class="resp">' + options[answers[idx]] + ' <span class="sc">(Score : ' + pointsFor(answers[idx], !!it.reverse) + ')</span></p>';
+      answersList.appendChild(block);
+    });
+
+    resultBox.style.display = 'block';
+    resultBox.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  document.getElementById('downloadBtn').addEventListener('click', function(){
+    window.print();
+  });
+
+  document.getElementById('restartBtn').addEventListener('click', function(){
+    answers.fill(null);
+    current = 0;
+    resultBox.style.display = 'none';
+    startScreen.hidden = false;
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>EAT-26 — Fiche — Cabinet Bouche &amp; Chmura</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  img{max-width:100%}
+  [hidden]{display:none!important}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:920px;margin:0 auto;padding:32px 24px 80px;}
+  .crumb{font-size:12.5px;color:#9A9E90;margin:0 0 22px;}
+  .crumb a{color:#63695D;text-decoration:none;}
+  .crumb a:hover{text-decoration:underline;}
+
+  .layout{display:flex;gap:28px;align-items:flex-start;}
+  .main-col{flex:1;min-width:0;}
+
+  .fiche-head{display:flex;gap:22px;align-items:flex-start;margin-bottom:26px;flex-wrap:wrap;}
+  .fiche-photo{position:relative;width:112px;height:112px;flex-shrink:0;border-radius:14px;overflow:hidden;
+    background:linear-gradient(135deg,#2A4A6B 0%,#1E3A5F 55%,#16283D 100%);}
+  .fiche-photo::before{content:"";position:absolute;width:150px;height:150px;border-radius:50%;
+    background:radial-gradient(circle,rgba(224,196,138,.55),transparent 70%);top:-50px;right:-40px;}
+  .fiche-photo .acronym{position:absolute;left:12px;bottom:10px;font-family:'Cormorant Garamond',Georgia,serif;
+    font-weight:600;font-size:19px;color:#fff;}
+  .fiche-title{flex:1;min-width:220px;}
+  .fiche-title h1{font-size:24px;margin:0 0 14px;}
+  .fiche-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;}
+  .round-btn{width:38px;height:38px;border-radius:50%;background:#F4F1EA;border:1px solid #E0D9C9;
+    display:flex;align-items:center;justify-content:center;cursor:pointer;color:#63695D;font-size:15px;padding:0;}
+  .round-btn.saved{color:#A0824C;}
+
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;transition:opacity .15s ease,background .15s ease,color .15s ease;}
+  .btn:hover{opacity:.85;}
+  .btn-primary{background:#1E3A5F;color:#fff;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-added{background:#E4EEE8;color:#3D6B4F;border-color:#C9DED2;}
+  .btn-added:hover{opacity:1;}
+  .btn[disabled]{cursor:not-allowed;opacity:.55;}
+
+  .desc-text{font-size:15px;color:#3A3E33;margin:0 0 26px;max-width:640px;}
+
+  .meta-list{list-style:none;margin:0 0 32px;padding:0;display:flex;flex-direction:column;gap:9px;max-width:520px;}
+  .meta-list li{display:flex;align-items:center;gap:10px;font-size:13.5px;color:#63695D;}
+  .meta-list .ico{width:18px;text-align:center;flex-shrink:0;}
+  .meta-list a{color:#1E3A5F;font-weight:600;text-decoration:none;}
+  .meta-list a:hover{text-decoration:underline;}
+
+  h2.section{font-size:19px;margin:0 0 14px;padding-top:26px;border-top:1px solid #E0D9C9;}
+  h2.section:first-of-type{border-top:none;padding-top:0;}
+
+  .preview-card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:14px;padding:20px 22px;margin-bottom:14px;}
+  .preview-card .stem{font-size:12.5px;color:#9A9E90;margin:0 0 6px;}
+  .preview-card .item{font-family:'Cormorant Garamond',Georgia,serif;font-size:18px;margin:0 0 16px;}
+  .preview-opts{display:flex;flex-wrap:wrap;gap:8px;}
+  .preview-opts span{font-size:12.5px;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:6px 13px;}
+  .reveal-link{appearance:none;background:none;border:none;font:inherit;color:#1E3A5F;font-weight:700;font-size:13.5px;cursor:pointer;padding:0;}
+  .reveal-link:hover{text-decoration:underline;}
+  .all-questions{list-style:decimal;margin:14px 0 0;padding-left:20px;font-size:13.5px;color:#3A3E33;display:flex;flex-direction:column;gap:8px;}
+
+  .cotation-text{font-size:14px;color:#3A3E33;margin:0 0 16px;max-width:640px;}
+  .band-table{width:100%;max-width:420px;border-collapse:collapse;font-size:13.5px;margin-bottom:16px;}
+  .band-table td{padding:8px 4px;border-bottom:1px solid #E0D9C9;color:#63695D;}
+  .band-table tr:last-child td{border-bottom:none;}
+  .band-table td.range{width:70px;font-weight:600;color:#20241E;}
+  .source-note{font-size:11.5px;color:#9A9E90;margin:0 0 30px;}
+
+  .sendbox{width:296px;flex-shrink:0;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:22px;position:sticky;top:24px;}
+  .sendbox h2.serif{font-size:17px;margin:0 0 16px;padding-top:0;border-top:none;}
+  .sendbox-empty{text-align:center;padding:20px 4px 8px;}
+  .sendbox-empty .mark{width:52px;height:52px;margin:0 auto 14px;border-radius:50%;background:#F4F1EA;display:flex;align-items:center;justify-content:center;font-size:22px;color:#9A9E90;}
+  .sendbox-empty p{font-size:13px;color:#9A9E90;margin:0;}
+  .sendbox-item{display:flex;align-items:center;justify-content:space-between;gap:8px;background:#F4F1EA;border-radius:8px;padding:8px 10px;font-size:13px;font-weight:600;margin-bottom:8px;}
+  .sendbox-item button{appearance:none;border:none;background:none;color:#9A9E90;cursor:pointer;font-size:14px;line-height:1;padding:2px;}
+  .sendbox-item button:hover{color:#B4483C;}
+  .field-label{display:block;font-size:12.5px;font-weight:600;color:#63695D;margin:16px 0 6px;}
+  .field-input{width:100%;font-family:'Inter',sans-serif;font-size:14px;color:#20241E;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:8px;padding:9px 12px;}
+  .field-hint{font-size:11.5px;color:#9A9E90;margin:6px 0 0;}
+  .sendbox .btn-primary{width:100%;justify-content:center;margin-top:14px;}
+  .msg-box{width:100%;font-family:'Inter',sans-serif;font-size:13px;color:#20241E;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:10px;padding:12px;resize:vertical;min-height:132px;margin-top:14px;}
+  .confirm{font-size:12.5px;color:#3D6B4F;margin-top:8px;}
+
+  @media (max-width:760px){
+    .layout{flex-direction:column;}
+    .sendbox{width:100%;position:static;order:-1;}
+  }
+
+  .modal-overlay{position:fixed;inset:0;background:rgba(32,36,30,.5);display:flex;align-items:center;justify-content:center;padding:24px;z-index:20;}
+  .modal-box{background:#fff;border-radius:18px;max-width:360px;width:100%;max-height:88vh;overflow:auto;padding:20px;}
+  .modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+  .modal-head span{font-family:'Cormorant Garamond',Georgia,serif;font-size:18px;}
+  .modal-head button{appearance:none;border:none;background:#F4F1EA;width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:16px;color:#63695D;}
+  .phone-frame{border:8px solid #20241E;border-radius:32px;overflow:hidden;background:#fff;box-shadow:0 20px 40px -18px rgba(20,26,32,.4);}
+  .phone-frame iframe{display:block;width:100%;height:540px;border:none;}
+</style>
+<div class="wrap">
+  <p class="crumb"><a href="index.html">Accueil</a> &rsaquo; <a href="index.html">Questionnaires</a> &rsaquo; EAT-26</p>
+
+  <div class="layout">
+    <div class="main-col">
+
+      <div class="fiche-head">
+        <div class="fiche-photo"><span class="acronym">EAT-26</span></div>
+        <div class="fiche-title">
+          <h1 class="serif">Test des attitudes alimentaires (EAT-26)</h1>
+          <div class="fiche-actions">
+            <button class="btn btn-primary" type="button" data-add>Ajouter à la boîte d'envoi</button>
+            <button class="btn btn-secondary" type="button" data-open-demo>Mode démo</button>
+            <button class="round-btn" type="button" data-bookmark aria-label="Enregistrer dans mes favoris">&#9734;</button>
+          </div>
+        </div>
+      </div>
+
+      <p class="desc-text">Questionnaire de dépistage des attitudes et comportements alimentaires à risque, forme révisée à 26 items. Explore trois dimensions : la restriction alimentaire, les préoccupations boulimiques et le contrôle oral, pour un score total orientant sur une suspicion de trouble du comportement alimentaire.</p>
+
+      <ul class="meta-list">
+        <li><span class="ico">&#10003;</span> 26 questions</li>
+        <li><span class="ico">&#9201;</span> 6 minutes</li>
+        <li><span class="ico">&#127760;</span> Français</li>
+        <li><span class="ico">&#128214;</span> Eating Attitudes Test-26 (EAT-26)</li>
+        <li><span class="ico">&#128100;</span> Adolescent, Adulte</li>
+        <li><span class="ico">&#9997;</span> Garner, Olmsted, Bohr &amp; Garfinkel (1982)</li>
+        <li><span class="ico">&#127991;</span> <a href="index.html">TCA</a></li>
+      </ul>
+
+      <h2 class="serif section">Aperçu des questions</h2>
+      <div class="preview-card">
+        <p class="item">Je suis terrifié(e) à l'idée d'être trop gros(se)</p>
+        <div class="preview-opts">
+          <span>Jamais</span><span>Rarement</span><span>Parfois</span><span>Souvent</span><span>Très souvent</span><span>Toujours</span>
+        </div>
+      </div>
+      <button class="reveal-link" type="button" data-reveal-questions>Voir toutes les questions &rsaquo;</button>
+      <ol class="all-questions" data-all-questions hidden>
+        <li>J'évite de manger quand j'ai faim</li>
+        <li>Je suis trop soucieux(se) de la nourriture</li>
+        <li>J'ai fait des excès alimentaires au cours desquels je pensais ne pas pouvoir m'arrêter</li>
+        <li>Je découpe mes aliments en petits morceaux</li>
+        <li>J'ai conscience de la valeur calorique des aliments quand je mange</li>
+        <li>J'évite particulièrement les aliments tels le sucre, le pain ou les pommes de terre</li>
+        <li>J'ai l'impression que les autres préféreraient que je mange davantage</li>
+        <li>Je vomis après avoir mangé</li>
+        <li>Je me sens très coupable après avoir mangé</li>
+        <li>Le désir d'être plus mince me préoccupe</li>
+        <li>Quand je me dépense physiquement il me vient à l'idée que je brule des calories</li>
+        <li>Les autres pensent que je suis trop mince</li>
+        <li>Je suis préoccupé(e) par le fait d'avoir trop de graisse sur le corps</li>
+        <li>Je prends plus de temps que les autres à prendre mes repas</li>
+        <li>J'évite de manger des aliments trop sucrés</li>
+        <li>Je mange des aliments diététiques</li>
+        <li>J'ai l'impression que la nourriture domine ma vie</li>
+        <li>Je parle volontiers de mes capacités à contrôler mon alimentation</li>
+        <li>J'ai l'impression que les autres me poussent à manger</li>
+        <li>J'accorde trop de temps et je pense trop à la nourriture</li>
+        <li>Je me sens mal à l'aise après avoir mangé des sucreries</li>
+        <li>Je m'oblige à me mettre à la diète</li>
+        <li>J'aime avoir l'estomac vide</li>
+        <li>J'aime essayer des aliments nouveaux et riches</li>
+        <li>Je ressens le besoin de vomir après les repas</li>
+      </ol>
+
+      <h2 class="serif section">Cotations &amp; interprétations</h2>
+      <p class="cotation-text">Chaque item est coté de 0 à 3 selon une échelle en 6 points (0 pour les trois réponses les plus neutres, 1 à 3 pour les réponses les plus extrêmes ; l'item 25 est inversé). Le score est calculé automatiquement à la fin de la passation et remis directement au patient, qui peut le partager avec vous. Il va de 0 à 78 :</p>
+      <table class="band-table">
+        <tr><td class="range">0 – 20</td><td>Faible probabilité de TCA</td></tr>
+        <tr><td class="range">21 – 78</td><td>Suspicion de TCA</td></tr>
+      </table>
+      <p class="cotation-text">Le score se répartit aussi en 3 sous-échelles : Restriction alimentaire (13 items, sur 39), Boulimie et préoccupations alimentaires (6 items, sur 18), Contrôle alimentaire (7 items, sur 21) — clé académique standard (Garner et al., 1982), cohérente avec les maxima affichés par la source consultée. Un score de 21 ou plus au total est le seuil habituellement retenu pour orienter vers un entretien clinique approfondi ; ce résultat reste un repère de dépistage, pas un diagnostic.</p>
+      <p class="source-note">Source : Garner, D. M., Olmsted, M. P., Bohr, Y., &amp; Garfinkel, P. E. (1982). The Eating Attitudes Test: psychometric features and clinical correlates. Psychological Medicine, 12(4), 871-878.</p>
+
+    </div>
+
+    <aside class="sendbox">
+      <h2 class="serif">Boîte d'envoi</h2>
+      <div data-sendbox-body>
+        <div class="sendbox-empty">
+          <div class="mark">＋</div>
+          <p>Ajoutez des questionnaires pour créer un lien à transmettre à un patient.</p>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<div class="modal-overlay" id="demoModal" hidden>
+  <div class="modal-box">
+    <div class="modal-head"><span class="serif">Aperçu du questionnaire</span><button type="button" data-close-demo aria-label="Fermer">&times;</button></div>
+    <div class="phone-frame"><iframe id="demoFrame" title="Aperçu EAT-26"></iframe></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var STORAGE_KEY = 'mentaal_envois_apercu';
+  var TEST_NAME = 'EAT-26';
+  var TEST_LINK = 'eat26.html';
+  var selected = [];
+
+  function loadEnvois(){
+    try{
+      var raw = window.localStorage.getItem(STORAGE_KEY);
+      var list = raw ? JSON.parse(raw) : [];
+      return list.map(function(e){
+        if (e.tests) return e;
+        return { label: e.label, tests: e.test ? [e.test] : [], date: e.date };
+      });
+    }catch(e){ return []; }
+  }
+  function saveEnvois(list){
+    try{ window.localStorage.setItem(STORAGE_KEY, JSON.stringify(list)); }catch(e){}
+  }
+  function escapeHtml(s){
+    return String(s).replace(/[&<>"']/g, function(c){
+      return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];
+    });
+  }
+
+  document.querySelectorAll('[data-bookmark]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      btn.classList.toggle('saved');
+      btn.innerHTML = btn.classList.contains('saved') ? '&#9733;' : '&#9734;';
+    });
+  });
+
+  var revealBtn = document.querySelector('[data-reveal-questions]');
+  var allQuestions = document.querySelector('[data-all-questions]');
+  revealBtn.addEventListener('click', function(){
+    allQuestions.hidden = !allQuestions.hidden;
+    revealBtn.textContent = allQuestions.hidden ? 'Voir toutes les questions ›' : 'Masquer les questions';
+  });
+
+  var demoModal = document.getElementById('demoModal');
+  var demoFrame = document.getElementById('demoFrame');
+  document.querySelector('[data-open-demo]').addEventListener('click', function(){
+    demoFrame.src = TEST_LINK;
+    demoModal.hidden = false;
+  });
+  document.querySelector('[data-close-demo]').addEventListener('click', function(){
+    demoModal.hidden = true;
+    demoFrame.src = '';
+  });
+  demoModal.addEventListener('click', function(e){
+    if (e.target === demoModal){ demoModal.hidden = true; demoFrame.src = ''; }
+  });
+
+  var addBtn = document.querySelector('.fiche-actions [data-add]');
+  addBtn.addEventListener('click', function(){
+    var idx = selected.findIndex(function(s){ return s.test === TEST_NAME; });
+    if (idx === -1){
+      selected.push({ test: TEST_NAME, link: TEST_LINK });
+      addBtn.textContent = 'Ajouté ✓';
+      addBtn.classList.remove('btn-primary'); addBtn.classList.add('btn-added');
+    } else {
+      selected.splice(idx, 1);
+      addBtn.textContent = "Ajouter à la boîte d'envoi";
+      addBtn.classList.remove('btn-added'); addBtn.classList.add('btn-primary');
+    }
+    renderSendbox();
+  });
+
+  function renderSendbox(){
+    var body = document.querySelector('[data-sendbox-body]');
+    if (selected.length === 0){
+      body.innerHTML = '<div class="sendbox-empty"><div class="mark">＋</div>' +
+        '<p>Ajoutez des questionnaires pour créer un lien à transmettre à un patient.</p></div>';
+      return;
+    }
+    var html = '';
+    selected.forEach(function(s, i){
+      html += '<div class="sendbox-item"><span>' + escapeHtml(s.test) + '</span>' +
+        '<button type="button" data-remove-selected="' + i + '" aria-label="Retirer">&times;</button></div>';
+    });
+    html += '<label class="field-label">Repère patient</label>' +
+      '<input class="field-input" data-patient-label type="text" placeholder="Prénom ou initiales">' +
+      '<p class="field-hint">Reste uniquement dans ce navigateur. Le lien envoyé ne contient aucune information sur le patient.</p>' +
+      '<button class="btn btn-primary" type="button" data-generate>Créer le message</button>' +
+      '<textarea class="msg-box" data-message hidden readonly></textarea>' +
+      '<p class="confirm" data-confirm hidden>Enregistré dans « Mes patients ».</p>' +
+      '<button class="btn btn-secondary" type="button" data-reset hidden>Nouvel envoi</button>';
+    body.innerHTML = html;
+
+    body.querySelectorAll('[data-remove-selected]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var i = parseInt(btn.getAttribute('data-remove-selected'), 10);
+        selected.splice(i, 1);
+        addBtn.textContent = "Ajouter à la boîte d'envoi";
+        addBtn.classList.remove('btn-added'); addBtn.classList.add('btn-primary');
+        renderSendbox();
+      });
+    });
+
+    body.querySelector('[data-generate]').addEventListener('click', function(){
+      var input = body.querySelector('[data-patient-label]');
+      var label = (input.value || '').trim();
+      if (!label){ input.focus(); return; }
+
+      var lines = selected.map(function(s){ return '- ' + s.test + ' : ' + s.link; });
+      var message = 'Bonjour,\n\n' +
+        'Comme convenu, voici le' + (selected.length > 1 ? 's liens' : ' lien') + ' pour compléter, à votre rythme :\n' +
+        lines.join('\n') + '\n\n' +
+        'Cela prend quelques minutes. Une fois terminé, vous pourrez télécharger votre fiche de résultat directement.\n\n' +
+        'À bientôt,\n' +
+        'Cabinet Bouche & Chmura';
+
+      var box = body.querySelector('[data-message]');
+      box.value = message;
+      box.hidden = false;
+
+      var list = loadEnvois();
+      list.push({ label: label, tests: selected.map(function(s){ return s.test; }), date: new Date().toISOString() });
+      saveEnvois(list);
+
+      body.querySelector('[data-confirm]').hidden = false;
+      input.setAttribute('disabled', 'disabled');
+      body.querySelector('[data-generate]').hidden = true;
+      body.querySelectorAll('[data-remove-selected]').forEach(function(btn){ btn.setAttribute('disabled', 'disabled'); });
+      var resetBtn = body.querySelector('[data-reset]');
+      resetBtn.hidden = false;
+      resetBtn.addEventListener('click', function(){ renderSendbox(); });
+
+      addBtn.textContent = "Ajouter à la boîte d'envoi";
+      addBtn.classList.remove('btn-added'); addBtn.classList.add('btn-primary');
+      selected = [];
+    });
+  }
+})();
+</script>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

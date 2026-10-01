@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>COPSOQ - Questionnaire d'évaluation des risques psychosociaux</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#3D5A73;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .domain-label{font-size:12px;font-weight:700;color:#3D5A73;text-transform:uppercase;letter-spacing:.06em;margin:0 0 6px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#3D5A73;background:#E6ECF1;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#3D5A73;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .domain-block{margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid #E0D9C9;}
+  .domain-block:last-of-type{border-bottom:none;}
+  .domain-title{font-size:13px;font-weight:700;color:#3D5A73;text-transform:uppercase;letter-spacing:.04em;margin:0 0 8px;}
+  .sub-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;font-size:13.5px;}
+  .sub-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:18px;color:#3D5A73;}
+  .caveat{font-size:12.5px;color:#8A5A3B;background:#F1E7DD;border-radius:10px;padding:12px 14px;margin:0 0 18px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">COPSOQ - Risques psychosociaux</h1>
+    <p class="lead">Copenhagen Psychosocial Questionnaire. 46 questions sur le vécu au travail, réparties en 6 domaines et 24 sous-échelles.</p>
+    <div class="pill-row">
+      <span class="pill">46 questions</span>
+      <span class="pill">11 minutes</span>
+      <span class="pill">6 domaines</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="domain-label" id="domain-label"></p>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div class="caveat">Chaque sous-échelle est convertie sur 0-100 (score brut moyen des items, transformé selon la méthodologie COPSOQ). Seule l'inversion de l'item 2 (indiquée explicitement par la source pour la dimension Charge de travail) a été appliquée : aucune autre inversion n'a été supposée. Les moyennes françaises de référence par sous-échelle n'ont pas été retranscrites intégralement à la construction : ces scores sont donc des repères descriptifs, pas des classements par rapport à une norme.</div>
+    <div id="domain-list"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">COPSOQ — Copenhagen Psychosocial Questionnaire (Kristensen, T. S., Hannerz, H., Høgh, A., &amp; Borg, V., 2001), version française validée (Santé Publique, 2012). Ce résultat est un repère, il ne constitue pas un diagnostic et ne remplace pas une évaluation complète des conditions de travail.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var SCALE_MESURE = ["Dans une très grande mesure","Dans une grande mesure","Plus ou moins","Dans une faible mesure","Dans une très faible mesure"];
+  var SCALE_A = ["Toujours","Souvent","Parfois","Rarement","Presque jamais/Jamais"];
+  var SCALE_B = ["Tout le temps","Très souvent","Parfois","Très peu souvent","Jamais"];
+  var SCALE_SANTE = ["Excellente/Très bonne","Bonne","Assez bonne","Plutôt mauvaise","Mauvaise"];
+  var SCALE_SATIS = ["Très satisfait(e)","Satisfait(e)","Insatisfait(e)","Très insatisfait(e)"];
+  var SCORE5 = [100,75,50,25,0];
+  var SCORE4 = [100, 200/3, 100/3, 0];
+
+  var domains = [
+    { name:"Contraintes quantitatives", subs:["charge","rythme","exigCognitives"] },
+    { name:"Organisations et leadership", subs:["previsibilite","reconnaissance","equite","clarteRoles","conflitRoles","leadership","soutienSuperieur","confianceManagement"] },
+    { name:"Relations horizontales", subs:["confianceCollegues","soutienCollegues"] },
+    { name:"Autonomie", subs:["margeManoeuvre","epanouissement"] },
+    { name:"Santé et bien-être", subs:["santeAutoEvaluee","stress","epuisement","exigEmotionnelles","conflitFamilleTravail","insecurite"] },
+    { name:"Vécu professionnel", subs:["sensTravail","engagement","satisfaction"] }
+  ];
+  var subLabels = {
+    charge:"Charge de travail", rythme:"Rythme de travail", exigCognitives:"Exigences cognitives",
+    previsibilite:"Prévisibilité", reconnaissance:"Reconnaissance", equite:"Équité",
+    clarteRoles:"Clarté des rôles", conflitRoles:"Conflit de rôles",
+    leadership:"Qualité de leadership du supérieur", soutienSuperieur:"Soutien social du supérieur",
+    confianceManagement:"Confiance salariés-management", confianceCollegues:"Confiance entre collègues",
+    soutienCollegues:"Soutien social des collègues", margeManoeuvre:"Marge de manœuvre",
+    epanouissement:"Possibilités d'épanouissement", santeAutoEvaluee:"Santé auto-évaluée",
+    stress:"Stress", epuisement:"Épuisement", exigEmotionnelles:"Exigences émotionnelles",
+    conflitFamilleTravail:"Conflit famille/travail", insecurite:"Insécurité professionnelle",
+    sensTravail:"Sens du travail", engagement:"Engagement dans l'entreprise", satisfaction:"Satisfaction au travail"
+  };
+
+  var items = [
+    {n:1, sub:'charge', scale:SCALE_A, text:"Prenez-vous du retard dans votre travail ?"},
+    {n:2, sub:'charge', scale:SCALE_MESURE, text:"Disposez-vous d'un temps suffisant pour accomplir vos tâches professionnelles ?", invert:true},
+    {n:3, sub:'rythme', scale:SCALE_MESURE, text:"Travaillez-vous à une cadence élevée tout au long de la journée ?"},
+    {n:4, sub:'rythme', scale:SCALE_MESURE, text:"Est-il nécessaire de maintenir un rythme soutenu au travail ?"},
+    {n:5, sub:'exigCognitives', scale:SCALE_A, text:"Durant votre travail, devez-vous avoir l'œil sur beaucoup de choses ?"},
+    {n:6, sub:'exigCognitives', scale:SCALE_A, text:"Votre travail exige-t-il que vous vous souveniez de beaucoup de choses ?"},
+    {n:7, sub:'previsibilite', scale:SCALE_MESURE, text:"Au travail, êtes-vous informé(e) suffisamment à l'avance au sujet par exemple de décisions importantes, de changements ou de projets futurs ?"},
+    {n:8, sub:'previsibilite', scale:SCALE_MESURE, text:"Recevez-vous toutes les informations dont vous avez besoin pour bien faire votre travail ?"},
+    {n:9, sub:'reconnaissance', scale:SCALE_MESURE, text:"Votre travail est-il reconnu et apprécié par le management ?"},
+    {n:10, sub:'equite', scale:SCALE_MESURE, text:"Êtes-vous traité(e) équitablement au travail ?"},
+    {n:11, sub:'equite', scale:SCALE_MESURE, text:"Les conflits sont-ils résolus de manière équitable ?"},
+    {n:12, sub:'equite', scale:SCALE_MESURE, text:"Le travail est-il réparti équitablement ?"},
+    {n:13, sub:'clarteRoles', scale:SCALE_MESURE, text:"Votre travail a-t-il des objectifs clairs ?"},
+    {n:14, sub:'clarteRoles', scale:SCALE_MESURE, text:"Savez-vous exactement ce que l'on attend de vous au travail ?"},
+    {n:15, sub:'conflitRoles', scale:SCALE_MESURE, text:"Au travail, êtes-vous soumis(e) à des demandes contradictoires ?"},
+    {n:16, sub:'conflitRoles', scale:SCALE_MESURE, text:"Devez-vous parfois faire des choses qui auraient dû être faites autrement ?"},
+    {n:17, sub:'leadership', scale:SCALE_MESURE, text:"Dans quelle mesure diriez-vous que votre supérieur(e) hiérarchique accorde une grande priorité à la satisfaction au travail ?"},
+    {n:18, sub:'leadership', scale:SCALE_MESURE, text:"Dans quelle mesure diriez-vous que votre supérieur(e) hiérarchique est compétent(e) dans la planification du travail ?"},
+    {n:19, sub:'soutienSuperieur', scale:SCALE_A, text:"À quelle fréquence votre supérieur(e) hiérarchique est-il(elle) disposé(e) à vous écouter au sujet de vos problèmes au travail ?"},
+    {n:20, sub:'soutienSuperieur', scale:SCALE_A, text:"À quelle fréquence recevez-vous de l'aide et du soutien de votre supérieur(e) hiérarchique ?"},
+    {n:21, sub:'confianceManagement', scale:SCALE_MESURE, text:"Le management fait-il confiance aux salariés quant à leur capacité à bien faire leur travail ?"},
+    {n:22, sub:'confianceManagement', scale:SCALE_MESURE, text:"Pouvez-vous faire confiance aux informations venant du management ?"},
+    {n:23, sub:'confianceCollegues', scale:SCALE_MESURE, text:"Y a-t-il une bonne coopération entre les collègues au travail ?"},
+    {n:24, sub:'confianceCollegues', scale:SCALE_MESURE, text:"Dans l'ensemble, les salariés se font-ils confiance entre eux ?"},
+    {n:25, sub:'soutienCollegues', scale:SCALE_A, text:"À quelle fréquence recevez-vous de l'aide et du soutien de vos collègues ?"},
+    {n:26, sub:'soutienCollegues', scale:SCALE_A, text:"À quelle fréquence vos collègues se montrent-ils à l'écoute de vos problèmes au travail ?"},
+    {n:27, sub:'margeManoeuvre', scale:SCALE_MESURE, text:"Avez-vous une grande marge de manœuvre dans votre travail ?"},
+    {n:28, sub:'margeManoeuvre', scale:SCALE_MESURE, text:"Pouvez-vous intervenir sur la quantité de travail qui vous est attribuée ?"},
+    {n:29, sub:'epanouissement', scale:SCALE_MESURE, text:"Votre travail nécessite-t-il que vous preniez des initiatives ?"},
+    {n:30, sub:'epanouissement', scale:SCALE_MESURE, text:"Votre travail vous donne-t-il la possibilité d'apprendre des choses nouvelles ?"},
+    {n:31, sub:'santeAutoEvaluee', scale:SCALE_SANTE, text:"En général, diriez-vous que votre santé est :"},
+    {n:32, sub:'stress', scale:SCALE_B, text:"À quelle fréquence avez-vous été irritable ?"},
+    {n:33, sub:'stress', scale:SCALE_B, text:"À quelle fréquence avez-vous été stressé(e) ?"},
+    {n:34, sub:'epuisement', scale:SCALE_B, text:"À quelle fréquence vous êtes-vous senti(e) à bout de force ?"},
+    {n:35, sub:'epuisement', scale:SCALE_B, text:"À quelle fréquence avez-vous été émotionnellement épuisé(e) ?"},
+    {n:36, sub:'exigEmotionnelles', scale:SCALE_MESURE, text:"Votre travail vous place-t-il dans des situations déstabilisantes sur le plan émotionnel ?"},
+    {n:37, sub:'exigEmotionnelles', scale:SCALE_MESURE, text:"Votre travail est-il éprouvant sur le plan émotionnel ?"},
+    {n:38, sub:'conflitFamilleTravail', scale:SCALE_MESURE, text:"Sentez-vous que votre travail vous prend tellement d'énergie que cela a un impact négatif sur votre vie privée ?"},
+    {n:39, sub:'conflitFamilleTravail', scale:SCALE_MESURE, text:"Sentez-vous que votre travail vous prend tellement de temps que cela a un impact négatif sur votre vie privée ?"},
+    {n:40, sub:'insecurite', scale:SCALE_MESURE, text:"Êtes-vous inquiet(ète) à l'idée de perdre votre emploi ?"},
+    {n:41, sub:'insecurite', scale:SCALE_MESURE, text:"Craignez-vous d'être muté(e) à un autre poste de travail contre votre volonté ?"},
+    {n:42, sub:'sensTravail', scale:SCALE_MESURE, text:"Votre travail a-t-il du sens pour vous ?"},
+    {n:43, sub:'sensTravail', scale:SCALE_MESURE, text:"Avez-vous le sentiment que le travail que vous faites est important ?"},
+    {n:44, sub:'engagement', scale:SCALE_MESURE, text:"Recommanderiez-vous à un ami proche de postuler sur un emploi dans votre entreprise ?"},
+    {n:45, sub:'engagement', scale:SCALE_MESURE, text:"Pensez-vous que votre entreprise est d'une grande importance pour vous ?"},
+    {n:46, sub:'satisfaction', scale:SCALE_SATIS, text:"À quel point êtes-vous satisfait(e) de votre travail dans son ensemble, en prenant en considération tous les aspects ?"}
+  ];
+
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function renderQuestion(){
+    var it = items[idx];
+    document.getElementById('domain-label').textContent = domainForSub(it.sub);
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = it.n + '. ' + it.text;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    it.scale.forEach(function(label, v){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === v ? ' selected' : '');
+      d.textContent = label;
+      d.addEventListener('click', function(){
+        answers[idx] = v;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  function domainForSub(sub){
+    for (var i=0;i<domains.length;i++){
+      if (domains[i].subs.indexOf(sub) !== -1) return domains[i].name;
+    }
+    return '';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function itemScore(it){
+    var v = answers[items.indexOf(it)];
+    if (v === null || v === undefined) return null;
+    var score = (it.scale.length === 4) ? SCORE4[v] : SCORE5[v];
+    if (it.invert) score = 100 - score;
+    return score;
+  }
+
+  function subScore(sub){
+    var scored = items.filter(function(it){ return it.sub === sub; }).map(itemScore).filter(function(v){ return v !== null; });
+    if (!scored.length) return null;
+    return Math.round(scored.reduce(function(a,b){ return a+b; },0) / scored.length);
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var list = document.getElementById('domain-list');
+    list.innerHTML = '';
+    domains.forEach(function(dom){
+      var block = document.createElement('div');
+      block.className = 'domain-block';
+      var html = '<p class="domain-title">' + dom.name + '</p>';
+      dom.subs.forEach(function(sub){
+        var s = subScore(sub);
+        html += '<div class="sub-row"><span>' + subLabels[sub] + '</span><span class="sub-score">' + (s === null ? '—' : s + ' / 100') + '</span></div>';
+      });
+      block.innerHTML = html;
+      list.appendChild(block);
+    });
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>COPSOQ - Questionnaire d'évaluation des risques psychosociaux</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#3D5A73 0%,#7699B0 55%,#1E2E3D 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(220,230,240,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#1E2E3D;background:#E6ECF1;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .caveat{font-size:13px;color:#8A5A3B;background:#F1E7DD;border-radius:10px;padding:12px 14px;margin:0 0 14px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#3D5A73;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#1E2E3D;border-color:#E0D9C9;}
+  .preview-card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:14px;padding:20px 22px;margin-bottom:14px;}
+  .preview-q{font-size:14.5px;font-weight:600;margin:0 0 10px;}
+  table.domains{width:100%;border-collapse:collapse;font-size:13.5px;margin:0 0 12px;}
+  table.domains th, table.domains td{text-align:left;padding:8px 10px;border-bottom:1px solid #E0D9C9;}
+  table.domains th{font-size:12px;color:#63695D;text-transform:uppercase;letter-spacing:.03em;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">COPSOQ</span></div>
+
+  <h1 class="serif">Questionnaire d'évaluation des risques psychosociaux (COPSOQ)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Copenhagen Psychosocial Questionnaire — Kristensen, T. S., Hannerz, H., Høgh, A., &amp; Borg, V. (2001), version française validée (Santé Publique, 2012)</p>
+  <div class="meta-row">
+    <span class="pill">46 questions</span>
+    <span class="pill">11 minutes</span>
+    <span class="pill">Auto-administré</span>
+    <span class="pill">Adulte</span>
+    <span class="pill">Français</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="copsoq.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le COPSOQ évalue les risques psychosociaux liés au travail à travers 46 questions réparties en 6 domaines et 24 sous-échelles (le décompte de 23 mentionné par la fiche source ne correspond pas à son propre détail domaine par domaine, qui totalise exactement les 46 items) : contraintes quantitatives, organisation et leadership, relations horizontales, autonomie, santé et bien-être, vécu professionnel. Instrument académique international très largement diffusé (réseau COPSOQ international, copsoq-network.org), norme française publiée.</p>
+    <p class="source-note">Aucun signal de propriété exclusive ni de licence commerciale identifié — usage libre en recherche et en pratique clinique/organisationnelle.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Domaines et sous-échelles</h2>
+    <table class="domains">
+      <tr><th>Domaine</th><th>Sous-échelles</th></tr>
+      <tr><td>Contraintes quantitatives</td><td>Charge de travail, Rythme de travail, Exigences cognitives</td></tr>
+      <tr><td>Organisations et leadership</td><td>Prévisibilité, Reconnaissance, Équité, Clarté des rôles, Conflit de rôles, Qualité de leadership du supérieur, Soutien social du supérieur, Confiance salariés-management</td></tr>
+      <tr><td>Relations horizontales</td><td>Confiance entre collègues, Soutien social des collègues</td></tr>
+      <tr><td>Autonomie</td><td>Marge de manœuvre, Possibilités d'épanouissement</td></tr>
+      <tr><td>Santé et bien-être</td><td>Santé auto-évaluée, Stress, Épuisement, Exigences émotionnelles, Conflit famille/travail, Insécurité professionnelle</td></tr>
+      <tr><td>Vécu professionnel</td><td>Sens du travail, Engagement dans l'entreprise, Satisfaction au travail</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Aperçu</h2>
+    <div class="preview-card">
+      <p class="preview-q">1. Prenez-vous du retard dans votre travail ?</p>
+      <p class="source-note">Échelle : Toujours / Souvent / Parfois / Rarement / Presque jamais/Jamais. Les échelles de réponse varient selon les items (fréquence, mesure, santé, satisfaction) — détail complet dans le questionnaire.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <div class="caveat">Chaque item est converti sur une échelle 0-100. Le score d'une sous-échelle est la moyenne des items qui la composent. Seule l'inversion de l'item 2 (« Disposez-vous d'un temps suffisant... ? ») avant le calcul de la dimension Charge de travail est appliquée, comme l'indique explicitement la source : aucune autre inversion n'a été supposée par prudence. Les moyennes françaises de référence par sous-échelle, mentionnées par la fiche source mais non retranscrites intégralement lors du sourçage, ne sont pas utilisées ici : les scores obtenus sont des repères descriptifs (0-100), pas un positionnement par rapport à une norme.</div>
+    <p>Pour les dimensions-problèmes (ex. charge de travail, stress), un score élevé traduit généralement un niveau plus élevé de la contrainte. Pour les dimensions-ressources (ex. autonomie, soutien social), un score élevé traduit généralement une ressource plus disponible. Le COPSOQ ne publie pas de seuil clinique universel.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source</h2>
+    <p class="source-note">Kristensen, T. S., Hannerz, H., Høgh, A., &amp; Borg, V. (2001). COPSOQ — Copenhagen Psychosocial Questionnaire. Version française validée publiée dans Santé Publique (2012). Ce résultat est un repère, il ne constitue pas un diagnostic et ne remplace pas une évaluation complète des conditions de travail.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

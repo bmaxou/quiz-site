@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ASEX — Arizona Sexual Experience Scale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#3E6B52;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .sec{font-size:12.5px;color:#63695D;background:#F4F1EA;border-radius:8px;padding:8px 12px;margin:0 0 16px;}
+  .q-text{font-size:16px;margin:0 0 6px;}
+  .q-desc{font-size:13px;color:#63695D;margin:0 0 18px;white-space:pre-line;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#3E6B52;background:#E3EFE7;}
+  .num-row{display:flex;flex-wrap:wrap;gap:6px;}
+  .num{min-width:44px;text-align:center;padding:10px 0;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600;background:#fff;}
+  .num.selected{border-color:#3E6B52;background:#E3EFE7;}
+  .num-ends{display:flex;justify-content:space-between;gap:12px;font-size:12px;color:#63695D;margin-top:8px;}
+  .vas-box{padding:8px 0;}
+  .vas-val{font-family:'Cormorant Garamond',Georgia,serif;font-size:40px;color:#3E6B52;margin:0 0 6px;}
+  .vas-box input[type=range]{width:100%;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#3E6B52;border-color:#E0D9C9;}
+  .btn-primary{background:#3E6B52;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:40px;color:#3E6B52;margin:0 0 4px;}
+  .result-max{font-size:13px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 14px;}
+  .result-list{font-size:14px;margin:0 0 16px;padding-left:20px;}
+  .result-list li{margin-bottom:4px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">ASEX — Arizona Sexual Experience Scale</h1>
+    <p class="lead">Cinq questions sur le désir sexuel, l'excitation, l'érection ou la lubrification vaginale, l'orgasme et la satisfaction orgasmique. Chaque réponse est cotée de 1 à 6 : plus le total est élevé, plus la difficulté sexuelle rapportée est importante.</p>
+    <p class="lang-note">Version française transcrite depuis l'annexe de la validation française (Briki et al., 2014).</p>
+    <div class="pill-row">
+      <span class="pill">5 questions</span>
+      <span class="pill">2 minutes</span>
+      <span class="pill">Échelle 1-6</span>
+      <span class="pill">Français</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="sec" id="sec-text" hidden></p>
+    <p class="q-text" id="q-text"></p>
+    <p class="q-desc" id="q-desc"></p>
+    <div id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">McGahuey C.A., Gelenberg A.J., Laukes C.A. et al. (2000). The Arizona Sexual Experience Scale (ASEX): reliability and validity. Journal of Sex &amp; Marital Therapy, 26(1), 25-40. Version française : Briki M. et al. (2014), L'Encéphale, 40(2), 114-122. Ce résultat est un repère, il ne constitue pas un diagnostic.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [
+ {
+  "t": "Comment sont vos « pulsions » sexuelles (désir sexuel) ?",
+  "opts": [
+   [
+    1,
+    "Extrêmement fortes"
+   ],
+   [
+    2,
+    "Très fortes"
+   ],
+   [
+    3,
+    "Assez fortes"
+   ],
+   [
+    4,
+    "Assez faibles"
+   ],
+   [
+    5,
+    "Très faibles"
+   ],
+   [
+    6,
+    "Absentes"
+   ]
+  ]
+ },
+ {
+  "t": "Avec quelle facilité êtes-vous excité(e) sexuellement ?",
+  "opts": [
+   [
+    1,
+    "Extrêmement facilement"
+   ],
+   [
+    2,
+    "Très facilement"
+   ],
+   [
+    3,
+    "Assez facilement"
+   ],
+   [
+    4,
+    "Assez difficilement"
+   ],
+   [
+    5,
+    "Très difficilement"
+   ],
+   [
+    6,
+    "Jamais"
+   ]
+  ]
+ },
+ {
+  "t": "Item 3 (deux formulations, répondez à celle qui vous concerne)",
+  "d": "Version homme : Pouvez-vous facilement avoir et garder une érection durant l'excitation sexuelle ?\nVersion femme : Avec quelle facilité se fait la lubrification vaginale durant l'excitation sexuelle ?",
+  "opts": [
+   [
+    1,
+    "Extrêmement facilement"
+   ],
+   [
+    2,
+    "Très facilement"
+   ],
+   [
+    3,
+    "Assez facilement"
+   ],
+   [
+    4,
+    "Assez difficilement"
+   ],
+   [
+    5,
+    "Très difficilement"
+   ],
+   [
+    6,
+    "Jamais"
+   ]
+  ]
+ },
+ {
+  "t": "Avec quelle facilité pouvez-vous avoir un orgasme ?",
+  "opts": [
+   [
+    1,
+    "Extrêmement facilement"
+   ],
+   [
+    2,
+    "Très facilement"
+   ],
+   [
+    3,
+    "Assez facilement"
+   ],
+   [
+    4,
+    "Assez difficilement"
+   ],
+   [
+    5,
+    "Très difficilement"
+   ],
+   [
+    6,
+    "Jamais"
+   ]
+  ]
+ },
+ {
+  "t": "Vos orgasmes sont-ils satisfaisants ?",
+  "opts": [
+   [
+    1,
+    "Extrêmement satisfaisants"
+   ],
+   [
+    2,
+    "Très satisfaisants"
+   ],
+   [
+    3,
+    "Assez satisfaisants"
+   ],
+   [
+    4,
+    "Assez insatisfaisants"
+   ],
+   [
+    5,
+    "Très insatisfaisants"
+   ],
+   [
+    6,
+    "Jamais"
+   ]
+  ]
+ }
+];
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+  var RESULT = function(a){
+    var tot = 0, ge5 = 0, ge4 = 0;
+    a.forEach(function(v){ tot += v; if (v >= 5) ge5++; if (v >= 4) ge4++; });
+    var fr = tot >= 18;
+    var orig = tot >= 19 || ge5 >= 1 || ge4 >= 3;
+    return '<p class="result-score">' + tot + ' / 30</p>' +
+      '<p class="result-max">score total (5 à 30) : plus il est élevé, plus la dysfonction sexuelle rapportée est marquée</p>' +
+      '<ul class="result-list">' +
+      '<li>Seuil de la validation française (patients déprimés, Briki et al., 2014) : score total ≥ 18 — <strong>' + (fr ? 'atteint' : 'non atteint') + '</strong>.</li>' +
+      '<li>Critères de l\'échelle originale (McGahuey et al., 2000) : total ≥ 19, ou au moins un item ≥ 5, ou au moins trois items ≥ 4 — <strong>' + (orig ? 'réunis' : 'non réunis') + '</strong>.</li>' +
+      '</ul>' +
+      '<p class="result-text">Ce résultat est un repère de dépistage : il ne remplace pas un entretien clinique sexologique ni la recherche d\'une cause médicamenteuse, organique ou relationnelle.</p>';
+  };
+
+  function vis(i){
+    var c = items[i].cond;
+    return !c || answers[c[0]] === c[1];
+  }
+  function step(i, dir){
+    var j = i + dir;
+    while (j >= 0 && j < items.length && !vis(j)) j += dir;
+    return j;
+  }
+  function visCount(){ var n = 0; for (var i = 0; i < items.length; i++) if (vis(i)) n++; return n; }
+  function visRank(i){ var n = 0; for (var k = 0; k <= i; k++) if (vis(k)) n++; return n; }
+  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+
+  function renderQuestion(){
+    var it = items[idx];
+    document.getElementById('progress-text').textContent = 'Question ' + visRank(idx) + ' / ' + visCount();
+    var secEl = document.getElementById('sec-text');
+    if (it.sec){ secEl.textContent = it.sec; secEl.hidden = false; } else { secEl.hidden = true; }
+    document.getElementById('q-text').textContent = it.t;
+    document.getElementById('q-desc').textContent = it.d || '';
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    if (it.kind === 'num'){
+      var nr = document.createElement('div'); nr.className = 'num-row';
+      for (var v = it.min; v <= it.max; v++){
+        (function(v){
+          var b = document.createElement('div');
+          b.className = 'num' + (answers[idx] === v ? ' selected' : '');
+          b.textContent = v;
+          b.addEventListener('click', function(){ answers[idx] = v; renderQuestion(); });
+          nr.appendChild(b);
+        })(v);
+      }
+      row.appendChild(nr);
+      var ends = document.createElement('div'); ends.className = 'num-ends';
+      ends.innerHTML = '<span>' + esc(it.lo) + '</span><span style="text-align:right">' + esc(it.hi) + '</span>';
+      row.appendChild(ends);
+    } else if (it.kind === 'vas'){
+      var box = document.createElement('div'); box.className = 'vas-box';
+      var cur = answers[idx] === null ? 50 : answers[idx];
+      box.innerHTML = '<p class="vas-val" id="vas-val">' + (answers[idx] === null ? '—' : answers[idx]) + '</p>' +
+        '<input type="range" id="vas-range" min="' + it.min + '" max="' + it.max + '" step="1" value="' + cur + '" aria-label="Échelle visuelle analogique">' +
+        '<div class="num-ends"><span>' + esc(it.lo) + '</span><span style="text-align:right">' + esc(it.hi) + '</span></div>' +
+        '<p class="q-desc" style="margin-top:14px">Déplacez le curseur (ou utilisez les flèches du clavier) jusqu\'à la valeur qui correspond à votre état de santé aujourd\'hui.</p>';
+      row.appendChild(box);
+      var rg = document.getElementById('vas-range');
+      function setV(){
+        answers[idx] = parseInt(rg.value, 10);
+        document.getElementById('vas-val').textContent = answers[idx];
+        document.getElementById('btn-next').disabled = false;
+      }
+      rg.addEventListener('input', setV);
+      rg.addEventListener('change', setV);
+      rg.addEventListener('click', setV);
+    } else {
+      var list = document.createElement('div'); list.className = 'opt-row';
+      it.opts.forEach(function(pair){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx] === pair[0] ? ' selected' : '');
+        d.textContent = pair[1];
+        d.addEventListener('click', function(){ answers[idx] = pair[0]; renderQuestion(); });
+        list.appendChild(d);
+      });
+      row.appendChild(list);
+    }
+    document.getElementById('btn-prev').disabled = step(idx, -1) < 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = step(idx, 1) >= items.length ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    var j = step(idx, -1);
+    if (j >= 0){ idx = j; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    var j = step(idx, 1);
+    if (j < items.length){ idx = j; renderQuestion(); } else { showResult(); }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var a = answers.map(function(v, i){ return vis(i) ? v : null; });
+    document.getElementById('result-body').innerHTML = RESULT(a);
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ASEX — Arizona Sexual Experience Scale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#3E5C4A 0%,#6E9A7E 55%,#233829 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,210,.40),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#3E6B52;background:#E3EFE7;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .section ul{font-size:14.5px;margin:0 0 10px;padding-left:20px;}
+  .section li{margin-bottom:4px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#3E6B52;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#3E6B52;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <div class="fiche-photo"><span class="acronym">ASEX</span></div>
+  <h1 class="serif">Arizona Sexual Experience Scale (ASEX)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">McGahuey C.A., Gelenberg A.J., Laukes C.A. et al. (2000) — version française validée : Briki M. et al. (2014)</p>
+  <div class="meta-row">
+    <span class="pill">5 questions</span>
+    <span class="pill">2 minutes</span>
+    <span class="pill">Échelle 1-6</span>
+    <span class="pill">Adulte</span>
+    <span class="pill">Français</span>
+    <span class="pill">Licence requise : oui</span>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" href="asex.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>L'ASEX est une échelle d'auto-évaluation très brève qui quantifie cinq dimensions de la réponse sexuelle : intensité du désir, facilité de l'excitation, réponse physiologique (érection chez l'homme, lubrification vaginale chez la femme), facilité à atteindre l'orgasme et satisfaction orgasmique. Elle est particulièrement utilisée pour repérer les dysfonctions sexuelles associées à la dépression ou à ses traitements.</p>
+    <p>L'item 3 existe en deux formulations (homme / femme) ; le questionnaire les affiche ensemble et la personne répond à celle qui la concerne.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Les 5 items</h2>
+    <ul>
+      <li>Désir sexuel (pulsions)</li>
+      <li>Excitation sexuelle</li>
+      <li>Érection (homme) ou lubrification vaginale (femme)</li>
+      <li>Facilité à avoir un orgasme</li>
+      <li>Satisfaction des orgasmes</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque item est coté de 1 (réponse la plus favorable) à 6 (réponse la plus défavorable : « Absentes », « Jamais »). Score total de 5 à 30 ; plus il est élevé, plus la dysfonction est importante.</p>
+    <p>Seuil retenu par la validation française chez des patients déprimés : score total ≥ 18 (sensibilité 70 %, spécificité 95,5 % d'après la publication). Critères habituellement rapportés pour l'échelle originale : total ≥ 19, ou au moins un item coté ≥ 5, ou au moins trois items cotés ≥ 4 (critères de l'échelle originale rapportés dans la littérature, non revérifiés à la source primaire pour cette page).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p>McGahuey C.A. et al. (2000). The Arizona Sexual Experience Scale (ASEX): reliability and validity. <em>Journal of Sex &amp; Marital Therapy</em>, 26(1), 25-40. Briki M. et al. (2014). Validation française de l'échelle psychométrique ASEX d'évaluation des troubles sexuels dans la dépression. <em>L'Encéphale</em>, 40(2), 114-122.</p>
+    <p class="source-note"><strong>Licence requise : oui.</strong> Autorisation obtenue auprès de l'Université d'Arizona par les auteurs de la validation française avant traduction, aucun frais systématique documenté. Construit malgré tout sur décision du cabinet (30/09/2026). Outil de repérage, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

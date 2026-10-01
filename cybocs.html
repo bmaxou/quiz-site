@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CY-BOCS — Échelle d'obsession-compulsion de Yale-Brown, version enfant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 24px;}
+  .progress-track{height:6px;background:#E0D9C9;border-radius:99px;overflow:hidden;margin-bottom:28px;}
+  .progress-fill{height:100%;background:#5B2E7A;border-radius:99px;transition:width .25s ease;}
+  .qnum{font-size:12px;font-weight:700;color:#5B2E7A;letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center;}
+  .subscale-tag{font-size:10.5px;font-weight:700;background:#F1E9F6;color:#5B2E7A;border-radius:999px;padding:3px 10px;text-transform:none;letter-spacing:0;}
+  .qtext{font-size:18px;font-family:'Cormorant Garamond',Georgia,serif;margin:0 0 4px;}
+  .qhint{font-size:13px;color:#63695D;font-style:italic;margin:0 0 22px;}
+  .opts{display:flex;flex-direction:column;gap:9px;}
+  .opt{appearance:none;text-align:left;border:1px solid #E0D9C9;background:#F4F1EA;border-radius:12px;padding:13px 16px;font-family:'Inter',sans-serif;font-size:13.5px;color:#20241E;cursor:pointer;transition:border-color .15s ease,background .15s ease;}
+  .opt:hover{border-color:#5B2E7A;background:#F1E9F6;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#5B2E7A;color:#fff;}
+  .btn[disabled]{opacity:.45;cursor:not-allowed;}
+  .start-btn{background:#5B2E7A;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:52px;margin:6px 0 4px;color:#5B2E7A;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 20px;}
+  .subscore-row{display:flex;gap:12px;margin:0 0 20px;}
+  .subscore-box{flex:1;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:12px;padding:14px 16px;}
+  .subscore-label{font-size:11.5px;font-weight:700;color:#63695D;text-transform:uppercase;letter-spacing:.06em;margin:0 0 4px;}
+  .subscore-val{font-family:'Cormorant Garamond',Georgia,serif;font-size:28px;color:#5B2E7A;}
+  .caveat{background:#FBF0DC;border:1px solid #E9D8AE;border-radius:12px;padding:14px 16px;font-size:13px;color:#7A5C16;margin:0 0 20px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">CY-BOCS — Échelle d'obsession-compulsion de Yale-Brown, version enfant</h1>
+    <p class="lead">Hétéro-questionnaire semi-structuré (passation par un clinicien), pour enfants et adolescents de 6 à 17 ans. Il comprend ici les 10 questions cotées qui composent le score total : Obsessions (1 à 5) puis Compulsions (6 à 10), chacune avec 5 niveaux de sévérité (0 à 4).</p>
+    <div class="pill-row">
+      <span class="pill">10 questions cotées</span>
+      <span class="pill">8 minutes</span>
+      <span class="pill">2 sous-échelles</span>
+      <span class="pill">Hétéro-administré, 6-17 ans</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+    <div class="qnum"><span id="qnum">Question 1 / 10</span><span class="subscale-tag" id="qtag">Obsessions</span></div>
+    <p class="qtext" id="qtext"></p>
+    <p class="qhint" id="qhint"></p>
+    <div class="opts" id="opts"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-back" disabled>Précédent</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div class="result-score" id="result-score">0 / 40</div>
+    <p class="result-text" id="result-text">Score total = somme des items 1 à 10 (échelle 0-40).</p>
+    <div class="subscore-row">
+      <div class="subscore-box">
+        <p class="subscore-label">Obsessions</p>
+        <p class="subscore-val" id="score-obs">0 / 20</p>
+      </div>
+      <div class="subscore-box">
+        <p class="subscore-label">Compulsions</p>
+        <p class="subscore-val" id="score-comp">0 / 20</p>
+      </div>
+    </div>
+    <div class="caveat">Aucune bande de sévérité officielle (subclinique / léger / modéré / sévère) n'a été retrouvée dans la source utilisée pour cette version enfant : seul le score chiffré est indiqué ici, à interpréter cliniquement. Les items 11 à 19 de l'instrument complet (insight, évitement, indécision, sens des responsabilités, lenteur, doute pathologique, sévérité globale, amélioration globale, fiabilité), ainsi que les listes de contrôle des obsessions et des compulsions, sont cotés séparément par le clinicien et ne sont pas repris dans cet outil interactif — voir la fiche complète.</div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">CY-BOCS (Children's Yale-Brown Obsessive Compulsive Scale) — Scahill, Riddle, McSwiggin-Hardin, Ort, King, Goodman, Cicchetti &amp; Leckman, 1997, dérivée du Y-BOCS de Goodman et al. (1989). Traduction française : R. Delorme (2000), Société Française de Psychiatrie de l'Enfant et de l'Adolescent (SFPEADA). Outil de repérage clinique administré par un professionnel entraîné, ne remplace pas une évaluation complète.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [
+    { tag:'Obsessions', q:"Durée des pensées obsédantes", opts:[
+      ["Nulle",0],["Légère (moins d'1h/jour ou intrusion occasionnelle)",1],["Modérée (1 à 3h/jour ou intrusion fréquente)",2],["Sévère (plus de 3h à 8h/jour ou intrusion très fréquente)",3],["Extrême (plus de 8h/jour ou intrusion quasi ininterrompue)",4]
+    ]},
+    { tag:'Obsessions', q:"Gêne liée aux pensées obsédantes", opts:[
+      ["Nulle",0],["Légère (faible gêne sociale/scolaire, efficacité globale non altérée)",1],["Modérée (gêne nette mais gérable)",2],["Sévère (altération importante)",3],["Extrême (gêne invalidante)",4]
+    ]},
+    { tag:'Obsessions', q:"Angoisse associée aux pensées obsédantes", opts:[
+      ["Nulle",0],["Légère (rare, peu gênante)",1],["Modérée (fréquente et gênante, gérable)",2],["Sévère (très fréquente et très gênante)",3],["Extrême (quasi constante, détresse/frustration invalidantes)",4]
+    ]},
+    { tag:'Obsessions', q:"Résistance aux pensées obsédantes", opts:[
+      ["Nulle (fait toujours l'effort de résister, ou symptômes trop minimes pour nécessiter résistance)",0],["Légère (essaie d'y résister la plupart du temps)",1],["Modérée (fait quelques efforts)",2],["Sévère (cède à toutes les obsessions sans essayer de contrôler, mais avec répugnance/hésitation)",3],["Extrême (cède volontiers et totalement)",4]
+    ]},
+    { tag:'Obsessions', q:"Degré de contrôle sur les pensées obsédantes", opts:[
+      ["Contrôle total",0],["Contrôle important (généralement capable d'interrompre/détourner avec efforts et concentration)",1],["Contrôle modéré (parfois capable de stopper/détourner)",2],["Contrôle faible (arrive rarement à interrompre)",3],["Absence de contrôle (pensées vécues comme complètement involontaires)",4]
+    ]},
+    { tag:'Compulsions', q:"Durée des comportements compulsifs", opts:[
+      ["Nulle",0],["Légère (moins d'1h/jour ou réalisation occasionnelle)",1],["Modérée (1 à 3h/jour ou réalisation fréquente)",2],["Sévère (3 à 8h/jour ou réalisation très fréquente)",3],["Extrême (plus de 8h/jour ou quasi constante, trop nombreuses pour compter)",4]
+    ]},
+    { tag:'Compulsions', q:"Gêne liée aux comportements compulsifs", opts:[
+      ["Nulle",0],["Légère (faible gêne sociale/scolaire, efficacité globale non altérée)",1],["Modérée (gêne nette mais gérable)",2],["Sévère (altération importante)",3],["Extrême (gêne invalidante)",4]
+    ]},
+    { tag:'Compulsions', q:"Angoisse associée aux comportements compulsifs", opts:[
+      ["Nulle",0],["Légère (seulement légèrement anxieux/frustré si empêché, ou durant la réalisation)",1],["Modérée (angoisse augmentée mais contrôlable)",2],["Sévère (augmentation très nette et éprouvante)",3],["Extrême (anxiété/frustration invalidante)",4]
+    ]},
+    { tag:'Compulsions', q:"Résistance aux compulsions", opts:[
+      ["Nulle (fait toujours l'effort de résister, ou symptômes trop minimes pour nécessiter résistance)",0],["Légère (essaie d'y résister la plupart du temps)",1],["Modérée (fait quelques efforts)",2],["Sévère (cède à toutes les compulsions sans essayer de contrôler, mais le fait avec contrariété)",3],["Extrême (cède volontiers et totalement)",4]
+    ]},
+    { tag:'Compulsions', q:"Degré de contrôle sur les compulsions", opts:[
+      ["Contrôle total",0],["Contrôle important (ressent une obligation mais peut habituellement exercer un contrôle volontaire)",1],["Contrôle modéré (forte obligation, contrôle possible avec difficulté)",2],["Contrôle faible (très forte obligation, doit être menée à terme, différée seulement avec difficulté)",3],["Absence de contrôle (obligation vécue comme complètement involontaire et irrésistible)",4]
+    ]}
+  ];
+  var answers = new Array(items.length).fill(null);
+  var current = 0;
+
+  var screenStart = document.getElementById('screen-start');
+  var screenQuiz = document.getElementById('screen-quiz');
+  var screenResult = document.getElementById('screen-result');
+  var qnum = document.getElementById('qnum');
+  var qtag = document.getElementById('qtag');
+  var qtext = document.getElementById('qtext');
+  var opts = document.getElementById('opts');
+  var progressFill = document.getElementById('progress-fill');
+  var btnBack = document.getElementById('btn-back');
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    screenStart.hidden = true; screenQuiz.hidden = false; renderQuestion();
+  });
+
+  function renderQuestion(){
+    var i = current;
+    qnum.textContent = 'Question ' + (i+1) + ' / ' + items.length;
+    qtag.textContent = items[i].tag;
+    qtext.textContent = items[i].q;
+    progressFill.style.width = Math.round((i / items.length) * 100) + '%';
+    btnBack.disabled = (i === 0);
+    opts.innerHTML = '';
+    items[i].opts.forEach(function(pair){
+      var b = document.createElement('button');
+      b.className = 'opt'; b.type = 'button'; b.textContent = pair[0];
+      if (answers[i] === pair[1]) { b.style.borderColor = '#5B2E7A'; b.style.background = '#F1E9F6'; }
+      b.addEventListener('click', function(){
+        answers[i] = pair[1];
+        if (current < items.length - 1) { current++; renderQuestion(); }
+        else { showResult(); }
+      });
+      opts.appendChild(b);
+    });
+  }
+
+  btnBack.addEventListener('click', function(){
+    if (current > 0) { current--; renderQuestion(); }
+  });
+
+  function showResult(){
+    screenQuiz.hidden = true; screenResult.hidden = false;
+    var total = 0, obs = 0, comp = 0;
+    for (var i=0;i<answers.length;i++){
+      var v = answers[i] || 0;
+      total += v;
+      if (i < 5) { obs += v; } else { comp += v; }
+    }
+    document.getElementById('result-score').textContent = total + ' / 40';
+    document.getElementById('score-obs').textContent = obs + ' / 20';
+    document.getElementById('score-comp').textContent = comp + ' / 20';
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null); current = 0;
+    screenResult.hidden = true; screenStart.hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CY-BOCS — Échelle d'obsession-compulsion de Yale-Brown, version enfant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#5B2E7A 0%,#8B4FB0 55%,#3A1A52 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(224,196,138,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:28px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#3D6B4F;background:#E4EEE8;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 28px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .section ul{font-size:14.5px;margin:0 0 10px;padding-left:20px;}
+  .section li{margin:0 0 4px;}
+  .preview-card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:14px;padding:20px 22px;margin-bottom:14px;}
+  .preview-q{font-size:14.5px;font-weight:600;margin:0 0 10px;}
+  .preview-opts{display:flex;flex-direction:column;gap:6px;}
+  .preview-opt{font-size:13.5px;color:#63695D;background:#F4F1EA;border-radius:8px;padding:8px 12px;}
+  .reveal-btn{appearance:none;background:#F4F1EA;color:#1E3A5F;border:1px solid #E0D9C9;border-radius:10px;padding:9px 16px;font-family:'Inter',sans-serif;font-size:13px;font-weight:700;cursor:pointer;}
+  .reveal-list{margin-top:14px;display:none;}
+  .reveal-list.open{display:block;}
+  .reveal-item{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:10px;padding:12px 16px;margin-bottom:8px;font-size:13.5px;}
+  .reveal-item .tag{display:inline-block;font-size:10px;font-weight:700;color:#5B2E7A;background:#F1E9F6;border-radius:999px;padding:2px 8px;margin-right:8px;text-transform:uppercase;letter-spacing:.04em;}
+  .cotation-table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:10px;}
+  .cotation-table th,.cotation-table td{border:1px solid #E0D9C9;padding:8px 12px;text-align:left;}
+  .cotation-table th{background:#F4F1EA;}
+  .caveat{background:#FBF0DC;border:1px solid #E9D8AE;border-radius:12px;padding:14px 16px;font-size:13.5px;color:#7A5C16;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#5B2E7A;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#1E3A5F;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">CY-BOCS</span></div>
+
+  <h1 class="serif">Échelle d'obsession-compulsion de Yale-Brown, version enfant</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Children's Yale-Brown Obsessive Compulsive Scale — Scahill, Riddle, McSwiggin-Hardin, Ort, King, Goodman, Cicchetti &amp; Leckman, 1997, dérivée du Y-BOCS de Goodman et al. (1989)</p>
+  <div class="meta-row">
+    <span class="pill">10 questions cotées</span>
+    <span class="pill">8 minutes</span>
+    <span class="pill">2 sous-échelles</span>
+    <span class="pill">Hétéro-administré, 6-17 ans</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="cybocs.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>La CY-BOCS évalue la sévérité des symptômes obsessionnels et compulsifs chez l'enfant et l'adolescent (6 à 17 ans). C'est un hétéro-questionnaire semi-structuré : l'évaluateur interroge ensemble l'enfant et le ou les parents/tuteurs, en cotant sur la semaine passée. Avant de commencer, l'évaluateur définit « obsessions » et « compulsions » dans des termes adaptés à l'âge de l'enfant (au besoin « inquiétudes » ou « habitudes »).</p>
+    <p>La passation s'appuie d'abord sur deux listes de contrôle, cochées sans nécessairement interroger item par item : la <strong>Liste des Obsessions</strong> (contamination, agressives, sexuelles, collection/accumulation, superstitieuses/pensées magiques, somatiques, religieuses, diverses) et la <strong>Liste des Compulsions</strong> (lavage/nettoyage, vérification, répétition, comptage, ordre/rangement, collection/accumulation, comportements superstitieux, rituels impliquant d'autres personnes, diverses). L'évaluateur identifie ensuite les 4 obsessions et les 4 compulsions les plus sévères (symptômes cibles), sur lesquelles s'appuient les 10 questions cotées ci-dessous.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Aperçu des questions cotées</h2>
+    <div class="preview-card">
+      <p class="preview-q">1. Durée des pensées obsédantes</p>
+      <div class="preview-opts">
+        <div class="preview-opt">Nulle</div>
+        <div class="preview-opt">Légère (moins d'1h/jour ou intrusion occasionnelle)</div>
+        <div class="preview-opt">Modérée (1 à 3h/jour ou intrusion fréquente)</div>
+        <div class="preview-opt">Sévère (plus de 3h à 8h/jour ou intrusion très fréquente)</div>
+        <div class="preview-opt">Extrême (plus de 8h/jour ou intrusion quasi ininterrompue)</div>
+      </div>
+    </div>
+    <button class="reveal-btn" id="reveal-btn">Voir toutes les questions</button>
+    <div class="reveal-list" id="reveal-list">
+      <div class="reveal-item"><span class="tag">Obsessions</span>2. Gêne liée aux pensées obsédantes</div>
+      <div class="reveal-item"><span class="tag">Obsessions</span>3. Angoisse associée aux pensées obsédantes</div>
+      <div class="reveal-item"><span class="tag">Obsessions</span>4. Résistance aux pensées obsédantes</div>
+      <div class="reveal-item"><span class="tag">Obsessions</span>5. Degré de contrôle sur les pensées obsédantes</div>
+      <div class="reveal-item"><span class="tag">Compulsions</span>6. Durée des comportements compulsifs</div>
+      <div class="reveal-item"><span class="tag">Compulsions</span>7. Gêne liée aux comportements compulsifs</div>
+      <div class="reveal-item"><span class="tag">Compulsions</span>8. Angoisse associée aux comportements compulsifs</div>
+      <div class="reveal-item"><span class="tag">Compulsions</span>9. Résistance aux compulsions</div>
+      <div class="reveal-item"><span class="tag">Compulsions</span>10. Degré de contrôle sur les compulsions</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Items complémentaires (hors score, cotés par le clinicien)</h2>
+    <p>L'instrument complet comprend neuf items supplémentaires, non repris dans l'outil interactif de cette fiche :</p>
+    <ul>
+      <li><strong>11 à 16</strong> — cotés individuellement (0-4), hors score total : capacité à s'interroger sur les obsessions/compulsions (insight), évitement, degré d'indécision, surestimation du sens des responsabilités, lenteur générale, doute pathologique.</li>
+      <li><strong>17</strong> — sévérité globale (0-6), adapté de la Clinical Global Impression Scale (Guy, 1976).</li>
+      <li><strong>18</strong> — amélioration globale (0-6), par rapport à une cotation initiale.</li>
+      <li><strong>19</strong> — fiabilité globale des scores obtenus par l'évaluateur (0-3).</li>
+    </ul>
+    <p>Deux intervalles libres (1A, entre les pensées obsédantes ; 6A, entre les comportements compulsifs) sont également recueillis à titre informatif, sans entrer dans la cotation.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque item coté de 1 à 10 va de 0 (nulle) à 4 (extrême), sévérité croissante. Score d'obsessions = somme des items 1 à 5 (0-20). Score de compulsions = somme des items 6 à 10 (0-20). Score total = somme des 10 items (0-40).</p>
+    <table class="cotation-table">
+      <tr><th>Score</th><th>Composition</th></tr>
+      <tr><td>0-20</td><td>Sous-score Obsessions (items 1 à 5)</td></tr>
+      <tr><td>0-20</td><td>Sous-score Compulsions (items 6 à 10)</td></tr>
+      <tr><td>0-40</td><td>Score total (items 1 à 10)</td></tr>
+    </table>
+    <div class="caveat">Aucune bande de sévérité officielle (subclinique / léger / modéré / sévère) n'a été retrouvée dans le document source utilisé pour cette version enfant : contrairement à d'autres échelles de ce catalogue, seul le score chiffré est calculé ici, sans classement en catégories de sévérité. L'interprétation clinique s'appuie notamment sur l'item 17 (sévérité globale), coté séparément par le clinicien et non inclus dans ce score.</div>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source</h2>
+    <p class="source-note">Scahill, L., Riddle, M. A., McSwiggin-Hardin, M., Ort, S. I., King, R. A., Goodman, W. K., Cicchetti, D., &amp; Leckman, J. F. (1997). Children's Yale-Brown Obsessive Compulsive Scale: reliability and validity. <em>Journal of the American Academy of Child and Adolescent Psychiatry</em>, 36(6), 844-852. Instrument dérivé du Y-BOCS adulte (Goodman et al., 1989). Traduction française : R. Delorme (2000), « Children's Yale-Brown Obsessive Compulsive Scale (CY-BOCS), Goodman et Coll. (1989) », hébergée par la Société Française de Psychiatrie de l'Enfant et de l'Adolescent (SFPEADA). Outil de repérage clinique administré par un professionnel entraîné, ne remplace pas une évaluation complète.</p>
+  </div>
+</div>
+
+<script>
+document.getElementById('reveal-btn').addEventListener('click', function(){
+  var list = document.getElementById('reveal-list');
+  list.classList.toggle('open');
+  this.textContent = list.classList.contains('open') ? 'Masquer les questions' : 'Voir toutes les questions';
+});
+</script>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

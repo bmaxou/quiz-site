@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CSE - Échelle d'auto-efficacité à faire face</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#2E6B4E;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .progress-track{height:6px;background:#E0D9C9;border-radius:99px;overflow:hidden;margin-bottom:14px;}
+  .progress-fill{height:100%;background:#2E6B4E;border-radius:99px;transition:width .25s ease;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .consigne{font-size:13px;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:10px;padding:10px 14px;margin:0 0 16px;font-style:italic;}
+  .q-text{font-size:17px;font-family:'Cormorant Garamond',Georgia,serif;margin:0 0 18px;}
+  .scale-row{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:12px;}
+  .scale-btn{flex:1 0 auto;min-width:34px;padding:9px 4px;border-radius:8px;border:1px solid #E0D9C9;background:#F4F1EA;font-family:'Inter',sans-serif;font-weight:700;font-size:12.5px;color:#20241E;cursor:pointer;text-align:center;}
+  .scale-btn:hover{border-color:#2E6B4E;}
+  .scale-btn.selected{background:#2E6B4E;color:#fff;border-color:#2E6B4E;}
+  .anchor-legend{font-size:12px;color:#9A9E90;margin:0 0 22px;line-height:1.6;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#2E6B4E;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-intro{font-size:14px;color:#63695D;margin:0 0 22px;}
+  .score-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;}
+  .score-block{border:1px solid #E0D9C9;border-radius:12px;padding:20px 18px;text-align:center;}
+  .score-block .score-val{font-family:'Cormorant Garamond',Georgia,serif;font-size:36px;font-weight:600;color:#2E6B4E;}
+  .score-block .score-label{font-size:12.5px;color:#63695D;margin-top:4px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+  @media (max-width:480px){ .score-grid{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">CSE — Auto-efficacité à faire face</h1>
+    <p class="lead">Coping Self-Efficacy Scale. Quand les choses ne vont pas bien pour vous, ou quand vous rencontrez des problèmes, à quel point êtes-vous confiant(e) ou certain(e) de pouvoir faire chacune des 26 choses suivantes ?</p>
+    <div class="pill-row">
+      <span class="pill">26 questions</span>
+      <span class="pill">7 minutes</span>
+      <span class="pill">Échelle 0-10</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+    <p class="progress" id="progress-text"></p>
+    <p class="consigne">Dans quelle mesure êtes-vous confiant(e) ou certain(e) de pouvoir faire ce qui suit :</p>
+    <p class="q-text" id="q-text"></p>
+    <div class="scale-row" id="scale-row"></div>
+    <p class="anchor-legend"><strong>0</strong> Ne peux pas du tout le faire &middot; <strong>10</strong> Certain(e) de pouvoir le faire</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-intro">Un seul score global est proposé pour cet instrument (aucune répartition en sous-échelles n'a pu être confirmée avec certitude lors du sourçage) : plus le score est élevé, plus vous vous sentez capable de faire face aux difficultés.</p>
+    <div class="score-grid">
+      <div class="score-block"><div class="score-val" id="score-sum">0 / 260</div><div class="score-label">Score total (somme)</div></div>
+      <div class="score-block"><div class="score-val" id="score-mean">0,0 / 10</div><div class="score-label">Score moyen</div></div>
+    </div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Chesney, M.A., Neilands, T.B., Chambers, D.B., Taylor, J.M., &amp; Folkman, S. (2006). A validity and reliability study of the Coping Self-Efficacy Scale. British Journal of Health Psychology, 11(3), 421-437. Ce résultat est un repère, il ne constitue pas un diagnostic.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [
+    "M'empêcher de sombrer (broyer du noir)",
+    "Me parler à moi-même de façon positive",
+    "Trier ce qui peut être changé et ce qui ne peut pas l'être",
+    "Obtenir un soutien émotionnel de mes amis et de ma famille",
+    "Trouver des solutions à mes problèmes les plus difficiles",
+    "Découper un problème pénible en parties plus petites",
+    "Garder mes options ouvertes quand les choses deviennent stressantes",
+    "Faire un plan d'action et le suivre face à un problème",
+    "Développer de nouveaux loisirs ou activités récréatives",
+    "Détourner mon esprit de pensées désagréables",
+    "Chercher quelque chose de bon dans une situation négative",
+    "M'empêcher de me sentir triste",
+    "Voir les choses du point de vue de l'autre personne pendant une dispute vive",
+    "Essayer d'autres solutions si les premières ne fonctionnent pas",
+    "M'empêcher d'être bouleversé(e) par des pensées désagréables",
+    "Me faire de nouveaux amis",
+    "Obtenir de mes amis qu'ils m'aident pour ce dont j'ai besoin",
+    "Faire quelque chose de positif pour moi-même quand je suis découragé(e)",
+    "Faire disparaître les pensées désagréables",
+    "Penser à une partie du problème à la fois",
+    "Visualiser une activité ou un lieu agréable",
+    "M'empêcher de me sentir seul(e)",
+    "Prier ou méditer",
+    "Obtenir un soutien émotionnel d'organisations ou de ressources communautaires",
+    "Tenir bon et me battre pour ce que je veux",
+    "Résister à l'impulsion d'agir précipitamment sous pression"
+  ];
+
+  var answers = new Array(items.length).fill(null);
+  var current = 0;
+
+  var screenStart = document.getElementById('screen-start');
+  var screenQuiz = document.getElementById('screen-quiz');
+  var screenResult = document.getElementById('screen-result');
+  var progressFill = document.getElementById('progress-fill');
+  var progressText = document.getElementById('progress-text');
+  var qText = document.getElementById('q-text');
+  var scaleRow = document.getElementById('scale-row');
+  var btnPrev = document.getElementById('btn-prev');
+  var btnNext = document.getElementById('btn-next');
+
+  function renderQuestion(){
+    progressFill.style.width = Math.round((current / items.length) * 100) + '%';
+    progressText.textContent = 'Question ' + (current + 1) + ' / ' + items.length;
+    qText.textContent = items[current];
+
+    scaleRow.innerHTML = '';
+    for (var v = 0; v <= 10; v++){
+      (function(val){
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'scale-btn' + (answers[current] === val ? ' selected' : '');
+        b.textContent = String(val);
+        b.addEventListener('click', function(){
+          answers[current] = val;
+          renderQuestion();
+        });
+        scaleRow.appendChild(b);
+      })(v);
+    }
+
+    btnPrev.disabled = (current === 0);
+    btnNext.disabled = (answers[current] === null);
+    btnNext.textContent = (current === items.length - 1) ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    screenStart.hidden = true;
+    screenQuiz.hidden = false;
+    current = 0;
+    renderQuestion();
+  });
+
+  btnPrev.addEventListener('click', function(){
+    if (current > 0){ current -= 1; renderQuestion(); }
+  });
+
+  btnNext.addEventListener('click', function(){
+    if (answers[current] === null) return;
+    if (current < items.length - 1){ current += 1; renderQuestion(); } else { showResult(); }
+  });
+
+  function showResult(){
+    screenQuiz.hidden = true;
+    screenResult.hidden = false;
+    var sum = answers.reduce(function(a,b){ return a + b; }, 0);
+    var mean = sum / items.length;
+    document.getElementById('score-sum').textContent = sum + ' / 260';
+    document.getElementById('score-mean').textContent = mean.toFixed(1).replace('.', ',') + ' / 10';
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers.fill(null);
+    current = 0;
+    screenResult.hidden = true;
+    screenStart.hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CSE - Échelle d'auto-efficacité à faire face</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#1B4B4A 0%,#3D9B8E 55%,#0D2E2D 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(224,196,138,.45),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#22334D;background:#E9EEF5;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .caveat{font-size:13px;color:#63695D;background:#FBF3E4;border:1px solid #E7D6AE;border-radius:12px;padding:12px 16px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#2E6B4E;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#22334D;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <div class="fiche-photo"><span class="acronym">CSE</span></div>
+  <h1 class="serif">Échelle d'auto-efficacité à faire face (CSE)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Coping Self-Efficacy Scale - Chesney, M.A., Neilands, T.B., Chambers, D.B., Taylor, J.M., &amp; Folkman, S. (2006)</p>
+  <div class="meta-row">
+    <span class="pill">26 questions</span>
+    <span class="pill">7 minutes</span>
+    <span class="pill">Auto-administré</span>
+    <span class="pill">Adulte</span>
+    <span class="pill">Français</span>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" href="cse.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le CSE mesure le sentiment de confiance qu'a une personne dans sa capacité à faire face efficacement aux difficultés et aux événements stressants. Pour chacun des 26 items, la personne indique, sur une échelle de 0 à 10, à quel point elle se sent confiante ou certaine de pouvoir mettre en œuvre le comportement ou la stratégie décrite quand les choses ne vont pas bien pour elle ou qu'elle rencontre des problèmes.</p>
+    <p class="caveat">L'article original décrit trois sous-échelles (recours au coping centré sur le problème, arrêter les émotions et pensées désagréables, obtenir le soutien des amis et de la famille), mais la répartition exacte des 26 items entre ces trois sous-échelles n'a pas pu être confirmée avec certitude lors du sourçage. Pour ne rien inventer, cette page ne propose qu'un score global (somme et moyenne des 26 items), sans détail par sous-échelle.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Les 26 items</h2>
+    <p>Consigne : « Quand les choses ne vont pas bien pour vous, ou quand vous rencontrez des problèmes, à quel point êtes-vous confiant(e) ou certain(e) de pouvoir faire ce qui suit ? » Échelle de réponse 0 (« Ne peux pas du tout le faire ») à 10 (« Certain(e) de pouvoir le faire »).</p>
+    <ul>
+      <li>M'empêcher de sombrer (broyer du noir)</li>
+      <li>Me parler à moi-même de façon positive</li>
+      <li>Trier ce qui peut être changé et ce qui ne peut pas l'être</li>
+      <li>Obtenir un soutien émotionnel de mes amis et de ma famille</li>
+      <li>Trouver des solutions à mes problèmes les plus difficiles</li>
+      <li>Découper un problème pénible en parties plus petites</li>
+      <li>Garder mes options ouvertes quand les choses deviennent stressantes</li>
+      <li>Faire un plan d'action et le suivre face à un problème</li>
+      <li>Développer de nouveaux loisirs ou activités récréatives</li>
+      <li>Détourner mon esprit de pensées désagréables</li>
+      <li>Chercher quelque chose de bon dans une situation négative</li>
+      <li>M'empêcher de me sentir triste</li>
+      <li>Voir les choses du point de vue de l'autre personne pendant une dispute vive</li>
+      <li>Essayer d'autres solutions si les premières ne fonctionnent pas</li>
+      <li>M'empêcher d'être bouleversé(e) par des pensées désagréables</li>
+      <li>Me faire de nouveaux amis</li>
+      <li>Obtenir de mes amis qu'ils m'aident pour ce dont j'ai besoin</li>
+      <li>Faire quelque chose de positif pour moi-même quand je suis découragé(e)</li>
+      <li>Faire disparaître les pensées désagréables</li>
+      <li>Penser à une partie du problème à la fois</li>
+      <li>Visualiser une activité ou un lieu agréable</li>
+      <li>M'empêcher de me sentir seul(e)</li>
+      <li>Prier ou méditer</li>
+      <li>Obtenir un soutien émotionnel d'organisations ou de ressources communautaires</li>
+      <li>Tenir bon et me battre pour ce que je veux</li>
+      <li>Résister à l'impulsion d'agir précipitamment sous pression</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Score global = somme des 26 items (0 à 260) et score moyen (0 à 10). Plus le score est élevé, plus la personne se sent capable de faire face aux difficultés. Aucun seuil clinique catégoriel n'est publié par les autrices.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p>Chesney, M.A., Neilands, T.B., Chambers, D.B., Taylor, J.M., &amp; Folkman, S. (2006). A validity and reliability study of the Coping Self-Efficacy Scale. <em>British Journal of Health Psychology</em>, 11(3), 421-437.</p>
+    <p class="source-note">Texte des items obtenu via la page de diffusion de l'autrice (UCSF Osher Center for Integrative Health) et recoupé avec la base SABI (UNC). Diffusion réservée à un usage de recherche et d'éducation, usage commercial exclu par les autrices — usage strictement personnel et non commercial de ce cabinet, conforme à cette réserve. Outil de repérage clinique, ne remplace pas une évaluation complète.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

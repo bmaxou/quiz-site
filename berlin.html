@@ -1,0 +1,593 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Questionnaire de Berlin — Risque d'apnées obstructives du sommeil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#8A4A26;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .sec{font-size:12.5px;color:#63695D;background:#F4F1EA;border-radius:8px;padding:8px 12px;margin:0 0 16px;}
+  .q-text{font-size:16px;margin:0 0 6px;}
+  .q-desc{font-size:13px;color:#63695D;margin:0 0 18px;white-space:pre-line;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#8A4A26;background:#F6E6DA;}
+  .num-row{display:flex;flex-wrap:wrap;gap:6px;}
+  .num{min-width:44px;text-align:center;padding:10px 0;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600;background:#fff;}
+  .num.selected{border-color:#8A4A26;background:#F6E6DA;}
+  .num-ends{display:flex;justify-content:space-between;gap:12px;font-size:12px;color:#63695D;margin-top:8px;}
+  .vas-box{padding:8px 0;}
+  .vas-val{font-family:'Cormorant Garamond',Georgia,serif;font-size:40px;color:#8A4A26;margin:0 0 6px;}
+  .vas-box input[type=range]{width:100%;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#8A4A26;border-color:#E0D9C9;}
+  .btn-primary{background:#8A4A26;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:40px;color:#8A4A26;margin:0 0 4px;}
+  .result-max{font-size:13px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 14px;}
+  .result-list{font-size:14px;margin:0 0 16px;padding-left:20px;}
+  .result-list li{margin-bottom:4px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">Questionnaire de Berlin — Risque d'apnées obstructives du sommeil</h1>
+    <p class="lead">Dix questions sur le ronflement, la fatigue et la somnolence, la tension artérielle et la corpulence, pour repérer un risque de syndrome d'apnées obstructives du sommeil. Les questions sur le ronflement ne sont posées qu'aux personnes qui ronflent.</p>
+    <p class="lang-note">Texte français diffusé à partir du questionnaire de Netzer et al. (1999). Dépistage, ne pose pas le diagnostic.</p>
+    <div class="pill-row">
+      <span class="pill">10 questions + taille et poids</span>
+      <span class="pill">3 minutes</span>
+      <span class="pill">3 catégories</span>
+      <span class="pill">Français</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="sec" id="sec-text" hidden></p>
+    <p class="q-text" id="q-text"></p>
+    <p class="q-desc" id="q-desc"></p>
+    <div id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Netzer N.C., Stoohs R.A., Netzer C.M., Clark K. &amp; Strohl K.P. (1999). Using the Berlin Questionnaire to identify patients at risk for the sleep apnea syndrome. Annals of Internal Medicine, 131, 485-491. Questionnaire sous copyright iONSLEEP LLC, utilisable à des fins académiques et de recherche sans frais. Ce résultat est un repère, il ne constitue pas un diagnostic.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [
+ {
+  "t": "Quelle est votre taille ?",
+  "d": "Ces deux informations (taille et poids) servent uniquement au calcul de l'indice de masse corporelle (IMC), utilisé pour la catégorie 3.",
+  "kind": "inp",
+  "min": 100,
+  "max": 250,
+  "unit": "cm",
+  "sec": "Informations préalables"
+ },
+ {
+  "t": "Quel est votre poids ?",
+  "d": "Ces deux informations (taille et poids) servent uniquement au calcul de l'indice de masse corporelle (IMC), utilisé pour la catégorie 3.",
+  "kind": "inp",
+  "min": 30,
+  "max": 300,
+  "unit": "kg",
+  "sec": "Informations préalables"
+ },
+ {
+  "t": "1. Est-ce que vous ronflez ?",
+  "sec": "Catégorie 1 — Ronflement",
+  "opts": [
+   [
+    1,
+    "Oui"
+   ],
+   [
+    2,
+    "Non"
+   ],
+   [
+    3,
+    "Je ne sais pas"
+   ]
+  ]
+ },
+ {
+  "t": "2. Votre ronflement est :",
+  "d": "Si vous ronflez.",
+  "sec": "Catégorie 1 — Ronflement",
+  "cond": [
+   2,
+   1
+  ],
+  "opts": [
+   [
+    1,
+    "Un peu plus bruyant que la respiration"
+   ],
+   [
+    2,
+    "Aussi bruyant que la parole"
+   ],
+   [
+    3,
+    "Plus bruyant que la parole"
+   ],
+   [
+    4,
+    "Très bruyant, peut être entendu de la pièce d'à côté"
+   ]
+  ]
+ },
+ {
+  "t": "3. Quelle est la fréquence de votre ronflement ?",
+  "d": "Si vous ronflez.",
+  "sec": "Catégorie 1 — Ronflement",
+  "cond": [
+   2,
+   1
+  ],
+  "opts": [
+   [
+    1,
+    "Presque tous les jours"
+   ],
+   [
+    2,
+    "3 à 4 fois par semaine"
+   ],
+   [
+    3,
+    "1 à 2 fois par semaine"
+   ],
+   [
+    4,
+    "1 à 2 fois par mois"
+   ],
+   [
+    5,
+    "Jamais ou presque jamais"
+   ]
+  ]
+ },
+ {
+  "t": "4. Votre ronflement a-t-il déjà dérangé d'autres personnes ?",
+  "d": "Si vous ronflez.",
+  "sec": "Catégorie 1 — Ronflement",
+  "cond": [
+   2,
+   1
+  ],
+  "opts": [
+   [
+    1,
+    "Oui"
+   ],
+   [
+    2,
+    "Non"
+   ],
+   [
+    3,
+    "Je ne sais pas"
+   ]
+  ]
+ },
+ {
+  "t": "5. Vous a-t-on déjà dit que vous arrêtiez de respirer pendant votre sommeil ?",
+  "sec": "Catégorie 1 — Ronflement",
+  "opts": [
+   [
+    1,
+    "Presque tous les jours"
+   ],
+   [
+    2,
+    "3 à 4 fois par semaine"
+   ],
+   [
+    3,
+    "1 à 2 fois par semaine"
+   ],
+   [
+    4,
+    "1 à 2 fois par mois"
+   ],
+   [
+    5,
+    "Jamais ou presque jamais"
+   ]
+  ]
+ },
+ {
+  "t": "6. Vous arrive-t-il de vous sentir las(se) ou fatigué(e) au réveil ?",
+  "sec": "Catégorie 2 — Fatigue et somnolence",
+  "opts": [
+   [
+    1,
+    "Presque tous les jours"
+   ],
+   [
+    2,
+    "3 à 4 fois par semaine"
+   ],
+   [
+    3,
+    "1 à 2 fois par semaine"
+   ],
+   [
+    4,
+    "1 à 2 fois par mois"
+   ],
+   [
+    5,
+    "Jamais ou presque jamais"
+   ]
+  ]
+ },
+ {
+  "t": "7. Vous arrive-t-il d'être fatigué(e) ou moins en forme dans la journée ?",
+  "sec": "Catégorie 2 — Fatigue et somnolence",
+  "opts": [
+   [
+    1,
+    "Presque tous les jours"
+   ],
+   [
+    2,
+    "3 à 4 fois par semaine"
+   ],
+   [
+    3,
+    "1 à 2 fois par semaine"
+   ],
+   [
+    4,
+    "1 à 2 fois par mois"
+   ],
+   [
+    5,
+    "Jamais ou presque jamais"
+   ]
+  ]
+ },
+ {
+  "t": "8. Avez-vous déjà piqué du nez ou vous êtes-vous déjà endormi(e) en conduisant ?",
+  "sec": "Catégorie 2 — Fatigue et somnolence",
+  "opts": [
+   [
+    1,
+    "Oui"
+   ],
+   [
+    2,
+    "Non"
+   ]
+  ]
+ },
+ {
+  "t": "9. Cela vous arrive-t-il :",
+  "d": "Si oui à la question précédente.",
+  "sec": "Catégorie 2 — Fatigue et somnolence",
+  "cond": [
+   9,
+   1
+  ],
+  "opts": [
+   [
+    1,
+    "Presque tous les jours"
+   ],
+   [
+    2,
+    "3 à 4 fois par semaine"
+   ],
+   [
+    3,
+    "1 à 2 fois par semaine"
+   ],
+   [
+    4,
+    "1 à 2 fois par mois"
+   ],
+   [
+    5,
+    "Jamais ou presque jamais"
+   ]
+  ]
+ },
+ {
+  "t": "10. Êtes-vous hypertendu(e) ou prenez-vous un traitement pour la tension ?",
+  "sec": "Catégorie 3 — Hypertension artérielle et IMC",
+  "opts": [
+   [
+    1,
+    "Oui"
+   ],
+   [
+    2,
+    "Non"
+   ],
+   [
+    3,
+    "Je ne sais pas"
+   ]
+  ]
+ }
+];
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+  var RESULT = function(a){
+    function in_(v, arr){ return v !== null && arr.indexOf(v) >= 0; }
+    var imc = a[1] / Math.pow(a[0] / 100, 2);
+    var c1 = 0;
+    if (a[2] === 1) c1 += 1;
+    if (in_(a[3], [3,4])) c1 += 1;
+    if (in_(a[4], [1,2])) c1 += 1;
+    if (a[5] === 1) c1 += 1;
+    if (in_(a[6], [1,2])) c1 += 2;
+    var c2 = 0;
+    if (in_(a[7], [1,2])) c2 += 1;
+    if (in_(a[8], [1,2])) c2 += 1;
+    if (a[9] === 1) c2 += 1;
+    if (in_(a[10], [1,2])) c2 += 1;
+    var p1 = c1 >= 2, p2 = c2 >= 2, p3 = (a[11] === 1) || (imc > 30);
+    var n = (p1 ? 1 : 0) + (p2 ? 1 : 0) + (p3 ? 1 : 0);
+    var high = n >= 2;
+    function lab(p){ return p ? 'positive' : 'négative'; }
+    return '<p class="result-score">' + (high ? 'Risque élevé' : 'Risque faible') + '</p>' +
+      '<p class="result-max">' + n + ' catégorie(s) positive(s) sur 3 (risque élevé si au moins 2 catégories positives)</p>' +
+      '<ul class="result-list">' +
+      '<li><strong>Catégorie 1 — ronflement</strong> : ' + c1 + ' point(s), catégorie ' + lab(p1) + ' (positive à partir de 2 points).</li>' +
+      '<li><strong>Catégorie 2 — fatigue et somnolence</strong> : ' + c2 + ' point(s), catégorie ' + lab(p2) + ' (positive à partir de 2 points).</li>' +
+      '<li><strong>Catégorie 3 — hypertension / IMC</strong> : IMC calculé ' + imc.toFixed(1) + ' kg/m², hypertension ' + (a[11] === 1 ? 'oui' : (a[11] === 2 ? 'non' : 'ne sait pas')) + ', catégorie ' + lab(p3) + ' (positive si hypertension déclarée ou IMC &gt; 30).</li>' +
+      '</ul>' +
+      '<p class="result-text">' + (high ? 'Au moins deux catégories sont positives : probabilité élevée de syndrome d\'apnées obstructives du sommeil. Ce résultat justifie un avis médical (médecin du sommeil) pour une polygraphie ou une polysomnographie.' : 'Une catégorie positive au plus : risque faible selon ce questionnaire. Il ne permet pas d\'exclure un syndrome d\'apnées si des symptômes persistent.') + '</p>' +
+      '<p class="result-text">Le Questionnaire de Berlin est un outil de dépistage, il ne pose pas le diagnostic.</p>';
+  };
+
+  function vis(i){
+    var c = items[i].cond;
+    return !c || answers[c[0]] === c[1];
+  }
+  function step(i, dir){
+    var j = i + dir;
+    while (j >= 0 && j < items.length && !vis(j)) j += dir;
+    return j;
+  }
+  function visCount(){ var n = 0; for (var i = 0; i < items.length; i++) if (vis(i)) n++; return n; }
+  function visRank(i){ var n = 0; for (var k = 0; k <= i; k++) if (vis(k)) n++; return n; }
+  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+
+  function renderQuestion(){
+    var it = items[idx];
+    document.getElementById('progress-text').textContent = 'Question ' + visRank(idx) + ' / ' + visCount();
+    var secEl = document.getElementById('sec-text');
+    if (it.sec){ secEl.textContent = it.sec; secEl.hidden = false; } else { secEl.hidden = true; }
+    document.getElementById('q-text').textContent = it.t;
+    document.getElementById('q-desc').textContent = it.d || '';
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    if (it.kind === 'num'){
+      var nr = document.createElement('div'); nr.className = 'num-row';
+      for (var v = it.min; v <= it.max; v++){
+        (function(v){
+          var b = document.createElement('div');
+          b.className = 'num' + (answers[idx] === v ? ' selected' : '');
+          b.textContent = v;
+          b.addEventListener('click', function(){ answers[idx] = v; renderQuestion(); });
+          nr.appendChild(b);
+        })(v);
+      }
+      row.appendChild(nr);
+      var ends = document.createElement('div'); ends.className = 'num-ends';
+      ends.innerHTML = '<span>' + esc(it.lo) + '</span><span style="text-align:right">' + esc(it.hi) + '</span>';
+      row.appendChild(ends);
+    } else if (it.kind === 'inp'){
+      var ib = document.createElement('div'); ib.className = 'vas-box';
+      ib.innerHTML = '<input type="number" id="inp-val" inputmode="decimal" min="' + it.min + '" max="' + it.max + '" step="any" value="' + (answers[idx] === null ? '' : answers[idx]) + '" aria-label="' + esc(it.unit) + '" style="font-size:22px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;width:140px;font-family:inherit"> <span style="font-size:15px;color:#63695D;margin-left:6px">' + esc(it.unit) + '</span>' +
+        '<p class="q-desc" style="margin-top:14px">Valeur attendue entre ' + it.min + ' et ' + it.max + ' ' + esc(it.unit) + '.</p>';
+      row.appendChild(ib);
+      var iv = document.getElementById('inp-val');
+      function setI(){
+        var x = parseFloat(String(iv.value).replace(',', '.'));
+        answers[idx] = (isFinite(x) && x >= it.min && x <= it.max) ? x : null;
+        document.getElementById('btn-next').disabled = answers[idx] === null;
+      }
+      iv.addEventListener('input', setI);
+      iv.addEventListener('change', setI);
+    } else if (it.kind === 'vas'){
+      var box = document.createElement('div'); box.className = 'vas-box';
+      var cur = answers[idx] === null ? 50 : answers[idx];
+      box.innerHTML = '<p class="vas-val" id="vas-val">' + (answers[idx] === null ? '—' : answers[idx]) + '</p>' +
+        '<input type="range" id="vas-range" min="' + it.min + '" max="' + it.max + '" step="1" value="' + cur + '" aria-label="Échelle visuelle analogique">' +
+        '<div class="num-ends"><span>' + esc(it.lo) + '</span><span style="text-align:right">' + esc(it.hi) + '</span></div>' +
+        '<p class="q-desc" style="margin-top:14px">Déplacez le curseur (ou utilisez les flèches du clavier) jusqu\'à la valeur qui correspond à votre état de santé aujourd\'hui.</p>';
+      row.appendChild(box);
+      var rg = document.getElementById('vas-range');
+      function setV(){
+        answers[idx] = parseInt(rg.value, 10);
+        document.getElementById('vas-val').textContent = answers[idx];
+        document.getElementById('btn-next').disabled = false;
+      }
+      rg.addEventListener('input', setV);
+      rg.addEventListener('change', setV);
+      rg.addEventListener('click', setV);
+    } else {
+      var list = document.createElement('div'); list.className = 'opt-row';
+      it.opts.forEach(function(pair){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx] === pair[0] ? ' selected' : '');
+        d.textContent = pair[1];
+        d.addEventListener('click', function(){ answers[idx] = pair[0]; renderQuestion(); });
+        list.appendChild(d);
+      });
+      row.appendChild(list);
+    }
+    document.getElementById('btn-prev').disabled = step(idx, -1) < 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = step(idx, 1) >= items.length ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    var j = step(idx, -1);
+    if (j >= 0){ idx = j; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    var j = step(idx, 1);
+    if (j < items.length){ idx = j; renderQuestion(); } else { showResult(); }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var a = answers.map(function(v, i){ return vis(i) ? v : null; });
+    document.getElementById('result-body').innerHTML = RESULT(a);
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Questionnaire de Berlin — Risque d'apnées obstructives du sommeil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#6E3A1E 0%,#B06A3C 55%,#3E2010 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,210,.40),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#8A4A26;background:#F6E6DA;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .section ul{font-size:14.5px;margin:0 0 10px;padding-left:20px;}
+  .section li{margin-bottom:4px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#8A4A26;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#8A4A26;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <div class="fiche-photo"><span class="acronym">BERLIN</span></div>
+  <h1 class="serif">Questionnaire de Berlin — Risque d'apnées obstructives du sommeil</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Berlin Questionnaire — Netzer N.C., Stoohs R.A., Netzer C.M., Clark K. &amp; Strohl K.P. (1999)</p>
+  <div class="meta-row">
+    <span class="pill">10 questions</span>
+    <span class="pill">3 minutes</span>
+    <span class="pill">3 catégories</span>
+    <span class="pill">Adulte</span>
+    <span class="pill">Français</span>
+    <span class="pill">Dépistage</span>
+    <span class="pill">Licence requise : oui</span>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" href="berlin.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le Questionnaire de Berlin est un auto-questionnaire de dépistage du syndrome d'apnées obstructives du sommeil (SAOS), mis au point lors d'une conférence de consensus à Berlin (1996) puis publié par Netzer et al. en 1999. Dix questions sont réparties en trois catégories : ronflement et pauses respiratoires (questions 1 à 5), fatigue et somnolence, y compris au volant (questions 6 à 9), tension artérielle et indice de masse corporelle (question 10). Cette version demande aussi la taille et le poids pour calculer l'IMC.</p>
+    <p>Les questions 2, 3 et 4 ne sont posées qu'en cas de ronflement déclaré, et la question 9 seulement si la personne a déjà piqué du nez au volant (questions conditionnelles de la version d'origine).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p><strong>Catégorie 1</strong> (questions 1 à 5) : question 1, « oui » = 1 point ; question 2, « plus bruyant que la parole » ou « très bruyant » = 1 point ; question 3, « presque tous les jours » ou « 3 à 4 fois par semaine » = 1 point ; question 4, « oui » = 1 point ; question 5, « presque tous les jours » ou « 3 à 4 fois par semaine » = 2 points. Catégorie positive si le total est de 2 points ou plus.</p>
+    <p><strong>Catégorie 2</strong> (questions 6 à 9) : questions 6 et 7, « presque tous les jours » ou « 3 à 4 fois par semaine » = 1 point chacune ; question 8, « oui » = 1 point ; question 9, « presque tous les jours » ou « 3 à 4 fois par semaine » = 1 point. Catégorie positive si le total est de 2 points ou plus.</p>
+    <p><strong>Catégorie 3</strong> (question 10) : positive si l'hypertension artérielle (ou son traitement) est déclarée, ou si l'IMC est supérieur à 30 kg/m².</p>
+    <p><strong>Résultat</strong> : risque élevé de SAOS si au moins deux catégories sont positives ; risque faible si une seule catégorie ou aucune est positive. Outil de dépistage : un risque élevé justifie un avis spécialisé (polygraphie ou polysomnographie), il ne confirme pas le diagnostic.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p>Netzer N.C., Stoohs R.A., Netzer C.M., Clark K. &amp; Strohl K.P. (1999), <em>Annals of Internal Medicine</em>, 131, 485-491. Texte français et règles de cotation transcrits depuis la feuille d'interprétation destinée au médecin diffusée par les Ateliers du sommeil d'Arcachon, qui reprend la cotation de Netzer ; d'autres formulations françaises circulent (Réseau Morphée, Revue du Praticien) avec de légères variantes de libellé. Aucune validation psychométrique française n'a été identifiée avec certitude pour cette traduction.</p>
+    <p class="source-note"><strong>Licence requise : oui.</strong> Le questionnaire est sous copyright iONSLEEP LLC (Shaker Heights, Ohio), utilisable sans frais ni licence pour des usages académiques et de recherche (Netzer et al., <em>Chest</em> 2003;124:1406-1414) ; un usage clinique relève du copyright et n'est pas explicitement couvert. Construit malgré tout sur décision du cabinet (30/09/2026). Outil de dépistage, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

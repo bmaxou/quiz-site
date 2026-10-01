@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CT-TEMPS-A — Sous-échelle Cyclothymique (TEMPS-A)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#E8A62E;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#E8A62E;background:#FDF3DD;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#E8A62E;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#E8A62E;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .subscale-row{display:flex;justify-content:space-between;font-size:13.5px;border-top:1px solid #E0D9C9;padding:8px 0;}
+  .subscale-row b{color:#1E3A5F;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">CT-TEMPS-A — Sous-échelle Cyclothymique</h1>
+    <p class="lead">Ce questionnaire explore les variations d'humeur et d'énergie de type cyclothymique, à travers 12 affirmations à évaluer par Vrai ou Faux. Il s'agit de la sous-échelle Cyclothymique du TEMPS-A (version courte validée, 2005).</p>
+    
+    <div class="pill-row">
+      <span class="pill">12 questions</span>
+      <span class="pill">3 minutes</span>
+      <span class="pill">Vrai / Faux</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [{"t": "Mes capacités à penser varient beaucoup (par exemple entre avoir l'esprit vif ou confus)", "opts": ["Vrai", "Faux"]}, {"t": "Je passe de moments où je suis plein d'énergie à des moments où je me sens très paresseux", "opts": ["Vrai", "Faux"]}, {"t": "J'ai des changements brutaux d'humeur et d'énergie", "opts": ["Vrai", "Faux"]}, {"t": "Je peux ressentir les choses de façon très intense ou au contraire très terne", "opts": ["Vrai", "Faux"]}, {"t": "Mon humeur change souvent sans raison", "opts": ["Vrai", "Faux"]}, {"t": "D'un jour à l'autre, je peux être sociable, « bout en train » ou au contraire isolé, en retrait", "opts": ["Vrai", "Faux"]}, {"t": "Mes sentiments ou mon énergie sont « trop haut » ou « trop bas », rarement « entre les deux »", "opts": ["Vrai", "Faux"]}, {"t": "Ma confiance en moi-même varie d'un extrême à l'autre", "opts": ["Vrai", "Faux"]}, {"t": "Mes besoins de sommeil sont très variables, de quelques heures à plus de 9 heures par nuit", "opts": ["Vrai", "Faux"]}, {"t": "Je peux être d'excellente humeur avant de m'endormir et me réveiller avec la sensation que la vie ne vaut pas la peine d'être vécue", "opts": ["Vrai", "Faux"]}, {"t": "Je peux apprécier beaucoup quelqu'un puis m'en désintéresser totalement", "opts": ["Vrai", "Faux"]}, {"t": "Je peux être triste et gai en même temps", "opts": ["Vrai", "Faux"]}];
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx].t;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    items[idx].opts.forEach(function(label, v){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === v+1 ? ' selected' : '');
+      d.textContent = label;
+      d.addEventListener('click', function(){
+        answers[idx] = v+1;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){
+      idx++; renderQuestion();
+    } else {
+      showResult();
+    }
+  });
+
+  function computeResult(){
+    
+    var total = 0;
+    answers.forEach(function(a){ if (a === 1) total++; });
+    var html = '';
+    html += '<p class="result-score">' + total + ' / 12</p>';
+    html += '<p class="result-max">nombre d\'items « Vrai » (sous-échelle Cyclothymique, TEMPS-A version courte)</p>';
+    html += '<p class="result-text">Aucun seuil de sévérité clinique publié en accès libre n\'a été retrouvé pour cette sous-échelle isolée : le score se lit à titre indicatif, en complément de l\'entretien clinique, et non comme un diagnostic.</p>';
+    document.getElementById('result-body').innerHTML = html;
+
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CT-TEMPS-A — Sous-échelle Cyclothymique (TEMPS-A)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#E8A62E 0%,#F3C871 55%,#8A6410 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#8A6410;background:#FDF3DD;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#E8A62E;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#8A6410;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">CT-TEMPS-A</span></div>
+
+  <h1 class="serif">Sous-échelle Cyclothymique du TEMPS-A</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Temperament Evaluation of Memphis, Pisa, Paris and San Diego — Akiskal et al. (2005)</p>
+  <div class="meta-row">
+    <span class="pill">12 questions</span>
+    <span class="pill">3 minutes</span>
+    <span class="pill">Vrai / Faux</span>
+    <span class="pill">Français</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="ct-temps-a.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le TEMPS-A (Temperament Evaluation of Memphis, Pisa, Paris and San Diego – Autoquestionnaire) évalue les tempéraments affectifs. Cette page reprend uniquement la sous-échelle Cyclothymique (12 items) de la version courte validée à 39 items (Akiskal et al., 2005 ; version française Krebs et al., 2006).</p>
+    <p>Format de réponse : Vrai / Faux pour chaque affirmation.</p>
+    <p>⚠️ Le catalogue mentionne parfois « une vingtaine d'items » pour CT-TEMPS-A : ce chiffre correspond à une version longue plus ancienne (110 items), dont le texte complet et fiable n'a pas pu être retrouvé en accès libre. La version courte validée (2005) ici transcrite compte 12 items pour la sous-échelle Cyclothymique.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Score = nombre de réponses « Vrai » sur les 12 items (0 à 12). Aucun seuil de sévérité clinique n'a été retrouvé publié en accès libre pour cette sous-échelle isolée.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source</h2>
+    <p class="source-note">Akiskal, H.S., Mendlowicz, M.V., Jean-Louis, G., Rapaport, M.H., Kelsoe, J.R., Gillin, J.C., Smith, T.L. (2005). TEMPS-A: validation of a short version. Journal of Affective Disorders, 85(1-2), 45-52. Version française : Krebs, M.-O. et al. (2006), Journal of Affective Disorders, 96(3), 271-273. Instrument de recherche en psychiatrie largement diffusé, aucune licence commerciale identifiée.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

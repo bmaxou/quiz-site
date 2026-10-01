@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BITE - Test d'investigation de la boulimie d'Édimbourg</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#8B5A2B;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .progress-track{height:6px;background:#E0D9C9;border-radius:99px;overflow:hidden;margin-bottom:14px;}
+  .progress-fill{height:100%;background:#8B5A2B;border-radius:99px;transition:width .25s ease;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .qtext{font-size:19px;font-family:'Cormorant Garamond',Georgia,serif;margin:0 0 24px;}
+  .opts{display:flex;flex-direction:column;gap:10px;}
+  .opt{appearance:none;text-align:left;border:1px solid #E0D9C9;background:#F4F1EA;border-radius:12px;padding:14px 18px;font-family:'Inter',sans-serif;font-size:14.5px;color:#20241E;cursor:pointer;transition:border-color .15s ease,background .15s ease;}
+  .opt:hover{border-color:#8B5A2B;background:#F1E6D8;}
+  .opt.selected{border-color:#8B5A2B;background:#F1E6D8;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#8B5A2B;color:#fff;}
+  .btn[disabled]{opacity:.45;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:36px;margin:6px 0 4px;color:#8B5A2B;}
+  .result-max{font-size:13px;color:#9A9E90;margin:0 0 8px;}
+  .result-block{margin:0 0 22px;}
+  .interpret-line{font-size:14px;color:#20241E;margin:0 0 4px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">BITE — Test d'investigation de la boulimie d'Édimbourg</h1>
+    <p class="lead">Bulimic Investigatory Test, Edinburgh. Répondez par oui ou par non à chaque question, en pensant à vos habitudes alimentaires actuelles. Certaines questions ne s'affichent que si votre réponse précédente le justifie.</p>
+    <div class="pill-row">
+      <span class="pill">33 questions</span>
+      <span class="pill">6 minutes</span>
+      <span class="pill">Oui / Non + fréquence</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+    <p class="progress" id="progress-text"></p>
+    <p class="qtext" id="qtext"></p>
+    <div class="opts" id="opts"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-back" disabled>Précédent</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div class="result-block">
+      <div class="result-score" id="score-symptom">0 / 30</div>
+      <div class="result-max">Échelle des symptômes</div>
+      <p class="interpret-line" id="interpret-symptom"></p>
+    </div>
+    <div class="result-block">
+      <div class="result-score" id="score-severity">0 / 39</div>
+      <div class="result-max">Échelle de sévérité</div>
+      <p class="interpret-line" id="interpret-severity"></p>
+    </div>
+    <p class="lead">Ces deux scores se lisent séparément, sans seuil combiné : ils ne se cumulent pas en une seule note.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Henderson, M., &amp; Freeman, C. P. L. (1987). A self-rating scale for bulimia: the 'BITE'. British Journal of Psychiatry, 150(1), 18-24. Interprétation publiée par les auteurs — Échelle des symptômes : 0-9 dans les limites de la normale ; 10-19 trouble alimentaire subclinique possible, entretien clinique recommandé ; 20 et plus, forte probabilité de répondre aux critères de boulimie (DSM-III). Échelle de sévérité : 5 et plus, cliniquement significatif ; 10 et plus, sévérité élevée. Ce résultat est un repère, il ne constitue pas un diagnostic.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var FREQ_5 = [["Une fois",1],["De temps en temps",2],["Une fois par semaine",3],["2-3 fois par semaine",4],["Un jour sur deux",5]];
+  var FREQ_7 = [["Jamais",0],["Occasionnellement",2],["Une fois par semaine",3],["2-3 fois par semaine",4],["Tous les jours",5],["2-3 fois par jour",6],["5 fois ou plus par jour",7]];
+  var FREQ_6 = [["Presque jamais",1],["Une fois par mois",2],["Une fois par semaine",3],["2-3 fois par semaine",4],["Tous les jours",5],["2-3 fois par jour",6]];
+
+  // Ordre original du BITE (33 items ; l'item 7 est décomposé en 4 sous-questions a-d, chacune notée séparément sur l'échelle de fréquence,
+  // conformément à la cotation publiée de l'Échelle de sévérité sur 0-39 = item6 (max5) + item7a-d (4x max7=28) + item27 (max6)).
+  var items = [
+    {n:'1', text:"Avez-vous une façon de manger régulière ?", type:'yn', yes:0, no:1},
+    {n:'2', text:"Suivez-vous un régime strict ?", type:'yn', yes:1, no:0},
+    {n:'3', text:"Vous sentez-vous en échec si vous rompez votre régime une seule fois ?", type:'yn', yes:1, no:0},
+    {n:'4', text:"Comptez-vous les calories de tout ce que vous mangez, même quand vous ne suivez pas de régime ?", type:'yn', yes:1, no:0},
+    {n:'5', text:"Vous arrive-t-il de jeûner toute une journée ?", type:'yn', yes:1, no:0},
+    {n:'6', text:"Si oui, à quelle fréquence ?", type:'freq', options:FREQ_5, dependsOn:4, severity:true},
+    {n:'7a', text:"Pour perdre du poids, prenez-vous des coupe-faim ? À quelle fréquence ?", type:'freq', options:FREQ_7, severity:true},
+    {n:'7b', text:"Pour perdre du poids, prenez-vous des diurétiques ? À quelle fréquence ?", type:'freq', options:FREQ_7, severity:true},
+    {n:'7c', text:"Pour perdre du poids, prenez-vous des laxatifs ? À quelle fréquence ?", type:'freq', options:FREQ_7, severity:true},
+    {n:'7d', text:"Pour perdre du poids, vous faites-vous vomir ? À quelle fréquence ?", type:'freq', options:FREQ_7, severity:true},
+    {n:'8', text:"Votre façon de manger perturbe-t-elle gravement votre vie ?", type:'yn', yes:1, no:0},
+    {n:'9', text:"Diriez-vous que la nourriture domine votre vie ?", type:'yn', yes:1, no:0},
+    {n:'10', text:"Vous arrive-t-il de manger sans arrêt jusqu'à être arrêté(e) par un inconfort physique ?", type:'yn', yes:1, no:0},
+    {n:'11', text:"Y a-t-il des moments où vous ne pensez qu'à la nourriture ?", type:'yn', yes:1, no:0},
+    {n:'12', text:"Mangez-vous raisonnablement devant les autres et vous « rattrapez-vous » en privé ?", type:'yn', yes:1, no:0},
+    {n:'13', text:"Pouvez-vous toujours arrêter de manger quand vous le voulez ?", type:'yn', yes:0, no:1},
+    {n:'14', text:"Ressentez-vous des envies irrésistibles de manger, encore et encore ?", type:'yn', yes:1, no:0},
+    {n:'15', text:"Quand vous êtes anxieux/anxieuse, avez-vous tendance à beaucoup manger ?", type:'yn', yes:1, no:0},
+    {n:'16', text:"L'idée de devenir gros/grosse vous terrifie-t-elle ?", type:'yn', yes:1, no:0},
+    {n:'17', text:"Vous arrive-t-il de manger rapidement de grandes quantités de nourriture (hors repas) ?", type:'yn', yes:1, no:0},
+    {n:'18', text:"Avez-vous honte de vos habitudes alimentaires ?", type:'yn', yes:1, no:0},
+    {n:'19', text:"Craignez-vous de ne plus avoir aucun contrôle sur la quantité que vous mangez ?", type:'yn', yes:1, no:0},
+    {n:'20', text:"Vous tournez-vous vers la nourriture pour vous réconforter ?", type:'yn', yes:1, no:0},
+    {n:'21', text:"Êtes-vous capable de laisser de la nourriture dans l'assiette à la fin d'un repas ?", type:'yn', yes:0, no:1},
+    {n:'22', text:"Trompez-vous les autres sur la quantité que vous mangez ?", type:'yn', yes:1, no:0},
+    {n:'23', text:"Est-ce votre sensation de faim qui détermine la quantité que vous mangez ?", type:'yn', yes:0, no:1},
+    {n:'24', text:"Vous arrive-t-il de faire des crises alimentaires (manger de grandes quantités) ?", type:'yn', yes:1, no:0},
+    {n:'25', text:"Si oui, ces crises vous laissent-elles malheureux/malheureuse ?", type:'yn', yes:1, no:0, dependsOn:26},
+    {n:'26', text:"Si vous faites des crises, est-ce uniquement quand vous êtes seul(e) ?", type:'yn', yes:1, no:0, dependsOn:26},
+    {n:'27', text:"Si vous faites des crises, à quelle fréquence ?", type:'freq', options:FREQ_6, dependsOn:26, severity:true},
+    {n:'28', text:"Iriez-vous jusqu'à de grandes extrémités pour satisfaire une envie de crise ?", type:'yn', yes:1, no:0},
+    {n:'29', text:"Si vous mangez trop, vous sentez-vous parfois très coupable ?", type:'yn', yes:1, no:0},
+    {n:'30', text:"Vous arrive-t-il de manger en cachette ?", type:'yn', yes:1, no:0},
+    {n:'31', text:"Considérez-vous vos habitudes alimentaires comme normales ?", type:'yn', yes:0, no:1},
+    {n:'32', text:"Vous considéreriez-vous comme un(e) mangeur/mangeuse compulsif/compulsive ?", type:'yn', yes:1, no:0},
+    {n:'33', text:"Votre poids varie-t-il de plus de 2 kg (environ 5 livres) en une semaine ?", type:'yn', yes:1, no:0}
+  ];
+  // dependsOn référence l'index (0-based) de l'item "Vous arrive-t-il de jeûner toute une journée ?" (5) et de "Vous arrive-t-il de faire des crises alimentaires ?" (26)
+  var IDX_JEUNE = 4;   // item "5"
+  var IDX_CRISES = 26; // item "24"
+  items[5].dependsOn = IDX_JEUNE;
+  items[27].dependsOn = IDX_CRISES;
+  items[28].dependsOn = IDX_CRISES;
+  items[29].dependsOn = IDX_CRISES;
+
+  var scores = new Array(items.length).fill(null); // points obtenus par item (0 si non applicable/skippé)
+  var displayedYes = new Array(items.length).fill(null); // pour l'écran (surlignage bouton)
+  var current = 0;
+  var visited = []; // pile des index réellement affichés, pour le bouton Précédent
+
+  var screenStart = document.getElementById('screen-start');
+  var screenQuiz = document.getElementById('screen-quiz');
+  var screenResult = document.getElementById('screen-result');
+  var progressFill = document.getElementById('progress-fill');
+  var progressText = document.getElementById('progress-text');
+  var qtext = document.getElementById('qtext');
+  var opts = document.getElementById('opts');
+  var btnBack = document.getElementById('btn-back');
+
+  function isApplicable(i){
+    var it = items[i];
+    if (it.dependsOn === undefined) return true;
+    return scores[it.dependsOn] !== null && wasYes(it.dependsOn);
+  }
+  function wasYes(i){
+    // pour un item conditionnant (jeûne / crises), "oui" correspond au choix qui vaut 1 point (yes:1)
+    return displayedYes[i] === true;
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    screenStart.hidden = true; screenQuiz.hidden = false;
+    current = 0; visited = [0];
+    renderQuestion();
+  });
+
+  function renderQuestion(){
+    var it = items[current];
+    progressText.textContent = 'Question ' + it.n + ' / 33';
+    qtext.textContent = it.text;
+    progressFill.style.width = Math.round((current / items.length) * 100) + '%';
+    btnBack.disabled = (visited.length <= 1);
+    opts.innerHTML = '';
+
+    if (it.type === 'yn'){
+      [["Oui", true],["Non", false]].forEach(function(pair){
+        var b = document.createElement('button');
+        b.className = 'opt'; b.type = 'button'; b.textContent = pair[0];
+        b.addEventListener('click', function(){
+          scores[current] = pair[1] ? it.yes : it.no;
+          displayedYes[current] = pair[1];
+          advance();
+        });
+        opts.appendChild(b);
+      });
+    } else {
+      it.options.forEach(function(pair){
+        var b = document.createElement('button');
+        b.className = 'opt'; b.type = 'button'; b.textContent = pair[0];
+        b.addEventListener('click', function(){
+          scores[current] = pair[1];
+          advance();
+        });
+        opts.appendChild(b);
+      });
+    }
+  }
+
+  function advance(){
+    var next = current + 1;
+    while (next < items.length && !isApplicable(next)){
+      scores[next] = 0;
+      next += 1;
+    }
+    if (next < items.length){
+      current = next;
+      visited.push(current);
+      renderQuestion();
+    } else {
+      showResult();
+    }
+  }
+
+  btnBack.addEventListener('click', function(){
+    if (visited.length > 1){
+      visited.pop();
+      current = visited[visited.length - 1];
+      renderQuestion();
+    }
+  });
+
+  function showResult(){
+    screenQuiz.hidden = true; screenResult.hidden = false;
+    var symptom = 0, severity = 0;
+    for (var i = 0; i < items.length; i++){
+      var v = scores[i] || 0;
+      if (items[i].severity) severity += v; else symptom += v;
+    }
+    document.getElementById('score-symptom').textContent = symptom + ' / 30';
+    document.getElementById('score-severity').textContent = severity + ' / 39';
+
+    var symText;
+    if (symptom <= 9) symText = 'Dans les limites de la normale.';
+    else if (symptom <= 19) symText = 'Trouble alimentaire subclinique possible — un entretien clinique est recommandé.';
+    else symText = 'Forte probabilité de répondre aux critères de boulimie (DSM-III).';
+    document.getElementById('interpret-symptom').textContent = symText;
+
+    var sevText;
+    if (severity < 5) sevText = 'Non significatif.';
+    else if (severity < 10) sevText = 'Cliniquement significatif.';
+    else sevText = 'Sévérité élevée.';
+    document.getElementById('interpret-severity').textContent = sevText;
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    scores = new Array(items.length).fill(null);
+    displayedYes = new Array(items.length).fill(null);
+    current = 0; visited = [];
+    screenResult.hidden = true; screenStart.hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BITE - Test d'investigation de la boulimie d'Édimbourg</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#8B5A2B 0%,#C99A5B 55%,#4A3418 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,220,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#22334D;background:#E9EEF5;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .caveat{font-size:13px;color:#63695D;background:#FBF3E4;border:1px solid #E7D6AE;border-radius:12px;padding:12px 16px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#8B5A2B;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#22334D;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <div class="fiche-photo"><span class="acronym">BITE</span></div>
+  <h1 class="serif">Test d'investigation de la boulimie d'Édimbourg (BITE)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Bulimic Investigatory Test, Edinburgh — Henderson, M., &amp; Freeman, C. P. L. (1987)</p>
+  <div class="meta-row">
+    <span class="pill">33 questions</span>
+    <span class="pill">6 minutes</span>
+    <span class="pill">Auto-administré</span>
+    <span class="pill">Adulte</span>
+    <span class="pill">Français</span>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" href="bite.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le BITE est un auto-questionnaire de repérage de la boulimie. Il comporte 30 questions oui/non formant l'Échelle des symptômes, et 3 questions supplémentaires de fréquence formant l'Échelle de sévérité (dont une, sur les comportements de contrôle du poids, se décompose en 4 sous-questions — coupe-faim, diurétiques, laxatifs, vomissements — chacune notée séparément). Certaines questions ne sont posées que si une réponse antérieure le justifie (jeûne, crises alimentaires), conformément à la structure conditionnelle du questionnaire original.</p>
+    <p class="source-note">Droits : aucun éditeur de test commercial identifié. Instrument académique classique de 1987, circulant librement dans des supports de cours universitaires, des centres de recherche sur les troubles alimentaires et des cabinets cliniques.</p>
+    <p class="source-note">Aucune traduction française officielle retrouvée lors du sourçage : traduction de travail non officielle.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p><strong>Échelle des symptômes</strong> (30 items oui/non, 0-30) — interprétation publiée par les auteurs : 0-9 dans les limites de la normale ; 10-19 trouble alimentaire subclinique possible, entretien clinique recommandé ; 20 et plus, forte probabilité de répondre aux critères de boulimie (DSM-III).</p>
+    <p><strong>Échelle de sévérité</strong> (fréquence du jeûne, des comportements de contrôle du poids et des crises alimentaires, 0-39) — 5 et plus : cliniquement significatif (comportements hebdomadaires ou plus fréquents) ; 10 et plus : sévérité élevée.</p>
+    <p class="caveat">Les deux scores se lisent séparément, sans seuil combiné inventé au-delà de ces deux échelles publiées par les auteurs.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p>Henderson, M., &amp; Freeman, C. P. L. (1987). A self-rating scale for bulimia: the 'BITE'. <em>British Journal of Psychiatry</em>, 150(1), 18-24.</p>
+    <p class="source-note">Texte intégral obtenu via des supports de cours universitaires et des centres de recherche sur les troubles alimentaires (dont l'AEDRTC, Australie), diffusion académique libre, aucune restriction d'usage clinique rencontrée. Outil de repérage clinique, ne remplace pas une évaluation complète.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

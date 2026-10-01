@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Flourishing Scale — Échelle d’épanouissement psychologique</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#4A7A6B;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 6px;}
+  .domain-tag{font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#4A7A6B;margin:0 0 10px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#4A7A6B;background:#E3EFEA;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#4A7A6B;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#4A7A6B;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 20px;}
+  .subscale-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .subscale-row:last-child{border-bottom:none;}
+  .subscale-val{font-weight:700;color:#4A7A6B;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">Flourishing Scale — Échelle d’épanouissement psychologique</h1>
+    <p class="lead">Ce questionnaire explore votre épanouissement psychologique et social à travers 8 affirmations sur le sens de votre vie, vos relations et votre compétence perçue.</p>
+    
+    <div class="pill-row">
+      <span class="pill">8 affirmations</span>
+      <span class="pill">2 minutes</span>
+      <span class="pill">Échelle 7 points</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="domain-tag" id="domain-tag" hidden></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Pr&eacute;c&eacute;dent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">R&eacute;sultat</h1>
+    <p class="result-score" id="score-val"></p>
+    <p class="result-max">score total, sur 56 (8 items de 1 à 7)</p>
+    <p class="result-text">Plus le score est élevé, plus l’épanouissement psychologique et social rapporté est important. Mesure dimensionnelle continue, sans seuil clinique officiel.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Diener, E., Wirtz, D., Tov, W., Kim-Prieto, C., Choi, D., Oishi, S., &amp; Biswas-Diener, R. (2010). New well-being measures: Short scales to assess flourishing and positive and negative feelings. Social Indicators Research, 97, 143-156. Version française : Villieux, A., Sovet, L., Jung, S.-C., &amp; Guilbert, L. (2016), Personality and Individual Differences, 88, 1-5. Outil dimensionnel de bien-être, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+
+<script>
+
+(function(){
+  var items = ["Je m\u00e8ne une vie qui a un but et du sens.", "Mes relations sociales me soutiennent et sont enrichissantes.", "Je suis impliqu\u00e9(e) et int\u00e9ress\u00e9(e) par mes activit\u00e9s quotidiennes.", "Je contribue activement au bonheur et au bien-\u00eatre des autres.", "Je suis comp\u00e9tent(e) et appliqu\u00e9(e) dans les activit\u00e9s qui sont importantes pour moi.", "Je suis quelqu\u2019un de \u00ab\u00a0bien\u00a0\u00bb qui a une \u00ab\u00a0bonne\u00a0\u00bb vie.", "Je suis optimiste quant \u00e0 mon avenir.", "Les gens me respectent."];
+  var opts = ["1 \u2014 Pas du tout d\u2019accord", "2 \u2014 Pas d\u2019accord", "3 \u2014 Plut\u00f4t pas d\u2019accord", "4 \u2014 Ni d\u2019accord, ni pas d\u2019accord", "5 \u2014 Plut\u00f4t d\u2019accord", "6 \u2014 D\u2019accord", "7 \u2014 Tout \u00e0 fait d\u2019accord"];
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    opts.forEach(function(label, v){
+      var score = v + 1;
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === score ? ' selected' : '');
+      d.textContent = label;
+      d.addEventListener('click', function(){
+        answers[idx] = score;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le r\u00e9sultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var total = 0;
+    answers.forEach(function(v){ total += v; });
+    document.getElementById('score-val').textContent = total;
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+
+</script>
+
+<!-- Fiche (vue praticien) int&eacute;gr&eacute;e : affich&eacute;e &agrave; la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Flourishing Scale — Échelle d’épanouissement psychologique</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#4A7A6B 0%,#7FAF9E 55%,#28473D 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.35),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#28473D;background:#E3EFEA;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#4A7A6B;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#28473D;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">FS</span></div>
+
+  <h1 class="serif">Échelle d’épanouissement psychologique (Flourishing Scale)</h1>
+  <span class="badge-standard">&#10003; Standardis&eacute;</span>
+  <p class="lead">Flourishing Scale — Diener et al. (2010), version française Villieux, Sovet, Jung &amp; Guilbert (2016)</p>
+  <div class="meta-row">
+    <span class="pill">8 affirmations</span>
+    <span class="pill">2 minutes</span>
+    <span class="pill">Échelle 7 points</span>
+    <span class="pill">Français</span>
+    <span class="pill">Bien-être</span>
+    <span class="pill">Licence requise : non</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="flourishing-scale.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Pr&eacute;sentation de l'outil</h2>
+    <p>La Flourishing Scale est une mesure brève (8 items) de l’épanouissement psychologique et social : sens et but de la vie, relations sociales soutenantes, engagement quotidien, contribution au bien-être d’autrui, compétence perçue, estime de soi globale, optimisme et respect social perçu. Aucun item n’est inversé.</p>
+    <p class="source-note">Version française validée (Villieux, Sovet, Jung &amp; Guilbert, 2016), diffusée directement par les détenteurs des droits (page officielle eddiener.com).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interpr&eacute;tation</h2>
+    <p>Score total = somme des 8 items, de 8 (épanouissement très faible) à 56 (épanouissement très élevé). Aucun item inversé.</p>
+    <p class="source-note">Mesure dimensionnelle continue, aucun seuil clinique officiel publié par les auteurs : à interpréter à titre indicatif ou en comparaison dans le temps.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p>Diener, E., Wirtz, D., Tov, W., Kim-Prieto, C., Choi, D., Oishi, S., &amp; Biswas-Diener, R. (2010). New well-being measures: Short scales to assess flourishing and positive and negative feelings. <em>Social Indicators Research</em>, 97, 143-156. Version française : Villieux, A., Sovet, L., Jung, S.-C., &amp; Guilbert, L. (2016). Psychological flourishing: Validation of the French version of the Flourishing Scale. <em>Personality and Individual Differences</em>, 88, 1-5.</p>
+    <p class="source-note"><strong>Licence requise : non.</strong> « Permission is not needed to employ the scales […] permission is granted here », usage autorisé à des fins non commerciales (page officielle eddiener.com, succession d’Ed Diener). Outil dimensionnel de bien-être, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var htmlOut = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(htmlOut); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>
