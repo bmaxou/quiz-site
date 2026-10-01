@@ -235,6 +235,7 @@
   button.hb.lic{font-size:11px;font-weight:700;padding:5px 10px;border-radius:999px;opacity:.5;}
   button.hb.lic.non{color:#3D6B4F;background:#E4EEE8;}
   button.hb.lic.oui{color:#8A4B12;background:#FBE9D0;}
+  button.hb.lic.site0{color:#63695D;background:#ECE8DD;}
   button.hb.lic.dem{color:#6B5A12;background:#F6EFC8;}
   button.hb[aria-pressed="true"]{opacity:1;box-shadow:0 0 0 2px #1E3A5F;}
   button.hb:hover{opacity:1;}
@@ -3859,7 +3860,9 @@
             <button type="button" class="hb lic non" data-v="non" aria-pressed="false">Non</button>
             <button type="button" class="hb lic oui" data-v="oui" aria-pressed="false">Oui</button>
             <button type="button" class="hb lic dem" data-v="demande" aria-pressed="false">À demander</button></div></th>
-          <th class="hsite" style="text-align:center">Sur ce site</th>
+          <th class="hsite hfilt" style="text-align:center"><div class="hlabel">Sur ce site</div><div class="hbtns" id="f-site">
+            <button type="button" class="hb lic non" data-v="1" aria-pressed="false">En ligne</button>
+            <button type="button" class="hb lic site0" data-v="0" aria-pressed="false">Pas en ligne</button></div></th>
         </tr></thead>
         <tbody id="liste-body"></tbody>
       </table>
@@ -4111,7 +4114,7 @@
     {k:'h', label:'Hors MENT', f:function(t){ return t[2]==='h'; }},
     {k:'on', label:'En ligne sur ce site', f:function(t){ return t[3]===1; }}
   ];
-  var selM = {}, selL = {};
+  var selM = {}, selL = {}, selS = {};
   function bindGroup(id, sel){
     Array.prototype.forEach.call(document.querySelectorAll('#' + id + ' .hb'), function(b){
       b.addEventListener('click', function(e){
@@ -4123,7 +4126,7 @@
       });
     });
   }
-  bindGroup('f-ment', selM); bindGroup('f-lic', selL);
+  bindGroup('f-ment', selM); bindGroup('f-lic', selL); bindGroup('f-site', selS);
   function mentKey(t){ return (t[2]==='h' && t[3]===1) ? 'n' : t[2]; }
   var cur = 'all', sortKey = 'status', sortDir = 1, text = '';
   var rank = function(t){ return t[2]==='v' ? 0 : (t[2]==='h' && t[3]===1) ? 1 : t[2]==='g' ? 2 : t[2]==='x' ? 3 : 4; };
@@ -4174,6 +4177,7 @@
       if (!fl.f(t)) return false;
       if (Object.keys(selM).length && !selM[mentKey(t)]) return false;
       if (Object.keys(selL).length && !selL[t[5]]) return false;
+      if (Object.keys(selS).length && !selS[t[3]]) return false;
       if (!text) return true;
       return text.split(/\s+/).every(function(w){ return t._s.indexOf(w) !== -1; });
     });
