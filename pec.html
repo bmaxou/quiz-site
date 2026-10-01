@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PEC - Profil de compétences émotionnelles</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#1B6B62;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .dim-label{font-size:12px;font-weight:700;color:#1B6B62;text-transform:uppercase;letter-spacing:.06em;margin:0 0 4px;display:flex;justify-content:space-between;align-items:center;}
+  .subscale-tag{font-size:10.5px;font-weight:700;background:#E1F0EC;color:#1B6B62;border-radius:999px;padding:3px 10px;text-transform:none;letter-spacing:0;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#1B6B62;background:#E1F0EC;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#1B6B62;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#1B6B62;margin:6px 0 4px;}
+  .result-max{font-size:13px;color:#9A9E90;margin:0 0 20px;}
+  .dim-block{margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid #E0D9C9;}
+  .dim-block:last-of-type{border-bottom:none;}
+  .dim-title{display:flex;justify-content:space-between;align-items:baseline;margin:0 0 10px;}
+  .dim-title .name{font-size:14px;font-weight:700;color:#1B6B62;text-transform:uppercase;letter-spacing:.04em;}
+  .dim-title .score{font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;color:#1B6B62;}
+  .sub-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;font-size:13.5px;}
+  .sub-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:18px;color:#1B6B62;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  .caveat{background:#FBF0DC;border:1px solid #E9D8AE;border-radius:12px;padding:14px 16px;font-size:13px;color:#7A5C16;margin:0 0 20px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">PEC - Profil de compétences émotionnelles</h1>
+    <p class="lead">50 questions sur la façon dont vous vivez avec vos émotions, les vôtres et celles des autres, réparties en 10 sous-échelles.</p>
+    <div class="pill-row">
+      <span class="pill">50 questions</span>
+      <span class="pill">12 minutes</span>
+      <span class="pill">10 sous-échelles</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="dim-label"><span id="dim-name"></span><span class="subscale-tag" id="sub-tag"></span></p>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-score" id="score-total">0 / 250</p>
+    <p class="result-max">score total de compétence émotionnelle</p>
+    <div id="dim-list"></div>
+    <div class="caveat">La clé de cotation utilisée provient d'une reproduction institutionnelle tierce (Haute École Pédagogique du canton de Vaud) citant les auteurs originaux, et non des auteurs eux-mêmes directement. Aucune norme française de référence n'a été retrouvée à la construction : ces scores sont des repères descriptifs, plus le score est élevé, plus la compétence émotionnelle correspondante est rapportée comme développée, pas un classement par rapport à un étalonnage publié.</div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">PEC — Profile of Emotional Competence (Brasseur, S., Grégoire, J., Bourdu, R., &amp; Mikolajczak, M., 2013), <em>PLoS ONE</em>, 8(5), e62635, licence CC-BY. Ce résultat est un repère, il ne constitue pas un diagnostic et ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var SCALE = ["1 — ne me correspond pas du tout / ne réagis jamais ainsi","2","3","4","5 — me correspond tout à fait / cela m'arrive très souvent"];
+
+  var dims = [
+    { key:'intra', name:'Compétences intrapersonnelles', subs:[
+      { key:'ident_intra', name:'Identification de ses propres émotions' },
+      { key:'comp_intra', name:'Compréhension de ses propres émotions' },
+      { key:'expr_intra', name:'Expression / écoute de ses propres émotions' },
+      { key:'reg_intra', name:'Régulation de ses propres émotions' },
+      { key:'util_intra', name:'Utilisation de ses propres émotions' }
+    ]},
+    { key:'inter', name:'Compétences interpersonnelles', subs:[
+      { key:'ident_inter', name:"Identification des émotions d'autrui" },
+      { key:'comp_inter', name:"Compréhension des émotions d'autrui" },
+      { key:'expr_inter', name:"Expression / écoute des émotions d'autrui" },
+      { key:'reg_inter', name:"Régulation des émotions d'autrui" },
+      { key:'util_inter', name:"Utilisation des émotions d'autrui" }
+    ]}
+  ];
+
+  // n = numéro d'item (1-50), dim = 'intra'/'inter', sub = clé de sous-échelle, inv = inversé (cotation 6-réponse)
+  var items = [
+    {n:1, dim:'intra', sub:'comp_intra', inv:true, text:"Mes émotions apparaissent sans que je comprenne d'où elles viennent."},
+    {n:2, dim:'intra', sub:'comp_intra', inv:true, text:"Je ne comprends pas toujours pourquoi je réagis comme je réagis."},
+    {n:3, dim:'inter', sub:'util_inter', inv:false, text:"Si je le voulais, je pourrais facilement jouer sur les émotions des autres pour obtenir ce que je veux."},
+    {n:4, dim:'inter', sub:'util_inter', inv:false, text:"Je sais quoi faire pour rallier les gens à ma cause."},
+    {n:5, dim:'inter', sub:'comp_inter', inv:true, text:"Je n'arrive pas à m'expliquer les réactions émotionnelles des gens."},
+    {n:6, dim:'intra', sub:'ident_intra', inv:false, text:"Quand je me sens bien, j'arrive facilement à savoir si c'est parce que je suis content, fier de moi ou détendu."},
+    {n:7, dim:'inter', sub:'ident_inter', inv:false, text:"Je sais lorsqu'une personne est en colère, triste, ou joyeuse même si elle ne m'en parle pas."},
+    {n:8, dim:'intra', sub:'expr_intra', inv:false, text:"J'arrive facilement à trouver les mots pour décrire ce que je ressens."},
+    {n:9, dim:'intra', sub:'util_intra', inv:true, text:"Je ne me base jamais sur mes émotions pour orienter ma vie."},
+    {n:10, dim:'intra', sub:'comp_intra', inv:false, text:"Quand je me sens mal, je fais facilement le lien avec une situation qui m'a touché(e)."},
+    {n:11, dim:'inter', sub:'util_inter', inv:false, text:"Je peux facilement obtenir ce que je désire des autres."},
+    {n:12, dim:'intra', sub:'reg_intra', inv:false, text:"Je retrouve facilement mon calme après avoir vécu un évènement difficile."},
+    {n:13, dim:'inter', sub:'comp_inter', inv:false, text:"Je peux facilement expliquer les réactions émotionnelles de mes proches."},
+    {n:14, dim:'inter', sub:'comp_inter', inv:false, text:"La plupart du temps, il m'est facile de comprendre pourquoi les gens ressentent ce qu'ils ressentent."},
+    {n:15, dim:'intra', sub:'reg_intra', inv:false, text:"Quand je suis triste il m'est facile de me remettre de bonne humeur."},
+    {n:16, dim:'intra', sub:'ident_intra', inv:false, text:"Quand quelque chose me touche, je sais immédiatement ce que je ressens."},
+    {n:17, dim:'intra', sub:'expr_intra', inv:false, text:"Si quelque chose me déplaît j'arrive à le dire calmement."},
+    {n:18, dim:'inter', sub:'comp_inter', inv:true, text:"Je ne comprends pas pourquoi mes proches réagissent comme ils réagissent."},
+    {n:19, dim:'inter', sub:'reg_inter', inv:false, text:"Quand je vois quelqu'un qui est stressé ou anxieux, il m'est facile de le calmer."},
+    {n:20, dim:'intra', sub:'ident_intra', inv:true, text:"Lors d'une dispute, je n'arrive pas à savoir si je suis triste ou en colère."},
+    {n:21, dim:'intra', sub:'util_intra', inv:false, text:"J'utilise mes émotions pour améliorer mes choix de vie."},
+    {n:22, dim:'intra', sub:'util_intra', inv:false, text:"J'essaie d'apprendre des situations ou des émotions difficiles."},
+    {n:23, dim:'inter', sub:'expr_inter', inv:false, text:"Les autres viennent facilement me parler de leurs problèmes personnels."},
+    {n:24, dim:'intra', sub:'util_intra', inv:false, text:"Mes émotions m'informent des changements à effectuer dans ma vie."},
+    {n:25, dim:'intra', sub:'expr_intra', inv:true, text:"C'est difficile pour moi d'expliquer aux autres ce que je ressens même si je le veux."},
+    {n:26, dim:'intra', sub:'comp_intra', inv:true, text:"Je ne comprends pas toujours pourquoi je suis stressé(e)."},
+    {n:27, dim:'inter', sub:'reg_inter', inv:true, text:"Si quelqu'un venait me voir en pleurs, je ne saurais pas quoi faire."},
+    {n:28, dim:'inter', sub:'expr_inter', inv:true, text:"J'éprouve de la difficulté à écouter les gens qui se plaignent."},
+    {n:29, dim:'inter', sub:'ident_inter', inv:true, text:"Je n'adopte pas la bonne attitude avec les gens parce que je n'ai pas perçu dans quel état émotionnel ils sont."},
+    {n:30, dim:'inter', sub:'ident_inter', inv:false, text:"J'arrive facilement à savoir ce que les autres ressentent."},
+    {n:31, dim:'inter', sub:'expr_inter', inv:true, text:"J'essaie d'éviter que les gens ne me parlent de leurs problèmes."},
+    {n:32, dim:'inter', sub:'util_inter', inv:false, text:"Je sais comment faire quand je veux motiver les gens."},
+    {n:33, dim:'inter', sub:'reg_inter', inv:false, text:"Je suis doué(e) pour remonter le moral des gens."},
+    {n:34, dim:'inter', sub:'comp_inter', inv:true, text:"J'ai du mal à faire le lien entre les réactions d'une personne et ce qu'elle a vécu."},
+    {n:35, dim:'inter', sub:'reg_inter', inv:false, text:"Je suis habituellement capable d'influencer la manière dont les autres se sentent."},
+    {n:36, dim:'inter', sub:'util_inter', inv:false, text:"Si je le voulais, il serait facile pour moi de pousser quelqu'un à se sentir mal."},
+    {n:37, dim:'intra', sub:'reg_intra', inv:true, text:"Je trouve difficile de gérer mes émotions."},
+    {n:38, dim:'intra', sub:'expr_intra', inv:true, text:"Mes proches me disent que je n'exprime pas assez ce que je ressens."},
+    {n:39, dim:'intra', sub:'reg_intra', inv:false, text:"Quand je suis en colère, je peux facilement me calmer."},
+    {n:40, dim:'inter', sub:'ident_inter', inv:true, text:"Je suis surpris(e) par la réaction de certaines personnes parce que je n'avais pas perçu qu'elles étaient déjà de mauvaise humeur."},
+    {n:41, dim:'intra', sub:'util_intra', inv:false, text:"Mes émotions m'informent de ce qui est important pour moi."},
+    {n:42, dim:'intra', sub:'expr_intra', inv:true, text:"Les autres n'acceptent pas la manière dont j'exprime mes émotions."},
+    {n:43, dim:'intra', sub:'comp_intra', inv:true, text:"Souvent, quand je suis triste, je ne sais pas pourquoi."},
+    {n:44, dim:'inter', sub:'ident_inter', inv:true, text:"Il m'arrive souvent de ne pas savoir dans quel état émotionnel se trouvent les personnes autour de moi."},
+    {n:45, dim:'inter', sub:'expr_inter', inv:false, text:"Les autres me disent que je suis un bon confident."},
+    {n:46, dim:'inter', sub:'expr_inter', inv:true, text:"Je suis mal à l'aise quand les autres me racontent quelque chose de difficile pour eux."},
+    {n:47, dim:'inter', sub:'reg_inter', inv:false, text:"Lorsque je fais face à quelqu'un en colère, je peux facilement le calmer."},
+    {n:48, dim:'intra', sub:'ident_intra', inv:false, text:"Je suis conscient de mes émotions au moment où je les éprouve."},
+    {n:49, dim:'intra', sub:'ident_intra', inv:true, text:"Quand je me sens mal, il m'est difficile de savoir quelle émotion je ressens exactement."},
+    {n:50, dim:'intra', sub:'reg_intra', inv:false, text:"Lorsque je suis confronté(e) à une situation stressante, je fais en sorte d'y penser de manière à ce que cela m'aide à rester calme."}
+  ];
+
+  var subLabel = {};
+  dims.forEach(function(d){ d.subs.forEach(function(s){ subLabel[s.key] = s.name; }); });
+  var dimLabel = {}; dims.forEach(function(d){ dimLabel[d.key] = d.name; });
+
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function renderQuestion(){
+    var it = items[idx];
+    document.getElementById('dim-name').textContent = dimLabel[it.dim];
+    document.getElementById('sub-tag').textContent = subLabel[it.sub];
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = it.n + '. ' + it.text;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    SCALE.forEach(function(label, i){
+      var v = i + 1;
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === v ? ' selected' : '');
+      d.textContent = label;
+      d.addEventListener('click', function(){
+        answers[idx] = v;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function itemScore(it){
+    var v = answers[items.indexOf(it)];
+    if (v === null || v === undefined) return null;
+    return it.inv ? (6 - v) : v;
+  }
+
+  function subScore(subKey){
+    var scored = items.filter(function(it){ return it.sub === subKey; }).map(itemScore).filter(function(v){ return v !== null; });
+    if (!scored.length) return null;
+    return scored.reduce(function(a,b){ return a+b; }, 0);
+  }
+
+  function dimScore(dimKey){
+    var subs = dims.filter(function(d){ return d.key === dimKey; })[0].subs;
+    var sum = 0, any = false;
+    subs.forEach(function(s){
+      var sc = subScore(s.key);
+      if (sc !== null) { sum += sc; any = true; }
+    });
+    return any ? sum : null;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+
+    var total = 0;
+    dims.forEach(function(d){ var s = dimScore(d.key); if (s !== null) total += s; });
+    document.getElementById('score-total').textContent = total + ' / 250';
+
+    var list = document.getElementById('dim-list');
+    list.innerHTML = '';
+    dims.forEach(function(d){
+      var block = document.createElement('div');
+      block.className = 'dim-block';
+      var ds = dimScore(d.key);
+      var html = '<div class="dim-title"><span class="name">' + d.name + '</span><span class="score">' + (ds === null ? '—' : ds + ' / 125') + '</span></div>';
+      d.subs.forEach(function(s){
+        var sc = subScore(s.key);
+        html += '<div class="sub-row"><span>' + s.name + '</span><span class="sub-score">' + (sc === null ? '—' : sc + ' / 25') + '</span></div>';
+      });
+      block.innerHTML = html;
+      list.appendChild(block);
+    });
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PEC - Profil de compétences émotionnelles</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#1B6B62 0%,#4E9B90 55%,#0E3A34 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(224,240,236,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:28px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#0E3A34;background:#E1F0EC;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .caveat{font-size:13px;color:#7A5C16;background:#FBF0DC;border:1px solid #E9D8AE;border-radius:12px;padding:14px 16px;margin:0 0 14px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#1B6B62;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#0E3A34;border-color:#E0D9C9;}
+  .preview-card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:14px;padding:20px 22px;margin-bottom:14px;}
+  .preview-q{font-size:14.5px;font-weight:600;margin:0 0 10px;}
+  table.domains{width:100%;border-collapse:collapse;font-size:13.5px;margin:0 0 12px;}
+  table.domains th, table.domains td{text-align:left;padding:8px 10px;border-bottom:1px solid #E0D9C9;}
+  table.domains th{font-size:12px;color:#63695D;text-transform:uppercase;letter-spacing:.03em;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">PEC</span></div>
+
+  <h1 class="serif">Profil de compétences émotionnelles (PEC)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Profile of Emotional Competence — Brasseur, S., Grégoire, J., Bourdu, R., &amp; Mikolajczak, M. (2013), <em>PLoS ONE</em>, 8(5), e62635, licence CC-BY</p>
+  <div class="meta-row">
+    <span class="pill">50 questions</span>
+    <span class="pill">12 minutes</span>
+    <span class="pill">Auto-administré</span>
+    <span class="pill">Adulte</span>
+    <span class="pill">Français</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="pec.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le PEC mesure la compétence émotionnelle perçue à travers 50 affirmations réparties en 10 sous-échelles de 5 items, elles-mêmes regroupées en deux grandes dimensions : les compétences émotionnelles intrapersonnelles (propres émotions) et interpersonnelles (émotions d'autrui). Chaque dimension couvre cinq processus : identification, compréhension, expression/écoute, régulation et utilisation des émotions. Instrument académique publié en libre accès (licence CC-BY), sans aucun signal de propriété exclusive ni de licence commerciale.</p>
+    <p class="source-note">Consigne de passation : « Les questions ci-dessous ont pour but de mieux comprendre comment vous vivez avec vos émotions. Répondez spontanément à chacune des questions en tenant compte de la manière dont vous réagissez en général. Il n'y a ni bonnes, ni mauvaises réponses car nous sommes tous différents à ce niveau. »</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Dimensions et sous-échelles</h2>
+    <table class="domains">
+      <tr><th>Dimension</th><th>Sous-échelles (5 items chacune)</th></tr>
+      <tr><td>Compétences intrapersonnelles (max 125)</td><td>Identification, Compréhension, Expression/écoute, Régulation, Utilisation — de ses propres émotions</td></tr>
+      <tr><td>Compétences interpersonnelles (max 125)</td><td>Identification, Compréhension, Expression/écoute, Régulation, Utilisation — des émotions d'autrui</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Aperçu</h2>
+    <div class="preview-card">
+      <p class="preview-q">1. Mes émotions apparaissent sans que je comprenne d'où elles viennent.</p>
+      <p class="source-note">Échelle : 1 (ne me correspond pas du tout / ne réagis jamais ainsi) à 5 (me correspond tout à fait / cela m'arrive très souvent). Item inversé à la cotation.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <div class="caveat">La clé de cotation (répartition exacte des 50 items entre les 10 sous-échelles et liste des 21 items inversés) provient d'une reproduction institutionnelle tierce — un outil de calcul publié par la Haute École Pédagogique du canton de Vaud (HEP Vaud/HES-SO), qui cite explicitement les auteurs originaux — et non du document des auteurs eux-mêmes, resté inaccessible lors du sourçage. Sa cohérence interne a été entièrement vérifiée avant construction : chacun des 50 items apparaît exactement une fois dans les 10 sous-échelles, et la logique des 21 items inversés est cohérente avec le sens de chaque item. Aucune norme française de référence n'a été retrouvée : les scores obtenus sont des repères descriptifs, pas un classement par rapport à un étalonnage publié.</div>
+    <p>21 items sont inversés (cotation = 6 − réponse) avant d'être additionnés dans leur sous-échelle. Chaque sous-échelle (5 items) va de 5 à 25. Chaque dimension (5 sous-échelles) va de 25 à 125. Le score total (2 dimensions) va de 50 à 250. Plus le score est élevé, plus la compétence émotionnelle correspondante est rapportée comme développée.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source</h2>
+    <p class="source-note">Brasseur, S., Grégoire, J., Bourdu, R., &amp; Mikolajczak, M. (2013). The Profile of Emotional Competence (PEC): Development and validation of a self-reported measure that fits dimensions of emotional competence theory. <em>PLoS ONE</em>, 8(5), e62635. DOI : 10.1371/journal.pone.0062635. Licence CC-BY (accès libre). Clé de cotation reproduite via un outil institutionnel de la Haute École Pédagogique du canton de Vaud (dépôt ORFEE), citant Brasseur et al. (2013). Ce résultat est un repère, il ne constitue pas un diagnostic et ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

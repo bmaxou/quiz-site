@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>K10 — Échelle de détresse psychologique de Kessler</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#1B4B4A;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#1B4B4A;background:#E1EDEC;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1B4B4A;border-color:#E0D9C9;}
+  .btn-primary{background:#1B4B4A;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#1B4B4A;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 14px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">K10 — Échelle de détresse psychologique de Kessler</h1>
+    <p class="lead">Dix questions sur la fréquence de symptômes de détresse psychologique (nervosité, agitation, tristesse, épuisement) au cours du dernier mois — dépistage transdiagnostique large (anxiété/dépression).</p>
+    <p class="lang-note">Version française établie sur la validation canadienne-française (Statistique Canada, Enquête auprès des peuples autochtones).</p>
+    <div class="pill-row">
+      <span class="pill">10 questions</span>
+      <span class="pill">3 minutes</span>
+      <span class="pill">Échelle de fréquence</span>
+      <span class="pill">Français</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-score" id="score-val"></p>
+    <p class="result-max">score total, de 0 à 40</p>
+    <p class="result-text" id="level-text"></p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Kessler R.C. et al. (2002/2003). Version française : Statistique Canada, Enquête auprès des peuples autochtones 2012. Outil de dépistage, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [
+    "Au cours du dernier mois, à quelle fréquence vous êtes-vous senti(e) épuisé(e) sans véritable raison ?",
+    "Au cours du dernier mois, à quelle fréquence vous êtes-vous senti(e) nerveux(se) ?",
+    "Au cours du dernier mois, à quelle fréquence vous êtes-vous senti(e) si nerveux(se) que rien ne pouvait vous calmer ?",
+    "Au cours du dernier mois, à quelle fréquence vous êtes-vous senti(e) désespéré(e) ?",
+    "Au cours du dernier mois, à quelle fréquence vous êtes-vous senti(e) agité(e) ou incapable de tenir en place ?",
+    "Au cours du dernier mois, à quelle fréquence vous êtes-vous senti(e) si agité(e) que vous ne pouviez pas rester sans bouger ?",
+    "Au cours du dernier mois, à quelle fréquence vous êtes-vous senti(e) triste ou déprimé(e) ?",
+    "Au cours du dernier mois, à quelle fréquence vous êtes-vous senti(e) si déprimé(e) que rien ne pouvait vous faire sourire ?",
+    "Au cours du dernier mois, à quelle fréquence avez-vous eu l'impression que tout était un effort ?",
+    "Au cours du dernier mois, à quelle fréquence vous êtes-vous senti(e) bon(ne) à rien ?"
+  ];
+  var opts = ["Jamais (0)","Rarement (1)","Parfois (2)","La plupart du temps (3)","Tout le temps (4)"];
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    opts.forEach(function(label, v){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === v ? ' selected' : '');
+      d.textContent = label;
+      d.addEventListener('click', function(){
+        answers[idx] = v;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var sum = answers.reduce(function(a,b){ return a+b; }, 0);
+    document.getElementById('score-val').textContent = sum;
+    document.getElementById('level-text').textContent = "Plus le score est élevé, plus la détresse psychologique rapportée sur le dernier mois est importante. Cette version cote chaque réponse de 0 à 4 (total 0-40), telle que documentée dans la validation canadienne-française consultée (Statistique Canada) ; d'autres versions internationales cotent 1 à 5 (total 10-50) — ne pas comparer les scores obtenus avec un seuil calculé sur une autre échelle de cotation.";
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>K10 — Échelle de détresse psychologique de Kessler</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#1B4B4A 0%,#3D9B8E 55%,#0D2E2D 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(210,245,235,.45),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#1B4B4A;background:#E1EDEC;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#1B4B4A;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#1B4B4A;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <div class="fiche-photo"><span class="acronym">K10</span></div>
+  <h1 class="serif">Échelle de détresse psychologique de Kessler (K10)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Kessler R.C., Andrews G., Colpe L.J. et al. (2002), <em>Psychological Medicine</em>, 32(6), 959-976.</p>
+  <div class="meta-row">
+    <span class="pill">10 questions</span>
+    <span class="pill">3 minutes</span>
+    <span class="pill">Échelle de fréquence</span>
+    <span class="pill">Adulte</span>
+    <span class="pill">Français</span>
+    <span class="pill">Licence requise : non</span>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" href="k10.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le K10 dépiste la détresse psychologique générale (anxiété et dépression confondues) sur le dernier mois, en population générale comme en clinique. Il existe une version courte K6 (6 items, sous-ensemble du K10).</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque item est coté de 0 (jamais) à 4 (tout le temps) ; score total de 0 à 40, cotation telle que documentée dans la validation canadienne-française consultée (Statistique Canada, Enquête auprès des peuples autochtones 2012). Plus le score est élevé, plus la détresse rapportée est importante. ⚠️ D'autres versions internationales du K10 (dont certaines cotations cliniques australiennes) utilisent une échelle 1-5 (total 10-50, avec des seuils de sévérité publiés pour cette échelle) : ne pas comparer un score obtenu ici avec un seuil calculé sur cette autre cotation. Aucune bande de sévérité propre à la cotation 0-40 n'a été retrouvée dans la source française consultée.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p>Kessler R.C., Andrews G., Colpe L.J., Hiripi E., Mroczek D.K., Normand S.-L.T., Walters E.E. &amp; Zaslavsky A.M. (2002). Short screening scales to monitor population prevalences and trends in non-specific psychological distress. <em>Psychological Medicine</em>, 32(6), 959-976. Version française : Statistique Canada (2016), « Validation de l'échelle de détresse psychologique à 10 questions de Kessler (K10) à partir de l'Enquête auprès des peuples autochtones de 2012 » ; validation complémentaire : Gauvin G., Côté L.-P. &amp; Bardon C. (2024), <em>Revue québécoise de psychologie</em>, 44(3), 132-152.</p>
+    <p class="source-note"><strong>Licence requise : non.</strong> Page officielle de référence (McGill MAPPRO) : « L'utilisation du K6/K10 est gratuite et ne nécessite aucune autorisation ou approbation » ; citer l'article fondateur et le copyright de l'OMS. Outil de dépistage, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>JSS — Questionnaire sur la satisfaction professionnelle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#3D6E8A;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 6px;}
+  .domain-tag{font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#3D6E8A;margin:0 0 10px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#3D6E8A;background:#E2ECF1;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#3D6E8A;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#3D6E8A;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 20px;}
+  .subscale-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .subscale-row:last-child{border-bottom:none;}
+  .subscale-val{font-weight:700;color:#3D6E8A;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">JSS — Questionnaire sur la satisfaction professionnelle</h1>
+    <p class="lead">Ce questionnaire explore votre satisfaction au travail à travers 36 affirmations réparties en 9 facettes (salaire, promotion, encadrement, avantages sociaux, reconnaissance, conditions de travail, relations aux collègues, nature du travail, communication).</p>
+    
+    <div class="pill-row">
+      <span class="pill">36 affirmations</span>
+      <span class="pill">8-10 minutes</span>
+      <span class="pill">Échelle 6 points</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="domain-tag" id="domain-tag" hidden></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Pr&eacute;c&eacute;dent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">R&eacute;sultat</h1>
+    <p class="result-score" id="score-val"></p>
+    <p class="result-max">score total, sur 216 (36 items de 1 à 6, items négatifs inversés)</p>
+    <div id="facet-rows"></div>
+    <p class="result-text">Plus le score est élevé, plus la satisfaction professionnelle rapportée est importante. Chaque facette est cotée de 4 à 24. Mesure dimensionnelle, sans seuil clinique officiel.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Spector, P.E. (1985). Measurement of human service staff satisfaction: Development of the Job Satisfaction Survey. American Journal of Community Psychology, 13(6), 693-713. Traduction française : Laurent M. Lapierre, École de gestion Telfer, Université d’Ottawa (2013). Outil dimensionnel, ne remplace pas une évaluation clinique ou organisationnelle complète.</p>
+  </div>
+</div>
+
+<script>
+
+(function(){
+  var items = ["Je trouve que ce qu\u2019on me paie est juste si je consid\u00e8re le travail que je fais.", "Il y a trop peu de chances d\u2019\u00eatre promu \u00e0 mon travail.", "Mon superviseur est comp\u00e9tent dans son travail.", "Je ne suis pas satisfait(e) des avantages sociaux que je re\u00e7ois.", "Quand je fais du bon travail, je re\u00e7ois la reconnaissance que je m\u00e9rite.", "Plusieurs de nos r\u00e8gles et proc\u00e9dures limitent notre capacit\u00e9 \u00e0 faire du bon travail.", "J\u2019aime les gens avec qui je travaille.", "Parfois, je trouve que mon travail est sans importance.", "Les communications semblent \u00eatre bonnes dans cette organisation.", "Les augmentations salariales sont rares.", "Ceux qui font du bon travail ont de bonnes chances d\u2019\u00eatre promus.", "Mon superviseur est injuste avec moi.", "Les avantages sociaux que l\u2019on re\u00e7oit sont aussi bons que ceux offerts par la plupart des autres organisations.", "Je ne trouve pas que le travail que je fais est appr\u00e9ci\u00e9.", "Mes efforts au travail sont rarement nuits par la paperasserie (\u00ab red tape \u00bb).", "Je trouve que je dois travailler plus fort \u00e0 cause de l\u2019incomp\u00e9tence des gens avec qui je travaille.", "J\u2019aime faire ce que je fais \u00e0 mon travail.", "Les buts de mon organisation m\u2019\u00e9chappent.", "Je ne me sens pas appr\u00e9ci\u00e9 par l\u2019organisation lorsque je consid\u00e8re ce qu\u2019elle me paie.", "Les gens obtiennent des promotions aussi facilement ici que dans d\u2019autres organisations.", "Mon superviseur n\u2019est pas assez attentionn\u00e9 aux sentiments de ses subordonn\u00e9s.", "Notre programme d\u2019avantages sociaux est \u00e9quitable.", "Il y a peu de r\u00e9compenses pour ceux qui travaillent ici.", "J\u2019ai trop de choses \u00e0 faire au travail.", "J\u2019appr\u00e9cie mes coll\u00e8gues de travail.", "J\u2019ai souvent le sentiment de ne pas savoir ce qui se passe avec l\u2019organisation.", "Faire mon travail me donne un sentiment de fiert\u00e9.", "Je suis satisfait avec mes chances d\u2019avoir des augmentations salariales.", "Il y a des avantages sociaux que nous n\u2019avons pas que nous devrions avoir.", "J\u2019appr\u00e9cie mon superviseur.", "J\u2019ai trop de paperasserie (t\u00e2ches administratives) \u00e0 faire.", "Je ne trouve pas que mes efforts sont reconnus \u00e0 leur juste valeur.", "Je suis satisfait(e) de mes chances de recevoir une promotion.", "Il y a trop de querelles et de conflits au travail.", "Mon travail est agr\u00e9able.", "Les t\u00e2ches de travail ne sont pas bien expliqu\u00e9es."];
+  var opts = ["1 \u2014 Fortement en d\u00e9saccord", "2 \u2014 Mod\u00e9r\u00e9ment en d\u00e9saccord", "3 \u2014 Un peu en d\u00e9saccord", "4 \u2014 Un peu d\u2019accord", "5 \u2014 Mod\u00e9r\u00e9ment d\u2019accord", "6 \u2014 Fortement d\u2019accord"];
+  var negative = [2, 4, 6, 8, 10, 12, 14, 16, 18, 19, 21, 23, 24, 26, 29, 31, 32, 34, 36];
+  var facets = [
+    {name:"Salaire", items:[1, 10, 19, 28]},
+    {name:"Possibilit\u00e9s de promotion", items:[2, 11, 20, 33]},
+    {name:"Qualit\u00e9 de l\u2019encadrement", items:[3, 12, 21, 30]},
+    {name:"Avantages sociaux", items:[4, 13, 22, 29]},
+    {name:"R\u00e9compenses bas\u00e9es sur le m\u00e9rite", items:[5, 14, 23, 32]},
+    {name:"Conditions de travail", items:[6, 15, 24, 31]},
+    {name:"Relations avec les coll\u00e8gues", items:[7, 16, 25, 34]},
+    {name:"Travail proprement dit", items:[8, 17, 27, 35]},
+    {name:"Communication", items:[9, 18, 26, 36]}
+  ];
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    opts.forEach(function(label, v){
+      var score = v + 1;
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === score ? ' selected' : '');
+      d.textContent = label;
+      d.addEventListener('click', function(){
+        answers[idx] = score;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le r\u00e9sultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function recoded(n){
+    var v = answers[n-1];
+    return negative.indexOf(n) !== -1 ? (7 - v) : v;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var total = 0;
+    var rows = '';
+    facets.forEach(function(f){
+      var sum = 0;
+      f.items.forEach(function(n){ sum += recoded(n); });
+      total += sum;
+      rows += '<div class="subscale-row"><span>' + f.name + '</span><span class="subscale-val">' + sum + ' / 24</span></div>';
+    });
+    document.getElementById('facet-rows').innerHTML = rows;
+    document.getElementById('score-val').textContent = total;
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+
+</script>
+
+<!-- Fiche (vue praticien) int&eacute;gr&eacute;e : affich&eacute;e &agrave; la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>JSS — Questionnaire sur la satisfaction professionnelle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#3D6E8A 0%,#7FA9C2 55%,#1F3B4A 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.35),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#1F3B4A;background:#E2ECF1;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#3D6E8A;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#1F3B4A;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">JSS</span></div>
+
+  <h1 class="serif">Questionnaire sur la satisfaction professionnelle (JSS)</h1>
+  <span class="badge-standard">&#10003; Standardis&eacute;</span>
+  <p class="lead">Job Satisfaction Survey — Spector (1985/1994), traduction française Lapierre (2013)</p>
+  <div class="meta-row">
+    <span class="pill">36 affirmations</span>
+    <span class="pill">8-10 minutes</span>
+    <span class="pill">Échelle 6 points</span>
+    <span class="pill">Français</span>
+    <span class="pill">Psychologie du travail</span>
+    <span class="pill">Licence requise : non</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="jss.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Pr&eacute;sentation de l'outil</h2>
+    <p>Le JSS mesure la satisfaction professionnelle à travers 9 facettes (4 items chacune) : salaire, possibilités de promotion, qualité de l’encadrement, avantages sociaux, récompenses basées sur le mérite, conditions de travail, relations avec les collègues, nature du travail lui-même et communication au sein de l’organisation. Les items sont formulés tantôt positivement, tantôt négativement.</p>
+    <p class="source-note">Traduction française officielle de Laurent M. Lapierre (École de gestion Telfer, Université d’Ottawa, 2013), diffusée directement par l’auteur détenteur des droits (page officielle paulspector.com), avec clé d’interprétation traduite par Silvia Bonaccio (2014).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interpr&eacute;tation</h2>
+    <p>19 items sont formulés négativement (2, 4, 6, 8, 10, 12, 14, 16, 18, 19, 21, 23, 24, 26, 29, 31, 32, 34, 36) et sont inversés avant addition (score inversé = 7 − score brut). Chaque facette (4 items) est cotée de 4 à 24. Le score total (36 items) est coté de 36 à 216. Plus le score est élevé, plus la satisfaction professionnelle est importante.</p>
+    <p class="source-note">Mesure dimensionnelle continue, aucun seuil clinique officiel : à interpréter par facette et globalement, à titre indicatif ou en comparaison dans le temps.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p>Spector, P.E. (1985). Measurement of human service staff satisfaction: Development of the Job Satisfaction Survey. <em>American Journal of Community Psychology</em>, 13(6), 693-713. Traduction française : Laurent M. Lapierre, École de gestion Telfer, Université d’Ottawa (2013), &#169; Paul E. Spector 1994.</p>
+    <p class="source-note"><strong>Licence requise : non.</strong> Instrument diffusé gratuitement par l’auteur détenteur des droits à des fins éducatives et de recherche non commerciales (page officielle paulspector.com, traductions en libre téléchargement). Usage commercial exclu. Outil dimensionnel, ne remplace pas une évaluation clinique ou organisationnelle complète.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var htmlOut = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(htmlOut); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

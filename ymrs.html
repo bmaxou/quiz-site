@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>YMRS - Échelle d'évaluation de la manie de Young</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#1E3A5F;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 4px;}
+  .q-desc{font-size:13px;color:#63695D;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#1E3A5F;background:#E1E7EC;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#1E3A5F;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:36px;color:#1E3A5F;margin:0 0 4px;}
+  .result-max{font-size:13px;color:#9A9E90;margin:0 0 20px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">YMRS - Échelle d'évaluation de la manie de Young</h1>
+    <p class="lead">Young Mania Rating Scale. Questionnaire hétéro-administré : pour chacun des 11 items, le clinicien cote la sévérité du symptôme sur la base de l'entretien et de l'observation, en se référant aux deux derniers jours (ou plus si les signes sont particulièrement fluctuants).</p>
+    <div class="pill-row">
+      <span class="pill">11 questions</span>
+      <span class="pill">10 minutes</span>
+      <span class="pill">Hétéro-administré (clinicien)</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-score" id="score-total"></p>
+    <p class="result-max">score total YMRS, sur 60 (0-4 pour 7 items, 0-8 par paliers de 2 pour 4 items)</p>
+    <p class="lead">Plus le score est élevé, plus les symptômes maniaques observés/rapportés sont marqués. Aucun seuil clinique catégoriel n'a été retrouvé dans la publication originale (Young et al., 1978) lors du sourçage de cet outil : ce résultat propose une lecture dimensionnelle uniquement, il ne remplace pas une évaluation clinique.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Young, R.C., Biggs, J.T., Ziegler, V.E., &amp; Meyer, D.A. (1978). A rating scale for mania: reliability, validity and sensitivity. British Journal of Psychiatry, 133, 429-435. Échelle académique reproduite librement par de nombreuses sources cliniques universitaires. Ce résultat est un repère, il ne constitue pas un diagnostic.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [
+    {t:"1. Élévation de l'humeur", opts:[
+      [0,"0 - Absente"],
+      [1,"1 - Discrètement ou possiblement augmentée à l'interrogatoire"],
+      [2,"2 - Élévation subjective nette ; optimiste, confiant, gai"],
+      [3,"3 - Élevée, inappropriée au contexte ; humoristique"],
+      [4,"4 - Euphorique ; inappropriée au contexte ; chante"]
+    ]},
+    {t:"2. Activité motrice - énergie augmentée", opts:[
+      [0,"0 - Absente"],
+      [1,"1 - Subjectivement augmentée"],
+      [2,"2 - Animé ; gestes augmentés"],
+      [3,"3 - Énergie excessive ; hyperactif par moments ; agité (peut être calmé)"],
+      [4,"4 - Excitation motrice ; hyperactivité continue (ne peut être calmé)"]
+    ]},
+    {t:"3. Intérêt sexuel", opts:[
+      [0,"0 - Normal ; non augmenté"],
+      [1,"1 - Discrètement ou possiblement augmenté"],
+      [2,"2 - Augmentation subjective nette à l'interrogatoire"],
+      [3,"3 - Contenu sexuel spontané ; développe des sujets sexuels ; hypersexuel"],
+      [4,"4 - Actes sexuels manifestes (envers patients, soignants ou l'examinateur)"]
+    ]},
+    {t:"4. Sommeil", opts:[
+      [0,"0 - Ne rapporte pas de diminution du sommeil"],
+      [1,"1 - Dort moins que d'habitude, jusqu'à une heure de moins"],
+      [2,"2 - Dort plus d'une heure de moins que d'habitude"],
+      [3,"3 - Rapporte un besoin de sommeil diminué"],
+      [4,"4 - Nie tout besoin de sommeil"]
+    ]},
+    {t:"5. Irritabilité", opts:[
+      [0,"0 - Absente"],
+      [2,"2 - Subjectivement augmentée"],
+      [4,"4 - Irritable par moments pendant l'entretien ; épisodes récents de colère"],
+      [6,"6 - Fréquemment irritable pendant l'entretien ; bref, sec en continu"],
+      [8,"8 - Hostile, non coopératif ; entretien impossible"]
+    ]},
+    {t:"6. Discours - débit et quantité", opts:[
+      [0,"0 - Pas d'augmentation"],
+      [2,"2 - Se sent loquace"],
+      [4,"4 - Débit ou quantité augmentés par moments, verbeux par moments"],
+      [6,"6 - Pressé ; débit et quantité constamment augmentés ; difficile à interrompre"],
+      [8,"8 - Logorrhéique ; ininterruptible, discours continu"]
+    ]},
+    {t:"7. Langage - trouble de la pensée", opts:[
+      [0,"0 - Absent"],
+      [1,"1 - Circonstancié ; distractibilité légère ; pensées rapides"],
+      [2,"2 - Distractible ; perd le fil de sa pensée ; change de sujet fréquemment"],
+      [3,"3 - Fuite des idées ; tangentialité ; difficile à suivre ; fait des rimes"],
+      [4,"4 - Incohérent ; communication impossible"]
+    ]},
+    {t:"8. Contenu de la pensée", opts:[
+      [0,"0 - Normal"],
+      [2,"2 - Projets discutables, intérêts nouveaux"],
+      [4,"4 - Projet(s) particulier(s) ; hyperreligiosité"],
+      [6,"6 - Idées de grandeur ou de persécution ; idées de référence"],
+      [8,"8 - Délires ; hallucinations"]
+    ]},
+    {t:"9. Comportement perturbateur - agressif", opts:[
+      [0,"0 - Absent ; coopératif"],
+      [2,"2 - Sarcastique ; bruyant par moments ; méfiant"],
+      [4,"4 - Exigeant ; menaces dans le service"],
+      [6,"6 - Menace l'examinateur ; crie ; entretien difficile"],
+      [8,"8 - Agressif physiquement ; destructeur ; entretien impossible"]
+    ]},
+    {t:"10. Apparence", opts:[
+      [0,"0 - Tenue et hygiène appropriées"],
+      [1,"1 - Légèrement négligé"],
+      [2,"2 - Mal soigné ; modérément débraillé ; habillé de façon excessive"],
+      [3,"3 - Débraillé ; à moitié habillé ; maquillage criard"],
+      [4,"4 - Complètement négligé ; décoré ; tenue bizarre"]
+    ]},
+    {t:"11. Insight (conscience du trouble)", opts:[
+      [0,"0 - Présent ; admet être malade ; d'accord avec la nécessité d'un traitement"],
+      [1,"1 - Possiblement malade"],
+      [2,"2 - Admet un changement de comportement mais nie être malade"],
+      [3,"3 - Admet un changement possible de comportement mais nie être malade"],
+      [4,"4 - Nie tout changement de comportement"]
+    ]}
+  ];
+
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx].t;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    items[idx].opts.forEach(function(pair){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === pair[0] ? ' selected' : '');
+      d.textContent = pair[1];
+      d.addEventListener('click', function(){
+        answers[idx] = pair[0];
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var total = answers.reduce(function(a,b){ return a + b; }, 0);
+    document.getElementById('score-total').textContent = total;
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>YMRS - Échelle d'évaluation de la manie de Young</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#1E2A3A 0%,#3A5068 55%,#10161F 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(224,196,138,.45),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#22334D;background:#E9EEF5;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .section ul{font-size:14.5px;margin:0 0 10px;padding-left:20px;}
+  .section li{margin-bottom:4px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#1E3A5F;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#22334D;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <div class="fiche-photo"><span class="acronym">YMRS</span></div>
+  <h1 class="serif">Échelle d'évaluation de la manie de Young (YMRS)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Young Mania Rating Scale - Young, R.C., Biggs, J.T., Ziegler, V.E., &amp; Meyer, D.A. (1978)</p>
+  <div class="meta-row">
+    <span class="pill">11 questions</span>
+    <span class="pill">10 minutes</span>
+    <span class="pill">Hétéro-administré (clinicien)</span>
+    <span class="pill">Adulte</span>
+    <span class="pill">Français</span>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" href="ymrs.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le YMRS est une échelle hétéro-administrée de référence pour évaluer la sévérité des symptômes maniaques : le clinicien cote 11 items sur la base de l'entretien et de l'observation du patient, en se référant en général aux deux derniers jours (ou davantage si les signes sont particulièrement fluctuants). Sept items sont cotés de 0 à 4, quatre items (irritabilité, débit et quantité du discours, contenu de la pensée, comportement perturbateur-agressif) sont cotés de 0 à 8 par paliers de 2, pour donner un poids double à des dimensions jugées particulièrement discriminantes de la manie.</p>
+    <p>Instrument très largement utilisé en recherche et en pratique clinique depuis 1978, reproduit librement par de nombreuses sources académiques et cliniques (dont le réseau new-yorkais Project TEACH), sans restriction de licence identifiée.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Les 11 items</h2>
+    <ul>
+      <li>Élévation de l'humeur (0-4)</li>
+      <li>Activité motrice - énergie augmentée (0-4)</li>
+      <li>Intérêt sexuel (0-4)</li>
+      <li>Sommeil (0-4)</li>
+      <li>Irritabilité (0-8, paliers de 2)</li>
+      <li>Discours - débit et quantité (0-8, paliers de 2)</li>
+      <li>Langage - trouble de la pensée (0-4)</li>
+      <li>Contenu de la pensée (0-8, paliers de 2)</li>
+      <li>Comportement perturbateur - agressif (0-8, paliers de 2)</li>
+      <li>Apparence (0-4)</li>
+      <li>Insight, conscience du trouble (0-4)</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Score total = somme des 11 items, étendue 0 à 60. Plus le score est élevé, plus les symptômes maniaques observés sont marqués. Aucun seuil clinique catégoriel n'a été retrouvé dans la publication originale de 1978 lors du sourçage de cet outil : cette page propose donc une lecture dimensionnelle uniquement, sans grille de sévérité par paliers, pour ne pas afficher un seuil qui n'aurait pas été vérifié à la source.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p>Young, R.C., Biggs, J.T., Ziegler, V.E., &amp; Meyer, D.A. (1978). A rating scale for mania: reliability, validity and sensitivity. <em>British Journal of Psychiatry</em>, 133, 429-435.</p>
+    <p class="source-note">Droits vérifiés lors du sourçage : échelle académique très largement diffusée et reproduite librement dans les outils cliniques universitaires (même famille d'usage libre que HAM-A, MADRS et HDRS déjà présents dans ce catalogue), aucune restriction commerciale identifiée. Outil de repérage clinique, ne remplace pas une évaluation complète.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

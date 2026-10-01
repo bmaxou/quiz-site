@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RBQ-3 - Questionnaire des comportements répétitifs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#6B3A3A;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#6B3A3A;background:#F1E2E2;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#6B3A3A;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:36px;color:#6B3A3A;margin:0 0 4px;}
+  .result-max{font-size:13px;color:#9A9E90;margin:0 0 20px;}
+  .subscore-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 20px;}
+  .subscore{background:#F4F1EA;border:1px solid #E0D9C9;border-radius:10px;padding:10px 14px;}
+  .subscore .lbl{font-size:11.5px;font-weight:700;color:#63695D;text-transform:uppercase;letter-spacing:.03em;margin-bottom:4px;}
+  .subscore .val{font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;color:#20241E;}
+  .caveat{background:#FBF3E7;border:1px solid #E7D9BC;border-radius:12px;padding:14px 16px;font-size:13px;color:#5A4A2A;margin:0 0 20px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+  @media (max-width:480px){ .subscore-grid{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">RBQ-3 - Comportements répétitifs</h1>
+    <p class="lead">Repetitive Behaviours Questionnaire-3 (Jones, Livingston, Fretwell, Uljarević, Carrington, Shah &amp; Leekam, 2024). Auto-questionnaire adulte, distinct du RBQ-2 (déjà présent dans ce catalogue, hétéro-rempli par un parent d'un jeune enfant) : le RBQ-3 est la version la plus récente, auto-administrée, validée en pratique clinique et en recherche chez l'adulte autiste et non-autiste.</p>
+    <p class="lead">⚠️ L'instrument original comporte 20 items. Le libellé exact des 3 options de réponse du 20<sup>e</sup> item (portant sur le type d'activité choisi en autonomie) n'a pas pu être confirmé mot à mot au sourçage. Pour ne jamais afficher un texte approximé ou inventé, cet item n'est pas posé ici : les 19 items ci-dessous (1 à 19) sont ceux dont le texte est confirmé, et le score total affiché en résultat porte uniquement sur ces 19 items.</p>
+    <div class="pill-row">
+      <span class="pill">19 questions</span>
+      <span class="pill">5 minutes</span>
+      <span class="pill">Auto-administré (adulte)</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-score" id="score-total"></p>
+    <p class="result-max">score total sur les 19 items posés (min 19, max 76)</p>
+    <div class="subscore-grid" id="subscore-grid"></div>
+    <p class="caveat">Score calculé sur 19 items (1 à 19). L'item 20 de l'instrument original (activité choisie en autonomie, échelle à 3 points) n'est pas inclus : le libellé exact de ses 3 réponses n'a pas pu être vérifié mot à mot lors du sourçage, il n'est donc pas posé ici pour ne jamais afficher un texte approximé. Les items 1 et 11 ne font partie d'aucune des deux sous-échelles (RSMB, IS), conformément à la structure publiée ; ils comptent uniquement dans le score total.</p>
+    <p class="lead">Aucun seuil clinique catégoriel publié pour cet instrument. Ce résultat ne peut en aucun cas remplacer une évaluation clinique.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Jones, C.R.G., Livingston, L.A., Fretwell, C., Uljarević, M., Carrington, S.J., Shah, P., &amp; Leekam, S.R. (2024). Measuring self and informant perspectives of Restricted and Repetitive Behaviours (RRBs): psychometric evaluation of the Repetitive Behaviours Questionnaire-3 (RBQ-3) in adult clinical practice and research settings. Molecular Autism, 15, 34. Wales Autism Research Centre, Cardiff University (accès libre confirmé pour un usage clinique et de recherche). Traduction de travail française, non officielle. Outil de repérage, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var scaleFreq = ["1 - Jamais ou rarement","2 - Une fois ou plus par jour","3 - 15 fois ou plus par jour (ou au moins une fois par heure)","4 - 30 fois ou plus par jour (ou au moins deux fois par heure)"];
+  var scaleSev = ["1 - Jamais ou rarement","2 - Léger ou occasionnel","3 - Marqué ou notable","4 - Sérieux ou extrême"];
+
+  var items = [
+    {t:"1. Aimez-vous arranger des objets en rangées ou selon des motifs ?", opts:scaleFreq},
+    {t:"2. Manipulez-vous des objets de façon répétitive (les tournez, tortillez, tapotez) ?", opts:scaleFreq},
+    {t:"3. Tournez-vous sur vous-même de façon répétée ?", opts:scaleFreq},
+    {t:"4. Vous balancez-vous d'avant en arrière, ou d'un côté à l'autre, assis(e) ou debout ?", opts:scaleFreq},
+    {t:"5. Faites-vous les cent pas ou vous déplacez-vous de façon répétitive ?", opts:scaleFreq},
+    {t:"6. Faites-vous des mouvements répétitifs des mains et/ou des doigts ?", opts:scaleFreq},
+    {t:"7. Avez-vous une fascination pour des objets spécifiques ?", opts:scaleFreq},
+    {t:"8. Aimez-vous regarder des objets sous des angles particuliers ou inhabituels ?", opts:scaleSev},
+    {t:"9. Avez-vous un intérêt particulier pour l'odeur des gens ou des objets ?", opts:scaleSev},
+    {t:"10. Avez-vous un intérêt particulier pour le toucher de différentes surfaces ?", opts:scaleSev},
+    {t:"11. Avez-vous des objets spéciaux que vous aimez porter avec vous ?", opts:scaleSev},
+    {t:"12. Collectionnez-vous ou amassez-vous des objets de toute sorte ?", opts:scaleSev},
+    {t:"13. Insistez-vous pour que les choses à la maison restent identiques ?", opts:scaleSev},
+    {t:"14. Vous bouleversez-vous pour des changements mineurs sur des objets ?", opts:scaleSev},
+    {t:"15. Insistez-vous pour que les aspects de votre routine quotidienne restent identiques ?", opts:scaleSev},
+    {t:"16. Insistez-vous pour faire les choses d'une certaine façon, ou les refaire jusqu'à ce qu'elles soient parfaites ?", opts:scaleSev},
+    {t:"17. Écoutez-vous la même musique, jouez-vous au même jeu ou regardez-vous la même vidéo, ou lisez-vous le même livre de façon répétée ?", opts:scaleSev},
+    {t:"18. Insistez-vous pour porter les mêmes vêtements ou refusez-vous d'en porter de nouveaux ?", opts:scaleSev},
+    {t:"19. Insistez-vous pour manger les mêmes aliments, ou une gamme très restreinte d'aliments, à chaque repas ?", opts:scaleSev}
+  ];
+
+  // Sous-échelles confirmées (index 0-based). Items 1 (idx 0) et 11 (idx 10) hors sous-échelle, conformément à la source.
+  var subscales = [
+    {label:"RSMB - Comportements sensori-moteurs répétitifs", idxs:[1,2,3,4,5,7,9,18]},
+    {label:"IS - Insistance sur l'identique", idxs:[6,8,11,12,13,14,15,16,17]}
+  ];
+
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx].t;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    items[idx].opts.forEach(function(label, i){
+      var v = i + 1;
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === v ? ' selected' : '');
+      d.textContent = label;
+      d.addEventListener('click', function(){
+        answers[idx] = v;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var total = 0;
+    for (var i = 0; i < answers.length; i++){ total += answers[i]; }
+    document.getElementById('score-total').textContent = total;
+    var grid = document.getElementById('subscore-grid');
+    grid.innerHTML = '';
+    subscales.forEach(function(s){
+      var sum = s.idxs.reduce(function(a,i){ return a + answers[i]; }, 0);
+      var div = document.createElement('div');
+      div.className = 'subscore';
+      div.innerHTML = '<div class="lbl">' + s.label + '</div><div class="val">' + sum + ' / ' + (s.idxs.length*4) + '</div>';
+      grid.appendChild(div);
+    });
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RBQ-3 - Questionnaire des comportements répétitifs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#6B3A3A 0%,#A05C4C 55%,#3D2020 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(200,215,235,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#22334D;background:#E9EEF5;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .caveat{background:#FBF3E7;border:1px solid #E7D9BC;border-radius:12px;padding:14px 16px;font-size:13.5px;color:#5A4A2A;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#6B3A3A;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#22334D;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <div class="fiche-photo"><span class="acronym">RBQ-3</span></div>
+  <h1 class="serif">Questionnaire des comportements répétitifs (RBQ-3)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Repetitive Behaviours Questionnaire-3 - Jones, Livingston, Fretwell, Uljarević, Carrington, Shah &amp; Leekam (2024)</p>
+  <div class="meta-row">
+    <span class="pill">19 questions posées (sur 20 items originaux)</span>
+    <span class="pill">5 minutes</span>
+    <span class="pill">Auto-administré (adulte)</span>
+    <span class="pill">Traduction de travail française</span>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" href="rbq-3.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le RBQ-3 est la version la plus récente (2024) du Repetitive Behaviours Questionnaire, développée par l'équipe du Wales Autism Research Centre (Cardiff University). Contrairement au RBQ-2, déjà présent dans ce catalogue (Leekam et al. 2007, hétéro-rempli par un parent d'un enfant de 2 ans), le RBQ-3 est un <strong>auto-questionnaire</strong>, validé chez l'adulte autiste et non-autiste, en pratique clinique comme en recherche.</p>
+    <p>L'instrument évalue la fréquence et la sévérité de comportements sensori-moteurs répétitifs et d'une insistance sur l'identique, sur 20 items au total, répartis en trois blocs d'échelles de réponse (fréquence pour les items 1 à 7, sévérité pour les items 8 à 19, et une échelle distincte à 3 points pour l'item 20).</p>
+    <p class="caveat">⚠️ Réserve documentée au sourçage : le libellé exact des 3 options de réponse de l'item 20 (portant sur le type d'activité choisie en autonomie) n'a pas pu être confirmé mot à mot, faute d'accès direct au PDF officiel (hébergé derrière un formulaire Qualtrics). Pour ne jamais afficher un texte approximé ou inventé, <strong>cet item n'est pas posé dans la version interactive de ce catalogue</strong> : seuls les 19 items dont le texte est confirmé (items 1 à 19) sont proposés, et le score affiché en résultat porte sur ces 19 items uniquement (sur 76, et non sur le score total officiel de l'instrument qui inclut l'item 20).</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque item se cote de 1 à 4 (échelle de fréquence pour les items 1 à 7, échelle de sévérité pour les items 8 à 19). Deux sous-échelles, confirmées par deux sources indépendantes concordantes (revue psychométrique tierce et fichier supplémentaire CC BY/CC0 de l'article de validation) :</p>
+    <p><strong>RSMB - Repetitive Sensory-Motor Behaviours</strong> (comportements sensori-moteurs répétitifs) : items 2, 3, 4, 5, 6, 8, 10, 19 (8 items, 8-32).</p>
+    <p><strong>IS - Insistence on Sameness</strong> (insistance sur l'identique) : items 7, 9, 12, 13, 14, 15, 16, 17, 18 (9 items, 9-36).</p>
+    <p>Les items 1 et 11 ne figurent dans aucune des deux sous-échelles selon la source (à l'identique du RBQ-2 déjà construit dans ce catalogue, où ces deux items sont également hors sous-échelle) : ils comptent uniquement dans le score total, qui n'a pas été réattribué arbitrairement à une sous-échelle. Score total affiché ici = somme des 19 items posés (19-76). Le score total officiel de l'instrument, publié par les auteurs, inclut en plus l'item 20 (« Total (incl. item 20) ») - non reproductible ici pour la raison indiquée ci-dessus. Aucun seuil clinique catégoriel publié n'a été retrouvé : aucun n'est affiché.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Source</h2>
+    <p class="source-note">Jones, C.R.G., Livingston, L.A., Fretwell, C., Uljarević, M., Carrington, S.J., Shah, P., &amp; Leekam, S.R. (2024). Measuring self and informant perspectives of Restricted and Repetitive Behaviours (RRBs): psychometric evaluation of the Repetitive Behaviours Questionnaire-3 (RBQ-3) in adult clinical practice and research settings. Molecular Autism, 15, 34. https://doi.org/10.1186/s13229-024-00603-7 (article en libre accès, licence CC BY ; fichier supplémentaire sous licence CC BY + CC0, Figshare, DOI 10.6084/m9.figshare.25989201). Page officielle de l'équipe (Wales Autism Research Centre, Cardiff University) : « Clinicians, researchers, and others interested in accessing the RBQ-3 can download it for free » - usage clinique et personnel libre et gratuit confirmé. Texte verbatim des 19 items obtenu via une fiche de synthèse psychométrique tierce (novopsych.com), cohérent à 100 % avec les libellés courts confirmés indépendamment par le fichier supplémentaire CC BY/CC0 de l'article de validation. Aucune traduction française officielle retrouvée. Outil de repérage, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1311 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>QOLIBRI — Qualité de vie après lésion cérébrale (version complète)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#2F5D62;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .sec{font-size:12.5px;color:#63695D;background:#F4F1EA;border-radius:8px;padding:8px 12px;margin:0 0 16px;}
+  .q-text{font-size:16px;margin:0 0 6px;}
+  .q-desc{font-size:13px;color:#63695D;margin:0 0 18px;white-space:pre-line;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#2F5D62;background:#DCEBEC;}
+  .num-row{display:flex;flex-wrap:wrap;gap:6px;}
+  .num{min-width:44px;text-align:center;padding:10px 0;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600;background:#fff;}
+  .num.selected{border-color:#2F5D62;background:#DCEBEC;}
+  .num-ends{display:flex;justify-content:space-between;gap:12px;font-size:12px;color:#63695D;margin-top:8px;}
+  .vas-box{padding:8px 0;}
+  .vas-val{font-family:'Cormorant Garamond',Georgia,serif;font-size:40px;color:#2F5D62;margin:0 0 6px;}
+  .vas-box input[type=range]{width:100%;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#2F5D62;border-color:#E0D9C9;}
+  .btn-primary{background:#2F5D62;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:40px;color:#2F5D62;margin:0 0 4px;}
+  .result-max{font-size:13px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 14px;}
+  .result-list{font-size:14px;margin:0 0 16px;padding-left:20px;}
+  .result-list li{margin-bottom:4px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">QOLIBRI — Qualité de vie après lésion cérébrale (version complète)</h1>
+    <p class="lead">Trente-sept questions sur la satisfaction (pensée, émotions et perception de soi, vie quotidienne, relations sociales) puis sur la gêne ressentie (sentiments, condition physique), depuis le traumatisme crânien. Chaque réponse va de « Pas du tout » à « Très ».</p>
+    <p class="lang-note">Version française approuvée par le consortium CENTER-TBI (37 items). Distincte de la forme brève QOLIBRI-OS (6 items), déjà disponible.</p>
+    <div class="pill-row">
+      <span class="pill">37 questions</span>
+      <span class="pill">8 minutes</span>
+      <span class="pill">Échelle 1-5</span>
+      <span class="pill">Français</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="sec" id="sec-text" hidden></p>
+    <p class="q-text" id="q-text"></p>
+    <p class="q-desc" id="q-desc"></p>
+    <div id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">von Steinbüchel N. et al. (2010). QOLIBRI — Quality of Life after Brain Injury: Scale Development and Metric Properties, Journal of Neurotrauma, 27. Version française approuvée par le consortium CENTER-TBI. © The authors, all rights reserved — www.qolibrinet.com. Ce résultat est un repère, il ne constitue pas un diagnostic.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [
+ {
+  "t": "À quel degré vous estimez-vous satisfait(e) de votre capacité à vous concentrer, par exemple pour lire ou pour suivre le fil d'une conversation ?",
+  "sec": "Partie 1 · A. Fonctionnement de la pensée",
+  "d": "Les questions ci-dessous portent sur le fonctionnement de votre pensée à l'heure actuelle (y compris au cours de la semaine passée). Degré de satisfaction depuis votre traumatisme crânien.",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Peu"
+   ],
+   [
+    3,
+    "Moyennement"
+   ],
+   [
+    4,
+    "Plutôt"
+   ],
+   [
+    5,
+    "Très"
+   ]
+  ]
+ },
+ {
+  "t": "À quel degré vous estimez-vous satisfait(e) de votre capacité à vous exprimer et à comprendre les autres lors d'une conversation ?",
+  "sec": "Partie 1 · A. Fonctionnement de la pensée",
+  "d": "Les questions ci-dessous portent sur le fonctionnement de votre pensée à l'heure actuelle (y compris au cours de la semaine passée). Degré de satisfaction depuis votre traumatisme crânien.",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Peu"
+   ],
+   [
+    3,
+    "Moyennement"
+   ],
+   [
+    4,
+    "Plutôt"
+   ],
+   [
+    5,
+    "Très"
+   ]
+  ]
+ },
+ {
+  "t": "À quel degré vous estimez-vous satisfait(e) de votre capacité à vous rappeler des choses quotidiennes, par exemple l'endroit où vous avez mis vos affaires ?",
+  "sec": "Partie 1 · A. Fonctionnement de la pensée",
+  "d": "Les questions ci-dessous portent sur le fonctionnement de votre pensée à l'heure actuelle (y compris au cours de la semaine passée). Degré de satisfaction depuis votre traumatisme crânien.",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Peu"
+   ],
+   [
+    3,
+    "Moyennement"
+   ],
+   [
+    4,
+    "Plutôt"
+   ],
+   [
+    5,
+    "Très"
+   ]
+  ]
+ },
+ {
+  "t": "À quel degré vous estimez-vous satisfait(e) de votre capacité à trouver des solutions aux problèmes pratiques du quotidien, par exemple ce que vous devez faire si vous perdez vos clés ?",
+  "sec": "Partie 1 · A. Fonctionnement de la pensée",
+  "d": "Les questions ci-dessous portent sur le fonctionnement de votre pensée à l'heure actuelle (y compris au cours de la semaine passée). Degré de satisfaction depuis votre traumatisme crânien.",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Peu"
+   ],
+   [
+    3,
+    "Moyennement"
+   ],
+   [
+    4,
+    "Plutôt"
+   ],
+   [
+    5,
+    "Très"
+   ]
+  ]
+ },
+ {
+  "t": "À quel degré vous estimez-vous satisfait(e) de votre capacité à prendre des décisions ?",
+  "sec": "Partie 1 · A. Fonctionnement de la pensée",
+  "d": "Les questions ci-dessous portent sur le fonctionnement de votre pensée à l'heure actuelle (y compris au cours de la semaine passée). Degré de satisfaction depuis votre traumatisme crânien.",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Peu"
+   ],
+   [
+    3,
+    "Moyennement"
+   ],
+   [
+    4,
+    "Plutôt"
+   ],
+   [
+    5,
+    "Très"
+   ]
+  ]
+ },
+ {
+  "t": "À quel degré vous estimez-vous satisfait(e) de votre capacité à vous orienter pour trouver votre chemin ?",
+  "sec": "Partie 1 · A. Fonctionnement de la pensée",
+  "d": "Les questions ci-dessous portent sur le fonctionnement de votre pensée à l'heure actuelle (y compris au cours de la semaine passée). Degré de satisfaction depuis votre traumatisme crânien.",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Peu"
+   ],
+   [
+    3,
+    "Moyennement"
+   ],
+   [
+    4,
+    "Plutôt"
+   ],
+   [
+    5,
+    "Très"
+   ]
+  ]
+ },
+ {
+  "t": "À quel degré vous estimez-vous satisfait(e) de la rapidité de votre pensée ?",
+  "sec": "Partie 1 · A. Fonctionnement de la pensée",
+  "d": "Les questions ci-dessous portent sur le fonctionnement de votre pensée à l'heure actuelle (y compris au cours de la semaine passée). Degré de satisfaction depuis votre traumatisme crânien.",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Peu"
+   ],
+   [
+    3,
+    "Moyennement"
+   ],
+   [
+    4,
+    "Plutôt"
+   ],
+   [
+    5,
+    "Très"
+   ]
+  ]
+ },
+ {
+  "t": "À quel degré vous estimez-vous satisfait(e) de votre niveau d'énergie ?",
+  "sec": "Partie 1 · B. Émotions et perception de soi",
+  "d": "Les questions ci-dessous portent sur vos émotions et la manière dont vous vous percevez à l'heure actuelle (y compris au cours de la semaine passée). Degré de satisfaction.",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Peu"
+   ],
+   [
+    3,
+    "Moyennement"
+   ],
+   [
+    4,
+    "Plutôt"
+   ],
+   [
+    5,
+    "Très"
+   ]
+  ]
+ },
+ {
+  "t": "À quel degré vous estimez-vous satisfait(e) de votre niveau de motivation à faire les choses ?",
+  "sec": "Partie 1 · B. Émotions et perception de soi",
+  "d": "Les questions ci-dessous portent sur vos émotions et la manière dont vous vous percevez à l'heure actuelle (y compris au cours de la semaine passée). Degré de satisfaction.",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Peu"
+   ],
+   [
+    3,
+    "Moyennement"
+   ],
+   [
+    4,
+    "Plutôt"
+   ],
+   [
+    5,
+    "Très"
+   ]
+  ]
+ },
+ {
+  "t": "À quel degré vous estimez-vous satisfait(e) de l'estime que vous avez de vous-même, de votre valeur à vos yeux ?",
+  "sec": "Partie 1 · B. Émotions et perception de soi",
+  "d": "Les questions ci-dessous portent sur vos émotions et la manière dont vous vous percevez à l'heure actuelle (y compris au cours de la semaine passée). Degré de satisfaction.",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Peu"
+   ],
+   [
+    3,
+    "Moyennement"
+   ],
+   [
+    4,
+    "Plutôt"
+   ],
+   [
+    5,
+    "Très"
+   ]
+  ]
+ },
+ {
+  "t": "À quel degré vous estimez-vous satisfait(e) de votre apparence extérieure ?",
+  "sec": "Partie 1 · B. Émotions et perception de soi",
+  "d": "Les questions ci-dessous portent sur vos émotions et la manière dont vous vous percevez à l'heure actuelle (y compris au cours de la semaine passée). Degré de satisfaction.",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Peu"
+   ],
+   [
+    3,
+    "Moyennement"
+   ],
+   [
+    4,
+    "Plutôt"
+   ],
+   [
+    5,
+    "Très"
+   ]
+  ]
+ },
+ {
+  "t": "À quel degré vous estimez-vous satisfait(e) de ce que vous avez réalisé ou accompli depuis votre traumatisme crânien ?",
+  "sec": "Partie 1 · B. Émotions et perception de soi",
+  "d": "Les questions ci-dessous portent sur vos émotions et la manière dont vous vous percevez à l'heure actuelle (y compris au cours de la semaine passée). Degré de satisfaction.",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Peu"
+   ],
+   [
+    3,
+    "Moyennement"
+   ],
+   [
+    4,
+    "Plutôt"
+   ],
+   [
+    5,
+    "Très"
+   ]
+  ]
+ },
+ {
+  "t": "À quel degré vous estimez-vous satisfait(e) de la façon dont vous vous percevez vous-même ?",
+  "sec": "Partie 1 · B. Émotions et perception de soi",
+  "d": "Les questions ci-dessous portent sur vos émotions et la manière dont vous vous percevez à l'heure actuelle (y compris au cours de la semaine passée). Degré de satisfaction.",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Peu"
+   ],
+   [
+    3,
+    "Moyennement"
+   ],
+   [
+    4,
+    "Plutôt"
+   ],
+   [
+    5,
+    "Très"
+   ]
+  ]
+ },
+ {
+  "t": "À quel degré vous estimez-vous satisfait(e) de la façon dont vous voyez votre avenir ?",
+  "sec": "Partie 1 · B. Émotions et perception de soi",
+  "d": "Les questions ci-dessous portent sur vos émotions et la manière dont vous vous percevez à l'heure actuelle (y compris au cours de la semaine passée). Degré de satisfaction.",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Peu"
+   ],
+   [
+    3,
+    "Moyennement"
+   ],
+   [
+    4,
+    "Plutôt"
+   ],
+   [
+    5,
+    "Très"
+   ]
+  ]
+ },
+ {
+  "t": "À quel degré vous estimez-vous satisfait(e) de votre niveau d'indépendance par rapport aux autres ?",
+  "sec": "Partie 1 · C. Indépendance et vie quotidienne",
+  "d": "Les questions ci-dessous portent sur votre indépendance et votre fonctionnement dans la vie quotidienne à l'heure actuelle (y compris au cours de la semaine passée). Degré de satisfaction.",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Peu"
+   ],
+   [
+    3,
+    "Moyennement"
+   ],
+   [
+    4,
+    "Plutôt"
+   ],
+   [
+    5,
+    "Très"
+   ]
+  ]
+ },
+ {
+  "t": "À quel degré vous estimez-vous satisfait(e) de votre capacité à vous déplacer à l'extérieur ?",
+  "sec": "Partie 1 · C. Indépendance et vie quotidienne",
+  "d": "Les questions ci-dessous portent sur votre indépendance et votre fonctionnement dans la vie quotidienne à l'heure actuelle (y compris au cours de la semaine passée). Degré de satisfaction.",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Peu"
+   ],
+   [
+    3,
+    "Moyennement"
+   ],
+   [
+    4,
+    "Plutôt"
+   ],
+   [
+    5,
+    "Très"
+   ]
+  ]
+ },
+ {
+  "t": "À quel degré vous estimez-vous satisfait(e) de votre capacité à réaliser les tâches domestiques, par exemple cuisiner ou faire des réparations ?",
+  "sec": "Partie 1 · C. Indépendance et vie quotidienne",
+  "d": "Les questions ci-dessous portent sur votre indépendance et votre fonctionnement dans la vie quotidienne à l'heure actuelle (y compris au cours de la semaine passée). Degré de satisfaction.",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Peu"
+   ],
+   [
+    3,
+    "Moyennement"
+   ],
+   [
+    4,
+    "Plutôt"
+   ],
+   [
+    5,
+    "Très"
+   ]
+  ]
+ },
+ {
+  "t": "À quel degré vous estimez-vous satisfait(e) de votre capacité à gérer votre budget personnel ?",
+  "sec": "Partie 1 · C. Indépendance et vie quotidienne",
+  "d": "Les questions ci-dessous portent sur votre indépendance et votre fonctionnement dans la vie quotidienne à l'heure actuelle (y compris au cours de la semaine passée). Degré de satisfaction.",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Peu"
+   ],
+   [
+    3,
+    "Moyennement"
+   ],
+   [
+    4,
+    "Plutôt"
+   ],
+   [
+    5,
+    "Très"
+   ]
+  ]
+ },
+ {
+  "t": "À quel degré vous estimez-vous satisfait(e) de votre participation au travail ou en formation ?",
+  "sec": "Partie 1 · C. Indépendance et vie quotidienne",
+  "d": "Les questions ci-dessous portent sur votre indépendance et votre fonctionnement dans la vie quotidienne à l'heure actuelle (y compris au cours de la semaine passée). Degré de satisfaction.",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Peu"
+   ],
+   [
+    3,
+    "Moyennement"
+   ],
+   [
+    4,
+    "Plutôt"
+   ],
+   [
+    5,
+    "Très"
+   ]
+  ]
+ },
+ {
+  "t": "À quel degré vous estimez-vous satisfait(e) de votre capacité à participer à des activités de loisirs, par exemple sports, hobbies, fêtes ?",
+  "sec": "Partie 1 · C. Indépendance et vie quotidienne",
+  "d": "Les questions ci-dessous portent sur votre indépendance et votre fonctionnement dans la vie quotidienne à l'heure actuelle (y compris au cours de la semaine passée). Degré de satisfaction.",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Peu"
+   ],
+   [
+    3,
+    "Moyennement"
+   ],
+   [
+    4,
+    "Plutôt"
+   ],
+   [
+    5,
+    "Très"
+   ]
+  ]
+ },
+ {
+  "t": "À quel degré vous estimez-vous satisfait(e) de la manière dont vous prenez en charge votre propre vie ?",
+  "sec": "Partie 1 · C. Indépendance et vie quotidienne",
+  "d": "Les questions ci-dessous portent sur votre indépendance et votre fonctionnement dans la vie quotidienne à l'heure actuelle (y compris au cours de la semaine passée). Degré de satisfaction.",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Peu"
+   ],
+   [
+    3,
+    "Moyennement"
+   ],
+   [
+    4,
+    "Plutôt"
+   ],
+   [
+    5,
+    "Très"
+   ]
+  ]
+ },
+ {
+  "t": "À quel degré vous estimez-vous satisfait(e) de votre capacité à éprouver de l'affection envers les autres, par exemple votre partenaire, famille, vos amis ?",
+  "sec": "Partie 1 · D. Relations sociales",
+  "d": "Les questions ci-dessous portent sur vos relations sociales à l'heure actuelle (y compris au cours de la semaine passée). Degré de satisfaction.",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Peu"
+   ],
+   [
+    3,
+    "Moyennement"
+   ],
+   [
+    4,
+    "Plutôt"
+   ],
+   [
+    5,
+    "Très"
+   ]
+  ]
+ },
+ {
+  "t": "À quel degré vous estimez-vous satisfait(e) de vos relations avec les membres de votre famille ?",
+  "sec": "Partie 1 · D. Relations sociales",
+  "d": "Les questions ci-dessous portent sur vos relations sociales à l'heure actuelle (y compris au cours de la semaine passée). Degré de satisfaction.",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Peu"
+   ],
+   [
+    3,
+    "Moyennement"
+   ],
+   [
+    4,
+    "Plutôt"
+   ],
+   [
+    5,
+    "Très"
+   ]
+  ]
+ },
+ {
+  "t": "À quel degré vous estimez-vous satisfait(e) de vos relations avec vos amis ?",
+  "sec": "Partie 1 · D. Relations sociales",
+  "d": "Les questions ci-dessous portent sur vos relations sociales à l'heure actuelle (y compris au cours de la semaine passée). Degré de satisfaction.",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Peu"
+   ],
+   [
+    3,
+    "Moyennement"
+   ],
+   [
+    4,
+    "Plutôt"
+   ],
+   [
+    5,
+    "Très"
+   ]
+  ]
+ },
+ {
+  "t": "À quel degré vous estimez-vous satisfait(e) de la relation que vous avez avec votre partenaire ou du fait de ne pas avoir un partenaire ?",
+  "sec": "Partie 1 · D. Relations sociales",
+  "d": "Les questions ci-dessous portent sur vos relations sociales à l'heure actuelle (y compris au cours de la semaine passée). Degré de satisfaction.",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Peu"
+   ],
+   [
+    3,
+    "Moyennement"
+   ],
+   [
+    4,
+    "Plutôt"
+   ],
+   [
+    5,
+    "Très"
+   ]
+  ]
+ },
+ {
+  "t": "À quel degré vous estimez-vous satisfait(e) de votre vie sexuelle ?",
+  "sec": "Partie 1 · D. Relations sociales",
+  "d": "Les questions ci-dessous portent sur vos relations sociales à l'heure actuelle (y compris au cours de la semaine passée). Degré de satisfaction.",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Peu"
+   ],
+   [
+    3,
+    "Moyennement"
+   ],
+   [
+    4,
+    "Plutôt"
+   ],
+   [
+    5,
+    "Très"
+   ]
+  ]
+ },
+ {
+  "t": "À quel degré vous estimez-vous satisfait(e) de l'attitude et du regard des autres envers vous ?",
+  "sec": "Partie 1 · D. Relations sociales",
+  "d": "Les questions ci-dessous portent sur vos relations sociales à l'heure actuelle (y compris au cours de la semaine passée). Degré de satisfaction.",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Peu"
+   ],
+   [
+    3,
+    "Moyennement"
+   ],
+   [
+    4,
+    "Plutôt"
+   ],
+   [
+    5,
+    "Très"
+   ]
+  ]
+ },
+ {
+  "t": "À quel degré vous estimez-vous gêné(e) par un sentiment de solitude, même lorsque vous vous trouvez en présence d'autres personnes ?",
+  "sec": "Partie 2 · E. Sentiments (gêne)",
+  "d": "Les questions ci-dessous portent sur le degré de gêne que vous éprouvez par rapport à vos sentiments à l'heure actuelle (y compris au cours de la semaine passée).",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Peu"
+   ],
+   [
+    3,
+    "Moyennement"
+   ],
+   [
+    4,
+    "Plutôt"
+   ],
+   [
+    5,
+    "Très"
+   ]
+  ]
+ },
+ {
+  "t": "À quel degré vous estimez-vous gêné(e) par un sentiment d'ennui ?",
+  "sec": "Partie 2 · E. Sentiments (gêne)",
+  "d": "Les questions ci-dessous portent sur le degré de gêne que vous éprouvez par rapport à vos sentiments à l'heure actuelle (y compris au cours de la semaine passée).",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Peu"
+   ],
+   [
+    3,
+    "Moyennement"
+   ],
+   [
+    4,
+    "Plutôt"
+   ],
+   [
+    5,
+    "Très"
+   ]
+  ]
+ },
+ {
+  "t": "À quel degré vous estimez-vous gêné(e) par un sentiment d'anxiété ?",
+  "sec": "Partie 2 · E. Sentiments (gêne)",
+  "d": "Les questions ci-dessous portent sur le degré de gêne que vous éprouvez par rapport à vos sentiments à l'heure actuelle (y compris au cours de la semaine passée).",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Peu"
+   ],
+   [
+    3,
+    "Moyennement"
+   ],
+   [
+    4,
+    "Plutôt"
+   ],
+   [
+    5,
+    "Très"
+   ]
+  ]
+ },
+ {
+  "t": "À quel degré vous estimez-vous gêné(e) par un sentiment de tristesse ou de dépression ?",
+  "sec": "Partie 2 · E. Sentiments (gêne)",
+  "d": "Les questions ci-dessous portent sur le degré de gêne que vous éprouvez par rapport à vos sentiments à l'heure actuelle (y compris au cours de la semaine passée).",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Peu"
+   ],
+   [
+    3,
+    "Moyennement"
+   ],
+   [
+    4,
+    "Plutôt"
+   ],
+   [
+    5,
+    "Très"
+   ]
+  ]
+ },
+ {
+  "t": "À quel degré vous estimez-vous gêné(e) par un sentiment de colère ou d'agressivité ?",
+  "sec": "Partie 2 · E. Sentiments (gêne)",
+  "d": "Les questions ci-dessous portent sur le degré de gêne que vous éprouvez par rapport à vos sentiments à l'heure actuelle (y compris au cours de la semaine passée).",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Peu"
+   ],
+   [
+    3,
+    "Moyennement"
+   ],
+   [
+    4,
+    "Plutôt"
+   ],
+   [
+    5,
+    "Très"
+   ]
+  ]
+ },
+ {
+  "t": "À quel degré vous estimez-vous gêné(e) par le ralentissement et/ou la maladresse de vos mouvements ?",
+  "sec": "Partie 2 · F. Condition physique (gêne)",
+  "d": "Les questions ci-dessous portent sur le degré de gêne que vous éprouvez par rapport à votre condition physique à l'heure actuelle (y compris au cours de la semaine passée).",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Peu"
+   ],
+   [
+    3,
+    "Moyennement"
+   ],
+   [
+    4,
+    "Plutôt"
+   ],
+   [
+    5,
+    "Très"
+   ]
+  ]
+ },
+ {
+  "t": "À quel degré vous estimez-vous gêné(e) en dehors du traumatisme crânien par les suites d'autres blessures que vous avez subies au moment de votre traumatisme crânien ?",
+  "sec": "Partie 2 · F. Condition physique (gêne)",
+  "d": "Les questions ci-dessous portent sur le degré de gêne que vous éprouvez par rapport à votre condition physique à l'heure actuelle (y compris au cours de la semaine passée).",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Peu"
+   ],
+   [
+    3,
+    "Moyennement"
+   ],
+   [
+    4,
+    "Plutôt"
+   ],
+   [
+    5,
+    "Très"
+   ]
+  ]
+ },
+ {
+  "t": "À quel degré vous estimez-vous gêné(e) par la douleur, y compris des maux de tête ?",
+  "sec": "Partie 2 · F. Condition physique (gêne)",
+  "d": "Les questions ci-dessous portent sur le degré de gêne que vous éprouvez par rapport à votre condition physique à l'heure actuelle (y compris au cours de la semaine passée).",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Peu"
+   ],
+   [
+    3,
+    "Moyennement"
+   ],
+   [
+    4,
+    "Plutôt"
+   ],
+   [
+    5,
+    "Très"
+   ]
+  ]
+ },
+ {
+  "t": "À quel degré vous estimez-vous gêné(e) par des difficultés à voir ou entendre ?",
+  "sec": "Partie 2 · F. Condition physique (gêne)",
+  "d": "Les questions ci-dessous portent sur le degré de gêne que vous éprouvez par rapport à votre condition physique à l'heure actuelle (y compris au cours de la semaine passée).",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Peu"
+   ],
+   [
+    3,
+    "Moyennement"
+   ],
+   [
+    4,
+    "Plutôt"
+   ],
+   [
+    5,
+    "Très"
+   ]
+  ]
+ },
+ {
+  "t": "Globalement, à quel degré vous estimez-vous gêné(e) par les suites de votre traumatisme crânien ?",
+  "sec": "Partie 2 · F. Condition physique (gêne)",
+  "d": "Les questions ci-dessous portent sur le degré de gêne que vous éprouvez par rapport à votre condition physique à l'heure actuelle (y compris au cours de la semaine passée).",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Peu"
+   ],
+   [
+    3,
+    "Moyennement"
+   ],
+   [
+    4,
+    "Plutôt"
+   ],
+   [
+    5,
+    "Très"
+   ]
+  ]
+ }
+];
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+  var SCALES = [
+    {n:"Cognition (pensée)", a:0, b:6, rev:false},
+    {n:"Soi (émotions et perception de soi)", a:7, b:13, rev:false},
+    {n:"Vie quotidienne et autonomie", a:14, b:20, rev:false},
+    {n:"Relations sociales", a:21, b:26, rev:false},
+    {n:"Émotions (gêne, cotation inversée)", a:27, b:31, rev:true},
+    {n:"Problèmes physiques (gêne, cotation inversée)", a:32, b:36, rev:true}
+  ];
+  var RESULT = function(a){
+    var rows = '', tot = 0;
+    SCALES.forEach(function(sc){
+      var k = sc.b - sc.a + 1, sum = 0;
+      for (var i = sc.a; i <= sc.b; i++){ sum += sc.rev ? (6 - a[i]) : a[i]; }
+      var t = (sum - k) / (4 * k) * 100;
+      tot += t;
+      rows += '<li>' + sc.n + ' : <strong>' + t.toFixed(0) + ' / 100</strong></li>';
+    });
+    var total = tot / SCALES.length;
+    return '<p class="result-score">' + total.toFixed(0) + ' / 100</p>' +
+      '<p class="result-max">score total QOLIBRI (moyenne des 6 échelles, chacune ramenée de 0 à 100)</p>' +
+      '<ul class="result-list">' + rows + '</ul>' +
+      '<p class="result-text">Plus le score est élevé, meilleure est la qualité de vie perçue (les deux échelles de gêne sont inversées avant le calcul). Lecture dimensionnelle, dans le temps ou à titre indicatif : aucun seuil clinique n\'est retenu ici. Ce résultat ne remplace pas une évaluation neuropsychologique complète.</p>';
+  };
+
+  function vis(i){
+    var c = items[i].cond;
+    return !c || answers[c[0]] === c[1];
+  }
+  function step(i, dir){
+    var j = i + dir;
+    while (j >= 0 && j < items.length && !vis(j)) j += dir;
+    return j;
+  }
+  function visCount(){ var n = 0; for (var i = 0; i < items.length; i++) if (vis(i)) n++; return n; }
+  function visRank(i){ var n = 0; for (var k = 0; k <= i; k++) if (vis(k)) n++; return n; }
+  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+
+  function renderQuestion(){
+    var it = items[idx];
+    document.getElementById('progress-text').textContent = 'Question ' + visRank(idx) + ' / ' + visCount();
+    var secEl = document.getElementById('sec-text');
+    if (it.sec){ secEl.textContent = it.sec; secEl.hidden = false; } else { secEl.hidden = true; }
+    document.getElementById('q-text').textContent = it.t;
+    document.getElementById('q-desc').textContent = it.d || '';
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    if (it.kind === 'num'){
+      var nr = document.createElement('div'); nr.className = 'num-row';
+      for (var v = it.min; v <= it.max; v++){
+        (function(v){
+          var b = document.createElement('div');
+          b.className = 'num' + (answers[idx] === v ? ' selected' : '');
+          b.textContent = v;
+          b.addEventListener('click', function(){ answers[idx] = v; renderQuestion(); });
+          nr.appendChild(b);
+        })(v);
+      }
+      row.appendChild(nr);
+      var ends = document.createElement('div'); ends.className = 'num-ends';
+      ends.innerHTML = '<span>' + esc(it.lo) + '</span><span style="text-align:right">' + esc(it.hi) + '</span>';
+      row.appendChild(ends);
+    } else if (it.kind === 'vas'){
+      var box = document.createElement('div'); box.className = 'vas-box';
+      var cur = answers[idx] === null ? 50 : answers[idx];
+      box.innerHTML = '<p class="vas-val" id="vas-val">' + (answers[idx] === null ? '—' : answers[idx]) + '</p>' +
+        '<input type="range" id="vas-range" min="' + it.min + '" max="' + it.max + '" step="1" value="' + cur + '" aria-label="Échelle visuelle analogique">' +
+        '<div class="num-ends"><span>' + esc(it.lo) + '</span><span style="text-align:right">' + esc(it.hi) + '</span></div>' +
+        '<p class="q-desc" style="margin-top:14px">Déplacez le curseur (ou utilisez les flèches du clavier) jusqu\'à la valeur qui correspond à votre état de santé aujourd\'hui.</p>';
+      row.appendChild(box);
+      var rg = document.getElementById('vas-range');
+      function setV(){
+        answers[idx] = parseInt(rg.value, 10);
+        document.getElementById('vas-val').textContent = answers[idx];
+        document.getElementById('btn-next').disabled = false;
+      }
+      rg.addEventListener('input', setV);
+      rg.addEventListener('change', setV);
+      rg.addEventListener('click', setV);
+    } else {
+      var list = document.createElement('div'); list.className = 'opt-row';
+      it.opts.forEach(function(pair){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx] === pair[0] ? ' selected' : '');
+        d.textContent = pair[1];
+        d.addEventListener('click', function(){ answers[idx] = pair[0]; renderQuestion(); });
+        list.appendChild(d);
+      });
+      row.appendChild(list);
+    }
+    document.getElementById('btn-prev').disabled = step(idx, -1) < 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = step(idx, 1) >= items.length ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    var j = step(idx, -1);
+    if (j >= 0){ idx = j; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    var j = step(idx, 1);
+    if (j < items.length){ idx = j; renderQuestion(); } else { showResult(); }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var a = answers.map(function(v, i){ return vis(i) ? v : null; });
+    document.getElementById('result-body').innerHTML = RESULT(a);
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>QOLIBRI — Qualité de vie après lésion cérébrale (version complète)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#23484C 0%,#3F7F86 55%,#14292C 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,210,.40),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#2F5D62;background:#DCEBEC;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .section ul{font-size:14.5px;margin:0 0 10px;padding-left:20px;}
+  .section li{margin-bottom:4px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#2F5D62;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#2F5D62;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <div class="fiche-photo"><span class="acronym">QOLIBRI</span></div>
+  <h1 class="serif">QOLIBRI — Qualité de vie après lésion cérébrale (version complète)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Quality of Life after Brain Injury — von Steinbüchel N., Wilson L. et al. (QOLIBRI Task Force, 2010)</p>
+  <div class="meta-row">
+    <span class="pill">37 questions</span>
+    <span class="pill">8 minutes</span>
+    <span class="pill">Échelle 1-5</span>
+    <span class="pill">Adulte</span>
+    <span class="pill">Français</span>
+    <span class="pill">Licence requise : oui</span>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" href="qolibri.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le QOLIBRI est le questionnaire spécifique de la qualité de vie après traumatisme crânien ou lésion cérébrale acquise. Il comprend 37 items en deux parties : la satisfaction (4 échelles : cognition, soi, vie quotidienne et autonomie, relations sociales ; 27 items) puis la gêne ressentie (2 échelles : émotions, problèmes physiques ; 10 items). Il se passe en quelques minutes, y compris avec l'aide d'un proche ou d'un professionnel.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque item est coté de 1 (« Pas du tout ») à 5 (« Très »). Pour les deux échelles de gêne (E et F), la cotation est inversée avant le calcul (une gêne faible correspond à une qualité de vie plus élevée). Chaque échelle est ramenée sur 0-100 : (somme − nombre d'items) / (4 × nombre d'items) × 100 ; le score total est la moyenne des six échelles. Transformation telle qu'habituellement décrite dans la littérature, non revérifiée à la source primaire pour cette page (le document français reçu ne contient ni cotation ni seuil). Aucun seuil clinique n'est retenu : lecture dimensionnelle, dans le temps.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p>von Steinbüchel N. et al. (2010), <em>Journal of Neurotrauma</em>, 27. Texte transcrit depuis la version française approuvée diffusée par le consortium européen CENTER-TBI (© The authors, all rights reserved, www.qolibrinet.com).</p>
+    <p class="source-note"><strong>Licence requise : oui.</strong> Gratuit pour les chercheurs, cliniciens et organismes à but non lucratif après enregistrement nominatif obligatoire sur qolibrinet.com (à renouveler pour chaque nouvelle étude) ; usage commercial payant. Construit malgré tout sur décision du cabinet (30/09/2026). Outil de repérage : ne remplace pas une évaluation clinique complète.</p>
+  </div>
+
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

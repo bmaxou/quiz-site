@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PERMA-Profiler — Profil de bien-être</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#7A6B9C;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 6px;}
+  .num-row{display:flex;flex-wrap:wrap;gap:6px;}
+  .num{min-width:36px;text-align:center;padding:10px 0;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600;background:#fff;}
+  .num.selected{border-color:#7A6B9C;background:#EEEAF5;}
+  .num-ends{display:flex;justify-content:space-between;gap:12px;font-size:12px;color:#63695D;margin-top:8px;margin-bottom:18px;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#4F4568;border-color:#E0D9C9;}
+  .btn-primary{background:#7A6B9C;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 14px;}
+  .result-list{font-size:14px;margin:0 0 16px;padding-left:0;list-style:none;}
+  .result-list li{margin-bottom:8px;display:flex;justify-content:space-between;border-bottom:1px solid #E0D9C9;padding-bottom:6px;}
+  .result-list .val{font-weight:700;color:#7A6B9C;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">PERMA-Profiler — Profil de bien-être</h1>
+    <p class="lead">Quinze questions explorant cinq dimensions du bien-être selon le modèle PERMA de Seligman : émotions positives, engagement, relations, sens et accomplissement.</p>
+    <p class="lang-note">Version française validée (Paucsik &amp; Shankland, 2023), diffusée par les autrices de l'adaptation. ⚠️ Cette page reprend les 15 items du cœur PERMA ; les items supplémentaires (santé, émotions négatives, solitude, bonheur global) parfois ajoutés dans la version complète du PERMA-Profiler n'ont pas pu être retrouvés de façon fiable dans la traduction française consultée et ne sont donc pas reproduits.</p>
+    <div class="pill-row">
+      <span class="pill">15 questions</span>
+      <span class="pill">4 minutes</span>
+      <span class="pill">Échelle 0-10</span>
+      <span class="pill">Français</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Butler J. &amp; Kern M.L. (2016). Version française : Paucsik M. &amp; Shankland R. (2023). Instrument dimensionnel de bien-être, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var freq = {lo:"Jamais", hi:"Toujours"};
+  var ext = {lo:"Pas du tout", hi:"Complètement"};
+  var items = [
+    {dim:"A", t:"À quelle fréquence avez-vous le sentiment d'avancer dans la réalisation de vos objectifs ?", s: freq},
+    {dim:"E", t:"À quelle fréquence êtes-vous absorbé(e) par ce que vous êtes en train de faire ?", s: freq},
+    {dim:"P", t:"En général, à quelle fréquence vous sentez-vous joyeux(se) ?", s: freq},
+    {dim:"A", t:"À quelle fréquence achevez-vous des objectifs importants que vous vous étiez fixés ?", s: freq},
+    {dim:"M", t:"En général, dans quelle mesure menez-vous une vie utile et signifiante ?", s: ext},
+    {dim:"R", t:"Dans quelle mesure recevez-vous de l'aide et du soutien d'autres personnes lorsque vous en avez besoin ?", s: ext},
+    {dim:"M", t:"En général, dans quelle mesure pensez-vous que ce que vous faites dans votre vie a de la valeur ?", s: ext},
+    {dim:"E", t:"En général, dans quelle mesure vous sentez-vous stimulé(e) et intéressé(e) par les choses ?", s: ext},
+    {dim:"P", t:"En général, à quelle fréquence vous sentez-vous positif(ve) ?", s: freq},
+    {dim:"A", t:"À quelle fréquence êtes-vous en mesure de gérer vos responsabilités ?", s: freq},
+    {dim:"E", t:"Combien de fois perdez-vous la notion du temps en faisant quelque chose que vous aimez ?", s: freq},
+    {dim:"R", t:"Dans quelle mesure vous sentez-vous aimé(e) ?", s: ext},
+    {dim:"M", t:"Dans quelle mesure avez-vous généralement le sentiment d'avoir un but dans votre vie ?", s: ext},
+    {dim:"R", t:"À quel point êtes-vous satisfait(e) de vos relations sociales ?", s: ext},
+    {dim:"P", t:"En général, à quel point vous sentez-vous satisfait(e) ?", s: ext}
+  ];
+  var dimLabels = {P:"Émotions positives", E:"Engagement", R:"Relations", M:"Sens", A:"Accomplissement"};
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function renderQuestion(){
+    var it = items[idx];
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = it.t;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    var nr = document.createElement('div'); nr.className = 'num-row';
+    for (var v = 0; v <= 10; v++){
+      (function(v){
+        var b = document.createElement('div');
+        b.className = 'num' + (answers[idx] === v ? ' selected' : '');
+        b.textContent = v;
+        b.addEventListener('click', function(){ answers[idx] = v; renderQuestion(); });
+        nr.appendChild(b);
+      })(v);
+    }
+    row.appendChild(nr);
+    var ends = document.createElement('div'); ends.className = 'num-ends';
+    ends.innerHTML = '<span>0 — ' + it.s.lo + '</span><span>10 — ' + it.s.hi + '</span>';
+    row.appendChild(ends);
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var dims = {P:[],E:[],R:[],M:[],A:[]};
+    items.forEach(function(it,i){ dims[it.dim].push(answers[i]); });
+    var html = '<ul class="result-list">';
+    var totalAll = 0, nAll = 0;
+    ["P","E","R","M","A"].forEach(function(d){
+      var vals = dims[d];
+      var mean = vals.reduce(function(a,b){return a+b;},0) / vals.length;
+      totalAll += vals.reduce(function(a,b){return a+b;},0);
+      nAll += vals.length;
+      html += '<li><span>' + dimLabels[d] + '</span><span class="val">' + mean.toFixed(1) + ' / 10</span></li>';
+    });
+    html += '</ul>';
+    var overall = totalAll / nAll;
+    html += '<p class="result-text"><strong>Bien-être global (moyenne des 15 items) : ' + overall.toFixed(1) + ' / 10</strong></p>';
+    html += '<p class="result-text">Chaque dimension est la moyenne de ses 3 items (0-10). Plus les scores sont élevés, plus le bien-être rapporté dans cette dimension est important. Aucun seuil clinique officiel : lecture dimensionnelle et comparative.</p>';
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PERMA-Profiler — Profil de bien-être</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#7A6B9C 0%,#9B8CB8 55%,#453A5C 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(235,225,250,.45),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:22px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#4F4568;background:#EEEAF5;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#7A6B9C;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#4F4568;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <div class="fiche-photo"><span class="acronym small">PERMA</span></div>
+  <h1 class="serif">PERMA-Profiler — profil de bien-être selon le modèle PERMA</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Butler J. &amp; Kern M.L. (2016), <em>International Journal of Wellbeing</em>. Version française : Paucsik M. &amp; Shankland R. (2023).</p>
+  <div class="meta-row">
+    <span class="pill">15 questions</span>
+    <span class="pill">4 minutes</span>
+    <span class="pill">Échelle 0-10</span>
+    <span class="pill">Français</span>
+    <span class="pill">Licence requise : non</span>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" href="perma-profiler.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le PERMA-Profiler mesure le bien-être selon les cinq dimensions du modèle de Martin Seligman : émotions Positives, Engagement, Relations, sens (Meaning) et Accomplissement (3 items chacune, 15 items au total).</p>
+    <p class="source-note">⚠️ La version complète du PERMA-Profiler comporte aussi des items supplémentaires (santé, émotions négatives, solitude, bonheur global) dans certaines publications ; ces items n'ont pas pu être retrouvés de façon fiable dans la traduction française consultée et ne sont pas reproduits ici — seul le cœur des 15 items PERMA est construit.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque item est coté de 0 à 10. Score de chaque dimension = moyenne de ses 3 items (0-10). Bien-être global = moyenne des 15 items. Plus les scores sont élevés, plus le bien-être rapporté est important ; aucun seuil clinique officiel, lecture dimensionnelle et comparative.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p>Butler J. &amp; Kern M.L. (2016). The PERMA-Profiler: A brief multidimensional measure of flourishing. <em>International Journal of Wellbeing</em>, 6(3), 1-48. Traduction française : Paucsik M. &amp; Shankland R. (2023), diffusée directement par les autrices sur le site de l'autrice détentrice des droits (peggykern.org).</p>
+    <p class="source-note"><strong>Licence requise : non.</strong> Page officielle (Peggy Kern) : « You are welcome to use these measures for research or non-commercial purposes… There is no cost involved » ; contact requis uniquement pour un usage commercial. Usage clinique personnel de Max couvert. Instrument dimensionnel de bien-être, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Örebro MPSQ — Questionnaire de dépistage (version courte)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#8A6510;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .sec{font-size:12.5px;color:#63695D;background:#F4F1EA;border-radius:8px;padding:8px 12px;margin:0 0 16px;}
+  .q-text{font-size:16px;margin:0 0 6px;}
+  .q-desc{font-size:13px;color:#63695D;margin:0 0 18px;white-space:pre-line;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#8A6510;background:#F8EDCC;}
+  .num-row{display:flex;flex-wrap:wrap;gap:6px;}
+  .num{min-width:44px;text-align:center;padding:10px 0;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600;background:#fff;}
+  .num.selected{border-color:#8A6510;background:#F8EDCC;}
+  .num-ends{display:flex;justify-content:space-between;gap:12px;font-size:12px;color:#63695D;margin-top:8px;}
+  .vas-box{padding:8px 0;}
+  .vas-val{font-family:'Cormorant Garamond',Georgia,serif;font-size:40px;color:#8A6510;margin:0 0 6px;}
+  .vas-box input[type=range]{width:100%;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#8A6510;border-color:#E0D9C9;}
+  .btn-primary{background:#8A6510;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:40px;color:#8A6510;margin:0 0 4px;}
+  .result-max{font-size:13px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 14px;}
+  .result-list{font-size:14px;margin:0 0 16px;padding-left:20px;}
+  .result-list li{margin-bottom:4px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">Örebro MPSQ — Questionnaire de dépistage des douleurs musculo-squelettiques (version courte)</h1>
+    <p class="lead">Dix questions pour repérer le risque de chronicisation d'une douleur du dos, des épaules ou de la nuque : durée et intensité de la douleur, détresse émotionnelle, croyances sur la douleur et capacités fonctionnelles.</p>
+    <p class="lang-note">Version française courte diffusée par le KCE (Belgique), reproduite avec la permission du Pr Steven J. Linton. Consigne de passation adaptée à l'écran : « Sélectionnez » remplace « Entourez » / « Cochez ».</p>
+    <div class="pill-row">
+      <span class="pill">10 questions</span>
+      <span class="pill">5 minutes</span>
+      <span class="pill">Échelles 0-10</span>
+      <span class="pill">Français</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="sec" id="sec-text" hidden></p>
+    <p class="q-text" id="q-text"></p>
+    <p class="q-desc" id="q-desc"></p>
+    <div id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Linton S.J. &amp; Hallden K. (1998). Can we screen for problematic back pain? Clinical Journal of Pain, 14, 209-215 ; forme courte : Linton S.J., Nicholas M. &amp; MacDonald S. (2011), Spine, 36(22), 1891-1895. Version française : KCE (Belgique), reproduite avec la permission du Pr Steven J. Linton. Ce résultat est un repère, il ne constitue pas un diagnostic.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [
+ {
+  "sec": "Ces questions vous concernent si vous avez des douleurs au niveau du dos, des épaules ou de la nuque. Veuillez lire et répondre à chaque question attentivement.",
+  "t": "Depuis combien de temps avez-vous vos douleurs actuelles ?",
+  "opts": [
+   [
+    1,
+    "0-1 semaine"
+   ],
+   [
+    2,
+    "2-3 semaines"
+   ],
+   [
+    3,
+    "4-5 semaines"
+   ],
+   [
+    4,
+    "6-7 semaines"
+   ],
+   [
+    5,
+    "8-9 semaines"
+   ],
+   [
+    6,
+    "10-11 semaines"
+   ],
+   [
+    7,
+    "12-23 semaines"
+   ],
+   [
+    8,
+    "24-35 semaines"
+   ],
+   [
+    9,
+    "36-52 semaines"
+   ],
+   [
+    10,
+    ">52 semaines"
+   ]
+  ]
+ },
+ {
+  "kind": "num",
+  "min": 0,
+  "max": 10,
+  "lo": "Pas de douleur",
+  "hi": "Douleur maximale imaginable",
+  "t": "Quelle était l'intensité de votre douleur durant les sept derniers jours ?",
+  "sec": "Ces questions vous concernent si vous avez des douleurs au niveau du dos, des épaules ou de la nuque. Veuillez lire et répondre à chaque question attentivement."
+ },
+ {
+  "kind": "num",
+  "min": 0,
+  "max": 10,
+  "lo": "Complètement calme et relâché",
+  "hi": "Aussi tendu et anxieux que je ne l'ai jamais été",
+  "t": "Dans quelle mesure vous êtes-vous senti tendu ou anxieux au cours de la dernière semaine ?",
+  "sec": "Ces questions vous concernent si vous avez des douleurs au niveau du dos, des épaules ou de la nuque. Veuillez lire et répondre à chaque question attentivement."
+ },
+ {
+  "kind": "num",
+  "min": 0,
+  "max": 10,
+  "lo": "Pas du tout",
+  "hi": "Extrêmement",
+  "t": "À quel point avez-vous été gêné par un sentiment de dépression au cours de la dernière semaine ?",
+  "sec": "Ces questions vous concernent si vous avez des douleurs au niveau du dos, des épaules ou de la nuque. Veuillez lire et répondre à chaque question attentivement."
+ },
+ {
+  "kind": "num",
+  "min": 0,
+  "max": 10,
+  "lo": "Pas de risque",
+  "hi": "Risque très élevé",
+  "t": "À votre avis, quelle est l'ampleur du risque que votre douleur actuelle devienne persistante ?",
+  "sec": "Ces questions vous concernent si vous avez des douleurs au niveau du dos, des épaules ou de la nuque. Veuillez lire et répondre à chaque question attentivement."
+ },
+ {
+  "kind": "num",
+  "min": 0,
+  "max": 10,
+  "lo": "Aucune chance",
+  "hi": "Très grande chance",
+  "t": "À votre avis, quelles sont les chances que vous soyez capable de travailler dans six mois ?",
+  "sec": "Ces questions vous concernent si vous avez des douleurs au niveau du dos, des épaules ou de la nuque. Veuillez lire et répondre à chaque question attentivement."
+ },
+ {
+  "kind": "num",
+  "min": 0,
+  "max": 10,
+  "lo": "Pas du tout d'accord",
+  "hi": "Complètement d'accord",
+  "t": "Une augmentation de la douleur indique que je devrais arrêter ce que je fais jusqu'à ce que la douleur diminue.",
+  "sec": "Voici certaines des choses que d'autres patients nous ont dites à propos de leur douleur. Pour chaque item, sélectionnez un chiffre de 0 à 10 pour indiquer à quel point les activités physiques comme se pencher, soulever quelque chose, marcher ou conduire affectent ou pourraient affecter votre dos."
+ },
+ {
+  "kind": "num",
+  "min": 0,
+  "max": 10,
+  "lo": "Pas du tout d'accord",
+  "hi": "Complètement d'accord",
+  "t": "Je ne devrais pas faire mes activités normales, y compris mon travail, avec ma douleur actuelle.",
+  "sec": "Voici certaines des choses que d'autres patients nous ont dites à propos de leur douleur. Pour chaque item, sélectionnez un chiffre de 0 à 10 pour indiquer à quel point les activités physiques comme se pencher, soulever quelque chose, marcher ou conduire affectent ou pourraient affecter votre dos."
+ },
+ {
+  "kind": "num",
+  "min": 0,
+  "max": 10,
+  "lo": "Je ne peux pas le faire à cause de la douleur",
+  "hi": "Je peux le faire sans que la douleur soit un problème",
+  "t": "Je peux faire un travail léger pendant une heure.",
+  "sec": "Voici une liste de cinq activités. Veuillez sélectionner le chiffre qui décrit le mieux votre capacité actuelle à participer à chacune de ces activités."
+ },
+ {
+  "kind": "num",
+  "min": 0,
+  "max": 10,
+  "lo": "Je ne peux pas le faire à cause de la douleur",
+  "hi": "Je peux le faire sans que la douleur soit un problème",
+  "t": "Je peux dormir la nuit.",
+  "sec": "Voici une liste de cinq activités. Veuillez sélectionner le chiffre qui décrit le mieux votre capacité actuelle à participer à chacune de ces activités."
+ }
+];
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+  var RESULT = function(a){
+    var tot = a[0];
+    [1,2,3,4,6,7].forEach(function(i){ tot += a[i]; });
+    [5,8,9].forEach(function(i){ tot += 10 - a[i]; });
+    var high = tot > 49;
+    return '<p class="result-score">' + tot + ' / 100</p>' +
+      '<p class="result-max">score total de la version courte (10 questions)</p>' +
+      '<p class="result-text">Seuil indiqué sur la fiche française : un score supérieur à 49 indique un risque élevé de chronicisation — <strong>' + (high ? 'seuil dépassé (risque élevé)' : 'seuil non dépassé') + '</strong>.</p>' +
+      '<p class="result-text">Ce résultat est un repère de dépistage : il oriente la prise en charge (par exemple approche biopsychosociale précoce) mais ne remplace pas une évaluation clinique complète.</p>';
+  };
+
+  function vis(i){
+    var c = items[i].cond;
+    return !c || answers[c[0]] === c[1];
+  }
+  function step(i, dir){
+    var j = i + dir;
+    while (j >= 0 && j < items.length && !vis(j)) j += dir;
+    return j;
+  }
+  function visCount(){ var n = 0; for (var i = 0; i < items.length; i++) if (vis(i)) n++; return n; }
+  function visRank(i){ var n = 0; for (var k = 0; k <= i; k++) if (vis(k)) n++; return n; }
+  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+
+  function renderQuestion(){
+    var it = items[idx];
+    document.getElementById('progress-text').textContent = 'Question ' + visRank(idx) + ' / ' + visCount();
+    var secEl = document.getElementById('sec-text');
+    if (it.sec){ secEl.textContent = it.sec; secEl.hidden = false; } else { secEl.hidden = true; }
+    document.getElementById('q-text').textContent = it.t;
+    document.getElementById('q-desc').textContent = it.d || '';
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    if (it.kind === 'num'){
+      var nr = document.createElement('div'); nr.className = 'num-row';
+      for (var v = it.min; v <= it.max; v++){
+        (function(v){
+          var b = document.createElement('div');
+          b.className = 'num' + (answers[idx] === v ? ' selected' : '');
+          b.textContent = v;
+          b.addEventListener('click', function(){ answers[idx] = v; renderQuestion(); });
+          nr.appendChild(b);
+        })(v);
+      }
+      row.appendChild(nr);
+      var ends = document.createElement('div'); ends.className = 'num-ends';
+      ends.innerHTML = '<span>' + esc(it.lo) + '</span><span style="text-align:right">' + esc(it.hi) + '</span>';
+      row.appendChild(ends);
+    } else if (it.kind === 'vas'){
+      var box = document.createElement('div'); box.className = 'vas-box';
+      var cur = answers[idx] === null ? 50 : answers[idx];
+      box.innerHTML = '<p class="vas-val" id="vas-val">' + (answers[idx] === null ? '—' : answers[idx]) + '</p>' +
+        '<input type="range" id="vas-range" min="' + it.min + '" max="' + it.max + '" step="1" value="' + cur + '" aria-label="Échelle visuelle analogique">' +
+        '<div class="num-ends"><span>' + esc(it.lo) + '</span><span style="text-align:right">' + esc(it.hi) + '</span></div>' +
+        '<p class="q-desc" style="margin-top:14px">Déplacez le curseur (ou utilisez les flèches du clavier) jusqu\'à la valeur qui correspond à votre état de santé aujourd\'hui.</p>';
+      row.appendChild(box);
+      var rg = document.getElementById('vas-range');
+      function setV(){
+        answers[idx] = parseInt(rg.value, 10);
+        document.getElementById('vas-val').textContent = answers[idx];
+        document.getElementById('btn-next').disabled = false;
+      }
+      rg.addEventListener('input', setV);
+      rg.addEventListener('change', setV);
+      rg.addEventListener('click', setV);
+    } else {
+      var list = document.createElement('div'); list.className = 'opt-row';
+      it.opts.forEach(function(pair){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx] === pair[0] ? ' selected' : '');
+        d.textContent = pair[1];
+        d.addEventListener('click', function(){ answers[idx] = pair[0]; renderQuestion(); });
+        list.appendChild(d);
+      });
+      row.appendChild(list);
+    }
+    document.getElementById('btn-prev').disabled = step(idx, -1) < 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = step(idx, 1) >= items.length ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    var j = step(idx, -1);
+    if (j >= 0){ idx = j; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    var j = step(idx, 1);
+    if (j < items.length){ idx = j; renderQuestion(); } else { showResult(); }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var a = answers.map(function(v, i){ return vis(i) ? v : null; });
+    document.getElementById('result-body').innerHTML = RESULT(a);
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Örebro MPSQ — Questionnaire de dépistage (version courte)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#6B4E0E 0%,#D4A52C 55%,#3D2C05 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,210,.40),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#8A6510;background:#F8EDCC;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .section ul{font-size:14.5px;margin:0 0 10px;padding-left:20px;}
+  .section li{margin-bottom:4px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#8A6510;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#8A6510;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <div class="fiche-photo"><span class="acronym">ÖREBRO</span></div>
+  <h1 class="serif">Questionnaire Örebro de dépistage des douleurs musculo-squelettiques — version courte (Örebro MPSQ)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Linton S.J. &amp; Hallden K. (1998) — forme courte : Linton S.J., Nicholas M. &amp; MacDonald S. (2011) — version française validée : Nonclercq O. &amp; Berquin A. (2012)</p>
+  <div class="meta-row">
+    <span class="pill">10 questions</span>
+    <span class="pill">5 minutes</span>
+    <span class="pill">Échelles 0-10</span>
+    <span class="pill">Adulte</span>
+    <span class="pill">Français</span>
+    <span class="pill">Licence requise : oui</span>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" href="orebro-mpsq.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>L'Örebro MPSQ dépiste, chez une personne souffrant de douleurs du dos, des épaules ou de la nuque, le risque que la douleur devienne persistante et invalidante. La version courte de 10 questions explore la durée de la douleur, son intensité, la tension ou l'anxiété, le sentiment de dépression, la perception du risque de chronicisation, les chances de reprise du travail, deux croyances d'évitement liées à la douleur et deux capacités fonctionnelles (travail léger, sommeil).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Question 1 (durée) : catégories cotées de 1 (0-1 semaine) à 10 (plus de 52 semaines). Questions 2, 3, 4, 5, 7 et 8 : score = chiffre sélectionné. Questions 6, 9 et 10 : score = 10 moins le chiffre sélectionné. Total sur 100 ; un score supérieur à 49 indique un risque élevé selon la fiche française.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p>Linton S.J. &amp; Hallden K. (1998). <em>Clinical Journal of Pain</em>, 14, 209-215. Version française validée : Nonclercq O. &amp; Berquin A. (2012), <em>Annals of Physical and Rehabilitation Medicine</em>, 55(4), 263-278. Texte transcrit depuis la version courte française diffusée par le KCE (Centre fédéral d'expertise des soins de santé, Belgique).</p>
+    <p class="source-note"><strong>Licence requise : oui.</strong> La fiche du KCE précise : « Outil reproduit avec la permission du Professeur Steven J. Linton détenteur du copyright » ; autorisation nominative nécessaire, aucun tarif documenté. Construit malgré tout sur décision du cabinet (30/09/2026). Outil de repérage, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

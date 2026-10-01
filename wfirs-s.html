@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WFIRS-S — Échelle de retentissement fonctionnel de Weiss, version auto-évaluation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#6A4E9C;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 6px;}
+  .domain-tag{font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#6A4E9C;margin:0 0 10px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#6A4E9C;background:#ECE6F5;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#6A4E9C;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#6A4E9C;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 20px;}
+  .subscale-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .subscale-row:last-child{border-bottom:none;}
+  .subscale-val{font-weight:700;color:#6A4E9C;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">WFIRS-S — Échelle de retentissement fonctionnel de Weiss, version auto-évaluation</h1>
+    <p class="lead">Ce questionnaire explore le retentissement de vos difficultés émotionnelles ou comportementales sur 7 domaines de votre vie quotidienne (famille, travail, école, compétences de vie, image de soi, fonctionnement social, comportements à risque), à travers 69 items.</p>
+    
+    <div class="pill-row">
+      <span class="pill">69 items</span>
+      <span class="pill">10-15 minutes</span>
+      <span class="pill">7 domaines</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="domain-tag" id="domain-tag" ></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Pr&eacute;c&eacute;dent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">R&eacute;sultat</h1>
+    <p class="result-score" id="score-val"></p>
+    <p class="result-max">score moyen global, sur une échelle de 0 à 3 (items « n/a » exclus du calcul)</p>
+    <div id="facet-rows"></div>
+    <p class="result-text">Plus le score est élevé, plus le retentissement fonctionnel rapporté est important. Chaque domaine est coté en moyenne de 0 à 3 (items marqués « n/a » exclus de la moyenne de leur domaine). Aucun score total unique officiel : les domaines Travail et École sont habituellement complétés selon la situation de la personne (emploi ou études), les deux sont proposés ici pour fidélité au questionnaire complet.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Weiss, M.D. Weiss Functional Impairment Rating Scale — Self-Report (WFIRS-S). Version française officielle diffusée par CADDRA (Canadian ADHD Resource Alliance). Validation française : PubMed 30191748 (2018, adultes). Outil de retentissement fonctionnel, ne remplace pas une évaluation clinique complète du TDAH.</p>
+  </div>
+</div>
+
+<script>
+
+(function(){
+  var items = [
+    {d:"Famille", t:"Nuisent aux relations avec les membres de votre famille"},
+    {d:"Famille", t:"Causent des probl\u00e8mes dans votre couple"},
+    {d:"Famille", t:"Font que vous comptez sur les autres afin qu\u2019ils fassent des choses \u00e0 votre place"},
+    {d:"Famille", t:"Causent des querelles familiales"},
+    {d:"Famille", t:"Emp\u00eachent la famille de s\u2019amuser ensemble"},
+    {d:"Famille", t:"Nuisent \u00e0 votre habilet\u00e9 \u00e0 s\u2019occuper de votre famille"},
+    {d:"Famille", t:"Causent des difficult\u00e9s quant \u00e0 trouver le juste \u00e9quilibre des besoins de tous les membres de la famille"},
+    {d:"Famille", t:"Emp\u00eachent de rester calme ou d\u2019\u00e9viter de vous f\u00e2cher"},
+    {d:"Travail", t:"Difficult\u00e9 \u00e0 effectuer ce qui est demand\u00e9"},
+    {d:"Travail", t:"Rendement de travail affect\u00e9"},
+    {d:"Travail", t:"Probl\u00e8mes avec votre sup\u00e9rieur(e)"},
+    {d:"Travail", t:"Difficult\u00e9 \u00e0 maintenir un emploi"},
+    {d:"Travail", t:"Cong\u00e9diement ou perte d\u2019emploi"},
+    {d:"Travail", t:"Difficult\u00e9 \u00e0 travailler en groupe"},
+    {d:"Travail", t:"Manque du travail, absent\u00e9isme"},
+    {d:"Travail", t:"Arrive en retard, retardataire"},
+    {d:"Travail", t:"Difficult\u00e9 \u00e0 entreprendre de nouvelles t\u00e2ches"},
+    {d:"Travail", t:"Difficult\u00e9 \u00e0 atteindre votre plein potentiel"},
+    {d:"Travail", t:"Faibles \u00e9valuations de rendement"},
+    {d:"\u00c9cole", t:"Difficult\u00e9 \u00e0 prendre des notes"},
+    {d:"\u00c9cole", t:"Difficult\u00e9 \u00e0 compl\u00e9ter vos devoirs ou projets"},
+    {d:"\u00c9cole", t:"Difficult\u00e9 \u00e0 effectuer ad\u00e9quatement vos travaux"},
+    {d:"\u00c9cole", t:"Probl\u00e8mes avec votre enseignant(e)"},
+    {d:"\u00c9cole", t:"Probl\u00e8mes avec le personnel administratif"},
+    {d:"\u00c9cole", t:"Difficult\u00e9 \u00e0 maintenir le minimum des pr\u00e9-requis scolaires"},
+    {d:"\u00c9cole", t:"Ne se pr\u00e9sente pas \u00e0 ses cours, absent\u00e9isme"},
+    {d:"\u00c9cole", t:"Arrive en retard, retardataire"},
+    {d:"\u00c9cole", t:"Difficult\u00e9 \u00e0 atteindre votre plein potentiel"},
+    {d:"\u00c9cole", t:"R\u00e9sultats scolaires instables"},
+    {d:"Aptitudes \u00e0 la vie quotidienne", t:"Usage abusif du t\u00e9l\u00e9viseur, de l\u2019ordinateur ou des jeux vid\u00e9os"},
+    {d:"Aptitudes \u00e0 la vie quotidienne", t:"Probl\u00e8mes d\u2019hygi\u00e8ne personnelle"},
+    {d:"Aptitudes \u00e0 la vie quotidienne", t:"Difficult\u00e9 \u00e0 se pr\u00e9parer \u00e0 temps pour quitter la maison le matin"},
+    {d:"Aptitudes \u00e0 la vie quotidienne", t:"Difficult\u00e9 \u00e0 se pr\u00e9parer au coucher"},
+    {d:"Aptitudes \u00e0 la vie quotidienne", t:"Probl\u00e8mes de nutrition"},
+    {d:"Aptitudes \u00e0 la vie quotidienne", t:"Probl\u00e8mes sexuels"},
+    {d:"Aptitudes \u00e0 la vie quotidienne", t:"Troubles du sommeil"},
+    {d:"Aptitudes \u00e0 la vie quotidienne", t:"Accident ou blessure"},
+    {d:"Aptitudes \u00e0 la vie quotidienne", t:"Inactivit\u00e9 physique"},
+    {d:"Aptitudes \u00e0 la vie quotidienne", t:"Difficult\u00e9 \u00e0 respecter rendez-vous r\u00e9guliers chez le m\u00e9decin ou le dentiste"},
+    {d:"Aptitudes \u00e0 la vie quotidienne", t:"Difficult\u00e9 avec les t\u00e2ches m\u00e9nag\u00e8res"},
+    {d:"Aptitudes \u00e0 la vie quotidienne", t:"Difficult\u00e9 \u00e0 g\u00e9rer vos finances"},
+    {d:"Concept de soi", t:"Mauvaise perception de vous-m\u00eames"},
+    {d:"Concept de soi", t:"Frustr\u00e9(e) face \u00e0 vous-m\u00eame"},
+    {d:"Concept de soi", t:"Sentiment de d\u00e9couragement"},
+    {d:"Concept de soi", t:"Insatisfait(e) de votre vie"},
+    {d:"Concept de soi", t:"Impression d\u2019\u00eatre incomp\u00e9tent(e)"},
+    {d:"Fonctionnement social", t:"Vous argumentez avec les autres"},
+    {d:"Fonctionnement social", t:"Difficult\u00e9 de coop\u00e9rer avec les autres"},
+    {d:"Fonctionnement social", t:"Difficult\u00e9 \u00e0 vous entendre avec les autres"},
+    {d:"Fonctionnement social", t:"Difficult\u00e9 \u00e0 vous amuser/avoir du plaisir avec les autres"},
+    {d:"Fonctionnement social", t:"Difficult\u00e9 \u00e0 avoir des activit\u00e9s de loisirs"},
+    {d:"Fonctionnement social", t:"Difficult\u00e9 \u00e0 vous faire de nouveaux amis"},
+    {d:"Fonctionnement social", t:"Difficult\u00e9 \u00e0 maintenir vos relations d\u2019amiti\u00e9"},
+    {d:"Fonctionnement social", t:"Vous tenez des propos inappropri\u00e9s"},
+    {d:"Fonctionnement social", t:"Plaintes des voisins"},
+    {d:"Comportements \u00e0 risque", t:"Conduite automobile agressive"},
+    {d:"Comportements \u00e0 risque", t:"Faire autre chose tout en conduisant"},
+    {d:"Comportements \u00e0 risque", t:"Rages au volant"},
+    {d:"Comportements \u00e0 risque", t:"D\u00e9truire ou endommager des biens"},
+    {d:"Comportements \u00e0 risque", t:"Poser des gestes illicites"},
+    {d:"Comportements \u00e0 risque", t:"Ennuis avec la police"},
+    {d:"Comportements \u00e0 risque", t:"Cigarette"},
+    {d:"Comportements \u00e0 risque", t:"Marijuana"},
+    {d:"Comportements \u00e0 risque", t:"Consommation d\u2019alcool"},
+    {d:"Comportements \u00e0 risque", t:"Consommation de drogues illicites"},
+    {d:"Comportements \u00e0 risque", t:"Relations sexuelles non prot\u00e9g\u00e9es (condom, pilule contraceptive)"},
+    {d:"Comportements \u00e0 risque", t:"Comportement sexuel inappropri\u00e9"},
+    {d:"Comportements \u00e0 risque", t:"\u00catre agressif(ve) physiquement"},
+    {d:"Comportements \u00e0 risque", t:"\u00catre agressif(ve) verbalement"}
+  ];
+  var opts = ["Jamais ou pas du tout", "Quelques fois ou un peu", "Souvent ou moyennement", "Tr\u00e8s souvent ou beaucoup", "Ne s\u2019applique pas (n/a)"];
+  var domainNames = ["Famille", "Travail", "\u00c9cole", "Aptitudes \u00e0 la vie quotidienne", "Concept de soi", "Fonctionnement social", "Comportements \u00e0 risque"];
+  var answers = new Array(items.length).fill(undefined);
+  var idx = 0;
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('domain-tag').textContent = items[idx].d;
+    document.getElementById('q-text').textContent = items[idx].t;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    opts.forEach(function(label, v){
+      var score = (v === 4) ? null : v; // null = n/a
+      var d = document.createElement('div');
+      var sel = (answers[idx] !== undefined && answers[idx] === score);
+      d.className = 'opt' + (sel ? ' selected' : '');
+      d.textContent = label;
+      d.addEventListener('click', function(){
+        answers[idx] = score;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === undefined;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le r\u00e9sultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === undefined) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var sums = {}, counts = {};
+    domainNames.forEach(function(n){ sums[n]=0; counts[n]=0; });
+    var grandSum = 0, grandCount = 0;
+    items.forEach(function(it, i){
+      var v = answers[i];
+      if (v === null || v === undefined) return;
+      sums[it.d] += v; counts[it.d] += 1;
+      grandSum += v; grandCount += 1;
+    });
+    var rows = '';
+    domainNames.forEach(function(n){
+      var avg = counts[n] ? (sums[n]/counts[n]) : 0;
+      rows += '<div class="subscale-row"><span>' + n + '</span><span class="subscale-val">' + avg.toFixed(2) + ' / 3' + (counts[n] ? '' : ' (aucun item r\u00e9pondu)') + '</span></div>';
+    });
+    document.getElementById('facet-rows').innerHTML = rows;
+    var grandAvg = grandCount ? (grandSum/grandCount) : 0;
+    document.getElementById('score-val').textContent = grandAvg.toFixed(2);
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(undefined);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+
+</script>
+
+<!-- Fiche (vue praticien) int&eacute;gr&eacute;e : affich&eacute;e &agrave; la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WFIRS-S — Échelle de retentissement fonctionnel de Weiss, version auto-évaluation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#6A4E9C 0%,#A78FC9 55%,#3C2A5E 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.35),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#3C2A5E;background:#ECE6F5;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#6A4E9C;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#3C2A5E;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">WFIRS-S</span></div>
+
+  <h1 class="serif">Échelle de retentissement fonctionnel de Weiss — auto-évaluation (WFIRS-S)</h1>
+  <span class="badge-standard">&#10003; Standardis&eacute;</span>
+  <p class="lead">Weiss Functional Impairment Rating Scale — Self-Report — Margaret D. Weiss, version française CADDRA</p>
+  <div class="meta-row">
+    <span class="pill">69 items</span>
+    <span class="pill">10-15 minutes</span>
+    <span class="pill">7 domaines</span>
+    <span class="pill">Français</span>
+    <span class="pill">TDAH</span>
+    <span class="pill">Licence requise : non</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="wfirs-s.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Pr&eacute;sentation de l'outil</h2>
+    <p>Le WFIRS-S évalue le retentissement fonctionnel des symptômes de TDAH (ou de tout trouble émotionnel/comportemental) dans la vie quotidienne, sur 7 domaines : famille (8 items), travail (11 items), école (10 items), aptitudes à la vie quotidienne (12 items), concept de soi (5 items), fonctionnement social (9 items) et comportements à risque (14 items). En pratique clinique, les domaines Travail et École sont généralement complétés de manière alternative selon la situation de la personne (en emploi ou en études) ; les deux sont proposés ici intégralement, fidèles au formulaire complet diffusé par CADDRA, chaque item pouvant être coché « n/a » si non applicable.</p>
+    <p class="source-note">Version française officielle diffusée sans verrou par CADDRA (Canadian ADHD Resource Alliance), validation psychométrique française publiée (PubMed 30191748, adultes, 2018 ; PubMed 36799215, population scolaire, 2023).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interpr&eacute;tation</h2>
+    <p>Chaque item est coté 0 (jamais ou pas du tout) à 3 (très souvent ou beaucoup), ou exclu s’il est coché « n/a ». Le score de chaque domaine est la moyenne des items répondus de ce domaine (0 à 3). Un score moyen global (tous domaines confondus, items « n/a » exclus) est également indiqué à titre synthétique.</p>
+    <p class="source-note">L’auteure ne publie pas de seuil clinique chiffré unique : le WFIRS-S est conçu pour repérer les domaines de vie les plus affectés et suivre leur évolution dans le temps, pas pour poser un diagnostic. La modification du contenu des items n’est pas autorisée par l’auteure.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p>Weiss, M.D. Weiss Functional Impairment Rating Scale — Self-Report (WFIRS-S). Validation française (adultes) : PubMed 30191748 (2018). Validation française (population scolaire générale, WFIRS-P) : PubMed 36799215 (2023).</p>
+    <p class="source-note"><strong>Licence requise : non.</strong> « Clinicians and researchers may use it without charge » (mention de l’auteure et détentrice des droits figurant sur la version française elle-même) ; seule la création d’une nouvelle traduction, sa mise en ligne par un tiers ou son usage dans une recherche formelle nécessitent de contacter l’auteure — pas l’usage clinique de cette traduction française déjà publiée et diffusée sans verrou par CADDRA. La modification des items n’est pas autorisée. Outil de retentissement fonctionnel, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var htmlOut = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(htmlOut); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>SPRS - Échelle de cotation de la phobie sociale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#8A5A12;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .progress-track{height:6px;background:#E0D9C9;border-radius:99px;overflow:hidden;margin-bottom:14px;}
+  .progress-fill{height:100%;background:#8A5A12;border-radius:99px;transition:width .25s ease;}
+  .part-label{font-size:11.5px;font-weight:700;color:#8A5A12;text-transform:uppercase;letter-spacing:.06em;margin:0 0 6px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .consigne{font-size:13px;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:10px;padding:10px 14px;margin:0 0 16px;font-style:italic;}
+  .q-text{font-size:17px;font-family:'Cormorant Garamond',Georgia,serif;margin:0 0 18px;}
+  .scale-row{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:12px;}
+  .scale-btn{flex:1 0 auto;min-width:34px;padding:9px 4px;border-radius:8px;border:1px solid #E0D9C9;background:#F4F1EA;font-family:'Inter',sans-serif;font-weight:700;font-size:12.5px;color:#20241E;cursor:pointer;text-align:center;}
+  .scale-btn:hover{border-color:#8A5A12;}
+  .scale-btn.selected{background:#8A5A12;color:#fff;border-color:#8A5A12;}
+  .anchor-legend{font-size:12px;color:#9A9E90;margin:0 0 22px;line-height:1.6;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#8A5A12;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-intro{font-size:14px;color:#63695D;margin:0 0 22px;}
+  .score-block{border:1px solid #E0D9C9;border-radius:12px;padding:22px 24px;margin-bottom:16px;text-align:center;}
+  .score-block .score-val{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;font-weight:600;color:#8A5A12;}
+  .score-block .score-label{font-size:13px;color:#63695D;margin-top:4px;}
+  .caveat{font-size:12.5px;color:#63695D;background:#FBF3E4;border:1px solid #E7D6AE;border-radius:10px;padding:12px 14px;margin:0 0 18px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">SPRS — Phobie sociale</h1>
+    <p class="lead">Social Phobia Rating Scale (Wells, 1997). Ce questionnaire porte sur la dernière semaine et se déroule en trois parties : trois évaluations générales, quinze comportements de sécurité, puis quatorze pensées automatiques.</p>
+    <div class="pill-row">
+      <span class="pill">32 questions</span>
+      <span class="pill">8 minutes</span>
+      <span class="pill">Auto-administré</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="part-label" id="part-label"></p>
+    <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+    <p class="progress" id="progress-text"></p>
+    <p class="consigne" id="consigne" hidden></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="scale-row" id="scale-row"></div>
+    <p class="anchor-legend" id="anchor-legend"></p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-intro">Un seul score global est publié pour cet instrument, aucune sous-échelle distincte : plus l'indice est élevé, plus la phobie sociale rapportée sur la dernière semaine est sévère.</p>
+    <div class="score-block">
+      <div class="score-val" id="score-val">0 %</div>
+      <div class="score-label">Indice global de phobie sociale</div>
+    </div>
+    <p class="caveat">La fiche source affiche un exemple (« Score : 54 % ») mais ne détaille pas la formule exacte de conversion des deux items 0-10 (questions 1 et 3) vers ce même indice en pourcentage, ni l'ancrage haut exact des pensées de la partie 3. Ce calcul convertit les questions 1 et 3 par ×10 puis fait la moyenne des 32 valeurs en pourcentage (cohérent avec l'exemple publié) ; l'ancrage haut des pensées (« Je crois complètement la pensée ») est déduit par symétrie avec l'ancrage bas affiché. Deux déductions de méthode, à interpréter avec cette réserve — voir la fiche pour le détail.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Wells, A. (1997). Cognitive Therapy of Anxiety Disorders. Social Phobia Rating Scale. Traduction française de travail. Ce résultat est un repère, il ne constitue pas un diagnostic.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  // SPRS (Wells, 1997), 32 items en 3 parties, transcrits dans
+  // claude/quiz-sourcing-brut-part2.md. type "s10" = échelle 0-10 native ;
+  // "s100" = échelle 0-100 % par paliers de 10.
+  var PARTS = [
+    { label: "Partie 1 · Évaluations générales", consigne: null },
+    { label: "Partie 2 · Comportements de sécurité", consigne: "Les gens gèrent leur anxiété sociale de différentes manières. Indiquez la fréquence à laquelle vous adoptez ce comportement lorsque vous êtes socialement anxieux : " },
+    { label: "Partie 3 · Pensées automatiques", consigne: "Indiquez dans quelle mesure vous croyez cette pensée lorsque vous êtes socialement anxieux : " }
+  ];
+
+  var items = [
+    { part:0, type:'s10', text:"Au cours de la dernière semaine, dans quelle mesure votre anxiété sociale a-t-elle été source de détresse ?",
+      anchors:[[0,"Pas du tout"],[5,"Modérément"],[10,"Ça n'a jamais été pire"]] },
+    { part:0, type:'s100', text:"Au cours de la dernière semaine, dans quelle mesure avez-vous évité des situations sociales à cause de l'anxiété ?",
+      anchors:[[0,"Pas du tout"],[50,"La moitié du temps"],[100,"Tout le temps"]] },
+    { part:0, type:'s10', text:"Au cours de la dernière semaine, dans quelle mesure vous êtes-vous senti(e) gêné(e) dans des situations sociales difficiles ?",
+      anchors:[[0,"Pas du tout"],[3,"Modérément"],[7,"Extrêmement gêné(e)"],[10,"Ça n'a jamais été pire"]] }
+  ];
+
+  var behaviors = ["Ne pas dire grand chose","Respirer lentement","Saisir fermement les objets","Bouger lentement",
+    "Utiliser la distraction","Contrôler mes pensées","Essayer de me détendre","M'asseoir","Couvrir mon visage",
+    "Porter certains vêtements","Tenir mes bras immobiles","Me concentrer sur ma voix","Éviter le contact visuel",
+    "Parler rapidement","Me concentrer sur mes mains"];
+  behaviors.forEach(function(b){
+    items.push({ part:1, type:'s100', text:b, anchors:[[0,"Pas du tout"],[50,"La moitié du temps"],[100,"Tout le temps"]] });
+  });
+
+  var thoughts = ["« Je parais mal »","« Tout le monde me regarde »","« Je perds le contrôle »",
+    "« Je serai incapable de parler »","« Je vais bégayer et parler bizarrement »","« J'ai l'air anormal »",
+    "« Ils ne me respecteront pas »","« Ils remarqueront que je suis anxieux »","« Je vais échapper et renverser des choses »",
+    "« Je suis ennuyeux »","« Je suis inadéquat »","« Ils pensent que je suis stupide »","« Ils ne m'aiment pas »",
+    "« Je vais avoir l'air stupide »"];
+  thoughts.forEach(function(t){
+    items.push({ part:2, type:'s100', text:t, anchors:[[0,"Je ne crois pas la pensée"],[100,"Je crois complètement la pensée"]] });
+  });
+
+  var answers = new Array(items.length).fill(null);
+  var current = 0;
+
+  var screenStart = document.getElementById('screen-start');
+  var screenQuiz = document.getElementById('screen-quiz');
+  var screenResult = document.getElementById('screen-result');
+  var partLabel = document.getElementById('part-label');
+  var progressFill = document.getElementById('progress-fill');
+  var progressText = document.getElementById('progress-text');
+  var consigneEl = document.getElementById('consigne');
+  var qText = document.getElementById('q-text');
+  var scaleRow = document.getElementById('scale-row');
+  var anchorLegend = document.getElementById('anchor-legend');
+  var btnPrev = document.getElementById('btn-prev');
+  var btnNext = document.getElementById('btn-next');
+
+  function stepsFor(type){ return type === 's10' ? 10 : 100; }
+  function incFor(type){ return type === 's10' ? 1 : 10; }
+  function unitLabel(type, v){ return type === 's10' ? String(v) : (v + '%'); }
+
+  function renderQuestion(){
+    var it = items[current];
+    partLabel.textContent = PARTS[it.part].label;
+    progressFill.style.width = Math.round((current / items.length) * 100) + '%';
+    progressText.textContent = 'Question ' + (current + 1) + ' / ' + items.length;
+
+    if (PARTS[it.part].consigne){
+      consigneEl.hidden = false;
+      consigneEl.textContent = PARTS[it.part].consigne;
+    } else {
+      consigneEl.hidden = true;
+    }
+    qText.textContent = it.text;
+
+    scaleRow.innerHTML = '';
+    var max = stepsFor(it.type), inc = incFor(it.type);
+    for (var v = 0; v <= max; v += inc){
+      (function(val){
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'scale-btn' + (answers[current] === val ? ' selected' : '');
+        b.textContent = unitLabel(it.type, val);
+        b.addEventListener('click', function(){
+          answers[current] = val;
+          renderQuestion();
+        });
+        scaleRow.appendChild(b);
+      })(v);
+    }
+
+    anchorLegend.innerHTML = it.anchors.map(function(a){
+      return '<strong>' + unitLabel(it.type, a[0]) + '</strong> ' + a[1];
+    }).join(' &middot; ');
+
+    btnPrev.disabled = (current === 0);
+    btnNext.disabled = (answers[current] === null);
+    btnNext.textContent = (current === items.length - 1) ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    screenStart.hidden = true;
+    screenQuiz.hidden = false;
+    current = 0;
+    renderQuestion();
+  });
+
+  btnPrev.addEventListener('click', function(){
+    if (current > 0){ current -= 1; renderQuestion(); }
+  });
+
+  btnNext.addEventListener('click', function(){
+    if (answers[current] === null) return;
+    if (current < items.length - 1){ current += 1; renderQuestion(); } else { showResult(); }
+  });
+
+  function showResult(){
+    screenQuiz.hidden = true;
+    screenResult.hidden = false;
+    var sum = 0;
+    items.forEach(function(it, i){
+      var raw = answers[i];
+      var pct = (it.type === 's10') ? raw * 10 : raw;
+      sum += pct;
+    });
+    var globalIndex = Math.round(sum / items.length);
+    document.getElementById('score-val').textContent = globalIndex + ' %';
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers.fill(null);
+    current = 0;
+    screenResult.hidden = true;
+    screenStart.hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>SPRS - Échelle de cotation de la phobie sociale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#E8A62E 0%,#F3C871 55%,#8A6410 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,210,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#22334D;background:#E9EEF5;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .section ul{font-size:14.5px;margin:0 0 10px;padding-left:20px;}
+  .section li{margin-bottom:4px;}
+  .caveat{font-size:13px;color:#63695D;background:#FBF3E4;border:1px solid #E7D6AE;border-radius:12px;padding:12px 16px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#8A5A12;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#22334D;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <div class="fiche-photo"><span class="acronym">SPRS</span></div>
+  <h1 class="serif">Échelle de cotation de la phobie sociale (SPRS)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Social Phobia Rating Scale — Wells, A. (1997)</p>
+  <div class="meta-row">
+    <span class="pill">32 questions</span>
+    <span class="pill">8 minutes</span>
+    <span class="pill">Auto-administré</span>
+    <span class="pill">Adolescent et adulte</span>
+    <span class="pill">Traduction de travail</span>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" href="sprs.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le SPRS est un instrument de 32 items développé par Adrian Wells (1997) dans le cadre du modèle cognitif de la phobie sociale (avec David M. Clark), largement diffusé et reproduit dans les manuels cliniques de thérapie cognitivo-comportementale de la phobie sociale. Il porte sur la semaine écoulée et se déroule en trois parties : trois évaluations générales de la détresse, de l'évitement et de la gêne ressentie ; quinze comportements de sécurité (safety behaviours) que les personnes anxieuses socialement adoptent pour se protéger ; et quatorze pensées automatiques négatives typiques de la phobie sociale, cotées en degré de croyance.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Partie 1 — Évaluations générales (items 1 à 3)</h2>
+    <ul>
+      <li>Au cours de la dernière semaine, dans quelle mesure votre anxiété sociale a-t-elle été source de détresse ? <em>(échelle 0 à 10 ; 0 = Pas du tout, 5 = Modérément, 10 = Ça n'a jamais été pire)</em></li>
+      <li>Au cours de la dernière semaine, dans quelle mesure avez-vous évité des situations sociales à cause de l'anxiété ? <em>(échelle 0 à 100 %, paliers de 10 ; 0 % = Pas du tout, 50 % = La moitié du temps, 100 % = Tout le temps)</em></li>
+      <li>Au cours de la dernière semaine, dans quelle mesure vous êtes-vous senti(e) gêné(e) dans des situations sociales difficiles ? <em>(échelle 0 à 10 ; 0 = Pas du tout, 3 = Modérément, 7 = Extrêmement gêné(e), 10 = Ça n'a jamais été pire)</em></li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Partie 2 — Comportements de sécurité (items 4 à 18)</h2>
+    <p>Consigne reprise pour chacun des quinze items : « Indiquez la fréquence à laquelle vous faites ce qui suit lorsque vous êtes socialement anxieux : » suivi du comportement, coté de 0 % à 100 % par paliers de 10 % (0 % = Pas du tout, 50 % = La moitié du temps, 100 % = Tout le temps).</p>
+    <ul>
+      <li>Ne pas dire grand chose</li>
+      <li>Respirer lentement</li>
+      <li>Saisir fermement les objets</li>
+      <li>Bouger lentement</li>
+      <li>Utiliser la distraction</li>
+      <li>Contrôler mes pensées</li>
+      <li>Essayer de me détendre</li>
+      <li>M'asseoir</li>
+      <li>Couvrir mon visage</li>
+      <li>Porter certains vêtements</li>
+      <li>Tenir mes bras immobiles</li>
+      <li>Me concentrer sur ma voix</li>
+      <li>Éviter le contact visuel</li>
+      <li>Parler rapidement</li>
+      <li>Me concentrer sur mes mains</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Partie 3 — Pensées automatiques (items 19 à 32)</h2>
+    <p>Consigne reprise pour chacune des quatorze pensées : « Indiquez dans quelle mesure vous croyez cette pensée lorsque vous êtes socialement anxieux : » suivi de la pensée, cotée de 0 % à 100 % par paliers de 10 % (0 % = Je ne crois pas la pensée).</p>
+    <ul>
+      <li>« Je parais mal »</li>
+      <li>« Tout le monde me regarde »</li>
+      <li>« Je perds le contrôle »</li>
+      <li>« Je serai incapable de parler »</li>
+      <li>« Je vais bégayer et parler bizarrement »</li>
+      <li>« J'ai l'air anormal »</li>
+      <li>« Ils ne me respecteront pas »</li>
+      <li>« Ils remarqueront que je suis anxieux »</li>
+      <li>« Je vais échapper et renverser des choses »</li>
+      <li>« Je suis ennuyeux »</li>
+      <li>« Je suis inadéquat »</li>
+      <li>« Ils pensent que je suis stupide »</li>
+      <li>« Ils ne m'aiment pas »</li>
+      <li>« Je vais avoir l'air stupide »</li>
+    </ul>
+    <p class="caveat">L'ancrage haut de cette échelle (100 %) n'a pas pu être capturé littéralement à l'écran lors du sourçage ; le libellé « Je crois complètement la pensée » affiché par cette page est déduit par symétrie avec l'ancrage bas (« Je ne crois pas la pensée »), affiché lui de façon certaine — à vérifier si une capture plus complète de la fiche source devient possible.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Cotation telle qu'affichée par la fiche source, non retravaillée : « Chaque item est coté sur une échelle numérique ; pour certains la cotation se fait en pourcentage, de 0 % à 100 %. Le score total est obtenu en additionnant les réponses à chaque item, ce qui permet d'obtenir un indice global (%) du niveau de phobie sociale durant la période considérée. Plus le score obtenu est élevé, plus la phobie sociale est sévère. » Un seul score global publié, aucune sous-échelle distincte. Exemple donné par la fiche source : Score 54 %.</p>
+    <p class="caveat">Réserve de méthode, sans réserve de droits ni de fidélité de contenu : la fiche source ne précise pas la formule exacte de conversion des questions 1 et 3 (échelle native 0-10) vers ce même indice en pourcentage que les 30 autres items (déjà en 0-100 %). Cette page convertit les questions 1 et 3 par ×10, puis calcule l'indice global comme la moyenne des 32 valeurs en pourcentage — un calcul cohérent avec l'exemple publié (« Score : 54 % ») mais déduit, pas confirmé nommément par la source. À interpréter avec cette réserve, comme un repère de discussion plutôt qu'une formule officiellement documentée.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p>Wells, A. (1997). <em>Cognitive Therapy of Anxiety Disorders: A Practice Manual and Conceptual Guide.</em> Chichester: Wiley. Social Phobia Rating Scale.</p>
+    <p class="caveat">Traduction française de travail (non une version validée officiellement publiée) : à interpréter avec cette réserve, comme un repère de discussion plutôt qu'un score étalonné en français.</p>
+    <p class="source-note">Droits vérifiés le 27/09/2026 sur la fiche source : auteur académique nommé explicitement, aucun signal de licence commerciale, instrument largement reproduit dans les manuels cliniques de TCC de la phobie sociale. Usage strictement personnel et non commercial, conforme à la règle générale du cabinet pour ce catalogue. Outil de repérage clinique, ne remplace pas une évaluation complète.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

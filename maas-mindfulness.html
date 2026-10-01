@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MAAS-mindfulness — Pleine conscience (Mindful Attention Awareness Scale)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#5B5EA6;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .sec{font-size:12.5px;color:#63695D;background:#F4F1EA;border-radius:8px;padding:8px 12px;margin:0 0 16px;}
+  .q-text{font-size:16px;margin:0 0 6px;}
+  .q-desc{font-size:13px;color:#63695D;margin:0 0 18px;white-space:pre-line;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#5B5EA6;background:#E7E7F5;}
+  .num-row{display:flex;flex-wrap:wrap;gap:6px;}
+  .num{min-width:44px;text-align:center;padding:10px 0;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600;background:#fff;}
+  .num.selected{border-color:#5B5EA6;background:#E7E7F5;}
+  .num-ends{display:flex;justify-content:space-between;gap:12px;font-size:12px;color:#63695D;margin-top:8px;}
+  .face-row{display:flex;justify-content:space-between;gap:6px;flex-wrap:wrap;}
+  .face{display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;padding:8px 4px;border-radius:10px;border:1px solid transparent;flex:1;min-width:44px;}
+  .face.selected{border-color:#5B5EA6;background:#E7E7F5;}
+  .face svg{width:40px;height:40px;}
+  .face span{font-size:11px;color:#63695D;font-weight:600;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#5B5EA6;border-color:#E0D9C9;}
+  .btn-primary{background:#5B5EA6;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:40px;color:#5B5EA6;margin:0 0 4px;}
+  .result-max{font-size:13px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 14px;}
+  .result-list{font-size:14px;margin:0 0 16px;padding-left:20px;}
+  .result-list li{margin-bottom:4px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">MAAS-mindfulness — MAAS — Mindful Attention Awareness Scale</h1>
+    <p class="lead">Ce questionnaire explore la fréquence, dans votre vie quotidienne, d'états d'inattention ou de « pilotage automatique », à travers 15 affirmations. Répondez selon ce qui reflète réellement votre expérience, plutôt que ce que vous pensez qu'elle devrait être.</p>
+    <p class="lang-note">Version française validée (Jermann, Billieux, Larøi et al., 2009).</p>
+    <div class="pill-row">
+      <span class="pill">15 questions</span>
+      <span class="pill">4 minutes</span>
+      <span class="pill">Échelle 1-6</span>
+      <span class="pill">Français</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="sec" id="sec-text" hidden></p>
+    <p class="q-text" id="q-text"></p>
+    <p class="q-desc" id="q-desc"></p>
+    <div id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Brown K.W. & Ryan R.M. (2003). The benefits of being present: mindfulness and its role in psychological well-being. Journal of Personality and Social Psychology, 84, 822-848. Version française : Jermann F. et al. (2009), Psychological Assessment, 21(4), 506-514. Outil dimensionnel, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [
+ {
+  "t": "Il m'arrive d'éprouver une émotion et de ne pas en prendre conscience avant un certain temps.",
+  "kind": "num",
+  "min": 1,
+  "max": 6,
+  "lo": "Presque toujours",
+  "hi": "Presque jamais"
+ },
+ {
+  "t": "Je casse ou renverse des choses parce que je suis inattentif(ve) ou parce que je pense à autre chose.",
+  "kind": "num",
+  "min": 1,
+  "max": 6,
+  "lo": "Presque toujours",
+  "hi": "Presque jamais"
+ },
+ {
+  "t": "J'ai des difficultés à rester concentré(e) sur ce qui se passe dans le présent.",
+  "kind": "num",
+  "min": 1,
+  "max": 6,
+  "lo": "Presque toujours",
+  "hi": "Presque jamais"
+ },
+ {
+  "t": "J'ai tendance à marcher rapidement pour me rendre là où je veux aller, sans prêter attention à ce qui se passe durant le trajet.",
+  "kind": "num",
+  "min": 1,
+  "max": 6,
+  "lo": "Presque toujours",
+  "hi": "Presque jamais"
+ },
+ {
+  "t": "J'ai tendance à ne pas remarquer des sensations de tension physique ou d'inconfort jusqu'à ce qu'elles captent vraiment mon attention.",
+  "kind": "num",
+  "min": 1,
+  "max": 6,
+  "lo": "Presque toujours",
+  "hi": "Presque jamais"
+ },
+ {
+  "t": "J'oublie le nom d'une personne presque immédiatement après l'avoir entendu pour la première fois.",
+  "kind": "num",
+  "min": 1,
+  "max": 6,
+  "lo": "Presque toujours",
+  "hi": "Presque jamais"
+ },
+ {
+  "t": "Il me semble que je fonctionne « en mode automatique » sans être très conscient(e) de ce que je fais.",
+  "kind": "num",
+  "min": 1,
+  "max": 6,
+  "lo": "Presque toujours",
+  "hi": "Presque jamais"
+ },
+ {
+  "t": "Je fais les choses très rapidement sans y prêter vraiment attention.",
+  "kind": "num",
+  "min": 1,
+  "max": 6,
+  "lo": "Presque toujours",
+  "hi": "Presque jamais"
+ },
+ {
+  "t": "Je suis tellement focalisé(e) sur le but que je veux atteindre que je perds de vue ce que je suis en train de faire pour y parvenir.",
+  "kind": "num",
+  "min": 1,
+  "max": 6,
+  "lo": "Presque toujours",
+  "hi": "Presque jamais"
+ },
+ {
+  "t": "Je fais des travaux ou des tâches de manière automatique, sans me rendre compte de ce que je suis en train de faire.",
+  "kind": "num",
+  "min": 1,
+  "max": 6,
+  "lo": "Presque toujours",
+  "hi": "Presque jamais"
+ },
+ {
+  "t": "Je me surprends à écouter quelqu'un d'une oreille tout en faisant autre chose.",
+  "kind": "num",
+  "min": 1,
+  "max": 6,
+  "lo": "Presque toujours",
+  "hi": "Presque jamais"
+ },
+ {
+  "t": "Je me déplace en voiture « en pilotage automatique » et il m'arrive d'être étonné(e) de me retrouver là où je suis.",
+  "kind": "num",
+  "min": 1,
+  "max": 6,
+  "lo": "Presque toujours",
+  "hi": "Presque jamais"
+ },
+ {
+  "t": "Je me surprends à être préoccupé(e) par l'avenir ou le passé.",
+  "kind": "num",
+  "min": 1,
+  "max": 6,
+  "lo": "Presque toujours",
+  "hi": "Presque jamais"
+ },
+ {
+  "t": "Je me surprends à effectuer des choses sans y prêter attention.",
+  "kind": "num",
+  "min": 1,
+  "max": 6,
+  "lo": "Presque toujours",
+  "hi": "Presque jamais"
+ },
+ {
+  "t": "Je grignote sans réaliser que je suis en train de manger.",
+  "kind": "num",
+  "min": 1,
+  "max": 6,
+  "lo": "Presque toujours",
+  "hi": "Presque jamais"
+ }
+];
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+  var RESULT = function(a){
+
+    var s = 0; a.forEach(function(v){ s += v; });
+    var mean = (s/15).toFixed(2);
+    return '<p class="result-score">' + s + ' / 90</p>' +
+      '<p class="result-max">score total (15 items, échelle 1-6), moyenne par item : ' + mean + '</p>' +
+      '<p class="result-text">Chaque item décrit un état d\'inattention ou de « pilotage automatique » ; les réponses vont de 1 (presque toujours dans cet état) à 6 (presque jamais). Un score total élevé indique donc un niveau plus élevé d\'attention et de conscience portées au moment présent (mindfulness dispositionnelle). Il n\'existe pas de seuil clinique : à titre de comparaison, la moyenne observée dans l\'échantillon de validation française (tout-venant, n=190) était de 63,96 (écart-type 10,29).</p>';
+
+  };
+
+  function vis(i){
+    var c = items[i].cond;
+    return !c || answers[c[0]] === c[1];
+  }
+  function step(i, dir){
+    var j = i + dir;
+    while (j >= 0 && j < items.length && !vis(j)) j += dir;
+    return j;
+  }
+  function visCount(){ var n = 0; for (var i = 0; i < items.length; i++) if (vis(i)) n++; return n; }
+  function visRank(i){ var n = 0; for (var k = 0; k <= i; k++) if (vis(k)) n++; return n; }
+  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+
+  function renderQuestion(){
+    var it = items[idx];
+    document.getElementById('progress-text').textContent = 'Question ' + visRank(idx) + ' / ' + visCount();
+    var secEl = document.getElementById('sec-text');
+    if (it.sec){ secEl.textContent = it.sec; secEl.hidden = false; } else { secEl.hidden = true; }
+    document.getElementById('q-text').textContent = it.t;
+    document.getElementById('q-desc').textContent = it.d || '';
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    if (it.kind === 'face'){
+      var fr = document.createElement('div'); fr.className = 'face-row';
+      it.opts.forEach(function(pair){
+        var f = document.createElement('div');
+        f.className = 'face' + (answers[idx] === pair[0] ? ' selected' : '');
+        f.innerHTML = pair[2] + '<span>' + esc(pair[1]) + '</span>';
+        f.addEventListener('click', function(){ answers[idx] = pair[0]; renderQuestion(); });
+        fr.appendChild(f);
+      });
+      row.appendChild(fr);
+    } else if (it.kind === 'num'){
+      var nr = document.createElement('div'); nr.className = 'num-row';
+      for (var v = it.min; v <= it.max; v++){
+        (function(v){
+          var b = document.createElement('div');
+          b.className = 'num' + (answers[idx] === v ? ' selected' : '');
+          b.textContent = v;
+          b.addEventListener('click', function(){ answers[idx] = v; renderQuestion(); });
+          nr.appendChild(b);
+        })(v);
+      }
+      row.appendChild(nr);
+      var ends = document.createElement('div'); ends.className = 'num-ends';
+      ends.innerHTML = '<span>' + esc(it.lo) + '</span><span style="text-align:right">' + esc(it.hi) + '</span>';
+      row.appendChild(ends);
+    } else {
+      var list = document.createElement('div'); list.className = 'opt-row';
+      it.opts.forEach(function(pair){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx] === pair[0] ? ' selected' : '');
+        d.textContent = pair[1];
+        d.addEventListener('click', function(){ answers[idx] = pair[0]; renderQuestion(); });
+        list.appendChild(d);
+      });
+      row.appendChild(list);
+    }
+    document.getElementById('btn-prev').disabled = step(idx, -1) < 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = step(idx, 1) >= items.length ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    var j = step(idx, -1);
+    if (j >= 0){ idx = j; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    var j = step(idx, 1);
+    if (j < items.length){ idx = j; renderQuestion(); } else { showResult(); }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    document.getElementById('result-body').innerHTML = RESULT(answers);
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MAAS-mindfulness — Pleine conscience (Mindful Attention Awareness Scale)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#8C8FC9 0%,#5B5EA6 55%,#2E3060 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,210,.40),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#5B5EA6;background:#E7E7F5;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .section ul{font-size:14.5px;margin:0 0 10px;padding-left:20px;}
+  .section li{margin-bottom:4px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#5B5EA6;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#5B5EA6;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <div class="fiche-photo"><span class="acronym">MAAS-mindfulness</span></div>
+  <h1 class="serif">MAAS — Mindful Attention Awareness Scale</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Mindful Attention Awareness Scale (MAAS) — Brown K.W. &amp; Ryan R.M. (2003) ; version française Jermann et al. (2009)</p>
+  <div class="meta-row">
+    <span class="pill">15 questions</span>
+    <span class="pill">Échelle 1-6</span>
+    <span class="pill">Adulte</span>
+    <span class="pill">Français</span>
+    <span class="pill">Licence requise : non</span>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" href="maas-mindfulness.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>La MAAS mesure une disposition générale à porter attention à ce qui se passe dans le moment présent, à travers 15 affirmations décrivant des états d'inattention ou de fonctionnement en « pilotage automatique » dans la vie quotidienne (émotions non remarquées, gestes maladroits, rumination, actions automatiques).</p><p class="source-note">⚠️ Ne pas confondre avec la Maternal Antenatal Attachment Scale (Condon), également abrégée MAAS, qui porte sur l'attachement prénatal et qui n'a pas pu être construite dans ce catalogue faute de clé de cotation vérifiable en accès libre.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque item est coté de 1 (presque toujours dans l'état décrit, donc peu de pleine conscience) à 6 (presque jamais). Le score total (somme des 15 items, de 15 à 90) est calculé ici ; un score élevé indique un niveau plus élevé d'attention et de conscience du moment présent. Il n'existe pas de seuil clinique : la moyenne observée dans l'échantillon de validation française (tout-venant, n=190) était de 63,96 (écart-type 10,29).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p>Brown K.W. &amp; Ryan R.M. (2003), <em>Journal of Personality and Social Psychology</em>, 84, 822-848. Version française validée : Jermann F., Billieux J., Larøi F., d'Argembeau A., Bondolfi G., Zermatten A., Van der Linden M. (2009), « Mindful Attention Awareness Scale (MAAS): Psychometric Properties of the French Translation... », <em>Psychological Assessment</em>, 21(4), 506-514. Items français transcrits depuis le Tableau 1 de cet article (accès libre, ORBi Université de Liège).</p><p class="source-note"><strong>Licence requise : non.</strong> Usage clinique et de recherche non commercial librement autorisé par le détenteur des droits ; construit et publié conformément à la politique du cabinet (30/09/2026).</p>
+  </div>
+
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>
