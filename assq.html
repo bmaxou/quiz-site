@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>ASSQ — Cabinet Bouche &amp; Chmura</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F4F1EA; --surface:#FFFFFF; --surface-2:#EAE6D9; --ink:#20241E; --ink-soft:#63695D;
+    --line:#E0D9C9; --accent:#3D5A6C; --accent-ink:#F4F1EA; --accent-soft:#E1E7EA; --terracotta:#A0824C;
+    --progress-bg:#E6E1D3; --progress-fill:#7FBF9E;
+    --shadow: 0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);
+    --verte:#3D6B4F; --verte-bg:#E4EEE8; --orange:#96631E; --orange-bg:#F3E8D2; --rouge:#B4483C; --rouge-bg:#F5DEDA;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',-apple-system,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,h3,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:var(--ink);}
+  .wrap{max-width:520px;margin:0 auto;padding:48px 24px 80px;}
+  .back-top{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--ink-soft);text-decoration:none;margin-bottom:20px;}
+  .back-top:hover{color:var(--ink);}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--ink-soft);display:inline-block;}
+  h1{font-size:28px;margin:0 0 10px;}
+  .intro-text{color:var(--ink-soft);font-size:15px;margin:0 0 28px;}
+
+  .start-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:32px 28px;box-shadow:var(--shadow);}
+  .pills{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 20px;}
+  .pill{font-size:12.5px;font-weight:600;color:var(--ink-soft);background:var(--surface-2);border-radius:999px;padding:6px 13px;display:inline-flex;align-items:center;gap:6px;}
+  .instructions{font-size:14.5px;color:var(--ink-soft);margin:0 0 22px;line-height:1.7;}
+
+  .quiz-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:28px 26px 26px;box-shadow:var(--shadow);}
+  .progress-track{height:8px;border-radius:99px;background:var(--progress-bg);overflow:hidden;margin-bottom:14px;}
+  .progress-fill{height:100%;background:var(--progress-fill);border-radius:99px;width:0%;transition:width .3s ease;}
+  .q-count{font-size:12.5px;color:var(--ink-soft);font-weight:600;margin:0 0 20px;}
+  .q-item{font-size:18px;font-weight:600;color:var(--ink);margin:0 0 8px;font-family:'Cormorant Garamond',Georgia,serif;line-height:1.35;}
+  .q-help{font-size:13px;color:var(--ink-soft);margin:0 0 22px;}
+  .options{display:flex;flex-direction:column;gap:10px;}
+  .option-btn{font:inherit;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:14.5px;color:var(--ink);cursor:pointer;transition:border-color .15s ease,background .15s ease,transform .1s ease;}
+  .option-btn:hover{border-color:var(--accent);}
+  .option-btn.selected{border-color:var(--accent);background:var(--accent-soft);font-weight:600;}
+  .back-link{display:inline-flex;align-items:center;gap:6px;margin-top:22px;font-size:13px;color:var(--ink-soft);background:none;border:none;font:inherit;cursor:pointer;padding:0;}
+  .back-link:hover{color:var(--ink);}
+  .back-link[hidden]{display:none;}
+
+  #result{display:none;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:30px 28px;box-shadow:var(--shadow);}
+  #result h2.serif{font-size:22px;margin:0 0 6px;}
+  .meta-line{font-size:13.5px;color:var(--ink-soft);margin:0 0 24px;}
+  .section-title{font-size:12.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft);margin:0 0 12px;padding-top:18px;border-top:1px solid var(--line);}
+  .section-title:first-of-type{border-top:none;padding-top:0;}
+  .score-line{font-size:17px;margin:0 0 14px;}
+  .score-line strong{font-size:22px;color:var(--accent);}
+
+  .global-badge{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;font-weight:700;border-radius:999px;padding:8px 16px;margin:0 0 18px;}
+  .global-badge.verte{color:var(--verte);background:var(--verte-bg);}
+  .global-badge.orange{color:var(--orange);background:var(--orange-bg);}
+  .global-badge.rouge{color:var(--rouge);background:var(--rouge-bg);}
+  .global-badge .dot{width:9px;height:9px;border-radius:50%;background:currentColor;flex-shrink:0;}
+
+  .dim-block{border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:12px;}
+  .dim-block .dim-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:4px;flex-wrap:wrap;}
+  .dim-block .dim-name{font-family:'Cormorant Garamond',Georgia,serif;font-size:17px;font-weight:600;color:var(--ink);}
+  .dim-block .dim-score{font-size:14.5px;font-weight:700;}
+  .dim-block .dim-items{font-size:12px;color:var(--ink-soft);margin:0;}
+
+  .dim-note{font-size:13.5px;color:var(--ink-soft);margin:0 0 20px;line-height:1.65;}
+  .answer-block{border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin-bottom:10px;}
+  .answer-block .q-no{font-size:12px;font-weight:700;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.05em;margin:0 0 8px;}
+  .answer-block .item{font-size:14.5px;font-weight:600;color:var(--ink);margin:0 0 8px;}
+  .answer-block .resp{font-size:14px;font-weight:600;color:var(--ink);}
+  .answer-block .resp .sc{font-weight:400;color:var(--ink-soft);}
+
+  .btn{font:inherit;font-size:15px;font-weight:600;padding:13px 30px;border-radius:999px;border:none;background:var(--accent);color:var(--accent-ink);cursor:pointer;transition:background .15s ease;width:100%;}
+  .btn:hover{background:#2C4350;}
+  .btn-outline{background:none;border:1px solid var(--accent);color:var(--accent);margin-top:14px;}
+  .btn-outline:hover{background:var(--accent-soft);}
+  .hint{font-size:12.5px;color:var(--ink-soft);margin-top:14px;text-align:center;}
+  .footnote{margin-top:40px;font-size:11.5px;color:var(--ink-soft);border-top:1px solid var(--line);padding-top:16px;line-height:1.7;}
+  [hidden]{display:none !important;}
+
+  @media print{
+    .back-top, .eyebrow, h1, .intro-text, .footnote, .btn-outline{ display:none !important; }
+    body{background:#fff;}
+    #result{box-shadow:none;border:none;padding:0;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back-top" href="index.html">&larr; Tous les tests</a>
+  <div class="eyebrow">Dépistage — hétéro-rempli</div>
+  <h1 class="serif">Questionnaire de dépistage des TSA chez l'enfant (ASSQ)</h1>
+  <p class="intro-text">Ce résultat ne remplace pas un échange avec votre praticien, il sert de point de départ pour en discuter ensemble.</p>
+
+  <div class="start-card" id="startScreen">
+    <div class="pills">
+      <span class="pill">27 questions</span>
+      <span class="pill">6 minutes</span>
+      <span class="pill">Rempli par un parent ou un enseignant</span>
+    </div>
+    <p class="instructions">Pour chaque énoncé, indiquez dans quelle mesure l'enfant se distingue des autres enfants de son âge de la façon décrite.</p>
+    <button type="button" class="btn" id="startBtn">Commencer</button>
+    <p class="hint">Rien n'est envoyé ni conservé sur un serveur : si vous quittez avant la fin, vos réponses sont perdues et il faudra recommencer.</p>
+  </div>
+
+  <div class="quiz-card" id="quizScreen" hidden>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <p class="q-count" id="qCount">Question 1/27</p>
+    <p class="q-item" id="qItem"></p>
+    <p class="q-help" id="qHelp"></p>
+    <div class="options" id="qOptions"></div>
+    <button type="button" class="back-link" id="backBtn" hidden>&larr; Question précédente</button>
+  </div>
+
+  <div id="result">
+    <h2 class="serif">Questionnaire de dépistage des TSA chez l'enfant (ASSQ)</h2>
+    <p class="meta-line">Passation : <span id="passationDate"></span></p>
+
+    <p class="section-title">Interprétation générale</p>
+    <div id="globalBadge"></div>
+    <p class="dim-note">Score total sur 54 (27 items cotés 0 à 2). Seuils indicatifs : 0-10 non significatif ; 11-18 modérément compatible avec un TSA ; 19-54 fortement compatible avec un TSA. 4 sous-échelles sont affichées ci-dessous à titre informatif (Junttila et al., 2023).</p>
+
+    <p class="section-title">Score total</p>
+    <p class="score-line">Score total (27 items) : <strong id="scoreTotal">0</strong>/54</p>
+
+    <p class="section-title">Sous-échelles (à titre informatif)</p>
+    <div id="dimBlocks"></div>
+
+    <p class="section-title">Réponses</p>
+    <div id="answersList"></div>
+
+    <button type="button" class="btn" id="downloadBtn">Télécharger le résultat (PDF)</button>
+    <button type="button" class="btn btn-outline" id="restartBtn">Refaire le test</button>
+  </div>
+
+  <p class="footnote">
+    Autism Spectrum Screening Questionnaire (ASSQ) — Ehlers, S., Gillberg, C., &amp; Wing, L. (1999). A screening questionnaire for Asperger syndrome and other high-functioning autism spectrum disorders in school age children. Journal of Autism and Developmental Disorders, 29(2), 129-141.
+    Sous-échelles : Junttila, M. et al. (2023). Instrument académique de dépistage, diffusion libre pour l'usage clinique.
+    Ce résultat est un repère, il ne constitue pas un diagnostic.
+  </p>
+</div>
+
+<script>
+(function(){
+  const items = [
+    { text: "Est «vieux jeu» ou précoce", sub: 'formel' },
+    { text: "Est considéré(e) comme un «professeur excentrique» par les autres enfants", sub: 'formel' },
+    { text: "Vit un peu dans son propre monde avec des intérêts intellectuels restreints et particuliers", sub: 'vocalisation' },
+    { text: "Accumule des connaissances sur certains sujets (bonne mémoire) mais ne comprend pas vraiment leur signification", sub: 'contextuelle' },
+    { text: "A une compréhension littérale du langage ambigu et métaphorique", help: "Par exemple, il prend les choses au pied de la lettre et a de la difficulté à comprendre les expressions imagées ou les métaphores.", sub: 'contextuelle' },
+    { text: "A un style de communication anormal et utilise un langage formel, recherché, démodé ou apparenté à celui d'un robot", sub: 'formel' },
+    { text: "Invente des mots et des expressions idiosyncrasiques", help: "Idiosyncrasique = original, personnel, atypique, propre à l'enfant.", sub: 'contextuelle' },
+    { text: "Sa voix ou son élocution sont différentes de celles des autres", sub: 'vocalisation' },
+    { text: "Émet des sons involontairement ; se racle la gorge, grogne, fait claquer ses lèvres, crie ou hurle", sub: 'vocalisation' },
+    { text: "Est étonnamment bon dans certains domaines et étonnamment faible dans d'autres", sub: 'contextuelle' },
+    { text: "Utilise le langage librement mais échoue à s'adapter au contexte social ou aux besoins de différents interlocuteurs", sub: 'contextuelle' },
+    { text: "Manque d'empathie", help: "Ne montre pas de compréhension pour les sentiments des autres.", sub: 'reciprocite' },
+    { text: "Fait des remarques naïves et embarrassantes", sub: 'contextuelle' },
+    { text: "A un style de regard déviant", sub: 'vocalisation' },
+    { text: "Souhaite être sociable mais échoue à établir des relations avec ses pairs", sub: 'reciprocite' },
+    { text: "Peut être avec d'autres enfants mais uniquement selon ses propres conditions", sub: 'reciprocite' },
+    { text: "N'a pas de meilleur ami", sub: 'reciprocite' },
+    { text: "Manque de bon sens", sub: 'reciprocite' },
+    { text: "Est mauvais dans les jeux : n'a pas l'idée de coopérer en équipe, marque des «buts contre son camp»", sub: 'reciprocite' },
+    { text: "A des mouvements ou des gestes maladroits, mal coordonnés, disgracieux", sub: 'vocalisation' },
+    { text: "A des mouvements involontaires du visage ou du corps", sub: 'vocalisation' },
+    { text: "A des difficultés à accomplir des activités quotidiennes simples à cause de la répétition compulsive de certaines actions ou pensées", sub: 'vocalisation' },
+    { text: "A des routines spéciales : insiste pour qu'il n'y ait aucun changement", sub: 'contextuelle' },
+    { text: "Montre un attachement idiosyncrasique à des objets", help: "Idiosyncrasique = attachement inhabituel, très spécifique à cet enfant, pas «typique» pour son âge.", sub: 'contextuelle' },
+    { text: "Est harcelé(e) par les autres enfants", sub: 'reciprocite' },
+    { text: "A une expression faciale inhabituelle", sub: 'vocalisation' },
+    { text: "A une posture inhabituelle", sub: 'vocalisation' }
+  ];
+
+  const SUBSCALES = [
+    { key: 'formel', name: 'Style formel', max: 6 },
+    { key: 'contextuelle', name: 'Compréhension contextuelle et routines', max: 16 },
+    { key: 'reciprocite', name: 'Réciprocité socio-émotionnelle', max: 14 },
+    { key: 'vocalisation', name: 'Vocalisation, mouvement et apparence', max: 18 }
+  ];
+  const TOTAL_LOW = 10;   // <= : non significatif
+  const TOTAL_HIGH = 18;  // <= : modéré ; > : fort
+
+  const options = ["Non", "Un peu", "Oui"];
+  const answers = new Array(items.length).fill(null);
+  let current = 0;
+
+  const startScreen = document.getElementById('startScreen');
+  const quizScreen = document.getElementById('quizScreen');
+  const startBtn = document.getElementById('startBtn');
+  const qCount = document.getElementById('qCount');
+  const qItem = document.getElementById('qItem');
+  const qHelp = document.getElementById('qHelp');
+  const qOptions = document.getElementById('qOptions');
+  const backBtn = document.getElementById('backBtn');
+  const progressFill = document.getElementById('progressFill');
+  const resultBox = document.getElementById('result');
+
+  startBtn.addEventListener('click', function(){
+    startScreen.hidden = true;
+    quizScreen.hidden = false;
+    renderQuestion();
+  });
+
+  backBtn.addEventListener('click', function(){
+    if(current > 0){ current -= 1; renderQuestion(); }
+  });
+
+  function renderQuestion(){
+    qCount.textContent = 'Question ' + (current + 1) + '/' + items.length;
+    qItem.textContent = "L'enfant se distingue des autres enfants de son âge de la façon suivante : " + items[current].text;
+    qHelp.textContent = items[current].help || '';
+    progressFill.style.width = (((current) / items.length) * 100) + '%';
+    backBtn.hidden = current === 0;
+
+    qOptions.innerHTML = '';
+    options.forEach(function(label, idx){
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'option-btn';
+      btn.textContent = label;
+      if(answers[current] === idx){ btn.classList.add('selected'); }
+      btn.addEventListener('click', function(){ selectAnswer(idx, btn); });
+      qOptions.appendChild(btn);
+    });
+  }
+
+  function selectAnswer(idx, btnEl){
+    answers[current] = idx;
+    Array.from(qOptions.children).forEach(function(b){ b.classList.remove('selected'); });
+    btnEl.classList.add('selected');
+    progressFill.style.width = (((current + 1) / items.length) * 100) + '%';
+
+    setTimeout(function(){
+      if(current < items.length - 1){
+        current += 1;
+        renderQuestion();
+      } else {
+        showResult();
+      }
+    }, 380);
+  }
+
+  function scoreForSub(subKey){
+    let total = 0;
+    items.forEach(function(it, i){
+      if (it.sub === subKey){ total += answers[i]; }
+    });
+    return total;
+  }
+
+  function renderDimBlock(def){
+    const score = scoreForSub(def.key);
+    const block = document.createElement('div');
+    block.className = 'dim-block';
+    block.innerHTML =
+      '<div class="dim-head">' +
+        '<span class="dim-name">' + def.name + '</span>' +
+        '<span class="dim-score">' + score + '/' + def.max + '</span>' +
+      '</div>';
+    return { el: block, score: score };
+  }
+
+  function showResult(){
+    quizScreen.hidden = true;
+
+    document.getElementById('passationDate').textContent = new Date().toLocaleString('fr-FR', {day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit'});
+
+    const dimBlocksEl = document.getElementById('dimBlocks');
+    dimBlocksEl.innerHTML = '';
+    SUBSCALES.forEach(function(def){
+      const res = renderDimBlock(def);
+      dimBlocksEl.appendChild(res.el);
+    });
+
+    const totalScore = answers.reduce(function(a,b){ return a + b; }, 0);
+    document.getElementById('scoreTotal').textContent = totalScore;
+
+    let cls, label;
+    if (totalScore <= TOTAL_LOW){ cls = 'verte'; label = 'Non significatif (&le; 10)'; }
+    else if (totalScore <= TOTAL_HIGH){ cls = 'orange'; label = 'Modérément compatible avec un TSA (11-18)'; }
+    else { cls = 'rouge'; label = 'Fortement compatible avec un TSA (&ge; 19)'; }
+    const globalBadge = document.getElementById('globalBadge');
+    globalBadge.innerHTML = '<span class="global-badge ' + cls + '"><span class="dot"></span>' + label + '</span>';
+
+    const answersList = document.getElementById('answersList');
+    answersList.innerHTML = '';
+    items.forEach(function(it, idx){
+      const block = document.createElement('div');
+      block.className = 'answer-block';
+      block.innerHTML =
+        '<p class="q-no">Question ' + (idx + 1) + '</p>' +
+        '<p class="item">' + it.text + '</p>' +
+        '<p class="resp">' + options[answers[idx]] + ' <span class="sc">(Score : ' + answers[idx] + ')</span></p>';
+      answersList.appendChild(block);
+    });
+
+    resultBox.style.display = 'block';
+    resultBox.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  document.getElementById('downloadBtn').addEventListener('click', function(){ window.print(); });
+
+  document.getElementById('restartBtn').addEventListener('click', function(){
+    answers.fill(null);
+    current = 0;
+    resultBox.style.display = 'none';
+    startScreen.hidden = false;
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ASSQ - Questionnaire de dépistage des TSA chez l'enfant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#3D5A6C 0%,#6E93A5 55%,#1C2E38 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(200,220,225,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#22334D;background:#E9EEF5;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .section ul{font-size:14.5px;margin:0 0 10px;padding-left:20px;}
+  .section ul li{margin-bottom:4px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#3D5A6C;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#22334D;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <div class="fiche-photo"><span class="acronym">ASSQ</span></div>
+  <h1 class="serif">Questionnaire de dépistage des TSA chez l'enfant (ASSQ)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Autism Spectrum Screening Questionnaire - Ehlers, Gillberg &amp; Wing (1999)</p>
+  <div class="meta-row">
+    <span class="pill">27 questions</span>
+    <span class="pill">6 minutes</span>
+    <span class="pill">Rempli par un parent ou un enseignant</span>
+    <span class="pill">Enfant, adolescent</span>
+    <span class="pill">Français</span>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" href="assq.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>L'ASSQ est un questionnaire de dépistage des troubles du spectre de l'autisme (dont le syndrome d'Asperger et les formes à haut niveau de fonctionnement) chez l'enfant et l'adolescent, rempli par un parent ou un enseignant sur la base de ses observations. 27 items portent sur le style de communication, la compréhension du langage et du contexte social, la réciprocité socio-émotionnelle, ainsi que la vocalisation, la motricité et l'apparence.</p>
+    <p>Instrument académique bien identifié, largement diffusé pour l'usage clinique et de recherche, sans restriction de licence.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque item est coté Non (0) / Un peu (1) / Oui (2). Score total = somme des 27 items, sur 54.</p>
+    <p>Seuils indicatifs du score total : 0-10 non significatif ; 11-18 modérément compatible avec un TSA ; 19-54 fortement compatible avec un TSA.</p>
+    <p>4 sous-échelles complémentaires (Junttila et al., 2023) :</p>
+    <ul>
+      <li>Style formel (items 1, 2, 6) — sur 6</li>
+      <li>Compréhension contextuelle et routines (items 4, 5, 7, 10, 11, 13, 23, 24) — sur 16</li>
+      <li>Réciprocité socio-émotionnelle (items 12, 15, 16, 17, 18, 19, 25) — sur 14</li>
+      <li>Vocalisation, mouvement et apparence (items 3, 8, 9, 14, 20, 21, 22, 26, 27) — sur 18</li>
+    </ul>
+    <p>Cet outil est un repère de dépistage, il ne constitue pas un diagnostic : un score élevé justifie une évaluation clinique complémentaire spécialisée.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Source</h2>
+    <p class="source-note">Ehlers, S., Gillberg, C., &amp; Wing, L. (1999). A screening questionnaire for Asperger syndrome and other high-functioning autism spectrum disorders in school age children. Journal of Autism and Developmental Disorders, 29(2), 129-141. Sous-échelles : Junttila et al. (2023). Ce résultat est un repère, il ne constitue pas un diagnostic.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

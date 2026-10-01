@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BVAQ - Questionnaire d'alexithymie de Bermond-Vorst</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#8B5A5A;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#8B5A5A;background:#F1E2E2;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#8B5A5A;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .caveat{background:#FBF3E7;border:1px solid #E7D9BC;border-radius:12px;padding:14px 16px;font-size:13.5px;color:#5A4A2A;margin:0 0 16px;}
+  .sub-block{margin:0 0 18px;}
+  .sub-block h3{font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:#8B5A5A;margin:0 0 6px;}
+  .answers-table{width:100%;border-collapse:collapse;font-size:12.5px;}
+  .answers-table td{padding:6px 8px;border-bottom:1px solid #E0D9C9;}
+  .answers-table td:last-child{color:#8B5A5A;font-weight:700;text-align:right;white-space:nowrap;}
+  .footnote{margin-top:20px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">BVAQ - Alexithymie de Bermond-Vorst</h1>
+    <p class="lead">Bermond-Vorst Alexithymia Questionnaire. Pour chaque affirmation, indiquez dans quelle mesure elle s'applique à vous.</p>
+    <p class="lang-note">⚠️ Traduction française de travail, non officielle. Le sens de l'échelle (croissant ou décroissant) diverge entre les deux sources retrouvées lors du sourçage : les chiffres 1 à 5 sont donc présentés ici sans affirmer leur direction, et aucun score n'est calculé (voir la fiche).</p>
+    <div class="pill-row">
+      <span class="pill">40 questions</span>
+      <span class="pill">7 minutes</span>
+      <span class="pill">Échelle 1-5</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Relevé des réponses</h1>
+    <p class="caveat">⚠️ Le sens de l'échelle et la clé de recodage des items inversés (environ la moitié des 40 items) n'ont pas pu être confirmés contre une source supplémentaire. Conformément à la règle de ce catalogue, aucun score n'est calculé : cette page publie uniquement le relevé brut de vos réponses, regroupées par sous-échelle théorique.</p>
+    <div id="sub-blocks"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Vorst, H.C.M., &amp; Bermond, B. (2001). Validity and reliability of the Bermond-Vorst Alexithymia Questionnaire. Personality and Individual Differences, 30(3), 413-434. Outil de repérage, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var opts = ["1","2","3","4","5"];
+  var items = [
+    {t:"1. J'ai du mal à mettre mes sentiments en mots.", s:"Verbaliser"},
+    {t:"2. Avant de m'endormir, j'imagine souvent toutes sortes d'événements, de rencontres et de conversations.", s:"Fantasmer"},
+    {t:"3. Quand je suis bouleversé(e), je sais si je suis anxieux(se), triste ou en colère.", s:"Identifier"},
+    {t:"4. Quand quelque chose de totalement inattendu se produit, je reste calme et impassible.", s:"Émotionaliser"},
+    {t:"5. Je ne m'attarde guère sur mes émotions.", s:"Analyser"},
+    {t:"6. J'aime parler de mes émotions aux autres.", s:"Verbaliser"},
+    {t:"7. J'ai peu de rêveries et de fantaisies.", s:"Fantasmer"},
+    {t:"8. Quand je suis tendu(e), il reste difficile de savoir de quel sentiment cela vient.", s:"Identifier"},
+    {t:"9. Quand je vois quelqu'un pleurer terriblement, je reste impassible.", s:"Émotionaliser"},
+    {t:"10. Il faut essayer de comprendre en profondeur ses émotions.", s:"Analyser"},
+    {t:"11. Même avec un(e) ami(e), j'ai du mal à parler de mes sentiments.", s:"Verbaliser"},
+    {t:"12. J'utilise souvent mon imagination.", s:"Fantasmer"},
+    {t:"13. Quand les choses deviennent trop pour moi, je comprends généralement pourquoi.", s:"Identifier"},
+    {t:"14. Quand des amis autour de moi se disputent violemment, je suis ému(e).", s:"Émotionaliser"},
+    {t:"15. Quand je me sens mal, je ne me tourmente pas davantage en me demandant pourquoi je ressens cela.", s:"Analyser"},
+    {t:"16. Quand je veux dire à quel point je me sens mal, je trouve facilement les mots justes pour cela.", s:"Verbaliser"},
+    {t:"17. Je m'intéresse peu aux contes de fées et aux histoires bizarres.", s:"Fantasmer"},
+    {t:"18. Quand je me sens bien, il reste difficile de savoir si je suis de bonne humeur, ravi(e) ou heureux(se).", s:"Identifier"},
+    {t:"19. Souvent, les émotions surgissent en moi sans crier gare.", s:"Émotionaliser"},
+    {t:"20. Quand je ne me sens pas bien dans ma peau, j'essaie de comprendre pourquoi je me sens ainsi.", s:"Analyser"},
+    {t:"21. Les gens me disent souvent que je devrais davantage parler de mes sentiments.", s:"Verbaliser"},
+    {t:"22. Je fantasme/imagine rarement.", s:"Fantasmer"},
+    {t:"23. Je ne sais pas tout ce qui se passe en moi.", s:"Identifier"},
+    {t:"24. Même quand les autres sont extrêmement enthousiastes pour quelque chose, je reste impassible.", s:"Émotionaliser"},
+    {t:"25. Il y a peu à comprendre dans les émotions.", s:"Analyser"},
+    {t:"26. Quand quelque chose me perturbe, je parle de mes sentiments avec les autres.", s:"Verbaliser"},
+    {t:"27. J'aime inventer des histoires fantaisistes farfelues.", s:"Fantasmer"},
+    {t:"28. Quand je me sens mal, je sais si je suis effrayé(e), sombre ou triste.", s:"Identifier"},
+    {t:"29. Les événements inattendus me submergent souvent d'émotions.", s:"Émotionaliser"},
+    {t:"30. Je pense qu'il faut rester en contact avec ses sentiments.", s:"Analyser"},
+    {t:"31. Je peux mettre des mots sur mes sentiments.", s:"Verbaliser"},
+    {t:"32. Je trouve que fantasmer sur des choses ou événements irréels est une perte de temps.", s:"Fantasmer"},
+    {t:"33. Quand je m'auto-sabote, il reste difficile de savoir si je suis triste, effrayé(e) ou malheureux(se).", s:"Identifier"},
+    {t:"34. J'accepte les déceptions sans émotion.", s:"Émotionaliser"},
+    {t:"35. Je trouve étrange que les autres analysent si souvent leurs émotions.", s:"Analyser"},
+    {t:"36. Quand je parle avec les gens, je parle plutôt de mes activités quotidiennes que de mes sentiments.", s:"Verbaliser"},
+    {t:"37. Quand j'ai peu à faire, je rêvasse.", s:"Fantasmer"},
+    {t:"38. Quand je suis de bonne humeur, je sais si je suis enthousiaste, joyeux(se) ou exubérant(e).", s:"Identifier"},
+    {t:"39. Quand je vois quelqu'un pleurer terriblement, je sens la tristesse monter en moi.", s:"Émotionaliser"},
+    {t:"40. Quand je suis tendu(e), je veux savoir exactement d'où vient ce sentiment.", s:"Analyser"}
+  ];
+  var subOrder = ["Verbaliser","Émotionaliser","Fantasmer","Identifier","Analyser"];
+
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx].t;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    opts.forEach(function(label, i){
+      var v = i + 1;
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === v ? ' selected' : '');
+      d.textContent = label;
+      d.addEventListener('click', function(){
+        answers[idx] = v;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le relevé' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var container = document.getElementById('sub-blocks');
+    container.innerHTML = '';
+    subOrder.forEach(function(sub){
+      var block = document.createElement('div');
+      block.className = 'sub-block';
+      var h3 = document.createElement('h3');
+      h3.textContent = sub;
+      block.appendChild(h3);
+      var table = document.createElement('table');
+      table.className = 'answers-table';
+      var html = '<tbody>';
+      items.forEach(function(item, i){
+        if (item.s === sub){
+          html += '<tr><td>' + item.t + '</td><td>' + answers[i] + ' / 5</td></tr>';
+        }
+      });
+      html += '</tbody>';
+      table.innerHTML = html;
+      block.appendChild(table);
+      container.appendChild(block);
+    });
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BVAQ - Questionnaire d'alexithymie de Bermond-Vorst</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#8B5A5A 0%,#C48787 55%,#5C3333 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(200,215,235,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#22334D;background:#E9EEF5;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .caveat{background:#FBF3E7;border:1px solid #E7D9BC;border-radius:12px;padding:14px 16px;font-size:13.5px;color:#5A4A2A;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#8B5A5A;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#22334D;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <div class="fiche-photo"><span class="acronym">BVAQ</span></div>
+  <h1 class="serif">Questionnaire d'alexithymie de Bermond-Vorst (BVAQ)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Bermond-Vorst Alexithymia Questionnaire - Vorst &amp; Bermond (2001)</p>
+  <div class="meta-row">
+    <span class="pill">40 questions</span>
+    <span class="pill">7 minutes</span>
+    <span class="pill">Auto-questionnaire</span>
+    <span class="pill">Français (traduction de travail)</span>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" href="bvaq.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le BVAQ évalue l'alexithymie à travers 5 facteurs de 8 items chacun : Verbaliser, Émotionaliser, Fantasmer, Identifier, Analyser (cognitif : Verbaliser+Identifier+Analyser ; affectif : Émotionaliser+Fantasmer).</p>
+    <p class="caveat">⚠️ Réserve modérée sur les droits : aucun éditeur de test commercial ne détient l'instrument, mais les auteurs n'avaient pas formellement publié/autorisé sa diffusion lors d'échanges publics de 2017-2018. Le texte circule cependant depuis plus de 10 ans dans le milieu académique (rapport de recherche officiel de l'Universiteit Twente, thèse universitaire mexicaine BUAP) sans qu'aucune démarche de licence commerciale n'ait jamais émergé.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p class="caveat">⚠️ Les deux sources retrouvées lors du sourçage divergent sur le sens de l'échelle (croissante ou décroissante), et la clé de recodage des items inversés (environ la moitié des 40 items) n'a pas pu être confirmée. Conformément à la règle de ce catalogue, aucun score par sous-échelle n'est calculé : la page publie un relevé brut des réponses regroupées par sous-échelle. Réserve de fidélité supplémentaire signalée par la source néerlandaise elle-même : certains items (18, 23, 33) chargent mal sur leur sous-échelle théorique « Identifier ».</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Source</h2>
+    <p class="source-note">Vorst, H.C.M., &amp; Bermond, B. (2001). Validity and reliability of the Bermond-Vorst Alexithymia Questionnaire. Personality and Individual Differences, 30(3), 413-434. Texte néerlandais intégral : mémoire Korkis, L., Universiteit Twente (2011), Tableau 3. Traduction espagnole intégrale : Palma Barrera, G. (2019), thèse, Benemérita Universidad Autónoma de Puebla. Outil de repérage, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

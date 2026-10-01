@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>IDE (langage) — Cabinet Bouche &amp; Chmura</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:720px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 18px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  h1{font-size:25px;margin:0 0 18px;}
+  .intro{font-size:14.5px;color:#4A4E43;background:#fff;border:1px solid #E0D9C9;border-radius:12px;padding:16px 18px;margin-bottom:24px;}
+  .warn{font-size:12.5px;color:#7A5A1E;background:#FBF3E3;border:1px solid #E7D2A0;border-radius:10px;padding:12px 14px;margin-bottom:24px;}
+  .part-title{font-size:19px;margin:28px 0 4px;}
+  .part-lead{font-size:12.5px;color:#9A9E90;margin:0 0 14px;}
+  .item{background:#fff;border:1px solid #E0D9C9;border-radius:12px;padding:14px 18px;margin-bottom:10px;display:flex;align-items:center;gap:14px;}
+  .item p{font-size:14px;margin:0;flex:1;}
+  .domain-tag{font-size:11px;font-weight:700;color:#63695D;background:#F4F1EA;border-radius:6px;padding:3px 8px;white-space:nowrap;}
+  .yn{display:flex;gap:8px;}
+  .opt{display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;padding:6px 12px;border:1px solid #E0D9C9;border-radius:999px;}
+  .opt:hover{background:#F4F1EA;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:12px 22px;cursor:pointer;border:1px solid transparent;background:#3B3A5C;color:#fff;margin-top:22px;}
+  .btn:disabled{opacity:.45;cursor:not-allowed;}
+  #result{display:none;margin-top:30px;}
+  .score-card{background:#fff;border:1px solid #E0D9C9;border-radius:12px;padding:18px 20px;margin-bottom:14px;}
+  .score-card h3{margin:0 0 6px;font-size:16px;font-family:'Cormorant Garamond',Georgia,serif;}
+  .score-val{font-size:22px;font-weight:700;}
+  .footnote{margin-top:40px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;line-height:1.7;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <h1 class="serif">Inventaire du Développement de l'Enfant — profil langage (IDE)</h1>
+  <div class="intro">
+    Vous devez lire attentivement chacune des descriptions et cocher la réponse « Oui » ou « Non ».
+    Cochez « Oui » si la description traduit le comportement actuel de votre enfant, ou s'il le
+    faisait plus jeune. Cochez « Non » si la description ne traduit pas son comportement, ou s'il
+    commence juste à le faire, ou seulement quelquefois.
+  </div>
+  <div class="warn">
+    ⚠️ Extraction des domaines langage (LEX, LCO, LE, NBRE) du profil COMPLET de l'IDE (9 domaines),
+    la forme dédiée « langage » n'étant pas accessible lors du sourçage. Aucune norme par âge n'a
+    été retrouvée (elles figurent dans le manuel d'utilisation, non consulté) : les résultats
+    ci-dessous sont de simples décomptes bruts, sans aucun score interprété ni seuil.
+  </div>
+  <div id="quiz"></div>
+  <button class="btn" id="submitBtn" type="button" disabled>Voir les décomptes</button>
+
+  <div id="result">
+    <h2 class="serif">Décomptes bruts (non interprétés)</h2>
+    <div id="cards"></div>
+  </div>
+
+  <p class="footnote">
+    Inventaire du Développement de l'Enfant (IDE), adaptation française du Child Development
+    Inventory (CDI, Harold Ireton) par Duyme, M., Capron, C., &amp; Zorman, M. (version clinique
+    française, février 2010). Diffusion libre par des institutions publiques françaises (académies
+    de Grenoble, ministère de la Santé, CH Le Vinatier) sous licence Creative Commons
+    Attribution-NonCommercial-NoDerivatives. Ce résultat est un décompte brut, il ne constitue pas
+    un diagnostic.
+  </p>
+</div>
+
+<script>
+(function(){
+  var PARTS = [
+    { name: "Partie AP (plus jeunes)", items: [
+      ["Babille, fait des suites de sons comme s'il faisait des phrases (ou le faisait plus jeune)","LEX"],
+      ["Montre les objets","LEX"],
+      ["Répond à son nom","LCO"],
+      ["Imite certains sons (ou le faisait plus jeune)","LCO"],
+      ["Vient quand on l'appelle","LCO"],
+      ["Fait un geste de la main pour dire au revoir","LCO"],
+      ["Comprend « Non, Non » et arrête son activité un moment","LCO"]
+    ]},
+    { name: "Partie A", items: [
+      ["Utilise 2 ou 3 mots ou plus dans ses phrases","LEX"],
+      ["Dans les livres d'images, nomme quelques objets familiers","LEX"],
+      ["Montre au moins 3 parties du corps humain","LCO"],
+      ["Comprend « enlever » et « mettre »","LCO"],
+      ["Répond de manière appropriée « oui »/« non »","LCO"],
+      ["Suit 2 parties d'une instruction","LCO"],
+      ["Suit des ordres simples","LCO"],
+      ["Comprend « ouvre »/« ferme »","LCO"],
+      ["Tend un jouet quand demandé","LCO"]
+    ]},
+    { name: "Partie B", items: [
+      ["Vocabulaire d'au moins 20 mots","LEX"],
+      ["Sait parler à voix basse","LEX"],
+      ["Utilise « s'il te plaît »/« merci »","LEX"],
+      ["Nomme au moins 5 parties du corps","LEX"],
+      ["Indique l'action en cours sur une image","LEX"],
+      ["Emploie la négation","LEX"],
+      ["Formule des phrases d'au moins 4 mots","LEX"],
+      ["Utilise « moi », « je », « il », « elle », « tu » ou « ça »","LEX"],
+      ["Comprend « en haut »/« en bas »","LCO"],
+      ["Emploie « grand »/« petit »","LCO"],
+      ["Donne son prénom","LCO"],
+      ["Comprend au moins 3 mots de position (dans, sur, sous, à côté...)","LCO"],
+      ["Dit quand quelque chose est lourd","LCO"],
+      ["Répond « que dit un minou ?... un toutou ?... un canard ? »","LCO"],
+      ["Exprime ce qu'il aime/n'aime pas","LCO"],
+      ["Pose des questions « Que/Quoi/Quel/Où »","LCO"],
+      ["Donne des raisons avec « parce que »","LCO"],
+      ["Parle clairement (compréhensible)","LCO"],
+      ["Pose des questions « pourquoi/quand/comment »","LCO"],
+      ["Utilise 50 mots ou plus en conversation","LCO"],
+      ["Pose des questions simples et correctes","LCO"],
+      ["Met les mots dans le bon ordre","LCO"]
+    ]},
+    { name: "Partie C", items: [
+      ["Emploie « mon » et « je »","LEX"],
+      ["Chante des chansons simples","LEX"],
+      ["Comprend au moins 6 mots de position","LCO"],
+      ["Parle de ses émotions (heureux, triste, méchant, en colère)","LCO"],
+      ["Identifie au moins une couleur en la nommant","LCO"],
+      ["Décrit des objets avec des mots descriptifs (petit, rouge, bon, rigolo...)","LCO"],
+      ["Montre/nomme le plus grand de 2 objets","NBRE"],
+      ["Compte au moins 3 objets","NBRE"],
+      ["Comprend « un » (la quantité)","NBRE"]
+    ]},
+    { name: "Partie D", items: [
+      ["Formule des phrases d'au moins 6 mots","LEX"],
+      ["Nomme des formes simples (rond, carré, triangle, étoile)","LEX"],
+      ["Formule des phrases au pluriel","LEX"],
+      ["Récite des comptines","LEX"],
+      ["Assemble 2 phrases avec « et »/« ou »/« mais »","LEX"],
+      ["A beaucoup de vocabulaire","LEX"],
+      ["Prononce correctement la plupart des mots","LEX"],
+      ["Répond aux « pourquoi » avec de bonnes explications","LCO"],
+      ["Décrit un objet ou son usage quand on demande « qu'est-ce que c'est ? »","LCO"],
+      ["Identifie précisément au moins 4 couleurs","LCO"],
+      ["Dit son âge sans se tromper","LCO"],
+      ["Comprend/utilise « facile »/« difficile »","LCO"],
+      ["Participe aux conversations (tour à tour)","LCO"],
+      ["Compare les objets entre eux (plus grand, plus lourd...)","NBRE"],
+      ["Dit quand un objet est plus petit/grand qu'un autre","NBRE"]
+    ]},
+    { name: "Partie E (plus âgés)", items: [
+      ["Répète des histoires courtes dans le bon ordre","LEX"],
+      ["Emploie correctement le passé","LEX"],
+      ["Formule des phrases conditionnelles (« Si je fais..., alors... »)","LEX"],
+      ["Utilise correctement les pluriels irréguliers (chevaux, animaux)","LEX"],
+      ["Demande la signification des mots","LEX"],
+      ["Dit les jours de la semaine dans l'ordre","LEX"],
+      ["Utilise « aujourd'hui »/« hier »/« demain »","LCO"],
+      ["Distingue sa main droite de la gauche","LCO"],
+      ["Connaît « pareil »/« différent »","LCO"],
+      ["Répond « que fais-tu avec tes yeux ?... tes oreilles ? »","LCO"],
+      ["Répond aux questions « Si..., alors... ? »","LCO"],
+      ["Exécute une série de 3 ordres simples dans l'ordre","LCO"],
+      ["Comprend/utilise « avant »/« après »","LCO"],
+      ["Parle du futur","LCO"],
+      ["Essaie de lire des livres familiers (ou les lit)","LE"],
+      ["Reconnaît quelques mots simples","LE"],
+      ["Écrit 2 mots simples de mémoire","LE"],
+      ["Demande la signification de signes/panneaux","LE"],
+      ["Récite l'alphabet sans aide","LE"],
+      ["Reconnaît et nomme au moins 5 lettres","LE"],
+      ["Lit 15 mots ou plus dans un livre nouveau","LE"],
+      ["Écrit son nom en orientant les lettres correctement","LE"],
+      ["Écrit les 26 lettres (copie ou mémoire)","LE"],
+      ["Essaie de découper les mots en syllabes","LE"],
+      ["Écrit quelques lettres ou nombres","LE"],
+      ["Écrit quelques mots simples en copiant","LE"],
+      ["Lit au moins 4 mots","LE"],
+      ["Écrit son prénom en entier ou au moins 4 lettres","LE"],
+      ["Reconnaît et nomme toutes les lettres","LE"],
+      ["Sait combien il y a de doigts dans chaque main","NBRE"],
+      ["Effectue des soustractions simples (2-1, 4-2, 6-3)","NBRE"],
+      ["Peut dire l'heure (heures et minutes)","NBRE"],
+      ["Compte au moins 10 objets","NBRE"],
+      ["Récite les nombres de 1 à 30","NBRE"],
+      ["Répond à des additions simples (2+2, 1+4, 3+6)","NBRE"],
+      ["Reconnaît et nomme quelques nombres","NBRE"],
+      ["Récite les chiffres de 1 à 10","NBRE"],
+      ["Sait ce que signifie « moitié »/« demi »","NBRE"],
+      ["Écrit les chiffres de 1 à 9","NBRE"]
+    ]}
+  ];
+
+  var answers = {};
+  var quizEl = document.getElementById('quiz');
+  var uid = 0;
+  var allIds = [];
+  var html = '';
+  PARTS.forEach(function(part){
+    html += '<h2 class="serif part-title">' + part.name + '</h2>';
+    html += '<p class="part-lead">' + part.items.length + ' items</p>';
+    part.items.forEach(function(row){
+      var id = uid++;
+      allIds.push(id);
+      html += '<div class="item" data-id="' + id + '" data-domain="' + row[1] + '">' +
+        '<p>' + row[0] + '</p>' +
+        '<span class="domain-tag">' + row[1] + '</span>' +
+        '<div class="yn">' +
+        '<label class="opt"><input type="radio" name="q' + id + '" value="oui" style="display:none">Oui</label>' +
+        '<label class="opt"><input type="radio" name="q' + id + '" value="non" style="display:none">Non</label>' +
+        '</div></div>';
+    });
+  });
+  quizEl.innerHTML = html;
+
+  var submitBtn = document.getElementById('submitBtn');
+
+  function checkComplete(){
+    var ok = allIds.every(function(id){ return answers[id] !== undefined; });
+    submitBtn.disabled = !ok;
+  }
+
+  quizEl.querySelectorAll('.opt').forEach(function(label){
+    label.addEventListener('click', function(){
+      var input = label.querySelector('input');
+      var item = label.closest('.item');
+      var id = item.getAttribute('data-id');
+      var group = item.querySelectorAll('.opt');
+      group.forEach(function(o){ o.style.background=''; o.style.borderColor='#E0D9C9'; o.style.color=''; });
+      label.style.background = '#3B3A5C';
+      label.style.color = '#fff';
+      label.style.borderColor = '#3B3A5C';
+      answers[id] = input.value;
+      checkComplete();
+    });
+  });
+
+  submitBtn.addEventListener('click', function(){
+    var totals = { LEX: [0,0], LCO: [0,0], LE: [0,0], NBRE: [0,0] };
+    quizEl.querySelectorAll('.item').forEach(function(item){
+      var id = item.getAttribute('data-id');
+      var domain = item.getAttribute('data-domain');
+      totals[domain][1] += 1;
+      if (answers[id] === 'oui') totals[domain][0] += 1;
+    });
+    var cards = document.getElementById('cards');
+    var html2 = '';
+    ['LEX','LCO','LE','NBRE'].forEach(function(d){
+      var labels = { LEX: "Langage expressif (LEX)", LCO: "Compréhension du langage (LCO)", LE: "Lecture / écriture (LE)", NBRE: "Nombres (NBRE)" };
+      html2 += '<div class="score-card"><h3>' + labels[d] + '</h3><div class="score-val">' + totals[d][0] + ' / ' + totals[d][1] + ' « Oui »</div></div>';
+    });
+    html2 += '<p style="font-size:12.5px;color:#63695D;">Ces décomptes ne sont pas des scores interprétés : aucune norme par âge n\'est disponible ici pour les situer.</p>';
+    cards.innerHTML = html2;
+    document.getElementById('result').style.display = 'block';
+    submitBtn.style.display = 'none';
+    document.getElementById('result').scrollIntoView({behavior:'smooth'});
+  });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IDE (langage) — Inventaire du Développement de l'Enfant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#3B3A5C 0%,#585585 55%,#25243B 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(200,195,225,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#1A2233;background:#E7E9EE;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .warn-note{font-size:12.5px;color:#7A5A1E;background:#FBF3E3;border:1px solid #E7D2A0;border-radius:10px;padding:10px 14px;}
+  .actions{display:flex;gap:12px;flex-wrap:wrap;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#3B3A5C;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#1A2233;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">IDE</span></div>
+
+  <h1 class="serif">Inventaire du Développement de l'Enfant — profil langage</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Adaptation française du Child Development Inventory (Harold Ireton), par Duyme, Capron &amp; Zorman (2010)</p>
+  <div class="meta-row">
+    <span class="pill">101 items</span>
+    <span class="pill">15 minutes</span>
+    <span class="pill">15 mois - 6 ans et demi</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="ide-langage.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <p class="warn-note">⚠️ Réserve importante : le contenu ci-dessous a été extrait des domaines
+    langage (LEX, LCO, LE, NBRE) du profil COMPLET de l'IDE (9 domaines), la forme « langage »
+    spécifiquement dédiée étant restée techniquement inaccessible lors du sourçage (pare-feu). Les
+    items transcrits sont très probablement identiques à ceux de la forme dédiée (mêmes codes de
+    domaine), mais l'identité exacte de mise en page n'est pas garantie à 100 %. Aucun seuil normatif
+    par âge n'a été trouvé (les normes figurent dans le manuel d'utilisation, non consulté) : les
+    résultats affichés sont de simples décomptes bruts, jamais un score interprété.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Questionnaire hétéro-rapporté (rempli par les parents sur l'observation de leur enfant,
+    15 mois à 6 ans et demi), organisé en parties par tranche d'âge croissante (AP, A, B, C, D, E),
+    couvrant ici 4 domaines : langage expressif (LEX), compréhension du langage (LCO), lecture/
+    écriture (LE) et nombres (NBRE).</p>
+    <p class="source-note">Droits : distribué librement par des institutions publiques françaises
+    (académies de Grenoble, ministère de la Santé, CH Le Vinatier) sous licence Creative Commons
+    (attribution, non-commercial, pas de modification). Usage strictement personnel non commercial
+    conforme.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Réponse Oui/Non par item. Décompte = nombre de « Oui » par domaine, à reporter normalement
+    sur les tableaux normatifs par âge du manuel officiel — <strong>normes non retrouvées lors du
+    sourçage</strong>, donc aucun seuil interprété n'est calculé ici : seuls les décomptes bruts par
+    domaine sont affichés.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source</h2>
+    <p class="source-note">« IDE Profil — Version clinique française — février 2010 »,
+    ch-le-vinatier.fr, recoupé avec Duyme, M., Capron, C., &amp; Zorman, M., <em>Devenir</em>
+    (Cairn.info) et www1.ac-grenoble.fr (forme langage dédiée, identité de domaines confirmée mais
+    fichier resté inaccessible techniquement).</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

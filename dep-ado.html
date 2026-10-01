@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DEP-ADO - Dépistage alcool et drogues chez les adolescents</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#3A4A44;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .step-label{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 18px;}
+  .field-row{display:flex;flex-direction:column;gap:6px;margin:0 0 16px;}
+  .field-row label{font-size:13px;font-weight:600;color:#63695D;}
+  .field-row select{font:inherit;font-size:14px;color:#20241E;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:8px;padding:9px 10px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#3A4A44;background:#E1E6E3;}
+  .toggle-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid #EFEBE1;font-size:13.5px;}
+  .toggle-row:last-child{border-bottom:none;}
+  .toggle-btns{display:flex;gap:6px;}
+  .toggle-btn{font:inherit;font-size:12.5px;font-weight:600;padding:6px 12px;border-radius:8px;border:1px solid #E0D9C9;background:#F4F1EA;color:#63695D;cursor:pointer;}
+  .toggle-btn.selected{background:#3A4A44;color:#fff;border-color:#3A4A44;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#3A4A44;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:36px;margin:0 0 4px;}
+  .result-score.feu-vert{color:#3D6B4F;}
+  .result-score.feu-jaune{color:#8A6D1E;}
+  .result-score.feu-rouge{color:#8B1E2E;}
+  .result-max{font-size:13px;color:#9A9E90;margin:0 0 20px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">DEP-ADO - Dépistage alcool et drogues (adolescents)</h1>
+    <p class="lead">Grille de dépistage de consommation problématique d'alcool et de drogues chez les adolescents et adolescentes (RISQ, version 3.3). Population validée : 14-17 ans.</p>
+    <div class="pill-row">
+      <span class="pill">7 questions</span>
+      <span class="pill">5-10 minutes</span>
+      <span class="pill">Auto-administré (14-17 ans)</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-q1" class="card" hidden>
+    <p class="step-label">Question 1 / 7</p>
+    <p class="q-text">Au cours des 12 derniers mois, à quelle fréquence avez-vous consommé chacun des produits suivants ?</p>
+    <div id="q1-fields"></div>
+    <div class="nav-row no-print"><span></span><button class="btn btn-primary" id="btn-q1-next">Continuer</button></div>
+  </div>
+
+  <div id="screen-q2a" class="card" hidden>
+    <p class="step-label">Question 2 / 7</p>
+    <p class="q-text">Au cours de votre vie, avez-vous déjà consommé une substance de façon régulière (au moins une fois par semaine, pendant au moins un mois) ?</p>
+    <div class="opt-row" id="q2a-opts"></div>
+    <div class="nav-row no-print"><button class="btn btn-secondary" id="btn-q2a-prev">Précédent</button><span></span></div>
+  </div>
+
+  <div id="screen-q2b" class="card" hidden>
+    <p class="step-label">Question 2 (suite) / 7</p>
+    <p class="q-text">À quel âge avez-vous commencé cette consommation régulière ? (laissez sur « non concerné » si la question ne s'applique pas)</p>
+    <div class="field-row"><label>Alcool</label><select id="q2b-alcool"><option value="na">Non concerné</option><option value="lt12">Avant 12 ans</option><option value="12-15">Entre 12 et 15 ans</option><option value="16+">16 ans ou plus</option></select></div>
+    <div class="field-row"><label>Drogue(s)</label><select id="q2b-drogue"><option value="na">Non concerné</option><option value="lt14">Avant 14 ans</option><option value="14-15">Entre 14 et 15 ans</option><option value="16+">16 ans ou plus</option></select></div>
+    <div class="nav-row no-print"><button class="btn btn-secondary" id="btn-q2b-prev">Précédent</button><button class="btn btn-primary" id="btn-q2b-next">Continuer</button></div>
+  </div>
+
+  <div id="screen-q3" class="card" hidden>
+    <p class="step-label">Question 3 / 7</p>
+    <p class="q-text">Au cours de votre vie, avez-vous déjà consommé une drogue par injection ?</p>
+    <div class="opt-row" id="q3-opts"></div>
+    <div class="nav-row no-print"><button class="btn btn-secondary" id="btn-q3-prev">Précédent</button><span></span></div>
+  </div>
+
+  <div id="screen-q4" class="card" hidden>
+    <p class="step-label">Question 4 / 7</p>
+    <p class="q-text">Au cours des 30 derniers jours, avez-vous consommé de l'alcool ou une drogue ?</p>
+    <div class="opt-row" id="q4-opts"></div>
+    <div class="nav-row no-print"><button class="btn btn-secondary" id="btn-q4-prev">Précédent</button><span></span></div>
+  </div>
+
+  <div id="screen-q5" class="card" hidden>
+    <p class="step-label">Question 5 / 7</p>
+    <p class="q-text">Au cours des 12 derniers mois, combien de fois avez-vous pris 5 consommations d'alcool ou plus en une même occasion (garçons), ou 5 consommations ou plus (filles) ?</p>
+    <div class="opt-row" id="q5-opts"></div>
+    <div class="nav-row no-print"><button class="btn btn-secondary" id="btn-q5-prev">Précédent</button><span></span></div>
+  </div>
+
+  <div id="screen-q6" class="card" hidden>
+    <p class="step-label">Question 6 / 7</p>
+    <p class="q-text">Au cours des 12 derniers mois, votre consommation d'alcool ou de drogues a-t-elle...</p>
+    <div id="q6-fields"></div>
+    <div class="nav-row no-print"><button class="btn btn-secondary" id="btn-q6-prev">Précédent</button><button class="btn btn-primary" id="btn-q6-next">Continuer</button></div>
+  </div>
+
+  <div id="screen-q7" class="card" hidden>
+    <p class="step-label">Question 7 / 7</p>
+    <p class="q-text">Au cours des 12 derniers mois, à quelle fréquence avez-vous consommé du tabac ? (information non cotée)</p>
+    <div class="opt-row" id="q7-opts"></div>
+    <div class="nav-row no-print"><button class="btn btn-secondary" id="btn-q7-prev">Précédent</button><button class="btn btn-primary" id="btn-q7-next">Voir le résultat</button></div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-score" id="score-total"></p>
+    <p class="result-max" id="score-label"></p>
+    <p class="lead">Seuils (3 feux) : ≤13 feu vert (aucun problème évident) · 14-19 feu jaune (problème en émergence, intervention précoce souhaitable) · ≥20 feu rouge (problème évident, intervention spécialisée nécessaire). Ce résultat ne peut en aucun cas remplacer une évaluation clinique.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Germain, M., Guyon, L., Landry, M., Tremblay, J., Brunelle, N., &amp; Bergeron, J. DEP-ADO — Grille de dépistage de consommation problématique d'alcool et de drogues chez les adolescents et les adolescentes, version 3.3, juin 2016. RISQ (Recherche et intervention sur les substances psychoactives-Québec, UQTR). © RISQ 1999-2016. Usage libre et gratuit, sous réserve de conserver l'intégralité du questionnaire et de citer la source. Ce résultat est un repère, il ne constitue pas un diagnostic.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var freqOpts = ["Pas consommé","À l'occasion","Environ 1 fois par mois","Fin de semaine, ou 1-2 fois par semaine","3 fois ou plus par semaine mais pas tous les jours","Tous les jours"];
+  var products = ["Alcool","Cannabis","Cocaïne","Colle ou solvant","Hallucinogènes","Opiacés","Amphétamines / speed","Autres substances"];
+  var q1Answers = new Array(products.length).fill(0);
+
+  var q1Fields = document.getElementById('q1-fields');
+  products.forEach(function(p, i){
+    var row = document.createElement('div');
+    row.className = 'field-row';
+    var sel = document.createElement('select');
+    freqOpts.forEach(function(label, v){
+      var o = document.createElement('option');
+      o.value = v; o.textContent = label;
+      sel.appendChild(o);
+    });
+    sel.addEventListener('change', function(){ q1Answers[i] = parseInt(sel.value, 10); });
+    row.innerHTML = '<label>' + p + '</label>';
+    row.appendChild(sel);
+    q1Fields.appendChild(row);
+  });
+
+  var q6Items = [
+    {t:"a) Nui à votre santé physique", scored:false},
+    {t:"b) Causé des difficultés psychologiques (nervosité, tristesse, etc.)", scored:true},
+    {t:"c) Nui à vos relations familiales", scored:true},
+    {t:"d) Nui à une amitié ou une relation amoureuse", scored:true},
+    {t:"e) Causé des difficultés scolaires", scored:true},
+    {t:"f) Fait dépenser ou perdre de l'argent", scored:false},
+    {t:"g) Amené à poser un geste délinquant (vol, bagarre...)", scored:true},
+    {t:"h) Amené à prendre des risques (conduite dangereuse, rapports non protégés...)", scored:false},
+    {t:"i) Fait que vous avez dû consommer davantage pour ressentir le même effet (tolérance)", scored:true},
+    {t:"j) Fait que vous en avez parlé à un intervenant", scored:true}
+  ];
+  var q6Answers = new Array(q6Items.length).fill(null);
+  var q6Fields = document.getElementById('q6-fields');
+  q6Items.forEach(function(item, i){
+    var row = document.createElement('div');
+    row.className = 'toggle-row';
+    row.innerHTML = '<span>' + item.t + '</span>';
+    var btns = document.createElement('div');
+    btns.className = 'toggle-btns';
+    ['Non','Oui'].forEach(function(label, v){
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'toggle-btn'; b.textContent = label;
+      b.addEventListener('click', function(){
+        q6Answers[i] = v;
+        Array.from(btns.children).forEach(function(x){ x.classList.remove('selected'); });
+        b.classList.add('selected');
+      });
+      btns.appendChild(b);
+    });
+    row.appendChild(btns);
+    q6Fields.appendChild(row);
+  });
+
+  function buildYesNo(containerId, onSelect){
+    var row = document.getElementById(containerId);
+    row.innerHTML = '';
+    ['Non','Oui'].forEach(function(label, v){
+      var d = document.createElement('div');
+      d.className = 'opt';
+      d.textContent = label;
+      d.addEventListener('click', function(){
+        Array.from(row.children).forEach(function(x){ x.classList.remove('selected'); });
+        d.classList.add('selected');
+        onSelect(v);
+      });
+      row.appendChild(d);
+    });
+  }
+
+  var q2aAnswer = null, q3Answer = null, q4Answer = null, q5Answer = null, q7Answer = null;
+  var q2bAlcool = 'na', q2bDrogue = 'na';
+
+  buildYesNo('q2a-opts', function(v){ q2aAnswer = v; setTimeout(goFromQ2a, 200); });
+  buildYesNo('q3-opts', function(v){ q3Answer = v; });
+  buildYesNo('q4-opts', function(v){ q4Answer = v; });
+
+  var q5Opts = ["0 fois","1-2 fois","3-25 fois","26 fois ou plus"];
+  (function(){
+    var row = document.getElementById('q5-opts');
+    q5Opts.forEach(function(label, v){
+      var d = document.createElement('div');
+      d.className = 'opt';
+      d.textContent = label;
+      d.addEventListener('click', function(){
+        Array.from(row.children).forEach(function(x){ x.classList.remove('selected'); });
+        d.classList.add('selected');
+        q5Answer = v;
+      });
+      row.appendChild(d);
+    });
+  })();
+
+  (function(){
+    var row = document.getElementById('q7-opts');
+    freqOpts.forEach(function(label, v){
+      var d = document.createElement('div');
+      d.className = 'opt';
+      d.textContent = label;
+      d.addEventListener('click', function(){
+        Array.from(row.children).forEach(function(x){ x.classList.remove('selected'); });
+        d.classList.add('selected');
+        q7Answer = v;
+      });
+      row.appendChild(d);
+    });
+  })();
+
+  document.getElementById('q2b-alcool').addEventListener('change', function(e){ q2bAlcool = e.target.value; });
+  document.getElementById('q2b-drogue').addEventListener('change', function(e){ q2bDrogue = e.target.value; });
+
+  function show(id){
+    ['screen-start','screen-q1','screen-q2a','screen-q2b','screen-q3','screen-q4','screen-q5','screen-q6','screen-q7','screen-result'].forEach(function(s){
+      document.getElementById(s).hidden = (s !== id);
+    });
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){ show('screen-q1'); });
+  document.getElementById('btn-q1-next').addEventListener('click', function(){ show('screen-q2a'); });
+
+  function goFromQ2a(){
+    if (q2aAnswer === 1) show('screen-q2b'); else show('screen-q3');
+  }
+  document.getElementById('btn-q2a-prev').addEventListener('click', function(){ show('screen-q1'); });
+  document.getElementById('btn-q2b-prev').addEventListener('click', function(){ show('screen-q2a'); });
+  document.getElementById('btn-q2b-next').addEventListener('click', function(){ show('screen-q3'); });
+  document.getElementById('btn-q3-prev').addEventListener('click', function(){ q2aAnswer===1 ? show('screen-q2b') : show('screen-q2a'); });
+  document.getElementById('btn-q4-prev').addEventListener('click', function(){ show('screen-q3'); });
+  document.getElementById('btn-q5-prev').addEventListener('click', function(){ show('screen-q4'); });
+  document.getElementById('btn-q6-prev').addEventListener('click', function(){ show('screen-q5'); });
+  document.getElementById('btn-q6-next').addEventListener('click', function(){ show('screen-q7'); });
+  document.getElementById('btn-q7-prev').addEventListener('click', function(){ show('screen-q6'); });
+  document.getElementById('btn-q7-next').addEventListener('click', showResult);
+
+  function ageScoreAlcool(v){ return v==='lt12'?3 : v==='12-15'?2 : v==='16+'?1 : 0; }
+  function ageScoreDrogue(v){ return v==='lt14'?3 : v==='14-15'?2 : v==='16+'?1 : 0; }
+
+  function showResult(){
+    var total = 0;
+    total += q1Answers.reduce(function(a,b){ return a+b; }, 0);
+    if (q2aAnswer === 1){ total += ageScoreAlcool(q2bAlcool) + ageScoreDrogue(q2bDrogue); }
+    total += (q3Answer === 1) ? 8 : 0;
+    total += (q4Answer === 1) ? 2 : 0;
+    total += (q5Answer === 1) ? 1 : (q5Answer === 2) ? 2 : (q5Answer === 3) ? 3 : 0;
+    q6Items.forEach(function(item, i){
+      if (item.scored && q6Answers[i] === 1) total += 2;
+    });
+
+    document.getElementById('score-total').textContent = total;
+    var label, cls;
+    if (total <= 13){ label = "Feu vert — aucun problème évident"; cls = "feu-vert"; }
+    else if (total <= 19){ label = "Feu jaune — problème en émergence"; cls = "feu-jaune"; }
+    else { label = "Feu rouge — problème évident"; cls = "feu-rouge"; }
+    var scoreEl = document.getElementById('score-total');
+    scoreEl.className = 'result-score ' + cls;
+    document.getElementById('score-label').textContent = label + " (tabac non coté : " + (q7Answer || "-") + ")";
+
+    show('screen-result');
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    q1Answers = new Array(products.length).fill(0);
+    Array.from(q1Fields.querySelectorAll('select')).forEach(function(s){ s.value = 0; });
+    q2aAnswer = null; q3Answer = null; q4Answer = null; q5Answer = null; q7Answer = null;
+    q2bAlcool = 'na'; q2bDrogue = 'na';
+    document.getElementById('q2b-alcool').value = 'na';
+    document.getElementById('q2b-drogue').value = 'na';
+    q6Answers = new Array(q6Items.length).fill(null);
+    document.querySelectorAll('.toggle-btn').forEach(function(b){ b.classList.remove('selected'); });
+    document.querySelectorAll('.opt.selected').forEach(function(o){ o.classList.remove('selected'); });
+    show('screen-start');
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DEP-ADO - Dépistage alcool et drogues chez les adolescents</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#3A4A44 0%,#5C7268 55%,#212B27 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(235,225,190,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#22334D;background:#E9EEF5;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#3A4A44;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#22334D;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <div class="fiche-photo"><span class="acronym">DEP-ADO</span></div>
+  <h1 class="serif">Dépistage de l'usage problématique d'alcool et de drogues chez les adolescents (DEP-ADO)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Grille de dépistage DEP-ADO, version 3.3 - RISQ, Québec (2016)</p>
+  <div class="meta-row">
+    <span class="pill">7 questions</span>
+    <span class="pill">5-10 minutes</span>
+    <span class="pill">Auto-administré (14-17 ans)</span>
+    <span class="pill">Adolescent</span>
+    <span class="pill">Français (Québec)</span>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" href="dep-ado.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>La grille DEP-ADO explore, sur les 12 derniers mois, la fréquence de consommation de 8 produits (alcool, cannabis, cocaïne, colle/solvant, hallucinogènes, opiacés, amphétamines/speed, autres), l'âge de début d'une consommation régulière le cas échéant, l'injection de drogues à vie, la consommation récente, les excès d'alcool, et 10 conséquences possibles de la consommation. Une question sur le tabac est incluse mais non cotée. Population validée : 14-17 ans, sensibilité 0,84, spécificité 0,91.</p>
+    <p>« Le RISQ est le créateur et le propriétaire de la DEP-ADO. Il en détient l'exclusivité ; les personnes et les organismes qui désirent l'utiliser peuvent le photocopier et en faire usage gratuitement, sous réserve de conserver l'intégralité du questionnaire et de citer la source. » — usage libre et gratuit confirmé, réservé aux professionnels formés en relation d'aide.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Score total = somme des points de chaque section (fréquence par produit 0 à 5 chacun, âge de début, injection, consommation récente, excès d'alcool, conséquences cotées b/c/d/e/g/i/j uniquement). Seuils à 3 niveaux : ≤13 feu vert (aucun problème évident), 14-19 feu jaune (problème en émergence, intervention précoce souhaitable), ≥20 feu rouge (problème évident, intervention spécialisée nécessaire).</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Source</h2>
+    <p class="source-note">Germain, M., Guyon, L., Landry, M., Tremblay, J., Brunelle, N., &amp; Bergeron, J. DEP-ADO — Grille de dépistage de consommation problématique d'alcool et de drogues chez les adolescents et les adolescentes, version 3.3, juin 2016. RISQ (Recherche et intervention sur les substances psychoactives-Québec, UQTR). © RISQ 1999-2016. Ce résultat est un repère, il ne constitue pas un diagnostic.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

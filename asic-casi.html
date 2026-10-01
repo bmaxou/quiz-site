@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ASIC (CASI) — Sensibilité à l'anxiété chez l'enfant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .progress-track{height:6px;background:#E0D9C9;border-radius:99px;overflow:hidden;margin-bottom:28px;}
+  .progress-fill{height:100%;background:#2E6B5E;border-radius:99px;transition:width .25s ease;}
+  .qnum{font-size:12px;font-weight:700;color:#2E6B5E;letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px;}
+  .qtext{font-size:18px;font-family:'Cormorant Garamond',Georgia,serif;margin:0 0 22px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;background:#F4F1EA;}
+  .opt.selected{border-color:#2E6B5E;background:#E1EEE9;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#2E6B5E;color:#fff;}
+  .btn[disabled]{opacity:.45;cursor:not-allowed;}
+  .start-btn{background:#2E6B5E;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 12px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 16px;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;margin:6px 0 4px;color:#2E6B5E;}
+  .subscore-grid{display:flex;flex-direction:column;gap:8px;margin:0 0 22px;}
+  .subscore{background:#F4F1EA;border:1px solid #E0D9C9;border-radius:10px;padding:10px 16px;display:flex;justify-content:space-between;align-items:center;}
+  .subscore .lbl{font-size:12.5px;font-weight:700;color:#20241E;}
+  .subscore .val{font-family:'Cormorant Garamond',Georgia,serif;font-size:17px;color:#2E6B5E;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">ASIC — Sensibilité à l'anxiété (enfant)</h1>
+    <p class="lead">Voici plusieurs phrases que des enfants utilisent pour se décrire. Indique à quel point chaque phrase te décrit bien. Il n'y a pas de bonne ou de mauvaise réponse.</p>
+    <p class="lang-note">Version française officielle (Stassart &amp; Etienne, 2014), validation publiée en libre accès.</p>
+    <div class="pill-row">
+      <span class="pill">18 questions</span>
+      <span class="pill">3-4 minutes</span>
+      <span class="pill">Échelle 1-3</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+    <div class="qnum" id="qnum">Question 1 / 18</div>
+    <p class="qtext" id="qtext"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-back" disabled>Précédent</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div class="result-score" id="score-total"></div>
+    <p class="result-text">score total ASIC (CASI), sur 54</p>
+    <div class="subscore-grid" id="subscore-grid"></div>
+    <p class="result-text" id="score-interp"></p>
+    <div class="nav-row no-print" style="margin-top:20px;">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">ASIC / CASI (Childhood Anxiety Sensitivity Index) — Silverman, Fleisig, Rabian &amp; Peterson (1991) ; version française Stassart &amp; Etienne (2014), Psychologica Belgica, 54(2), 222-241. Outil de repérage, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var opts = [["Pas du tout",1],["Un peu",2],["Beaucoup",3]];
+  var items = [
+    "Je ne veux pas que les autres sachent quand j'ai peur de quelque chose.",
+    "Quand je ne suis pas capable de me concentrer sur mes devoirs, j'ai peur d'être en train de devenir fou.",
+    "Ça me fait peur quand je sens que je tremble.",
+    "Ça me fait peur quand j'ai l'impression que je vais m'évanouir.",
+    "C'est important pour moi de contrôler mes émotions (ex. la peur, la colère, la joie, la tristesse).",
+    "Ça me fait peur quand mon cœur bat vite.",
+    "Ça me dérange quand mon ventre se met à faire du bruit.",
+    "Ça me fait peur quand j'ai l'impression que je vais vomir.",
+    "Quand je remarque que mon cœur bat vite, j'ai peur que quelque chose n'aille pas bien à l'intérieur de moi.",
+    "Ça me fait peur quand j'ai difficile à reprendre mon souffle.",
+    "Quand j'ai mal au ventre, j'ai peur d'être vraiment malade.",
+    "Ça me fait peur quand je ne suis pas capable de me concentrer sur mes devoirs.",
+    "Les autres enfants peuvent remarquer quand je tremble.",
+    "Les sensations inhabituelles dans mon corps me font peur.",
+    "Quand je suis effrayé, j'ai peur d'être en train de devenir fou.",
+    "Ça me fait peur quand je me sens nerveux(se).",
+    "Je n'aime pas montrer mes émotions.",
+    "Les drôles de sensations dans mon corps me font peur."
+  ];
+  // sous-échelles (index 0-based)
+  var physIdx = [2,5,6,8,9,13,17]; // items 3,6,7,9,10,14,18
+  var mentalIdx = [1,11,14,15]; // items 2,12,15,16
+  var socialIdx = [0,4,12,16]; // items 1,5,13,17
+  var controlIdx = [3,7,10]; // items 4,8,11
+  var answers = new Array(items.length).fill(null);
+  var current = 0;
+
+  var screenStart = document.getElementById('screen-start');
+  var screenQuiz = document.getElementById('screen-quiz');
+  var screenResult = document.getElementById('screen-result');
+  var qnum = document.getElementById('qnum');
+  var qtext = document.getElementById('qtext');
+  var optRow = document.getElementById('opt-row');
+  var progressFill = document.getElementById('progress-fill');
+  var btnBack = document.getElementById('btn-back');
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    screenStart.hidden = true; screenQuiz.hidden = false; renderQuestion();
+  });
+
+  function renderQuestion(){
+    var i = current;
+    qnum.textContent = 'Question ' + (i+1) + ' / ' + items.length;
+    qtext.textContent = items[i];
+    progressFill.style.width = Math.round((i / items.length) * 100) + '%';
+    btnBack.disabled = (i === 0);
+    optRow.innerHTML = '';
+    opts.forEach(function(pair){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[i] === pair[1] ? ' selected' : '');
+      d.textContent = pair[0];
+      d.addEventListener('click', function(){
+        answers[i] = pair[1];
+        if (current < items.length - 1) { current++; renderQuestion(); }
+        else { showResult(); }
+      });
+      optRow.appendChild(d);
+    });
+  }
+
+  btnBack.addEventListener('click', function(){
+    if (current > 0) { current--; renderQuestion(); }
+  });
+
+  function sumIdx(list){
+    var s = 0;
+    list.forEach(function(idx){ s += (answers[idx]||0); });
+    return s;
+  }
+
+  function showResult(){
+    screenQuiz.hidden = true; screenResult.hidden = false;
+    var total = sumIdx([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17]);
+    document.getElementById('score-total').textContent = total;
+    var grid = document.getElementById('subscore-grid');
+    grid.innerHTML =
+      '<div class="subscore"><span class="lbl">Préoccupations physiques</span><span class="val">' + sumIdx(physIdx) + ' / 21</span></div>' +
+      '<div class="subscore"><span class="lbl">Préoccupations d\'incapacité mentale</span><span class="val">' + sumIdx(mentalIdx) + ' / 12</span></div>' +
+      '<div class="subscore"><span class="lbl">Préoccupations sociales</span><span class="val">' + sumIdx(socialIdx) + ' / 12</span></div>' +
+      '<div class="subscore"><span class="lbl">Préoccupations de perte de contrôle</span><span class="val">' + sumIdx(controlIdx) + ' / 9</span></div>';
+    document.getElementById('score-interp').textContent = "Le score total (recommandé, fidèle à la publication originale de 1991) reflète la sensibilité à l'anxiété : plus il est élevé, plus la sensibilité est importante. Normes françaises (n=200, 9-13 ans) : moyenne = 29,5 (ÉT=5,7). Les 4 sous-scores ci-dessus ont une cohérence interne faible à modérée dans la validation française et sont à interpréter avec prudence, en privilégiant le score global. Aucun seuil clinique officiel n'est publié : c'est un outil dimensionnel.";
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null); current = 0;
+    screenResult.hidden = true; screenStart.hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ASIC (CASI) — Sensibilité à l'anxiété chez l'enfant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#2E6B5E 0%,#5FA695 55%,#173A32 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(200,235,220,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#1E4A3F;background:#E1EEE9;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#2E6B5E;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#2E6B5E;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <div class="fiche-photo"><span class="acronym">ASIC</span></div>
+  <h1 class="serif">Indice de sensibilité à l'anxiété pour enfants</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Childhood Anxiety Sensitivity Index (CASI) — Silverman, Fleisig, Rabian &amp; Peterson (1991)</p>
+  <div class="meta-row">
+    <span class="pill">18 questions</span>
+    <span class="pill">3-4 minutes</span>
+    <span class="pill">Échelle 1-3</span>
+    <span class="pill">Français officiel</span>
+    <span class="pill">Anxiété, Enfance</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="asic-casi.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>L'ASIC (connu internationalement sous le sigle CASI) mesure la sensibilité à l'anxiété chez l'enfant : la peur des sensations corporelles liées à l'anxiété elles-mêmes (cœur qui bat vite, tremblements, essoufflement), au-delà de la peur ordinaire. C'est un facteur de vulnérabilité reconnu pour les troubles anxieux.</p>
+    <p class="source-note">Traduction française transcrite depuis Stassart &amp; Etienne (2014), article de validation en libre accès (licence CC-BY 3.0) incluant le texte intégral français et anglais en annexe.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Score total (recommandé, fidèle à la publication originale de 1991) = somme des 18 items (1 à 3 chacun), étendue 18-54. Un score plus élevé reflète une sensibilité à l'anxiété plus importante. Normes françaises (n=200, 9-13 ans) : moyenne = 29,5 (ÉT=5,7), avec des filles significativement plus élevées (M=31,0) que les garçons (M=27,9). Cohérence interne α=0,87 dans cette validation.</p>
+    <p>Quatre sous-scores optionnels sont aussi calculés (préoccupations physiques, d'incapacité mentale, sociales, de perte de contrôle), issus d'une structure à 4 facteurs publiée dans la validation française mais de cohérence interne faible à modérée pour certains d'entre eux : à utiliser avec prudence, en privilégiant le score global. Aucun seuil clinique officiel n'est publié.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source</h2>
+    <p class="source-note">Silverman, W. K., Fleisig, W., Rabian, B., &amp; Peterson, R. A. (1991). Childhood Anxiety Sensitivity Index. Journal of Clinical Child Psychology, 20(2), 162-168. Traduction française : Stassart, C., &amp; Etienne, A. M. (2014). A French Translation of the Childhood Anxiety Sensitivity Index (CASI). Psychologica Belgica, 54(2), 222-241. doi:10.5334/pb.an. Article en libre accès, licence CC-BY 3.0.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

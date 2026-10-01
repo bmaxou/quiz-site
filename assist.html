@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ASSIST - Dépistage alcool, tabac et substances</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#6B4E1E;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 4px;}
+  .domain-label{font-size:11.5px;font-weight:700;color:#6B4E1E;text-transform:uppercase;letter-spacing:.04em;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#6B4E1E;background:#F2E7D6;}
+  .check-row{display:flex;flex-direction:column;gap:8px;margin:0 0 24px;}
+  .check{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .check.selected{border-color:#6B4E1E;background:#F2E7D6;}
+  .check .box{width:18px;height:18px;border:1px solid #9A9E90;border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;}
+  .check.selected .box{background:#6B4E1E;border-color:#6B4E1E;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#6B4E1E;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 20px;font-size:13.5px;}
+  .result-table th,.result-table td{text-align:left;padding:8px 6px;border-bottom:1px solid #E0D9C9;}
+  .result-table th{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:#63695D;}
+  .risk-basse{color:#3D6B4F;font-weight:700;}
+  .risk-moyenne{color:#8A6D1E;font-weight:700;}
+  .risk-elevee{color:#8B1E2E;font-weight:700;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">ASSIST - Alcool, tabac et substances</h1>
+    <p class="lead">Alcohol, Smoking and Substance Involvement Screening Test (OMS). Ce test porte sur votre consommation de substances au cours de votre vie et des 3 derniers mois. Commencez par indiquer les substances que vous avez déjà consommées.</p>
+    <div class="pill-row">
+      <span class="pill">1 à 10 substances</span>
+      <span class="pill">5-15 minutes</span>
+      <span class="pill">Auto-administré</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-q1" class="card" hidden>
+    <p class="progress">Question 1 — vie entière</p>
+    <p class="q-text">Au cours de votre vie, quelles substances suivantes avez-vous déjà consommées (sans prescription médicale, ou en quantités/de manières plus importantes que celles prescrites) ?</p>
+    <div class="check-row" id="check-row"></div>
+    <div class="nav-row no-print">
+      <span></span>
+      <button class="btn btn-primary" id="btn-q1-next">Continuer</button>
+    </div>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="domain-label" id="domain-label"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <table class="result-table" id="result-table"></table>
+    <p class="lead" id="q8-text"></p>
+    <p class="lead">Score par substance = Q2+Q3+Q4+Q5+Q6+Q7 (sauf tabac : Q2+Q3+Q4+Q6+Q7, sans Q5). Seuils (identiques pour toutes les substances sauf l'alcool) : 0-3 aucune intervention, 4-26 intervention brève, ≥27 traitement intensif. Alcool : 0-10 aucune intervention, 11-26 intervention brève, ≥27 traitement intensif. Ce résultat ne peut en aucun cas remplacer une évaluation clinique.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Humeniuk, R., Henry-Edwards, S., Ali, R., Poznyak, V., &amp; Monteiro, M. G. The ASSIST: Manual for use in primary care. Organisation mondiale de la santé, Genève, 2010. Traduction française officielle OMS-ASSIST V3.0, © WHO 2007. Photocopie et usage clinique répété explicitement autorisés par l'OMS, sans démarche de permission. Ce résultat est un repère, il ne constitue pas un diagnostic.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var substances = [
+    {code:"a", label:"Tabac (cigarettes, cigares, tabac à rouler, à chiquer, à priser...)", isTobacco:true},
+    {code:"b", label:"Boissons alcoolisées (bière, vin, spiritueux...)"},
+    {code:"c", label:"Cannabis (marijuana, haschich...)"},
+    {code:"d", label:"Cocaïne"},
+    {code:"e", label:"Amphétamines (speed, ecstasy...)"},
+    {code:"f", label:"Solvants ou inhalants"},
+    {code:"g", label:"Calmants ou somnifères"},
+    {code:"h", label:"Hallucinogènes"},
+    {code:"i", label:"Opiacés"},
+    {code:"j", label:"Autres substances"}
+  ];
+
+  var qDefs = {
+    Q2:{label:"fréquence de consommation, 3 derniers mois", opts:[["Jamais",0],["1-2 fois",2],["Mensuellement",3],["Hebdomadairement",4],["Chaque jour ou presque",6]]},
+    Q3:{label:"envie irrésistible de consommer, 3 derniers mois", opts:[["Jamais",0],["1-2 fois",3],["Mensuellement",4],["Hebdomadairement",5],["Chaque jour ou presque",6]]},
+    Q4:{label:"problèmes causés par la consommation, 3 derniers mois", opts:[["Jamais",0],["1-2 fois",4],["Mensuellement",5],["Hebdomadairement",6],["Chaque jour ou presque",7]]},
+    Q5:{label:"incapacité à faire ce qui était attendu de vous, 3 derniers mois", opts:[["Jamais",0],["1-2 fois",5],["Mensuellement",6],["Hebdomadairement",7],["Chaque jour ou presque",8]]},
+    Q6:{label:"un proche s'est inquiété de votre consommation", opts:[["Non, jamais",0],["Oui, au cours des 3 derniers mois",6],["Oui, mais pas au cours des 3 derniers mois",3]]},
+    Q7:{label:"tentative de contrôler, réduire ou arrêter, sans y parvenir", opts:[["Non, jamais",0],["Oui, au cours des 3 derniers mois",6],["Oui, mais pas au cours des 3 derniers mois",3]]}
+  };
+  var qOrder = ["Q2","Q3","Q4","Q5","Q6","Q7"];
+  var q8Def = {opts:[["Non, jamais",0],["Oui, au cours des 3 derniers mois",2],["Oui, mais pas au cours des 3 derniers mois",1]]};
+
+  var selected = [];
+  var questions = []; // {sub, qkey, text}
+  var answers = [];
+  var idx = 0;
+  var q8Answer = null;
+
+  var checkRow = document.getElementById('check-row');
+  substances.forEach(function(s){
+    var d = document.createElement('div');
+    d.className = 'check';
+    d.innerHTML = '<span class="box"></span><span>' + s.label + '</span>';
+    d.addEventListener('click', function(){
+      var i = selected.indexOf(s.code);
+      if (i === -1){ selected.push(s.code); d.classList.add('selected'); d.querySelector('.box').textContent = '✓'; }
+      else { selected.splice(i,1); d.classList.remove('selected'); d.querySelector('.box').textContent = ''; }
+    });
+    checkRow.appendChild(d);
+  });
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-q1').hidden = false;
+  });
+
+  document.getElementById('btn-q1-next').addEventListener('click', function(){
+    questions = [];
+    selected.forEach(function(code){
+      var sub = substances.find(function(s){ return s.code === code; });
+      qOrder.forEach(function(qk){
+        if (qk === 'Q5' && sub.isTobacco) return;
+        questions.push({subCode: code, subLabel: sub.label, qkey: qk, text: 'Au cours des 3 derniers mois, ' + qDefs[qk].label + ' — ' + sub.label + ' ?', opts: qDefs[qk].opts});
+      });
+    });
+    questions.push({subCode: null, subLabel: "Toutes substances confondues", qkey:"Q8", text:"Avez-vous déjà consommé une drogue par injection (sans prescription médicale) ?", opts: q8Def.opts});
+    answers = new Array(questions.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-q1').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + questions.length;
+    document.getElementById('domain-label').textContent = questions[idx].subLabel;
+    document.getElementById('q-text').textContent = questions[idx].text;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    questions[idx].opts.forEach(function(pair, i){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === i ? ' selected' : '');
+      d.textContent = pair[0];
+      d.addEventListener('click', function(){
+        answers[idx] = i;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === questions.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < questions.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+
+    var scores = {};
+    var labels = {};
+    questions.forEach(function(q, i){
+      if (q.qkey === 'Q8'){
+        q8Answer = q.opts[answers[i]][0];
+        return;
+      }
+      if (!(q.subCode in scores)){ scores[q.subCode] = 0; labels[q.subCode] = q.subLabel; }
+      scores[q.subCode] += q.opts[answers[i]][1];
+    });
+
+    var table = document.getElementById('result-table');
+    table.innerHTML = '<tr><th>Substance</th><th>Score</th><th>Niveau de risque</th></tr>';
+    Object.keys(scores).forEach(function(code){
+      var score = scores[code];
+      var isAlcohol = code === 'b';
+      var level, cls;
+      if (isAlcohol){
+        if (score <= 10){ level = 'Aucune intervention'; cls='risk-basse'; }
+        else if (score <= 26){ level = 'Intervention brève'; cls='risk-moyenne'; }
+        else { level = 'Traitement intensif'; cls='risk-elevee'; }
+      } else {
+        if (score <= 3){ level = 'Aucune intervention'; cls='risk-basse'; }
+        else if (score <= 26){ level = 'Intervention brève'; cls='risk-moyenne'; }
+        else { level = 'Traitement intensif'; cls='risk-elevee'; }
+      }
+      var tr = document.createElement('tr');
+      tr.innerHTML = '<td>' + labels[code] + '</td><td>' + score + '</td><td class="' + cls + '">' + level + '</td>';
+      table.appendChild(tr);
+    });
+    if (Object.keys(scores).length === 0){
+      var tr = document.createElement('tr');
+      tr.innerHTML = '<td colspan="3">Aucune substance déclarée à la question 1.</td>';
+      table.appendChild(tr);
+    }
+
+    document.getElementById('q8-text').textContent = "Consommation par injection déclarée : " + (q8Answer || "-") + ".";
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    selected = [];
+    Array.from(checkRow.children).forEach(function(el){ el.classList.remove('selected'); el.querySelector('.box').textContent=''; });
+    questions = []; answers = []; idx = 0; q8Answer = null;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ASSIST - Dépistage alcool, tabac et substances</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#6B4E1E 0%,#A0803C 55%,#4A3510 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(235,225,190,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#22334D;background:#E9EEF5;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#6B4E1E;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#22334D;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <div class="fiche-photo"><span class="acronym">ASSIST</span></div>
+  <h1 class="serif">Test de dépistage de la consommation d'alcool, de tabac et de substances (ASSIST)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Alcohol, Smoking and Substance Involvement Screening Test - Organisation mondiale de la santé (2010)</p>
+  <div class="meta-row">
+    <span class="pill">1 à 10 substances</span>
+    <span class="pill">5-15 minutes</span>
+    <span class="pill">Auto-administré</span>
+    <span class="pill">Adulte</span>
+    <span class="pill">Français</span>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" href="assist.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>L'ASSIST commence par une question de repérage sur 10 catégories de substances déjà consommées au cours de la vie (tabac, alcool, cannabis, cocaïne, amphétamines, solvants, calmants/somnifères, hallucinogènes, opiacés, autres). Pour chaque substance déclarée, une série de questions explore la fréquence de consommation, l'envie irrésistible, les problèmes causés, l'incapacité à faire ce qui était attendu (sauf pour le tabac), l'inquiétude de l'entourage et les tentatives de contrôle infructueuses, toutes sur les 3 derniers mois. Une dernière question porte sur l'usage par injection, toutes substances confondues.</p>
+    <p>Manuel narratif sous copyright standard OMS, mais dérogation explicite pour l'instrument lui-même : « The ASSIST questionnaire can be photocopied for repeated use in primary care and other treatment settings » — usage clinique gratuit et libre, sans démarche de permission. ⚠️ L'OMS recommande la version 3.1 pour l'usage clinique (la 3.0 étant réservée à la recherche) ; seule la version 3.0 est disponible en intégralité en français, celle transcrite ici (différences mineures entre les deux versions, structure et cotation identiques).</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Score par substance = somme des points des questions sur la fréquence, l'envie irrésistible, les problèmes causés, l'incapacité à faire ce qui était attendu (sauf tabac), l'inquiétude d'un proche et les tentatives de contrôle infructueuses. Seuils identiques pour toutes les substances sauf l'alcool : 0-3 aucune intervention, 4-26 intervention brève, ≥27 traitement intensif. Pour l'alcool : 0-10 aucune intervention, 11-26 intervention brève, ≥27 traitement intensif.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Source</h2>
+    <p class="source-note">Humeniuk, R., Henry-Edwards, S., Ali, R., Poznyak, V., &amp; Monteiro, M. G. The ASSIST: Manual for use in primary care. Organisation mondiale de la santé, Genève, 2010. ISBN 978-92-4-159938-2. Traduction française officielle OMS-ASSIST V3.0, © WHO 2007. Ce résultat est un repère, il ne constitue pas un diagnostic.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

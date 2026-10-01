@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DIS-Q - Questionnaire de dissociation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#3D5A80;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#3D5A80;background:#E9EEF5;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#3D5A80;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:36px;color:#3D5A80;margin:0 0 4px;}
+  .result-max{font-size:13px;color:#9A9E90;margin:0 0 16px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">DIS-Q - Questionnaire de dissociation</h1>
+    <p class="lead">Pour chaque affirmation, indiquez dans quelle mesure elle vous correspond. 63 questions réparties en quatre dimensions : confusion et fragmentation identitaire, perte de contrôle, amnésie, absorption.</p>
+    <div class="pill-row">
+      <span class="pill">63 questions</span>
+      <span class="pill">10 minutes</span>
+      <span class="pill">Échelle 1-5</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-score" id="score-total"></p>
+    <p class="result-max">Score total (moyenne des 63 items, échelle 1 à 5)</p>
+    <p class="result-score" id="score-q1"></p>
+    <p class="result-max">DIS-Q1 - Confusion et fragmentation identitaire</p>
+    <p class="result-score" id="score-q2"></p>
+    <p class="result-max">DIS-Q2 - Perte de contrôle</p>
+    <p class="result-score" id="score-q3"></p>
+    <p class="result-max">DIS-Q3 - Amnésie</p>
+    <p class="result-score" id="score-q4"></p>
+    <p class="result-max">DIS-Q4 - Absorption</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Vanderlinden, J., Van Dyck, R., Vertommen, H., &amp; Vandereycken, W. (1993). The Dissociation Questionnaire (DIS-Q): Development and characteristics of a new self-report questionnaire. Clinical Psychology &amp; Psychotherapy, 1(1), 21-27. Outil de repérage, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [
+    "J'ai de temps en temps le sentiment de me laisser aller à rêver.",
+    "J'ai régulièrement le sentiment que tout est irréel.",
+    "Il m'arrive de temps en temps de perdre contact avec mon corps.",
+    "Je me gave de nourriture sans y penser.",
+    "Je roule à vélo ou en voiture et, tout à coup, je remarque que je ne parviens pas à me souvenir de ce qui s'est passé en route.",
+    "Je peux, sans le vouloir et sans raison, éclater de rire ou éclater en sanglots.",
+    "Il m'arrive de temps en temps d'avoir le sentiment d'être quelqu'un d'autre.",
+    "Il m'arrive quand j'écoute quelqu'un de constater tout à coup qu'une partie de l'histoire ou que l'histoire toute entière m'a totalement échappée.",
+    "Quand je suis fatigué, j'ai le sentiment qu'une force extérieure prend possession de moi et décide à ma place de ce que je fais.",
+    "Je me retrouve dans des situations dans lesquelles je ne veux pas être.",
+    "Je ressens de temps en temps une grande distance entre moi-même et ce que je pense et fais.",
+    "Je me demande de temps en temps qui je suis réellement.",
+    "Je retrouve de temps en temps des choses nouvelles dans mes affaires personnelles sans que je me souvienne de les avoir achetées.",
+    "Je ressens régulièrement une force qui me pousse à manger alors que je n'ai pas faim.",
+    "Je me mets de temps en temps en colère alors que je ne le veux pas du tout.",
+    "Il arrive d'avoir décidé de faire quelque chose et que mon corps fasse quelque chose d'autre contre mon gré.",
+    "Je me sens confus de temps en temps.",
+    "Il y a des moments où je ne peux me souvenir où j'étais le(s) jour(s) précédent(s).",
+    "On me dit parfois que je me comporte comme si les amis ou les membres de ma famille m'étaient étrangers.",
+    "Dans certaines situations j'ai la sensation d'avoir une personnalité dédoublée.",
+    "Il arrive que je ne puisse me souvenir de certains évènements importants de ma vie comme par exemple la date de mon mariage ou le jour de la fin de mes études.",
+    "Parfois je veux dire quelque chose mais je m'entends dire quelque chose de tout à fait différent.",
+    "Mon humeur peut changer soudainement.",
+    "Je fais parfois les choses sans y penser.",
+    "J'oublie immédiatement ce qu'on me dit.",
+    "Il m'arrive de faire quelque chose et d'avoir tout à coup un trou de mémoire total.",
+    "Il m'arrive de me regarder dans le miroir et de ne pas me reconnaître.",
+    "Il m'arrive d'avoir la sensation que mon corps subit un changement.",
+    "J'ai parfois le sentiment que le monde et les gens qui m'entourent ne sont pas réels.",
+    "J'ai le sentiment que mon corps ne m'appartient pas.",
+    "Quand je regarde la télévision je ne remarque plus rien de ce qui m'entoure.",
+    "Parfois des périodes entières de temps m'échappent et je ne sais plus ce que j'ai fait.",
+    "Je peux me rappeler d'un évènement passé de manière si vivante que j'ai l'impression de le revivre.",
+    "J'ai de temps en temps le sentiment que quelqu'un d'autre en moi décide de ce que je fais.",
+    "Je découvre parfois que j'ai fait des choses dont je ne peux me souvenir.",
+    "Je me demande comment je peux m'empêcher de faire certaines choses.",
+    "Je remarque parfois que je me trouve dans un endroit que je ne connais pas sans savoir comment j'y suis arrivé.",
+    "Je me demande parfois si certains de mes souvenirs sont vrais ou si je les ai simplement rêvés.",
+    "Parfois je me retrouve dans un endroit que je connais bien mais qui me paraît étrange et inconnu.",
+    "J'ai le sentiment de faire certaines choses sans savoir pourquoi je les fais.",
+    "Parfois je pense ou fais des choses contre mon gré et d'une façon qui ne me ressemble pas.",
+    "Je remarque que, dans tous mes actes, je me surveille rigoureusement.",
+    "Parfois je suis tellement plongé dans mon imagination et mes rêveries qu'elles me semblent réelles.",
+    "Il m'arrive de regarder fixement devant moi sans penser à rien.",
+    "Je pense souvent à rien.",
+    "Combattre de mauvaises habitudes demande beaucoup d'énergie.",
+    "J'oublie parfois où j'ai déposé mes affaires.",
+    "Quand je mange, je le fais sans y penser.",
+    "Je rêvasse de temps en temps.",
+    "Je voudrais avoir plus de contrôle sur moi-même.",
+    "Quand je marche, je suis conscient de tous mes pas.",
+    "Je remarque que, dans certaines situations, j'agis avec la plus grande facilité alors que la plupart du temps j'agis avec difficulté (par exemple activité sportive, travail, contacts sociaux, etc.).",
+    "Quand je mange, je suis conscient de toutes les bouchées que j'avale.",
+    "Je perds toute notion de temps.",
+    "Il m'arrive de ne plus savoir si j'ai réellement fait quelque chose ou si j'ai seulement décidé de le faire.",
+    "Il m'arrive de vouloir faire en même temps deux choses contradictoires et je constate que je suis en train de peser le pour et le contre de chacune d'elles.",
+    "J'ai de temps en temps le sentiment que mon esprit est divisé en deux parties.",
+    "Je retrouve parfois des lettres, dessins ou notes de ma main sans me souvenir de les avoir exécutés.",
+    "J'ai le sentiment d'être composé de deux personnes (ou plus).",
+    "Je fais souvent les choses sans y penser.",
+    "J'entends parfois des voix dans ma tête qui me disent ce que je dois faire ou qui font des commentaires à propos de ce que je fais.",
+    "Je me vois différent de l'image que les autres ont de moi.",
+    "J'ai parfois le sentiment de regarder le monde à travers un voile de telle sorte que les gens et les choses qui m'entourent me paraissent très loin et flous."
+  ];
+  var opts = ["1 - Pas du tout","2 - Un peu","3 - Assez bien","4 - Fortement","5 - Tout à fait"];
+  var q1Idx = [2,3,7,9,10,11,12,16,20,22,27,28,29,30,34,36,39,40,41,50,57,59,61,62,63].map(function(n){return n-1;});
+  var q2Idx = [1,4,5,6,8,14,15,17,23,24,38,43,44,46,48,49,54,60].map(function(n){return n-1;});
+  var q3Idx = [13,18,19,21,25,26,31,32,35,37,45,47,55,58].map(function(n){return n-1;});
+  var q4Idx = [33,42,51,52,53,56].map(function(n){return n-1;});
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    opts.forEach(function(label, v){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === v+1 ? ' selected' : '');
+      d.textContent = label;
+      d.addEventListener('click', function(){
+        answers[idx] = v+1;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function avgIndexes(list){
+    var s = 0;
+    for (var i=0;i<list.length;i++){ s += answers[list[i]]; }
+    return s / list.length;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var totalSum = 0;
+    for (var i=0;i<answers.length;i++){ totalSum += answers[i]; }
+    var total = totalSum / answers.length;
+    document.getElementById('score-total').textContent = 'Score total : ' + total.toFixed(2);
+    document.getElementById('score-q1').textContent = 'DIS-Q1 : ' + avgIndexes(q1Idx).toFixed(2);
+    document.getElementById('score-q2').textContent = 'DIS-Q2 : ' + avgIndexes(q2Idx).toFixed(2);
+    document.getElementById('score-q3').textContent = 'DIS-Q3 : ' + avgIndexes(q3Idx).toFixed(2);
+    document.getElementById('score-q4').textContent = 'DIS-Q4 : ' + avgIndexes(q4Idx).toFixed(2);
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DIS-Q - Questionnaire de dissociation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#3D5A80 0%,#7B9BC4 55%,#22334D 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(200,215,235,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#22334D;background:#E9EEF5;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#3D5A80;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#22334D;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <div class="fiche-photo"><span class="acronym">DIS-Q</span></div>
+  <h1 class="serif">Questionnaire de dissociation</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Dissociation Questionnaire - Vanderlinden, Van Dyck, Vertommen &amp; Vandereycken (1993)</p>
+  <div class="meta-row">
+    <span class="pill">63 questions</span>
+    <span class="pill">10 minutes</span>
+    <span class="pill">Échelle 1-5</span>
+    <span class="pill">Français</span>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" href="dis-q.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le DIS-Q est un auto-questionnaire de repérage des expériences dissociatives dans la population générale et clinique. Il comprend 63 items cotés en fréquence/intensité sur une échelle de 1 (pas du tout) à 5 (tout à fait), organisés en quatre sous-échelles : la confusion et fragmentation identitaire (25 items), la perte de contrôle sur les comportements, pensées et émotions (18 items), l'amnésie dissociative (14 items) et l'absorption, c'est-à-dire l'implication intense dans une activité au point de perdre conscience de l'environnement (6 items).</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque sous-échelle est cotée par la moyenne des items qui la composent (et non leur somme), donnant un score de 1 à 5 par dimension : DIS-Q1 - Confusion et fragmentation identitaire (items 2, 3, 7, 9, 10, 11, 12, 16, 20, 22, 27, 28, 29, 30, 34, 36, 39, 40, 41, 50, 57, 59, 61, 62, 63), DIS-Q2 - Perte de contrôle (items 1, 4, 5, 6, 8, 14, 15, 17, 23, 24, 38, 43, 44, 46, 48, 49, 54, 60), DIS-Q3 - Amnésie (items 13, 18, 19, 21, 25, 26, 31, 32, 35, 37, 45, 47, 55, 58), DIS-Q4 - Absorption (items 33, 42, 51, 52, 53, 56). Le score total correspond à la moyenne des 63 items.</p>
+    <p>Il n'existe pas, dans la source transcrite, de seuil clinique officiel universellement publié avec certitude pour ces scores : aucun seuil n'est donc proposé ici. Les scores se lisent de façon comparative entre les quatre dimensions et servent d'appui à l'entretien clinique, jamais de diagnostic autonome.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Source</h2>
+    <p class="source-note">Vanderlinden, J., Van Dyck, R., Vertommen, H., &amp; Vandereycken, W. (1993). The Dissociation Questionnaire (DIS-Q): Development and characteristics of a new self-report questionnaire. Clinical Psychology &amp; Psychotherapy, 1(1), 21-27. Diffusion libre par l'ESTD (European Society for Trauma and Dissociation) et l'IRPT (Institut Romand de Psychotraumatologie).</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

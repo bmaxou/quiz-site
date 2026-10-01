@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CSQ-R - Stratégies d'adaptation à la douleur (version révisée)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#52585C;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#52585C;background:#E7E8E8;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#52585C;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .subscore-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 20px;}
+  .subscore{background:#F4F1EA;border:1px solid #E0D9C9;border-radius:10px;padding:10px 14px;}
+  .subscore .lbl{font-size:11.5px;font-weight:700;color:#63695D;text-transform:uppercase;letter-spacing:.03em;margin-bottom:4px;}
+  .subscore .val{font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;color:#20241E;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+  @media (max-width:480px){ .subscore-grid{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">CSQ-R - Adaptation à la douleur (révisé)</h1>
+    <p class="lead">Coping Strategies Questionnaire-Revised. Au fil de leur journée, les gens ressentent parfois de la douleur (mal de dents, mal de tête occasionnel, ou blessure mineure). Pour chaque item, indiquez à quel point vous vous engagez dans cette activité quand vous ressentez de la douleur.</p>
+    <p class="lang-note">⚠️ Version révisée (27 items, Robinson et al. 1997), distincte du CSQ original à 48 items (Rosenstiel &amp; Keefe 1983) également présent dans ce catalogue sous le nom « CSQ original ».</p>
+    <div class="pill-row">
+      <span class="pill">27 questions</span>
+      <span class="pill">5 minutes</span>
+      <span class="pill">Échelle 0-6</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="lead">Le CSQ-R ne produit pas de score total unique publié : il dresse un profil de 6 stratégies d'adaptation à la douleur.</p>
+    <div class="subscore-grid" id="subscore-grid"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Robinson, M.E., Riley, J.L., Myers, C.D., Papas, R.K., Wise, E.A., Waxenberg, L.B., &amp; Fillingim, R.B. (1997). The Coping Strategies Questionnaire: A large sample, item-level factor analysis. Clinical Journal of Pain, 13(1), 43-49. Outil de repérage, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var opts = ["0 - Je ne fais jamais cela","1","2","3 - Je fais parfois cela","4","5","6 - Je fais toujours cela"];
+  var items = [
+    "1. J'essaie de me sentir distant(e) de la douleur, presque comme si elle était dans le corps de quelqu'un d'autre.",
+    "2. J'essaie de penser à quelque chose d'agréable.",
+    "3. C'est terrible et j'ai l'impression que ça ne va jamais s'améliorer.",
+    "4. Je me dis d'être courageux(se) et de continuer malgré la douleur.",
+    "5. Je me dis que je peux surmonter la douleur.",
+    "6. C'est affreux et j'ai l'impression que ça me submerge.",
+    "7. J'ai l'impression que ma vie ne vaut pas la peine d'être vécue.",
+    "8. Je prie Dieu pour que ça ne dure pas longtemps.",
+    "9. J'essaie de ne pas y penser comme mon corps, mais plutôt comme quelque chose de séparé de moi.",
+    "10. Je ne pense pas à la douleur.",
+    "11. Je me dis que je ne peux pas laisser la douleur m'empêcher de faire ce que j'ai à faire.",
+    "12. Je n'y prête aucune attention.",
+    "13. Je fais comme si elle n'était pas là.",
+    "14. Je m'inquiète tout le temps de savoir si ça va finir.",
+    "15. Je me repasse en tête des expériences agréables du passé.",
+    "16. Je pense aux gens avec qui j'aime faire des choses.",
+    "17. Je prie pour que la douleur s'arrête.",
+    "18. J'imagine que la douleur est en dehors de mon corps.",
+    "19. Je continue comme si de rien n'était.",
+    "20. Même si ça fait mal, je continue.",
+    "21. J'ai l'impression de ne plus pouvoir le supporter.",
+    "22. Je l'ignore.",
+    "23. Je m'appuie sur ma foi en Dieu.",
+    "24. J'ai l'impression de ne plus pouvoir continuer.",
+    "25. Je pense à des choses que j'aime faire.",
+    "26. Je fais quelque chose que j'aime, comme regarder la télévision ou écouter de la musique.",
+    "27. Je fais comme si elle ne faisait pas partie de moi."
+  ];
+  var subscales = [
+    {label:"Distanciation cognitive", idxs:[0,8,17,26]},
+    {label:"Distraction", idxs:[1,14,15,24,25]},
+    {label:"Catastrophisation", idxs:[2,5,6,20,23]},
+    {label:"Auto-affirmations", idxs:[3,4,10]},
+    {label:"Détournement de l'attention", idxs:[9,11,12,18,21]},
+    {label:"Prière / adaptation religieuse", idxs:[7,16,22]}
+  ];
+
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    opts.forEach(function(label, v){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === v ? ' selected' : '');
+      d.textContent = label;
+      d.addEventListener('click', function(){
+        answers[idx] = v;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var grid = document.getElementById('subscore-grid');
+    grid.innerHTML = '';
+    subscales.forEach(function(s){
+      var sum = s.idxs.reduce(function(a,i){ return a + answers[i]; }, 0);
+      var div = document.createElement('div');
+      div.className = 'subscore';
+      div.innerHTML = '<div class="lbl">' + s.label + '</div><div class="val">' + sum + ' / ' + (s.idxs.length*6) + '</div>';
+      grid.appendChild(div);
+    });
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CSQ-R - Stratégies d'adaptation à la douleur (version révisée)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#52585C 0%,#868D92 55%,#33383B 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(200,215,235,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:24px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#22334D;background:#E9EEF5;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .caveat{background:#FBF3E7;border:1px solid #E7D9BC;border-radius:12px;padding:14px 16px;font-size:13.5px;color:#5A4A2A;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#52585C;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#22334D;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <div class="fiche-photo"><span class="acronym">CSQ-R</span></div>
+  <h1 class="serif">Stratégies d'adaptation à la douleur, version révisée (CSQ-R)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Coping Strategies Questionnaire-Revised - Robinson, Riley, Myers et al. (1997)</p>
+  <div class="meta-row">
+    <span class="pill">27 questions</span>
+    <span class="pill">5 minutes</span>
+    <span class="pill">Auto-questionnaire</span>
+    <span class="pill">Français</span>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" href="csq-r.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p class="caveat">⚠️ L'entrée du catalogue vise vraisemblablement le CSQ original de Rosenstiel &amp; Keefe (1983, 48 items), dont le texte intégral reste introuvable en accès libre. Ce qui est proposé ici est la version révisée CSQ-R (27 items, Robinson et al. 1997), aujourd'hui la version la plus largement utilisée en recherche sur la douleur chronique — un instrument apparenté mais distinct, à ne pas confondre avec le CSQ original (48 items) également présent dans ce catalogue.</p>
+    <p>Le CSQ-R explore les stratégies d'adaptation utilisées face à des douleurs courantes de la vie quotidienne, à travers 27 items cotés de 0 (jamais) à 6 (toujours).</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Score de chaque sous-échelle = somme des items la composant : Distanciation cognitive (4 items), Distraction (5 items), Catastrophisation (5 items), Auto-affirmations (3 items), Détournement de l'attention (5 items), Prière/adaptation religieuse (3 items). Pas de score total unique publié pour cette version (approche par profil de stratégies).</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Source</h2>
+    <p class="source-note">Robinson, M.E., Riley, J.L., Myers, C.D., Papas, R.K., Wise, E.A., Waxenberg, L.B., &amp; Fillingim, R.B. (1997). The Coping Strategies Questionnaire: A large sample, item-level factor analysis of a commonly used measure of pain coping. Clinical Journal of Pain, 13(1), 43-49. Formulaire officiel de l'étude NIH OPPERA, déposé publiquement dans la base dbGaP du NCBI. Aucun éditeur commercial identifié. Outil de repérage, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

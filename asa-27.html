@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ASA-27 - Echelle d'anxiete de separation chez l'adulte</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#3D5A80;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#3D5A80;background:#E9EEF5;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#3D5A80;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:36px;color:#3D5A80;margin:0 0 4px;}
+  .result-max{font-size:13px;color:#9A9E90;margin:0 0 16px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">ASA-27 - Anxiete de separation adulte</h1>
+    <p class="lead">Adult Separation Anxiety Questionnaire. Repondez selon vos experiences recentes, sans bonne ni mauvaise reponse.</p>
+    <p class="lang-note">Manicavasagar, Silove, Wagner &amp; Drobny (2003).</p>
+    <div class="pill-row">
+      <span class="pill">27 questions</span>
+      <span class="pill">6 minutes</span>
+      <span class="pill">Echelle 0-3 par item</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Precedent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Resultat</h1>
+    <p class="result-score" id="score-total"></p>
+    <p class="result-max">score total ASA-27, sur 81</p>
+    <p class="result-score" id="score-level" style="font-size:22px;"></p>
+    <p class="result-max">niveau indicatif</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Manicavasagar, V., Silove, D., Wagner, R., &amp; Drobny, J. (2003). A self-report questionnaire for measuring separation anxiety in adulthood. Comprehensive Psychiatry, 44(2), 146-153. Outil de reperage, ne remplace pas une evaluation clinique complete.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var opts = [
+    "Cela n'est jamais arrive",
+    "Cela arrive occasionnellement",
+    "Cela arrive assez souvent",
+    "Cela arrive tres souvent"
+  ];
+  var questions = [
+    "Vous etes-vous senti(e) plus en securite chez vous lorsque vous etiez avec des personnes proches ?",
+    "Avez-vous eu des difficultes a rester loin de votre domicile pendant plusieurs heures ?",
+    "Avez-vous porte sur vous un objet (dans votre sac ou portefeuille) qui vous rassurait ?",
+    "Avez-vous ressenti un fort stress avant de quitter votre domicile pour un long deplacement ?",
+    "Avez-vous souffert de cauchemars ou des reves a propos d'etre separe d'une personne proche ?",
+    "Avez-vous ressenti un stress intense avant de quitter une personne proche pour partir en voyage ?",
+    "Etes-vous devenu(e) tres perturbe(e) lorsque votre routine quotidienne a ete modifiee ?",
+    "Vous etes-vous inquiete(e) de l'intensite de vos relations proches (par exemple en ayant l'impression d'etre trop attache(e)) ?",
+    "Avez-vous eu des symptomes physiques (maux de tete, maux de ventre, nausees...) avant d'aller travailler ou de sortir de chez vous pour une activite reguliere ?",
+    "Avez-vous constate que vous parlez beaucoup afin de garder les gens proches de vous ?",
+    "Vous etes-vous senti particulierement preoccupe(e) de savoir ou allaient les personnes qui vous sont proches lorsque vous etes separe(e) d'elles, par exemple en allant au travail ou en quittant le domicile ?",
+    "Avez-vous ressenti des difficultes a dormir seul(e) la nuit, par exemple votre sommeil est-il meilleur si quelqu'un de proche est a la maison ?",
+    "Avez-vous remarque qu'il etait plus facile de vous endormir si vous entendez la voix de personnes proches, ou le son de la television ou de la radio ?",
+    "Avez-vous ete tres panique(e) a l'idee d'etre eloigne(e) de personnes qui vous sont proches ?",
+    "Avez-vous souffert de cauchemars ou de reves a propos d'etre loin de chez vous ?",
+    "Vous etes-vous beaucoup inquiete(e) de la possibilite que de grands dangers arrivent a des personnes proches, par exemple un accident de voiture ou une maladie incurable ?",
+    "Etes-vous devenu(e) tres perturbe(e) par des changements dans votre routine quotidienne habituelle s'ils entravent vos contacts avec des personnes proches ?",
+    "Vous etes-vous beaucoup inquiete(e) que des personnes qui vous sont cheres vous quittent ?",
+    "Avez-vous constate que vous donnez mieux si les lumieres sont allumees dans la maison ou dans la chambre ?",
+    "Avez-vous essaye d'eviter d'etre seul(e) chez vous, en particulier lorsque les personnes qui vous sont proches sont sorties ?",
+    "Avez-vous souffert de crises soudaines d'anxiete ou d'attaques de panique (par exemple, tremblements, sueurs, essoufflement, palpitations soudains) a l'idee de quitter des personnes proches ou de leur depart ?",
+    "Avez-vous constate que vous devenez anxieux si vous ne parlez pas regulierement au telephone avec des personnes qui vous sont proches, par exemple tous les jours ?",
+    "Avez-vous eu peur de ne pas etre capable de faire face ou de ne pas pouvoir continuer a vivre si quelqu'un qui vous est cher vous quittait ?",
+    "Avez-vous souffert de soudaines crises d'anxiete ou d'attaques de panique (par exemple, tremblements, sueurs, essoufflement, palpitations soudains) lorsque vous etes separe(e) de personnes proches ?",
+    "Vous etes-vous beaucoup inquiete(e) de potentiels evenements qui pourraient vous separer de ceux qui vous sont proches, par exemple a cause d'exigences professionnelles ?",
+    "Des personnes proches vous ont-elles dit que vous « parlez beaucoup » ?",
+    "Vous etes-vous inquiete(e) que vos relations avec certaines personnes soient si proches qu'elles pourraient leur causer des problemes ?"
+  ];
+  var answers = new Array(questions.length).fill(null);
+  var idx = 0;
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + questions.length;
+    document.getElementById('q-text').textContent = questions[idx];
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    opts.forEach(function(label, v){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === v ? ' selected' : '');
+      d.textContent = label;
+      d.addEventListener('click', function(){
+        answers[idx] = v;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === questions.length - 1 ? 'Voir le resultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < questions.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function levelLabel(total){
+    if (total <= 15) return "Anxiete de separation faible ou absente";
+    if (total <= 21) return "Anxiete de separation legere a moderee";
+    return "Anxiete de separation severe - trouble probable";
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var total = answers.reduce(function(a,b){ return a + b; }, 0);
+    document.getElementById('score-total').textContent = total;
+    document.getElementById('score-level').textContent = levelLabel(total);
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(questions.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ASA-27 - Echelle d'anxiete de separation chez l'adulte</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#2E3A52 0%,#5C6E8C 55%,#1A2233 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(200,215,235,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#22334D;background:#E9EEF5;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#3D5A80;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#22334D;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <div class="fiche-photo"><span class="acronym">ASA-27</span></div>
+  <h1 class="serif">Echelle d'anxiete de separation chez l'adulte</h1>
+  <span class="badge-standard">&#10003; Standardise</span>
+  <p class="lead">Adult Separation Anxiety Questionnaire - Manicavasagar, Silove, Wagner &amp; Drobny (2003)</p>
+  <div class="meta-row">
+    <span class="pill">27 questions</span>
+    <span class="pill">6 minutes</span>
+    <span class="pill">Echelle 0-3 par item</span>
+    <span class="pill">Dependance affective</span>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" href="asa-27.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+  <div class="section">
+    <h2 class="serif">Presentation de l'outil</h2>
+    <p>L'ASA-27 evalue l'anxiete de separation a l'age adulte : la difficulte a s'eloigner des personnes proches ou du domicile, l'inquietude excessive pour la securite des proches, les strategies de reassurance (objets, appels frequents) et l'evitement de la solitude. Les 27 items portent sur des experiences recentes, cotees sur une echelle de frequence en 4 points.</p>
+    <p class="source-note">Transcription realisee depuis le mode demo public du site mentaal.fr, item par item (23/09/2026). Un libelle affiche par le site pour l'item 19 (« Avez-vous constate que vous donnez mieux si les lumieres sont allumees... ») a ete conserve verbatim, tel qu'affiche par la source, meme si sa formulation parait maladroite.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Cotation et interpretation</h2>
+    <p>Score total = somme des 27 items (0 a 81). Seuils indicatifs :</p>
+    <p>0 a 15 : anxiete de separation faible ou absente &nbsp;/&nbsp; 16 a 21 : anxiete de separation legere a moderee &nbsp;/&nbsp; 22 a 81 : anxiete de separation severe, trouble probable.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Source</h2>
+    <p class="source-note">Manicavasagar, V., Silove, D., Wagner, R., &amp; Drobny, J. (2003). A self-report questionnaire for measuring separation anxiety in adulthood. Comprehensive Psychiatry, 44(2), 146-153. Instrument academique classique, sans mecanisme de licence payante identifie.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

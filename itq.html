@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ITQ - Questionnaire international sur le traumatisme</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#5C1F30;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 4px;}
+  .domain-label{font-size:11.5px;font-weight:700;color:#5C1F30;text-transform:uppercase;letter-spacing:.04em;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#5C1F30;background:#F1E1E5;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#5C1F30;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:30px;color:#5C1F30;margin:0 0 12px;}
+  .subscore-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 20px;}
+  .subscore{background:#F4F1EA;border:1px solid #E0D9C9;border-radius:10px;padding:10px 14px;}
+  .subscore .lbl{font-size:11.5px;font-weight:700;color:#63695D;text-transform:uppercase;letter-spacing:.03em;margin-bottom:4px;}
+  .subscore .val{font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;color:#20241E;}
+  .diag-box{background:#F1E1E5;border:1px solid #D9B8BC;border-radius:10px;padding:14px 16px;font-size:14.5px;color:#5C1F30;margin:0 0 20px;font-weight:600;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+  @media (max-width:480px){ .subscore-grid{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">ITQ - Questionnaire international sur le traumatisme</h1>
+    <p class="lead">International Trauma Questionnaire. Pensez à l'expérience la plus stressante ou la plus bouleversante de votre vie et indiquez à quel point vous avez été affecté(e) par chaque problème, au cours du dernier mois.</p>
+    <div class="pill-row">
+      <span class="pill">18 questions</span>
+      <span class="pill">10 minutes</span>
+      <span class="pill">Auto-administré</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="domain-label" id="domain-label"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div class="diag-box" id="diag-box"></div>
+    <p class="result-score" id="score-total"></p>
+    <div class="subscore-grid" id="subscore-grid"></div>
+    <p class="lead">Règles de diagnostic (score ≥2 = présence du symptôme) : TSPT = (reviviscence P1 ou P2 ≥2) ET (évitement P3 ou P4 ≥2) ET (menace P5 ou P6 ≥2) ET retentissement fonctionnel (P7, P8 ou P9 ≥2). TSPT complexe = critères TSPT remplis, PLUS (régulation émotionnelle C1 ou C2 ≥2) ET (perception de soi C3 ou C4 ≥2) ET (déficit relationnel C5 ou C6 ≥2) ET retentissement fonctionnel POS (C7, C8 ou C9 ≥2). Le TSPT complexe absorbe le TSPT (exclusion mutuelle). Ce résultat ne peut en aucun cas remplacer une évaluation clinique.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Cloitre, M., Shevlin, M., Brewin, C. R., Bisson, J. I., Roberts, N. P., Maercker, A., Karatzias, T., &amp; Hyland, P. (2018). The International Trauma Questionnaire: Development of a self-report measure of ICD-11 PTSD and complex PTSD. Acta Psychiatrica Scandinavica, 138(6), 536-546. Domaine public, librement disponible à tous. Version française officielle : Peraud et al. (2022), diffusée par le Cn2r. Ce résultat est un repère, il ne constitue pas un diagnostic.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var opts = ["0 - Pas du tout","1 - Un petit peu","2 - Modérément","3 - Beaucoup","4 - Extrêmement"];
+
+  var items = [
+    {code:"P1", t:"Avoir des rêves perturbants où se rejoue une partie de l'expérience", dl:"TSPT — Reviviscence"},
+    {code:"P2", t:"Avoir des images ou des souvenirs forts comme si l'expérience se rejouait ici et maintenant", dl:"TSPT — Reviviscence"},
+    {code:"P3", t:"Éviter les ressentis qui rappellent l'expérience (pensées, sentiments, sensations)", dl:"TSPT — Évitement"},
+    {code:"P4", t:"Éviter les éléments extérieurs qui rappellent l'expérience (personnes, lieux, objets, situations)", dl:"TSPT — Évitement"},
+    {code:"P5", t:"Être en état de super-alerte, de vigilance, sur vos gardes", dl:"TSPT — Sentiment de menace actuelle"},
+    {code:"P6", t:"Avoir une réaction exagérée de surprise ou de sursaut", dl:"TSPT — Sentiment de menace actuelle"},
+    {code:"P7", t:"Ces problèmes ont-ils affecté vos relations ou votre vie sociale ?", dl:"TSPT — Retentissement fonctionnel"},
+    {code:"P8", t:"Ces problèmes ont-ils affecté votre travail ?", dl:"TSPT — Retentissement fonctionnel"},
+    {code:"P9", t:"Ces problèmes ont-ils affecté d'autres parties importantes de votre vie (enfants, études, activités) ?", dl:"TSPT — Retentissement fonctionnel"},
+    {code:"C1", t:"Il me faut beaucoup de temps pour me calmer quand je suis contrarié(e)", dl:"POS — Dysrégulation affective"},
+    {code:"C2", t:"Je me sens insensible ou émotionnellement éteint(e)", dl:"POS — Dysrégulation affective"},
+    {code:"C3", t:"Je me sens nul(le)", dl:"POS — Concept de soi négatif"},
+    {code:"C4", t:"Je me sens sans valeur", dl:"POS — Concept de soi négatif"},
+    {code:"C5", t:"Je me sens distant(e) ou coupé(e) des autres", dl:"POS — Troubles relationnels"},
+    {code:"C6", t:"Il m'est difficile de rester émotionnellement proche des autres", dl:"POS — Troubles relationnels"},
+    {code:"C7", t:"Ces problèmes ont-ils causé de l'inquiétude ou de la détresse dans vos relations ou votre vie sociale ?", dl:"POS — Retentissement fonctionnel"},
+    {code:"C8", t:"Ces problèmes ont-ils affecté votre travail ?", dl:"POS — Retentissement fonctionnel"},
+    {code:"C9", t:"Ces problèmes ont-ils affecté d'autres parties importantes de votre vie ?", dl:"POS — Retentissement fonctionnel"}
+  ];
+
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('domain-label').textContent = items[idx].dl;
+    document.getElementById('q-text').textContent = items[idx].t;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    opts.forEach(function(label, i){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === i ? ' selected' : '');
+      d.textContent = label;
+      d.addEventListener('click', function(){
+        answers[idx] = i;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function val(code){
+    var i = items.findIndex(function(it){ return it.code === code; });
+    return answers[i];
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+
+    var reviviscence = val('P1') + val('P2');
+    var evitement = val('P3') + val('P4');
+    var menace = val('P5') + val('P6');
+    var scoreTSPT = reviviscence + evitement + menace;
+
+    var regulation = val('C1') + val('C2');
+    var perception = val('C3') + val('C4');
+    var relationnel = val('C5') + val('C6');
+    var scorePOS = regulation + perception + relationnel;
+
+    var scoreComplexe = scoreTSPT + scorePOS;
+
+    document.getElementById('score-total').textContent = 'Score TSPT : ' + scoreTSPT + ' / 24    ·    Score POS : ' + scorePOS + ' / 24    ·    Score TSPT complexe : ' + scoreComplexe + ' / 48';
+
+    var grid = document.getElementById('subscore-grid');
+    grid.innerHTML = '';
+    [
+      ['Reviviscence', reviviscence], ['Évitement', evitement], ['Menace actuelle', menace],
+      ['Dysrégulation affective', regulation], ['Concept de soi négatif', perception], ['Troubles relationnels', relationnel]
+    ].forEach(function(pair){
+      var div = document.createElement('div');
+      div.className = 'subscore';
+      div.innerHTML = '<div class="lbl">' + pair[0] + '</div><div class="val">' + pair[1] + ' / 8</div>';
+      grid.appendChild(div);
+    });
+
+    var tsptCrit = (Math.max(val('P1'), val('P2')) >= 2) && (Math.max(val('P3'), val('P4')) >= 2) && (Math.max(val('P5'), val('P6')) >= 2) && (Math.max(val('P7'), val('P8'), val('P9')) >= 2);
+    var posCrit = (Math.max(val('C1'), val('C2')) >= 2) && (Math.max(val('C3'), val('C4')) >= 2) && (Math.max(val('C5'), val('C6')) >= 2) && (Math.max(val('C7'), val('C8'), val('C9')) >= 2);
+
+    var diagText;
+    if (tsptCrit && posCrit) diagText = "Critères remplis pour un TSPT complexe (CIM-11).";
+    else if (tsptCrit) diagText = "Critères remplis pour un TSPT (CIM-11), sans perturbations de l'organisation du soi.";
+    else diagText = "Critères diagnostiques CIM-11 non remplis sur cette passation (ni TSPT, ni TSPT complexe).";
+    document.getElementById('diag-box').textContent = diagText;
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ITQ - Questionnaire international sur le traumatisme</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#5C1F30 0%,#8F2F4E 55%,#3A1420 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(235,225,190,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#22334D;background:#E9EEF5;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#5C1F30;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#22334D;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <div class="fiche-photo"><span class="acronym">ITQ</span></div>
+  <h1 class="serif">Questionnaire international sur le traumatisme (ITQ)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">International Trauma Questionnaire - Cloitre, Shevlin, Brewin et al. (2018)</p>
+  <div class="meta-row">
+    <span class="pill">18 questions</span>
+    <span class="pill">10 minutes</span>
+    <span class="pill">Auto-administré</span>
+    <span class="pill">Adulte</span>
+    <span class="pill">Français</span>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" href="itq.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>L'ITQ mesure les deux syndromes du TSPT selon la CIM-11 : le TSPT (reviviscence, évitement, sentiment de menace actuelle) et le TSPT complexe, qui ajoute trois perturbations de l'organisation du soi (dysrégulation affective, concept de soi négatif, troubles relationnels). Chaque item est coté de 0 (Pas du tout) à 4 (Extrêmement).</p>
+    <p>Instrument dans le domaine public, librement disponible à tous, y compris pour un usage clinique individuel. Version française officielle validée par Peraud, Hebrard, Lavandier et al. (2022), diffusée par le Cn2r (Centre national de ressources et de résilience).</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Scores dimensionnels : Reviviscence, Évitement et Menace actuelle (0-8 chacun) s'additionnent en un Score TSPT (0-24). Dysrégulation affective, Concept de soi négatif et Troubles relationnels (0-8 chacun) s'additionnent en un Score POS (0-24). Le Score TSPT complexe est la somme des deux (0-48).</p>
+    <p>Diagnostic catégoriel (seuil ≥2 par item = présence du symptôme) : le TSPT est retenu si chacun des 3 groupes de symptômes (reviviscence, évitement, menace) est présent ET qu'un retentissement fonctionnel est rapporté. Le TSPT complexe est retenu si les critères du TSPT sont remplis ET que les 3 perturbations de l'organisation du soi sont également présentes avec leur propre retentissement fonctionnel. Le TSPT complexe absorbe le TSPT (exclusion mutuelle).</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Source</h2>
+    <p class="source-note">Cloitre, M., Shevlin, M., Brewin, C. R., Bisson, J. I., Roberts, N. P., Maercker, A., Karatzias, T., &amp; Hyland, P. (2018). The International Trauma Questionnaire: Development of a self-report measure of ICD-11 PTSD and complex PTSD. Acta Psychiatrica Scandinavica, 138(6), 536-546. Version française : Peraud, W., et al. (2022). French cross-cultural adaptation and validation of the ITQ. European Journal of Psychotraumatology, 13(2), 2152109. Ce résultat est un repère, il ne constitue pas un diagnostic.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

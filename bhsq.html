@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BHSQ — Questionnaire des situations à la maison de Barkley</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:720px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 18px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  h1{font-size:25px;margin:0 0 18px;}
+  .intro{font-size:14.5px;color:#4A4E43;background:#fff;border:1px solid #E0D9C9;border-radius:12px;padding:16px 18px;margin-bottom:24px;}
+  .item{background:#fff;border:1px solid #E0D9C9;border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+  .item p{font-size:14.5px;margin:0 0 12px;font-weight:600;}
+  .row{display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+  .yn{display:flex;gap:8px;}
+  .opt{display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;padding:6px 12px;border:1px solid #E0D9C9;border-radius:999px;}
+  .opt:hover{background:#F4F1EA;}
+  .sev{display:none;margin-top:12px;}
+  .sev.show{display:block;}
+  .sev label{font-size:12.5px;color:#63695D;display:block;margin-bottom:6px;}
+  .sev-opts{display:flex;gap:6px;flex-wrap:wrap;}
+  .sev-opt{font-size:12px;padding:6px 10px;border:1px solid #E0D9C9;border-radius:8px;cursor:pointer;}
+  .sev-opt:hover{background:#F4F1EA;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:12px 22px;cursor:pointer;border:1px solid transparent;background:#2E6B5C;color:#fff;margin-top:10px;}
+  .btn:disabled{opacity:.45;cursor:not-allowed;}
+  #result{display:none;margin-top:30px;}
+  .score-card{background:#fff;border:1px solid #E0D9C9;border-radius:12px;padding:18px 20px;margin-bottom:14px;}
+  .score-card h3{margin:0 0 6px;font-size:16px;font-family:'Cormorant Garamond',Georgia,serif;}
+  .score-val{font-size:22px;font-weight:700;}
+  .cutoffs{font-size:12.5px;color:#63695D;margin-top:6px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <h1 class="serif">Questionnaire des situations à la maison de Barkley (BHSQ)</h1>
+  <div class="intro">
+    Votre enfant présente-t-il des problèmes de respect des consignes, ordres ou règles dans l'une
+    des situations suivantes ? Si oui, cochez Oui et cotez la sévérité du problème sur une échelle
+    de 1 (léger) à 9 (sévère). Si votre enfant ne présente pas de problème dans une situation donnée
+    (ou la situation ne s'applique pas), cochez Non et passez à l'item suivant.
+  </div>
+  <div id="quiz"></div>
+  <button class="btn" id="submitBtn" type="button" disabled>Voir mes résultats</button>
+
+  <div id="result">
+    <h2 class="serif">Vos résultats</h2>
+    <div id="cards"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var SITUATIONS = [
+    "En jouant seul",
+    "En jouant avec d'autres enfants",
+    "Aux repas",
+    "En s'habillant / se déshabillant",
+    "En se lavant / prenant son bain",
+    "Quand vous êtes au téléphone",
+    "Quand des visiteurs sont à la maison",
+    "En visite chez quelqu'un",
+    "Dans les lieux publics (restaurants, magasins, églises...)",
+    "Quand l'autre parent est à la maison",
+    "Quand on lui demande de faire des corvées",
+    "Quand on lui demande de faire ses devoirs",
+    "Au coucher",
+    "En voiture",
+    "Avec une baby-sitter"
+  ];
+
+  var yn = {};
+  var sev = {};
+
+  var quizEl = document.getElementById('quiz');
+  var html = '';
+  SITUATIONS.forEach(function(s, idx){
+    html += '<div class="item" data-idx="' + idx + '"><p>' + (idx+1) + '. ' + s + '</p>';
+    html += '<div class="row"><div class="yn">' +
+      '<label class="opt"><input type="radio" name="yn' + idx + '" value="oui" style="display:none">Oui</label>' +
+      '<label class="opt"><input type="radio" name="yn' + idx + '" value="non" style="display:none">Non</label>' +
+      '</div></div>';
+    html += '<div class="sev" id="sev' + idx + '"><label>Sévérité (1 = légère, 9 = sévère)</label><div class="sev-opts">';
+    for (var v=1; v<=9; v++){
+      html += '<span class="sev-opt" data-idx="' + idx + '" data-val="' + v + '">' + v + '</span>';
+    }
+    html += '</div></div></div>';
+  });
+  quizEl.innerHTML = html;
+
+  var submitBtn = document.getElementById('submitBtn');
+
+  function checkComplete(){
+    var ok = true;
+    SITUATIONS.forEach(function(s, idx){
+      if (yn[idx] === undefined) ok = false;
+      if (yn[idx] === 'oui' && sev[idx] === undefined) ok = false;
+    });
+    submitBtn.disabled = !ok;
+  }
+
+  quizEl.querySelectorAll('.opt').forEach(function(label){
+    label.addEventListener('click', function(){
+      var input = label.querySelector('input');
+      var item = label.closest('.item');
+      var idx = item.getAttribute('data-idx');
+      var group = item.querySelectorAll('.opt');
+      group.forEach(function(o){ o.style.background=''; o.style.borderColor='#E0D9C9'; o.style.color=''; });
+      label.style.background = '#2E6B5C';
+      label.style.color = '#fff';
+      label.style.borderColor = '#2E6B5C';
+      yn[idx] = input.value;
+      var sevBox = document.getElementById('sev' + idx);
+      if (input.value === 'oui'){
+        sevBox.classList.add('show');
+      } else {
+        sevBox.classList.remove('show');
+        delete sev[idx];
+      }
+      checkComplete();
+    });
+  });
+
+  quizEl.querySelectorAll('.sev-opt').forEach(function(el){
+    el.addEventListener('click', function(){
+      var idx = el.getAttribute('data-idx');
+      var val = parseInt(el.getAttribute('data-val'), 10);
+      var box = document.getElementById('sev' + idx);
+      box.querySelectorAll('.sev-opt').forEach(function(o){ o.style.background=''; o.style.color=''; o.style.borderColor='#E0D9C9'; });
+      el.style.background = '#2E6B5C';
+      el.style.color = '#fff';
+      el.style.borderColor = '#2E6B5C';
+      sev[idx] = val;
+      checkComplete();
+    });
+  });
+
+  submitBtn.addEventListener('click', function(){
+    var count = 0;
+    var sevSum = 0;
+    SITUATIONS.forEach(function(s, idx){
+      if (yn[idx] === 'oui'){ count += 1; sevSum += (sev[idx] || 0); }
+    });
+    var sevMean = (sevSum / SITUATIONS.length).toFixed(1);
+    var cards = document.getElementById('cards');
+    var html2 = '<div class="score-card"><h3>Situations problématiques</h3><div class="score-val">' + count + ' / 15</div></div>' +
+      '<div class="score-card"><h3>Sévérité moyenne</h3><div class="score-val">' + sevMean + ' / 9</div>' +
+      '<p class="cutoffs">Aucun seuil clinique officiel publié — profil descriptif à discuter avec ' +
+      'les parents.</p></div>';
+    cards.innerHTML = html2;
+    document.getElementById('result').style.display = 'block';
+    submitBtn.style.display = 'none';
+    document.getElementById('result').scrollIntoView({behavior:'smooth'});
+  });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BHSQ — Questionnaire des situations à la maison de Barkley</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#2E6B5C 0%,#5CA08E 55%,#1B4038 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(200,230,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#1A2233;background:#E7E9EE;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;flex-wrap:wrap;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#2E6B5C;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#1A2233;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">BHSQ</span></div>
+
+  <h1 class="serif">Questionnaire des situations à la maison de Barkley</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Barkley Home Situations Questionnaire (BHSQ) — Barkley &amp; Edelbrock (1987)</p>
+  <div class="meta-row">
+    <span class="pill">15 situations</span>
+    <span class="pill">4 min</span>
+    <span class="pill">Rempli par le parent</span>
+    <span class="pill">TDAH</span>
+    <span class="pill">Enfance</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="bhsq.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Questionnaire parental de la même famille que le BSSQ (situations scolaires) de Barkley,
+    mais centré sur les situations de la vie à la maison : jeu seul ou avec d'autres enfants, repas,
+    toilette, visites, corvées, devoirs, coucher, trajets en voiture, garde par une baby-sitter.
+    Pour chaque situation, le parent indique si l'enfant présente des difficultés de respect des
+    consignes, et si oui, à quel point le problème est sévère.</p>
+    <p class="source-note">⚠️ Cette version comporte 15 situations ; certaines révisions/éditions de
+    ce matériel Barkley en comptent 14 à 16 selon les sources — la version reprise ici est celle
+    effectivement retrouvée et vérifiée intégralement (même mise en page et même maison d'édition
+    clinique que le BSSQ déjà construit dans ce catalogue).</p>
+    <p class="source-note">Droits : matériel cliniquement reproductible, diffusé librement par des
+    centres de santé comportementale nord-américains à des fins d'évaluation clinique de routine —
+    même statut que le BSSQ déjà sourcé. Aucune licence commerciale identifiée. Usage
+    clinique/personnel considéré comme libre.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Pour chacune des 15 situations : case Oui/Non (l'enfant présente-t-il des difficultés dans
+    cette situation), puis si Oui, une sévérité notée de 1 (légère) à 9 (sévère).</p>
+    <p>Deux scores résumés : le nombre de situations problématiques (0-15), et la sévérité moyenne
+    (somme des sévérités, y compris 0 pour les situations non cochées, divisée par 15). Aucun seuil
+    clinique officiel publié — profil descriptif à discuter avec les parents.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source</h2>
+    <p class="source-note">Barkley, R. A., &amp; Edelbrock, C. S. (1987). Assessing situational
+    variation in children's problem behaviors: The Home and School Situations Questionnaires. In
+    R. J. Prinz (Ed.), <em>Advances in Behavioral Assessment of Children and Families</em> (Vol. 3,
+    pp. 157-176). Greenwich, CT: JAI Press. Reproduction consultée : Burrell Behavioral Health
+    (assets.burrellcenter.com/home_situations_questionnaire.doc), extraction fidèle via
+    conversion LibreOffice.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>
