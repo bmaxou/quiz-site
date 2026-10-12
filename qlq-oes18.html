@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Module cancer de l'œsophage de l'EORTC (QLQ-OES18)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#2F6F8F;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .period{font-size:12.5px;font-weight:600;color:#2F6F8F;margin:0 0 8px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#2F6F8F;background:#E3F0F6;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#2F6F8F;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 20px;}
+  .sc-title{font-size:13px;font-weight:700;color:#2F6F8F;margin:18px 0 6px;}
+  .sc-row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-top:1px solid #EFEBE1;font-size:14px;}
+  .sc-row b{font-variant-numeric:tabular-nums;white-space:nowrap;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">Module cancer de l'œsophage de l'EORTC (QLQ-OES18)</h1>
+    <p class="lead">Les patients rapportent parfois les symptômes ou problèmes suivants. Pourriez-vous indiquer, s'il vous plaît, si, durant la semaine passée, vous avez été affecté(e) par l'un de ces symptômes ou problèmes.</p>
+    <p class="lang-note">Version française officielle (document « OES18 French », EORTC). Outil sous licence (EORTC Quality of Life Group) : « Licence requise : oui ».</p>
+    <div class="pill-row">
+      <span class="pill">18 questions</span>
+    <span class="pill">3 minutes</span>
+    <span class="pill">scores de 0 à 100 par question</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="period" id="period-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-text">Chaque question est cotée de 0 à 100 : (réponse − 1) ÷ 3 × 100. Les échelles composites officielles du questionnaire (regroupement de plusieurs questions) ne sont pas recalculées ici : se reporter au manuel de cotation EORTC. Les questions marquées « Non concerné(e) » ne sont pas cotées.</p>
+    <div id="rows-all"></div>
+    <p class="result-text" style="margin-top:18px">Aucun seuil clinique officiel n'est repris ici : ces scores se lisent avec la personne, et de préférence en comparaison de ses scores antérieurs. Ce module complète le questionnaire de base QLQ-C30 (questions 1 à 30), non inclus dans cette page.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">QLQ-C30-OES18 © 1999 EORTC Groupe d'étude sur la qualité de la vie, tous droits réservés. Outil d'évaluation de la qualité de vie, ne remplace pas une évaluation clinique.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var DEFOPTS = ["Pas du tout", "Un peu", "Assez", "Beaucoup"];
+  var items = [
+ {
+  "n": "31",
+  "t": "Pouviez-vous manger des aliments solides?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "32",
+  "t": "Pouviez-vous manger des aliments mixés ou mous?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "33",
+  "t": "Pouviez-vous boire des liquides?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "34",
+  "t": "Avez-vous eu du mal à avaler votre salive?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "35",
+  "t": "Vous êtes-vous étranglé(e) en avalant?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "36",
+  "t": "Avez-vous eu du mal à apprécier vos repas?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "37",
+  "t": "Vous êtes-vous senti(e) rassasié(e) trop vite?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "38",
+  "t": "Avez-vous eu du mal à manger?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "39",
+  "t": "Avez-vous été gêné(e) de manger devant d'autres personnes?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "40",
+  "t": "Avez-vous eu la bouche sèche?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "41",
+  "t": "Avez-vous eu des problèmes de goût?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "42",
+  "t": "Avez-vous eu du mal à tousser?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "43",
+  "t": "Avez-vous eu du mal à parler?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "44",
+  "t": "Avez-vous eu des acidités ou des brûlures d'estomac?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "45",
+  "t": "Avez-vous été gêné(e) par des renvois d'acide ou de bile dans la bouche?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "46",
+  "t": "Avez-vous eu des douleurs en mangeant?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "47",
+  "t": "Avez-vous eu mal dans la poitrine?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "48",
+  "t": "Avez-vous eu des douleurs dans le ventre?",
+  "p": "Au cours de la semaine passée :"
+ }
+];
+  var groups = [
+ {
+  "title": "Questions formulées en capacité (Q31 à Q33) : la cotation n'est pas inversée ; lire le score à la lumière de la formulation (« Pouviez-vous… ») et se reporter au manuel EORTC pour l'orientation de l'échelle de dysphagie",
+  "rows": [
+   {
+    "l": "Q31 — Pouviez-vous manger des aliments solides?",
+    "it": [
+     0
+    ]
+   },
+   {
+    "l": "Q32 — Pouviez-vous manger des aliments mixés ou mous?",
+    "it": [
+     1
+    ]
+   },
+   {
+    "l": "Q33 — Pouviez-vous boire des liquides?",
+    "it": [
+     2
+    ]
+   }
+  ]
+ },
+ {
+  "title": "Autres questions : plus le score est élevé, plus le symptôme ou le problème est important",
+  "rows": [
+   {
+    "l": "Q34 — Avez-vous eu du mal à avaler votre salive?",
+    "it": [
+     3
+    ]
+   },
+   {
+    "l": "Q35 — Vous êtes-vous étranglé(e) en avalant?",
+    "it": [
+     4
+    ]
+   },
+   {
+    "l": "Q36 — Avez-vous eu du mal à apprécier vos repas?",
+    "it": [
+     5
+    ]
+   },
+   {
+    "l": "Q37 — Vous êtes-vous senti(e) rassasié(e) trop vite?",
+    "it": [
+     6
+    ]
+   },
+   {
+    "l": "Q38 — Avez-vous eu du mal à manger?",
+    "it": [
+     7
+    ]
+   },
+   {
+    "l": "Q39 — Avez-vous été gêné(e) de manger devant d'autres personnes?",
+    "it": [
+     8
+    ]
+   },
+   {
+    "l": "Q40 — Avez-vous eu la bouche sèche?",
+    "it": [
+     9
+    ]
+   },
+   {
+    "l": "Q41 — Avez-vous eu des problèmes de goût?",
+    "it": [
+     10
+    ]
+   },
+   {
+    "l": "Q42 — Avez-vous eu du mal à tousser?",
+    "it": [
+     11
+    ]
+   },
+   {
+    "l": "Q43 — Avez-vous eu du mal à parler?",
+    "it": [
+     12
+    ]
+   },
+   {
+    "l": "Q44 — Avez-vous eu des acidités ou des brûlures d'estomac?",
+    "it": [
+     13
+    ]
+   },
+   {
+    "l": "Q45 — Avez-vous été gêné(e) par des renvois d'acide ou de bile dans la bouche?",
+    "it": [
+     14
+    ]
+   },
+   {
+    "l": "Q46 — Avez-vous eu des douleurs en mangeant?",
+    "it": [
+     15
+    ]
+   },
+   {
+    "l": "Q47 — Avez-vous eu mal dans la poitrine?",
+    "it": [
+     16
+    ]
+   },
+   {
+    "l": "Q48 — Avez-vous eu des douleurs dans le ventre?",
+    "it": [
+     17
+    ]
+   }
+  ]
+ }
+];
+  var infos = [];
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function active(i){
+    var c = items[i].c;
+    if(!c) return true;
+    if(!active(c.i)) return false;
+    var a = answers[c.i];
+    if(a === null) return false;
+    if(c.eq !== undefined) return a === c.eq;
+    if(c.gt !== undefined) return a > c.gt;
+    return true;
+  }
+  function nextIdx(i){ var j = i + 1; while(j < items.length && !active(j)) j++; return j; }
+  function prevIdx(i){ var j = i - 1; while(j >= 0 && !active(j)) j--; return j; }
+  function position(i){
+    var k = 0, tot = 0;
+    for(var j = 0; j < items.length; j++){ if(active(j)){ tot++; if(j <= i) k++; } }
+    return [k, tot];
+  }
+  function optsOf(i){
+    var it = items[i];
+    var base = it.o ? it.o : DEFOPTS;
+    var out = base.map(function(l, k){ return {v: k + 1, l: l}; });
+    if(it.na) out.push({v: 0, l: "Non concerné(e)"});
+    return out;
+  }
+
+  function renderQuestion(){
+    var pos = position(idx);
+    var it = items[idx];
+    document.getElementById('progress-text').textContent = (it.n ? 'Question ' + it.n + ' — ' : '') + pos[0] + ' / ' + pos[1];
+    document.getElementById('period-text').textContent = it.p || '';
+    document.getElementById('q-text').textContent = it.t;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    optsOf(idx).forEach(function(o){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === o.v ? ' selected' : '');
+      d.textContent = o.l;
+      d.addEventListener('click', function(){ answers[idx] = o.v; renderQuestion(); });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = prevIdx(idx) < 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = nextIdx(idx) >= items.length ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    var p = prevIdx(idx);
+    if (p >= 0){ idx = p; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    var n = nextIdx(idx);
+    if (n < items.length){ idx = n; renderQuestion(); } else { showResult(); }
+  });
+
+  // Score EORTC : (moyenne des réponses - 1) / 3 x 100, sur les questions actives et répondues
+  function score(ids){
+    var s = 0, k = 0;
+    ids.forEach(function(i){
+      if(active(i) && answers[i] !== null && answers[i] > 0){ s += answers[i]; k++; }
+    });
+    if(!k) return null;
+    var span = (items[ids[0]].o ? items[ids[0]].o.length : DEFOPTS.length) - 1;
+    return Math.round(((s / k) - 1) / span * 100);
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var box = document.getElementById('rows-all');
+    box.innerHTML = '';
+    function row(a, b){
+      var d = document.createElement('div'); d.className = 'sc-row';
+      var x = document.createElement('span'); x.textContent = a;
+      var y = document.createElement('b'); y.textContent = b;
+      d.appendChild(x); d.appendChild(y); box.appendChild(d);
+    }
+    groups.forEach(function(g){
+      var t = document.createElement('p'); t.className = 'sc-title'; t.textContent = g.title; box.appendChild(t); var shown = 0;
+      g.rows.forEach(function(r){
+        var v = score(r.it);
+        if(v === null && r.it.every(function(i){ return !active(i) && items[i].c && items[i].c.eq !== undefined; })) return;
+        row(r.l, v === null ? 'non applicable' : v + ' / 100'); shown++;
+      });
+      if(!shown) box.removeChild(t);
+    });
+    if(infos.length){
+      var t2 = document.createElement('p'); t2.className = 'sc-title';
+      t2.textContent = 'Informations recueillies, non cotées';
+      box.appendChild(t2);
+      infos.forEach(function(r){
+        var i = r.it;
+        var txt = 'non applicable';
+        if(active(i) && answers[i] !== null){
+          var lab = optsOf(i).filter(function(o){ return o.v === answers[i]; })[0];
+          txt = lab ? lab.l : '';
+        }
+        row(r.l, txt);
+      });
+    }
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Module cancer de l'œsophage de l'EORTC (QLQ-OES18)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#6E9A58 0%,#D5EBC4 55%,#2C4A20 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,245,235,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#123B4F;background:#E3F0F6;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#2F6F8F;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#123B4F;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">QLQ-OES18</span></div>
+
+  <h1 class="serif">Module cancer de l'œsophage de l'EORTC (QLQ-OES18)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">EORTC QLQ-OES18, module spécifique — EORTC Quality of Life Group</p>
+  <div class="meta-row">
+    <span class="pill">18 questions</span>
+    <span class="pill">3 minutes</span>
+    <span class="pill">scores de 0 à 100 par question</span>
+    <span class="pill">Français</span>
+    <span class="pill">Licence requise : oui</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="qlq-oes18.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le QLQ-OES18 est le module « cancer de l'œsophage » de l'EORTC, complément du questionnaire de base QLQ-C30. Il explore, en 18 questions numérotées de 31 à 48 et portant sur la semaine passée, la capacité à manger des aliments solides, mixés ou mous et à boire, la difficulté à avaler la salive, les fausses routes, le plaisir de manger, la satiété précoce, la gêne de manger en public, la bouche sèche, les troubles du goût, la toux, la voix, le reflux (acidités, renvois d'acide ou de bile) et les douleurs (en mangeant, dans la poitrine, dans le ventre). Chaque question se cote de 1 (pas du tout) à 4 (beaucoup).</p>
+
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque question est cotée de 0 à 100 : (réponse − 1) ÷ 3 × 100, la réponse allant de 1 (pas du tout) à 4 (beaucoup). Cette page affiche un score par question ; le regroupement en échelles composites n'est pas recalculé ici (se reporter au manuel de cotation EORTC). Les trois premières questions (Q31 à Q33) sont formulées en termes de capacité (« Pouviez-vous manger… ») : elles sont présentées à part et leur cotation n'est pas inversée dans cette page ; l'orientation de l'échelle correspondante est à vérifier dans le manuel de cotation EORTC avant tout usage clinique. Pour les autres questions, un score élevé signifie des symptômes ou problèmes plus importants.</p>
+    <p>Aucun seuil clinique officiel n'est repris ici : ces scores se lisent avec la personne, et de préférence en comparaison de ses scores antérieurs. Ce module complète le questionnaire de base QLQ-C30 (questions 1 à 30), non inclus dans cette page.</p>
+
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p><strong>Licence requise : oui.</strong> QLQ-C30-OES18 © 1999 EORTC Groupe d'étude sur la qualité de la vie, tous droits réservés. Usage académique non financé par l'industrie : gratuit sur demande auprès du groupe EORTC Quality of Life (conditions d'utilisation, qol.eortc.org) ; tout usage commercial exige une convention de licence payante. Instrument construit ici malgré la licence, conformément à la décision du 30/09/2026 ; la diffusion publique reste soumise à l'autorisation du détenteur des droits.</p>
+    <p class="source-note">Texte des items : document officiel « QLQ-OES18 — French », EORTC Quality of Life Group (qol.eortc.org, hébergé sur eortc.be), 18 items numérotés 31 à 48, vérifiés par script contre le texte du PDF. Cotation : EORTC QLQ-C30 Scoring Manual (transformation linéaire en scores de 0 à 100). Référence princeps non reprise ici : voir la fiche du module sur qol.eortc.org avant tout usage clinique.</p>
+
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

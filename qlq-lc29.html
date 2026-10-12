@@ -1,0 +1,627 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Module cancer du poumon de l'EORTC, version révisée (QLQ-LC29)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#2F6F8F;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .period{font-size:12.5px;font-weight:600;color:#2F6F8F;margin:0 0 8px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#2F6F8F;background:#E3F0F6;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#2F6F8F;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 20px;}
+  .sc-title{font-size:13px;font-weight:700;color:#2F6F8F;margin:18px 0 6px;}
+  .sc-row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-top:1px solid #EFEBE1;font-size:14px;}
+  .sc-row b{font-variant-numeric:tabular-nums;white-space:nowrap;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">Module cancer du poumon de l'EORTC, version révisée (QLQ-LC29)</h1>
+    <p class="lead">Les patients rapportent parfois les symptômes ou problèmes suivants. Pourriez-vous indiquer, s'il vous plaît, si, durant la semaine passée, vous avez été affecté(e) par l'un de ces symptômes ou problèmes ?</p>
+    <p class="lang-note">Version française officielle (« French (Europe) »). Outil sous licence (EORTC Quality of Life Group) : « Licence requise : oui ».</p>
+    <div class="pill-row">
+      <span class="pill">29 questions</span>
+    <span class="pill">4 minutes</span>
+    <span class="pill">scores de 0 à 100 par question</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="period" id="period-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-text">Chaque question est cotée de 0 à 100 : (réponse − 1) ÷ 3 × 100. Les échelles composites officielles du module (regroupement de plusieurs questions) ne sont pas recalculées ici : se reporter au manuel de cotation EORTC. Les questions marquées « Non concerné(e) » ne sont pas cotées.</p>
+    <div id="rows-all"></div>
+    <p class="result-text" style="margin-top:18px">Aucun seuil clinique officiel n'est repris ici : ces scores se lisent avec la personne, et de préférence en comparaison de ses scores antérieurs. Ce module complète le questionnaire de base QLQ-C30 (questions 1 à 30), non inclus dans cette page. Il ne se substitue pas au QLQ-LC13, qui reste publié séparément.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">QLQ-LC29 © 2016 EORTC Quality of Life Group, tous droits réservés (phase III terminée). Outil d'évaluation de la qualité de vie, ne remplace pas une évaluation clinique.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var DEFOPTS = ["Pas du tout", "Un peu", "Assez", "Beaucoup"];
+  var items = [
+ {
+  "n": "31",
+  "t": "Avez-vous toussé ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "32",
+  "t": "Votre toux était-elle accompagnée de sang ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "33",
+  "t": "Avez-vous eu du mal à respirer au repos ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "34",
+  "t": "Avez-vous eu du mal à respirer en marchant ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "35",
+  "t": "Avez-vous eu du mal à respirer en montant les escaliers ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "36",
+  "t": "Avez-vous eu mal à la bouche ou à la langue ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "37",
+  "t": "Avez-vous eu des difficultés à avaler ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "38",
+  "t": "Avez-vous ressenti des fourmillements dans les mains ou dans les pieds ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "39",
+  "t": "Avez-vous perdu des cheveux ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "40",
+  "t": "Avez-vous eu mal à la poitrine ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "41",
+  "t": "Avez-vous eu mal au bras ou à l'épaule ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "42",
+  "t": "Avez-vous eu mal dans un autre endroit de votre corps ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "43",
+  "t": "Avez-vous eu des réactions allergiques ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "44",
+  "t": "Avez-vous eu les yeux brûlants ou douloureux ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "45",
+  "t": "Avez-vous eu des étourdissements ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "46",
+  "t": "Avez-vous eu des ongles fendus aux doigts ou aux orteils?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "47",
+  "t": "Avez-vous eu des problèmes de peau (p.ex. démangeaisons, peau sèche) ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "48",
+  "t": "Avez-vous eu des difficultés à parler ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "49",
+  "t": "Avez-vous eu peur d'une progression tumorale ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "50",
+  "t": "Avez-vous eu les cheveux fins ou ternes à cause de votre maladie ou de votre traitement ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "51",
+  "t": "Vous êtes-vous inquiété(e) de votre santé future ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "52",
+  "t": "Avez-vous eu une toux sèche ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "53",
+  "t": "Avez-vous constaté une diminution de votre capacité physique ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "54",
+  "t": "Une perte de poids vous a-t-elle gêné ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "55",
+  "t": "Avez-vous eu des douleurs au niveau de la zone opérée ?",
+  "p": "Répondez aux questions suivantes seulement si vous avez été opéré(e) d'un cancer du poumon. Au cours de la semaine passée :",
+  "na": true
+ },
+ {
+  "n": "56",
+  "t": "La zone de plaie était-elle hypersensible ?",
+  "p": "Répondez aux questions suivantes seulement si vous avez été opéré(e) d'un cancer du poumon. Au cours de la semaine passée :",
+  "na": true
+ },
+ {
+  "n": "57",
+  "t": "L'ampleur de la chirurgie a-t-elle perturbé votre performance physique ?",
+  "p": "Répondez aux questions suivantes seulement si vous avez été opéré(e) d'un cancer du poumon. Au cours de la semaine passée :",
+  "na": true
+ },
+ {
+  "n": "58",
+  "t": "Avez-vous eu des difficultés à vous servir du bras ou de l'épaule du côté opéré ?",
+  "p": "Répondez aux questions suivantes seulement si vous avez été opéré(e) d'un cancer du poumon. Au cours de la semaine passée :",
+  "na": true
+ },
+ {
+  "n": "59",
+  "t": "Les douleurs dues à la cicatrisation ont-elles perturbé vos activités quotidiennes ?",
+  "p": "Répondez aux questions suivantes seulement si vous avez été opéré(e) d'un cancer du poumon. Au cours de la semaine passée :",
+  "na": true
+ }
+];
+  var groups = [
+ {
+  "title": "Scores par question (0 à 100). Pour les questions formulées négativement, plus le score est élevé, plus le symptôme ou le problème est important",
+  "rows": [
+   {
+    "l": "Q31 — Avez-vous toussé ?",
+    "it": [
+     0
+    ]
+   },
+   {
+    "l": "Q32 — Votre toux était-elle accompagnée de sang ?",
+    "it": [
+     1
+    ]
+   },
+   {
+    "l": "Q33 — Avez-vous eu du mal à respirer au repos ?",
+    "it": [
+     2
+    ]
+   },
+   {
+    "l": "Q34 — Avez-vous eu du mal à respirer en marchant ?",
+    "it": [
+     3
+    ]
+   },
+   {
+    "l": "Q35 — Avez-vous eu du mal à respirer en montant les escaliers ?",
+    "it": [
+     4
+    ]
+   },
+   {
+    "l": "Q36 — Avez-vous eu mal à la bouche ou à la langue ?",
+    "it": [
+     5
+    ]
+   },
+   {
+    "l": "Q37 — Avez-vous eu des difficultés à avaler ?",
+    "it": [
+     6
+    ]
+   },
+   {
+    "l": "Q38 — Avez-vous ressenti des fourmillements dans les mains ou dans les pieds ?",
+    "it": [
+     7
+    ]
+   },
+   {
+    "l": "Q39 — Avez-vous perdu des cheveux ?",
+    "it": [
+     8
+    ]
+   },
+   {
+    "l": "Q40 — Avez-vous eu mal à la poitrine ?",
+    "it": [
+     9
+    ]
+   },
+   {
+    "l": "Q41 — Avez-vous eu mal au bras ou à l'épaule ?",
+    "it": [
+     10
+    ]
+   },
+   {
+    "l": "Q42 — Avez-vous eu mal dans un autre endroit de votre corps ?",
+    "it": [
+     11
+    ]
+   },
+   {
+    "l": "Q43 — Avez-vous eu des réactions allergiques ?",
+    "it": [
+     12
+    ]
+   },
+   {
+    "l": "Q44 — Avez-vous eu les yeux brûlants ou douloureux ?",
+    "it": [
+     13
+    ]
+   },
+   {
+    "l": "Q45 — Avez-vous eu des étourdissements ?",
+    "it": [
+     14
+    ]
+   },
+   {
+    "l": "Q46 — Avez-vous eu des ongles fendus aux doigts ou aux orteils?",
+    "it": [
+     15
+    ]
+   },
+   {
+    "l": "Q47 — Avez-vous eu des problèmes de peau (p.ex. démangeaisons, peau sèche) ?",
+    "it": [
+     16
+    ]
+   },
+   {
+    "l": "Q48 — Avez-vous eu des difficultés à parler ?",
+    "it": [
+     17
+    ]
+   },
+   {
+    "l": "Q49 — Avez-vous eu peur d'une progression tumorale ?",
+    "it": [
+     18
+    ]
+   },
+   {
+    "l": "Q50 — Avez-vous eu les cheveux fins ou ternes à cause de votre maladie ou de votre traitement ?",
+    "it": [
+     19
+    ]
+   },
+   {
+    "l": "Q51 — Vous êtes-vous inquiété(e) de votre santé future ?",
+    "it": [
+     20
+    ]
+   },
+   {
+    "l": "Q52 — Avez-vous eu une toux sèche ?",
+    "it": [
+     21
+    ]
+   },
+   {
+    "l": "Q53 — Avez-vous constaté une diminution de votre capacité physique ?",
+    "it": [
+     22
+    ]
+   },
+   {
+    "l": "Q54 — Une perte de poids vous a-t-elle gêné ?",
+    "it": [
+     23
+    ]
+   },
+   {
+    "l": "Q55 — Avez-vous eu des douleurs au niveau de la zone opérée ?",
+    "it": [
+     24
+    ]
+   },
+   {
+    "l": "Q56 — La zone de plaie était-elle hypersensible ?",
+    "it": [
+     25
+    ]
+   },
+   {
+    "l": "Q57 — L'ampleur de la chirurgie a-t-elle perturbé votre performance physique ?",
+    "it": [
+     26
+    ]
+   },
+   {
+    "l": "Q58 — Avez-vous eu des difficultés à vous servir du bras ou de l'épaule du côté opéré ?",
+    "it": [
+     27
+    ]
+   },
+   {
+    "l": "Q59 — Les douleurs dues à la cicatrisation ont-elles perturbé vos activités quotidiennes ?",
+    "it": [
+     28
+    ]
+   }
+  ]
+ }
+];
+  var infos = [];
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function active(i){
+    var c = items[i].c;
+    if(!c) return true;
+    if(!active(c.i)) return false;
+    var a = answers[c.i];
+    if(a === null) return false;
+    if(c.eq !== undefined) return a === c.eq;
+    if(c.gt !== undefined) return a > c.gt;
+    return true;
+  }
+  function nextIdx(i){ var j = i + 1; while(j < items.length && !active(j)) j++; return j; }
+  function prevIdx(i){ var j = i - 1; while(j >= 0 && !active(j)) j--; return j; }
+  function position(i){
+    var k = 0, tot = 0;
+    for(var j = 0; j < items.length; j++){ if(active(j)){ tot++; if(j <= i) k++; } }
+    return [k, tot];
+  }
+  function optsOf(i){
+    var it = items[i];
+    var base = it.o ? it.o : DEFOPTS;
+    var out = base.map(function(l, k){ return {v: k + 1, l: l}; });
+    if(it.na) out.push({v: 0, l: 'Non concerné(e)'});
+    return out;
+  }
+
+  function renderQuestion(){
+    var pos = position(idx);
+    var it = items[idx];
+    document.getElementById('progress-text').textContent = (it.n ? 'Question ' + it.n + ' — ' : '') + pos[0] + ' / ' + pos[1];
+    document.getElementById('period-text').textContent = it.p || '';
+    document.getElementById('q-text').textContent = it.t;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    optsOf(idx).forEach(function(o){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === o.v ? ' selected' : '');
+      d.textContent = o.l;
+      d.addEventListener('click', function(){ answers[idx] = o.v; renderQuestion(); });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = prevIdx(idx) < 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = nextIdx(idx) >= items.length ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    var p = prevIdx(idx);
+    if (p >= 0){ idx = p; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    var n = nextIdx(idx);
+    if (n < items.length){ idx = n; renderQuestion(); } else { showResult(); }
+  });
+
+  // Score EORTC : (moyenne des réponses - 1) / 3 x 100, sur les questions actives et répondues
+  function score(ids){
+    var s = 0, k = 0;
+    ids.forEach(function(i){
+      if(active(i) && answers[i] !== null && answers[i] > 0){ s += answers[i]; k++; }
+    });
+    if(!k) return null;
+    return Math.round(((s / k) - 1) / 3 * 100);
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var box = document.getElementById('rows-all');
+    box.innerHTML = '';
+    function row(a, b){
+      var d = document.createElement('div'); d.className = 'sc-row';
+      var x = document.createElement('span'); x.textContent = a;
+      var y = document.createElement('b'); y.textContent = b;
+      d.appendChild(x); d.appendChild(y); box.appendChild(d);
+    }
+    groups.forEach(function(g){
+      var t = document.createElement('p'); t.className = 'sc-title'; t.textContent = g.title; box.appendChild(t);
+      g.rows.forEach(function(r){
+        var v = score(r.it);
+        if(v === null && r.it.every(function(i){ return !active(i) && items[i].c && items[i].c.eq !== undefined; })) return;
+        row(r.l, v === null ? 'non applicable' : v + ' / 100');
+      });
+    });
+    if(infos.length){
+      var t2 = document.createElement('p'); t2.className = 'sc-title';
+      t2.textContent = 'Informations recueillies, non cotées';
+      box.appendChild(t2);
+      infos.forEach(function(r){
+        var i = r.it;
+        var txt = 'non applicable';
+        if(active(i) && answers[i] !== null){
+          var lab = optsOf(i).filter(function(o){ return o.v === answers[i]; })[0];
+          txt = lab ? lab.l : '';
+        }
+        row(r.l, txt);
+      });
+    }
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Module cancer du poumon de l'EORTC, version révisée (QLQ-LC29)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#5E7A2E 0%,#B9D08A 55%,#2C3C0F 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,245,235,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#123B4F;background:#E3F0F6;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#2F6F8F;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#123B4F;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">QLQ-LC29</span></div>
+
+  <h1 class="serif">Module cancer du poumon de l'EORTC, version révisée (QLQ-LC29)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">EORTC QLQ-LC29, module spécifique — EORTC Quality of Life Group</p>
+  <div class="meta-row">
+    <span class="pill">29 questions</span>
+    <span class="pill">4 minutes</span>
+    <span class="pill">scores de 0 à 100 par question</span>
+    <span class="pill">Français</span>
+    <span class="pill">Licence requise : oui</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="qlq-lc29.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le QLQ-LC29 est la version révisée du module « cancer du poumon » de l'EORTC (successeur du QLQ-LC13). Il explore, en 29 questions numérotées de 31 à 59, la toux (dont sang et toux sèche), l'essoufflement au repos, en marchant et dans les escaliers, les douleurs (bouche ou langue, poitrine, bras ou épaule, ailleurs), les difficultés pour avaler et pour parler, les fourmillements, la perte et l'aspect des cheveux, les réactions allergiques, les yeux, les étourdissements, les ongles, la peau, la peur d'une progression tumorale, les inquiétudes pour la santé future, la baisse de capacité physique, la perte de poids et, pour les personnes opérées, les douleurs et la gêne liées à la chirurgie. Les questions 55 à 59 ne concernent que les personnes opérées : la page propose « Non concerné(e) ». Chaque question se cote de 1 (pas du tout) à 4 (beaucoup) sur la semaine passée. Version française « French (Europe) » officielle.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque question est cotée de 0 à 100 : (réponse − 1) ÷ 3 × 100, la réponse allant de 1 (pas du tout) à 4 (beaucoup). Cette page affiche un score par question ; le regroupement en échelles composites du module n'est pas recalculé ici (se reporter au manuel de cotation EORTC). Un score élevé signifie des symptômes ou problèmes plus importants, sauf pour les questions formulées positivement, repérées dans le résultat, où un score élevé signifie une réponse plus favorable ou plus affirmative (cotation non inversée dans cette page). Les questions marquées « Non concerné(e) » ne sont pas cotées.</p>
+    <p>Aucun seuil clinique officiel n'est repris ici : ces scores se lisent avec le patient, et de préférence en comparaison de ses scores antérieurs. Ce module complète le questionnaire de base QLQ-C30 (questions 1 à 30), non inclus dans cette page. Il ne se substitue pas au QLQ-LC13, qui reste publié séparément.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p><strong>Licence requise : oui.</strong> QLQ-LC29 © 2016 EORTC Quality of Life Group, tous droits réservés (phase III terminée). Usage académique non financé par l'industrie : gratuit sur demande auprès du groupe EORTC Quality of Life (conditions d'utilisation, qol.eortc.org) ; tout usage commercial exige une convention de licence payante. Instrument construit ici malgré la licence, conformément à la décision du 30/09/2026 ; la diffusion publique reste soumise à l'autorisation du détenteur des droits.</p>
+    <p class="source-note">Texte des items : document officiel « QLQ-LC29 — French (Europe) », EORTC Quality of Life Group (qol.eortc.org, hébergé sur eortc.be), 29 items numérotés 31 à 59. Cotation : EORTC QLQ-C30 Scoring Manual. Référence : Groupe Qualité de vie EORTC, module QLQ-LC29 (Koller M. et al.) (référence à vérifier sur qol.eortc.org avant tout usage clinique).</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dépistage médical du réfugié (RHS-15)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#2F6F8F;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .period{font-size:12.5px;font-weight:600;color:#2F6F8F;margin:0 0 8px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#2F6F8F;background:#E3F0F6;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#2F6F8F;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 20px;}
+  .sc-title{font-size:13px;font-weight:700;color:#2F6F8F;margin:18px 0 6px;}
+  .sc-row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-top:1px solid #EFEBE1;font-size:14px;}
+  .sc-row b{font-variant-numeric:tabular-nums;white-space:nowrap;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">Dépistage médical du réfugié (RHS-15)</h1>
+    <p class="lead">Veuillez indiquer le point auquel vos symptômes vous ont dérangé ce mois dernier. Si vous n'avez pas eu ce symptôme au cours du mois dernier, alors cochez « Pas du tout ».</p>
+    <p class="lang-note">Version française officielle diffusée par les détenteurs des droits (Pathways to Wellness). Outil sous licence (accord d'utilisation) : « Licence requise : oui ».</p>
+    <div class="pill-row">
+      <span class="pill">15 questions</span>
+    <span class="pill">5 minutes</span>
+    <span class="pill">dépistage positif ou négatif</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="period" id="period-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-text">Le total des questions 1 à 14 (chaque question cotée de 0 à 4) et la valeur de l'échelle de problèmes émotionnels (question 15, de 0 à 10) sont affichés, avec les deux critères de la grille officielle : le dépistage est positif si le total des questions 1 à 14 est d'au moins 12, ou si l'échelle de problèmes émotionnels est d'au moins 5.</p>
+    <div id="rows-all"></div>
+    <p class="result-text" style="margin-top:18px">Un dépistage positif invite à une évaluation clinique approfondie ; il ne constitue pas un diagnostic. L'outil est un repérage et ne remplace ni un entretien ni l'avis d'un professionnel.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">RHS-15 © 2013 Pathways to Wellness : Integrating Refugee Health and Well-Being. Tous droits réservés. Outil de repérage, ne remplace pas une évaluation clinique.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var DEFOPTS = ["Pas du tout", "Un tout petit peu", "Assez", "Beaucoup", "Extrêmement"];
+  var items = [
+ {
+  "n": "1",
+  "t": "Douleurs des muscles, des os, des articulations",
+  "p": "Veuillez indiquer le point auquel vos symptômes vous ont dérangé ce mois dernier. Si vous n'avez pas eu ce symptôme au cours du mois dernier, alors cochez « Pas du tout ».",
+  "o": [
+   "Pas du tout",
+   "Un tout petit peu",
+   "Assez",
+   "Beaucoup",
+   "Extrêmement"
+  ]
+ },
+ {
+  "n": "2",
+  "t": "Se sentir abattu(e) ou triste",
+  "p": "Veuillez indiquer le point auquel vos symptômes vous ont dérangé ce mois dernier. Si vous n'avez pas eu ce symptôme au cours du mois dernier, alors cochez « Pas du tout ».",
+  "o": [
+   "Pas du tout",
+   "Un tout petit peu",
+   "Assez",
+   "Beaucoup",
+   "Extrêmement"
+  ]
+ },
+ {
+  "n": "3",
+  "t": "Penser excessivement ou avoir trop de pensées",
+  "p": "Veuillez indiquer le point auquel vos symptômes vous ont dérangé ce mois dernier. Si vous n'avez pas eu ce symptôme au cours du mois dernier, alors cochez « Pas du tout ».",
+  "o": [
+   "Pas du tout",
+   "Un tout petit peu",
+   "Assez",
+   "Beaucoup",
+   "Extrêmement"
+  ]
+ },
+ {
+  "n": "4",
+  "t": "Se sentir impuissant(e) (incapable)",
+  "p": "Veuillez indiquer le point auquel vos symptômes vous ont dérangé ce mois dernier. Si vous n'avez pas eu ce symptôme au cours du mois dernier, alors cochez « Pas du tout ».",
+  "o": [
+   "Pas du tout",
+   "Un tout petit peu",
+   "Assez",
+   "Beaucoup",
+   "Extrêmement"
+  ]
+ },
+ {
+  "n": "5",
+  "t": "Etre soudainement effrayé(e) sans cause",
+  "p": "Veuillez indiquer le point auquel vos symptômes vous ont dérangé ce mois dernier. Si vous n'avez pas eu ce symptôme au cours du mois dernier, alors cochez « Pas du tout ».",
+  "o": [
+   "Pas du tout",
+   "Un tout petit peu",
+   "Assez",
+   "Beaucoup",
+   "Extrêmement"
+  ]
+ },
+ {
+  "n": "6",
+  "t": "Vertige, affaiblissement ou vous sentir comme si vous alliez vous évanouir",
+  "p": "Veuillez indiquer le point auquel vos symptômes vous ont dérangé ce mois dernier. Si vous n'avez pas eu ce symptôme au cours du mois dernier, alors cochez « Pas du tout ».",
+  "o": [
+   "Pas du tout",
+   "Un tout petit peu",
+   "Assez",
+   "Beaucoup",
+   "Extrêmement"
+  ]
+ },
+ {
+  "n": "7",
+  "t": "Nervosité, instabilité ou tremblement à l'intérieur du corps",
+  "p": "Veuillez indiquer le point auquel vos symptômes vous ont dérangé ce mois dernier. Si vous n'avez pas eu ce symptôme au cours du mois dernier, alors cochez « Pas du tout ».",
+  "o": [
+   "Pas du tout",
+   "Un tout petit peu",
+   "Assez",
+   "Beaucoup",
+   "Extrêmement"
+  ]
+ },
+ {
+  "n": "8",
+  "t": "Se sentir agité(e), ne pas pouvoir rester tranquille",
+  "p": "Veuillez indiquer le point auquel vos symptômes vous ont dérangé ce mois dernier. Si vous n'avez pas eu ce symptôme au cours du mois dernier, alors cochez « Pas du tout ».",
+  "o": [
+   "Pas du tout",
+   "Un tout petit peu",
+   "Assez",
+   "Beaucoup",
+   "Extrêmement"
+  ]
+ },
+ {
+  "n": "9",
+  "t": "Pleurer facilement",
+  "p": "Veuillez indiquer le point auquel vos symptômes vous ont dérangé ce mois dernier. Si vous n'avez pas eu ce symptôme au cours du mois dernier, alors cochez « Pas du tout ».",
+  "o": [
+   "Pas du tout",
+   "Un tout petit peu",
+   "Assez",
+   "Beaucoup",
+   "Extrêmement"
+  ]
+ },
+ {
+  "n": "10",
+  "t": "Eu l'expérience de revivre le traumatisme (moment difficile), ou avez agi ou senti que vous reviviez ces moments difficiles ?",
+  "p": "Les symptômes suivants peuvent être liés aux expériences traumatisantes (moments difficiles) vécues pendant la guerre et votre déplacement à cause de la guerre. Combien de fois, au cours du mois dernier, avez-vous :",
+  "o": [
+   "Pas du tout",
+   "Un tout petit peu",
+   "Assez",
+   "Beaucoup",
+   "Extrêmement"
+  ]
+ },
+ {
+  "n": "11",
+  "t": "Eu des réactions PHYSIQUES (par exemple : transpiration ou battements de cœur plus rapides) quand vous vous rappelez du traumatisme (moment difficile) ?",
+  "p": "Les symptômes suivants peuvent être liés aux expériences traumatisantes (moments difficiles) vécues pendant la guerre et votre déplacement à cause de la guerre. Combien de fois, au cours du mois dernier, avez-vous :",
+  "o": [
+   "Pas du tout",
+   "Un tout petit peu",
+   "Assez",
+   "Beaucoup",
+   "Extrêmement"
+  ]
+ },
+ {
+  "n": "12",
+  "t": "Eu le sentiment de ne sentir aucune émotion ou de sentir émotionnellement insensible (par exemple, vous sentir triste sans pouvoir pleurer ou incapable d'avoir des sentiments affectueux) ?",
+  "p": "Les symptômes suivants peuvent être liés aux expériences traumatisantes (moments difficiles) vécues pendant la guerre et votre déplacement à cause de la guerre. Combien de fois, au cours du mois dernier, avez-vous :",
+  "o": [
+   "Pas du tout",
+   "Un tout petit peu",
+   "Assez",
+   "Beaucoup",
+   "Extrêmement"
+  ]
+ },
+ {
+  "n": "13",
+  "t": "Eté plus nerveux(se) ou sursauté plus facilement (par exemple, quand quelqu'un vous approche par derrière) ?",
+  "p": "Les symptômes suivants peuvent être liés aux expériences traumatisantes (moments difficiles) vécues pendant la guerre et votre déplacement à cause de la guerre. Combien de fois, au cours du mois dernier, avez-vous :",
+  "o": [
+   "Pas du tout",
+   "Un tout petit peu",
+   "Assez",
+   "Beaucoup",
+   "Extrêmement"
+  ]
+ },
+ {
+  "n": "14",
+  "t": "Encerclez l'une des meilleures réponses ci-dessous. Sentez-vous que :",
+  "p": "Question 14",
+  "o": [
+   "Vous parvenez à surmonter ou vaincre tout ce qui vous arrive",
+   "Vous parvenez à surmonter ou vaincre la plupart des choses qui vous arrivent",
+   "Vous parvenez à surmonter ou vaincre certaines choses, mais incapable d'en surmonter d'autres",
+   "Vous ne parvenez pas à surmonter ou vaincre la plupart des choses",
+   "Vous ne parvenez pas à rien surmonter"
+  ]
+ },
+ {
+  "n": "15",
+  "t": "Echelle de Problèmes Emotionels (Soucis) — S'il vous plait encerclez le numéro (0-10) qui décrit les mieux de les problèmes emotionels (soucis) que vous avez ressenti pendant cette dernière semaine y compris aujourd'hui.",
+  "p": "Question 15",
+  "o": [
+   "0 — Aucun (« Tout va bien »)",
+   "1",
+   "2",
+   "3",
+   "4",
+   "5",
+   "6",
+   "7",
+   "8",
+   "9",
+   "10 — Extrême (« Je me sens aussi mal que jamais »)"
+  ]
+ }
+];
+  var groups = [];
+  var infos = [];
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function active(i){
+    var c = items[i].c;
+    if(!c) return true;
+    if(!active(c.i)) return false;
+    var a = answers[c.i];
+    if(a === null) return false;
+    if(c.eq !== undefined) return a === c.eq;
+    if(c.gt !== undefined) return a > c.gt;
+    return true;
+  }
+  function nextIdx(i){ var j = i + 1; while(j < items.length && !active(j)) j++; return j; }
+  function prevIdx(i){ var j = i - 1; while(j >= 0 && !active(j)) j--; return j; }
+  function position(i){
+    var k = 0, tot = 0;
+    for(var j = 0; j < items.length; j++){ if(active(j)){ tot++; if(j <= i) k++; } }
+    return [k, tot];
+  }
+  function optsOf(i){
+    var it = items[i];
+    var base = it.o ? it.o : DEFOPTS;
+    var out = base.map(function(l, k){ return {v: k, l: l}; });
+    if(it.na) out.push({v: 0, l: "Non concerné(e)"});
+    return out;
+  }
+
+  function renderQuestion(){
+    var pos = position(idx);
+    var it = items[idx];
+    document.getElementById('progress-text').textContent = (it.n ? 'Question ' + it.n + ' — ' : '') + pos[0] + ' / ' + pos[1];
+    document.getElementById('period-text').textContent = it.p || '';
+    document.getElementById('q-text').textContent = it.t;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    optsOf(idx).forEach(function(o){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === o.v ? ' selected' : '');
+      d.textContent = o.l;
+      d.addEventListener('click', function(){ answers[idx] = o.v; renderQuestion(); });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = prevIdx(idx) < 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = nextIdx(idx) >= items.length ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    var p = prevIdx(idx);
+    if (p >= 0){ idx = p; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    var n = nextIdx(idx);
+    if (n < items.length){ idx = n; renderQuestion(); } else { showResult(); }
+  });
+
+  // Score EORTC : (moyenne des réponses - 1) / 3 x 100, sur les questions actives et répondues
+  function score(ids){
+    var s = 0, k = 0;
+    ids.forEach(function(i){
+      if(active(i) && answers[i] !== null && answers[i] > 0){ s += answers[i]; k++; }
+    });
+    if(!k) return null;
+    var span = (items[ids[0]].o ? items[ids[0]].o.length : DEFOPTS.length) - 1;
+    return Math.round(((s / k) - 1) / span * 100);
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var box = document.getElementById('rows-all');
+    box.innerHTML = '';
+    function row(a, b){
+      var d = document.createElement('div'); d.className = 'sc-row';
+      var x = document.createElement('span'); x.textContent = a;
+      var y = document.createElement('b'); y.textContent = b;
+      d.appendChild(x); d.appendChild(y); box.appendChild(d);
+    }
+    var tot = 0, i;
+    for(i = 0; i < 14; i++){ tot += answers[i]; }
+    var dt = answers[14];
+    var c1 = tot >= 12, c2 = dt >= 5;
+    var t = document.createElement('p'); t.className = 'sc-title'; t.textContent = 'Scores'; box.appendChild(t);
+    row('Total des questions 1 à 14 (0 à 56)', tot + ' / 56');
+    row('Échelle de problèmes émotionnels (question 15, 0 à 10)', dt + ' / 10');
+    var t2 = document.createElement('p'); t2.className = 'sc-title'; t2.textContent = 'Critères de la grille officielle'; box.appendChild(t2);
+    row('Critère 1 : total des questions 1 à 14 ≥ 12', c1 ? 'rempli' : 'non rempli');
+    row('Critère 2 : échelle de problèmes émotionnels ≥ 5', c2 ? 'rempli' : 'non rempli');
+    row('Dépistage (au moins un des deux critères)', (c1 || c2) ? 'POSITIF' : 'NÉGATIF');
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dépistage médical du réfugié (RHS-15)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#B5524D 0%,#F2CFC9 55%,#5C1F1B 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,245,235,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#123B4F;background:#E3F0F6;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#2F6F8F;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#123B4F;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">RHS-15</span></div>
+
+  <h1 class="serif">Dépistage médical du réfugié (RHS-15)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Refugee Health Screener-15 (RHS-15) — Pathways to Wellness</p>
+  <div class="meta-row">
+    <span class="pill">15 questions</span>
+    <span class="pill">5 minutes</span>
+    <span class="pill">dépistage positif ou négatif</span>
+    <span class="pill">Français</span>
+    <span class="pill">Licence requise : oui</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="rhs-15.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le RHS-15 (Refugee Health Screener-15, « Le dépistage médical du réfugié ») est un outil de repérage de la détresse émotionnelle chez les personnes réfugiées. Il comprend 15 questions portant sur le mois dernier : neuf symptômes physiques et émotionnels (douleurs, tristesse, pensées excessives, impuissance, peur soudaine, vertiges, nervosité, agitation, pleurs), quatre questions sur des réactions liées aux expériences traumatisantes (revivre le traumatisme, réactions physiques, insensibilité émotionnelle, hypervigilance), une question sur la capacité à faire face (cinq niveaux) et un thermomètre de détresse de 0 à 10 portant sur la dernière semaine. Les questions 1 à 13 se cotent de 0 (pas du tout) à 4 (extrêmement) ; la question 14 de 0 à 4 selon la capacité à surmonter les difficultés.</p>
+
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>La grille officielle indique que le dépistage est positif si le total des questions 1 à 14 (de 0 à 56) est d'au moins 12, ou si l'échelle de problèmes émotionnels (question 15) est d'au moins 5. La page affiche le total, la valeur du thermomètre et le résultat selon ces deux critères. Les sous-scores par trouble (anxiété, dépression, stress post-traumatique) ne figurent pas sur la grille officielle et ne sont pas repris ici.</p>
+    <p>Un dépistage positif invite à une évaluation clinique approfondie ; il ne constitue pas un diagnostic. L'outil est un repérage et ne remplace ni un entretien ni l'avis d'un professionnel.</p>
+
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p><strong>Licence requise : oui.</strong> RHS-15 © 2013 Pathways to Wellness : Integrating Refugee Health and Well-Being (projet de Lutheran Community Services Northwest, Asian Counseling and Referral Service, Public Health Seattle &amp; King County et Michael Hollifield, M.D.). Aucun tarif n'est mentionné ; l'usage est conditionné à une demande d'utilisation et à un accord avec les détenteurs des droits. Instrument construit ici malgré la licence, conformément à la décision du 30/09/2026 ; la diffusion publique reste soumise à l'autorisation du détenteur des droits.</p>
+    <p class="source-note">Texte des items : traduction française officielle (« RHS-15 French Version ») hébergée par l'IFEMDR (ifemdr.fr), production de la version française financée par le Maryland Department of Health and Mental Hygiene ; items transcrits à l'identique, y compris la formulation « Vous ne parvenez pas à rien surmonter » (question 14) et les libellés de la question 15, dont la grille officielle porte des coquilles conservées telles quelles. Le texte anglais de référence figurant sur la grille n'est pas repris. Pas de validation psychométrique académique francophone dédiée identifiée. Références complètes : voir la fiche du détenteur des droits (Pathways to Wellness) avant tout usage clinique.</p>
+
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>QOLIE-31 — Qualité de vie dans l'épilepsie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#2E6E5E;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 6px;}
+  .domain-tag{font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#2E6E5E;margin:0 0 10px;}
+  .q-head{font-size:12.5px;color:#63695D;margin:0 0 10px;}
+  .q-text{font-size:16px;margin:0 0 18px;}
+  .opt-list{display:flex;flex-direction:column;gap:8px;}
+  .opt-btn{text-align:left;width:100%;border:1px solid #E0D9C9;background:#fff;border-radius:10px;padding:12px 14px;font-family:'Inter',sans-serif;font-size:14px;color:#20241E;cursor:pointer;}
+  .opt-btn.selected{background:#2E6E5E;color:#fff;border-color:#2E6E5E;}
+  .circle-row{display:flex;gap:6px;justify-content:space-between;}
+  .circle-btn{flex:1;aspect-ratio:1;border-radius:50%;border:1px solid #E0D9C9;background:#fff;cursor:pointer;font-size:13px;font-weight:700;color:#20241E;font-family:'Inter',sans-serif;}
+  .circle-btn.selected{background:#2E6E5E;color:#fff;border-color:#2E6E5E;}
+  .circle-labels{display:flex;justify-content:space-between;font-size:11.5px;color:#63695D;margin-top:10px;font-weight:600;}
+  .vas-wrap{margin:10px 0 4px;}
+  .vas-val{font-family:'Cormorant Garamond',Georgia,serif;font-size:34px;color:#2E6E5E;text-align:center;margin:0 0 8px;}
+  .vas-wrap input[type=range]{width:100%;}
+  .vas-labels{display:flex;justify-content:space-between;font-size:11.5px;color:#63695D;margin-top:4px;font-weight:600;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#2E6E5E;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#2E6E5E;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 20px;}
+  .subscale-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .subscale-row:last-child{border-bottom:none;}
+  .subscale-val{font-weight:700;color:#2E6E5E;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">QOLIE-31 — Qualité de vie dans l'épilepsie</h1>
+    <p class="lead">Ce questionnaire explore le retentissement de l'épilepsie sur sept dimensions de la qualité de vie : bien-être émotionnel, fonctionnement social, énergie/fatigue, fonctionnement cognitif, anxiété liée aux crises, effets du traitement et qualité de vie globale ; une question supplémentaire porte sur la santé perçue en général.</p>
+    <p class="lang-note">Questionnaire transcrit en anglais (version officielle RAND, Version 1.0) : aucune traduction française intégrale vérifiée n'a été retrouvée lors du sourçage (validation française : Picot et al., 2004).</p>
+    <div class="pill-row">
+      <span class="pill">31 questions</span>
+      <span class="pill">8-10 minutes</span>
+      <span class="pill">7 sous-échelles</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="domain-tag" id="domain-tag"></p>
+    <p class="q-head" id="q-head"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="answer-zone"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Pr&eacute;c&eacute;dent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">R&eacute;sultat</h1>
+    <p class="result-score" id="score-val"></p>
+    <p class="result-max">score global pondéré, sur 100 (plus le score est élevé, meilleure est la qualité de vie rapportée)</p>
+    <div id="sub-rows"></div>
+    <p class="result-text" id="health-row"></p>
+    <p class="result-text">Chaque sous-échelle est convertie sur 0-100 (0 = pire état, 100 = meilleur état), puis le score global est obtenu par moyenne pondérée des sept sous-échelles (poids du manuel officiel : anxiété liée aux crises .08, qualité de vie globale .14, bien-être émotionnel .15, énergie/fatigue .12, fonctionnement cognitif .27, effets du traitement .03, fonctionnement social .21). Mesure dimensionnelle, sans seuil clinique officiel : un score de 50 correspond à la moyenne de la cohorte d'étalonnage de 304 adultes épileptiques (T-score), pas à un repère diagnostique.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Vickrey B.G., Perrine K.R., Hays R.D., Hermann B.P., Cramer J.A., Meador K.J. &amp; Devinsky O. (1993). Quality of Life in Epilepsy Inventory-31 (QOLIE-31), Version 1.0, Scoring Manual. RAND Corporation. Outil dimensionnel, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  // Chaque item : id, scale (clé de sous-échelle ou null), q (question), head (consigne optionnelle),
+  // soit opts:[{t:libellé, v:valeur convertie 0-100}], soit special:'circle10' ou 'vas100'.
+  var FREQ6_NEG = [ // "All of the time"=pire(0) ... "None of the time"=meilleur(100) — items négatifs
+    {t:"Tout le temps (« All of the time »)", v:0},
+    {t:"La plupart du temps (« Most of the time »)", v:20},
+    {t:"Une bonne partie du temps (« A good bit of the time »)", v:40},
+    {t:"Parfois (« Some of the time »)", v:60},
+    {t:"Un peu (« A little of the time »)", v:80},
+    {t:"Jamais (« None of the time »)", v:100}
+  ];
+  var FREQ6_POS = [ // items positifs : "All of the time"=meilleur(100) ... "None"=pire(0)
+    {t:"Tout le temps (« All of the time »)", v:100},
+    {t:"La plupart du temps (« Most of the time »)", v:80},
+    {t:"Une bonne partie du temps (« A good bit of the time »)", v:60},
+    {t:"Parfois (« Some of the time »)", v:40},
+    {t:"Un peu (« A little of the time »)", v:20},
+    {t:"Jamais (« None of the time »)", v:0}
+  ];
+  var BOTHER5 = [ // 1=pas du tout gênant(100) ... 5=extrêmement gênant(0)
+    {t:"1 — Pas du tout gênant", v:100},
+    {t:"2", v:75},
+    {t:"3", v:50},
+    {t:"4", v:25},
+    {t:"5 — Extrêmement gênant", v:0}
+  ];
+  var MUCH5 = [ // "A great deal"=pire(0) ... "Not at all"=meilleur(100)
+    {t:"Énormément (« A great deal »)", v:0},
+    {t:"Beaucoup (« A lot »)", v:25},
+    {t:"Un peu (« Somewhat »)", v:50},
+    {t:"Très peu (« Only a little »)", v:75},
+    {t:"Pas du tout (« Not at all »)", v:100}
+  ];
+  var WORRY4 = [ // "Very worried"(0) ... "Not at all worried"(100)
+    {t:"Très inquiet(e)", v:0},
+    {t:"Assez inquiet(e)", v:33.3},
+    {t:"Peu inquiet(e)", v:66.7},
+    {t:"Pas du tout inquiet(e)", v:100}
+  ];
+
+  var ITEMS = [
+    {id:1, scale:'overall', special:'circle10',
+      q:"Dans l'ensemble, comment évalueriez-vous votre qualité de vie ?"},
+    {id:2, scale:'energy', q:"Vous êtes-vous senti(e) plein(e) d'entrain (« full of pep ») ?", opts:FREQ6_POS},
+    {id:3, scale:'emo', q:"Avez-vous été une personne très nerveuse ?", opts:FREQ6_NEG},
+    {id:4, scale:'emo', q:"Vous êtes-vous senti(e) si abattu(e) que rien ne pouvait vous remonter le moral ?", opts:FREQ6_NEG},
+    {id:5, scale:'emo', q:"Vous êtes-vous senti(e) calme et apaisé(e) ?", opts:FREQ6_POS},
+    {id:6, scale:'energy', q:"Avez-vous eu beaucoup d'énergie ?", opts:FREQ6_POS},
+    {id:7, scale:'emo', q:"Vous êtes-vous senti(e) découragé(e) et triste (« downhearted and blue ») ?", opts:FREQ6_NEG},
+    {id:8, scale:'energy', q:"Vous êtes-vous senti(e) épuisé(e) (« worn out ») ?", opts:FREQ6_NEG},
+    {id:9, scale:'emo', q:"Avez-vous été une personne heureuse ?", opts:FREQ6_POS},
+    {id:10, scale:'energy', q:"Vous êtes-vous senti(e) fatigué(e) ?", opts:FREQ6_NEG},
+    {id:11, scale:'seizure', q:"Vous êtes-vous inquiété(e) à l'idée d'avoir une autre crise ?", opts:FREQ6_NEG},
+    {id:12, scale:'cog', q:"Avez-vous eu des difficultés à raisonner et à résoudre des problèmes (faire des projets, prendre des décisions, apprendre de nouvelles choses) ?", opts:FREQ6_NEG},
+    {id:13, scale:'social', q:"Votre santé a-t-elle limité vos activités sociales (comme rendre visite à des amis ou des proches) ?", opts:FREQ6_NEG},
+    {id:14, scale:'overall',
+      head:"Comment la QUALITÉ DE VOTRE VIE a-t-elle été au cours des 4 dernières semaines (c'est-à-dire, comment les choses se sont-elles passées pour vous) ?",
+      q:"Choisissez le barreau de l'échelle qui correspond le mieux.",
+      opts:[
+        {t:"Très bien : difficilement mieux", v:100},
+        {t:"Plutôt bien", v:75},
+        {t:"Parts bonnes et mauvaises à peu près égales", v:50},
+        {t:"Plutôt mal", v:25},
+        {t:"Très mal : difficilement pire", v:0}
+      ]},
+    {id:15, scale:'cog', q:"Au cours des 4 dernières semaines, avez-vous eu des problèmes de mémoire ?",
+      opts:[
+        {t:"Oui, énormément", v:0},
+        {t:"Oui, un peu", v:33.3},
+        {t:"Seulement très peu", v:66.7},
+        {t:"Non, pas du tout", v:100}
+      ]},
+    {id:16, scale:'cog', head:"À quelle fréquence, au cours des 4 dernières semaines, avez-vous eu des difficultés à vous souvenir, ou ce problème a-t-il interféré avec votre travail ou votre vie habituels ?",
+      q:"Difficulté à vous souvenir de ce qu'on vous dit", opts:FREQ6_NEG},
+    {id:17, scale:'cog', head:"À quelle fréquence, au cours des 4 dernières semaines, avez-vous eu des difficultés de concentration, ou ces difficultés ont-elles interféré avec votre travail ou votre vie habituels ?",
+      q:"Difficulté à vous concentrer sur une lecture", opts:FREQ6_NEG},
+    {id:18, scale:'cog', q:"Difficulté à vous concentrer pour faire une seule chose à la fois", opts:FREQ6_NEG},
+    {id:19, scale:'social', head:"Au cours des 4 dernières semaines, combien votre épilepsie ou votre traitement antiépileptique a-t-il causé de difficultés concernant...",
+      q:"Le temps de loisir (passe-temps, sorties)", opts:MUCH5},
+    {id:20, scale:'social', q:"La conduite automobile", opts:MUCH5},
+    {id:21, scale:'seizure', q:"À quel point redoutez-vous d'avoir une crise au cours du mois prochain ?",
+      opts:[
+        {t:"Très inquiet(e)", v:0},
+        {t:"Assez inquiet(e)", v:33.3},
+        {t:"Peu inquiet(e)", v:66.7},
+        {t:"Pas du tout inquiet(e)", v:100}
+      ]},
+    {id:22, scale:'seizure', q:"Vous inquiétez-vous à l'idée de vous blesser pendant une crise ?",
+      opts:[
+        {t:"Je m'inquiète beaucoup", v:0},
+        {t:"Je m'inquiète occasionnellement", v:50},
+        {t:"Je ne m'inquiète pas du tout", v:100}
+      ]},
+    {id:23, scale:'seizure', q:"À quel point êtes-vous inquiet(e) d'un embarras ou d'autres problèmes sociaux qui résulteraient d'une crise au cours du mois prochain ?", opts:WORRY4},
+    {id:24, scale:'med', q:"À quel point êtes-vous inquiet(e) que les médicaments que vous prenez vous soient nocifs s'ils sont pris longtemps ?", opts:WORRY4},
+    {id:25, scale:'seizure', head:"Pour chacun de ces problèmes, indiquez à quel point il vous gêne, de 1 (pas du tout gênant) à 5 (extrêmement gênant).",
+      q:"Les crises", opts:BOTHER5},
+    {id:26, scale:'cog', q:"Les difficultés de mémoire", opts:BOTHER5},
+    {id:27, scale:'social', q:"Les limitations au travail", opts:BOTHER5},
+    {id:28, scale:'social', q:"Les limitations sociales", opts:BOTHER5},
+    {id:29, scale:'med', q:"Les effets physiques du traitement antiépileptique", opts:BOTHER5},
+    {id:30, scale:'med', q:"Les effets mentaux du traitement antiépileptique", opts:BOTHER5},
+    {id:31, scale:null, special:'vas100',
+      q:"Comment jugez-vous votre état de santé, bon ou mauvais ? Sur l'échelle ci-dessous, 100 est le meilleur état de santé imaginable et 0 le pire. Veuillez considérer votre épilepsie comme faisant partie de votre santé en répondant à cette question."}
+  ];
+
+  var SCALES = {
+    seizure:{label:"Anxiété liée aux crises", weight:.08},
+    overall:{label:"Qualité de vie globale", weight:.14},
+    emo:{label:"Bien-être émotionnel", weight:.15},
+    energy:{label:"Énergie / fatigue", weight:.12},
+    cog:{label:"Fonctionnement cognitif", weight:.27},
+    med:{label:"Effets du traitement", weight:.03},
+    social:{label:"Fonctionnement social", weight:.21}
+  };
+
+  var answers = new Array(ITEMS.length).fill(null); // valeur convertie 0-100 (ou brute pour item 31)
+  var idx = 0;
+
+  function renderQuestion(){
+    var it = ITEMS[idx];
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + ITEMS.length;
+    document.getElementById('domain-tag').textContent = it.scale ? SCALES[it.scale].label : 'Santé générale';
+    document.getElementById('q-head').textContent = it.head || '';
+    document.getElementById('q-head').style.display = it.head ? 'block' : 'none';
+    document.getElementById('q-text').textContent = it.q;
+    var zone = document.getElementById('answer-zone');
+    zone.innerHTML = '';
+
+    if (it.special === 'circle10'){
+      var row = document.createElement('div');
+      row.className = 'circle-row';
+      for (var v = 10; v >= 0; v--){
+        (function(v){
+          var b = document.createElement('button');
+          b.type = 'button';
+          b.className = 'circle-btn' + (answers[idx] === v*10 ? ' selected' : '');
+          b.setAttribute('data-v', v*10);
+          b.textContent = v;
+          b.addEventListener('click', function(){
+            answers[idx] = v*10;
+            renderQuestion();
+          });
+          row.appendChild(b);
+        })(v);
+      }
+      zone.appendChild(row);
+      var lab = document.createElement('div');
+      lab.className = 'circle-labels';
+      lab.innerHTML = '<span>10 — Meilleure qualité de vie possible</span><span>0 — Pire qualité de vie possible</span>';
+      zone.appendChild(lab);
+    } else if (it.special === 'vas100'){
+      var cur = answers[idx] === null ? 50 : answers[idx];
+      var wrap = document.createElement('div');
+      wrap.className = 'vas-wrap';
+      wrap.innerHTML = '<p class="vas-val" id="vas-display">' + cur + '</p>' +
+        '<input type="range" min="0" max="100" step="1" value="' + cur + '" id="vas-input">' +
+        '<div class="vas-labels"><span>0 — Pire état de santé imaginable</span><span>100 — Meilleur état de santé imaginable</span></div>';
+      zone.appendChild(wrap);
+      var input = document.getElementById('vas-input');
+      input.addEventListener('input', function(){
+        document.getElementById('vas-display').textContent = input.value;
+        answers[idx] = parseInt(input.value, 10);
+        document.getElementById('btn-next').disabled = false;
+      });
+      if (answers[idx] === null){ answers[idx] = cur; }
+    } else {
+      var list = document.createElement('div');
+      list.className = 'opt-list';
+      it.opts.forEach(function(o){
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'opt-btn' + (answers[idx] === o.v ? ' selected' : '');
+        b.setAttribute('data-v', o.v);
+        b.textContent = o.t;
+        b.addEventListener('click', function(){
+          answers[idx] = o.v;
+          renderQuestion();
+        });
+        list.appendChild(b);
+      });
+      zone.appendChild(list);
+    }
+
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === ITEMS.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < ITEMS.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+
+    var scaleScores = {};
+    Object.keys(SCALES).forEach(function(key){
+      var sum = 0, n = 0;
+      ITEMS.forEach(function(it, i){
+        if (it.scale === key){ sum += answers[i]; n++; }
+      });
+      scaleScores[key] = sum / n;
+    });
+
+    var overall = 0;
+    Object.keys(SCALES).forEach(function(key){
+      overall += scaleScores[key] * SCALES[key].weight;
+    });
+
+    var rows = '';
+    Object.keys(SCALES).forEach(function(key){
+      rows += '<div class="subscale-row"><span>' + SCALES[key].label + '</span><span class="subscale-val">' + scaleScores[key].toFixed(1) + ' / 100</span></div>';
+    });
+    document.getElementById('sub-rows').innerHTML = rows;
+    document.getElementById('score-val').textContent = overall.toFixed(1);
+
+    var healthVal = answers[ITEMS.length - 1];
+    document.getElementById('health-row').textContent = 'Santé générale perçue (question 31, hors score global) : ' + healthVal + ' / 100.';
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(ITEMS.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>QOLIE-31 — Qualité de vie dans l'épilepsie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#2E6E5E 0%,#7FB8A8 55%,#17352C 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.3),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#2E6E5E;background:#E2F0EA;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#2E6E5E;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#2E6E5E;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">QOLIE-31</span></div>
+
+  <h1 class="serif">Qualité de vie dans l'épilepsie (QOLIE-31)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Quality of Life in Epilepsy Inventory-31 — Cramer, Vickrey, Perrine, Hays, Hermann, Meador &amp; Devinsky, RAND Corporation (1993, Version 1.0)</p>
+  <div class="meta-row">
+    <span class="pill">31 questions</span>
+    <span class="pill">8-10 minutes</span>
+    <span class="pill">7 sous-échelles + 1 item isolé</span>
+    <span class="pill">Anglais</span>
+    <span class="pill">Épilepsie</span>
+    <span class="pill">Licence requise : oui</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="qolie-31.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Pr&eacute;sentation de l'outil</h2>
+    <p>Le QOLIE-31 mesure le retentissement de l'épilepsie sur la qualité de vie à travers sept sous-échelles pondérées : anxiété liée aux crises (5 items), qualité de vie globale (2 items), bien-être émotionnel (5 items), énergie/fatigue (4 items), fonctionnement cognitif (6 items), effets du traitement antiépileptique (3 items) et fonctionnement social (5 items) — soit 30 items répartis sur les sept échelles. Un item isolé supplémentaire (le 31e, échelle visuelle analogique 0-100) évalue la santé générale perçue mais n'entre dans aucune sous-échelle ni dans le score global. Développé à partir d'une cohorte de 304 adultes épileptiques dans 25 centres américains ; items repris en partie du RAND 36-Item Health Survey (SF-36) pour le bien-être émotionnel et l'énergie/fatigue, le reste développé spécifiquement pour l'épilepsie ou l'Epilepsy Surgery Inventory-55.</p>
+    <p class="source-note">Items et grille de cotation (« Patient Inventory » et « Scoring Manual », Version 1.0, copyright 1993 RAND) récupérés directement par <code>curl</code> depuis les PDF officiels liés par la page de référence de RAND Health Care (rand.org/health-care/surveys_tools/qolie.html), documents scannés lus intégralement page par page. Aucune traduction française intégrale vérifiée retrouvée lors du sourçage (validation française : Picot M.-C. et al., 2004, <em>Epileptic Disorders</em>) : items transcrits et traduits en français par le constructeur de cette page à partir du texte anglais officiel, en conservant les libellés anglais des catégories de réponse entre guillemets pour fidélité à la source ; à vérifier au regard de la version française validée si elle devient disponible.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interpr&eacute;tation</h2>
+    <p>Chaque réponse brute est convertie en un score 0-100 selon la grille officielle du manuel (Table 2), où 100 représente toujours la meilleure qualité de vie possible sur cet item. Les scores convertis sont moyennés par sous-échelle (division par le nombre d'items de l'échelle). Le score global est une moyenne pondérée des sept sous-échelles, avec les poids officiels du manuel (Table 4) : anxiété liée aux crises × 0,08, qualité de vie globale × 0,14, bien-être émotionnel × 0,15, énergie/fatigue × 0,12, fonctionnement cognitif × 0,27, effets du traitement × 0,03, fonctionnement social × 0,21 (somme des poids = 1,00). L'item 31 (santé générale perçue, échelle thermomètre 0-100) est affiché séparément : il n'entre dans aucun calcul, conformément au manuel qui le traite comme un item isolé ajouté après l'étalonnage des 30 premiers items.</p>
+    <p class="source-note">Le manuel officiel propose aussi une conversion en T-score (moyenne 50, écart-type 10, étalonnée sur la cohorte de 304 adultes épileptiques) — non reproduite ici, le score 0-100 étant conservé pour rester directement interprétable. Mesure dimensionnelle continue, sans seuil clinique officiel.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p>Cramer J.A., Perrine K., Devinsky O., Bryant-Comstock L., Meador K. &amp; Hermann B. (1998). Development and cross-cultural translations of a 31-item quality of life in epilepsy inventory. <em>Epilepsia</em>, 39(1), 81-88. Vickrey B.G., Perrine K.R., Hays R.D., Hermann B.P., Cramer J.A., Meador K.J. &amp; Devinsky O. (1993). <em>Quality of Life in Epilepsy Inventory-31 (QOLIE-31), Version 1.0, Scoring Manual</em>. RAND Corporation. Validation française : Picot M.-C. et al. (2004), <em>Epileptic Disorders</em>, PMID 15634625 (liste complète des auteurs non confirmée avec certitude, accès bloqué lors du sourçage).</p>
+    <p class="source-note"><strong>Licence requise : oui.</strong> La page officielle de RAND Health Care présente l'instrument comme disponible pour l'usage public sans facturation ni permission pour un usage non commercial, mais le manuel de cotation lui-même comporte un encart explicite : « For written permission to use the QOLIE-31, write to: RAND... Attn: Contracts and Grant Services » — classé par prudence « Licence requise : oui » du fait de cette démarche écrite documentée, conformément à la décision de Max du 30/09/2026 (les tests sous licence ou à démarche d'autorisation sont construits quand même). Outil dimensionnel, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var htmlOut = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(htmlOut); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

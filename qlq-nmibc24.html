@@ -1,0 +1,591 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Module cancer de la vessie non infiltrant le muscle de l'EORTC (QLQ-NMIBC24)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#2F6F8F;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .period{font-size:12.5px;font-weight:600;color:#2F6F8F;margin:0 0 8px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#2F6F8F;background:#E3F0F6;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#2F6F8F;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 20px;}
+  .sc-title{font-size:13px;font-weight:700;color:#2F6F8F;margin:18px 0 6px;}
+  .sc-row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-top:1px solid #EFEBE1;font-size:14px;}
+  .sc-row b{font-variant-numeric:tabular-nums;white-space:nowrap;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">Module cancer de la vessie non infiltrant le muscle de l'EORTC (QLQ-NMIBC24)</h1>
+    <p class="lead">Les patients rapportent parfois les symptômes ou problèmes suivants. Pourriez-vous indiquer, s'il vous plaît, si, durant la semaine passée, vous avez été affecté(e) par l'un de ces symptômes ou problèmes.</p>
+    <p class="lang-note">Version française officielle (« French (Europe) »). Outil sous licence (EORTC Quality of Life Group) : « Licence requise : oui ».</p>
+    <div class="pill-row">
+      <span class="pill">24 questions</span>
+    <span class="pill">4 minutes</span>
+    <span class="pill">scores de 0 à 100 par question</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="period" id="period-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-text">Chaque question est cotée de 0 à 100 : (réponse − 1) ÷ 3 × 100. Les échelles composites officielles du questionnaire (regroupement de plusieurs questions) ne sont pas recalculées ici : se reporter au manuel de cotation EORTC. Les questions marquées « Non concerné(e) » ne sont pas cotées. Questions 47, 48 et 53 : un score élevé signifie un intérêt, une activité ou un plaisir plus importants.</p>
+    <div id="rows-all"></div>
+    <p class="result-text" style="margin-top:18px">Aucun seuil clinique officiel n'est repris ici : ces scores se lisent avec la personne, et de préférence en comparaison de ses scores antérieurs. Ce module complète le questionnaire de base QLQ-C30 (questions 1 à 30), non inclus dans cette page.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">QLQ-NMIBC24 © 1994 EORTC Groupe d'étude sur la qualité de la vie (phase III achevée), tous droits réservés. Outil d'évaluation de la qualité de vie, ne remplace pas une évaluation clinique.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var DEFOPTS = ["Pas du tout", "Un peu", "Assez", "Beaucoup"];
+  var items = [
+ {
+  "n": "31",
+  "t": "Avez-vous dû uriner souvent pendant la journée ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "32",
+  "t": "Avez-vous dû uriner souvent pendant la nuit ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "33",
+  "t": "Lorsque vous avez ressenti le besoin urgent d'uriner, avez-vous dû vous précipiter aux toilettes ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "34",
+  "t": "Avez-vous eu des difficultés à dormir suffisamment à cause de la fréquence de ces mictions nocturnes ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "35",
+  "t": "La nécessité de vous trouver à proximité d'une toilette vous a-t-elle empêché de sortir de chez vous ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "36",
+  "t": "Avez-vous eu des pertes d'urine involontaires ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "37",
+  "t": "Avez-vous ressenti des douleurs ou une sensation de brûlure en urinant ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "38",
+  "t": "Avez-vous eu de la fièvre ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "39",
+  "t": "Vous êtes-vous senti(e) malade ou souffrant(e) ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "40",
+  "t": "Les traitements répétés de la vessie (cystoscopies ou instillations) vous ont-ils rendu la vie compliquée ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "41",
+  "t": "Les traitements répétés de la vessie (cystoscopies ou instillations) vous ont-ils inquiété ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "42",
+  "t": "Vous êtes-vous inquiété(e) de votre santé pour l'avenir ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "43",
+  "t": "Vous êtes-vous fait du souci au sujet des résultats des examens et des tests ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "44",
+  "t": "Vous êtes-vous fait du souci à l'idée d'éventuels traitements futurs ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "45",
+  "t": "Avez-vous ressenti une impression de ballonnement de l'abdomen ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "46",
+  "t": "Avez-vous eu des flatulences ou des gaz ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "47",
+  "t": "Dans quelle mesure vous êtes-vous intéressé(e) aux rapports sexuels ?",
+  "p": "Au cours des 4 dernières semaines :"
+ },
+ {
+  "n": "48",
+  "t": "Dans quelle mesure avez-vous été sexuellement actif(ve) (avec ou sans rapports sexuels) ?",
+  "p": "Au cours des 4 dernières semaines :"
+ },
+ {
+  "n": "49",
+  "t": "Pour les hommes uniquement : Avez-vous éprouvé des difficultés à obtenir ou à maintenir une érection ?",
+  "p": "Au cours des 4 dernières semaines :",
+  "na": true
+ },
+ {
+  "n": "50",
+  "t": "Pour les hommes uniquement : Avez-vous éprouvé des problèmes d'éjaculation (par ex. éjaculation sèche) ?",
+  "p": "Au cours des 4 dernières semaines :",
+  "na": true
+ },
+ {
+  "n": "51",
+  "t": "Vous êtes-vous senti(e) mal à l'aise en raison de cette intimité sexuelle ?",
+  "p": "Au cours des 4 dernières semaines (à remplir seulement si vous avez eu une activité sexuelle au cours des 4 dernières semaines) :",
+  "c": {
+   "i": 17,
+   "gt": 1
+  }
+ },
+ {
+  "n": "52",
+  "t": "Vous êtes-vous inquiété(e) à l'idée de contaminer votre partenaire pendant les contacts sexuels, à cause du traitement de la vessie que vous receviez ?",
+  "p": "Au cours des 4 dernières semaines (à remplir seulement si vous avez eu une activité sexuelle au cours des 4 dernières semaines) :",
+  "c": {
+   "i": 17,
+   "gt": 1
+  }
+ },
+ {
+  "n": "53",
+  "t": "Dans quelle mesure avez-vous apprécié vos rapports sexuels ?",
+  "p": "Au cours des 4 dernières semaines (à remplir seulement si vous avez eu une activité sexuelle au cours des 4 dernières semaines) :",
+  "c": {
+   "i": 17,
+   "gt": 1
+  }
+ },
+ {
+  "n": "54",
+  "t": "Pour les femmes uniquement : Avez-vous souffert de sécheresse vaginale ou d'autres problèmes pendant vos rapports sexuels ?",
+  "p": "Au cours des 4 dernières semaines (à remplir seulement si vous avez eu une activité sexuelle au cours des 4 dernières semaines) :",
+  "c": {
+   "i": 17,
+   "gt": 1
+  },
+  "na": true
+ }
+];
+  var groups = [
+ {
+  "title": "Scores par question. Pour les questions formulées négativement (symptômes, problèmes, inquiétudes), plus le score est élevé, plus le symptôme ou le problème est important",
+  "rows": [
+   {
+    "l": "Q31 — Avez-vous dû uriner souvent pendant la journée ?",
+    "it": [
+     0
+    ]
+   },
+   {
+    "l": "Q32 — Avez-vous dû uriner souvent pendant la nuit ?",
+    "it": [
+     1
+    ]
+   },
+   {
+    "l": "Q33 — Lorsque vous avez ressenti le besoin urgent d'uriner, avez-vous dû vous précipiter aux toilettes ?",
+    "it": [
+     2
+    ]
+   },
+   {
+    "l": "Q34 — Avez-vous eu des difficultés à dormir suffisamment à cause de la fréquence de ces mictions nocturnes ?",
+    "it": [
+     3
+    ]
+   },
+   {
+    "l": "Q35 — La nécessité de vous trouver à proximité d'une toilette vous a-t-elle empêché de sortir de chez vous ?",
+    "it": [
+     4
+    ]
+   },
+   {
+    "l": "Q36 — Avez-vous eu des pertes d'urine involontaires ?",
+    "it": [
+     5
+    ]
+   },
+   {
+    "l": "Q37 — Avez-vous ressenti des douleurs ou une sensation de brûlure en urinant ?",
+    "it": [
+     6
+    ]
+   },
+   {
+    "l": "Q38 — Avez-vous eu de la fièvre ?",
+    "it": [
+     7
+    ]
+   },
+   {
+    "l": "Q39 — Vous êtes-vous senti(e) malade ou souffrant(e) ?",
+    "it": [
+     8
+    ]
+   },
+   {
+    "l": "Q40 — Les traitements répétés de la vessie (cystoscopies ou instillations) vous ont-ils rendu la vie compliquée ?",
+    "it": [
+     9
+    ]
+   },
+   {
+    "l": "Q41 — Les traitements répétés de la vessie (cystoscopies ou instillations) vous ont-ils inquiété ?",
+    "it": [
+     10
+    ]
+   },
+   {
+    "l": "Q42 — Vous êtes-vous inquiété(e) de votre santé pour l'avenir ?",
+    "it": [
+     11
+    ]
+   },
+   {
+    "l": "Q43 — Vous êtes-vous fait du souci au sujet des résultats des examens et des tests ?",
+    "it": [
+     12
+    ]
+   },
+   {
+    "l": "Q44 — Vous êtes-vous fait du souci à l'idée d'éventuels traitements futurs ?",
+    "it": [
+     13
+    ]
+   },
+   {
+    "l": "Q45 — Avez-vous ressenti une impression de ballonnement de l'abdomen ?",
+    "it": [
+     14
+    ]
+   },
+   {
+    "l": "Q46 — Avez-vous eu des flatulences ou des gaz ?",
+    "it": [
+     15
+    ]
+   },
+   {
+    "l": "Q49 — Pour les hommes uniquement : Avez-vous éprouvé des difficultés à obtenir ou à maintenir une érection ?",
+    "it": [
+     18
+    ]
+   },
+   {
+    "l": "Q50 — Pour les hommes uniquement : Avez-vous éprouvé des problèmes d'éjaculation (par ex. éjaculation sèche) ?",
+    "it": [
+     19
+    ]
+   },
+   {
+    "l": "Q51 — Vous êtes-vous senti(e) mal à l'aise en raison de cette intimité sexuelle ?",
+    "it": [
+     20
+    ]
+   },
+   {
+    "l": "Q52 — Vous êtes-vous inquiété(e) à l'idée de contaminer votre partenaire pendant les contacts sexuels, à cause du traitement de la vessie que vous receviez ?",
+    "it": [
+     21
+    ]
+   },
+   {
+    "l": "Q54 — Pour les femmes uniquement : Avez-vous souffert de sécheresse vaginale ou d'autres problèmes pendant vos rapports sexuels ?",
+    "it": [
+     23
+    ]
+   }
+  ]
+ },
+ {
+  "title": "Questions sur l'intérêt, l'activité et le plaisir sexuels : plus le score est élevé, plus l'intérêt, l'activité ou le plaisir est important",
+  "rows": [
+   {
+    "l": "Q47 — Dans quelle mesure vous êtes-vous intéressé(e) aux rapports sexuels ?",
+    "it": [
+     16
+    ]
+   },
+   {
+    "l": "Q48 — Dans quelle mesure avez-vous été sexuellement actif(ve) (avec ou sans rapports sexuels) ?",
+    "it": [
+     17
+    ]
+   },
+   {
+    "l": "Q53 — Dans quelle mesure avez-vous apprécié vos rapports sexuels ?",
+    "it": [
+     22
+    ]
+   }
+  ]
+ }
+];
+  var infos = [];
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function active(i){
+    var c = items[i].c;
+    if(!c) return true;
+    if(!active(c.i)) return false;
+    var a = answers[c.i];
+    if(a === null) return false;
+    if(c.eq !== undefined) return a === c.eq;
+    if(c.gt !== undefined) return a > c.gt;
+    return true;
+  }
+  function nextIdx(i){ var j = i + 1; while(j < items.length && !active(j)) j++; return j; }
+  function prevIdx(i){ var j = i - 1; while(j >= 0 && !active(j)) j--; return j; }
+  function position(i){
+    var k = 0, tot = 0;
+    for(var j = 0; j < items.length; j++){ if(active(j)){ tot++; if(j <= i) k++; } }
+    return [k, tot];
+  }
+  function optsOf(i){
+    var it = items[i];
+    var base = it.o ? it.o : DEFOPTS;
+    var out = base.map(function(l, k){ return {v: k + 1, l: l}; });
+    if(it.na) out.push({v: 0, l: "Non concerné(e)"});
+    return out;
+  }
+
+  function renderQuestion(){
+    var pos = position(idx);
+    var it = items[idx];
+    document.getElementById('progress-text').textContent = (it.n ? 'Question ' + it.n + ' — ' : '') + pos[0] + ' / ' + pos[1];
+    document.getElementById('period-text').textContent = it.p || '';
+    document.getElementById('q-text').textContent = it.t;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    optsOf(idx).forEach(function(o){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === o.v ? ' selected' : '');
+      d.textContent = o.l;
+      d.addEventListener('click', function(){ answers[idx] = o.v; renderQuestion(); });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = prevIdx(idx) < 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = nextIdx(idx) >= items.length ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    var p = prevIdx(idx);
+    if (p >= 0){ idx = p; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    var n = nextIdx(idx);
+    if (n < items.length){ idx = n; renderQuestion(); } else { showResult(); }
+  });
+
+  // Score EORTC : (moyenne des réponses - 1) / 3 x 100, sur les questions actives et répondues
+  function score(ids){
+    var s = 0, k = 0;
+    ids.forEach(function(i){
+      if(active(i) && answers[i] !== null && answers[i] > 0){ s += answers[i]; k++; }
+    });
+    if(!k) return null;
+    return Math.round(((s / k) - 1) / 3 * 100);
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var box = document.getElementById('rows-all');
+    box.innerHTML = '';
+    function row(a, b){
+      var d = document.createElement('div'); d.className = 'sc-row';
+      var x = document.createElement('span'); x.textContent = a;
+      var y = document.createElement('b'); y.textContent = b;
+      d.appendChild(x); d.appendChild(y); box.appendChild(d);
+    }
+    groups.forEach(function(g){
+      var t = document.createElement('p'); t.className = 'sc-title'; t.textContent = g.title; box.appendChild(t);
+      g.rows.forEach(function(r){
+        var v = score(r.it);
+        if(v === null && r.it.every(function(i){ return !active(i) && items[i].c && items[i].c.eq !== undefined; })) return;
+        row(r.l, v === null ? 'non applicable' : v + ' / 100');
+      });
+    });
+    if(infos.length){
+      var t2 = document.createElement('p'); t2.className = 'sc-title';
+      t2.textContent = 'Informations recueillies, non cotées';
+      box.appendChild(t2);
+      infos.forEach(function(r){
+        var i = r.it;
+        var txt = 'non applicable';
+        if(active(i) && answers[i] !== null){
+          var lab = optsOf(i).filter(function(o){ return o.v === answers[i]; })[0];
+          txt = lab ? lab.l : '';
+        }
+        row(r.l, txt);
+      });
+    }
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Module cancer de la vessie non infiltrant le muscle de l'EORTC (QLQ-NMIBC24)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#4A5A6A 0%,#AEBCC9 55%,#1F2832 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,245,235,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#123B4F;background:#E3F0F6;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#2F6F8F;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#123B4F;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">QLQ-NMIBC24</span></div>
+
+  <h1 class="serif">Module cancer de la vessie non infiltrant le muscle de l'EORTC (QLQ-NMIBC24)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">EORTC QLQ-NMIBC24, module spécifique — EORTC Quality of Life Group</p>
+  <div class="meta-row">
+    <span class="pill">24 questions</span>
+    <span class="pill">4 minutes</span>
+    <span class="pill">scores de 0 à 100 par question</span>
+    <span class="pill">Français</span>
+    <span class="pill">Licence requise : oui</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="qlq-nmibc24.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le QLQ-NMIBC24 est le module « cancer de la vessie non infiltrant le muscle » de l'EORTC, complément du questionnaire de base QLQ-C30. Il explore, en 24 questions numérotées de 31 à 54, les symptômes urinaires (fréquence jour et nuit, urgence, retentissement sur le sommeil et sur les sorties, fuites, brûlures), la fièvre, le sentiment d'être malade, le retentissement et l'inquiétude liés aux traitements répétés de la vessie (cystoscopies, instillations), l'inquiétude pour la santé et les résultats d'examens, le ballonnement et les flatulences, puis, sur les quatre dernières semaines, l'intérêt sexuel, l'activité sexuelle et, selon le sexe et l'activité sexuelle, les difficultés d'érection ou d'éjaculation, le malaise lié à l'intimité, la crainte de contaminer le partenaire, le plaisir et la sécheresse vaginale. Les questions 49 et 50 (hommes uniquement) et 54 (femmes uniquement) proposent « Non concerné(e) » ; les questions 51 à 54 ne sont posées que s'il y a eu une activité sexuelle (question 48 supérieure à « pas du tout »). Chaque question se cote de 1 (pas du tout) à 4 (beaucoup).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque question est cotée de 0 à 100 : (réponse − 1) ÷ 3 × 100, la réponse allant de 1 (pas du tout) à 4 (beaucoup). Cette page affiche un score par question ; le regroupement en échelles composites n'est pas recalculé ici (se reporter au manuel de cotation EORTC). Un score élevé signifie des symptômes ou problèmes plus importants, sauf pour les questions formulées positivement, regroupées à part dans le résultat, où un score élevé signifie une réponse plus favorable ou plus affirmative (cotation non inversée dans cette page). Les questions marquées « Non concerné(e) » ne sont pas cotées. Questions 47, 48 et 53 : un score élevé signifie un intérêt, une activité ou un plaisir plus importants.</p>
+    <p>Aucun seuil clinique officiel n'est repris ici : ces scores se lisent avec le patient, et de préférence en comparaison de ses scores antérieurs. Ce module complète le questionnaire de base QLQ-C30 (questions 1 à 30), non inclus dans cette page.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p><strong>Licence requise : oui.</strong> QLQ-NMIBC24 © 1994 EORTC Groupe d'étude sur la qualité de la vie (phase III achevée), tous droits réservés. Usage académique non financé par l'industrie : gratuit sur demande auprès du groupe EORTC Quality of Life (conditions d'utilisation, qol.eortc.org) ; tout usage commercial exige une convention de licence payante. Instrument construit ici malgré la licence, conformément à la décision du 30/09/2026 ; la diffusion publique reste soumise à l'autorisation du détenteur des droits.</p>
+    <p class="source-note">Texte des items : document officiel « QLQ-NMIBC24 — French (Europe) », EORTC Quality of Life Group (qol.eortc.org, hébergé sur eortc.be), 24 items numérotés 31 à 54. Cotation : EORTC QLQ-C30 Scoring Manual (transformation linéaire en scores de 0 à 100). Référence princeps non reprise ici : voir la fiche du module sur qol.eortc.org avant tout usage clinique. Aucune question d'aiguillage n'a été ajoutée : les questions réservées à un sexe sont proposées avec « Non concerné(e) » ; les questions 51 à 54 sont masquées si la question 48 est cotée « pas du tout ».</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

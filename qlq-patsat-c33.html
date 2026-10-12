@@ -1,0 +1,698 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Satisfaction des patients, soins en cancérologie de l'EORTC (QLQ-PATSAT-C33)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#2F6F8F;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .period{font-size:12.5px;font-weight:600;color:#2F6F8F;margin:0 0 8px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#2F6F8F;background:#E3F0F6;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#2F6F8F;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 20px;}
+  .sc-title{font-size:13px;font-weight:700;color:#2F6F8F;margin:18px 0 6px;}
+  .sc-row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-top:1px solid #EFEBE1;font-size:14px;}
+  .sc-row b{font-variant-numeric:tabular-nums;white-space:nowrap;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">Satisfaction des patients, soins en cancérologie de l'EORTC (QLQ-PATSAT-C33)</h1>
+    <p class="lead">Nous aimerions savoir certaines choses sur votre expérience la plus récente des soins que vous avez reçus dans ce service hospitalier ou cette clinique. Il n'y a pas de « bonnes » ou de « mauvaises » réponses. Les informations que vous fournirez resteront strictement confidentielles.</p>
+    <p class="lang-note">Version française officielle (« French (Europe) »). Outil sous licence (EORTC Quality of Life Group) : « Licence requise : oui ».</p>
+    <div class="pill-row">
+      <span class="pill">33 questions</span>
+    <span class="pill">7 minutes</span>
+    <span class="pill">scores de 0 à 100 par question</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="period" id="period-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-text">Chaque question est cotée de 0 à 100 : (réponse − 1) ÷ 4 × 100. Les échelles composites officielles du questionnaire (regroupement de plusieurs questions) ne sont pas recalculées ici : se reporter au manuel de cotation EORTC. Les questions marquées « Non applicable (N/A) » ne sont pas cotées. Toutes les questions évaluent la qualité perçue (1 = mauvais, 5 = excellent) : un score élevé signifie une plus grande satisfaction.</p>
+    <div id="rows-all"></div>
+    <p class="result-text" style="margin-top:18px">Aucun seuil clinique officiel n'est repris ici : ces scores se lisent avec la personne, et de préférence en comparaison de ses scores antérieurs.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">QLQ-PATSAT-C33 © 2019 EORTC Quality of Life Group, tous droits réservés. Outil d'évaluation de la qualité de vie, ne remplace pas une évaluation clinique.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var DEFOPTS = ["Mauvais", "Moyen", "Bon", "Très bon", "Excellent"];
+  var items = [
+ {
+  "t": "Veuillez indiquer le service de l'hôpital ou de la clinique que vous évaluez (sélectionnez uniquement l'un d'entre eux) :",
+  "p": "",
+  "o": [
+   "Soins dans le cadre d'une hospitalisation",
+   "Soins ambulatoires"
+  ]
+ },
+ {
+  "n": "1",
+  "t": "Leur connaissance des soins et des traitements que vous avez reçus précédemment ?",
+  "p": "Dans cet hôpital, comment évalueriez-vous les médecins concernant :"
+ },
+ {
+  "n": "2",
+  "t": "L'attention qu'ils ont accordée à vos symptômes physiques ?",
+  "p": "Dans cet hôpital, comment évalueriez-vous les médecins concernant :",
+  "na": true
+ },
+ {
+  "n": "3",
+  "t": "Leur rigueur dans le traitement de vos symptômes physiques ?",
+  "p": "Dans cet hôpital, comment évalueriez-vous les médecins concernant :",
+  "na": true
+ },
+ {
+  "n": "4",
+  "t": "Les informations qu'ils vous ont données concernant votre maladie ?",
+  "p": "Dans cet hôpital, comment évalueriez-vous les médecins concernant :",
+  "na": true
+ },
+ {
+  "n": "5",
+  "t": "Les informations qu'ils vous ont données concernant votre traitement ?",
+  "p": "Dans cet hôpital, comment évalueriez-vous les médecins concernant :",
+  "na": true
+ },
+ {
+  "n": "6",
+  "t": "L'attention qu'ils ont accordée à votre opinion concernant le choix de traitement (lorsque plusieurs options étaient possibles) ?",
+  "p": "Dans cet hôpital, comment évalueriez-vous les médecins concernant :",
+  "na": true
+ },
+ {
+  "n": "7",
+  "t": "L'intérêt qu'ils vous ont porté en tant que personne ?",
+  "p": "Dans cet hôpital, comment évalueriez-vous les médecins concernant :"
+ },
+ {
+  "n": "8",
+  "t": "Le réconfort et le soutien qu'ils vous ont apportés ?",
+  "p": "Dans cet hôpital, comment évalueriez-vous les médecins concernant :"
+ },
+ {
+  "n": "9",
+  "t": "La fréquence de leurs visites/consultations ?",
+  "p": "Dans cet hôpital, comment évalueriez-vous les médecins concernant :"
+ },
+ {
+  "n": "10",
+  "t": "Le temps qu'ils vous ont consacré ?",
+  "p": "Dans cet hôpital, comment évalueriez-vous les médecins concernant :"
+ },
+ {
+  "t": "Veuillez indiquer le(s) professionnel(s) que vous évaluez :",
+  "p": "Dans cet hôpital, comment évalueriez-vous les infirmier(-ère)s ou les technicien(ne)s de radiothérapie concernant :",
+  "o": [
+   "Infirmier(-ère)s",
+   "Technicien(ne)s de radiothérapie",
+   "Infirmier(-ère)s et technicien(ne)s de radiothérapie"
+  ]
+ },
+ {
+  "n": "11",
+  "t": "L'attention qu'ils ont accordée à votre confort physique ?",
+  "p": "Dans cet hôpital, comment évalueriez-vous les infirmier(-ère)s ou les technicien(ne)s de radiothérapie concernant :",
+  "na": true
+ },
+ {
+  "n": "12",
+  "t": "Les informations qu'ils vous ont données concernant vos soins et votre traitement ?",
+  "p": "Dans cet hôpital, comment évalueriez-vous les infirmier(-ère)s ou les technicien(ne)s de radiothérapie concernant :",
+  "na": true
+ },
+ {
+  "n": "13",
+  "t": "Les conseils qu'ils vous ont donnés concernant la prise en charge de vos symptômes physiques ?",
+  "p": "Dans cet hôpital, comment évalueriez-vous les infirmier(-ère)s ou les technicien(ne)s de radiothérapie concernant :",
+  "na": true
+ },
+ {
+  "n": "14",
+  "t": "L'intérêt qu'ils vous ont porté en tant que personne ?",
+  "p": "Dans cet hôpital, comment évalueriez-vous les infirmier(-ère)s ou les technicien(ne)s de radiothérapie concernant :",
+  "na": true
+ },
+ {
+  "n": "15",
+  "t": "Le réconfort et le soutien qu'ils vous ont apportés ?",
+  "p": "Dans cet hôpital, comment évalueriez-vous les infirmier(-ère)s ou les technicien(ne)s de radiothérapie concernant :",
+  "na": true
+ },
+ {
+  "n": "16",
+  "t": "La rapidité avec laquelle ils ont répondu à vos demandes particulières ?",
+  "p": "Dans cet hôpital, comment évalueriez-vous les infirmier(-ère)s ou les technicien(ne)s de radiothérapie concernant :",
+  "na": true
+ },
+ {
+  "n": "17",
+  "t": "Le temps qu'ils vous ont consacré ?",
+  "p": "Dans cet hôpital, comment évalueriez-vous les infirmier(-ère)s ou les technicien(ne)s de radiothérapie concernant :",
+  "na": true
+ },
+ {
+  "n": "18",
+  "t": "La facilité à identifier le rôle et les responsabilités des différents soignants (ex : médecins, infirmier(-ère)s, kinésithérapeutes, psychologues, etc.) impliqués dans vos soins ?",
+  "p": "Dans cet hôpital, comment évalueriez-vous l'organisation des services et des soins concernant :"
+ },
+ {
+  "n": "19",
+  "t": "L'échange d'informations entre les différents soignants (ex : médecins, infirmier(-ère)s, kinésithérapeutes, psychologues, etc.) ?",
+  "p": "Dans cet hôpital, comment évalueriez-vous l'organisation des services et des soins concernant :"
+ },
+ {
+  "n": "20",
+  "t": "La façon dont les médecins, infirmier(-ère)s et autres soignants impliqués dans vos soins semblent travailler ensemble, comme une équipe ?",
+  "p": "Dans cet hôpital, comment évalueriez-vous l'organisation des services et des soins concernant :"
+ },
+ {
+  "n": "21",
+  "t": "L'échange d'information avec les services extrahospitaliers (ex : médecin traitant, soins à domicile, maison de repos, services sociaux, etc.) ?",
+  "p": "Dans cet hôpital, comment évalueriez-vous l'organisation des services et des soins concernant :",
+  "na": true
+ },
+ {
+  "n": "22",
+  "t": "La gentillesse et la volonté d'aider du personnel technique, de la réception, du laboratoire, etc. ?",
+  "p": "Dans cet hôpital, comment évalueriez-vous l'organisation des services et des soins concernant :"
+ },
+ {
+  "n": "23",
+  "t": "Les informations données concernant la planification des examens médicaux, du traitement ou des soins ?",
+  "p": "Dans cet hôpital, comment évalueriez-vous l'organisation des services et des soins concernant :"
+ },
+ {
+  "n": "24",
+  "t": "Les informations données concernant l'ensemble des services de soutien disponibles (ex : service social, d'aide psychologique, de kinésithérapie, de diététique, et groupes de soutien, etc.) ?",
+  "p": "Dans cet hôpital, comment évalueriez-vous l'organisation des services et des soins concernant :"
+ },
+ {
+  "n": "25",
+  "t": "Les informations données par les médecins, infirmier(-ère)s et autres soignants concernant ce que vous pouvez faire en particulier pour améliorer votre état de santé ou prévenir la maladie ?",
+  "p": "Dans cet hôpital, comment évalueriez-vous l'organisation des services et des soins concernant :"
+ },
+ {
+  "n": "26",
+  "t": "Le délai d'attente pour obtenir les résultats des examens médicaux ?",
+  "p": "Dans cet hôpital, comment évalueriez-vous l'organisation des services et des soins concernant :",
+  "na": true
+ },
+ {
+  "n": "27",
+  "t": "Le délai d'attente pour pouvoir passer des examens médicaux et/ou recevoir un traitement ?",
+  "p": "Dans cet hôpital, comment évalueriez-vous l'organisation des services et des soins concernant :"
+ },
+ {
+  "n": "28",
+  "t": "Le respect de votre intimité durant les examens physiques ou votre traitement ?",
+  "p": "Dans cet hôpital, comment évalueriez-vous l'organisation des services et des soins concernant :"
+ },
+ {
+  "n": "29",
+  "t": "La possibilité pour votre famille ou vos proches d'être impliqués dans vos soins (ex : parler au médecin, recevoir des informations sur la maladie ou les soins, etc.) ?",
+  "p": "Dans cet hôpital, comment évalueriez-vous l'organisation des services et des soins concernant :",
+  "na": true
+ },
+ {
+  "n": "30",
+  "t": "L'accessibilité (parking, moyens de transport etc.) ?",
+  "p": "Dans cet hôpital, comment évalueriez-vous l'organisation des services et des soins concernant :"
+ },
+ {
+  "n": "31",
+  "t": "La facilité à vous orienter vers les différents services de l'hôpital ?",
+  "p": "Dans cet hôpital, comment évalueriez-vous l'organisation des services et des soins concernant :"
+ },
+ {
+  "n": "32",
+  "t": "L'environnement de l'établissement (propreté, espace, calme, etc.) ?",
+  "p": "Dans cet hôpital, comment évalueriez-vous l'organisation des services et des soins concernant :"
+ },
+ {
+  "n": "33",
+  "t": "Comment évalueriez-vous les soins que vous avez reçus dans cet hôpital ?",
+  "p": "Globalement,"
+ }
+];
+  var groups = [
+ {
+  "title": "Satisfaction : plus le score est élevé, plus la qualité perçue est élevée",
+  "rows": [
+   {
+    "l": "Q1 — Leur connaissance des soins et des traitements que vous avez reçus précédemment ?",
+    "it": [
+     1
+    ]
+   },
+   {
+    "l": "Q2 — L'attention qu'ils ont accordée à vos symptômes physiques ?",
+    "it": [
+     2
+    ]
+   },
+   {
+    "l": "Q3 — Leur rigueur dans le traitement de vos symptômes physiques ?",
+    "it": [
+     3
+    ]
+   },
+   {
+    "l": "Q4 — Les informations qu'ils vous ont données concernant votre maladie ?",
+    "it": [
+     4
+    ]
+   },
+   {
+    "l": "Q5 — Les informations qu'ils vous ont données concernant votre traitement ?",
+    "it": [
+     5
+    ]
+   },
+   {
+    "l": "Q6 — L'attention qu'ils ont accordée à votre opinion concernant le choix de traitement (lorsque plusieurs options étaient possibles) ?",
+    "it": [
+     6
+    ]
+   },
+   {
+    "l": "Q7 — L'intérêt qu'ils vous ont porté en tant que personne ?",
+    "it": [
+     7
+    ]
+   },
+   {
+    "l": "Q8 — Le réconfort et le soutien qu'ils vous ont apportés ?",
+    "it": [
+     8
+    ]
+   },
+   {
+    "l": "Q9 — La fréquence de leurs visites/consultations ?",
+    "it": [
+     9
+    ]
+   },
+   {
+    "l": "Q10 — Le temps qu'ils vous ont consacré ?",
+    "it": [
+     10
+    ]
+   },
+   {
+    "l": "Q11 — L'attention qu'ils ont accordée à votre confort physique ?",
+    "it": [
+     12
+    ]
+   },
+   {
+    "l": "Q12 — Les informations qu'ils vous ont données concernant vos soins et votre traitement ?",
+    "it": [
+     13
+    ]
+   },
+   {
+    "l": "Q13 — Les conseils qu'ils vous ont donnés concernant la prise en charge de vos symptômes physiques ?",
+    "it": [
+     14
+    ]
+   },
+   {
+    "l": "Q14 — L'intérêt qu'ils vous ont porté en tant que personne ?",
+    "it": [
+     15
+    ]
+   },
+   {
+    "l": "Q15 — Le réconfort et le soutien qu'ils vous ont apportés ?",
+    "it": [
+     16
+    ]
+   },
+   {
+    "l": "Q16 — La rapidité avec laquelle ils ont répondu à vos demandes particulières ?",
+    "it": [
+     17
+    ]
+   },
+   {
+    "l": "Q17 — Le temps qu'ils vous ont consacré ?",
+    "it": [
+     18
+    ]
+   },
+   {
+    "l": "Q18 — La facilité à identifier le rôle et les responsabilités des différents soignants (ex : médecins, infirmier(-ère)s, kinésithérapeutes, psychologues, etc.) impliqués dans vos soins ?",
+    "it": [
+     19
+    ]
+   },
+   {
+    "l": "Q19 — L'échange d'informations entre les différents soignants (ex : médecins, infirmier(-ère)s, kinésithérapeutes, psychologues, etc.) ?",
+    "it": [
+     20
+    ]
+   },
+   {
+    "l": "Q20 — La façon dont les médecins, infirmier(-ère)s et autres soignants impliqués dans vos soins semblent travailler ensemble, comme une équipe ?",
+    "it": [
+     21
+    ]
+   },
+   {
+    "l": "Q21 — L'échange d'information avec les services extrahospitaliers (ex : médecin traitant, soins à domicile, maison de repos, services sociaux, etc.) ?",
+    "it": [
+     22
+    ]
+   },
+   {
+    "l": "Q22 — La gentillesse et la volonté d'aider du personnel technique, de la réception, du laboratoire, etc. ?",
+    "it": [
+     23
+    ]
+   },
+   {
+    "l": "Q23 — Les informations données concernant la planification des examens médicaux, du traitement ou des soins ?",
+    "it": [
+     24
+    ]
+   },
+   {
+    "l": "Q24 — Les informations données concernant l'ensemble des services de soutien disponibles (ex : service social, d'aide psychologique, de kinésithérapie, de diététique, et groupes de soutien, etc.) ?",
+    "it": [
+     25
+    ]
+   },
+   {
+    "l": "Q25 — Les informations données par les médecins, infirmier(-ère)s et autres soignants concernant ce que vous pouvez faire en particulier pour améliorer votre état de santé ou prévenir la maladie ?",
+    "it": [
+     26
+    ]
+   },
+   {
+    "l": "Q26 — Le délai d'attente pour obtenir les résultats des examens médicaux ?",
+    "it": [
+     27
+    ]
+   },
+   {
+    "l": "Q27 — Le délai d'attente pour pouvoir passer des examens médicaux et/ou recevoir un traitement ?",
+    "it": [
+     28
+    ]
+   },
+   {
+    "l": "Q28 — Le respect de votre intimité durant les examens physiques ou votre traitement ?",
+    "it": [
+     29
+    ]
+   },
+   {
+    "l": "Q29 — La possibilité pour votre famille ou vos proches d'être impliqués dans vos soins (ex : parler au médecin, recevoir des informations sur la maladie ou les soins, etc.) ?",
+    "it": [
+     30
+    ]
+   },
+   {
+    "l": "Q30 — L'accessibilité (parking, moyens de transport etc.) ?",
+    "it": [
+     31
+    ]
+   },
+   {
+    "l": "Q31 — La facilité à vous orienter vers les différents services de l'hôpital ?",
+    "it": [
+     32
+    ]
+   },
+   {
+    "l": "Q32 — L'environnement de l'établissement (propreté, espace, calme, etc.) ?",
+    "it": [
+     33
+    ]
+   },
+   {
+    "l": "Q33 — Comment évalueriez-vous les soins que vous avez reçus dans cet hôpital ?",
+    "it": [
+     34
+    ]
+   }
+  ]
+ }
+];
+  var infos = [{"l": "Type de soins évalués", "it": 0}, {"l": "Professionnels évalués (questions 11 à 17)", "it": 11}];
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function active(i){
+    var c = items[i].c;
+    if(!c) return true;
+    if(!active(c.i)) return false;
+    var a = answers[c.i];
+    if(a === null) return false;
+    if(c.eq !== undefined) return a === c.eq;
+    if(c.gt !== undefined) return a > c.gt;
+    return true;
+  }
+  function nextIdx(i){ var j = i + 1; while(j < items.length && !active(j)) j++; return j; }
+  function prevIdx(i){ var j = i - 1; while(j >= 0 && !active(j)) j--; return j; }
+  function position(i){
+    var k = 0, tot = 0;
+    for(var j = 0; j < items.length; j++){ if(active(j)){ tot++; if(j <= i) k++; } }
+    return [k, tot];
+  }
+  function optsOf(i){
+    var it = items[i];
+    var base = it.o ? it.o : DEFOPTS;
+    var out = base.map(function(l, k){ return {v: k + 1, l: l}; });
+    if(it.na) out.push({v: 0, l: "Non applicable (N/A)"});
+    return out;
+  }
+
+  function renderQuestion(){
+    var pos = position(idx);
+    var it = items[idx];
+    document.getElementById('progress-text').textContent = (it.n ? 'Question ' + it.n + ' — ' : '') + pos[0] + ' / ' + pos[1];
+    document.getElementById('period-text').textContent = it.p || '';
+    document.getElementById('q-text').textContent = it.t;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    optsOf(idx).forEach(function(o){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === o.v ? ' selected' : '');
+      d.textContent = o.l;
+      d.addEventListener('click', function(){ answers[idx] = o.v; renderQuestion(); });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = prevIdx(idx) < 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = nextIdx(idx) >= items.length ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    var p = prevIdx(idx);
+    if (p >= 0){ idx = p; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    var n = nextIdx(idx);
+    if (n < items.length){ idx = n; renderQuestion(); } else { showResult(); }
+  });
+
+  // Score EORTC : (moyenne des réponses - 1) / 4 x 100, sur les questions actives et répondues
+  function score(ids){
+    var s = 0, k = 0;
+    ids.forEach(function(i){
+      if(active(i) && answers[i] !== null && answers[i] > 0){ s += answers[i]; k++; }
+    });
+    if(!k) return null;
+    return Math.round(((s / k) - 1) / 4 * 100);
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var box = document.getElementById('rows-all');
+    box.innerHTML = '';
+    function row(a, b){
+      var d = document.createElement('div'); d.className = 'sc-row';
+      var x = document.createElement('span'); x.textContent = a;
+      var y = document.createElement('b'); y.textContent = b;
+      d.appendChild(x); d.appendChild(y); box.appendChild(d);
+    }
+    groups.forEach(function(g){
+      var t = document.createElement('p'); t.className = 'sc-title'; t.textContent = g.title; box.appendChild(t);
+      g.rows.forEach(function(r){
+        var v = score(r.it);
+        if(v === null && r.it.every(function(i){ return !active(i) && items[i].c && items[i].c.eq !== undefined; })) return;
+        row(r.l, v === null ? 'non applicable' : v + ' / 100');
+      });
+    });
+    if(infos.length){
+      var t2 = document.createElement('p'); t2.className = 'sc-title';
+      t2.textContent = 'Informations recueillies, non cotées';
+      box.appendChild(t2);
+      infos.forEach(function(r){
+        var i = r.it;
+        var txt = 'non applicable';
+        if(active(i) && answers[i] !== null){
+          var lab = optsOf(i).filter(function(o){ return o.v === answers[i]; })[0];
+          txt = lab ? lab.l : '';
+        }
+        row(r.l, txt);
+      });
+    }
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Satisfaction des patients, soins en cancérologie de l'EORTC (QLQ-PATSAT-C33)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#6B6A3A 0%,#C9C98F 55%,#2F2F15 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,245,235,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#123B4F;background:#E3F0F6;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#2F6F8F;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#123B4F;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">QLQ-PATSAT-C33</span></div>
+
+  <h1 class="serif">Satisfaction des patients, soins en cancérologie de l'EORTC (QLQ-PATSAT-C33)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">EORTC QLQ-PATSAT-C33, questionnaire de satisfaction — EORTC Quality of Life Group</p>
+  <div class="meta-row">
+    <span class="pill">33 questions</span>
+    <span class="pill">7 minutes</span>
+    <span class="pill">scores de 0 à 100 par question</span>
+    <span class="pill">Français</span>
+    <span class="pill">Licence requise : oui</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="qlq-patsat-c33.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le QLQ-PATSAT-C33 est le questionnaire de satisfaction des patients de l'EORTC pour les soins en cancérologie. Il comporte 33 questions : les questions 1 à 10 évaluent les médecins (connaissance des soins antérieurs, attention aux symptômes, informations sur la maladie et le traitement, prise en compte de l'opinion du patient, intérêt, réconfort, fréquence des visites, temps consacré), les questions 11 à 17 évaluent les infirmier(-ère)s et/ou les technicien(ne)s de radiothérapie, les questions 18 à 32 évaluent l'organisation des services et des soins (rôles des soignants, échange d'informations, travail d'équipe, accueil, planification, services de soutien, délais, intimité, implication de la famille, accessibilité, orientation, environnement) et la question 33 la qualité globale des soins. Avant les questions, la personne indique s'il s'agit de soins en hospitalisation ou ambulatoires, et, avant la question 11, quels professionnels elle évalue. Plusieurs questions proposent « N/A » (non applicable). Chaque question se cote de 1 (mauvais) à 5 (excellent).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque question est cotée de 0 à 100 : (réponse − 1) ÷ 4 × 100, la réponse allant de 1 (mauvais) à 5 (excellent). Cette page affiche un score par question ; le regroupement en échelles composites n'est pas recalculé ici (se reporter au manuel de cotation EORTC). Un score élevé signifie une plus grande satisfaction (toutes les questions sont formulées dans le sens de la qualité perçue). Les questions marquées « Non applicable (N/A) » ne sont pas cotées.</p>
+    <p>Aucun seuil clinique officiel n'est repris ici : ces scores se lisent avec le patient, et de préférence en comparaison de ses scores antérieurs.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p><strong>Licence requise : oui.</strong> QLQ-PATSAT-C33 © 2019 EORTC Quality of Life Group, tous droits réservés. Usage académique non financé par l'industrie : gratuit sur demande auprès du groupe EORTC Quality of Life (conditions d'utilisation, qol.eortc.org) ; tout usage commercial exige une convention de licence payante. Instrument construit ici malgré la licence, conformément à la décision du 30/09/2026 ; la diffusion publique reste soumise à l'autorisation du détenteur des droits.</p>
+    <p class="source-note">Texte des items : document officiel « QLQ-PATSAT-C33 — French (Europe) », EORTC Quality of Life Group (qol.eortc.org, hébergé sur eortc.be), 33 items numérotés 1 à 33. Cotation : EORTC QLQ-C30 Scoring Manual (transformation linéaire en scores de 0 à 100). Référence princeps non reprise ici : voir la fiche du module sur qol.eortc.org avant tout usage clinique. Les deux choix de contexte reprennent les cases à cocher du questionnaire (l'option regroupant infirmier(-ère)s et technicien(ne)s de radiothérapie est ajoutée pour permettre de cocher les deux cases). Le questionnaire d'origine est complété par le QLQ-OUT-PATSAT7 pour les soins ambulatoires (questions 34 à 40, publié séparément).</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

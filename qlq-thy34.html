@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>QLQ-THY34 — Module Thyroïde de l'EORTC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#1F7A74;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .recap-row{font-size:13.5px;padding:6px 0;border-bottom:1px solid #E0D9C9;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#1F7A74;background:#E2F1EF;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#1F7A74;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#1F7A74;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 20px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">QLQ-THY34 — Module Thyroïde de l'EORTC</h1>
+    <p class="lead">Patients sometimes report that they have the following symptoms or problems. Please indicate the extent to which you have experienced these symptoms or problems during the past week. <em>(Les patients signalent parfois les symptômes ou problèmes suivants : indiquez dans quelle mesure vous les avez ressentis au cours de la semaine passée.)</em></p>
+    <p class="lang-note">Version anglaise officielle (EORTC Quality of Life Group, 2017) ; aucune version française accessible. Module complémentaire du QLQ-C30 dédié au cancer de la thyroïde. Outil sous licence : « Licence requise : oui ».</p>
+    <div class="pill-row">
+      <span class="pill">34 questions</span>
+      <span class="pill">5 minutes</span>
+      <span class="pill">Réponses 1 à 4</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-score" id="score-val"></p>
+    <p class="result-max" id="score-sub"></p>
+    <p class="result-text" id="level-text"></p>
+    <div id="recap" class="result-text"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">EORTC QLQ-THY34 — Singer S. et al. (2017), Endocrine-Related Cancer, 24(4), 197-207 ; © Copyright 2017 EORTC Quality of Life Group. Tous droits réservés. Outil de repérage des symptômes et préoccupations liés au cancer de la thyroïde ; ne remplace pas une évaluation médicale.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [
+    {n:31,t:"Have you had sudden attacks of tiredness?"},
+    {n:32,t:"Have you felt mentally exhausted?"},
+    {n:33,t:"Have you felt physically exhausted?"},
+    {n:34,t:"Have you had pain in your throat?"},
+    {n:35,t:"Have you had any discomfort in your neck?"},
+    {n:36,t:"Have you had problems with hoarseness?"},
+    {n:37,t:"Has your voice sounded different as a result of your disease or treatment?"},
+    {n:38,t:"Have you had a tired voice?"},
+    {n:39,t:"Have you had thin or lifeless hair as a result of your disease or treatment?"},
+    {n:40,t:"Have you lost any hair?"},
+    {n:41,t:"Have you had problems swallowing solid food?"},
+    {n:42,t:"Have you choked when swallowing?"},
+    {n:43,t:"Have you had a dry mouth?"},
+    {n:44,t:"Have you had problems tolerating heat or cold?"},
+    {n:45,t:"Have you felt physically less attractive as a result of your disease or treatment?"},
+    {n:46,t:"Have you felt restless or agitated?"},
+    {n:47,t:"Have you had a rapid heartbeat?"},
+    {n:48,t:"Have you had problems raising your arm or moving it sideways?"},
+    {n:49,t:"Have you felt as though there was a knot in your throat?"},
+    {n:50,t:"Have you worried about a possible recurrence of the disease?"},
+    {n:51,t:"Have you worried about having to come off your thyroid hormone replacement tablets to prepare for a radioiodine body scan or radioiodine treatment?"},
+    {n:52,t:"Have you worried about having to take drugs for the rest of your life?"},
+    {n:53,t:"Have you had pain in your joints?"},
+    {n:54,t:"Have you had tingling or numbness in your fingers or toes?"},
+    {n:55,t:"Have you had tingling or numbness around your mouth?"},
+    {n:56,t:"Have you had any muscle cramps?"},
+    {n:57,t:"Have you found it upsetting to see those close to you distressed as a result of your disease or treatment?"},
+    {n:58,t:"Have you worried about the future of people who are important to you?"},
+    {n:59,t:"Have you worried how those close to you will cope with your illness and treatment?"},
+    {n:60,t:"Have you worried that you will be a burden to others?"},
+    {n:61,t:"Have you had any problems with your job or your education because of your disease or treatment?"},
+    {n:62,t:"Have you felt supported by your doctors?"},
+    {n:63,t:"Have you felt supported by other health care professionals (e.g. nurse)?"},
+    {n:64,t:"Have you felt supported by your family members or friends?"}
+  ];
+  var opts = [
+    {l:"Not at all (Pas du tout)", p:1},
+    {l:"A little (Un peu)", p:2},
+    {l:"Quite a bit (Assez)", p:3},
+    {l:"Very much (Beaucoup)", p:4}
+  ];
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx].n + '. During the past week: ' + items[idx].t;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    opts.forEach(function(o, v){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === v ? ' selected' : '');
+      d.textContent = o.l;
+      d.addEventListener('click', function(){
+        answers[idx] = v;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){
+      idx++; renderQuestion();
+    } else {
+      showResult();
+    }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var hi = [], n3 = 0, n4 = 0;
+    items.forEach(function(item, i){
+      var p = opts[answers[i]].p;
+      if (item.n <= 61 && p >= 3){ hi.push(item); if (p === 3) n3++; else n4++; }
+    });
+    document.getElementById('score-val').textContent = hi.length + ' / 31';
+    document.getElementById('score-sub').textContent = 'items 31 à 61 cotés « Quite a bit » ou « Very much »';
+    document.getElementById('level-text').textContent = "Il n'existe pas de score total pour ce module : les réponses sont lues item par item (1 = Not at all à 4 = Very much ; plus le chiffre est élevé, plus le symptôme ou la préoccupation est marqué, sauf pour les items 62 à 64 sur le soutien perçu, formulés positivement). Les scores d'échelles de l'EORTC ne sont pas calculés ici. Ce récapitulatif ne constitue pas un diagnostic.";
+    var rc = document.getElementById('recap');
+    rc.innerHTML = '';
+    var h = document.createElement('p');
+    h.style.fontWeight = '600';
+    h.textContent = hi.length ? 'Items 31 à 61 cotés 3 ou 4 :' : 'Aucun item 31 à 61 coté 3 ou 4.';
+    rc.appendChild(h);
+    hi.forEach(function(item){
+      var d = document.createElement('div');
+      d.className = 'recap-row';
+      d.textContent = item.n + '. ' + item.t + ' \u2192 ' + answers[items.indexOf(item)] + '';
+      d.textContent = item.n + '. ' + item.t + ' \u2192 ' + opts[answers[items.indexOf(item)]].p;
+      rc.appendChild(d);
+    });
+    var sup = document.createElement('p');
+    sup.style.marginTop = '14px';
+    sup.textContent = 'Soutien perçu (items 62 à 64, 1 = Not at all à 4 = Very much) : médecins ' + opts[answers[31]].p + ' ; autres soignants ' + opts[answers[32]].p + ' ; proches ' + opts[answers[33]].p + '.';
+    rc.appendChild(sup);
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>QLQ-THY34 — Module Thyroïde de l'EORTC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#1F7A74 0%,#6FB8B1 55%,#0F4A46 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(220,245,240,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#0F4A46;background:#E2F1EF;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#1F7A74;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#0F4A46;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">QLQ-THY34</span></div>
+
+  <h1 class="serif">Module Thyroïde de l'EORTC (cancer de la thyroïde)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">EORTC Quality of Life Questionnaire — Thyroid Cancer Module, 34 items — Singer et al. (2017)</p>
+  <div class="meta-row">
+    <span class="pill">34 questions</span>
+    <span class="pill">5 minutes</span>
+    <span class="pill">Réponses 1 à 4</span>
+    <span class="pill">Anglais</span>
+    <span class="pill">Licence requise : oui</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="qlq-thy34.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le QLQ-THY34 est le module spécifique au cancer de la thyroïde du questionnaire de qualité de vie de l'EORTC, à utiliser avec le QLQ-C30 (items numérotés 31 à 64, dans la continuité des 30 items du QLQ-C30). Il explore, sur la semaine écoulée, la fatigue, les troubles de la voix et de la déglutition, les cheveux, les sensations d'engourdissement ou de crampes, les inquiétudes liées à la maladie et au traitement, le retentissement sur les proches, le travail ou les études, et le soutien perçu. Chaque item se répond sur 4 modalités : Not at all (1), A little (2), Quite a bit (3), Very much (4).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Réponses codées de 1 à 4 ; plus la valeur est élevée, plus le symptôme ou la préoccupation est marqué, sauf pour les items 62 à 64 (soutien perçu des médecins, des autres soignants, des proches), formulés positivement. La page affiche les réponses item par item et le nombre d'items 31 à 61 cotés 3 ou 4. <strong>Les scores d'échelles ne sont pas calculés</strong> : l'étude de validation internationale (Singer et al., 2024) décrit 9 échelles multi-items et 8 items isolés, mais leur composition exacte n'a pas pu être vérifiée dans une source accessible (article payant) ; rien n'a été déduit ni inventé. Pour une cotation en échelles 0-100, se référer au manuel de cotation de l'EORTC Quality of Life Group.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p><strong>Licence requise : oui.</strong> © Copyright 2017 EORTC Quality of Life Group, tous droits réservés ; l'EORTC demande une autorisation pour tout usage de ses questionnaires, y compris académique et clinique. Instrument construit ici malgré la licence, conformément à la décision du 30/09/2026 ; la diffusion publique reste soumise à l'autorisation de l'EORTC.</p>
+    <p class="source-note">Texte des items : formulaire anglais officiel (« Specimen-THY34-English.pdf », eortc.org), vérifié item par item. Aucune version française accessible (la version française existe selon une revue systématique, Uslar et al. 2022, mais n'est pas téléchargeable en libre accès). Développement : Singer S., Jordan S. et al. (2017), Endocrine-Related Cancer, 24(4), 197-207 ; validation internationale de phase IV : Singer S. et al. (2024), Thyroid, DOI 10.1089/thy.2023.0221.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

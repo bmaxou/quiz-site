@@ -1,0 +1,628 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Module cancer de l'ovaire de l'EORTC (QLQ-OV28)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#3B8C86;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .period{font-size:12.5px;font-weight:600;color:#3B8C86;margin:0 0 8px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#3B8C86;background:#DFF1EF;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#3B8C86;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 20px;}
+  .sc-title{font-size:13px;font-weight:700;color:#3B8C86;margin:18px 0 6px;}
+  .sc-row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-top:1px solid #EFEBE1;font-size:14px;}
+  .sc-row b{font-variant-numeric:tabular-nums;white-space:nowrap;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">Module cancer de l'ovaire de l'EORTC (QLQ-OV28)</h1>
+    <p class="lead">Les patientes rapportent parfois les symptômes ou problèmes suivants. Pourriez-vous indiquer, s'il vous plaît, si, durant la semaine passée, vous avez été affectée par l'un de ces symptômes ou problèmes.</p>
+    <p class="lang-note">Version française officielle (« French »). Outil sous licence (EORTC Quality of Life Group) : « Licence requise : oui ».</p>
+    <div class="pill-row">
+      <span class="pill">28 questions</span>
+    <span class="pill">6 minutes</span>
+    <span class="pill">28 scores de 0 à 100</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="period" id="period-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-text">Les scores vont de 0 à 100 : (moyenne des réponses − 1) ÷ 3 × 100, soit ici un score par question. Les échelles à plusieurs questions du manuel EORTC ne sont pas recalculées dans cette page.</p>
+    <div id="rows-all"></div>
+    <p class="result-text" style="margin-top:18px">Aucun seuil clinique officiel n'est repris ici : ces scores se lisent avec la personne, et de préférence en comparaison de ses scores antérieurs. Ce module complète le questionnaire de base QLQ-C30 (questions 1 à 30), non inclus dans cette page.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">QLQ-OV28 © 1997 EORTC Quality of Life Group, tous droits réservés. Outil d'évaluation de la qualité de vie dans le cancer de l'ovaire, ne remplace pas une évaluation clinique.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var DEFOPTS = ["Pas du tout", "Un peu", "Assez", "Beaucoup"];
+  var items = [
+ {
+  "n": "31",
+  "t": "Avez-vous eu mal au ventre ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "32",
+  "t": "Vous êtes-vous sentie ballonnée ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "33",
+  "t": "Avez-vous eu le sentiment gênant que vos vêtements vous serraient ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "34",
+  "t": "Avez-vous été gênée par des modifications du transit intestinal secondaires à votre maladie ou à votre traitement ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "35",
+  "t": "Avez-vous été gênée par des gaz ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "36",
+  "t": "Vous êtes-vous sentie rassasiée trop vite ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "37",
+  "t": "Avez-vous eu des acidités ou des brûlures d'estomac ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "38",
+  "t": "Avez-vous perdu des cheveux ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "39",
+  "t": "Répondez à cette question uniquement si vous avez perdu des cheveux : la perte de vos cheveux vous a-t-elle contrariée ?",
+  "p": "Au cours de la semaine passée :",
+  "c": {
+   "i": 7,
+   "gt": 1
+  }
+ },
+ {
+  "n": "40",
+  "t": "La nourriture et la boisson avaient-elles un goût inhabituel ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "41",
+  "t": "Avez-vous eu des picotements aux mains ou aux pieds ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "42",
+  "t": "Avez-vous eu les doigts ou les orteils engourdis ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "43",
+  "t": "Avez-vous ressenti une faiblesse des bras ou des jambes ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "44",
+  "t": "Avez-vous eu mal dans les muscles ou les articulations ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "45",
+  "t": "Avez-vous eu des problèmes d'audition ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "46",
+  "t": "Avez-vous uriné fréquemment ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "47",
+  "t": "Avez-vous eu des problèmes de peau (peau sèche, démangeaisons, peau qui pèle) ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "48",
+  "t": "Avez-vous eu des bouffées de chaleur ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "49",
+  "t": "Avez-vous eu des sueurs nocturnes ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "50",
+  "t": "Vous êtes-vous sentie moins attirante du fait de votre maladie ou de votre traitement ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "51",
+  "t": "Votre corps vous a-t-il déplu ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "52",
+  "t": "Dans quelle mesure votre maladie a-t-elle été un poids pour vous ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "53",
+  "t": "Dans quelle mesure votre traitement a-t-il été un poids pour vous ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "54",
+  "t": "Vous faisiez-vous du souci pour votre santé dans l'avenir ?",
+  "p": "Au cours de la semaine passée :"
+ },
+ {
+  "n": "55",
+  "t": "Dans quelle mesure vous êtes-vous intéressée à la sexualité ?",
+  "p": "Au cours des quatre dernières semaines :"
+ },
+ {
+  "n": "56",
+  "t": "Avez-vous eu des relations sexuelles ?",
+  "p": "Au cours des quatre dernières semaines :"
+ },
+ {
+  "n": "57",
+  "t": "Dans quelle mesure l'activité sexuelle vous a-t-elle procuré du plaisir ?",
+  "p": "Au cours des quatre dernières semaines :",
+  "c": {
+   "i": 25,
+   "gt": 1
+  }
+ },
+ {
+  "n": "58",
+  "t": "Avez-vous été gênée par une sécheresse vaginale durant vos rapports ?",
+  "p": "Au cours des quatre dernières semaines :",
+  "c": {
+   "i": 25,
+   "gt": 1
+  }
+ }
+];
+  var groups = [
+ {
+  "title": "Questions isolées : plus le score est élevé, plus le symptôme ou le problème est important",
+  "rows": [
+   {
+    "l": "Douleur au ventre (question 31)",
+    "it": [
+     0
+    ]
+   },
+   {
+    "l": "Ballonnement (question 32)",
+    "it": [
+     1
+    ]
+   },
+   {
+    "l": "Vêtements serrés (question 33)",
+    "it": [
+     2
+    ]
+   },
+   {
+    "l": "Modifications du transit intestinal (question 34)",
+    "it": [
+     3
+    ]
+   },
+   {
+    "l": "Gaz (question 35)",
+    "it": [
+     4
+    ]
+   },
+   {
+    "l": "Satiété trop rapide (question 36)",
+    "it": [
+     5
+    ]
+   },
+   {
+    "l": "Acidités, brûlures d'estomac (question 37)",
+    "it": [
+     6
+    ]
+   },
+   {
+    "l": "Perte de cheveux (question 38)",
+    "it": [
+     7
+    ]
+   },
+   {
+    "l": "Contrariété liée à la perte de cheveux (question 39)",
+    "it": [
+     8
+    ]
+   },
+   {
+    "l": "Goût inhabituel (question 40)",
+    "it": [
+     9
+    ]
+   },
+   {
+    "l": "Picotements des mains ou des pieds (question 41)",
+    "it": [
+     10
+    ]
+   },
+   {
+    "l": "Doigts ou orteils engourdis (question 42)",
+    "it": [
+     11
+    ]
+   },
+   {
+    "l": "Faiblesse des bras ou des jambes (question 43)",
+    "it": [
+     12
+    ]
+   },
+   {
+    "l": "Douleurs musculaires ou articulaires (question 44)",
+    "it": [
+     13
+    ]
+   },
+   {
+    "l": "Problèmes d'audition (question 45)",
+    "it": [
+     14
+    ]
+   },
+   {
+    "l": "Envie fréquente d'uriner (question 46)",
+    "it": [
+     15
+    ]
+   },
+   {
+    "l": "Problèmes de peau (question 47)",
+    "it": [
+     16
+    ]
+   },
+   {
+    "l": "Bouffées de chaleur (question 48)",
+    "it": [
+     17
+    ]
+   },
+   {
+    "l": "Sueurs nocturnes (question 49)",
+    "it": [
+     18
+    ]
+   },
+   {
+    "l": "Se sentir moins attirante (question 50)",
+    "it": [
+     19
+    ]
+   },
+   {
+    "l": "Corps déplaisant (question 51)",
+    "it": [
+     20
+    ]
+   },
+   {
+    "l": "Maladie vécue comme un poids (question 52)",
+    "it": [
+     21
+    ]
+   },
+   {
+    "l": "Traitement vécu comme un poids (question 53)",
+    "it": [
+     22
+    ]
+   },
+   {
+    "l": "Souci pour la santé à venir (question 54)",
+    "it": [
+     23
+    ]
+   },
+   {
+    "l": "Sécheresse vaginale durant les rapports (question 58)",
+    "it": [
+     27
+    ]
+   }
+  ]
+ },
+ {
+  "title": "Questions isolées d'intérêt, d'activité ou de plaisir sexuels : plus le score est élevé, plus l'intérêt, l'activité ou le plaisir sont importants",
+  "rows": [
+   {
+    "l": "Intérêt pour la sexualité (question 55)",
+    "it": [
+     24
+    ]
+   },
+   {
+    "l": "Relations sexuelles (question 56)",
+    "it": [
+     25
+    ]
+   },
+   {
+    "l": "Plaisir lié à l'activité sexuelle (question 57)",
+    "it": [
+     26
+    ]
+   }
+  ]
+ }
+];
+  var infos = [];
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function active(i){
+    var c = items[i].c;
+    if(!c) return true;
+    if(!active(c.i)) return false;
+    var a = answers[c.i];
+    if(a === null) return false;
+    if(c.eq !== undefined) return a === c.eq;
+    if(c.gt !== undefined) return a > c.gt;
+    return true;
+  }
+  function nextIdx(i){ var j = i + 1; while(j < items.length && !active(j)) j++; return j; }
+  function prevIdx(i){ var j = i - 1; while(j >= 0 && !active(j)) j--; return j; }
+  function position(i){
+    var k = 0, tot = 0;
+    for(var j = 0; j < items.length; j++){ if(active(j)){ tot++; if(j <= i) k++; } }
+    return [k, tot];
+  }
+  function optsOf(i){
+    var it = items[i];
+    var base = it.o ? it.o : DEFOPTS;
+    var out = base.map(function(l, k){ return {v: k + 1, l: l}; });
+    if(it.na) out.push({v: 0, l: 'Non concerné(e)'});
+    return out;
+  }
+
+  function renderQuestion(){
+    var pos = position(idx);
+    var it = items[idx];
+    document.getElementById('progress-text').textContent = (it.n ? 'Question ' + it.n + ' — ' : '') + pos[0] + ' / ' + pos[1];
+    document.getElementById('period-text').textContent = it.p || '';
+    document.getElementById('q-text').textContent = it.t;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    optsOf(idx).forEach(function(o){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === o.v ? ' selected' : '');
+      d.textContent = o.l;
+      d.addEventListener('click', function(){ answers[idx] = o.v; renderQuestion(); });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = prevIdx(idx) < 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = nextIdx(idx) >= items.length ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    var p = prevIdx(idx);
+    if (p >= 0){ idx = p; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    var n = nextIdx(idx);
+    if (n < items.length){ idx = n; renderQuestion(); } else { showResult(); }
+  });
+
+  // Score EORTC : (moyenne des réponses - 1) / 3 x 100, sur les questions actives et répondues
+  function score(ids){
+    var s = 0, k = 0;
+    ids.forEach(function(i){
+      if(active(i) && answers[i] !== null && answers[i] > 0){ s += answers[i]; k++; }
+    });
+    if(!k) return null;
+    return Math.round(((s / k) - 1) / 3 * 100);
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var box = document.getElementById('rows-all');
+    box.innerHTML = '';
+    function row(a, b){
+      var d = document.createElement('div'); d.className = 'sc-row';
+      var x = document.createElement('span'); x.textContent = a;
+      var y = document.createElement('b'); y.textContent = b;
+      d.appendChild(x); d.appendChild(y); box.appendChild(d);
+    }
+    groups.forEach(function(g){
+      var t = document.createElement('p'); t.className = 'sc-title'; t.textContent = g.title; box.appendChild(t);
+      g.rows.forEach(function(r){
+        var v = score(r.it);
+        if(v === null && r.it.every(function(i){ return !active(i) && items[i].c && items[i].c.eq !== undefined; })) return;
+        row(r.l, v === null ? 'non applicable' : v + ' / 100');
+      });
+    });
+    if(infos.length){
+      var t2 = document.createElement('p'); t2.className = 'sc-title';
+      t2.textContent = 'Informations recueillies, non cotées';
+      box.appendChild(t2);
+      infos.forEach(function(r){
+        var i = r.it;
+        var txt = 'non applicable';
+        if(active(i) && answers[i] !== null){
+          var lab = optsOf(i).filter(function(o){ return o.v === answers[i]; })[0];
+          txt = lab ? lab.l : '';
+        }
+        row(r.l, txt);
+      });
+    }
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Module cancer de l'ovaire de l'EORTC (QLQ-OV28)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#3B8C86 0%,#99D0CB 55%,#164643 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,245,235,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#164643;background:#DFF1EF;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#3B8C86;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#164643;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">QLQ-OV28</span></div>
+
+  <h1 class="serif">Module cancer de l'ovaire de l'EORTC (QLQ-OV28)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">EORTC QLQ-OV28, module spécifique — EORTC Quality of Life Group</p>
+  <div class="meta-row">
+    <span class="pill">28 questions</span>
+    <span class="pill">6 minutes</span>
+    <span class="pill">28 scores de 0 à 100</span>
+    <span class="pill">Français</span>
+    <span class="pill">Licence requise : oui</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="qlq-ov28.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le QLQ-OV28 est le module « cancer de l'ovaire » de l'EORTC. Il complète le questionnaire de base QLQ-C30 et explore, en 28 questions numérotées de 31 à 58, les symptômes abdominaux et digestifs, les effets secondaires de la chimiothérapie (cheveux, goût, picotements, engourdissements, audition, peau), les symptômes hormonaux, l'image du corps, le vécu de la maladie et du traitement, et la sexualité. Chaque question se cote de 1 (pas du tout) à 4 (beaucoup) ; les questions 31 à 54 portent sur la semaine passée, les questions 55 à 58 sur les quatre dernières semaines. La question 39 n'est posée qu'en cas de perte de cheveux (question 38 supérieure à « pas du tout »), les questions 57 et 58 qu'en cas de relations sexuelles (question 56 supérieure à « pas du tout »). Version française officielle.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Cette page restitue un score de 0 à 100 par question : (réponse − 1) ÷ 3 × 100, sans recalcul des échelles à plusieurs questions définies par le manuel de cotation de l'EORTC (échelles abdominales et gastro-intestinales, neuropathie périphérique, effets secondaires de la chimiothérapie, symptômes hormonaux, image du corps, attitude face à la maladie et au traitement), dont la composition exacte n'a pas pu être vérifiée dans une source accessible. Un score élevé signifie plus de symptômes, de gêne ou de souci, sauf pour l'intérêt pour la sexualité (55), les relations sexuelles (56) et le plaisir sexuel (57), où il signifie plus d'intérêt, d'activité ou de plaisir.</p>
+    <p>Aucun seuil clinique officiel n'est repris ici. Pour obtenir les scores d'échelles et les comparer à des données publiées, appliquer le manuel de cotation de l'EORTC aux réponses de la patiente.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p><strong>Licence requise : oui.</strong> QLQ-OV28 © 1997 EORTC Study Group on Quality of Life, tous droits réservés (module de phase III). Usage académique non financé par l'industrie : gratuit sur demande auprès du groupe EORTC Quality of Life (conditions d'utilisation, qol.eortc.org) ; tout usage commercial exige une convention de licence payante. Instrument construit ici malgré la licence, conformément à la décision du 30/09/2026 ; la diffusion publique reste soumise à l'autorisation du détenteur des droits.</p>
+    <p class="source-note">Texte des items : document officiel « QLQ-OV28 — French », EORTC Quality of Life Group (qol.eortc.org, hébergé sur eortc.be), 28 items numérotés 31 à 58. Références : Cull A. et al., 2001, British Journal of Cancer ; Greimel E. et al., 2003, European Journal of Cancer.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

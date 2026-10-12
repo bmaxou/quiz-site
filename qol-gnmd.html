@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>QoL-gNMD — Qualité de vie dans les maladies neuromusculaires génétiques</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#3E6B54;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .period{font-size:12.5px;font-weight:600;color:#3E6B54;margin:0 0 8px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#3E6B54;background:#E3EFE8;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#3E6B54;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#3E6B54;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 20px;}
+  .sc-title{font-size:13px;font-weight:700;color:#3E6B54;margin:18px 0 6px;}
+  .sc-row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-top:1px solid #EFEBE1;font-size:14px;}
+  .sc-row b{font-variant-numeric:tabular-nums;white-space:nowrap;text-align:right;}
+  .sc-row small{display:block;font-weight:400;color:#9A9E90;font-size:11.5px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">QoL-gNMD — Qualité de vie dans les maladies neuromusculaires génétiques</h1>
+    <p class="lead">Ce questionnaire explore votre qualité de vie en lien avec votre maladie neuromusculaire à travers 26 questions. Répondez à toutes les questions : votre réponse doit être spontanée, il n'y a pas de bonne ou mauvaise réponse.</p>
+    <p class="lang-note">Version française originale (QoL-NMD v1.0, Dany et al.). Outil sous licence (équipe de Reims) : « Licence requise : oui ».</p>
+    <div class="pill-row">
+      <span class="pill">26 questions</span>
+      <span class="pill">5 minutes</span>
+      <span class="pill">3 domaines</span>
+      <span class="pill">Mesure standardisée (score T)</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="period" id="period-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-max" style="margin-top:0">Trois domaines, chacun converti en mesure standardisée (score T : moyenne 50, écart-type 10, plus la valeur est élevée, meilleure est la qualité de vie).</p>
+    <div id="dom-rows"></div>
+    <p class="sc-title">Questions générales (non intégrées aux domaines)</p>
+    <div class="sc-row"><span>Santé ces 4 dernières semaines</span><b id="gen-1"></b></div>
+    <div class="sc-row"><span>Qualité de vie ces 4 dernières semaines</span><b id="gen-2"></b></div>
+    <p class="result-text" style="margin-top:18px">Chaque domaine se cote par la somme des réponses (0 = situation la moins favorable, aucun item inversé), convertie à l'aide de la table de conversion publiée par les auteurs ; il n'y a pas de score global. Aucun seuil clinique n'est repris ici : les mesures se lisent surtout dans le temps et par rapport à la situation clinique.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">QoL-gNMD (QoL-NMD v1.0) — Dany, Boyer et al., Université de Reims Champagne-Ardenne. Mesure de la qualité de vie dans les maladies neuromusculaires génétiques lentement progressives, ne remplace pas une évaluation clinique.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [{"t": "Comment avez-vous trouvé votre santé ces 4 dernières semaines compte-tenu de votre maladie neuromusculaire ?", "p": "Questions générales (non cotées dans les domaines)", "o": [[0, "Mauvaise"], [1, "Moyenne"], [2, "Bonne"], [3, "Excellente"]], "dom": 0}, {"t": "Comment avez-vous trouvé votre qualité de vie en rapport avec votre maladie neuromusculaire, ces 4 dernières semaines ?", "p": "Questions générales (non cotées dans les domaines)", "o": [[0, "Mauvaise"], [1, "Moyenne"], [2, "Bonne"], [3, "Excellente"]], "dom": 0}, {"t": "Avez-vous éprouvé une fatigue physique le matin au réveil due à votre maladie neuromusculaire ?", "p": "Partie I. L’impact de vos symptômes corporels - Concernant l'influence de votre maladie neuromusculaire sur votre santé ces 4 dernières semaines :", "o": [[0, "Tous les matins"], [1, "Souvent"], [2, "Parfois"], [3, "Jamais"]], "dom": 1}, {"t": "En raison de votre maladie neuromusculaire, avez-vous eu besoin de vous reposer dans la journée ?", "p": "Partie I. L’impact de vos symptômes corporels - Concernant l'influence de votre maladie neuromusculaire sur votre santé ces 4 dernières semaines :", "o": [[0, "Plusieurs fois par jour"], [1, "Une fois par jour"], [2, "Parfois mais pas tous les jours"], [3, "Jamais"]], "dom": 1}, {"t": "Compte-tenu de votre maladie neuromusculaire, quelle a été la qualité de votre sommeil ?", "p": "Partie I. L’impact de vos symptômes corporels - Concernant l'influence de votre maladie neuromusculaire sur votre santé ces 4 dernières semaines :", "o": [[0, "Mauvaise"], [1, "Moyenne"], [2, "Bonne"], [3, "Excellente"]], "dom": 1}, {"t": "Des douleurs liées à votre maladie neuromusculaire ont-elles limité vos activités quotidiennes ?", "p": "Partie I. L’impact de vos symptômes corporels - Concernant l'influence de votre maladie neuromusculaire sur votre santé ces 4 dernières semaines :", "o": [[0, "Tous les jours"], [1, "Parfois mais pas tous les jours"], [2, "Jamais"]], "dom": 1}, {"t": "A cause de votre maladie neuromusculaire, avez-vous été gêné(e) par des envies fréquentes d’uriner?", "p": "Partie I. L’impact de vos symptômes corporels - Concernant l'influence de votre maladie neuromusculaire sur votre santé ces 4 dernières semaines :", "o": [[0, "Oui"], [1, "Non"]], "dom": 1}, {"t": "Avez-vous éprouvé des difficultés pour rester concentré(e) sur des tâches de la vie courante, en raison de votre maladie neuromusculaire?", "p": "Partie I. L’impact de vos symptômes corporels - Concernant l'influence de votre maladie neuromusculaire sur votre santé ces 4 dernières semaines :", "o": [[0, "Très souvent"], [1, "Souvent"], [2, "Parfois"], [3, "Jamais"]], "dom": 1}, {"t": "Avez-vous éprouvé des difficultés de mémoire en raison de votre maladie neuromusculaire?", "p": "Partie I. L’impact de vos symptômes corporels - Concernant l'influence de votre maladie neuromusculaire sur votre santé ces 4 dernières semaines :", "o": [[0, "Très souvent"], [1, "Souvent"], [2, "Parfois"], [3, "Jamais"]], "dom": 1}, {"t": "Votre maladie neuromusculaire vous angoisse-t-elle ?", "p": "Partie II. Perception de soi - Précisez la nature de vos sentiments aujourd’hui vis-à-vis de votre maladie neuromusculaire.", "o": [[0, "Très souvent"], [1, "Souvent"], [2, "Rarement"], [3, "Jamais"]], "dom": 2}, {"t": "La maladie neuromusculaire influence-t-elle défavorablement votre moral ?", "p": "Partie II. Perception de soi - Précisez la nature de vos sentiments aujourd’hui vis-à-vis de votre maladie neuromusculaire.", "o": [[0, "Très souvent"], [1, "Souvent"], [2, "Rarement"], [3, "Jamais"]], "dom": 2}, {"t": "Votre maladie neuromusculaire vous rend-elle :", "p": "Partie II. Perception de soi - Précisez la nature de vos sentiments aujourd’hui vis-à-vis de votre maladie neuromusculaire.", "o": [[0, "Extrêmement irritable"], [1, "Plus irritable"], [2, "Ni plus, ni moins irritable"], [3, "Moins irritable"]], "dom": 2}, {"t": "Vous arrive-t-il de penser qu’à l’avenir, en raison de votre maladie neuromusculaire, vous risquez de solliciter davantage vos proches ?", "p": "Partie II. Perception de soi - Précisez la nature de vos sentiments aujourd’hui vis-à-vis de votre maladie neuromusculaire.", "o": [[0, "Très souvent"], [1, "Souvent"], [2, "Rarement"], [3, "Jamais"]], "dom": 2}, {"t": "Vos projets d'avenir sont-ils influencés par votre maladie neuromusculaire ?", "p": "Partie II. Perception de soi - Précisez la nature de vos sentiments aujourd’hui vis-à-vis de votre maladie neuromusculaire.", "o": [[0, "Très souvent"], [1, "Souvent"], [2, "Parfois"], [3, "Jamais"]], "dom": 2}, {"t": "Votre maladie neuromusculaire vous empêche-t-elle de diriger votre vie ?", "p": "Partie II. Perception de soi - Précisez la nature de vos sentiments aujourd’hui vis-à-vis de votre maladie neuromusculaire.", "o": [[0, "Très souvent"], [1, "Souvent"], [2, "Parfois"], [3, "Jamais"]], "dom": 2}, {"t": "Pensez-vous que votre maladie neuromusculaire modifie le regard que les autres portent sur vous ?", "p": "Partie II. Perception de soi - Précisez la nature de vos sentiments aujourd’hui vis-à-vis de votre maladie neuromusculaire.", "o": [[0, "Énormément"], [1, "Beaucoup"], [2, "Un peu"], [3, "Pas du tout"]], "dom": 2}, {"t": "Votre maladie neuromusculaire gêne-t-elle votre vie amoureuse ?", "p": "Partie II. Perception de soi - Précisez la nature de vos sentiments aujourd’hui vis-à-vis de votre maladie neuromusculaire.", "o": [[0, "Très souvent"], [1, "Souvent"], [2, "Parfois"], [3, "Jamais"]], "dom": 2}, {"t": "Vous êtes-vous senti(e) libre de vous déplacer seul(e) en dehors de votre domicile compte-tenu de votre maladie neuromusculaire ?", "p": "Partie III. Déplacements et vie sociale - Indiquez-nous vos impressions sur vos possibilités de déplacement durant ces 4 dernières semaines ?", "o": [[0, "Jamais"], [1, "Parfois"], [2, "Souvent"], [3, "Très souvent"]], "dom": 3}, {"t": "En raison de votre maladie neuromusculaire, avez-vous rencontré des difficultés pour vous déplacer dans votre lieu de vie ?", "p": "Partie III. Déplacements et vie sociale - Indiquez-nous vos impressions sur vos possibilités de déplacement durant ces 4 dernières semaines ?", "o": [[0, "Très souvent"], [1, "Souvent"], [2, "Parfois"], [3, "Jamais"]], "dom": 3}, {"t": "En raison de votre maladie neuromusculaire, avez-vous rencontré des difficultés pour vous déplacer dans la maison de vos proches (amis et/ou famille) ?", "p": "Partie III. Déplacements et vie sociale - Indiquez-nous vos impressions sur vos possibilités de déplacement durant ces 4 dernières semaines ?", "o": [[0, "Très souvent"], [1, "Souvent"], [2, "Parfois"], [3, "Jamais"]], "dom": 3}, {"t": "En raison de votre maladie neuromusculaire, l'angoisse de vous déplacer seul(e), a-t-elle limité vos sorties à l'extérieur ?", "p": "Partie III. Déplacements et vie sociale - Indiquez-nous vos impressions sur vos possibilités de déplacement durant ces 4 dernières semaines ?", "o": [[0, "Très souvent"], [1, "Souvent"], [2, "Parfois"], [3, "Jamais"]], "dom": 3}, {"t": "Avez-vous évité des lieux en raison du risque de chutes (en marchant ou en vous déplaçant en fauteuil) ?", "p": "Partie III. Déplacements et vie sociale - Indiquez-nous vos impressions sur vos possibilités de déplacement durant ces 4 dernières semaines ?", "o": [[0, "Très souvent"], [1, "Souvent"], [2, "Parfois"], [3, "Jamais"]], "dom": 3}, {"t": "L'accès aux toilettes limite-t-il vos activités à l'extérieur de votre domicile compte tenu de votre maladie neuromusculaire?", "p": "Ces questions abordent les aménagements extérieurs (lieux publics et transports) autour de votre lieu de vie et l'impact de votre maladie neuromusculaire sur vos relations familiales et amicales ces 12 derniers mois.", "o": [[0, "Très souvent"], [1, "Souvent"], [2, "Parfois"], [3, "Jamais"]], "dom": 3}, {"t": "Votre maladie neuromusculaire vous a-t-elle empêché(e) d'avoir des activités (loisirs, restaurant, spectacles, sport, …) ?", "p": "Ces questions abordent les aménagements extérieurs (lieux publics et transports) autour de votre lieu de vie et l'impact de votre maladie neuromusculaire sur vos relations familiales et amicales ces 12 derniers mois.", "o": [[0, "Très souvent"], [1, "Souvent"], [2, "Parfois"], [3, "Jamais"]], "dom": 3}, {"t": "En raison de votre maladie neuromusculaire, pensez-vous que le froid a limité vos activités plus que pour les autres personnes?", "p": "Ces questions abordent les aménagements extérieurs (lieux publics et transports) autour de votre lieu de vie et l'impact de votre maladie neuromusculaire sur vos relations familiales et amicales ces 12 derniers mois.", "o": [[0, "Très souvent"], [1, "Souvent"], [2, "Parfois"], [3, "Jamais"]], "dom": 3}, {"t": "Votre maladie neuromusculaire limite-t-elle votre participation aux activités familiales?", "p": "Ces questions abordent les aménagements extérieurs (lieux publics et transports) autour de votre lieu de vie et l'impact de votre maladie neuromusculaire sur vos relations familiales et amicales ces 12 derniers mois.", "o": [[0, "Très souvent"], [1, "Souvent"], [2, "Parfois"], [3, "Jamais"]], "dom": 3}];
+  var conv = {"d1": {"0": [24.01, "13.63 ; 34.38"], "1": [26.89, "17.33 ; 36.44"], "2": [29.38, "20.39 ; 38.37"], "3": [31.63, "23.02 ; 40.23"], "4": [33.72, "25.36 ; 42.08"], "5": [35.71, "27.49 ; 43.94"], "6": [37.67, "29.50 ; 45.84"], "7": [39.61, "31.43 ; 47.79"], "8": [41.58, "33.32 ; 49.84"], "9": [43.59, "35.20 ; 51.98"], "10": [45.68, "37.11 ; 54.25"], "11": [47.87, "39.08 ; 56.67"], "12": [50.2, "41.12 ; 59.28"], "13": [52.68, "43.27 ; 62.10"], "14": [55.37, "45.57 ; 65.17"], "15": [58.29, "48.04 ; 68.53"], "16": [61.5, "50.73 ; 72.27"], "17": [65.08, "53.66 ; 76.50"], "18": [69.15, "56.88 ; 81.42"]}, "d2": {"0": [23.5, "12.70 ; 34.31"], "1": [26.62, "16.63 ; 36.61"], "2": [29.31, "19.97 ; 38.66"], "3": [31.7, "22.86 ; 40.53"], "4": [33.84, "25.42 ; 42.27"], "5": [35.82, "27.71 ; 43.93"], "6": [37.66, "29.79 ; 45.52"], "7": [39.4, "31.71 ; 47.09"], "8": [41.08, "33.51 ; 48.66"], "9": [42.72, "35.21 ; 50.23"], "10": [44.35, "36.85 ; 51.84"], "11": [45.98, "38.45 ; 53.50"], "12": [47.62, "40.04 ; 55.21"], "13": [49.31, "41.62 ; 56.99"], "14": [51.04, "43.24 ; 58.84"], "15": [52.83, "44.88 ; 60.77"], "16": [54.69, "46.58 ; 62.79"], "17": [56.62, "48.34 ; 64.90"], "18": [58.65, "50.17 ; 67.13"], "19": [60.78, "52.07 ; 69.50"], "20": [63.05, "54.05 ; 72.05"], "21": [65.48, "56.12 ; 74.83"], "22": [68.13, "58.31 ; 77.94"], "23": [71.07, "60.66 ; 81.49"], "24": [74.44, "63.24 ; 85.64"]}, "d3": {"0": [24.21, "13.85 ; 34.56"], "1": [26.88, "17.40 ; 36.35"], "2": [29.14, "20.34 ; 37.95"], "3": [31.13, "22.85 ; 39.41"], "4": [32.9, "25.03 ; 40.77"], "5": [34.51, "26.97 ; 42.05"], "6": [36.0, "28.73 ; 43.27"], "7": [37.4, "30.34 ; 44.46"], "8": [38.72, "31.84 ; 45.60"], "9": [39.98, "33.24 ; 46.73"], "10": [41.2, "34.56 ; 47.85"], "11": [42.39, "35.82 ; 48.96"], "12": [43.56, "37.03 ; 50.08"], "13": [44.71, "38.21 ; 51.22"], "14": [45.86, "39.35 ; 52.38"], "15": [47.03, "40.47 ; 53.58"], "16": [48.21, "41.58 ; 54.83"], "17": [49.42, "42.69 ; 56.14"], "18": [50.67, "43.81 ; 57.53"], "19": [51.99, "44.94 ; 59.03"], "20": [53.38, "46.11 ; 60.65"], "21": [54.87, "47.31 ; 62.44"], "22": [56.5, "48.58 ; 64.43"], "23": [58.31, "49.94 ; 66.68"], "24": [60.34, "51.41 ; 69.28"], "25": [62.68, "53.05 ; 72.32"], "26": [65.44, "54.92 ; 75.97"], "27": [68.78, "57.12 ; 80.44"]}};
+  var dnames = ["Impact des symptômes corporels", "Perception de soi", "Déplacements et vie sociale (activités et participation sociale)"];
+  var dmax = [18, 24, 27];
+
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function renderQuestion(){
+    var it = items[idx];
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('period-text').textContent = it.p || '';
+    document.getElementById('q-text').textContent = it.t;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    it.o.forEach(function(o){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === o[0] ? ' selected' : '');
+      d.textContent = o[1];
+      d.addEventListener('click', function(){
+        answers[idx] = o[0];
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var sums = [0,0,0];
+    items.forEach(function(it,i){ if(it.dom > 0){ sums[it.dom-1] += answers[i]; } });
+    var box = document.getElementById('dom-rows');
+    box.innerHTML = '';
+    for(var k=0;k<3;k++){
+      var c = conv['d'+(k+1)][sums[k]];
+      var r = document.createElement('div'); r.className = 'sc-row';
+      var a = document.createElement('span'); a.textContent = dnames[k];
+      var sm = document.createElement('small'); sm.textContent = 'Somme brute : ' + sums[k] + ' / ' + dmax[k] + ' — intervalle de confiance à 95 % : ' + c[1]; a.appendChild(sm);
+      var b = document.createElement('b'); b.textContent = c[0].toFixed(2);
+      r.appendChild(a); r.appendChild(b); box.appendChild(r);
+    }
+    function lab(i){ var v = answers[i], l = ''; items[i].o.forEach(function(o){ if(o[0] === v){ l = o[1]; } }); return l; }
+    document.getElementById('gen-1').textContent = lab(0);
+    document.getElementById('gen-2').textContent = lab(1);
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>QoL-gNMD — Qualité de vie dans les maladies neuromusculaires génétiques</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#3E6B54 0%,#86B59C 55%,#173326 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,245,235,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#173326;background:#E3EFE8;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#3E6B54;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#173326;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">QoL-gNMD</span></div>
+
+  <h1 class="serif">Qualité de vie dans les maladies neuromusculaires génétiques lentement progressives (QoL-gNMD)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">QoL-NMD v1.0, devenu QoL-gNMD — Dany, Boyer et al. (CHU et Université de Reims Champagne-Ardenne), version française originale</p>
+  <div class="meta-row">
+    <span class="pill">26 questions</span>
+    <span class="pill">5 minutes</span>
+    <span class="pill">3 domaines</span>
+    <span class="pill">Mesure standardisée (score T)</span>
+    <span class="pill">Français</span>
+    <span class="pill">Licence requise : oui</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="qol-gnmd.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le QoL-gNMD (Quality of Life in genetic NeuroMuscular Diseases) est un questionnaire de qualité de vie liée à la santé construit spécifiquement pour des adultes atteints de maladies neuromusculaires génétiques lentement progressives (dystrophies musculaires, neuropathies héréditaires, myopathies, etc.), conçu dans une démarche de réponse à l'item (modèle de Rasch). Il comporte 26 items : 2 questions générales (santé et qualité de vie, non intégrées aux domaines) et 24 items répartis en trois domaines : impact des symptômes corporels (7 items), perception de soi (8 items) et déplacements et vie sociale, c'est-à-dire activités et participation sociale (9 items).</p>
+    <p>Période de référence : les 4 dernières semaines (12 derniers mois pour les 4 derniers items sur l'environnement, les relations familiales et amicales).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque réponse est cotée avec le chiffre figurant sur le questionnaire papier : 0 correspond toujours à la modalité la moins favorable (la plus favorable est 3, ou 2 pour l'item 6 et 1 pour l'item 7, à deux modalités) ; aucun item n'est inversé. La somme des réponses est calculée domaine par domaine (maximum 18, 24 et 27), puis convertie en mesure standardisée (score T, moyenne 50, écart-type 10, plus la valeur est élevée, meilleure est la qualité de vie) grâce à la table de conversion publiée par les auteurs, avec son intervalle de confiance à 95 %. La conversion n'est valable que si tous les items du domaine sont renseignés ; il n'y a pas de score global.</p>
+    <p>Aucun seuil clinique ni norme de population n'est repris ici. Le formulaire original annonce deux modes de calcul (« score recherche » et « score clinique ») et renvoie, pour le guide de cotation, à une demande écrite à l'équipe de Reims : cette page applique uniquement la conversion publiée dans la thèse de A. Dany (2016), sans prétendre reproduire le guide complet.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p><strong>Licence requise : oui.</strong> Questionnaire développé par l'équipe du Pr François-Constant Boyer (EA 3797, Université de Reims Champagne-Ardenne), « gratuit sur demande » à l'auteur correspondant, sans licence de réutilisation explicite. Instrument construit ici malgré la licence, conformément à la décision du 30/09/2026 ; la diffusion publique reste soumise à l'autorisation de l'équipe de Reims.</p>
+    <p class="source-note">Réserves de source : le texte français des 26 items et la table de conversion proviennent de la thèse d'Antoine Dany (Université de Reims Champagne-Ardenne, soutenue le 11/10/2016, theses.fr/2016REIMS013), annexe « Questionnaire QoL-NMD v1.0 » et article intégré « Quality of Life Measure in Patients with Slowly-progressive Neuromuscular Disease: Validation of the QoL-NMD » (Table 3) : il s'agit de la version française originale v1.0, dont la concordance mot à mot avec la version française publiée en 2017 n'a pas été vérifiée (l'article de 2017 n'est pas en accès libre) ; la structure (26 items, 3 domaines) et les modalités de réponse concordent avec la version anglaise officielle QoL-gNMD v1.0 (3 juillet 2018) diffusée par POD-NMD. Les consignes d'en-tête (« entourez la réponse ») sont adaptées à la passation à l'écran. Références : Dany A., Barbe C., Rapin A., Réveillère C., Hardouin J.-B., Morrone I. et al. (2015), « Construction of a Quality of Life Questionnaire for slowly progressive neuromuscular disease », Qual Life Res, 24(11), 2615-2623 ; Dany A., Rapin A., Lavrard B., Saoût V., Réveillère C., Bassez G. et al. (2017), « The quality of life in genetic neuromuscular disease questionnaire: Rasch validation of the French version », Muscle Nerve, 56(6), 1085-1091, DOI 10.1002/mus.25598.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

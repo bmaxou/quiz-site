@@ -1,0 +1,694 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Module bien-être spirituel de l'EORTC (QLQ-SWB32)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#2F6F8F;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .period{font-size:12.5px;font-weight:600;color:#2F6F8F;margin:0 0 8px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#2F6F8F;background:#E3F0F6;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#2F6F8F;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 20px;}
+  .sc-title{font-size:13px;font-weight:700;color:#2F6F8F;margin:18px 0 6px;}
+  .sc-row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-top:1px solid #EFEBE1;font-size:14px;}
+  .sc-row b{font-variant-numeric:tabular-nums;white-space:nowrap;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">Module bien-être spirituel de l'EORTC (QLQ-SWB32)</h1>
+    <p class="lead">Please respond to all of the statements yourself by circling the number that best applies to you. There are no “right” or “wrong” answers. The information that you provide will remain strictly confidential.</p>
+    <p class="lang-note">Items en anglais : le PDF français officiel présente deux fois le même texte aux questions 10 et 11 (anomalie), la version anglaise officielle a donc été retenue. Outil sous licence (EORTC Quality of Life Group) : « Licence requise : oui ».</p>
+    <div class="pill-row">
+      <span class="pill">32 questions</span>
+    <span class="pill">7 minutes</span>
+    <span class="pill">scores de 0 à 100 par question</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="period" id="period-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-text">Chaque question est cotée de 0 à 100 : (réponse − 1) ÷ (nombre de modalités − 1) × 100. Les échelles composites officielles du questionnaire (regroupement de plusieurs questions) ne sont pas recalculées ici : se reporter au manuel de cotation EORTC. Les questions marquées « Not applicable » ne sont pas cotées. La question 32 (évaluation globale du bien-être spirituel, de 0 à 7) est présentée à part, non cotée.</p>
+    <div id="rows-all"></div>
+    <p class="result-text" style="margin-top:18px">Aucun seuil clinique officiel n'est repris ici : ces scores se lisent avec la personne, et de préférence en comparaison de ses scores antérieurs. Le module peut compléter le questionnaire de base QLQ-C30 ; il n'est pas inclus dans cette page.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">QLQ-SWB32 © 2014 EORTC Groupe d'étude sur la qualité de la vie, tous droits réservés (version 6.3). Outil d'évaluation du bien-être spirituel, ne remplace pas une évaluation clinique.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var DEFOPTS = ["Not at all", "A little", "Quite a bit", "Very much"];
+  var items = [
+ {
+  "n": "1",
+  "t": "I have felt able to deal with problems",
+  "p": "During the past week :"
+ },
+ {
+  "n": "2",
+  "t": "I have felt at peace with myself",
+  "p": "During the past week :"
+ },
+ {
+  "n": "3",
+  "t": "I have been able to find things I enjoy doing",
+  "p": "During the past week :"
+ },
+ {
+  "n": "4",
+  "t": "I have felt able to forgive myself for things I have done",
+  "p": "During the past week :"
+ },
+ {
+  "n": "5",
+  "t": "I have felt troubled",
+  "p": "During the past week :"
+ },
+ {
+  "n": "6",
+  "t": "I have felt lonely",
+  "p": "During the past week :"
+ },
+ {
+  "n": "7",
+  "t": "I have worried about the future of people who are important to me",
+  "p": "During the past week :"
+ },
+ {
+  "n": "8",
+  "t": "I have felt able to share thoughts about life with people who are close to me",
+  "p": "During the past week :"
+ },
+ {
+  "n": "9",
+  "t": "I have felt loved by those who are important to me",
+  "p": "During the past week :"
+ },
+ {
+  "n": "10",
+  "t": "I have felt that I have someone to talk to about my feelings",
+  "p": "During the past week :"
+ },
+ {
+  "n": "11",
+  "t": "I have felt able to trust others",
+  "p": "During the past week :"
+ },
+ {
+  "n": "12",
+  "t": "I have felt able to forgive others for things they have done",
+  "p": "During the past week :"
+ },
+ {
+  "n": "13",
+  "t": "I have felt that I am valued as a person",
+  "p": "During the past week :"
+ },
+ {
+  "n": "14",
+  "t": "I have felt that my life is fulfilling",
+  "p": "During the past week :"
+ },
+ {
+  "n": "15",
+  "t": "I have felt that my life is worthwhile",
+  "p": "During the past week :"
+ },
+ {
+  "n": "16",
+  "t": "I have felt able to plan for the future",
+  "p": "During the past week :"
+ },
+ {
+  "n": "17",
+  "t": "I have had worries and/or concerns about the future",
+  "p": "During the past week :"
+ },
+ {
+  "n": "18",
+  "t": "I have wondered whether anything can be done for me",
+  "p": "During the past week :"
+ },
+ {
+  "n": "19",
+  "t": "I have felt that it is unfair that I am ill",
+  "p": "During the past week :"
+ },
+ {
+  "n": "20",
+  "t": "I have had time for quietness, prayer or meditation",
+  "p": "During the past week :"
+ },
+ {
+  "n": "21",
+  "t": "I have felt that it is important that other people pray for me",
+  "p": "During the past week :"
+ },
+ {
+  "n": "22",
+  "t": "I believe in God or in someone or something greater than myself",
+  "p": "More generally :"
+ },
+ {
+  "n": "23",
+  "t": "I have always believed in God or in someone or something greater than myself",
+  "p": "More generally :"
+ },
+ {
+  "n": "24",
+  "t": "My beliefs have changed since I have felt less well",
+  "p": "If you answered BOTH items 22 AND 23 “Not at all”, go to item 27; otherwise continue. More generally :",
+  "c": {
+   "any": [
+    21,
+    22
+   ]
+  }
+ },
+ {
+  "n": "25",
+  "t": "My beliefs have changed in the last few weeks",
+  "p": "If you answered BOTH items 22 AND 23 “Not at all”, go to item 27; otherwise continue. More generally :",
+  "c": {
+   "any": [
+    21,
+    22
+   ]
+  }
+ },
+ {
+  "n": "26",
+  "t": "I feel connected to God or to someone or something greater than myself",
+  "p": "If you answered BOTH items 22 AND 23 “Not at all”, go to item 27; otherwise continue. More generally :",
+  "c": {
+   "any": [
+    21,
+    22
+   ]
+  }
+ },
+ {
+  "n": "27",
+  "t": "I feel that I will live on through my words, deeds and/or influence on other people",
+  "p": "More generally :"
+ },
+ {
+  "n": "28",
+  "t": "My feelings about life have changed since I have felt less well",
+  "p": "More generally :"
+ },
+ {
+  "n": "29",
+  "t": "My feelings about life have changed in the last few weeks",
+  "p": "More generally :"
+ },
+ {
+  "n": "30",
+  "t": "I believe in life after death",
+  "p": "More generally :"
+ },
+ {
+  "n": "31",
+  "t": "I have spiritual wellbeing",
+  "p": "More generally :"
+ },
+ {
+  "n": "32",
+  "t": "How would you rate your overall spiritual wellbeing?",
+  "p": "Circle ONE number: 0 = Don't know / Can't answer, 1 = Very poor … 7 = Excellent",
+  "o": [
+   "0 — Don't know / Can't answer",
+   "1 — Very poor",
+   "2",
+   "3",
+   "4",
+   "5",
+   "6",
+   "7 — Excellent"
+  ],
+  "z": true
+ }
+];
+  var groups = [
+ {
+  "title": "Questions formulées en inquiétudes ou difficultés (Q5, Q6, Q7, Q17, Q18, Q19) : plus le score est élevé, plus le problème est important",
+  "rows": [
+   {
+    "l": "Q5 — I have felt troubled",
+    "it": [
+     4
+    ]
+   },
+   {
+    "l": "Q6 — I have felt lonely",
+    "it": [
+     5
+    ]
+   },
+   {
+    "l": "Q7 — I have worried about the future of people who are important to me",
+    "it": [
+     6
+    ]
+   },
+   {
+    "l": "Q17 — I have had worries and/or concerns about the future",
+    "it": [
+     16
+    ]
+   },
+   {
+    "l": "Q18 — I have wondered whether anything can be done for me",
+    "it": [
+     17
+    ]
+   },
+   {
+    "l": "Q19 — I have felt that it is unfair that I am ill",
+    "it": [
+     18
+    ]
+   }
+  ]
+ },
+ {
+  "title": "Questions formulées positivement ou de façon neutre (Q1 à Q4, Q8 à Q16, Q20 à Q31) : un score élevé = une réponse plus affirmative (cotation non inversée)",
+  "rows": [
+   {
+    "l": "Q1 — I have felt able to deal with problems",
+    "it": [
+     0
+    ]
+   },
+   {
+    "l": "Q2 — I have felt at peace with myself",
+    "it": [
+     1
+    ]
+   },
+   {
+    "l": "Q3 — I have been able to find things I enjoy doing",
+    "it": [
+     2
+    ]
+   },
+   {
+    "l": "Q4 — I have felt able to forgive myself for things I have done",
+    "it": [
+     3
+    ]
+   },
+   {
+    "l": "Q8 — I have felt able to share thoughts about life with people who are close to me",
+    "it": [
+     7
+    ]
+   },
+   {
+    "l": "Q9 — I have felt loved by those who are important to me",
+    "it": [
+     8
+    ]
+   },
+   {
+    "l": "Q10 — I have felt that I have someone to talk to about my feelings",
+    "it": [
+     9
+    ]
+   },
+   {
+    "l": "Q11 — I have felt able to trust others",
+    "it": [
+     10
+    ]
+   },
+   {
+    "l": "Q12 — I have felt able to forgive others for things they have done",
+    "it": [
+     11
+    ]
+   },
+   {
+    "l": "Q13 — I have felt that I am valued as a person",
+    "it": [
+     12
+    ]
+   },
+   {
+    "l": "Q14 — I have felt that my life is fulfilling",
+    "it": [
+     13
+    ]
+   },
+   {
+    "l": "Q15 — I have felt that my life is worthwhile",
+    "it": [
+     14
+    ]
+   },
+   {
+    "l": "Q16 — I have felt able to plan for the future",
+    "it": [
+     15
+    ]
+   },
+   {
+    "l": "Q20 — I have had time for quietness, prayer or meditation",
+    "it": [
+     19
+    ]
+   },
+   {
+    "l": "Q21 — I have felt that it is important that other people pray for me",
+    "it": [
+     20
+    ]
+   },
+   {
+    "l": "Q22 — I believe in God or in someone or something greater than myself",
+    "it": [
+     21
+    ]
+   },
+   {
+    "l": "Q23 — I have always believed in God or in someone or something greater than myself",
+    "it": [
+     22
+    ]
+   },
+   {
+    "l": "Q24 — My beliefs have changed since I have felt less well",
+    "it": [
+     23
+    ]
+   },
+   {
+    "l": "Q25 — My beliefs have changed in the last few weeks",
+    "it": [
+     24
+    ]
+   },
+   {
+    "l": "Q26 — I feel connected to God or to someone or something greater than myself",
+    "it": [
+     25
+    ]
+   },
+   {
+    "l": "Q27 — I feel that I will live on through my words, deeds and/or influence on other people",
+    "it": [
+     26
+    ]
+   },
+   {
+    "l": "Q28 — My feelings about life have changed since I have felt less well",
+    "it": [
+     27
+    ]
+   },
+   {
+    "l": "Q29 — My feelings about life have changed in the last few weeks",
+    "it": [
+     28
+    ]
+   },
+   {
+    "l": "Q30 — I believe in life after death",
+    "it": [
+     29
+    ]
+   },
+   {
+    "l": "Q31 — I have spiritual wellbeing",
+    "it": [
+     30
+    ]
+   }
+  ]
+ }
+];
+  var infos = [
+ {
+  "l": "Q32 — How would you rate your overall spiritual wellbeing?",
+  "it": 31
+ }
+];
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function active(i){
+    var c = items[i].c;
+    if(!c) return true;
+    if(c.any){ return c.any.some(function(j){ return active(j) && answers[j] !== null && answers[j] > 1; }); }
+    if(!active(c.i)) return false;
+    var a = answers[c.i];
+    if(a === null) return false;
+    if(c.eq !== undefined) return a === c.eq;
+    if(c.gt !== undefined) return a > c.gt;
+    return true;
+  }
+  function nextIdx(i){ var j = i + 1; while(j < items.length && !active(j)) j++; return j; }
+  function prevIdx(i){ var j = i - 1; while(j >= 0 && !active(j)) j--; return j; }
+  function position(i){
+    var k = 0, tot = 0;
+    for(var j = 0; j < items.length; j++){ if(active(j)){ tot++; if(j <= i) k++; } }
+    return [k, tot];
+  }
+  function optsOf(i){
+    var it = items[i];
+    var base = it.o ? it.o : DEFOPTS;
+    var out = base.map(function(l, k){ return {v: k + 1, l: l}; });
+    if(it.na) out.push({v: 0, l: "Not applicable"});
+    return out;
+  }
+
+  function renderQuestion(){
+    var pos = position(idx);
+    var it = items[idx];
+    document.getElementById('progress-text').textContent = (it.n ? 'Question ' + it.n + ' — ' : '') + pos[0] + ' / ' + pos[1];
+    document.getElementById('period-text').textContent = it.p || '';
+    document.getElementById('q-text').textContent = it.t;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    optsOf(idx).forEach(function(o){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === o.v ? ' selected' : '');
+      d.textContent = o.l;
+      d.addEventListener('click', function(){ answers[idx] = o.v; renderQuestion(); });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = prevIdx(idx) < 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = nextIdx(idx) >= items.length ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    var p = prevIdx(idx);
+    if (p >= 0){ idx = p; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    var n = nextIdx(idx);
+    if (n < items.length){ idx = n; renderQuestion(); } else { showResult(); }
+  });
+
+  // Score EORTC : (moyenne des réponses - 1) / 3 x 100, sur les questions actives et répondues
+  function score(ids){
+    var s = 0, k = 0;
+    ids.forEach(function(i){
+      if(active(i) && answers[i] !== null && answers[i] > 0){ s += answers[i]; k++; }
+    });
+    if(!k) return null;
+    var span = (items[ids[0]].o ? items[ids[0]].o.length : DEFOPTS.length) - 1;
+    return Math.round(((s / k) - 1) / span * 100);
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var box = document.getElementById('rows-all');
+    box.innerHTML = '';
+    function row(a, b){
+      var d = document.createElement('div'); d.className = 'sc-row';
+      var x = document.createElement('span'); x.textContent = a;
+      var y = document.createElement('b'); y.textContent = b;
+      d.appendChild(x); d.appendChild(y); box.appendChild(d);
+    }
+    groups.forEach(function(g){
+      var t = document.createElement('p'); t.className = 'sc-title'; t.textContent = g.title; box.appendChild(t); var shown = 0;
+      g.rows.forEach(function(r){
+        var v = score(r.it);
+        if(v === null && r.it.every(function(i){ return !active(i) && items[i].c && items[i].c.eq !== undefined; })) return;
+        row(r.l, v === null ? 'non applicable' : v + ' / 100'); shown++;
+      });
+      if(!shown) box.removeChild(t);
+    });
+    if(infos.length){
+      var t2 = document.createElement('p'); t2.className = 'sc-title';
+      t2.textContent = 'Informations recueillies, non cotées';
+      box.appendChild(t2);
+      infos.forEach(function(r){
+        var i = r.it;
+        var txt = 'non applicable';
+        if(active(i) && answers[i] !== null){
+          var lab = optsOf(i).filter(function(o){ return o.v === answers[i]; })[0];
+          txt = lab ? lab.l : '';
+        }
+        row(r.l, txt);
+      });
+    }
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Module bien-être spirituel de l'EORTC (QLQ-SWB32)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#7A6FA8 0%,#DAD3F0 55%,#322A5C 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,245,235,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#123B4F;background:#E3F0F6;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#2F6F8F;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#123B4F;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">QLQ-SWB32</span></div>
+
+  <h1 class="serif">Module bien-être spirituel de l'EORTC (QLQ-SWB32)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">EORTC QLQ-SWB32, module bien-être spirituel (soins palliatifs) — EORTC Quality of Life Group</p>
+  <div class="meta-row">
+    <span class="pill">32 questions</span>
+    <span class="pill">7 minutes</span>
+    <span class="pill">scores de 0 à 100 par question</span>
+    <span class="pill">Anglais</span>
+    <span class="pill">Licence requise : oui</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="qlq-swb32.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le QLQ-SWB32 est le module « bien-être spirituel » de l'EORTC, conçu pour les personnes atteintes d'un cancer en soins palliatifs. Il comprend 32 questions : 21 sur la semaine passée (capacité à faire face, paix intérieure, plaisirs, pardon de soi et des autres, inquiétude, solitude, relations avec les proches, sentiment d'être aimé et apprécié, sens et utilité de la vie, projets d'avenir, injustice ressentie, temps de calme, de prière ou de méditation), puis 10 questions sur les pensées, croyances et sentiments de manière plus générale (croyance en une réalité qui dépasse l'existence individuelle, évolution des croyances, sentiment de connexion, vie après la mort, bien-être spirituel), et enfin une évaluation globale du bien-être spirituel de 0 à 7. Chaque question se cote de 1 (not at all) à 4 (very much).</p>
+
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Les questions 1 à 31 sont cotées de 0 à 100 : (réponse − 1) ÷ 3 × 100. Cette page affiche un score par question ; le regroupement en échelles composites n'est pas recalculé ici (se reporter au manuel de cotation EORTC). Un score élevé signifie des inquiétudes ou difficultés plus importantes pour les questions formulées en ce sens, regroupées à part ; pour les autres questions, formulées positivement ou de façon neutre, un score élevé signifie une réponse plus affirmative (cotation non inversée). La question 32 (de 0 à 7, 0 = ne sait pas) est affichée telle que répondue. Comme l'indique le questionnaire, les questions 24 à 26 ne sont posées que si l'une au moins des questions 22 et 23 a reçu une réponse autre que « not at all ».</p>
+    <p>Aucun seuil clinique officiel n'est repris ici : ces scores se lisent avec le patient, et de préférence en comparaison de ses scores antérieurs.</p>
+
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p><strong>Licence requise : oui.</strong> QLQ-SWB32 © 2014 EORTC Groupe d'étude sur la qualité de la vie, tous droits réservés. Usage académique non financé par l'industrie : gratuit sur demande auprès du groupe EORTC Quality of Life (conditions d'utilisation, qol.eortc.org) ; tout usage commercial exige une convention de licence payante. Instrument construit ici malgré la licence, conformément à la décision du 30/09/2026 ; la diffusion publique reste soumise à l'autorisation du détenteur des droits.</p>
+    <p class="source-note">Texte des items : spécimen officiel anglais « EORTC QLQ-SWB32 » (version 6.3), EORTC Quality of Life Group (eortc.org), 32 items vérifiés par script contre le texte du PDF. Le PDF français officiel (« French (Europe) ») porte, aux questions 10 et 11, le même texte (« quelqu'un à qui parler de mes sentiments ») : la question 11 anglaise officielle (« I have felt able to trust others ») n'ayant pas de texte français officiel fiable, la version anglaise a été retenue. Cotation : EORTC QLQ-C30 Scoring Manual (transformation linéaire en scores de 0 à 100). Référence princeps non reprise ici : voir la fiche du module sur qol.eortc.org avant tout usage clinique.</p>
+
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1485 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Questionnaire de survivance après un cancer de l'EORTC (QLQ-SURV100)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#2F6F8F;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .period{font-size:12.5px;font-weight:600;color:#2F6F8F;margin:0 0 8px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#2F6F8F;background:#E3F0F6;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#2F6F8F;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 20px;}
+  .sc-title{font-size:13px;font-weight:700;color:#2F6F8F;margin:18px 0 6px;}
+  .sc-row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-top:1px solid #EFEBE1;font-size:14px;}
+  .sc-row b{font-variant-numeric:tabular-nums;white-space:nowrap;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">Questionnaire de survivance après un cancer de l'EORTC (QLQ-SURV100)</h1>
+    <p class="lead">We are interested in how you are doing now. Please answer all of the questions yourself by circling the number that best applies to you. Please answer according to the timeframe indicated above the questions. There are no right or wrong answers. The information that you provide will remain strictly confidential.</p>
+    <p class="lang-note">Items en anglais : version française officielle non retrouvée. Outil sous licence (EORTC Quality of Life Group) : « Licence requise : oui ». Module de phase IV.</p>
+    <div class="pill-row">
+      <span class="pill">100 questions</span>
+    <span class="pill">15 minutes</span>
+    <span class="pill">scores de 0 à 100 par question</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="period" id="period-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-text">Chaque question est cotée de 0 à 100 : (réponse − 1) ÷ (nombre de modalités − 1) × 100. Les échelles composites officielles du questionnaire (regroupement de plusieurs questions) ne sont pas recalculées ici : se reporter au manuel de cotation EORTC. Les questions marquées « Not applicable » ne sont pas cotées. Les questions 95 à 98 ne sont posées qu'en cas d'activité sexuelle sur les quatre dernières semaines (question 93).</p>
+    <div id="rows-all"></div>
+    <p class="result-text" style="margin-top:18px">Aucun seuil clinique officiel n'est repris ici : ces scores se lisent avec la personne, et de préférence en comparaison de ses scores antérieurs. Le sens d'un score dépend de la formulation de chaque question : un score élevé signifie une intensité ou un accord plus marqué avec la question posée (par exemple davantage de symptômes pour les questions 8 à 61, mais aussi davantage de relations plus solides ou de gratitude pour certaines questions 74 à 89) ; il n'est pas à lire comme un score unique de gravité. Pour les questions 99 et 100 (qualité de vie et santé globales), un score élevé signifie une meilleure qualité de vie ou santé (cotation non inversée).</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">QLQ-SURV100 © 2021 EORTC Quality of Life Group, tous droits réservés, module de phase IV. Outil d'évaluation de la qualité de vie, ne remplace pas une évaluation clinique.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var DEFOPTS = ["Not at all", "A little", "Quite a bit", "Very much"];
+  var items = [
+ {
+  "n": "1",
+  "t": "Do you have any trouble taking a long walk carrying a heavy pack on your back (e.g., a filled rucksack)?",
+  "p": ""
+ },
+ {
+  "n": "2",
+  "t": "Do you have any trouble running a short distance, such as to catch the bus?",
+  "p": ""
+ },
+ {
+  "n": "3",
+  "t": "Do you have any trouble doing strenuous activities, like carrying a heavy shopping bag or a suitcase?",
+  "p": ""
+ },
+ {
+  "n": "4",
+  "t": "Do you have any trouble taking a long walk?",
+  "p": ""
+ },
+ {
+  "n": "5",
+  "t": "Do you have any trouble taking a short walk outside of the house?",
+  "p": ""
+ },
+ {
+  "n": "6",
+  "t": "Do you need to stay in bed or a chair during the day?",
+  "p": ""
+ },
+ {
+  "n": "7",
+  "t": "Do you need help with eating, dressing, washing yourself or using the toilet?",
+  "p": ""
+ },
+ {
+  "n": "8",
+  "t": "Were you limited in doing either your work or other daily activities?",
+  "p": "During the past week :"
+ },
+ {
+  "n": "9",
+  "t": "Were you limited in pursuing your hobbies or other leisure time activities?",
+  "p": "During the past week :"
+ },
+ {
+  "n": "10",
+  "t": "Were you short of breath?",
+  "p": "During the past week :"
+ },
+ {
+  "n": "11",
+  "t": "Have you had pain?",
+  "p": "During the past week :"
+ },
+ {
+  "n": "12",
+  "t": "Did you need to rest?",
+  "p": "During the past week :"
+ },
+ {
+  "n": "13",
+  "t": "Have you had trouble sleeping?",
+  "p": "During the past week :"
+ },
+ {
+  "n": "14",
+  "t": "Have you felt weak?",
+  "p": "During the past week :"
+ },
+ {
+  "n": "15",
+  "t": "Were you tired?",
+  "p": "During the past week :"
+ },
+ {
+  "n": "16",
+  "t": "Did pain interfere with your daily activities?",
+  "p": "During the past week :"
+ },
+ {
+  "n": "17",
+  "t": "Have you had difficulty in concentrating on things, like reading a newspaper or watching television?",
+  "p": "During the past week :"
+ },
+ {
+  "n": "18",
+  "t": "Did you feel tense?",
+  "p": "During the past week :"
+ },
+ {
+  "n": "19",
+  "t": "Did you worry?",
+  "p": "During the past week :"
+ },
+ {
+  "n": "20",
+  "t": "Did you feel irritable?",
+  "p": "During the past week :"
+ },
+ {
+  "n": "21",
+  "t": "Did you feel depressed?",
+  "p": "During the past week :"
+ },
+ {
+  "n": "22",
+  "t": "Have you had difficulty remembering things?",
+  "p": "During the past week :"
+ },
+ {
+  "n": "23",
+  "t": "Have cancer-related physical problems interfered with your family life?",
+  "p": "During the past week :"
+ },
+ {
+  "n": "24",
+  "t": "Have cancer-related physical problems interfered with your social activities?",
+  "p": "During the past week :"
+ },
+ {
+  "n": "25",
+  "t": "Has your physical condition or medical treatment caused you financial difficulties?",
+  "p": "During the past week :"
+ },
+ {
+  "n": "26",
+  "t": "Have you had aches or pains in your joints?",
+  "p": "During the past week :"
+ },
+ {
+  "n": "27",
+  "t": "Have you had aches or pains in your muscles?",
+  "p": "During the past week :"
+ },
+ {
+  "n": "28",
+  "t": "Have your hands and/or feet been sensitive to hot and cold?",
+  "p": "During the past week :"
+ },
+ {
+  "n": "29",
+  "t": "Have you had pale/cold fingers or toes?",
+  "p": "During the past week :"
+ },
+ {
+  "n": "30",
+  "t": "Have you had tingling or numbness in your fingers or hands?",
+  "p": "During the past week :"
+ },
+ {
+  "n": "31",
+  "t": "Have you had tingling or numbness in your toes or feet?",
+  "p": "During the past week :"
+ },
+ {
+  "n": "32",
+  "t": "Have you had skin problems (e.g., itchy, dry, flaky)?",
+  "p": "During the past week :"
+ },
+ {
+  "n": "33",
+  "t": "Have you experienced restless legs (uncontrollable urge to move your legs)?",
+  "p": "During the past week :"
+ },
+ {
+  "n": "34",
+  "t": "Have you had problems standing for a long time?",
+  "p": "During the past week :"
+ },
+ {
+  "n": "35",
+  "t": "Have you had swelling in your legs, ankles or feet?",
+  "p": "During the past week :"
+ },
+ {
+  "n": "36",
+  "t": "Have you had muscle cramps?",
+  "p": "During the past week :"
+ },
+ {
+  "n": "37",
+  "t": "Have you had muscle weakness?",
+  "p": "During the past week :"
+ },
+ {
+  "n": "38",
+  "t": "Have you felt cold easily?",
+  "p": "During the past week :"
+ },
+ {
+  "n": "39",
+  "t": "Have you had indigestion or heartburn?",
+  "p": "During the past week :"
+ },
+ {
+  "n": "40",
+  "t": "Have you felt ill or unwell?",
+  "p": "During the past week :"
+ },
+ {
+  "n": "41",
+  "t": "Have you felt exhausted?",
+  "p": "During the past week :"
+ },
+ {
+  "n": "42",
+  "t": "Have you woken up during the night?",
+  "p": "During the past week :"
+ },
+ {
+  "n": "43",
+  "t": "Have you woken up too early?",
+  "p": "During the past week :"
+ },
+ {
+  "n": "44",
+  "t": "Have you had difficulty falling asleep?",
+  "p": "During the past week :"
+ },
+ {
+  "n": "45",
+  "t": "Have you had problems thinking clearly?",
+  "p": "During the past week :"
+ },
+ {
+  "n": "46",
+  "t": "Have you felt that your ability to think (to process information) has slowed down?",
+  "p": "During the past week :"
+ },
+ {
+  "n": "47",
+  "t": "Have you felt frustrated?",
+  "p": "During the past week :"
+ },
+ {
+  "n": "48",
+  "t": "Have you felt angry?",
+  "p": "During the past week :"
+ },
+ {
+  "n": "49",
+  "t": "Have you had mood swings?",
+  "p": "During the past week :"
+ },
+ {
+  "n": "50",
+  "t": "Have you been limited in doing physically demanding recreational activities (e.g., swimming or cycling)?",
+  "p": "During the past week :"
+ },
+ {
+  "n": "51",
+  "t": "Have you felt older than your age?",
+  "p": "During the past week :"
+ },
+ {
+  "n": "52",
+  "t": "Have you been dissatisfied with your physical appearance?",
+  "p": "During the past week :"
+ },
+ {
+  "n": "53",
+  "t": "Have you worried about your cancer coming back or that it may spread to other parts of your body?",
+  "p": "During the past week :"
+ },
+ {
+  "n": "54",
+  "t": "Have you worried about getting another type of cancer?",
+  "p": "During the past week :"
+ },
+ {
+  "n": "55",
+  "t": "Have you worried about your health?",
+  "p": "During the past week :"
+ },
+ {
+  "n": "56",
+  "t": "Have you worried that your previous cancer treatment may cause (more) health problems in the future?",
+  "p": "During the past week :"
+ },
+ {
+  "n": "57",
+  "t": "Have you worried about dying?",
+  "p": "During the past week :"
+ },
+ {
+  "n": "58",
+  "t": "Have you felt that you were still a cancer patient?",
+  "p": "During the past week :"
+ },
+ {
+  "n": "59",
+  "t": "Have you felt uncertain about the future?",
+  "p": "During the past week :"
+ },
+ {
+  "n": "60",
+  "t": "Have you worried about your future health?",
+  "p": "During the past week :"
+ },
+ {
+  "n": "61",
+  "t": "Have you worried that your family members are at risk of getting cancer?",
+  "p": "During the past week :"
+ },
+ {
+  "n": "62",
+  "t": "Do you currently have problems controlling your weight?",
+  "p": "Because of your experience with cancer :"
+ },
+ {
+  "n": "63",
+  "t": "Have you had to limit your life plans or goals?",
+  "p": "Because of your experience with cancer :"
+ },
+ {
+  "n": "64",
+  "t": "Do you feel that your life has been on hold?",
+  "p": "Because of your experience with cancer :"
+ },
+ {
+  "n": "65",
+  "t": "Are you alert for symptoms that may signal a return of your cancer?",
+  "p": "Because of your experience with cancer :"
+ },
+ {
+  "n": "66",
+  "t": "Are you more likely to contact your doctor when you experience symptoms?",
+  "p": "Because of your experience with cancer :"
+ },
+ {
+  "n": "67",
+  "t": "Do you feel that your family and/or friends do not understand the impact of having (had) cancer?",
+  "p": "Because of your experience with cancer :"
+ },
+ {
+  "n": "68",
+  "t": "Do you feel that your acquaintances do not understand the impact of having (had) cancer?",
+  "p": "Because of your experience with cancer :"
+ },
+ {
+  "n": "69",
+  "t": "Have your career/job opportunities been limited? (If this question does not apply to you, please select N/A)",
+  "p": "Because of your experience with cancer :",
+  "na": true
+ },
+ {
+  "n": "70",
+  "t": "Do you work fewer hours than you would like? (If this question does not apply to you, please select N/A)",
+  "p": "Because of your experience with cancer :",
+  "na": true
+ },
+ {
+  "n": "71",
+  "t": "Do you perform your work les well? (If this question does not apply to you, please select N/A)",
+  "p": "Because of your experience with cancer :",
+  "na": true
+ },
+ {
+  "n": "72",
+  "t": "Do you lack support and understanding from colleagues and/or management? (If this question does not apply to you, please select N/A)",
+  "p": "Because of your experience with cancer :",
+  "na": true
+ },
+ {
+  "n": "73",
+  "t": "Have you lost income? (If you did not have a source of income at the time of diagnosis, please select N/A)",
+  "p": "Because of your experience with cancer :",
+  "na": true
+ },
+ {
+  "n": "74",
+  "t": "Do you take better care of yourself?",
+  "p": "Because of your experience with cancer :"
+ },
+ {
+  "n": "75",
+  "t": "Have you worried about the impact of your cancer on your children? (If you do not have children, please select N/A)",
+  "p": "Because of your experience with cancer :",
+  "na": true
+ },
+ {
+  "n": "76",
+  "t": "Do you feel that people treat you differently?",
+  "p": "Because of your experience with cancer :"
+ },
+ {
+  "n": "77",
+  "t": "Are your relationships with family and/or friends stronger?",
+  "p": "Because of your experience with cancer :"
+ },
+ {
+  "n": "78",
+  "t": "Are your relationships with family and/or friends more important to you?",
+  "p": "Because of your experience with cancer :"
+ },
+ {
+  "n": "79",
+  "t": "Is your relationship with your partner stronger? (If you do not have a partner, please select N/A)",
+  "p": "Because of your experience with cancer :",
+  "na": true
+ },
+ {
+  "n": "80",
+  "t": "Do you feel that your life has more purpose?",
+  "p": "Because of your experience with cancer :"
+ },
+ {
+  "n": "81",
+  "t": "Do you appreciate life more?",
+  "p": "Because of your experience with cancer :"
+ },
+ {
+  "n": "82",
+  "t": "Has the experience of cancer helped you to distinguish between important and unimportant things in life?",
+  "p": "Because of your experience with cancer :"
+ },
+ {
+  "n": "83",
+  "t": "Have you been better able to cope with problems?",
+  "p": "Because of your experience with cancer :"
+ },
+ {
+  "n": "84",
+  "t": "Have you been more willing to help others?",
+  "p": "Because of your experience with cancer :"
+ },
+ {
+  "n": "85",
+  "t": "Have you been more understanding of other people's feelings?",
+  "p": "Because of your experience with cancer :"
+ },
+ {
+  "n": "86",
+  "t": "Have you had problems with obtaining insurance, loans, and/or a mortgage? (If you have not tried to obtain any of these, please select N/A)",
+  "p": "Since the diagnosis and treatment of your cancer :",
+  "na": true
+ },
+ {
+  "n": "87",
+  "t": "Have you made positive lifestyle changes (e.g., more exercise, healthy food, cutting down smoking)?",
+  "p": "Since the diagnosis and treatment of your cancer :"
+ },
+ {
+  "n": "88",
+  "t": "Have you been concerned about your ability to have children? (If you did/do not want to have (more) children, please select N/A)",
+  "p": "Since the diagnosis and treatment of your cancer :",
+  "na": true
+ },
+ {
+  "n": "89",
+  "t": "Have you given a deeper meaning to the fact that you have (had) cancer?",
+  "p": "Since the diagnosis and treatment of your cancer :"
+ },
+ {
+  "n": "90",
+  "t": "Have you felt uncomfortable about the idea of being sexually intimate?",
+  "p": "During the past four weeks :"
+ },
+ {
+  "n": "91",
+  "t": "Have you avoided having sex?",
+  "p": "During the past four weeks :"
+ },
+ {
+  "n": "92",
+  "t": "Have you been interested in sex?",
+  "p": "During the past four weeks :"
+ },
+ {
+  "n": "93",
+  "t": "Have you been sexually active?",
+  "p": "During the past four weeks :"
+ },
+ {
+  "n": "94",
+  "t": "For men only: Have you had problems getting or maintaining an erection?",
+  "p": "During the past four weeks :",
+  "na": true
+ },
+ {
+  "n": "95",
+  "t": "Have you had problems being sexually intimate?",
+  "p": "Answer these questions only if you have been sexually active during the past four weeks; if not, please continue to question 99. During the past four weeks :",
+  "c": {
+   "i": 92,
+   "gt": 1
+  }
+ },
+ {
+  "n": "96",
+  "t": "Have you had problems becoming sexually aroused?",
+  "p": "Answer these questions only if you have been sexually active during the past four weeks; if not, please continue to question 99. During the past four weeks :",
+  "c": {
+   "i": 92,
+   "gt": 1
+  }
+ },
+ {
+  "n": "97",
+  "t": "Has sexual activity been enjoyable for you?",
+  "p": "Answer these questions only if you have been sexually active during the past four weeks; if not, please continue to question 99. During the past four weeks :",
+  "c": {
+   "i": 92,
+   "gt": 1
+  }
+ },
+ {
+  "n": "98",
+  "t": "For women only: Have you experienced a dry vagina during sexual activity?",
+  "p": "Answer these questions only if you have been sexually active during the past four weeks; if not, please continue to question 99. During the past four weeks :",
+  "na": true,
+  "c": {
+   "i": 92,
+   "gt": 1
+  }
+ },
+ {
+  "n": "99",
+  "t": "How would you rate your overall quality of life during the past week?",
+  "p": "Rate from 1 (Very poor) to 7 (Excellent)",
+  "o": [
+   "1 — Very poor",
+   "2",
+   "3",
+   "4",
+   "5",
+   "6",
+   "7 — Excellent"
+  ]
+ },
+ {
+  "n": "100",
+  "t": "How would you rate your overall health during the past week?",
+  "p": "Rate from 1 (Very poor) to 7 (Excellent)",
+  "o": [
+   "1 — Very poor",
+   "2",
+   "3",
+   "4",
+   "5",
+   "6",
+   "7 — Excellent"
+  ]
+ }
+];
+  var groups = [
+ {
+  "title": "Fonction physique (questions 1 à 7) : plus le score est élevé, plus la difficulté est importante",
+  "rows": [
+   {
+    "l": "Q1 — Do you have any trouble taking a long walk carrying a heavy pack on your back (e.g., a filled rucksack)?",
+    "it": [
+     0
+    ]
+   },
+   {
+    "l": "Q2 — Do you have any trouble running a short distance, such as to catch the bus?",
+    "it": [
+     1
+    ]
+   },
+   {
+    "l": "Q3 — Do you have any trouble doing strenuous activities, like carrying a heavy shopping bag or a suitcase?",
+    "it": [
+     2
+    ]
+   },
+   {
+    "l": "Q4 — Do you have any trouble taking a long walk?",
+    "it": [
+     3
+    ]
+   },
+   {
+    "l": "Q5 — Do you have any trouble taking a short walk outside of the house?",
+    "it": [
+     4
+    ]
+   },
+   {
+    "l": "Q6 — Do you need to stay in bed or a chair during the day?",
+    "it": [
+     5
+    ]
+   },
+   {
+    "l": "Q7 — Do you need help with eating, dressing, washing yourself or using the toilet?",
+    "it": [
+     6
+    ]
+   }
+  ]
+ },
+ {
+  "title": "Semaine passée (questions 8 à 61) : plus le score est élevé, plus le symptôme ou le problème est important",
+  "rows": [
+   {
+    "l": "Q8 — Were you limited in doing either your work or other daily activities?",
+    "it": [
+     7
+    ]
+   },
+   {
+    "l": "Q9 — Were you limited in pursuing your hobbies or other leisure time activities?",
+    "it": [
+     8
+    ]
+   },
+   {
+    "l": "Q10 — Were you short of breath?",
+    "it": [
+     9
+    ]
+   },
+   {
+    "l": "Q11 — Have you had pain?",
+    "it": [
+     10
+    ]
+   },
+   {
+    "l": "Q12 — Did you need to rest?",
+    "it": [
+     11
+    ]
+   },
+   {
+    "l": "Q13 — Have you had trouble sleeping?",
+    "it": [
+     12
+    ]
+   },
+   {
+    "l": "Q14 — Have you felt weak?",
+    "it": [
+     13
+    ]
+   },
+   {
+    "l": "Q15 — Were you tired?",
+    "it": [
+     14
+    ]
+   },
+   {
+    "l": "Q16 — Did pain interfere with your daily activities?",
+    "it": [
+     15
+    ]
+   },
+   {
+    "l": "Q17 — Have you had difficulty in concentrating on things, like reading a newspaper or watching television?",
+    "it": [
+     16
+    ]
+   },
+   {
+    "l": "Q18 — Did you feel tense?",
+    "it": [
+     17
+    ]
+   },
+   {
+    "l": "Q19 — Did you worry?",
+    "it": [
+     18
+    ]
+   },
+   {
+    "l": "Q20 — Did you feel irritable?",
+    "it": [
+     19
+    ]
+   },
+   {
+    "l": "Q21 — Did you feel depressed?",
+    "it": [
+     20
+    ]
+   },
+   {
+    "l": "Q22 — Have you had difficulty remembering things?",
+    "it": [
+     21
+    ]
+   },
+   {
+    "l": "Q23 — Have cancer-related physical problems interfered with your family life?",
+    "it": [
+     22
+    ]
+   },
+   {
+    "l": "Q24 — Have cancer-related physical problems interfered with your social activities?",
+    "it": [
+     23
+    ]
+   },
+   {
+    "l": "Q25 — Has your physical condition or medical treatment caused you financial difficulties?",
+    "it": [
+     24
+    ]
+   },
+   {
+    "l": "Q26 — Have you had aches or pains in your joints?",
+    "it": [
+     25
+    ]
+   },
+   {
+    "l": "Q27 — Have you had aches or pains in your muscles?",
+    "it": [
+     26
+    ]
+   },
+   {
+    "l": "Q28 — Have your hands and/or feet been sensitive to hot and cold?",
+    "it": [
+     27
+    ]
+   },
+   {
+    "l": "Q29 — Have you had pale/cold fingers or toes?",
+    "it": [
+     28
+    ]
+   },
+   {
+    "l": "Q30 — Have you had tingling or numbness in your fingers or hands?",
+    "it": [
+     29
+    ]
+   },
+   {
+    "l": "Q31 — Have you had tingling or numbness in your toes or feet?",
+    "it": [
+     30
+    ]
+   },
+   {
+    "l": "Q32 — Have you had skin problems (e.g., itchy, dry, flaky)?",
+    "it": [
+     31
+    ]
+   },
+   {
+    "l": "Q33 — Have you experienced restless legs (uncontrollable urge to move your legs)?",
+    "it": [
+     32
+    ]
+   },
+   {
+    "l": "Q34 — Have you had problems standing for a long time?",
+    "it": [
+     33
+    ]
+   },
+   {
+    "l": "Q35 — Have you had swelling in your legs, ankles or feet?",
+    "it": [
+     34
+    ]
+   },
+   {
+    "l": "Q36 — Have you had muscle cramps?",
+    "it": [
+     35
+    ]
+   },
+   {
+    "l": "Q37 — Have you had muscle weakness?",
+    "it": [
+     36
+    ]
+   },
+   {
+    "l": "Q38 — Have you felt cold easily?",
+    "it": [
+     37
+    ]
+   },
+   {
+    "l": "Q39 — Have you had indigestion or heartburn?",
+    "it": [
+     38
+    ]
+   },
+   {
+    "l": "Q40 — Have you felt ill or unwell?",
+    "it": [
+     39
+    ]
+   },
+   {
+    "l": "Q41 — Have you felt exhausted?",
+    "it": [
+     40
+    ]
+   },
+   {
+    "l": "Q42 — Have you woken up during the night?",
+    "it": [
+     41
+    ]
+   },
+   {
+    "l": "Q43 — Have you woken up too early?",
+    "it": [
+     42
+    ]
+   },
+   {
+    "l": "Q44 — Have you had difficulty falling asleep?",
+    "it": [
+     43
+    ]
+   },
+   {
+    "l": "Q45 — Have you had problems thinking clearly?",
+    "it": [
+     44
+    ]
+   },
+   {
+    "l": "Q46 — Have you felt that your ability to think (to process information) has slowed down?",
+    "it": [
+     45
+    ]
+   },
+   {
+    "l": "Q47 — Have you felt frustrated?",
+    "it": [
+     46
+    ]
+   },
+   {
+    "l": "Q48 — Have you felt angry?",
+    "it": [
+     47
+    ]
+   },
+   {
+    "l": "Q49 — Have you had mood swings?",
+    "it": [
+     48
+    ]
+   },
+   {
+    "l": "Q50 — Have you been limited in doing physically demanding recreational activities (e.g., swimming or cycling)?",
+    "it": [
+     49
+    ]
+   },
+   {
+    "l": "Q51 — Have you felt older than your age?",
+    "it": [
+     50
+    ]
+   },
+   {
+    "l": "Q52 — Have you been dissatisfied with your physical appearance?",
+    "it": [
+     51
+    ]
+   },
+   {
+    "l": "Q53 — Have you worried about your cancer coming back or that it may spread to other parts of your body?",
+    "it": [
+     52
+    ]
+   },
+   {
+    "l": "Q54 — Have you worried about getting another type of cancer?",
+    "it": [
+     53
+    ]
+   },
+   {
+    "l": "Q55 — Have you worried about your health?",
+    "it": [
+     54
+    ]
+   },
+   {
+    "l": "Q56 — Have you worried that your previous cancer treatment may cause (more) health problems in the future?",
+    "it": [
+     55
+    ]
+   },
+   {
+    "l": "Q57 — Have you worried about dying?",
+    "it": [
+     56
+    ]
+   },
+   {
+    "l": "Q58 — Have you felt that you were still a cancer patient?",
+    "it": [
+     57
+    ]
+   },
+   {
+    "l": "Q59 — Have you felt uncertain about the future?",
+    "it": [
+     58
+    ]
+   },
+   {
+    "l": "Q60 — Have you worried about your future health?",
+    "it": [
+     59
+    ]
+   },
+   {
+    "l": "Q61 — Have you worried that your family members are at risk of getting cancer?",
+    "it": [
+     60
+    ]
+   }
+  ]
+ },
+ {
+  "title": "À cause de votre expérience du cancer (questions 62 à 85) : le sens dépend de la formulation de chaque question",
+  "rows": [
+   {
+    "l": "Q62 — Do you currently have problems controlling your weight?",
+    "it": [
+     61
+    ]
+   },
+   {
+    "l": "Q63 — Have you had to limit your life plans or goals?",
+    "it": [
+     62
+    ]
+   },
+   {
+    "l": "Q64 — Do you feel that your life has been on hold?",
+    "it": [
+     63
+    ]
+   },
+   {
+    "l": "Q65 — Are you alert for symptoms that may signal a return of your cancer?",
+    "it": [
+     64
+    ]
+   },
+   {
+    "l": "Q66 — Are you more likely to contact your doctor when you experience symptoms?",
+    "it": [
+     65
+    ]
+   },
+   {
+    "l": "Q67 — Do you feel that your family and/or friends do not understand the impact of having (had) cancer?",
+    "it": [
+     66
+    ]
+   },
+   {
+    "l": "Q68 — Do you feel that your acquaintances do not understand the impact of having (had) cancer?",
+    "it": [
+     67
+    ]
+   },
+   {
+    "l": "Q69 — Have your career/job opportunities been limited? (If this question does not apply to you, please select N/A)",
+    "it": [
+     68
+    ]
+   },
+   {
+    "l": "Q70 — Do you work fewer hours than you would like? (If this question does not apply to you, please select N/A)",
+    "it": [
+     69
+    ]
+   },
+   {
+    "l": "Q71 — Do you perform your work les well? (If this question does not apply to you, please select N/A)",
+    "it": [
+     70
+    ]
+   },
+   {
+    "l": "Q72 — Do you lack support and understanding from colleagues and/or management? (If this question does not apply to you, please select N/A)",
+    "it": [
+     71
+    ]
+   },
+   {
+    "l": "Q73 — Have you lost income? (If you did not have a source of income at the time of diagnosis, please select N/A)",
+    "it": [
+     72
+    ]
+   },
+   {
+    "l": "Q74 — Do you take better care of yourself?",
+    "it": [
+     73
+    ]
+   },
+   {
+    "l": "Q75 — Have you worried about the impact of your cancer on your children? (If you do not have children, please select N/A)",
+    "it": [
+     74
+    ]
+   },
+   {
+    "l": "Q76 — Do you feel that people treat you differently?",
+    "it": [
+     75
+    ]
+   },
+   {
+    "l": "Q77 — Are your relationships with family and/or friends stronger?",
+    "it": [
+     76
+    ]
+   },
+   {
+    "l": "Q78 — Are your relationships with family and/or friends more important to you?",
+    "it": [
+     77
+    ]
+   },
+   {
+    "l": "Q79 — Is your relationship with your partner stronger? (If you do not have a partner, please select N/A)",
+    "it": [
+     78
+    ]
+   },
+   {
+    "l": "Q80 — Do you feel that your life has more purpose?",
+    "it": [
+     79
+    ]
+   },
+   {
+    "l": "Q81 — Do you appreciate life more?",
+    "it": [
+     80
+    ]
+   },
+   {
+    "l": "Q82 — Has the experience of cancer helped you to distinguish between important and unimportant things in life?",
+    "it": [
+     81
+    ]
+   },
+   {
+    "l": "Q83 — Have you been better able to cope with problems?",
+    "it": [
+     82
+    ]
+   },
+   {
+    "l": "Q84 — Have you been more willing to help others?",
+    "it": [
+     83
+    ]
+   },
+   {
+    "l": "Q85 — Have you been more understanding of other people's feelings?",
+    "it": [
+     84
+    ]
+   }
+  ]
+ },
+ {
+  "title": "Depuis le diagnostic et le traitement (questions 86 à 89) : le sens dépend de la formulation de chaque question",
+  "rows": [
+   {
+    "l": "Q86 — Have you had problems with obtaining insurance, loans, and/or a mortgage? (If you have not tried to obtain any of these, please select N/A)",
+    "it": [
+     85
+    ]
+   },
+   {
+    "l": "Q87 — Have you made positive lifestyle changes (e.g., more exercise, healthy food, cutting down smoking)?",
+    "it": [
+     86
+    ]
+   },
+   {
+    "l": "Q88 — Have you been concerned about your ability to have children? (If you did/do not want to have (more) children, please select N/A)",
+    "it": [
+     87
+    ]
+   },
+   {
+    "l": "Q89 — Have you given a deeper meaning to the fact that you have (had) cancer?",
+    "it": [
+     88
+    ]
+   }
+  ]
+ },
+ {
+  "title": "Quatre dernières semaines, sexualité (questions 90 à 98) : le sens dépend de la formulation de chaque question",
+  "rows": [
+   {
+    "l": "Q90 — Have you felt uncomfortable about the idea of being sexually intimate?",
+    "it": [
+     89
+    ]
+   },
+   {
+    "l": "Q91 — Have you avoided having sex?",
+    "it": [
+     90
+    ]
+   },
+   {
+    "l": "Q92 — Have you been interested in sex?",
+    "it": [
+     91
+    ]
+   },
+   {
+    "l": "Q93 — Have you been sexually active?",
+    "it": [
+     92
+    ]
+   },
+   {
+    "l": "Q94 — For men only: Have you had problems getting or maintaining an erection?",
+    "it": [
+     93
+    ]
+   },
+   {
+    "l": "Q95 — Have you had problems being sexually intimate?",
+    "it": [
+     94
+    ]
+   },
+   {
+    "l": "Q96 — Have you had problems becoming sexually aroused?",
+    "it": [
+     95
+    ]
+   },
+   {
+    "l": "Q97 — Has sexual activity been enjoyable for you?",
+    "it": [
+     96
+    ]
+   },
+   {
+    "l": "Q98 — For women only: Have you experienced a dry vagina during sexual activity?",
+    "it": [
+     97
+    ]
+   }
+  ]
+ },
+ {
+  "title": "Questions 99 et 100 : plus le score est élevé, meilleure est la qualité de vie ou la santé globale (cotation non inversée)",
+  "rows": [
+   {
+    "l": "Q99 — How would you rate your overall quality of life during the past week?",
+    "it": [
+     98
+    ]
+   },
+   {
+    "l": "Q100 — How would you rate your overall health during the past week?",
+    "it": [
+     99
+    ]
+   }
+  ]
+ }
+];
+  var infos = [];
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function active(i){
+    var c = items[i].c;
+    if(!c) return true;
+    if(!active(c.i)) return false;
+    var a = answers[c.i];
+    if(a === null) return false;
+    if(c.eq !== undefined) return a === c.eq;
+    if(c.gt !== undefined) return a > c.gt;
+    return true;
+  }
+  function nextIdx(i){ var j = i + 1; while(j < items.length && !active(j)) j++; return j; }
+  function prevIdx(i){ var j = i - 1; while(j >= 0 && !active(j)) j--; return j; }
+  function position(i){
+    var k = 0, tot = 0;
+    for(var j = 0; j < items.length; j++){ if(active(j)){ tot++; if(j <= i) k++; } }
+    return [k, tot];
+  }
+  function optsOf(i){
+    var it = items[i];
+    var base = it.o ? it.o : DEFOPTS;
+    var out = base.map(function(l, k){ return {v: k + 1, l: l}; });
+    if(it.na) out.push({v: 0, l: "Not applicable"});
+    return out;
+  }
+
+  function renderQuestion(){
+    var pos = position(idx);
+    var it = items[idx];
+    document.getElementById('progress-text').textContent = (it.n ? 'Question ' + it.n + ' — ' : '') + pos[0] + ' / ' + pos[1];
+    document.getElementById('period-text').textContent = it.p || '';
+    document.getElementById('q-text').textContent = it.t;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    if(it.num){
+      var inp = document.createElement('input'); inp.type = 'number'; inp.min = '0'; inp.step = '1'; inp.id = 'num-in';
+      inp.setAttribute('aria-label', 'Nombre'); inp.style.cssText = 'font:inherit;font-size:16px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;width:140px';
+      if(answers[idx] !== null) inp.value = answers[idx];
+      inp.addEventListener('input', function(){ var v = inp.value; answers[idx] = (v !== '' && +v >= 0 && +v % 1 === 0) ? +v : null; document.getElementById('btn-next').disabled = answers[idx] === null; });
+      row.appendChild(inp);
+    }
+    if(!it.num) optsOf(idx).forEach(function(o){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === o.v ? ' selected' : '');
+      d.textContent = o.l;
+      d.addEventListener('click', function(){ answers[idx] = o.v; renderQuestion(); });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = prevIdx(idx) < 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = nextIdx(idx) >= items.length ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    var p = prevIdx(idx);
+    if (p >= 0){ idx = p; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    var n = nextIdx(idx);
+    if (n < items.length){ idx = n; renderQuestion(); } else { showResult(); }
+  });
+
+  // Score EORTC : (moyenne des réponses - 1) / 3 x 100, sur les questions actives et répondues
+  function score(ids){
+    var s = 0, k = 0;
+    ids.forEach(function(i){
+      if(active(i) && answers[i] !== null && answers[i] > 0){ s += answers[i]; k++; }
+    });
+    if(!k) return null;
+    var span = (items[ids[0]].o ? items[ids[0]].o.length : DEFOPTS.length) - 1;
+    return Math.round(((s / k) - 1) / span * 100);
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var box = document.getElementById('rows-all');
+    box.innerHTML = '';
+    function row(a, b){
+      var d = document.createElement('div'); d.className = 'sc-row';
+      var x = document.createElement('span'); x.textContent = a;
+      var y = document.createElement('b'); y.textContent = b;
+      d.appendChild(x); d.appendChild(y); box.appendChild(d);
+    }
+    groups.forEach(function(g){
+      var t = document.createElement('p'); t.className = 'sc-title'; t.textContent = g.title; box.appendChild(t); var shown = 0;
+      g.rows.forEach(function(r){
+        var v = score(r.it);
+        if(v === null && r.it.every(function(i){ return !active(i) && items[i].c && items[i].c.eq !== undefined; })) return;
+        row(r.l, v === null ? 'non applicable' : v + ' / 100'); shown++;
+      });
+      if(!shown) box.removeChild(t);
+    });
+    if(infos.length){
+      var t2 = document.createElement('p'); t2.className = 'sc-title';
+      t2.textContent = 'Informations recueillies, non cotées';
+      box.appendChild(t2);
+      infos.forEach(function(r){
+        var i = r.it;
+        var txt = 'non applicable';
+        if(active(i) && answers[i] !== null){
+          if(items[i].num){ txt = String(answers[i]); } else { var lab = optsOf(i).filter(function(o){ return o.v === answers[i]; })[0];
+          txt = lab ? lab.l : ''; }
+        }
+        row(r.l, txt);
+      });
+    }
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Questionnaire de survivance après un cancer de l'EORTC (QLQ-SURV100)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#3F6FB0 0%,#D3E2F5 55%,#162F57 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,245,235,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#123B4F;background:#E3F0F6;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#2F6F8F;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#123B4F;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">QLQ-SURV100</span></div>
+
+  <h1 class="serif">Questionnaire de survivance après un cancer de l'EORTC (QLQ-SURV100)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">EORTC QLQ-SURV100, module de survivance après un cancer (symptômes, inquiétudes, conséquences sociales et professionnelles, croissance post-traumatique, sexualité) — EORTC Quality of Life Group</p>
+  <div class="meta-row">
+    <span class="pill">100 questions</span>
+    <span class="pill">15 minutes</span>
+    <span class="pill">scores de 0 à 100 par question</span>
+    <span class="pill">Anglais</span>
+    <span class="pill">Licence requise : oui</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="qlq-surv100.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le QLQ-SURV100 est le module « survivorship » de l'EORTC (statut validé, phase IV), destiné aux personnes ayant eu un cancer. Il comprend 100 questions : fonction physique (1 à 7), symptômes et problèmes de la semaine passée (8 à 61 : fatigue, douleur, sommeil, cognition, émotions, neuropathie, symptômes musculo-articulaires, apparence, inquiétudes sur la récidive, la santé et l'avenir), conséquences de l'expérience du cancer (62 à 85 : projets de vie, travail et revenus, relations, changements positifs), conséquences depuis le diagnostic et le traitement (86 à 89 : assurances et crédits, mode de vie, fertilité, sens donné à l'expérience), sexualité sur les quatre dernières semaines (90 à 98, avec filtre sur l'activité sexuelle) et deux questions de qualité de vie et de santé globales sur une échelle de 1 à 7. Plusieurs questions proposent « N/A » (non applicable). Le spécimen prévoit aussi un espace de commentaire libre, non repris ici.</p>
+
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Les questions à quatre modalités sont cotées de 0 à 100 : (réponse − 1) ÷ 3 × 100 ; les questions 99 et 100 sont cotées de 0 à 100 : (réponse − 1) ÷ 6 × 100. Cette page affiche un score par question, regroupé par bloc du questionnaire ; le regroupement en échelles composites n'est pas recalculé ici (manuel de cotation EORTC à consulter ; module de phase IV). Les questions marquées « Not applicable » (N/A) ne sont pas cotées. Les questions 94 (hommes) et 98 (femmes) portent la mention « For men only » ou « For women only » dans le texte du spécimen : l'option « Not applicable » y est ajoutée dans cette page pour permettre de les passer, elle ne figure pas dans le spécimen papier.</p>
+    <p>Aucun seuil clinique officiel n'est repris ici : ces scores se lisent avec la personne, et de préférence en comparaison de ses scores antérieurs. Le sens d'un score dépend de la formulation de la question (symptôme ou problème, mais aussi changement positif) : ne pas additionner les scores de questions de sens différent.</p>
+
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p><strong>Licence requise : oui.</strong> QLQ-SURV100 © 2021 EORTC Quality of Life Group, tous droits réservés. Usage académique non financé par l'industrie : gratuit sur demande auprès du groupe EORTC Quality of Life (conditions d'utilisation, qol.eortc.org) ; tout usage commercial exige une convention de licence payante. Instrument construit ici malgré la licence, conformément à la décision du 30/09/2026 ; la diffusion publique reste soumise à l'autorisation du détenteur des droits.</p>
+    <p class="source-note">Texte des items : spécimen officiel anglais « EORTC QLQ-SURV100 » (eortc.org, fiche « Survivorship »), 100 items vérifiés par script contre le texte du PDF ; la faute du spécimen « les well » (question 71) est conservée. La version française officielle n'a pas été retrouvée. Module de phase IV : se reporter à l'EORTC pour la cotation et la validation avant tout usage clinique. Référence princeps non reprise ici : voir la fiche du module sur qol.eortc.org.</p>
+
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>
