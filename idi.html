@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IDI - Inventaire de dépendance interpersonnelle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#1F4A3D;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:15.5px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#1F4A3D;background:#E3EFEA;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#1F4A3D;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .answers-table{width:100%;border-collapse:collapse;margin:8px 0 20px;font-size:12.5px;max-height:520px;overflow-y:auto;display:block;}
+  .answers-table td{padding:7px 8px;border-bottom:1px solid #E0D9C9;vertical-align:top;}
+  .answers-table td:first-child{color:#20241E;width:70%;}
+  .answers-table td:last-child{color:#1F4A3D;font-weight:700;text-align:right;white-space:nowrap;}
+  .footnote{margin-top:20px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  .caveat{background:#FBF3E7;border:1px solid #E7D9BC;border-radius:12px;padding:14px 16px;font-size:13.5px;color:#5A4A2A;margin:0 0 16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} .answers-table{display:table;max-height:none;overflow:visible;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">IDI - Dépendance interpersonnelle</h1>
+    <p class="lead">Interpersonal Dependency Inventory. 48 affirmations sont présentées : merci de lire chacune et de décider si elle est caractéristique ou non de vos attitudes, sentiments ou comportements.</p>
+    <p class="lang-note">Questionnaire transcrit en anglais (version originale), avec traduction française de travail affichée en complément. Aucune traduction française validée en texte intégral libre retrouvée lors du sourçage.</p>
+    <div class="pill-row">
+      <span class="pill">48 questions</span>
+      <span class="pill">8 minutes</span>
+      <span class="pill">Échelle 1-4</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Relevé des réponses</h1>
+    <p class="caveat">⚠️ La clé exacte reliant chaque item aux 3 sous-échelles (Emotional Reliance on Another Person, Lack of Social Self-Confidence, Assertion of Autonomy) n'a pas pu être retrouvée dans une source primaire. Conformément à la règle de ce catalogue, aucun score (total ou par sous-échelle) n'est calculé : cette page affiche uniquement le relevé brut de vos 48 réponses, sur le modèle déjà utilisé pour OAS et YFAS.</p>
+    <table class="answers-table" id="answers-table"></table>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Hirschfeld, R.M., Klerman, G.L., Gough, H.G., Barrett, J., Korchin, S.J., &amp; Chodoff, P. (1977). A measure of interpersonal dependency. Journal of Personality Assessment, 41(6), 610-618. Outil de repérage, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var opts = [
+    {v:4, l:"4 - Très caractéristique de moi"},
+    {v:3, l:"3 - Plutôt caractéristique de moi"},
+    {v:2, l:"2 - Un peu caractéristique de moi"},
+    {v:1, l:"1 - Pas caractéristique de moi"}
+  ];
+  var items = [
+    "1. I prefer to be by myself. — Je préfère être seul(e).",
+    "2. When I have a decision to make, I always ask for advice. — Quand je dois prendre une décision, je demande toujours conseil.",
+    "3. I do my best work when I know it will be appreciated. — Je fais mon meilleur travail quand je sais qu'il sera apprécié.",
+    "4. I can't stand being fussed over when I am sick. — Je ne supporte pas qu'on s'occupe trop de moi quand je suis malade.",
+    "5. I would rather be a follower than a leader. — Je préférerais être suiveur(se) que meneur(se).",
+    "6. I believe people could do a lot more for me if they wanted to. — Je pense que les gens pourraient faire beaucoup plus pour moi s'ils le voulaient.",
+    "7. As a child, pleasing my parents was very important to me. — Enfant, plaire à mes parents était très important pour moi.",
+    "8. I don't need other people to make me feel good. — Je n'ai pas besoin des autres pour me sentir bien.",
+    "9. Disapproval by someone I care about is very painful for me. — La désapprobation d'une personne qui compte pour moi m'est très douloureuse.",
+    "10. I feel confident of my ability to deal with most of the personal problems I am likely to meet in life. — Je me sens capable de faire face à la plupart des problèmes personnels que je suis susceptible de rencontrer.",
+    "11. I'm the only person I want to please. — Je suis la seule personne que je veuille satisfaire.",
+    "12. The idea of losing a close friend is terrifying to me. — L'idée de perdre un ami proche me terrifie.",
+    "13. I am quick to agree with the opinions expressed by others. — Je suis prompt(e) à approuver les opinions exprimées par les autres.",
+    "14. I rely only on myself. — Je ne compte que sur moi-même.",
+    "15. I would be completely lost if I didn't have someone special. — Je serais complètement perdu(e) si je n'avais pas quelqu'un de spécial.",
+    "16. I get upset when someone discovers a mistake I've made. — Je suis contrarié(e) quand quelqu'un découvre une erreur que j'ai commise.",
+    "17. It is hard for me to ask someone for a favour. — Il m'est difficile de demander un service à quelqu'un.",
+    "18. I hate it when people offer me sympathy. — Je déteste qu'on me témoigne de la compassion.",
+    "19. I easily get discouraged when I don't get what I need from others. — Je me décourage facilement quand je n'obtiens pas des autres ce dont j'ai besoin.",
+    "20. In an argument, I give in easily. — Dans une dispute, je cède facilement.",
+    "21. I don't need much from people. — Je n'ai pas besoin de grand-chose de la part des gens.",
+    "22. I must have one person who is very special to me. — Il faut que j'aie une personne qui compte particulièrement pour moi.",
+    "23. When I go to a party, I expect that the other people will like me. — Quand je vais à une fête, je m'attends à ce que les autres m'apprécient.",
+    "24. I feel better when I know someone else is in command. — Je me sens mieux quand je sais que quelqu'un d'autre dirige.",
+    "25. When I am sick, I prefer that my friends leave me alone. — Quand je suis malade, je préfère que mes amis me laissent tranquille.",
+    "26. I'm never happier than when people say I've done a good job. — Je ne suis jamais aussi heureux(se) que lorsqu'on me dit que j'ai bien fait mon travail.",
+    "27. It is hard for me to make up my mind about a TV show or movie until I know what other people think. — J'ai du mal à me faire une opinion tant que je ne sais pas ce que les autres en pensent.",
+    "28. I am willing to disregard other people's feelings in order to accomplish something that's important to me. — Je suis prêt(e) à ne pas tenir compte des sentiments des autres pour accomplir quelque chose qui compte pour moi.",
+    "29. I need to have one person who puts me above all others. — J'ai besoin d'avoir une personne qui me place au-dessus de tous les autres.",
+    "30. In social situations I tend to be very self-conscious. — Dans les situations sociales, j'ai tendance à être très mal à l'aise.",
+    "31. I don't need anyone. — Je n'ai besoin de personne.",
+    "32. I have a lot of trouble making decisions by myself. — J'ai beaucoup de mal à prendre des décisions seul(e).",
+    "33. I tend to imagine the worst if a loved one doesn't arrive when expected. — J'ai tendance à imaginer le pire si un proche n'arrive pas à l'heure prévue.",
+    "34. Even when things go wrong I can get along without asking for help from my friends. — Même quand les choses tournent mal, je peux me débrouiller sans demander l'aide de mes amis.",
+    "35. I tend to expect too much from others. — J'ai tendance à trop attendre des autres.",
+    "36. I don't like to buy clothes by myself. — Je n'aime pas acheter des vêtements seul(e).",
+    "37. I tend to be a loner. — J'ai tendance à être solitaire.",
+    "38. I feel that I never really get all that I need from people. — J'ai l'impression de ne jamais vraiment obtenir des autres tout ce dont j'ai besoin.",
+    "39. When I meet new people, I'm afraid that I won't do the right thing. — Quand je rencontre de nouvelles personnes, j'ai peur de ne pas faire ce qu'il faut.",
+    "40. Even if most people turned against me, I could still go on if someone I love stood by me. — Même si la plupart des gens se retournaient contre moi, je pourrais continuer si quelqu'un que j'aime restait à mes côtés.",
+    "41. I would rather stay free of involvements with others than to risk disappointments. — Je préférerais rester libre de tout engagement plutôt que de risquer des déceptions.",
+    "42. What people think of me doesn't affect how I feel. — Ce que les gens pensent de moi n'affecte pas ce que je ressens.",
+    "43. I think that most people don't realise how easily they can hurt me. — Je pense que la plupart des gens ne réalisent pas à quel point ils peuvent facilement me blesser.",
+    "44. I am very confident about my own judgement. — J'ai une grande confiance en mon propre jugement.",
+    "45. I have always had a terrible fear that I will lose the love and support of people I desperately need. — J'ai toujours eu une peur terrible de perdre l'amour et le soutien des personnes dont j'ai désespérément besoin.",
+    "46. I don't have what it takes to be a good leader. — Je n'ai pas ce qu'il faut pour être un bon leader.",
+    "47. I would feel helpless if deserted by someone I love. — Je me sentirais impuissant(e) si j'étais abandonné(e) par quelqu'un que j'aime.",
+    "48. What other people say doesn't bother me. — Ce que disent les autres ne me dérange pas."
+  ];
+
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    opts.forEach(function(o){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === o.v ? ' selected' : '');
+      d.textContent = o.l;
+      d.addEventListener('click', function(){
+        answers[idx] = o.v;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le relevé' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var table = document.getElementById('answers-table');
+    var html = '<tbody>';
+    for (var i = 0; i < items.length; i++){
+      html += '<tr><td>Item ' + (i+1) + '</td><td>' + answers[i] + ' / 4</td></tr>';
+    }
+    html += '</tbody>';
+    table.innerHTML = html;
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IDI - Inventaire de dépendance interpersonnelle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#1F4A3D 0%,#3D7A63 55%,#12291F 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(200,215,235,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#22334D;background:#E9EEF5;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .caveat{background:#FBF3E7;border:1px solid #E7D9BC;border-radius:12px;padding:14px 16px;font-size:13.5px;color:#5A4A2A;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#1F4A3D;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#22334D;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <div class="fiche-photo"><span class="acronym">IDI</span></div>
+  <h1 class="serif">Inventaire de dépendance interpersonnelle (IDI)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Interpersonal Dependency Inventory - Hirschfeld, Klerman, Gough, Barrett, Korchin &amp; Chodoff (1977)</p>
+  <div class="meta-row">
+    <span class="pill">48 questions</span>
+    <span class="pill">8 minutes</span>
+    <span class="pill">Auto-questionnaire</span>
+    <span class="pill">Anglais</span>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" href="idi.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>L'IDI est un inventaire académique classique de dépendance interpersonnelle, comportant 48 affirmations cotées de 1 (pas caractéristique de moi) à 4 (très caractéristique de moi). Il se décline en 3 sous-échelles théoriques : Emotional Reliance on Another Person (18 items), Lack of Social Self-Confidence (16 items), Assertion of Autonomy (14 items).</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p class="caveat">⚠️ La clé exacte reliant chaque item à sa sous-échelle n'a pas pu être retrouvée dans une source primaire malgré une recherche approfondie (seuls les effectifs par sous-échelle sont confirmés). Cette page publie donc uniquement un relevé brut des 48 réponses, sans calculer de score par sous-échelle ni de score total, sur le modèle déjà utilisé pour l'OAS et le YFAS dans ce catalogue.</p>
+    <p class="source-note">Formules publiées, nécessitant la clé ci-dessus pour être appliquées : formule originale de Hirschfeld (1977), Total = 3×(score ER) + 1×(score LSSC) + 1×(score AA) ; formule alternative (Loas et al., European Psychiatry), Total = 3×ER + LSSC − AA. Une traduction française validée existe (Loas, Le Borgne, Gérard &amp; Delahousse, 1993, Annales médico-psychologiques) mais n'a pas été retrouvée en texte intégral libre.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Source</h2>
+    <p class="source-note">Hirschfeld, R.M., Klerman, G.L., Gough, H.G., Barrett, J., Korchin, S.J., &amp; Chodoff, P. (1977). A measure of interpersonal dependency. Journal of Personality Assessment, 41(6), 610-618. Aucun éditeur de test commercial n'a jamais détenu de licence sur l'IDI ; échelle reproduite librement depuis des décennies dans de nombreuses thèses universitaires en accès libre. Outil de repérage, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

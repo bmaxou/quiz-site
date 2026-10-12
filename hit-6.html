@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HIT-6 — Questionnaire sur l'impact des maux de tête</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#1F7A74;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#1F7A74;background:#E2F1EF;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#1F7A74;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#1F7A74;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 20px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">HIT-6 — Questionnaire sur l'impact des maux de tête</h1>
+    <p class="lead">Ce questionnaire vous aide à décrire ce que vous ressentez et ce que vous ne pouvez pas faire à cause de vos maux de tête. Pour chaque question, choisissez la réponse qui vous correspond.</p>
+    <p class="lang-note">Version française diffusée par la Société Française d'Étude des Migraines et Céphalées (SFEMC). Outil sous licence (QualityMetric / GlaxoSmithKline) : « Licence requise : oui ».</p>
+    <div class="pill-row">
+      <span class="pill">6 questions</span>
+      <span class="pill">2 minutes</span>
+      <span class="pill">Score 36 à 78</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-score" id="score-val"></p>
+    <p class="result-max">score total, sur une échelle de 36 à 78</p>
+    <p class="result-text" id="level-text"></p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">HIT-6™ (Headache Impact Test) — Kosinski et al., 2003. © 2001, 2015 QualityMetric Incorporated et GlaxoSmithKline Group of Companies, tous droits réservés. Outil de repérage de l'impact des céphalées, ne remplace pas une évaluation médicale.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [
+    {t:"1 - Lorsque vous avez des maux de tête, la douleur est-elle intense ?"},
+    {t:"2 - Votre capacité à effectuer vos activités quotidiennes habituelles, y compris les tâches ménagères, le travail, les études ou les activités avec les autres, est-elle limitée à cause de vos maux de tête ?"},
+    {t:"3 - Lorsque vous avez des maux de tête, souhaiteriez-vous avoir la possibilité de vous allonger ?"},
+    {t:"4 - Au cours de ces 4 dernières semaines, vous êtes-vous senti(e) trop fatigué(e) pour travailler ou effectuer vos activités quotidiennes à cause de vos maux de tête ?"},
+    {t:"5 - Au cours de ces 4 dernières semaines, avez-vous éprouvé un sentiment de « ras-le-bol » ou d'agacement à cause de vos maux de tête ?"},
+    {t:"6 - Au cours de ces 4 dernières semaines, votre capacité à vous concentrer sur votre travail ou vos activités quotidiennes a-t-elle été limitée à cause de vos maux de tête ?"}
+  ];
+  var opts = [
+    {l:"Jamais", p:6},
+    {l:"Rarement", p:8},
+    {l:"De temps en temps", p:10},
+    {l:"Très souvent", p:11},
+    {l:"Tout le temps", p:13}
+  ];
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx].t;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    opts.forEach(function(o, v){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === v ? ' selected' : '');
+      d.textContent = o.l;
+      d.addEventListener('click', function(){
+        answers[idx] = v;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){
+      idx++; renderQuestion();
+    } else {
+      showResult();
+    }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var sum = 0;
+    items.forEach(function(item, i){ sum += opts[answers[i]].p; });
+    var cat;
+    if (sum <= 49) cat = "Impact faible ou nul des maux de tête (36 à 49).";
+    else if (sum <= 55) cat = "Impact modéré des maux de tête (50 à 55).";
+    else if (sum <= 59) cat = "Impact important des maux de tête (56 à 59).";
+    else cat = "Impact sévère des maux de tête (60 à 78).";
+    document.getElementById('score-val').textContent = String(sum);
+    document.getElementById('level-text').textContent = cat + " Plus le score est élevé, plus l'impact des maux de tête sur la vie est important. Ces tranches sont celles publiées pour l'instrument, à titre de repère ; elles ne constituent pas un diagnostic et sont à discuter avec un médecin.";
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HIT-6 — Questionnaire sur l'impact des maux de tête</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#1F7A74 0%,#6FB8B1 55%,#0F4A46 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(220,245,240,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#0F4A46;background:#E2F1EF;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#1F7A74;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#0F4A46;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">HIT-6</span></div>
+
+  <h1 class="serif">Questionnaire sur l'impact des maux de tête</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Headache Impact Test, 6 items — Kosinski et al. (2003)</p>
+  <div class="meta-row">
+    <span class="pill">6 questions</span>
+    <span class="pill">2 minutes</span>
+    <span class="pill">Score 36 à 78</span>
+    <span class="pill">Français</span>
+    <span class="pill">Licence requise : oui</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="hit-6.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le HIT-6 mesure l'impact des céphalées et de la migraine sur la vie quotidienne : intensité de la douleur, limitation des activités, besoin de s'allonger, fatigue, agacement (« ras-le-bol ») et difficultés de concentration. Chaque item se cote sur cinq modalités de fréquence (jamais, rarement, de temps en temps, très souvent, tout le temps). Les items 1 à 3 n'ont pas de période de référence ; les items 4 à 6 portent sur les 4 dernières semaines.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Points par réponse : jamais 6, rarement 8, de temps en temps 10, très souvent 11, tout le temps 13. Le score total est la somme des 6 items, de 36 à 78 : plus il est élevé, plus l'impact est important. Tranches publiées pour l'instrument : 36-49 impact faible ou nul ; 50-55 impact modéré ; 56-59 impact important ; 60-78 impact sévère. Ces tranches sont un repère, non un diagnostic.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p><strong>Licence requise : oui.</strong> HIT-6™ © 2001, 2015 QualityMetric Incorporated et GlaxoSmithKline Group of Companies, tous droits réservés ; distribué par la plateforme ePROVIDE (Mapi Research Trust). Instrument construit ici malgré la licence, conformément à la décision du 30/09/2026 ; la diffusion publique reste soumise à l'autorisation du détenteur des droits.</p>
+    <p class="source-note">Texte des items et grille de points : formulaire français diffusé par la Société Française d'Étude des Migraines et Céphalées (sfemc.fr). Validation française de la littérature : Magnoux E., Freeman M.A. &amp; Zlotnik G. (2008), « MIDAS and HIT-6 French Translation: Reliability and Correlation Between Tests », Cephalalgia, 28(2), 131-135 (correspondance exacte avec le texte diffusé par la SFEMC non vérifiée). Version originale : Kosinski M. et al. (2003), Quality of Life Research, 12(8), 963-974. Tranches d'interprétation : notes de bas de tableau publiées (NCBI Bookshelf, CADTH).</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

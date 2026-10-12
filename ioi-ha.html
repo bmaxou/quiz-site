@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Inventaire international sur les bénéfices des aides auditives (IOI-HA)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#2F6F8F;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .period{font-size:12.5px;font-weight:600;color:#2F6F8F;margin:0 0 8px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#2F6F8F;background:#E3F0F6;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#2F6F8F;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 20px;}
+  .sc-title{font-size:13px;font-weight:700;color:#2F6F8F;margin:18px 0 6px;}
+  .sc-row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-top:1px solid #EFEBE1;font-size:14px;}
+  .sc-row b{font-variant-numeric:tabular-nums;white-space:nowrap;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">Inventaire international sur les bénéfices des aides auditives (IOI-HA)</h1>
+    <p class="lead">Inventaire de sept questions sur le bénéfice des aides auditives (version française IIPBAA), à remplir par la personne appareillée : utilisation, bénéfice, difficultés persistantes, intérêt, restriction de participation, effet sur l’entourage et qualité de vie.</p>
+    <p class="lang-note">Version française : traduction du groupe ICRA (Cox, Stephens &amp; Kramer, 2002), diffusée librement par l’ICRA. Outil soumis à autorisation nominative des auteurs : « Licence requise : oui ».</p>
+    <div class="pill-row">
+      <span class="pill">7 questions</span>
+    <span class="pill">2 minutes</span>
+    <span class="pill">score total de 7 à 35</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="period" id="period-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-text">Chaque question est cotée de 1 (réponse la moins favorable, à gauche sur le questionnaire papier) à 5 (la plus favorable, à droite). Le score total est la somme des sept questions (de 7 à 35) ; deux sous-totaux sont donnés d’après la structure en deux facteurs décrite par les auteurs.</p>
+    <div id="rows-all"></div>
+    <p class="result-text" style="margin-top:18px">Un score plus élevé signifie un meilleur résultat de l’appareillage, sur chaque question comme au total. Aucun seuil clinique officiel n’est repris ici : ces scores se lisent avec la personne, et de préférence en comparaison de ses scores antérieurs.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">IOI-HA © Cox &amp; Alexander ; traduction française ICRA 2002. Outil d’évaluation du bénéfice de l’appareillage auditif, ne remplace pas une évaluation audiologique.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var DEFOPTS = [];
+  var items = [
+ {
+  "n": "1",
+  "t": "Durant les deux dernières semaines, si vous avez utilisé votre(vos) appareil(s) auditif(s), indiquez combien d’heures par jour en moyenne.",
+  "p": "",
+  "o": [
+   "jamais",
+   "moins d’une heure/jour",
+   "1 à 4 h/jour",
+   "4 à 8 h/jour",
+   "plus de 8 h/jour"
+  ]
+ },
+ {
+  "n": "2",
+  "t": "Souvenez-vous des situations dans lesquelles vous aviez le plus envie d’entendre mieux avant d’avoir votre appareillage auditif. Durant les deux dernières semaines, votre appareillage vous a-t-il aidé dans ces situations ?",
+  "p": "",
+  "o": [
+   "jamais aidé",
+   "légèrement aidé",
+   "modérément aidé",
+   "nettement aidé",
+   "beaucoup aidé"
+  ]
+ },
+ {
+  "n": "3",
+  "t": "Souvenez-vous des situations dans lesquelles vous aviez le plus envie d’entendre mieux. Quand vous utilisez maintenant votre appareillage auditif, avez-vous ENCORE des difficultés ?",
+  "p": "",
+  "o": [
+   "beaucoup de difficultés",
+   "de nettes difficultés",
+   "des difficultés modérées",
+   "de légères difficultés",
+   "aucune difficulté"
+  ]
+ },
+ {
+  "n": "4",
+  "t": "Tout compte fait, pensez-vous que votre appareillage auditif actuel présente un intérêt ?",
+  "p": "",
+  "o": [
+   "aucun intérêt",
+   "un léger intérêt",
+   "un intérêt modéré",
+   "un net intérêt",
+   "un grand intérêt"
+  ]
+ },
+ {
+  "n": "5",
+  "t": "Durant les deux dernières semaines, avec votre appareillage auditif actuel, à quel point vos difficultés auditives ont-elles gêné ou affecté les choses que vous pouvez faire ?",
+  "p": "",
+  "o": [
+   "beaucoup gêné",
+   "nettement gêné",
+   "modérément gêné",
+   "légèrement gêné",
+   "pas du tout gêné"
+  ]
+ },
+ {
+  "n": "6",
+  "t": "Durant les deux dernières semaines, avec votre appareillage auditif actuel, à quel point pensez-vous que vos difficultés auditives ont ennuyé les autres ?",
+  "p": "",
+  "o": [
+   "beaucoup ennuyé",
+   "nettement ennuyé",
+   "modérément ennuyé",
+   "légèrement ennuyé",
+   "pas du tout ennuyé"
+  ]
+ },
+ {
+  "n": "7",
+  "t": "Tout compte fait, votre vie et ses plaisirs ont-ils changé depuis votre appareillage auditif ?",
+  "p": "",
+  "o": [
+   "pire qu’avant",
+   "pas de changement",
+   "légèrement mieux",
+   "nettement mieux",
+   "beaucoup mieux"
+  ]
+ }
+];
+  var groups = [];
+  var infos = [];
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function active(i){
+    var c = items[i].c;
+    if(!c) return true;
+    if(!active(c.i)) return false;
+    var a = answers[c.i];
+    if(a === null) return false;
+    if(c.eq !== undefined) return a === c.eq;
+    if(c.gt !== undefined) return a > c.gt;
+    return true;
+  }
+  function nextIdx(i){ var j = i + 1; while(j < items.length && !active(j)) j++; return j; }
+  function prevIdx(i){ var j = i - 1; while(j >= 0 && !active(j)) j--; return j; }
+  function position(i){
+    var k = 0, tot = 0;
+    for(var j = 0; j < items.length; j++){ if(active(j)){ tot++; if(j <= i) k++; } }
+    return [k, tot];
+  }
+  function optsOf(i){
+    var it = items[i];
+    var base = it.o ? it.o : DEFOPTS;
+    var out = base.map(function(l, k){ return {v: k + 1, l: l}; });
+    if(it.na) out.push({v: 0, l: "Not applicable"});
+    return out;
+  }
+
+  function renderQuestion(){
+    var pos = position(idx);
+    var it = items[idx];
+    document.getElementById('progress-text').textContent = (it.n ? 'Question ' + it.n + ' — ' : '') + pos[0] + ' / ' + pos[1];
+    document.getElementById('period-text').textContent = it.p || '';
+    document.getElementById('q-text').textContent = it.t;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    if(it.num){
+      var inp = document.createElement('input'); inp.type = 'number'; inp.min = '0'; inp.step = '1'; inp.id = 'num-in';
+      inp.setAttribute('aria-label', 'Nombre'); inp.style.cssText = 'font:inherit;font-size:16px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;width:140px';
+      if(answers[idx] !== null) inp.value = answers[idx];
+      inp.addEventListener('input', function(){ var v = inp.value; answers[idx] = (v !== '' && +v >= 0 && +v % 1 === 0) ? +v : null; document.getElementById('btn-next').disabled = answers[idx] === null; });
+      row.appendChild(inp);
+    }
+    if(!it.num) optsOf(idx).forEach(function(o){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === o.v ? ' selected' : '');
+      d.textContent = o.l;
+      d.addEventListener('click', function(){ answers[idx] = o.v; renderQuestion(); });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = prevIdx(idx) < 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = nextIdx(idx) >= items.length ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    var p = prevIdx(idx);
+    if (p >= 0){ idx = p; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    var n = nextIdx(idx);
+    if (n < items.length){ idx = n; renderQuestion(); } else { showResult(); }
+  });
+
+  // Score EORTC : (moyenne des réponses - 1) / 3 x 100, sur les questions actives et répondues
+  function score(ids){
+    var s = 0, k = 0;
+    ids.forEach(function(i){
+      if(active(i) && answers[i] !== null && answers[i] > 0){ s += answers[i]; k++; }
+    });
+    if(!k) return null;
+    var span = (items[ids[0]].o ? items[ids[0]].o.length : DEFOPTS.length) - 1;
+    return Math.round(((s / k) - 1) / span * 100);
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var box = document.getElementById('rows-all');
+    box.innerHTML = '';
+    function row(a, b){
+      var d = document.createElement('div'); d.className = 'sc-row';
+      var x = document.createElement('span'); x.textContent = a;
+      var y = document.createElement('b'); y.textContent = b;
+      d.appendChild(x); d.appendChild(y); box.appendChild(d);
+    }
+    function title(s){ var t = document.createElement('p'); t.className = 'sc-title'; t.textContent = s; box.appendChild(t); }
+    title('Réponses : chaque question est cotée de 1 (réponse la moins favorable) à 5 (la plus favorable)');
+    items.forEach(function(it, i){
+      var lab = it.o[answers[i] - 1];
+      row('Q' + it.n + ' — ' + lab, answers[i] + ' / 5');
+    });
+    function sum(ids){ var s = 0; ids.forEach(function(i){ s += answers[i]; }); return s; }
+    title('Scores');
+    row('Facteur 1 — questions 1, 2, 4 et 7 (utilisation, bénéfice, intérêt, qualité de vie)', sum([0, 1, 3, 6]) + ' / 20');
+    row('Facteur 2 — questions 3, 5 et 6 (difficultés persistantes, restriction de participation, effet sur l’entourage)', sum([2, 4, 5]) + ' / 15');
+    row('Score total', sum([0, 1, 2, 3, 4, 5, 6]) + ' / 35');
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Inventaire international sur les bénéfices des aides auditives (IOI-HA)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#2E8B8B 0%,#CFEDEA 55%,#0F4747 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,245,235,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#123B4F;background:#E3F0F6;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#2F6F8F;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#123B4F;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">IOI-HA</span></div>
+
+  <h1 class="serif">Inventaire international sur les bénéfices des aides auditives (IOI-HA)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">International Outcome Inventory for Hearing Aids (IOI-HA), version française (IIPBAA) — Cox &amp; Alexander ; traduction ICRA (Cox, Stephens &amp; Kramer, 2002)</p>
+  <div class="meta-row">
+    <span class="pill">7 questions</span>
+    <span class="pill">2 minutes</span>
+    <span class="pill">score total de 7 à 35</span>
+    <span class="pill">Français</span>
+    <span class="pill">Licence requise : oui</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="ioi-ha.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>L’IOI-HA est un inventaire de sept questions, issu d’un atelier international (Eriksholm, Danemark), destiné à évaluer le résultat d’un appareillage auditif de façon comparable d’une étude ou d’un service à l’autre. Chaque question explore une dimension : durée d’utilisation quotidienne, bénéfice dans la situation où la personne voulait le plus entendre mieux, difficulté résiduelle dans cette situation, intérêt global de l’appareil, restriction de participation, gêne perçue chez les autres et changement dans le plaisir de vivre. Chaque question possède sa propre échelle à cinq modalités, la plus favorable étant à droite sur le questionnaire papier.</p>
+
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque question est cotée de 1 (à gauche) à 5 (à droite). Le score total est la somme des sept questions (de 7 à 35, un score plus élevé = un meilleur résultat). D’après Cox et Alexander (2002, International Journal of Audiology, 41, 30-35), les questions se regroupent en deux facteurs : facteur 1 (questions 1, 2, 4 et 7 ; de 4 à 20) et facteur 2 (questions 3, 5 et 6 ; de 3 à 15). Regroupement cité de mémoire : à revérifier dans l’article avant tout usage clinique.</p>
+    <p>Aucun seuil clinique officiel n’est repris ici : ces scores se lisent avec la personne, et de préférence en comparaison de ses scores antérieurs. La traduction française de 2002 n’avait pas été validée psychométriquement à sa parution ; une validation française récente existe (Tuset et al., 2025, Audiology Research, 15(4), 97).</p>
+
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p><strong>Licence requise : oui.</strong> IOI-HA © Cox &amp; Alexander ; le groupe ICRA diffuse librement les traductions, mais l’utilisation de l’inventaire reste soumise à l’autorisation nominative des auteurs (permission écrite mentionnée par l’article de validation française de 2025). Instrument construit ici malgré la licence, conformément à la décision du 30/09/2026 ; la diffusion publique reste soumise à l’autorisation du détenteur des droits.</p>
+    <p class="source-note">Texte des items : version française « Inventaire international portant sur les bénéfices des aides auditives (IIPBAA) », appendice de Cox, Stephens &amp; Kramer (2002), International Journal of Audiology, 41, 3-26 (PDF français ICRA, icra-audiology.org), 7 items vérifiés par script contre le texte du PDF ; la coquille du PDF « plaisisrs » (question 7) est corrigée en « plaisirs ». Certains libellés de modalités ont été mis à plat sur une seule ligne (par exemple « 1 à 4 h/jour »). Version anglaise de référence : harlmemphis.org.</p>
+
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

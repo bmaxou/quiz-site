@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FES - Echelle des evenements futurs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#3D5A80;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 18px;}
+  .step-label{font-size:12px;font-weight:700;color:#63695D;text-transform:uppercase;letter-spacing:.06em;margin:0 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;margin-bottom:18px;}
+  .opt-row.inline{flex-direction:row;flex-wrap:wrap;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt-row.inline .opt{flex:1 1 auto;justify-content:center;}
+  .opt.selected{border-color:#3D5A80;background:#E9EEF5;}
+  .step2{opacity:.4;pointer-events:none;transition:opacity .15s;}
+  .step2.active{opacity:1;pointer-events:auto;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#3D5A80;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:36px;color:#3D5A80;margin:0 0 4px;}
+  .result-max{font-size:13px;color:#9A9E90;margin:0 0 16px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">FES - Échelle des événements futurs</h1>
+    <p class="lead">Future Events Scale. Pour chaque événement, indiquez d'abord s'il est probable qu'il vous arrive un jour dans le futur (Oui / Non), puis indiquez votre degré de certitude quant à cette réponse.</p>
+    <p class="lang-note">⚠️ Distinct de l'autre entrée « FES, Échelle de l'environnement familial » (Family Environment Scale de Moos) du catalogue. Traduction française de travail, non officielle ; texte original en anglais (pool d'items de Miranda &amp; Mennin, 2007).</p>
+    <div class="pill-row">
+      <span class="pill">34 questions</span>
+      <span class="pill">6-8 minutes</span>
+      <span class="pill">Oui/Non + certitude 1-5</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="step-label">Est-il probable que cela vous arrive un jour dans le futur ?</p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row inline" id="opt-row-yn"></div>
+    <div id="step2" class="step2">
+      <p class="step-label">Quel est votre degré de certitude sur cette réponse ?</p>
+      <div class="opt-row" id="opt-row-cert"></div>
+    </div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-score" id="score-neg"></p>
+    <p class="result-max">Certitude pessimiste, événements négatifs, sur 17 (Oui à un événement négatif avec certitude maximale)</p>
+    <p class="result-score" id="score-pos"></p>
+    <p class="result-max">Certitude pessimiste, événements positifs, sur 17 (Non à un événement positif avec certitude maximale)</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Miranda, R., &amp; Mennin, D. S. (2007). Depression, Generalized Anxiety Disorder, and Certainty in Pessimistic Predictions about the Future. Cognitive Therapy and Research, 31(1), 71-82 (pool d'items) ; construct original Andersen, S. M. (1990), Social Cognition, 8(3), 203-228. Aucun seuil clinique publié. Outil de repérage, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [
+    {neg:true,  t:"Être socialement inadéquat(e) ?"},
+    {neg:false, t:"Avoir une conversation inspirante ?"},
+    {neg:false, t:"Être admiré(e) par les gens ?"},
+    {neg:true,  t:"Voir une promesse importante rompue ?"},
+    {neg:true,  t:"Regretter une décision de vie majeure ?"},
+    {neg:true,  t:"Se sentir incompris(e) par les gens ?"},
+    {neg:false, t:"Avoir une carrière réussie ?"},
+    {neg:false, t:"Voir son travail acharné reconnu en cours ?"},
+    {neg:true,  t:"Être blâmé(e) quand les choses tournent mal ?"},
+    {neg:false, t:"Réaliser tout ce qu'on s'était fixé de faire ?"},
+    {neg:true,  t:"Subir une grande perte financière ?"},
+    {neg:true,  t:"Être rejeté(e) par un partenaire important ?"},
+    {neg:true,  t:"Voir les choses ne pas se passer comme espéré ?"},
+    {neg:true,  t:"Être coincé(e) dans un emploi peu épanouissant ?"},
+    {neg:false, t:"Vivre un moment de grande clairvoyance ?"},
+    {neg:false, t:"Être honoré(e) pour une réalisation majeure ?"},
+    {neg:false, t:"Passer beaucoup de bons moments avec des amis ?"},
+    {neg:false, t:"Être capable de gérer facilement la pression ?"},
+    {neg:true,  t:"Être considéré(e) comme un échec par les gens ?"},
+    {neg:false, t:"Avoir confiance en affrontant le monde ?"},
+    {neg:false, t:"Avoir de nombreuses amitiés durables ?"},
+    {neg:true,  t:"Être exclu(e) par des amis ?"},
+    {neg:true,  t:"Avoir un désaccord sérieux avec un(e) bon(ne) ami(e) ?"},
+    {neg:false, t:"Avoir le respect de ses collègues ?"},
+    {neg:true,  t:"Prendre beaucoup de retard dans son travail ?"},
+    {neg:true,  t:"Ne pouvoir se confier à personne ?"},
+    {neg:false, t:"Vivre une existence épanouissante ?"},
+    {neg:true,  t:"Être incapable de faire face à ses responsabilités ?"},
+    {neg:false, t:"Réussir une négociation compliquée ?"},
+    {neg:true,  t:"Être très seul(e) en vieillissant ?"},
+    {neg:false, t:"Voir son travail se dérouler souvent sans accroc ?"},
+    {neg:true,  t:"Voir sa famille désapprouver ses choix de vie ?"},
+    {neg:false, t:"Connaître une progression de carrière régulière ?"},
+    {neg:false, t:"Être considéré(e) comme un(e) excellent(e) auditeur/auditrice ?"}
+  ];
+  var certOpts = ["1 - Pas du tout certain(e)","2","3","4","5 - Aussi certain(e) qu'on peut l'être"];
+  var answers = items.map(function(){ return {yn:null, cert:null}; });
+  var idx = 0;
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx].t;
+    var a = answers[idx];
+
+    var ynRow = document.getElementById('opt-row-yn');
+    ynRow.innerHTML = '';
+    ["Oui","Non"].forEach(function(label, v){
+      var val = v === 0 ? 1 : 0;
+      var d = document.createElement('div');
+      d.className = 'opt' + (a.yn === val ? ' selected' : '');
+      d.textContent = label;
+      d.addEventListener('click', function(){
+        a.yn = val;
+        renderQuestion();
+      });
+      ynRow.appendChild(d);
+    });
+
+    var step2 = document.getElementById('step2');
+    step2.className = 'step2' + (a.yn !== null ? ' active' : '');
+    var certRow = document.getElementById('opt-row-cert');
+    certRow.innerHTML = '';
+    certOpts.forEach(function(label, v){
+      var d = document.createElement('div');
+      d.className = 'opt' + (a.cert === v+1 ? ' selected' : '');
+      d.textContent = label;
+      d.addEventListener('click', function(){
+        a.cert = v+1;
+        renderQuestion();
+      });
+      certRow.appendChild(d);
+    });
+
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = (a.yn === null || a.cert === null);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    var a = answers[idx];
+    if (a.yn === null || a.cert === null) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var neg = 0, pos = 0;
+    items.forEach(function(it, i){
+      var a = answers[i];
+      var pessimistic = it.neg ? (a.yn === 1) : (a.yn === 0);
+      var counts = pessimistic && a.cert === 5;
+      if (counts){
+        if (it.neg) neg++; else pos++;
+      }
+    });
+    document.getElementById('score-neg').textContent = neg;
+    document.getElementById('score-pos').textContent = pos;
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(){ return {yn:null, cert:null}; });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FES - Echelle des evenements futurs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#3D5A80 0%,#7B9BC4 55%,#22334D 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(200,215,235,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#22334D;background:#E9EEF5;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .caveat{background:#FBF3E7;border:1px solid #E7D9BC;border-radius:12px;padding:14px 16px;font-size:13.5px;color:#5A4A2A;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#3D5A80;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#22334D;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <div class="fiche-photo"><span class="acronym">FES</span></div>
+  <h1 class="serif">Échelle des événements futurs</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Future Events Scale - pool d'items de Miranda &amp; Mennin (2007), construct original Andersen (1990)</p>
+  <div class="meta-row">
+    <span class="pill">34 questions</span>
+    <span class="pill">6-8 minutes</span>
+    <span class="pill">Oui/Non + certitude 1-5</span>
+    <span class="pill">Anglais</span>
+    <span class="pill">Dépression, Anxiété</span>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" href="fes-evenements-futurs.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>La FES mesure la certitude avec laquelle une personne prédit la survenue d'événements futurs positifs ou négatifs dans sa propre vie, un marqueur cognitif étudié dans la dépression et l'anxiété généralisée. Pour chacun des 34 événements (17 négatifs, 17 positifs), la personne répond d'abord si elle pense que cela lui arrivera un jour (Oui/Non), puis indique son degré de certitude sur cette réponse (1 à 5).</p>
+    <p class="lang-note source-note">⚠️ Distincte de l'autre entrée « FES, Échelle de l'environnement familial » (Family Environment Scale de Moos) présente par ailleurs dans ce catalogue : il s'agit ici d'un instrument totalement différent, d'où le nom de fichier distinct <code>fes-evenements-futurs</code>.</p>
+    <p class="source-note">Le construct original de l'échelle FES (30 items) a été créé par Andersen (1990), publication non consultée en texte intégral (paywall). Le pool de 34 items transcrit ici provient de Miranda &amp; Mennin (2007), qui l'ont compilé à partir de plusieurs sources FES antérieures. Traduction française de travail, non officielle.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Pour chaque item, une réponse est dite « pessimiste » si la personne répond Oui à un événement négatif, ou Non à un événement positif. Cette réponse pessimiste ne compte dans le score que si elle est accompagnée d'une certitude maximale (5). Deux scores séparés sont calculés : la certitude pessimiste pour les événements négatifs (somme des 17 items négatifs, 0 à 17) et la certitude pessimiste pour les événements positifs (somme des 17 items positifs, 0 à 17).</p>
+    <p class="source-note">Aucun seuil clinique publié n'a été retrouvé : les deux scores se lisent comme des mesures continues de recherche, en profil relatif.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Source</h2>
+    <p class="source-note">Miranda, R., &amp; Mennin, D. S. (2007). Depression, Generalized Anxiety Disorder, and Certainty in Pessimistic Predictions about the Future. Cognitive Therapy and Research, 31(1), 71-82. Construct original : Andersen, S. M. (1990). The inevitability of future suffering: The role of depressive predictive certainty in depression. Social Cognition, 8(3), 203-228. Diffusion académique, aucun éditeur commercial identifié. Outil de repérage, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

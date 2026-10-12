@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IOFS — Impact on Family Scale (impact sur la famille)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#2F7F7A;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#2F7F7A;background:#DDEFEC;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#2F7F7A;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#2F7F7A;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 20px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">IOFS — Impact on Family Scale</h1>
+    <p class="lead">Ce questionnaire explore, du point de vue d'un parent, le retentissement de la maladie chronique ou du handicap de son enfant sur la famille, à travers 15 affirmations, chacune cotée de 1 (tout à fait d'accord) à 4 (pas du tout d'accord).</p>
+    <p class="lang-note">Questionnaire transcrit en anglais (forme à 15 items, publiée en libre accès) : le texte français de la validation de Boudas et al. (2013) n'est pas accessible en ligne (il est diffusé par l'auteure sur demande).</p>
+    <div class="pill-row">
+      <span class="pill">15 questions</span>
+      <span class="pill">3 minutes</span>
+      <span class="pill">Échelle 1-4</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-score" id="score-val"></p>
+    <p class="result-max">score total, sur une échelle de 15 à 60</p>
+    <p class="result-text" id="level-text"></p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">IOFS (Impact on Family Scale) — Stein &amp; Riessman, 1980 ; forme à 15 items (Stein &amp; Jessop, 2003). Outil dimensionnel, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [
+    {t:"Our family gives up things because of my child's illness."},
+    {t:"People in the neighborhood treat us specially because of my child's illness."},
+    {t:"We see family and friends less because of the illness."},
+    {t:"I don't have much time left over for other family members after caring for my child."},
+    {t:"We have little desire to go out because of my child's illness."},
+    {t:"Because of the illness, we are not able to travel out of the city."},
+    {t:"Sometimes we have to change plans about going out at the last minute because of my child's state."},
+    {t:"Sometimes I wonder whether my child should be treated \"specially\" or the same as a normal child."},
+    {t:"I think about not having more children because of the illness."},
+    {t:"Nobody understands the burden I carry."},
+    {t:"Traveling to the hospital is a strain on me."},
+    {t:"Sometimes I feel like we live on a roller coaster: in crisis when my child is acutely ill, OK when things are stable."},
+    {t:"It is hard to find a reliable person to take care of my child."},
+    {t:"I live from day to day and don't plan for the future."},
+    {t:"Fatigue is a problem for me because of my child's illness."}
+  ];
+  var opts = ["1 — Strongly agree","2 — Agree","3 — Disagree","4 — Strongly disagree"];
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx].t;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    opts.forEach(function(label, v){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === v+1 ? ' selected' : '');
+      d.textContent = label;
+      d.addEventListener('click', function(){
+        answers[idx] = v+1;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){
+      idx++; renderQuestion();
+    } else {
+      showResult();
+    }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var sum = 0;
+    items.forEach(function(item, i){
+      sum += 5 - answers[i];
+    });
+    document.getElementById('score-val').textContent = sum;
+    document.getElementById('level-text').textContent = "Plus le score est élevé, plus l'impact rapporté sur la famille est important (15 = aucun impact, 60 = impact maximal). Il n'existe aucun seuil clinique officiel : ce score se lit de façon dimensionnelle, dans le temps ou à titre de comparaison.";
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IOFS — Impact on Family Scale (impact sur la famille)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#2F7F7A 0%,#6BB5AE 55%,#1D4F4B 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#1D4F4B;background:#DDEFEC;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#2F7F7A;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#1D4F4B;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">IOFS</span></div>
+
+  <h1 class="serif">Impact on Family Scale (impact sur la famille)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Impact on Family Scale — Stein &amp; Riessman (1980), forme à 15 items</p>
+  <div class="meta-row">
+    <span class="pill">15 questions</span>
+    <span class="pill">3 minutes</span>
+    <span class="pill">Échelle 1-4</span>
+    <span class="pill">Parents</span>
+    <span class="pill">Anglais</span>
+    <span class="pill">Licence requise : oui</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="iofs.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>L'IOFS est un auto-questionnaire rempli par un parent, qui mesure le retentissement de la maladie chronique ou du handicap d'un enfant sur la famille entière : renoncements, vie sociale, temps pour les autres membres de la famille, fatigue, difficultés pratiques de garde, avenir. Il se distingue du burn-out parental (PBA, BPBS) : il décrit l'impact global sur la vie de famille, pas l'épuisement du parent lui-même. Cette page reproduit la forme à 15 items à facteur unique (« revised IOFS »).</p>
+    <p class="source-note">Questionnaire transcrit en anglais : les 15 items proviennent de la table de la version révisée publiée en libre accès (Health and Quality of Life Outcomes, CC BY) et correspondent un à un aux 15 libellés abrégés de la validation française (Boudas et al., 2013). Le texte français complet est diffusé par l'auteure sur demande.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque item est coté sur 4 choix (1 = tout à fait d'accord, 4 = pas du tout d'accord). Les valeurs sont inversées (1 devient 4, 2 devient 3, etc.) puis additionnées : le score total va de 15 (aucun impact) à 60 (impact maximal). Cette règle est celle décrite par la validation française. Aucun seuil clinique officiel n'existe ; le score se lit de façon dimensionnelle (la médiane était de 17 chez des parents d'enfants avec fente labio-palatine, étude de validation française). Pertinent pour documenter le retentissement familial dans un bilan pédiatrique.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p class="source-note"><strong>Licence requise : oui.</strong> © 1978 R. E. K. Stein, M.D., et C. K. Riessman, Ph.D. : l'instrument est disponible « avec la permission du premier auteur » (Ruth E. K. Stein, Albert Einstein College of Medicine). Construit malgré tout sur décision du cabinet (30/09/2026) ; l'autorisation d'usage reste à demander avant toute diffusion publique. Références : Stein &amp; Riessman (1980), Medical Care ; Stein &amp; Jessop (2003), J Dev Behav Pediatr 24(1), 9-16 ; Boudas, Jégu, Grollemund, Quentel, Danion-Grilliat &amp; Velten (2013), Health Qual Life Outcomes 11:67 ; version révisée : Health and Quality of Life Outcomes / J Patient Rep Outcomes 2019 (RIOFS, PMC6517451). Outil de repérage : ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

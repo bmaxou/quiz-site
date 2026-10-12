@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ICIQ-FLUTS — Symptômes urinaires chez la femme</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#1F7A74;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#1F7A74;background:#E2F1EF;}
+  .opt-row.scale{flex-direction:row;flex-wrap:wrap;gap:8px;}
+  .opt-row.scale .opt{justify-content:center;min-width:52px;flex:1 0 52px;padding:12px 6px;font-weight:600;}
+  .scale-legend{display:flex;justify-content:space-between;font-size:12px;color:#63695D;margin-top:10px;}
+  .opt .box{width:16px;height:16px;border:1.5px solid #9A9E90;border-radius:4px;flex:0 0 16px;display:inline-block;}
+  .opt.selected .box{background:#1F7A74;border-color:#1F7A74;}
+  .q-hint{font-size:12.5px;color:#63695D;margin:-10px 0 16px;}
+  .detail{font-size:13px;color:#63695D;margin:0 0 18px;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#1F7A74;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#1F7A74;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 20px;}
+  .bother-label{font-size:14px;font-weight:600;margin:22px 0 10px;}
+  .sub-table{width:100%;border-collapse:collapse;font-size:13.5px;margin:0 0 18px;}
+  .sub-table th,.sub-table td{border-bottom:1px solid #E0D9C9;padding:8px 6px;text-align:left;vertical-align:top;}
+  .sub-table th{font-size:12px;color:#63695D;text-transform:uppercase;letter-spacing:.06em;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">ICIQ-FLUTS — Symptômes urinaires chez la femme</h1>
+    <p class="lead">Beaucoup de personnes ont des symptômes urinaires de temps en temps. Ce questionnaire cherche à savoir quels symptômes urinaires vous avez et à quel point ils vous gênent. Répondez en pensant à votre cas, en moyenne, au cours des quatre dernières semaines.</p>
+    <p class="lang-note">Questions affichées en anglais : texte du formulaire officiel « ICIQ-FLUTS 08/04 » ; la version française officielle (iciq.net, inscription requise) n'est pas accessible. Outil du groupe ICIQ : « Licence requise : oui ».</p>
+    <div class="pill-row">
+      <span class="pill">12 questions</span>
+      <span class="pill">5 minutes</span>
+      <span class="pill">3 sous-scores (F, V, I)</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <p class="bother-label" id="bother-label">How much does this bother you? <span style="font-weight:400;color:#63695D">(0 = not at all, 10 = a great deal)</span></p>
+    <div class="opt-row scale" id="bother-row"></div>
+    <div class="scale-legend"><span>0 = not at all</span><span>10 = a great deal</span></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <table class="sub-table" id="sub-table"></table>
+    <p class="detail" id="detail-text"></p>
+    <p class="result-text" id="level-text"></p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">ICIQ-FLUTS — groupe ICIQ, d'après le BFLUTS-SF (Jackson et al., 1996). Copyright © « ICIQ Group ». Outil de repérage des symptômes urinaires bas de la femme et de leur gêne, ne remplace pas une évaluation médicale.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [{"n": "2", "t": "During the night, how many times do you have to get up to urinate, on average?", "s": "F", "o": ["none", "one", "two", "three", "four or more"]}, {"n": "3", "t": "Do you have a sudden need to rush to the toilet to urinate?", "s": "F", "o": ["never", "occasionally", "sometimes", "most of the time", "all of the time"]}, {"n": "4", "t": "Do you have pain in your bladder?", "s": "F", "o": ["never", "occasionally", "sometimes", "most of the time", "all of the time"]}, {"n": "5", "t": "How often do you pass urine during the day?", "s": "F", "o": ["1 to 6 times", "7 to 8 times", "9 to 10 times", "11 to 12 times", "13 or more times"]}, {"n": "6", "t": "Is there a delay before you can start to urinate?", "s": "V", "o": ["never", "occasionally", "sometimes", "most of the time", "all of the time"]}, {"n": "7", "t": "Do you have to strain to urinate?", "s": "V", "o": ["never", "occasionally", "sometimes", "most of the time", "all of the time"]}, {"n": "8", "t": "Do you stop and start more than once while you urinate?", "s": "V", "o": ["never", "occasionally", "sometimes", "most of the time", "all of the time"]}, {"n": "9", "t": "Does urine leak before you can get to the toilet?", "s": "I", "o": ["never", "occasionally", "sometimes", "most of the time", "all of the time"]}, {"n": "10", "t": "How often do you leak urine?", "s": "I", "o": ["never", "once or less per week", "two to three times per week", "once per day", "several times per day"]}, {"n": "11", "t": "Does urine leak when you are physically active, exert yourself, cough or sneeze?", "s": "I", "o": ["never", "occasionally", "sometimes", "most of the time", "all of the time"]}, {"n": "12", "t": "Do you ever leak urine for no obvious reason and without feeling that you want to go?", "s": "I", "o": ["never", "occasionally", "sometimes", "most of the time", "all of the time"]}, {"n": "13", "t": "Do you leak urine when you are asleep?", "s": "I", "o": ["never", "occasionally", "sometimes", "most of the time", "all of the time"]}];
+  var ans = []; var bot = [];
+  for (var i = 0; i < items.length; i++){ ans.push(null); bot.push(null); }
+  var idx = 0;
+
+  function ready(){ return ans[idx] !== null && bot[idx] !== null; }
+
+  function renderQuestion(){
+    var it = items[idx];
+    document.getElementById('progress-text').textContent = 'Question ' + it.n + ' (' + (idx+1) + ' / ' + items.length + ')';
+    document.getElementById('q-text').textContent = it.n + 'a. ' + it.t;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    it.o.forEach(function(lab, v){
+      var d = document.createElement('div');
+      d.className = 'opt' + (ans[idx] === v ? ' selected' : '');
+      d.textContent = lab;
+      d.addEventListener('click', function(){ ans[idx] = v; renderQuestion(); });
+      row.appendChild(d);
+    });
+    document.getElementById('bother-label').firstChild.textContent = it.n + 'b. How much does this bother you? ';
+    var br = document.getElementById('bother-row');
+    br.innerHTML = '';
+    for (var v = 0; v <= 10; v++){
+      (function(v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (bot[idx] === v ? ' selected' : '');
+        d.textContent = String(v);
+        d.addEventListener('click', function(){ bot[idx] = v; renderQuestion(); });
+        br.appendChild(d);
+      })(v);
+    }
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !ready();
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!ready()) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); }
+    else { showResult(); }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var S = {F:0, V:0, I:0};
+    items.forEach(function(it, i){ S[it.s] += ans[i]; });
+    var tb = document.getElementById('sub-table');
+    tb.innerHTML = '<tr><th>Sous-score</th><th>Questions</th><th>Résultat</th></tr>' +
+      '<tr><td>F — Remplissage (filling)</td><td>2a à 5a</td><td><strong>' + S.F + '</strong> / 16</td></tr>' +
+      '<tr><td>V — Vidange (voiding)</td><td>6a à 8a</td><td><strong>' + S.V + '</strong> / 12</td></tr>' +
+      '<tr><td>I — Incontinence</td><td>9a à 13a</td><td><strong>' + S.I + '</strong> / 20</td></tr>';
+    var lines = items.map(function(it, i){ return it.n + ' : ' + ans[i] + ' (gêne ' + bot[i] + '/10)'; });
+    document.getElementById('detail-text').textContent = 'Détail (points de la question a ; gêne de la question b, 0 à 10) — ' + lines.join(' ; ') + '.';
+    document.getElementById('level-text').textContent = "Plus un sous-score est élevé, plus les symptômes correspondants sont fréquents ou marqués. Le formulaire officiel définit uniquement ces trois sommes (F = 2a à 5a, V = 6a à 8a, I = 9a à 13a) ; il ne fournit ni seuil de sévérité ni score total, et les scores de gêne (questions b) ne sont pas additionnés. Les résultats sont à interpréter avec un médecin.";
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    for (var i = 0; i < items.length; i++){ ans[i] = null; bot[i] = null; }
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ICIQ-FLUTS — Symptômes urinaires chez la femme</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#8A4F7D 0%,#D8A7C9 55%,#5A2C50 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(250,232,246,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#0F4A46;background:#E2F1EF;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#1F7A74;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#0F4A46;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">ICIQ-FLUTS</span></div>
+
+  <h1 class="serif">Symptômes urinaires chez la femme</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">International Consultation on Incontinence Questionnaire – Female Lower Urinary Tract Symptoms — groupe ICIQ, d'après le BFLUTS-SF (Jackson et al., 1996)</p>
+  <div class="meta-row">
+    <span class="pill">12 questions</span>
+    <span class="pill">5 minutes</span>
+    <span class="pill">Sous-scores F, V, I</span>
+    <span class="pill">Anglais</span>
+    <span class="pill">Licence requise : oui</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="iciq-fluts.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>L'ICIQ-FLUTS évalue les symptômes du bas appareil urinaire chez la femme : symptômes de remplissage (nycturie, urgenturie, douleur vésicale, fréquence diurne), de vidange (retard au démarrage, poussée, miction en plusieurs temps) et d'incontinence (fuites par urgence, à l'effort, sans raison apparente, nocturnes, fréquence des fuites). Il comprend 12 questions ; chacune est suivie d'une question sur la gêne ressentie (échelle de 0 à 10). La période de référence est les quatre dernières semaines. La question d'identification du formulaire papier (date de naissance) n'a pas été reprise.</p>
+    <p>Les questions sont affichées en anglais, texte du formulaire officiel « ICIQ-FLUTS 08/04 ». La version française officielle (France, Belgique, Canada) est téléchargeable sur iciq.net après inscription et n'a pas pu être consultée.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque question « a » est cotée de 0 à 4 (« never » 0 à « all of the time » 4 ; nycturie : « none » 0 à « four or more » 4 ; fréquence diurne : « 1 to 6 times » 0 à « 13 or more times » 4 ; fréquence des fuites : « never » 0 à « several times per day » 4). Le formulaire officiel imprime trois sommes : <strong>F (remplissage)</strong> = questions 2a à 5a (0-16) ; <strong>V (vidange)</strong> = 6a + 7a + 8a (0-12) ; <strong>I (incontinence)</strong> = 9a à 13a (0-20). Les scores de gêne (questions b, 0-10) sont recueillis question par question et ne sont pas additionnés. Aucun seuil de sévérité ni score total n'est défini sur le formulaire : cette fiche n'en invente pas.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p><strong>Licence requise : oui.</strong> Copyright © « ICIQ Group » (ICIQ-FLUTS, d'après le BFLUTS-SF). Selon le site officiel iciq.net, l'usage clinique de routine et la recherche non commerciale sont gratuits mais soumis à une inscription et à une demande avant téléchargement des traductions ; une licence payante s'applique à la recherche financée à grande échelle et à tout usage commercial. Instrument construit ici malgré la licence, conformément à la décision du 30/09/2026 ; la diffusion publique reste soumise à l'autorisation du détenteur des droits.</p>
+    <p class="source-note">Texte des items, modalités et grille de points : formulaire officiel « ICIQ-FLUTS 08/04 » (mention « Copyright © ICIQ Group : the ICIQ-FLUTS is based on the BFLUTS SF », sommes F, V et I imprimées sur le formulaire), PDF diffusé par une clinique d'urologie (stgeorgeurology.com.au), anglais. Les pages iciq.net sont protégées par un contrôle anti-robot et n'ont pas été consultées ; la correspondance avec la version française officielle n'est pas vérifiée. Original : Jackson S., Donovan J., Brookes S., Eckford S., Swithinbank L. &amp; Abrams P. (1996), « The Bristol Female Lower Urinary Tract Symptoms questionnaire: development and psychometric testing », British Journal of Urology, 77(6), 805-812 ; forme scorée : Brookes S.T., Donovan J.L., Wright M., Jackson S. &amp; Abrams P. (2004), American Journal of Obstetrics and Gynecology, 191(1), 73-82.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

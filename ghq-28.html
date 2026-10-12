@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GHQ-28 — Questionnaire de santé général de Goldberg</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#6B5A3C;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .stem{font-size:13px;color:#63695D;margin:0 0 8px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#6B5A3C;background:#EFE9DA;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#6B5A3C;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#6B5A3C;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 16px;}
+  .alert{font-size:14px;background:#FBEFEA;border:1px solid #E8C9BC;border-radius:10px;padding:12px 14px;margin:0 0 18px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">GHQ-28 — Questionnaire de santé général de Goldberg</h1>
+    <p class="lead">Nous aimerions savoir si vous avez eu des problèmes médicaux et comment, d'une manière générale, vous vous êtes porté(e) ces dernières semaines. Répondez à toutes les questions en choisissant la réponse qui correspond le mieux à ce que vous ressentez. Nous cherchons à connaître les problèmes actuels et récents, et non ceux que vous avez pu avoir dans le passé.</p>
+    <p class="lang-note">Version française (traduction du GHQ-28, annexe d'un chapitre d'évaluation en psychiatrie ; la concordance exacte avec le texte de la validation française de Pariente et al. (1992) n'est pas vérifiée). Outil sous licence : « Licence requise : oui ».</p>
+    <div class="pill-row">
+      <span class="pill">28 questions</span>
+      <span class="pill">5 à 10 minutes</span>
+      <span class="pill">Score GHQ 0 à 28</span>
+      <span class="pill">Français</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="stem" id="stem-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-score" id="score-val"></p>
+    <p class="result-max">score GHQ (cotation 0-0-1-1), sur une échelle de 0 à 28 (plus il est élevé, plus la détresse psychologique est marquée)</p>
+    <p class="alert" id="alert-text" hidden></p>
+    <p class="result-text" id="level-text"></p>
+    <p class="result-text" id="extra-text"></p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">General Health Questionnaire à 28 items (GHQ-28) — Goldberg D.P. &amp; Hillier V.F. (1979). Version française : Pariente P., Challita H., Mesbah M. &amp; Guelfi J.D. (1992). Outil protégé par le droit d'auteur, autorisation d'usage via Mapi Research Trust. Outil de repérage de la détresse psychologique, ne remplace pas une évaluation clinique.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var STEM = 'Récemment, et en particulier ces dernières semaines…';
+  var items = [{"t": "1 - Vous êtes-vous senti(e) parfaitement bien et en bonne santé ?", "o": 0}, {"t": "2 - Avez-vous éprouvé le besoin d'un bon remontant ?", "o": 1}, {"t": "3 - Vous êtes-vous senti(e) à plat et pas dans votre assiette (« mal fichu(e) ») ?", "o": 1}, {"t": "4 - Vous êtes-vous senti(e) malade ?", "o": 1}, {"t": "5 - Avez-vous eu des douleurs à la tête ?", "o": 1}, {"t": "6 - Avez-vous eu une sensation de serrement ou de tension dans la tête ?", "o": 1}, {"t": "7 - Avez-vous eu des bouffées de chaleur ou des frissons ?", "o": 1}, {"t": "8 - Avez-vous manqué de sommeil à cause de vos soucis ?", "o": 1}, {"t": "9 - Avez-vous eu de la peine à rester endormi(e) ?", "o": 1}, {"t": "10 - Vous êtes-vous senti(e) constamment tendu(e) ou « stressé(e) » ?", "o": 1}, {"t": "11 - Vous êtes-vous senti(e) irritable et de mauvaise humeur ?", "o": 1}, {"t": "12 - Avez-vous été effrayé(e) et pris(e) de panique sans raison valable ?", "o": 1}, {"t": "13 - Vous êtes-vous senti(e) dépassé(e) par les événements ?", "o": 1}, {"t": "14 - Vous êtes-vous senti(e) continuellement énervé(e) ou tendu(e) ?", "o": 1}, {"t": "15 - Avez-vous réussi à rester actif(ve) et occupé(e) ?", "o": 2}, {"t": "16 - Avez-vous mis plus de temps à faire les choses habituelles ?", "o": 3}, {"t": "17 - Avez-vous eu le sentiment que dans l'ensemble vous faisiez bien les choses ?", "o": 4}, {"t": "18 - Avez-vous été satisfait(e) de la façon dont vous avez fait votre travail ?", "o": 5}, {"t": "19 - Avez-vous eu le sentiment de jouer un rôle utile dans la vie ?", "o": 6}, {"t": "20 - Vous êtes-vous senti(e) capable de prendre des décisions ?", "o": 7}, {"t": "21 - Avez-vous été capable d'apprécier vos activités quotidiennes normales ?", "o": 2}, {"t": "22 - Vous êtes-vous considéré(e) comme quelqu'un qui ne valait rien ?", "o": 8}, {"t": "23 - Avez-vous eu le sentiment que la vie est totalement sans espoir ?", "o": 8}, {"t": "24 - Avez-vous eu le sentiment que la vie ne vaut pas la peine d'être vécue ?", "o": 8}, {"t": "25 - Avez-vous pensé à la possibilité de vous supprimer ?", "o": 9}, {"t": "26 - Avez-vous pensé que parfois vous n'arriviez à rien parce que vos nerfs étaient à bout ?", "o": 8}, {"t": "27 - Vous est-il arrivé de souhaiter être mort(e) et loin de tout ça ?", "o": 8}, {"t": "28 - Est-ce que l'idée de vous supprimer réapparaissait continuellement dans votre esprit ?", "o": 9}];
+  var opts = [["mieux que d'habitude", "comme d'habitude", "moins bien que d'habitude", "beaucoup moins bien que d'habitude"], ["pas du tout", "pas plus que d'habitude", "un peu plus que d'habitude", "bien plus que d'habitude"], ["plus que d'habitude", "comme d'habitude", "moins que d'habitude", "bien moins que d'habitude"], ["moins de temps que d'habitude", "autant que d'habitude", "plus que d'habitude", "beaucoup plus de temps que d'habitude"], ["mieux que d'habitude", "aussi bien que d'habitude", "moins bien que d'habitude", "beaucoup moins bien que d'habitude"], ["plus satisfait(e)", "comme d'habitude", "moins satisfait(e) que d'habitude", "bien moins satisfait(e)"], ["plus que d'habitude", "comme d'habitude", "moins utile que d'habitude", "bien moins utile"], ["plus que d'habitude", "comme d'habitude", "moins capable que d'habitude", "bien moins capable"], ["pas du tout", "pas plus que d'habitude", "plus que d'habitude", "bien plus que d'habitude"], ["certainement pas", "je ne pense pas", "m'a traversé l'esprit", "oui certainement"]];
+  function optsFor(i){ return opts[items[i].o]; }
+  var SUB = [["Symptômes somatiques (questions 1 à 7)",0],["Anxiété et insomnie (questions 8 à 14)",7],["Dysfonctionnement social (questions 15 à 21)",14],["Dépression sévère (questions 22 à 28)",21]];
+  function compute(a){
+    var ghq = 0, lik = 0, subs = [], subL = [];
+    for (var s = 0; s < 4; s++){
+      var g = 0, l = 0;
+      for (var k = 0; k < 7; k++){ var v = a[SUB[s][1] + k]; l += v; if (v >= 2) g++; }
+      subs.push(g); subL.push(l); ghq += g; lik += l;
+    }
+    var level;
+    if (ghq >= 5) level = "Score supérieur au seuil usuel de 4/5 (soit 5 ou plus) : détresse psychologique probable. Le seuil dépend de la population étudiée ; il s'agit d'un outil de repérage, pas d'un diagnostic.";
+    else level = "Score inférieur ou égal au seuil usuel de 4/5 (soit 4 ou moins) : pas de détresse psychologique repérée par ce questionnaire. Le seuil dépend de la population étudiée ; il s'agit d'un outil de repérage, pas d'un diagnostic.";
+    var extra = "Sous-scores (cotation 0-0-1-1, de 0 à 7 chacun) : " +
+      SUB.map(function(x, i){ return x[0] + " : " + subs[i]; }).join(" ; ") +
+      ". Cotation de type Likert (0-1-2-3) : total " + lik + " sur 84 (sous-scores : " + subL.join(", ") + " sur 21), sans seuil officiel affiché ici.";
+    var alert = "";
+    var sui = [23,24,26,27].some(function(i){ return a[i] >= 2; });
+    if (sui) alert = "Une ou plusieurs réponses évoquent des idées de mort ou de suicide (questions 24, 25, 27 ou 28). Cela appelle une évaluation clinique rapide. En France, le 3114 (numéro national de prévention du suicide, 24 h/24, gratuit) est joignable à tout moment ; en cas de danger immédiat, appeler le 15.";
+    return {score: ghq, level: level, extra: extra, alert: alert};
+  }
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('stem-text').textContent = STEM;
+    document.getElementById('q-text').textContent = items[idx].t;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    optsFor(idx).forEach(function(label, v){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === v ? ' selected' : '');
+      d.textContent = label;
+      d.addEventListener('click', function(){
+        answers[idx] = v;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){
+      idx++; renderQuestion();
+    } else {
+      showResult();
+    }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var r = compute(answers);
+    document.getElementById('score-val').textContent = String(r.score);
+    document.getElementById('level-text').textContent = r.level;
+    document.getElementById('extra-text').textContent = r.extra || '';
+    var al = document.getElementById('alert-text');
+    if (r.alert){ al.textContent = r.alert; al.hidden = false; } else { al.hidden = true; }
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GHQ-28 — Questionnaire de santé général de Goldberg</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#7A6F5A 0%,#D8CDB5 55%,#453D2E 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.45),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#4A3E27;background:#EFE9DA;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#6B5A3C;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#4A3E27;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">GHQ-28</span></div>
+
+  <h1 class="serif">Questionnaire de santé général à 28 items (GHQ-28)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">General Health Questionnaire — Goldberg &amp; Hillier (1979), version à 28 items avec 4 sous-échelles ; version française Pariente et al. (1992)</p>
+  <div class="meta-row">
+    <span class="pill">28 questions</span>
+      <span class="pill">5 à 10 minutes</span>
+      <span class="pill">Score GHQ 0 à 28</span>
+      <span class="pill">Français</span>
+      <span class="pill">Licence requise : oui</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="ghq-28.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le GHQ-28 est un auto-questionnaire qui repère la détresse psychologique non psychotique chez l'adulte (population générale, soins primaires, patients ayant une affection somatique) à partir de l'état des dernières semaines comparé à l'état habituel. Il comprend 4 sous-échelles de 7 items : symptômes somatiques (1 à 7), anxiété et insomnie (8 à 14), dysfonctionnement social (15 à 21) et dépression sévère (22 à 28). Les 4 modalités de réponse varient selon les items (par exemple « pas du tout / pas plus que d'habitude / un peu plus que d'habitude / bien plus que d'habitude »). La première modalité correspond toujours à l'absence de problème.</p><p>Les items 24, 25, 27 et 28 portent sur des idées de mort ou de suicide : la page de résultat affiche un message d'alerte si l'une de ces questions reçoit une réponse positive.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Cotation GHQ dichotomique 0-0-1-1 (retenue ici comme score principal) : les deux premières modalités sont cotées 0, les deux dernières 1 ; le score total va de 0 à 28 et chaque sous-échelle de 0 à 7. Seuil usuel pour le GHQ-28 : 4/5, un score de 5 ou plus évoquant une détresse psychologique probable ; ce seuil dépend de la population étudiée (patients de médecine générale, patients psychiatriques, etc.) et doit être éprouvé pour chaque contexte. La cotation de type Likert (0-1-2-3, total de 0 à 84) est aussi calculée pour information, sans seuil officiel. La cotation cGHQ (items « positifs » cotés 0-0-1-1 et items « négatifs » cotés 0-1-1-1, pour les affections durables) n'est pas implémentée. L'instrument ne mesure que des variations par rapport à l'état habituel et ne tient pas compte de la chronicité ; il ne permet pas de poser un diagnostic.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p><strong>Licence requise : oui.</strong> Le GHQ est un instrument protégé (D. Goldberg) ; les autorisations d'usage passent par Mapi Research Trust (Lyon), avec des droits à payer pour les recherches académiques financées par des entreprises (fiche INRS FRPS 17, 2011) ; la fiche sralab.org le classe « Not Free ». Instrument construit ici malgré la licence, conformément à la décision du 30/09/2026 ; la diffusion publique reste soumise à l'autorisation du détenteur des droits.</p><p class="source-note">Texte des 28 items et modalités de réponse : traduction française reproduite en annexe (« Outil d'évaluation 1 — Questionnaire de santé GHQ-28 ») d'un chapitre d'évaluation en psychiatrie consulté en ligne ; la concordance exacte avec le texte validé de Pariente P., Challita H., Mesbah M. &amp; Guelfi J.D. (1992), European Psychiatry, 7(1), 15-20, n'a pas été vérifiée (le texte a été relu item par item contre la structure du GHQ-28 original). Cotation, sous-échelles et seuil 4/5 : même chapitre, recoupé avec la fiche « General Health Questionnaire (GHQ) », Langevin V., François M., Boini S. &amp; Riou A., INRS, Documents pour le Médecin du Travail n° 128, 2011. Version originale : Goldberg D.P. &amp; Hillier V.F. (1979), Psychological Medicine, 9, 139-145.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

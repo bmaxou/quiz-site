@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KDQOL-SF — Qualité de vie et maladie rénale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#4A7A58;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .sec{font-size:12.5px;color:#63695D;background:#F4F1EA;border-radius:8px;padding:8px 12px;margin:0 0 16px;}
+  .q-text{font-size:16px;margin:0 0 6px;}
+  .q-desc{font-size:13px;color:#63695D;margin:0 0 18px;white-space:pre-line;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#4A7A58;background:#DCEADF;}
+  .num-row{display:flex;flex-wrap:wrap;gap:6px;}
+  .num{min-width:44px;text-align:center;padding:10px 0;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600;background:#fff;}
+  .num.selected{border-color:#4A7A58;background:#DCEADF;}
+  .num-ends{display:flex;justify-content:space-between;gap:12px;font-size:12px;color:#63695D;margin-top:8px;}
+  .vas-box{padding:8px 0;}
+  .vas-val{font-family:'Cormorant Garamond',Georgia,serif;font-size:40px;color:#4A7A58;margin:0 0 6px;}
+  .vas-box input[type=range]{width:100%;accent-color:#4A7A58;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#4A7A58;border-color:#E0D9C9;}
+  .btn-primary{background:#4A7A58;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:40px;color:#4A7A58;margin:0 0 4px;}
+  .result-max{font-size:13px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 14px;}
+  .result-list{font-size:14px;margin:0 0 16px;padding-left:20px;}
+  .result-list li{margin-bottom:4px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">KDQOL-SF — Qualité de vie et maladie rénale</h1>
+    <p class="lead">Questionnaire complet (SF-36 + domaines spécifiques) pour évaluer votre qualité de vie en lien avec une maladie rénale chronique, notamment sous dialyse : santé physique et émotionnelle, symptômes, effets de la maladie, sommeil, vie sociale et professionnelle.</p>
+    <p class="lang-note">Kidney Disease Quality of Life Short Form (KDQOL-SF™), Hays et al. (RAND, 1995-1997) — version française officielle 1.2.</p>
+    <div class="pill-row">
+      <span class="pill">~80 questions</span><span class="pill">20-25 minutes</span><span class="pill">Français</span><span class="pill">Modalités mixtes</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="sec" id="sec-text" hidden></p>
+    <p class="q-text" id="q-text"></p>
+    <p class="q-desc" id="q-desc"></p>
+    <div id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Hays R.D. et al. (1995-1997), RAND P-7994. Outil de suivi de la qualité de vie, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [{"t": "Suivez-vous actuellement un traitement de dialyse ? (cette information sert uniquement à afficher la bonne question sur votre accès de dialyse, question 14 du questionnaire)", "sec": "Question préliminaire (non notée, hors questionnaire officiel)", "opts": [["HD", "Hémodialyse"], ["DP", "Dialyse péritonéale"], ["NON", "Aucune des deux / je ne sais pas"]]}, {"t": "Dans l'ensemble, pensez-vous que votre santé est :", "sec": "KDQOL-SF — questionnaire officiel RAND, version française 1.2", "opts": [[1, "Excellente"], [2, "Très bonne"], [3, "Bonne"], [4, "Médiocre"], [5, "Mauvaise"]]}, {"t": "Par rapport à l'année dernière à la même époque, comment trouvez-vous votre état de santé en ce moment ?", "sec": "KDQOL-SF — questionnaire officiel RAND, version française 1.2", "opts": [[1, "Bien meilleur que l'an dernier"], [2, "Plutôt meilleur"], [3, "À peu près pareil"], [4, "Plutôt moins bon"], [5, "Beaucoup moins bon"]]}, {"t": "Efforts physiques importants tels que courir, soulever un objet lourd, faire du sport", "sec": "Voici une liste d'activités que vous pouvez avoir à faire dans votre vie de tous les jours. Pour chacune, êtes-vous limité(e) en raison de votre état de santé actuel ?", "opts": [[1, "Oui, beaucoup limité(e)"], [2, "Oui, un peu limité(e)"], [3, "Non, pas du tout limité(e)"]]}, {"t": "Efforts physiques modérés tels que déplacer une table, passer l'aspirateur, jouer aux boules", "sec": "Voici une liste d'activités que vous pouvez avoir à faire dans votre vie de tous les jours. Pour chacune, êtes-vous limité(e) en raison de votre état de santé actuel ?", "opts": [[1, "Oui, beaucoup limité(e)"], [2, "Oui, un peu limité(e)"], [3, "Non, pas du tout limité(e)"]]}, {"t": "Soulever et porter les courses", "sec": "Voici une liste d'activités que vous pouvez avoir à faire dans votre vie de tous les jours. Pour chacune, êtes-vous limité(e) en raison de votre état de santé actuel ?", "opts": [[1, "Oui, beaucoup limité(e)"], [2, "Oui, un peu limité(e)"], [3, "Non, pas du tout limité(e)"]]}, {"t": "Monter plusieurs étages par l'escalier", "sec": "Voici une liste d'activités que vous pouvez avoir à faire dans votre vie de tous les jours. Pour chacune, êtes-vous limité(e) en raison de votre état de santé actuel ?", "opts": [[1, "Oui, beaucoup limité(e)"], [2, "Oui, un peu limité(e)"], [3, "Non, pas du tout limité(e)"]]}, {"t": "Monter un étage par l'escalier", "sec": "Voici une liste d'activités que vous pouvez avoir à faire dans votre vie de tous les jours. Pour chacune, êtes-vous limité(e) en raison de votre état de santé actuel ?", "opts": [[1, "Oui, beaucoup limité(e)"], [2, "Oui, un peu limité(e)"], [3, "Non, pas du tout limité(e)"]]}, {"t": "Se pencher en avant, se mettre à genoux, s'accroupir", "sec": "Voici une liste d'activités que vous pouvez avoir à faire dans votre vie de tous les jours. Pour chacune, êtes-vous limité(e) en raison de votre état de santé actuel ?", "opts": [[1, "Oui, beaucoup limité(e)"], [2, "Oui, un peu limité(e)"], [3, "Non, pas du tout limité(e)"]]}, {"t": "Marcher plus d'un km à pied", "sec": "Voici une liste d'activités que vous pouvez avoir à faire dans votre vie de tous les jours. Pour chacune, êtes-vous limité(e) en raison de votre état de santé actuel ?", "opts": [[1, "Oui, beaucoup limité(e)"], [2, "Oui, un peu limité(e)"], [3, "Non, pas du tout limité(e)"]]}, {"t": "Marcher plusieurs centaines de mètres", "sec": "Voici une liste d'activités que vous pouvez avoir à faire dans votre vie de tous les jours. Pour chacune, êtes-vous limité(e) en raison de votre état de santé actuel ?", "opts": [[1, "Oui, beaucoup limité(e)"], [2, "Oui, un peu limité(e)"], [3, "Non, pas du tout limité(e)"]]}, {"t": "Marcher une centaine de mètres", "sec": "Voici une liste d'activités que vous pouvez avoir à faire dans votre vie de tous les jours. Pour chacune, êtes-vous limité(e) en raison de votre état de santé actuel ?", "opts": [[1, "Oui, beaucoup limité(e)"], [2, "Oui, un peu limité(e)"], [3, "Non, pas du tout limité(e)"]]}, {"t": "Prendre un bain, une douche ou s'habiller", "sec": "Voici une liste d'activités que vous pouvez avoir à faire dans votre vie de tous les jours. Pour chacune, êtes-vous limité(e) en raison de votre état de santé actuel ?", "opts": [[1, "Oui, beaucoup limité(e)"], [2, "Oui, un peu limité(e)"], [3, "Non, pas du tout limité(e)"]]}, {"t": "Avez-vous réduit le temps passé à votre travail ou à vos activités habituelles ?", "sec": "Au cours de ces 4 dernières semaines, et en raison de votre état physique…", "opts": [[1, "Oui"], [2, "Non"]]}, {"t": "Avez-vous accompli moins de choses que vous auriez souhaité ?", "sec": "Au cours de ces 4 dernières semaines, et en raison de votre état physique…", "opts": [[1, "Oui"], [2, "Non"]]}, {"t": "Avez-vous dû arrêter de faire certaines choses ?", "sec": "Au cours de ces 4 dernières semaines, et en raison de votre état physique…", "opts": [[1, "Oui"], [2, "Non"]]}, {"t": "Avez-vous eu des difficultés à faire votre travail ou toute autre activité (par exemple, cela vous a demandé un effort supplémentaire) ?", "sec": "Au cours de ces 4 dernières semaines, et en raison de votre état physique…", "opts": [[1, "Oui"], [2, "Non"]]}, {"t": "Avez-vous réduit le temps passé à votre travail ou à vos activités habituelles ?", "sec": "Au cours de ces 4 dernières semaines, et en raison de votre état émotionnel (comme vous sentir triste, nerveux(se) ou déprimé(e))…", "opts": [[1, "Oui"], [2, "Non"]]}, {"t": "Avez-vous accompli moins de choses que vous auriez souhaité ?", "sec": "Au cours de ces 4 dernières semaines, et en raison de votre état émotionnel (comme vous sentir triste, nerveux(se) ou déprimé(e))…", "opts": [[1, "Oui"], [2, "Non"]]}, {"t": "Avez-vous eu des difficultés à faire ce que vous aviez à faire avec autant de soin et d'attention que d'habitude ?", "sec": "Au cours de ces 4 dernières semaines, et en raison de votre état émotionnel (comme vous sentir triste, nerveux(se) ou déprimé(e))…", "opts": [[1, "Oui"], [2, "Non"]]}, {"t": "Au cours de ces 4 dernières semaines, dans quelle mesure votre état de santé, physique ou émotionnel, vous a-t-il gêné(e) dans votre vie sociale et vos relations avec les autres, votre famille, vos amis, vos connaissances ?", "sec": "KDQOL-SF — questionnaire officiel RAND, version française 1.2", "opts": [[1, "Pas du tout"], [2, "Un petit peu"], [3, "Moyennement"], [4, "Beaucoup"], [5, "Énormément"]]}, {"t": "Au cours de ces 4 dernières semaines, quelle a été l'intensité de vos douleurs physiques ?", "sec": "KDQOL-SF — questionnaire officiel RAND, version française 1.2", "opts": [[1, "Nulle"], [2, "Très faible"], [3, "Faible"], [4, "Moyenne"], [5, "Grande"], [6, "Très grande"]]}, {"t": "Au cours de ces 4 dernières semaines, dans quelle mesure vos douleurs physiques vous ont-elles limité(e) dans votre travail ou vos activités domestiques ?", "sec": "KDQOL-SF — questionnaire officiel RAND, version française 1.2", "opts": [[1, "Pas du tout"], [2, "Un petit peu"], [3, "Moyennement"], [4, "Beaucoup"], [5, "Énormément"]]}, {"t": "Vous vous êtes senti(e) dynamique ?", "sec": "Au cours de ces 4 dernières semaines, y a-t-il eu des moments où…", "opts": [[1, "En permanence"], [2, "Très souvent"], [3, "Souvent"], [4, "Quelquefois"], [5, "Rarement"], [6, "Jamais"]]}, {"t": "Vous vous êtes senti(e) très nerveux(se) ?", "sec": "Au cours de ces 4 dernières semaines, y a-t-il eu des moments où…", "opts": [[1, "En permanence"], [2, "Très souvent"], [3, "Souvent"], [4, "Quelquefois"], [5, "Rarement"], [6, "Jamais"]]}, {"t": "Vous vous êtes senti(e) si découragé(e) que rien ne pouvait vous remonter le moral ?", "sec": "Au cours de ces 4 dernières semaines, y a-t-il eu des moments où…", "opts": [[1, "En permanence"], [2, "Très souvent"], [3, "Souvent"], [4, "Quelquefois"], [5, "Rarement"], [6, "Jamais"]]}, {"t": "Vous vous êtes senti(e) calme et détendu(e) ?", "sec": "Au cours de ces 4 dernières semaines, y a-t-il eu des moments où…", "opts": [[1, "En permanence"], [2, "Très souvent"], [3, "Souvent"], [4, "Quelquefois"], [5, "Rarement"], [6, "Jamais"]]}, {"t": "Vous vous êtes senti(e) débordant(e) d'énergie ?", "sec": "Au cours de ces 4 dernières semaines, y a-t-il eu des moments où…", "opts": [[1, "En permanence"], [2, "Très souvent"], [3, "Souvent"], [4, "Quelquefois"], [5, "Rarement"], [6, "Jamais"]]}, {"t": "Vous vous êtes senti(e) triste et abattu(e) ?", "sec": "Au cours de ces 4 dernières semaines, y a-t-il eu des moments où…", "opts": [[1, "En permanence"], [2, "Très souvent"], [3, "Souvent"], [4, "Quelquefois"], [5, "Rarement"], [6, "Jamais"]]}, {"t": "Vous vous êtes senti(e) épuisé(e) ?", "sec": "Au cours de ces 4 dernières semaines, y a-t-il eu des moments où…", "opts": [[1, "En permanence"], [2, "Très souvent"], [3, "Souvent"], [4, "Quelquefois"], [5, "Rarement"], [6, "Jamais"]]}, {"t": "Vous vous êtes senti(e) heureux(se) ?", "sec": "Au cours de ces 4 dernières semaines, y a-t-il eu des moments où…", "opts": [[1, "En permanence"], [2, "Très souvent"], [3, "Souvent"], [4, "Quelquefois"], [5, "Rarement"], [6, "Jamais"]]}, {"t": "Vous vous êtes senti(e) fatigué(e) ?", "sec": "Au cours de ces 4 dernières semaines, y a-t-il eu des moments où…", "opts": [[1, "En permanence"], [2, "Très souvent"], [3, "Souvent"], [4, "Quelquefois"], [5, "Rarement"], [6, "Jamais"]]}, {"t": "Au cours de ces 4 dernières semaines, y a-t-il eu des moments où votre état de santé, physique ou émotionnel, vous a gêné(e) dans votre vie sociale et vos relations avec les autres, votre famille, vos amis, vos connaissances ?", "sec": "KDQOL-SF — questionnaire officiel RAND, version française 1.2", "opts": [[1, "En permanence"], [2, "Une bonne partie du temps"], [3, "De temps en temps"], [4, "Rarement"], [5, "Jamais"]]}, {"t": "Je tombe malade plus facilement que les autres", "sec": "Indiquez, pour chacune des phrases suivantes, dans quelle mesure elles sont vraies ou fausses dans votre cas.", "opts": [[1, "Totalement vraie"], [2, "Plutôt vraie"], [3, "Je ne sais pas"], [4, "Plutôt fausse"], [5, "Totalement fausse"]]}, {"t": "Je me porte aussi bien que n'importe qui", "sec": "Indiquez, pour chacune des phrases suivantes, dans quelle mesure elles sont vraies ou fausses dans votre cas.", "opts": [[1, "Totalement vraie"], [2, "Plutôt vraie"], [3, "Je ne sais pas"], [4, "Plutôt fausse"], [5, "Totalement fausse"]]}, {"t": "Je m'attends à ce que ma santé se dégrade", "sec": "Indiquez, pour chacune des phrases suivantes, dans quelle mesure elles sont vraies ou fausses dans votre cas.", "opts": [[1, "Totalement vraie"], [2, "Plutôt vraie"], [3, "Je ne sais pas"], [4, "Plutôt fausse"], [5, "Totalement fausse"]]}, {"t": "Je suis en excellente santé", "sec": "Indiquez, pour chacune des phrases suivantes, dans quelle mesure elles sont vraies ou fausses dans votre cas.", "opts": [[1, "Totalement vraie"], [2, "Plutôt vraie"], [3, "Je ne sais pas"], [4, "Plutôt fausse"], [5, "Totalement fausse"]]}, {"t": "Ma maladie rénale me rend la vie trop compliquée", "sec": "Votre maladie rénale — indiquez pour chacune des phrases suivantes dans quelle mesure elles sont vraies ou fausses dans votre cas.", "opts": [[1, "Totalement vraie"], [2, "Plutôt vraie"], [3, "Je ne sais pas"], [4, "Plutôt fausse"], [5, "Totalement fausse"]]}, {"t": "Ma maladie me prend trop de temps", "sec": "Votre maladie rénale — indiquez pour chacune des phrases suivantes dans quelle mesure elles sont vraies ou fausses dans votre cas.", "opts": [[1, "Totalement vraie"], [2, "Plutôt vraie"], [3, "Je ne sais pas"], [4, "Plutôt fausse"], [5, "Totalement fausse"]]}, {"t": "Je supporte mal tout ce qu'il y a à faire pour ma maladie", "sec": "Votre maladie rénale — indiquez pour chacune des phrases suivantes dans quelle mesure elles sont vraies ou fausses dans votre cas.", "opts": [[1, "Totalement vraie"], [2, "Plutôt vraie"], [3, "Je ne sais pas"], [4, "Plutôt fausse"], [5, "Totalement fausse"]]}, {"t": "J'ai le sentiment d'être un poids pour ma famille", "sec": "Votre maladie rénale — indiquez pour chacune des phrases suivantes dans quelle mesure elles sont vraies ou fausses dans votre cas.", "opts": [[1, "Totalement vraie"], [2, "Plutôt vraie"], [3, "Je ne sais pas"], [4, "Plutôt fausse"], [5, "Totalement fausse"]]}, {"t": "Vous êtes-vous isolé(e) des personnes de votre entourage ?", "sec": "Au cours des quatre dernières semaines, à quelle fréquence…", "opts": [[1, "Jamais"], [2, "Rarement"], [3, "Quelquefois"], [4, "Souvent"], [5, "Très souvent"], [6, "En permanence"]]}, {"t": "Avez-vous mis plus de temps à réagir à ce qui était dit ou fait autour de vous ?", "sec": "Au cours des quatre dernières semaines, à quelle fréquence…", "opts": [[1, "Jamais"], [2, "Rarement"], [3, "Quelquefois"], [4, "Souvent"], [5, "Très souvent"], [6, "En permanence"]]}, {"t": "Avez-vous été agressif(ve) avec les personnes de votre entourage ?", "sec": "Au cours des quatre dernières semaines, à quelle fréquence…", "opts": [[1, "Jamais"], [2, "Rarement"], [3, "Quelquefois"], [4, "Souvent"], [5, "Très souvent"], [6, "En permanence"]]}, {"t": "Avez-vous eu des difficultés à vous concentrer et à réfléchir ?", "sec": "Au cours des quatre dernières semaines, à quelle fréquence…", "opts": [[1, "Jamais"], [2, "Rarement"], [3, "Quelquefois"], [4, "Souvent"], [5, "Très souvent"], [6, "En permanence"]]}, {"t": "Vous êtes-vous bien entendu(e) avec les autres ?", "sec": "Au cours des quatre dernières semaines, à quelle fréquence…", "opts": [[1, "Jamais"], [2, "Rarement"], [3, "Quelquefois"], [4, "Souvent"], [5, "Très souvent"], [6, "En permanence"]]}, {"t": "Vous êtes-vous senti(e) perturbé(e) ?", "sec": "Au cours des quatre dernières semaines, à quelle fréquence…", "opts": [[1, "Jamais"], [2, "Rarement"], [3, "Quelquefois"], [4, "Souvent"], [5, "Très souvent"], [6, "En permanence"]]}, {"t": "Des douleurs musculaires, des courbatures ?", "sec": "Au cours des quatre dernières semaines, dans quelle mesure avez-vous eu les problèmes suivants ?", "opts": [[1, "Pas du tout"], [2, "Un petit peu"], [3, "Moyennement"], [4, "Beaucoup"], [5, "Énormément"]]}, {"t": "Des douleurs dans la poitrine ?", "sec": "Au cours des quatre dernières semaines, dans quelle mesure avez-vous eu les problèmes suivants ?", "opts": [[1, "Pas du tout"], [2, "Un petit peu"], [3, "Moyennement"], [4, "Beaucoup"], [5, "Énormément"]]}, {"t": "Des crampes ?", "sec": "Au cours des quatre dernières semaines, dans quelle mesure avez-vous eu les problèmes suivants ?", "opts": [[1, "Pas du tout"], [2, "Un petit peu"], [3, "Moyennement"], [4, "Beaucoup"], [5, "Énormément"]]}, {"t": "Des démangeaisons ?", "sec": "Au cours des quatre dernières semaines, dans quelle mesure avez-vous eu les problèmes suivants ?", "opts": [[1, "Pas du tout"], [2, "Un petit peu"], [3, "Moyennement"], [4, "Beaucoup"], [5, "Énormément"]]}, {"t": "Une sensation de peau sèche ?", "sec": "Au cours des quatre dernières semaines, dans quelle mesure avez-vous eu les problèmes suivants ?", "opts": [[1, "Pas du tout"], [2, "Un petit peu"], [3, "Moyennement"], [4, "Beaucoup"], [5, "Énormément"]]}, {"t": "Un essoufflement ?", "sec": "Au cours des quatre dernières semaines, dans quelle mesure avez-vous eu les problèmes suivants ?", "opts": [[1, "Pas du tout"], [2, "Un petit peu"], [3, "Moyennement"], [4, "Beaucoup"], [5, "Énormément"]]}, {"t": "Des étourdissements ou des vertiges ?", "sec": "Au cours des quatre dernières semaines, dans quelle mesure avez-vous eu les problèmes suivants ?", "opts": [[1, "Pas du tout"], [2, "Un petit peu"], [3, "Moyennement"], [4, "Beaucoup"], [5, "Énormément"]]}, {"t": "Un manque d'appétit ?", "sec": "Au cours des quatre dernières semaines, dans quelle mesure avez-vous eu les problèmes suivants ?", "opts": [[1, "Pas du tout"], [2, "Un petit peu"], [3, "Moyennement"], [4, "Beaucoup"], [5, "Énormément"]]}, {"t": "Une fatigue ou un épuisement ?", "sec": "Au cours des quatre dernières semaines, dans quelle mesure avez-vous eu les problèmes suivants ?", "opts": [[1, "Pas du tout"], [2, "Un petit peu"], [3, "Moyennement"], [4, "Beaucoup"], [5, "Énormément"]]}, {"t": "Des mains ou des pieds engourdis ?", "sec": "Au cours des quatre dernières semaines, dans quelle mesure avez-vous eu les problèmes suivants ?", "opts": [[1, "Pas du tout"], [2, "Un petit peu"], [3, "Moyennement"], [4, "Beaucoup"], [5, "Énormément"]]}, {"t": "Une envie de vomir ou l'estomac dérangé ?", "sec": "Au cours des quatre dernières semaines, dans quelle mesure avez-vous eu les problèmes suivants ?", "opts": [[1, "Pas du tout"], [2, "Un petit peu"], [3, "Moyennement"], [4, "Beaucoup"], [5, "Énormément"]]}, {"t": "Des problèmes avec votre fistule ?", "sec": "Au cours des quatre dernières semaines, dans quelle mesure avez-vous eu les problèmes suivants ? (uniquement pour les patients sous hémodialyse)", "opts": [[1, "Pas du tout"], [2, "Un petit peu"], [3, "Moyennement"], [4, "Beaucoup"], [5, "Énormément"]], "cond": [0, "HD"]}, {"t": "Des problèmes avec votre cathéter ?", "sec": "Au cours des quatre dernières semaines, dans quelle mesure avez-vous eu les problèmes suivants ? (uniquement pour les patients sous dialyse péritonéale)", "opts": [[1, "Pas du tout"], [2, "Un petit peu"], [3, "Moyennement"], [4, "Beaucoup"], [5, "Énormément"]], "cond": [0, "DP"]}, {"t": "La restriction des boissons ?", "sec": "Jusqu'à quel point les effets de la maladie rénale sur votre vie quotidienne vous gênent-ils dans les domaines suivants ?", "opts": [[1, "Pas du tout"], [2, "Un petit peu"], [3, "Moyennement"], [4, "Beaucoup"], [5, "Énormément"]]}, {"t": "La restriction alimentaire ?", "sec": "Jusqu'à quel point les effets de la maladie rénale sur votre vie quotidienne vous gênent-ils dans les domaines suivants ?", "opts": [[1, "Pas du tout"], [2, "Un petit peu"], [3, "Moyennement"], [4, "Beaucoup"], [5, "Énormément"]]}, {"t": "La restriction dans ce que vous pouvez faire à la maison ?", "sec": "Jusqu'à quel point les effets de la maladie rénale sur votre vie quotidienne vous gênent-ils dans les domaines suivants ?", "opts": [[1, "Pas du tout"], [2, "Un petit peu"], [3, "Moyennement"], [4, "Beaucoup"], [5, "Énormément"]]}, {"t": "La restriction dans vos déplacements ou vos voyages ?", "sec": "Jusqu'à quel point les effets de la maladie rénale sur votre vie quotidienne vous gênent-ils dans les domaines suivants ?", "opts": [[1, "Pas du tout"], [2, "Un petit peu"], [3, "Moyennement"], [4, "Beaucoup"], [5, "Énormément"]]}, {"t": "La dépendance vis-à-vis des médecins et du personnel soignant ?", "sec": "Jusqu'à quel point les effets de la maladie rénale sur votre vie quotidienne vous gênent-ils dans les domaines suivants ?", "opts": [[1, "Pas du tout"], [2, "Un petit peu"], [3, "Moyennement"], [4, "Beaucoup"], [5, "Énormément"]]}, {"t": "Le stress ou les soucis liés à la maladie rénale ?", "sec": "Jusqu'à quel point les effets de la maladie rénale sur votre vie quotidienne vous gênent-ils dans les domaines suivants ?", "opts": [[1, "Pas du tout"], [2, "Un petit peu"], [3, "Moyennement"], [4, "Beaucoup"], [5, "Énormément"]]}, {"t": "Votre vie sexuelle ?", "sec": "Jusqu'à quel point les effets de la maladie rénale sur votre vie quotidienne vous gênent-ils dans les domaines suivants ?", "opts": [[1, "Pas du tout"], [2, "Un petit peu"], [3, "Moyennement"], [4, "Beaucoup"], [5, "Énormément"]]}, {"t": "Votre apparence physique ?", "sec": "Jusqu'à quel point les effets de la maladie rénale sur votre vie quotidienne vous gênent-ils dans les domaines suivants ?", "opts": [[1, "Pas du tout"], [2, "Un petit peu"], [3, "Moyennement"], [4, "Beaucoup"], [5, "Énormément"]]}, {"t": "Des difficultés pour avoir du plaisir sexuel ?", "sec": "Au cours des quatre dernières semaines, dans quelle mesure avez-vous rencontré les problèmes suivants ?", "opts": [[1, "Pas du tout"], [2, "Un petit peu"], [3, "Moyennement"], [4, "Beaucoup"], [5, "Énormément"]]}, {"t": "Une absence ou une insuffisance de désir sexuel ?", "sec": "Au cours des quatre dernières semaines, dans quelle mesure avez-vous rencontré les problèmes suivants ?", "opts": [[1, "Pas du tout"], [2, "Un petit peu"], [3, "Moyennement"], [4, "Beaucoup"], [5, "Énormément"]]}, {"t": "Notez la qualité de votre sommeil entre 0 (très mauvais sommeil) et 10 (très bon sommeil).", "sec": "KDQOL-SF — questionnaire officiel RAND, version française 1.2", "kind": "vas", "min": 0, "max": 10, "scale": 1, "lo": "Très mauvais sommeil", "hi": "Très bon sommeil", "hint": "Déplacez le curseur jusqu'à la note qui correspond à la qualité de votre sommeil."}, {"t": "Je me réveille trop tôt, et j'ai du mal à me rendormir", "sec": "Pour chaque phrase suivante, indiquez si elle a été vraie pour vous au cours des quatre dernières semaines.", "opts": [[1, "Jamais"], [2, "Rarement"], [3, "Quelquefois"], [4, "Souvent"], [5, "Très souvent"], [6, "En permanence"]]}, {"t": "Je dors suffisamment", "sec": "Pour chaque phrase suivante, indiquez si elle a été vraie pour vous au cours des quatre dernières semaines.", "opts": [[1, "Jamais"], [2, "Rarement"], [3, "Quelquefois"], [4, "Souvent"], [5, "Très souvent"], [6, "En permanence"]]}, {"t": "Je somnole ou je dors plus souvent dans la journée", "sec": "Pour chaque phrase suivante, indiquez si elle a été vraie pour vous au cours des quatre dernières semaines.", "opts": [[1, "Jamais"], [2, "Rarement"], [3, "Quelquefois"], [4, "Souvent"], [5, "Très souvent"], [6, "En permanence"]]}, {"t": "Le temps que vous pouvez passer avec votre famille et vos amis", "sec": "En ce qui concerne votre vie de famille et vos relations amicales, quel est votre degré de satisfaction pour chaque aspect suivant ?", "opts": [[1, "Très insatisfait"], [2, "Plutôt insatisfait"], [3, "Plutôt satisfait"], [4, "Très satisfait"]]}, {"t": "Le soutien et la compréhension manifestés par votre famille et par vos amis", "sec": "En ce qui concerne votre vie de famille et vos relations amicales, quel est votre degré de satisfaction pour chaque aspect suivant ?", "opts": [[1, "Très insatisfait"], [2, "Plutôt insatisfait"], [3, "Plutôt satisfait"], [4, "Très satisfait"]]}, {"t": "Au cours des quatre dernières semaines, avez-vous exercé une activité rémunérée (travaillé pour gagner de l'argent) ?", "sec": "KDQOL-SF — questionnaire officiel RAND, version française 1.2", "opts": [[1, "Oui"], [2, "Non"]]}, {"t": "Est-ce que votre santé vous empêche (ou vous empêcherait si vous vouliez travailler) d'exercer une activité rémunérée ?", "sec": "KDQOL-SF — questionnaire officiel RAND, version française 1.2", "opts": [[1, "Oui"], [2, "Non"]]}, {"t": "Globalement, comment évaluez-vous votre santé ?", "sec": "KDQOL-SF — questionnaire officiel RAND, version française 1.2", "kind": "vas", "min": 0, "max": 10, "scale": 1, "lo": "La pire santé possible", "hi": "Parfaite santé", "hint": "Déplacez le curseur jusqu'à la note qui correspond à votre état de santé actuel."}, {"t": "Comment jugez-vous la façon dont vous êtes traité(e) dans le service de dialyse ? En particulier, êtes-vous satisfait(e) de la sympathie et de l'attention de l'équipe soignante à votre égard ?", "sec": "Satisfaction avec les soins (ne s'applique qu'aux patients suivis en service de dialyse)", "opts": [[1, "Très mauvaises"], [2, "Mauvaises"], [3, "Médiocres"], [4, "Bonnes"], [5, "Très bonnes"], [6, "Excellentes"], [7, "Les meilleures possibles"]]}, {"t": "L'équipe de dialyse m'encourage à mener une vie aussi normale que possible", "sec": "Dans quelle mesure les phrases suivantes vous semblent-elles vraies ou fausses ? (patients suivis en service de dialyse)", "opts": [[1, "Totalement vraie"], [2, "Plutôt vraie"], [3, "Je ne sais pas"], [4, "Plutôt fausse"], [5, "Totalement fausse"]]}, {"t": "L'équipe de dialyse m'apporte son soutien et ses conseils pour m'aider à supporter ma maladie", "sec": "Dans quelle mesure les phrases suivantes vous semblent-elles vraies ou fausses ? (patients suivis en service de dialyse)", "opts": [[1, "Totalement vraie"], [2, "Plutôt vraie"], [3, "Je ne sais pas"], [4, "Plutôt fausse"], [5, "Totalement fausse"]]}];
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  var RESULT = function(a) {
+
+    var RECODE_TABLE = {1:{1:100,2:75,3:50,4:25,5:0},3:{1:0,2:50,3:100},4:{1:0,2:50,3:100},5:{1:0,2:50,3:100},6:{1:0,2:50,3:100},7:{1:0,2:50,3:100},8:{1:0,2:50,3:100},9:{1:0,2:50,3:100},10:{1:0,2:50,3:100},11:{1:0,2:50,3:100},12:{1:0,2:50,3:100},13:{1:0,2:100},14:{1:0,2:100},15:{1:0,2:100},16:{1:0,2:100},17:{1:0,2:100},18:{1:0,2:100},19:{1:0,2:100},20:{1:100,2:75,3:50,4:25,5:0},21:{1:100,2:80,3:60,4:40,5:20,6:0},22:{1:100,2:75,3:50,4:25,5:0},23:{1:100,2:80,3:60,4:40,5:20,6:0},24:{1:0,2:20,3:40,4:60,5:80,6:100},25:{1:0,2:20,3:40,4:60,5:80,6:100},26:{1:100,2:80,3:60,4:40,5:20,6:0},27:{1:100,2:80,3:60,4:40,5:20,6:0},28:{1:0,2:20,3:40,4:60,5:80,6:100},29:{1:0,2:20,3:40,4:60,5:80,6:100},30:{1:100,2:80,3:60,4:40,5:20,6:0},31:{1:0,2:20,3:40,4:60,5:80,6:100},32:{1:0,2:25,3:50,4:75,5:100},33:{1:0,2:25,3:50,4:75,5:100},34:{1:100,2:75,3:50,4:25,5:0},35:{1:0,2:25,3:50,4:75,5:100},36:{1:100,2:75,3:50,4:25,5:0},37:{1:0,2:25,3:50,4:75,5:100},38:{1:0,2:25,3:50,4:75,5:100},39:{1:0,2:25,3:50,4:75,5:100},40:{1:0,2:25,3:50,4:75,5:100},41:{1:100,2:80,3:60,4:40,5:20,6:0},42:{1:100,2:80,3:60,4:40,5:20,6:0},43:{1:100,2:80,3:60,4:40,5:20,6:0},44:{1:100,2:80,3:60,4:40,5:20,6:0},45:{1:0,2:20,3:40,4:60,5:80,6:100},46:{1:100,2:80,3:60,4:40,5:20,6:0},47:{1:100,2:75,3:50,4:25,5:0},48:{1:100,2:75,3:50,4:25,5:0},49:{1:100,2:75,3:50,4:25,5:0},50:{1:100,2:75,3:50,4:25,5:0},51:{1:100,2:75,3:50,4:25,5:0},52:{1:100,2:75,3:50,4:25,5:0},53:{1:100,2:75,3:50,4:25,5:0},54:{1:100,2:75,3:50,4:25,5:0},55:{1:100,2:75,3:50,4:25,5:0},56:{1:100,2:75,3:50,4:25,5:0},57:{1:100,2:75,3:50,4:25,5:0},58:{1:100,2:75,3:50,4:25,5:0},59:{1:100,2:75,3:50,4:25,5:0},60:{1:100,2:75,3:50,4:25,5:0},61:{1:100,2:75,3:50,4:25,5:0},62:{1:100,2:75,3:50,4:25,5:0},63:{1:100,2:75,3:50,4:25,5:0},64:{1:100,2:75,3:50,4:25,5:0},65:{1:100,2:75,3:50,4:25,5:0},66:{1:100,2:75,3:50,4:25,5:0},67:{1:100,2:75,3:50,4:25,5:0},68:{1:100,2:75,3:50,4:25,5:0},69:{1:100,2:75,3:50,4:25,5:0},71:{1:100,2:80,3:60,4:40,5:20,6:0},72:{1:0,2:20,3:40,4:60,5:80,6:100},73:{1:100,2:80,3:60,4:40,5:20,6:0},74:{1:0,2:33.33,3:66.66,4:100},75:{1:0,2:33.33,3:66.66,4:100},76:{1:100,2:0},77:{1:0,2:100},80:{1:100,2:75,3:50,4:25,5:0},81:{1:100,2:75,3:50,4:25,5:0}};
+    var SCALES = [{n:"Liste de symptômes/problèmes",idx:[47,48,49,50,51,52,53,54,55,56,57].concat(a[58]!==null?[58]:(a[59]!==null?[59]:[]))},{n:"Effets de la maladie rénale",idx:[60,61,62,63,64,65,66,67]},{n:"Fardeau de la maladie rénale",idx:[37,38,39,40]},{n:"Statut professionnel",idx:[76,77]},{n:"Fonction cognitive",idx:[42,44,46]},{n:"Qualité de l'interaction sociale",idx:[41,43,45]},{n:"Fonction sexuelle",idx:[68,69]},{n:"Sommeil",idx:[70,71,72,73]},{n:"Soutien social",idx:[74,75]},{n:"Encouragement de l'équipe de dialyse",idx:[80,81]},{n:"Satisfaction du patient",idx:[79]},{n:"Fonctionnement physique (SF-36)",idx:[3,4,5,6,7,8,9,10,11,12]},{n:"Rôle physique (SF-36)",idx:[13,14,15,16]},{n:"Douleur (SF-36)",idx:[21,22]},{n:"Santé générale (SF-36)",idx:[1,33,34,35,36]},{n:"Bien-être émotionnel (SF-36)",idx:[24,25,26,28,30]},{n:"Rôle émotionnel (SF-36)",idx:[17,18,19]},{n:"Fonctionnement social (SF-36)",idx:[20,32]},{n:"Énergie / fatigue (SF-36)",idx:[23,27,29,31]}];
+    function recode(i, raw){
+      if (raw === null || raw === undefined) return null;
+      if (i === 70 || i === 78) return raw * 10;               // items 17, 22 : deja 0-10, x10
+      if (i === 79) return (raw - 1) / 6 * 100;                  // item 23 : echelle 1-7
+      var t = RECODE_TABLE[i];
+      if (!t) return null;
+      return t[raw];
+    }
+    var h = '';
+    var moyennes = [];
+    SCALES.forEach(function(sc){
+      var vals = [];
+      sc.idx.forEach(function(i){
+        var r = recode(i, a[i]);
+        if (r !== null && r !== undefined) vals.push(r);
+      });
+      var avg = vals.length ? (vals.reduce(function(x,y){return x+y;},0) / vals.length) : null;
+      moyennes.push({n: sc.n, v: avg, nItems: vals.length});
+    });
+    h += '<p class="result-text">Chaque échelle ci-dessous est ramenée sur 0 (plus mauvaise qualité de vie) à 100 (meilleure qualité de vie), selon la procédure officielle de cotation du KDQOL-SF (RAND, Hays et al., 1995-1997) : recodage de chaque item puis moyenne des items répondus de chaque échelle. Un score n\'est affiché que si au moins une question de l\'échelle a été renseignée.</p>';
+    h += '<p class="result-text"><strong>Domaines spécifiques à la maladie rénale (ESRD-targeted areas)</strong></p><ul class="result-list">';
+    for (var i = 0; i < 11; i++){
+      var m = moyennes[i];
+      h += '<li>' + m.n + ' : <strong>' + (m.v===null?'—':Math.round(m.v*10)/10) + (m.v===null?'':' / 100') + '</strong></li>';
+    }
+    h += '</ul>';
+    h += '<p class="result-text"><strong>Questionnaire de santé générique SF-36</strong></p><ul class="result-list">';
+    for (var j = 11; j < moyennes.length; j++){
+      var m2 = moyennes[j];
+      h += '<li>' + m2.n + ' : <strong>' + (m2.v===null?'—':Math.round(m2.v*10)/10) + (m2.v===null?'':' / 100') + '</strong></li>';
+    }
+    h += '</ul>';
+    var evoHealth = a[2] !== null ? [[1, "Bien meilleur que l'an dernier"], [2, "Plutôt meilleur"], [3, "À peu près pareil"], [4, "Plutôt moins bon"], [5, "Beaucoup moins bon"]][a[2]-1][1] : null;
+    var globalHealth = a[78] !== null ? a[78]*10 : null;
+    h += '<p class="result-text"><strong>Items isolés (non moyennés dans une échelle, rapportés tels quels)</strong></p><ul class="result-list">';
+    h += '<li>Évolution perçue de la santé par rapport à l\'année dernière : <strong>' + (evoHealth || '—') + '</strong></li>';
+    h += '<li>Évaluation globale de la santé (échelle 0-10 reportée sur 0-100) : <strong>' + (globalHealth===null?'—':globalHealth) + ' / 100</strong></li>';
+    h += '</ul>';
+    h += '<p class="result-text">Il n\'existe pas de score unique ni de seuil diagnostique pour le KDQOL-SF : chaque échelle se lit séparément, comme repli de suivi dans le temps ou de comparaison entre patients, conformément au manuel officiel.</p>';
+    return h;
+
+  };
+
+  function vis(i){
+    var c = items[i].cond;
+    return !c || answers[c[0]] === c[1];
+  }
+  function step(i, dir){
+    var j = i + dir;
+    while (j >= 0 && j < items.length && !vis(j)) j += dir;
+    return j;
+  }
+  function visCount(){ var n = 0; for (var i = 0; i < items.length; i++) if (vis(i)) n++; return n; }
+  function visRank(i){ var n = 0; for (var k = 0; k <= i; k++) if (vis(k)) n++; return n; }
+  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+
+  function renderQuestion(){
+    var it = items[idx];
+    document.getElementById('progress-text').textContent = 'Question ' + visRank(idx) + ' / ' + visCount();
+    var secEl = document.getElementById('sec-text');
+    if (it.sec){ secEl.textContent = it.sec; secEl.hidden = false; } else { secEl.hidden = true; }
+    document.getElementById('q-text').textContent = it.t;
+    document.getElementById('q-desc').textContent = it.d || '';
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    if (it.kind === 'num'){
+      var nr = document.createElement('div'); nr.className = 'num-row';
+      for (var v = it.min; v <= it.max; v++){
+        (function(v){
+          var b = document.createElement('div');
+          b.className = 'num' + (answers[idx] === v ? ' selected' : '');
+          b.textContent = v;
+          b.addEventListener('click', function(){ answers[idx] = v; renderQuestion(); });
+          nr.appendChild(b);
+        })(v);
+      }
+      row.appendChild(nr);
+      var ends = document.createElement('div'); ends.className = 'num-ends';
+      ends.innerHTML = '<span>' + esc(it.lo) + '</span><span style="text-align:right">' + esc(it.hi) + '</span>';
+      row.appendChild(ends);
+    } else if (it.kind === 'vas'){
+      var box = document.createElement('div'); box.className = 'vas-box';
+      var sc = it.scale || 1;
+      var fmt = function(v){ return sc === 1 ? String(v) : (v / sc).toFixed(1); };
+      var cur = answers[idx] === null ? Math.round((it.min + it.max) / 2) : answers[idx];
+      box.innerHTML = '<p class="vas-val" id="vas-val">' + (answers[idx] === null ? '\u2014' : fmt(answers[idx])) + '</p>' +
+        '<input type="range" id="vas-range" min="' + it.min + '" max="' + it.max + '" step="1" value="' + cur + '" aria-label="\u00c9chelle">' +
+        '<div class="num-ends"><span>' + esc(it.lo) + '</span><span style="text-align:right">' + esc(it.hi) + '</span></div>' +
+        (it.hint ? '<p class="q-desc" style="margin-top:14px">' + esc(it.hint) + '</p>' : '');
+      row.appendChild(box);
+      var rg = document.getElementById('vas-range');
+      function setV(){
+        answers[idx] = parseInt(rg.value, 10);
+        document.getElementById('vas-val').textContent = fmt(answers[idx]);
+        document.getElementById('btn-next').disabled = false;
+      }
+      rg.addEventListener('input', setV);
+      rg.addEventListener('change', setV);
+      rg.addEventListener('click', setV);
+    } else {
+      var list = document.createElement('div'); list.className = 'opt-row';
+      it.opts.forEach(function(pair){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx] === pair[0] ? ' selected' : '');
+        d.textContent = pair[1];
+        d.addEventListener('click', function(){ answers[idx] = pair[0]; renderQuestion(); });
+        list.appendChild(d);
+      });
+      row.appendChild(list);
+    }
+    document.getElementById('btn-prev').disabled = step(idx, -1) < 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = step(idx, 1) >= items.length ? 'Voir le r\u00e9sultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    var j = step(idx, -1);
+    if (j >= 0){ idx = j; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    var j = step(idx, 1);
+    if (j < items.length){ idx = j; renderQuestion(); } else { showResult(); }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var a = answers.map(function(v, i){ return vis(i) ? v : null; });
+    document.getElementById('result-body').innerHTML = RESULT(a);
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KDQOL-SF — Qualité de vie et maladie rénale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#4A7A58 0%,#A9CBB0 55%,#223D29 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.4),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:22px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#4A7A58;background:#DCEADF;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .section ul{font-size:14.5px;margin:0 0 10px;padding-left:20px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#4A7A58;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#4A7A58;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <div class="fiche-photo"><span class="acronym">KDQOL</span></div>
+  <h1 class="serif">KDQOL-SF — Qualité de vie et maladie rénale (Short Form)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Hays R.D., Kallich J.D., Mapes D.L., Coons S.J., Amin N., Carter W.B. &amp; Kamberg C. (RAND, 1995, rév. 1997) — version française officielle 1.2.</p>
+  <div class="meta-row">
+    <span class="pill">~80 questions</span><span class="pill">20-25 minutes</span><span class="pill">Français</span><span class="pill">Néphrologie, dialyse</span><span class="pill">Licence requise : non</span>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" href="kdqol-sf.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+  
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le KDQOL-SF (Kidney Disease Quality of Life Short Form, version 1.2/1.3) évalue la qualité de vie des personnes atteintes d'insuffisance rénale chronique terminale, notamment sous dialyse. Il combine le questionnaire générique SF-36 (8 sous-échelles : fonctionnement physique, rôle physique, douleur, santé générale, bien-être émotionnel, rôle émotionnel, fonctionnement social, énergie/fatigue) et 11 domaines spécifiques à la maladie rénale (symptômes, effets de la maladie, fardeau, statut professionnel, fonction cognitive, qualité de l'interaction sociale, fonction sexuelle, sommeil, soutien social, encouragement de l'équipe de dialyse, satisfaction du patient).</p>
+    <p>La question 14 (liste de symptômes) comporte deux items propres au type de dialyse (problèmes avec la fistule pour l'hémodialyse, avec le cathéter pour la dialyse péritonéale) : une question préliminaire, non notée et absente du questionnaire officiel, permet d'afficher le bon item ; les questions 23-24 (satisfaction et encouragement de l'équipe de dialyse) ne concernent que les patients suivis en service de dialyse.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Cotation officielle en deux temps, conformément au manuel (Hays, Kallich, Mapes, Coons, Amin, Carter &amp; Kamberg, <em>Kidney Disease Quality of Life Short Form (KDQOL-SF), Version 1.3 : A Manual for Use and Scoring</em>, RAND P-7994, 1995-1997, Tables 3 et 4) : chaque item est d'abord recodé sur une échelle 0-100 (0 = plus mauvais état, 100 = meilleur état), selon des tables de recodage propres à chaque groupe d'items (certains items sont cotés à l'endroit, d'autres à l'envers, selon le sens de l'échelle de réponse) ; les items 17 et 22 (notés de 0 à 10) sont multipliés par 10 ; l'item 23 (1 à 7) est recodé par (valeur–1)/6×100. Puis les items d'une même échelle sont moyennés (les items laissés sans réponse ne sont pas pris en compte). L'item 2 (évolution de la santé) et l'item 22 (évaluation globale 0-10) sont rapportés comme des items isolés, non intégrés à une échelle, conformément au manuel. Il n'existe pas de score unique ni de seuil diagnostique : chaque échelle se lit séparément.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p>Hays R.D., Kallich J.D., Mapes D.L., Coons S.J., Amin N., Carter W.B. &amp; Kamberg C. (1995, rév. 1997). <em>Kidney Disease Quality of Life Short Form (KDQOL-SF), Version 1.3 : A Manual for Use and Scoring.</em> Santa Monica, CA : RAND, P-7994. Version française officielle (France) : <em>Kidney Disease and Quality of Life Short Form (KDQOL-SF), French Version 1.2</em>, rand.org. Évaluation psychométrique francophone (insuffisance rénale chronique terminale) : Boini S., Leplège A., Loos Ayav C., Français P., Ecosse E. &amp; Briançon S. (2007), <em>Néphrologie &amp; Thérapeutique</em>, 3(6), 372-383.</p>
+    <p class="source-note"><strong>Licence requise : non.</strong> Le manuel officiel (RAND P-7994, page 1) le précise explicitement : « RAND hereby grants permission to use the KDQOL-SF … No further written permission is needed for use of the KDQOL-SF » ; la seule condition est de citer la référence ci-dessus et de porter la responsabilité de toute traduction. Les items 1 à 11 du module générique (SF-36/IQOLA) sont reproduits avec l'autorisation du New England Medical Center. Tous les items, l'intégralité du texte des 24 questions et les tables de recodage (Tables 3 et 4 du manuel) ont été vérifiés directement sur les documents officiels (questionnaire français version 1.2 et manuel de cotation version 1.3, tous deux rand.org) ; aucun item ni aucune règle de cotation n'a été inventé. La majoration pondérée éventuelle ou les normes de référence par population ne sont pas reproduites ici (non nécessaires à la lecture des scores bruts 0-100).</p>
+  </div>
+
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

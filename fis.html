@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FIS — Échelle d'impact de la fatigue (Fatigue Impact Scale)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#2F5F63;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .period{font-size:12.5px;font-weight:600;color:#2F5F63;margin:0 0 8px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#2F5F63;background:#DDEEEC;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#2F5F63;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#2F5F63;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 20px;}
+  .sc-title{font-size:13px;font-weight:700;color:#2F5F63;margin:18px 0 6px;}
+  .sc-row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-top:1px solid #EFEBE1;font-size:14px;}
+  .sc-row b{font-variant-numeric:tabular-nums;white-space:nowrap;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">FIS — Échelle d'impact de la fatigue (Fatigue Impact Scale)</h1>
+    <p class="lead">Pour chaque affirmation, indiquez dans quelle mesure votre fatigue est un problème pour vous, de 0 (aucun problème) à 4 (problème extrême).</p>
+    <p class="lang-note">Items en anglais (version originale) ; la version française de Debouverie et al. (2007) n'a pas été récupérable en accès libre. Outil sous licence (Mapi Research Trust) : « Licence requise : oui ».</p>
+    <div class="pill-row">
+      <span class="pill">40 questions</span><span class="pill">7 minutes</span><span class="pill">Score 0 à 160</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="period" id="period-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-score" id="score-val"></p>
+    <p class="result-max">score total, sur une échelle de 0 à 160 (plus il est élevé, plus l'impact de la fatigue est important)</p>
+    <div class="sc-row"><span>Dimension cognitive (10 items)</span><b id="cog-val"></b></div>
+    <div class="sc-row"><span>Dimension physique (10 items)</span><b id="phy-val"></b></div>
+    <div class="sc-row"><span>Dimension sociale / psychosociale (20 items)</span><b id="soc-val"></b></div>
+    <p class="result-text" style="margin-top:18px">Chaque item est coté de 0 à 4 et les scores sont des sommes simples, sans item inversé. Aucun seuil clinique ni norme n'est repris ici, faute de repère officiel libre ; le score se lit surtout en comparaison d'une mesure à l'autre et avec la situation clinique.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Fatigue Impact Scale (FIS) — Fisk et al., 1994. Outil de mesure de l'impact de la fatigue, ne remplace pas une évaluation clinique.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["I feel less alert", "I feel that I am more isolated from social contact", "I have to reduce my workload or responsibilities", "I am more moody", "I have difficulty paying attention for a long period of time", "I feel like I cannot think clearly", "I work less effectively (inside or outside the home)", "I have to rely more on others to help me or do things for me", "I have difficulty planning activities ahead of time because my fatigue may interfere with them", "I am more clumsy and uncoordinated", "I find that I am more forgetful", "I am more irritable and more easily angered", "I have to be careful about pacing my physical activities", "I am less motivated to do anything that requires physical effort", "I am less motivated to engage in social activities", "My ability to travel outside my home is limited", "I have trouble maintaining physical effort for long periods", "I find it difficult to make decisions", "I have few social contacts outside of my own home", "Normal day-to-day events are stressful for me", "I am less motivated to do anything that requires thinking", "I avoid situations that are stressful for me", "My muscles feel much weaker than they should", "My physical discomfort is increased", "I have difficulty dealing with anything new", "I am less able to finish tasks that require thinking", "I feel unable to meet the demands that people place on me", "I feel less able to provide financial support for myself and my family", "I engage in less sexual activity", "I find it difficult to organize my thoughts when I am doing things at home or at work", "I am less able to complete tasks that require physical effort", "I worry about how I look to other people", "I am less able to deal with emotional issues", "I feel slowed down in my thinking", "I find it hard to concentrate", "I have difficulty participating fully in family activities", "I have to limit my physical activities", "I require more frequent or longer periods of rest", "I am not able to provide as much emotional support to my family as I should", "Minor difficulties seem like major difficulties"];
+  var opts = ["0 — Aucun problème (No problem)", "1", "2", "3", "4 — Problème extrême (Extreme problem)"];
+  var COG = [1, 5, 6, 11, 18, 21, 26, 30, 34, 35], PHY = [10, 13, 14, 17, 23, 24, 31, 32, 37, 38], SOC = [2, 3, 4, 7, 8, 9, 12, 15, 16, 19, 20, 22, 25, 27, 28, 29, 33, 36, 39, 40];
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('period-text').textContent = 'Because of my fatigue :';
+    document.getElementById('q-text').textContent = items[idx];
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    opts.forEach(function(label, v){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === v ? ' selected' : '');
+      d.textContent = label;
+      d.addEventListener('click', function(){
+        answers[idx] = v;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function sumOf(list){ var s = 0; list.forEach(function(n){ s += answers[n-1]; }); return s; }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var a = sumOf(COG), b = sumOf(PHY), c = sumOf(SOC);
+    document.getElementById('score-val').textContent = String(a + b + c);
+    document.getElementById('cog-val').textContent = a + ' / 40';
+    document.getElementById('phy-val').textContent = b + ' / 40';
+    document.getElementById('soc-val').textContent = c + ' / 80';
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FIS — Échelle d'impact de la fatigue (Fatigue Impact Scale)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#2F5F63 0%,#9FC7C5 55%,#1B3B3E 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,250,245,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#1B3B3E;background:#DDEEEC;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#2F5F63;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#1B3B3E;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">FIS</span></div>
+
+  <h1 class="serif">Échelle d'impact de la fatigue (FIS)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Fatigue Impact Scale (FIS), 40 items — Fisk et al. ; dimensions cognitive, physique et sociale.</p>
+  <div class="meta-row">
+    <span class="pill">40 questions</span><span class="pill">7 minutes</span><span class="pill">Score 0 à 160</span><span class="pill">Items en anglais</span><span class="pill">Licence requise : oui</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="fis.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>La Fatigue Impact Scale (FIS) mesure l'impact de la fatigue sur la vie quotidienne à travers 40 affirmations introduites par « Because of my fatigue… », réparties en trois dimensions : cognitive (10 items), physique (10 items) et sociale (20 items). Elle a été développée dans la sclérose en plaques et utilisée depuis dans d'autres maladies chroniques. Chaque item se cote de 0 (aucun problème) à 4 (problème extrême).</p>
+    <p><strong>Items en anglais.</strong> La version française (Debouverie, Pittion-Vouyovitch, Louis &amp; Guillemin, 2007) n'est pas accessible en libre accès : les items sont présentés dans leur version originale anglaise, sans traduction improvisée. Les intitulés des réponses intermédiaires (1 à 3) ne sont pas repris, faute de source libre : seuls les deux ancrages 0 et 4 sont donnés. La période de rappel n'est pas précisée dans la source consultée : elle est laissée au praticien et doit être donnée à l'oral au patient.</p>
+    <p><strong>Ne pas confondre</strong> avec la Fear of Intimacy Scale (même sigle « FIS », classée à part) ni avec la Fatigue Severity Scale (FSS) ou le MFI-20.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Réponses de 0 à 4, sans item inversé. Dimension cognitive (items 1, 5, 6, 11, 18, 21, 26, 30, 34 et 35) de 0 à 40 ; dimension physique (items 10, 13, 14, 17, 23, 24, 31, 32, 37 et 38) de 0 à 40 ; dimension sociale (les 20 autres items) de 0 à 80 ; score total, somme des 40 items, de 0 à 160 : plus il est élevé, plus la fatigue a de retentissement. Aucun seuil clinique ni norme de population n'est repris ici : la FIS se lit surtout en comparaison d'une mesure à l'autre.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p><strong>Licence requise : oui.</strong> Fatigue Impact Scale (Fisk et al., 1994) ; distribution encadrée par Mapi Research Trust (ePROVIDE). Instrument construit ici malgré la licence, conformément à la décision du 30/09/2026 ; la diffusion publique reste soumise à l'autorisation du détenteur des droits.</p>
+    <p class="source-note">Texte des 40 items, affectation aux trois dimensions (10 cognitifs, 10 physiques, 20 sociaux) et cotation 0-4, score total 0-160 : Lexell J., Jonasson S.B. &amp; Brogårdh C. (2018), « Psychometric properties of three fatigue rating scales in individuals with late effects of polio », Annals of Rehabilitation Medicine, 42(5), 702-712, DOI 10.5535/arm.2018.42.5.702, article en accès libre (CC BY-NC), tableau 2. Instrument original : Fisk J.D. et al. (1994), « Measuring the functional impact of fatigue: initial validation of the Fatigue Impact Scale », Clinical Infectious Diseases, 18 (suppl. 1), S79-S83.</p>
+  </div>
+</div>
+</template>
+
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

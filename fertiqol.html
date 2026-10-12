@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FertiQoL — Qualité de vie et fertilité</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#E8A62E;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#E8A62E;background:#FDF3DD;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#E8A62E;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#E8A62E;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .subscale-row{display:flex;justify-content:space-between;font-size:13.5px;border-top:1px solid #E0D9C9;padding:8px 0;}
+  .subscale-row b{color:#1E3A5F;}
+  .section-title{font-size:13px;font-weight:700;color:#8A6410;text-transform:uppercase;letter-spacing:.06em;margin:22px 0 4px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">FertiQoL — Qualité de vie et fertilité</h1>
+    <p class="lead">Ce questionnaire explore le retentissement des problèmes de fertilité sur votre qualité de vie (24 questions réparties en 4 dimensions), avec un module optionnel de 10 questions si vous suivez un traitement.</p>
+    <p class="lang-note">Les six questions marquées d'un astérisque dans le questionnaire officiel ne concernent que les personnes en couple ; une option « sans objet » est prévue pour les autres.</p>
+    <div class="pill-row">
+      <span class="pill">24 + 10 questions</span>
+      <span class="pill">10 minutes</span>
+      <span class="pill">Échelle 0-4</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">FertiQoL — Boivin, Takefman &amp; Braverman (2011), <i>Human Reproduction</i>, 26(8), 2084-2091. Outil dimensionnel de qualité de vie, ne remplace pas une évaluation clinique complète. Aucun seuil clinique officiel : le score se lit en comparaison à soi-même dans le temps, ou à titre indicatif.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var SAT = ["Très insatisfait(e)","Insatisfait(e)","Ni satisfait(e) ni insatisfait(e)","Satisfait(e)","Très satisfait(e)"];
+  var FREQ = ["Toujours","Très souvent","Assez souvent","Rarement","Jamais"];
+  var INT = ["Extrêmement","Beaucoup","Modérément","Peu","Pas du tout"];
+  var CAP = ["Complètement","Beaucoup","Modérément","Peu","Pas du tout"];
+  var EVAL = ["Très mauvais","Mauvais","Ni bon ni mauvais","Bon","Très bon"];
+  var NA = "Sans objet — je ne suis pas en couple";
+
+  function mk(code, sub, rev, star, text, scale){
+    var opts = scale.slice();
+    if (star) opts = opts.concat([NA]);
+    return {code:code, sub:sub, rev:rev, star:!!star, text:text, opts:opts, score:true};
+  }
+
+  var items = [
+    {code:'A', sub:null, rev:false, star:false, text:"Quel est votre état de santé, d'après vous ?", opts:EVAL, score:false},
+    {code:'B', sub:null, rev:false, star:false, text:"Êtes-vous satisfait(e) de votre qualité de vie ?", opts:SAT, score:false},
+    mk('Q1','MB',false,false,"Vos pensées sur l'infertilité vous posent-elles des problèmes d'attention et de concentration ?",CAP),
+    mk('Q2','MB',false,false,"Pensez-vous que vous ne pouvez pas poursuivre d'autres objectifs de vie du fait de vos problèmes de fertilité ?",CAP),
+    mk('Q3','MB',false,false,"Vous sentez-vous épuisé(e) à cause de vos problèmes de fertilité ?",CAP),
+    mk('Q4','EM',true,false,"Vous sentez-vous capable de faire face à vos problèmes de fertilité ?",CAP),
+    mk('Q5','SOC',false,false,"Êtes-vous satisfait(e) du soutien que vous recevez de vos amis au sujet de vos problèmes de fertilité ?",SAT),
+    mk('Q6','REL',false,true,"Êtes-vous satisfait(e) de vos relations sexuelles même si vous avez des problèmes de fertilité ?",SAT),
+    mk('Q7','EM',false,false,"Vos problèmes de fertilité vous font-ils ressentir de la jalousie ou du ressentiment ?",FREQ),
+    mk('Q8','EM',false,false,"Ressentez-vous de la douleur ou un sentiment de perte en raison du fait que vous ne pouvez pas avoir d'enfant (ou d'autres enfants) ?",FREQ),
+    mk('Q9','EM',false,false,"Oscillez-vous entre l'espoir et le désespoir à cause de vos problèmes de fertilité ?",FREQ),
+    mk('Q10','SOC',false,false,"Êtes-vous isolé(e) socialement à cause de vos problèmes de fertilité ?",FREQ),
+    mk('Q11','REL',true,true,"Vous témoignez-vous de l'affection au sein de votre couple même si vous avez des problèmes de fertilité ?",FREQ),
+    mk('Q12','MB',false,false,"Vos problèmes de fertilité ont-ils des conséquences sur votre travail ou vos obligations quotidiennes ?",FREQ),
+    mk('Q13','SOC',false,false,"Vous sentez-vous gêné(e) d'assister à des réunions de famille ou d'amis, comme des vacances ou des fêtes, à cause de vos problèmes de fertilité ?",FREQ),
+    mk('Q14','SOC',true,false,"Pensez-vous que votre famille comprend ce que vous vivez ?",FREQ),
+    mk('Q15','REL',true,true,"Vos problèmes de fertilité vous ont-ils rapproché(e) de votre compagnon/compagne ?",INT),
+    mk('Q16','EM',false,false,"Vous sentez-vous triste et déprimé(e) à cause de vos problèmes de fertilité ?",INT),
+    mk('Q17','SOC',false,false,"Vos problèmes de fertilité vous placent-ils dans une position d'infériorité par rapport aux personnes qui ont des enfants ?",INT),
+    mk('Q18','MB',false,false,"Ressentez-vous de la fatigue à cause de vos problèmes de fertilité ?",INT),
+    mk('Q19','REL',false,true,"Vos problèmes de fertilité ont-ils eu un effet négatif sur votre relation de couple ?",INT),
+    mk('Q20','REL',false,true,"Trouvez-vous difficile d'exprimer à votre compagnon/compagne vos sentiments liés à vos problèmes de fertilité ?",INT),
+    mk('Q21','REL',true,true,"Êtes-vous satisfait(e) de votre relation de couple même si vous avez des problèmes de fertilité ?",INT),
+    mk('Q22','SOC',false,false,"Ressentez-vous une pression sociale pour avoir des enfants (ou avoir plus d'enfants) ?",INT),
+    mk('Q23','EM',false,false,"Vos problèmes de fertilité vous mettent-ils en colère ?",INT),
+    mk('Q24','MB',false,false,"Ressentez-vous de la douleur physique à cause de vos problèmes de fertilité ?",INT),
+    {code:'BRANCH', sub:null, rev:false, star:false, branch:true, text:"Avez-vous commencé un traitement de l'infertilité (cela inclut toute consultation médicale ou intervention) ?", opts:["Oui","Non"], score:false}
+  ];
+  var treatmentItems = [
+    mk('T1','TT',false,false,"Le traitement de l'infertilité a-t-il des effets négatifs sur votre humeur ?",FREQ),
+    mk('T2','TE',true,false,"Vous est-il possible de recourir aux examens et traitements médicaux que vous souhaitez ?",FREQ),
+    mk('T3','TT',false,false,"La procédure et/ou la prise de médicaments pour le traitement de vos problèmes de fertilité est-elle compliquée ?",INT),
+    mk('T4','TT',false,false,"Êtes-vous gêné(e) par l'effet du traitement sur vos activités professionnelles ou vos activités quotidiennes ?",INT),
+    mk('T5','TE',true,false,"Pensez-vous que le personnel médical comprend ce que vous vivez ?",INT),
+    mk('T6','TT',false,false,"Êtes-vous gêné(e) par les répercussions physiques des traitements de l'infertilité ?",INT),
+    mk('T7','TE',false,false,"Êtes-vous satisfait(e) de la qualité de l'aide psychologique proposée ?",SAT),
+    mk('T8','TE',false,false,"Que pensez-vous de la chirurgie et/ou des traitements médicaux que vous avez reçus ?",SAT),
+    mk('T9','TE',false,false,"Que pensez-vous de la qualité des informations que vous avez reçues au sujet des médicaments, de la chirurgie et/ou des traitements médicaux ?",SAT),
+    mk('T10','TE',false,false,"Êtes-vous satisfait(e) de vos échanges avec le personnel traitant ?",SAT)
+  ];
+
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+  var includeTreatment = false;
+
+  function currentItems(){ return includeTreatment ? items.concat(treatmentItems) : items; }
+
+  function renderQuestion(){
+    var list = currentItems();
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + list.length;
+    document.getElementById('q-text').textContent = list[idx].text;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    list[idx].opts.forEach(function(label, v){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === v ? ' selected' : '');
+      d.textContent = label;
+      d.addEventListener('click', function(){
+        answers[idx] = v;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = (idx === list.length - 1) ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+
+  document.getElementById('btn-next').addEventListener('click', function(){
+    var list = currentItems();
+    if (answers[idx] === null) return;
+    if (list[idx].branch){
+      includeTreatment = (answers[idx] === 0); // 0 = "Oui"
+      if (includeTreatment){
+        answers = answers.concat(new Array(treatmentItems.length).fill(null));
+      }
+      list = currentItems();
+    }
+    if (idx < list.length - 1){
+      idx++; renderQuestion();
+    } else {
+      showResult();
+    }
+  });
+
+  function subscaleScore(list, key){
+    var raw = 0, k = 0;
+    for (var i=0;i<list.length;i++){
+      var it = list[i];
+      if (it.sub !== key || !it.score) continue;
+      var v = answers[i];
+      if (v === null || v === undefined) continue;
+      if (v >= it.opts.length - (it.star ? 1 : 0)) continue; // "sans objet" sélectionné
+      raw += it.rev ? (4 - v) : v;
+      k++;
+    }
+    if (k === 0) return null;
+    return {score: raw * (25/k), k:k, raw:raw};
+  }
+
+  function coreOrTreatmentTotal(list, subKeys){
+    var raw = 0, k = 0;
+    subKeys.forEach(function(key){
+      for (var i=0;i<list.length;i++){
+        var it = list[i];
+        if (it.sub !== key || !it.score) continue;
+        var v = answers[i];
+        if (v === null || v === undefined) continue;
+        if (v >= it.opts.length - (it.star ? 1 : 0)) continue;
+        raw += it.rev ? (4 - v) : v;
+        k++;
+      }
+    });
+    if (k === 0) return null;
+    return {score: raw * (25/k), k:k};
+  }
+
+  function fmt(x){ return x===null ? '—' : x.score.toFixed(0); }
+
+  function computeResult(){
+    var list = currentItems();
+    var em = subscaleScore(list,'EM');
+    var mb = subscaleScore(list,'MB');
+    var rel = subscaleScore(list,'REL');
+    var soc = subscaleScore(list,'SOC');
+    var core = coreOrTreatmentTotal(list, ['EM','MB','REL','SOC']);
+
+    var aIdx = 0, bIdx = 1;
+    var aLabel = items[aIdx].opts[answers[aIdx]];
+    var bLabel = items[bIdx].opts[answers[bIdx]];
+
+    var html = '';
+    html += '<p class="result-score">' + (core ? core.score.toFixed(0) : '—') + ' / 100</p>';
+    html += '<p class="result-max">score FertiQoL de base (Core FertiQoL), sur 100 — plus le score est élevé, meilleure est la qualité de vie liée à la fertilité</p>';
+
+    html += '<div class="section-title">Dimensions (Core FertiQoL)</div>';
+    html += '<div class="subscale-row"><span>Émotionnelle</span><b>' + fmt(em) + ' / 100</b></div>';
+    html += '<div class="subscale-row"><span>Esprit-Corps (Mind-Body)</span><b>' + fmt(mb) + ' / 100</b></div>';
+    html += '<div class="subscale-row"><span>Relationnelle' + (rel===null ? ' (sans objet — pas de partenaire)' : '') + '</span><b>' + fmt(rel) + ' / 100</b></div>';
+    html += '<div class="subscale-row"><span>Sociale</span><b>' + fmt(soc) + ' / 100</b></div>';
+
+    if (includeTreatment){
+      var te = subscaleScore(list,'TE');
+      var tt = subscaleScore(list,'TT');
+      var treat = coreOrTreatmentTotal(list, ['TE','TT']);
+      var total = coreOrTreatmentTotal(list, ['EM','MB','REL','SOC','TE','TT']);
+      html += '<div class="section-title">Dimensions (Treatment FertiQoL)</div>';
+      html += '<div class="subscale-row"><span>Environnement de traitement</span><b>' + fmt(te) + ' / 100</b></div>';
+      html += '<div class="subscale-row"><span>Tolérabilité du traitement</span><b>' + fmt(tt) + ' / 100</b></div>';
+      html += '<div class="subscale-row"><span><b>Treatment FertiQoL (total)</b></span><b>' + fmt(treat) + ' / 100</b></div>';
+      html += '<div class="subscale-row"><span><b>Total FertiQoL (ensemble)</b></span><b>' + fmt(total) + ' / 100</b></div>';
+    }
+
+    html += '<div class="section-title">Auto-évaluations globales (hors score, informatif)</div>';
+    html += '<div class="subscale-row"><span>État de santé perçu</span><b>' + aLabel + '</b></div>';
+    html += '<div class="subscale-row"><span>Satisfaction de la qualité de vie</span><b>' + bLabel + '</b></div>';
+
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    includeTreatment = false;
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FertiQoL — Qualité de vie et fertilité</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#E8A62E 0%,#F3C871 55%,#8A6410 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#8A6410;background:#FDF3DD;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#E8A62E;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#8A6410;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">FQoL</span></div>
+
+  <h1 class="serif">FertiQoL — Qualité de vie et fertilité</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Fertility Quality of Life tool — Boivin, Takefman &amp; Braverman (2011) ; version française officielle (Cardiff Fertility Research Group)</p>
+  <div class="meta-row">
+    <span class="pill">24 + 10 questions</span>
+    <span class="pill">10 minutes</span>
+    <span class="pill">Échelle 0-4</span>
+    <span class="pill">Français</span>
+    <span class="pill">Licence requise : oui</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="fertiqol.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le FertiQoL évalue le retentissement des problèmes de fertilité et de leur traitement sur la qualité de vie. Le tronc commun (Core FertiQoL, 24 items) couvre quatre dimensions : Émotionnelle, Esprit-Corps (impact physique, cognitif et comportemental), Relationnelle (couple, sexualité) et Sociale (soutien, stigmatisation). Six items relationnels ne concernent que les personnes en couple (une option « sans objet » est prévue pour les autres, conformément à la consigne officielle du questionnaire). Un module optionnel de 10 items (Treatment FertiQoL) évalue l'environnement et la tolérance du traitement en cours, à ne proposer qu'aux patients ayant débuté une prise en charge médicale de l'infertilité. Deux items complémentaires (A : état de santé perçu, B : satisfaction de la qualité de vie) sont recueillis à titre informatif et ne sont pas inclus dans le calcul des scores (convention officielle de l'instrument).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque item est coté de 0 à 4 ; les items marqués comme inversés dans la grille officielle (Q4, Q11, Q14, Q15, Q21, T2, T5) sont recodés en 4 moins la réponse brute avant sommation, afin qu'un score élevé reflète toujours une meilleure qualité de vie. Les scores de sous-échelle et les scores totaux sont calculés en multipliant la somme brute par 25/k (k = nombre d'items pris en compte), pour une échelle ramenée de 0 à 100. Le score Core FertiQoL (0-100) est la moyenne des 24 items du tronc commun ; le score Treatment FertiQoL (0-100), calculé seulement si le module est rempli, est la moyenne des 10 items de traitement ; le score Total FertiQoL (0-100) combine les 34 items. Aucun seuil clinique officiel n'est publié : l'instrument est dimensionnel et se lit en comparaison à soi-même dans le temps, ou à titre indicatif.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p class="source-note">Boivin, J., Takefman, J., &amp; Braverman, A. (2011). The fertility quality of life (FertiQoL) tool: development and general psychometric properties. <i>Human Reproduction</i>, 26(8), 2084-2091. © European Society of Human Reproduction &amp; Embryology (ESHRE) et American Society of Reproductive Medicine (ASRM). LICENCE : oui — l'instrument et sa traduction française officielle sont diffusés gratuitement en téléchargement direct par le Cardiff Fertility Research Group (sites.cardiff.ac.uk/fertiqol), sans inscription, à condition de citer l'article princeps et de ne pas modifier l'instrument ni le redistribuer soi-même à d'autres professionnels (chaque utilisateur est invité à le télécharger depuis le site officiel). Construit malgré cette licence conformément à la décision de Max du 30/09/2026 (tests sous licence construits quand même). Texte intégral français et clé de cotation (sous-échelles et items inversés) vérifiés directement sur les documents officiels : fertiqol-French.pdf et FertiQoL_Scoring.pdf (sites.cardiff.ac.uk/fertiqol).</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

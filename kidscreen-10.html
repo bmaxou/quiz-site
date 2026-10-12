@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KIDSCREEN-10 — Qualité de vie liée à la santé (enfants et adolescents)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:24px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#2E7D6B;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#2E7D6B;background:#E4F1EC;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#2E7D6B;border-color:#E0D9C9;}
+  .btn-primary{background:#2E7D6B;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#2E7D6B;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .sub-row{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 18px;}
+  .sub-box{flex:1;min-width:140px;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:10px;padding:10px 14px;}
+  .sub-box .n{font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;color:#2E7D6B;}
+  .sub-box .l{font-size:11.5px;color:#63695D;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 14px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">KIDSCREEN-10 — Qualité de vie liée à la santé</h1>
+    <p class="lead">Questionnaire explorant la qualité de vie et le bien-être général de l'enfant ou de l'adolescent au cours de la semaine passée : forme physique, énergie, humeur, relations aux parents et aux amis, vie scolaire, en 10 questions + 1 question sur l'état de santé perçu.</p>
+    <p class="lang-note">Version française officielle (The KIDSCREEN Group, 2004), téléchargée depuis la page officielle de l'instrument (kidscreen.org).</p>
+    <div class="pill-row">
+      <span class="pill">10 items + 1 item santé</span>
+      <span class="pill">5 minutes</span>
+      <span class="pill">Échelle 1-5</span>
+      <span class="pill">8-18 ans</span>
+      <span class="pill">Français</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-score" id="score-val"></p>
+    <p class="result-max">score brut (somme des 10 items), de 10 à 50</p>
+    <div class="sub-row">
+      <div class="sub-box"><div class="n" id="t-val"></div><div class="l">Score-T (moyenne internationale 50, écart-type 10)</div></div>
+      <div class="sub-box"><div class="n" id="health-val"></div><div class="l">État de santé perçu (item non comptabilisé)</div></div>
+    </div>
+    <p class="result-text" id="level-text"></p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">KIDSCREEN-10 Index — The KIDSCREEN Group Europe, 2004-2006 (EC Grant QLG-CT-2000-00751) ; Ravens-Sieberer U. et al. (2010), « Reliability, construct and criterion validity of the KIDSCREEN-10 score », <em>Quality of Life Research</em>, DOI 10.1007/s11136-010-9706-5. Outil dimensionnel de qualité de vie, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [
+    {t:"T’es-tu senti(e) en pleine forme ?", opts:[["Pas du tout",1],["Un peu",2],["Modérément",3],["Beaucoup",4],["Extrêmement",5]]},
+    {t:"T’es-tu senti(e) plein(e) d’énergie ?", opts:[["Jamais",1],["Parfois",2],["Souvent",3],["Très souvent",4],["Toujours",5]]},
+    {t:"T’es-tu senti(e) triste ?", opts:[["Jamais",5],["Parfois",4],["Souvent",3],["Très souvent",2],["Toujours",1]]},
+    {t:"T’es-tu senti(e) seul(e) ?", opts:[["Jamais",5],["Parfois",4],["Souvent",3],["Très souvent",2],["Toujours",1]]},
+    {t:"As-tu eu assez de temps pour toi ?", opts:[["Jamais",1],["Parfois",2],["Souvent",3],["Très souvent",4],["Toujours",5]]},
+    {t:"As-tu pu faire ce que tu voulais pendant ton temps libre ?", opts:[["Jamais",1],["Parfois",2],["Souvent",3],["Très souvent",4],["Toujours",5]]},
+    {t:"Tes parents ont-ils été justes envers toi ?", opts:[["Jamais",1],["Parfois",2],["Souvent",3],["Très souvent",4],["Toujours",5]]},
+    {t:"T’es-tu amusé(e) avec tes ami(e)s ?", opts:[["Jamais",1],["Parfois",2],["Souvent",3],["Très souvent",4],["Toujours",5]]},
+    {t:"Cela se passe-t-il bien à l’école ?", opts:[["Pas du tout",1],["Un peu",2],["Modérément",3],["Beaucoup",4],["Extrêmement",5]]},
+    {t:"As-tu été capable d’être attentif / attentive ?", opts:[["Jamais",1],["Parfois",2],["Souvent",3],["Très souvent",4],["Toujours",5]]},
+    {t:"En général, dirais-tu que ton état de santé est :", opts:[["Excellent",5],["Très bon",4],["Bon",3],["Assez bon",2],["Mauvais",1]], unscored:true}
+  ];
+  // Table officielle KIDSCREEN-10, forme auto-évaluation (self-report), score brut 10-50 -> [paramètre de Rasch, score-T]
+  // Source : fichier "Normdata_Raw-score_Rasch_T-Value_ENGLISH.xlsx", kidscreen.org/english/analysis/evaluation-by-hand/
+  var normTable = [
+    [-4.33,0],[-3.21,7.30],[-2.68,12.44],[-2.32,15.88],[-2.05,18.50],[-1.83,20.60],[-1.65,22.40],[-1.48,23.97],[-1.34,25.36],[-1.21,26.64],
+    [-1.01,27.82],[-0.97,28.92],[-0.86,29.97],[-0.76,30.96],[-0.66,31.93],[-0.56,32.87],[-0.47,33.79],[-0.37,34.70],[-0.28,35.60],[-0.19,36.51],
+    [-0.09,37.42],[0,38.34],[0.10,39.28],[0.199,40.24],[0.302,41.24],[0.409,42.27],[0.52,43.35],[0.637,44.48],[0.76,45.67],[0.891,46.94],
+    [1.031,48.29],[1.183,49.76],[1.348,51.36],[1.529,53.11],[1.732,55.07],[1.961,57.29],[2.226,59.85],[2.545,62.94],[2.951,66.86],[3.533,72.49],
+    [4.703,83.81]
+  ];
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx].t;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    items[idx].opts.forEach(function(pair){
+      var label = pair[0], val = pair[1];
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === val ? ' selected' : '');
+      d.textContent = label;
+      d.addEventListener('click', function(){
+        answers[idx] = val;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){
+      idx++; renderQuestion();
+    } else {
+      showResult();
+    }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var raw = 0;
+    for (var i = 0; i < 10; i++){ raw += answers[i]; }
+    var tRow = normTable[raw - 10];
+    var tVal = tRow[1];
+    document.getElementById('score-val').textContent = raw;
+    document.getElementById('t-val').textContent = tVal.toFixed(1);
+    var healthLabels = ["Mauvais","Assez bon","Bon","Très bon","Excellent"];
+    document.getElementById('health-val').textContent = healthLabels[answers[10]-1];
+    var band;
+    if (tVal < 30) band = "nettement en dessous de la moyenne internationale de référence (plus de 2 écarts-types sous la moyenne).";
+    else if (tVal < 40) band = "en dessous de la moyenne internationale de référence (entre 1 et 2 écarts-types sous la moyenne).";
+    else if (tVal <= 60) band = "dans la moyenne internationale de référence.";
+    else if (tVal <= 70) band = "au-dessus de la moyenne internationale de référence (entre 1 et 2 écarts-types au-dessus de la moyenne).";
+    else band = "nettement au-dessus de la moyenne internationale de référence (plus de 2 écarts-types au-dessus de la moyenne).";
+    document.getElementById('level-text').textContent = "Le score-T se lit par rapport à une moyenne internationale de référence fixée à 50 (écart-type 10) : ce résultat se situe " + band + " Il n'existe pas de seuil clinique officiel : le KIDSCREEN-10 est un instrument dimensionnel de qualité de vie, à interpréter dans le temps ou en complément d'un entretien clinique, jamais seul.";
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KIDSCREEN-10 — Qualité de vie liée à la santé (enfants et adolescents)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#2E7D6B 0%,#6FC2AC 55%,#134B3E 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(220,250,240,.45),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:24px;color:#fff;}
+  h1{font-size:25px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#1E5C4D;background:#E4F1EC;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#2E7D6B;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#2E7D6B;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <div class="fiche-photo"><span class="acronym">KIDSCREEN-10</span></div>
+  <h1 class="serif">KIDSCREEN-10 Index — Qualité de vie liée à la santé</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">The KIDSCREEN Group Europe (2004-2006) ; version abrégée (index unique) des KIDSCREEN-52/KIDSCREEN-27, dérivée par analyse de Rasch. Version française officielle, forme enfant/adolescent auto-administrée.</p>
+  <div class="meta-row">
+    <span class="pill">10 items + 1 item santé</span>
+    <span class="pill">5 minutes</span>
+    <span class="pill">8-18 ans</span>
+    <span class="pill">Auto-administré</span>
+    <span class="pill">Français</span>
+    <span class="pill">Licence requise : non</span>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" href="kidscreen-10.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le KIDSCREEN-10 est la forme courte (index unique) de la famille d'instruments KIDSCREEN, développée et validée nativement dans 13 pays européens dont la France pour mesurer la qualité de vie liée à la santé (QdV) générique des enfants et adolescents de 8 à 18 ans. Il explore en 10 questions le bien-être physique et psychologique, la relation aux parents, aux amis et à l'école au cours de la semaine écoulée. Une 11<sup>e</sup> question sur l'état de santé perçu est posée mais n'entre pas dans le calcul du score (item d'appoint, non inclus dans l'index officiel).</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque item (hors item santé) est coté de 1 à 5. Deux items formulés négativement (« T'es-tu senti(e) triste ? », « T'es-tu senti(e) seul(e) ? ») sont inversés à la cotation (codage direct 5→1 appliqué dans ce test, conformément au tableau de codage officiel). Le score brut (somme des 10 items) va de 10 à 50.</p>
+    <p>Le score brut est ensuite converti en score-T (moyenne internationale fixée à 50, écart-type 10) via le tableau de conversion officiel basé sur un modèle de Rasch, publié par le groupe KIDSCREEN (« Normdata_Raw-score_Rasch_T-Value », forme auto-évaluation). Plus le score-T est élevé, meilleure est la qualité de vie rapportée. Il n'existe pas de seuil clinique officiel validé pour un usage diagnostique individuel : l'instrument se lit en référence à la moyenne internationale (bandes statistiques à ±1 et ±2 écarts-types) ou en suivi dans le temps, jamais comme un outil de dépistage isolé.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p>The KIDSCREEN Group Europe (2006), <em>The KIDSCREEN Questionnaires — Quality of life questionnaires for children and adolescents, Handbook</em>, Pabst Science Publishers. Validation de la forme courte : Ravens-Sieberer U., Erhart M., Rajmil L. et al. (2010), « Reliability, construct and criterion validity of the KIDSCREEN-10 score: a short measure for children and adolescents' well-being and health-related quality of life », <em>Quality of Life Research</em>, 19(10), 1487-1500, DOI 10.1007/s11136-010-9706-5. Validation francophone native dans l'étude croisée européenne à 13 pays (KIDSCREEN Group) et thèse Robitail S. (Université Aix-Marseille, dir. P. Auquier). Questionnaire français officiel (« KIDSCREEN-10 index_ChildrenAdolescents_France.pdf ») et tableau de conversion Rasch/score-T (forme auto-évaluation) téléchargés depuis le site officiel de l'instrument, kidscreen.org.</p>
+    <p class="source-note"><strong>Licence requise : non.</strong> Page officielle (kidscreen.org, Terms of Use) : instrument en accès pleinement libre (« fully open-access »), gratuit pour tout usage clinique, éducatif et de recherche non commercial, sans formulaire de collaboration préalable. Conditions : reproduction intégrale sans modification ni abrégé, aucune distribution commerciale à des tiers, citation obligatoire des publications de référence (© The KIDSCREEN Group, 2004 ; EC Grant Number QLG-CT-2000-00751). Outil dimensionnel de qualité de vie, ne remplace pas une évaluation clinique complète. Existe aussi en version parent/proxy (non construite ici) et en formes plus longues KIDSCREEN-27 et KIDSCREEN-52, non construites à ce jour.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

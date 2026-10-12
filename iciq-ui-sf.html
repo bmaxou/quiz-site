@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ICIQ-UI SF — Questionnaire sur les fuites d'urine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#1F7A74;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#1F7A74;background:#E2F1EF;}
+  .opt-row.scale{flex-direction:row;flex-wrap:wrap;gap:8px;}
+  .opt-row.scale .opt{justify-content:center;min-width:52px;flex:1 0 52px;padding:12px 6px;font-weight:600;}
+  .scale-legend{display:flex;justify-content:space-between;font-size:12px;color:#63695D;margin-top:10px;}
+  .opt .box{width:16px;height:16px;border:1.5px solid #9A9E90;border-radius:4px;flex:0 0 16px;display:inline-block;}
+  .opt.selected .box{background:#1F7A74;border-color:#1F7A74;}
+  .q-hint{font-size:12.5px;color:#63695D;margin:-10px 0 16px;}
+  .detail{font-size:13px;color:#63695D;margin:0 0 18px;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#1F7A74;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#1F7A74;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 20px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">ICIQ-UI SF — Questionnaire sur les fuites d'urine</h1>
+    <p class="lead">Beaucoup de personnes ont des pertes d'urine de temps en temps. Ce questionnaire cherche à savoir combien de personnes ont des pertes d'urine et à quel point cela les gêne. Répondez en pensant à votre cas, en moyenne, au cours des quatre dernières semaines.</p>
+    <p class="lang-note">Version française « ICIQ-SF (French) » reproduite dans Progrès en Urologie (AFU). Outil du groupe ICIQ : « Licence requise : oui ».</p>
+    <div class="pill-row">
+      <span class="pill">4 questions</span>
+      <span class="pill">2 minutes</span>
+      <span class="pill">Score 0 à 21</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <p class="q-hint" id="q-hint" hidden></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="scale-legend" id="scale-legend" hidden><span>0 = pas du tout</span><span>10 = vraiment beaucoup</span></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-score" id="score-val"></p>
+    <p class="result-max">score total, sur une échelle de 0 à 21</p>
+    <p class="detail" id="detail-text"></p>
+    <p class="result-text" id="level-text"></p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">ICIQ-UI SF — Avery et al., 2004. Copyright © « ICIQ Group ». Outil de repérage de la fréquence, de la quantité et de la gêne liées aux fuites d'urine, ne remplace pas une évaluation médicale.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [
+    {t:"1 - À quelle fréquence avez-vous des pertes d'urine ?", k:"freq", o:[
+      {l:"jamais",p:0},{l:"environ une fois par semaine au maximum",p:1},{l:"deux à trois fois par semaine",p:2},
+      {l:"environ une fois par jour",p:3},{l:"plusieurs fois par jour",p:4},{l:"tout le temps",p:5}]},
+    {t:"2 - Nous aimerions savoir quelle est la quantité de vos pertes d'urine, selon votre estimation. Quelle est la quantité habituelle de vos pertes d'urine (avec ou sans protection) ?", k:"qte", o:[
+      {l:"nulle",p:0},{l:"une petite quantité",p:2},{l:"une quantité moyenne",p:4},{l:"une grande quantité",p:6}]},
+    {t:"3 - De manière générale, à quel point vos pertes d'urine vous dérangent-elles dans votre vie de tous les jours ?", k:"gene", scale:true, o:[]},
+    {t:"4 - Quand avez-vous des pertes d'urine ?", k:"quand", multi:true, hint:"Cochez toutes les réponses qui s'appliquent à votre cas. Cette question n'entre pas dans le score.", o:[
+      {l:"vous ne perdez jamais d'urine"},
+      {l:"vous avez des pertes d'urine avant de pouvoir arriver aux toilettes"},
+      {l:"vous avez des pertes d'urine quand vous toussez ou éternuez"},
+      {l:"vous avez des pertes d'urine quand vous dormez"},
+      {l:"vous avez des pertes d'urine quand vous avez une activité physique ou quand vous faites de l'exercice"},
+      {l:"vous avez des pertes d'urine quand vous avez fini d'uriner et vous êtes rhabillé(e)"},
+      {l:"vous avez des pertes d'urine sans cause apparente"},
+      {l:"vous avez des pertes d'urine tout le temps"}]}
+  ];
+  var answers = [null,null,null,[]];
+  var idx = 0;
+
+  function ready(){
+    var it = items[idx];
+    if (it.multi) return answers[idx].length > 0;
+    return answers[idx] !== null;
+  }
+
+  function renderQuestion(){
+    var it = items[idx];
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = it.t;
+    var hint = document.getElementById('q-hint');
+    if (it.hint){ hint.hidden = false; hint.textContent = it.hint; } else { hint.hidden = true; }
+    document.getElementById('scale-legend').hidden = !it.scale;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    row.className = 'opt-row' + (it.scale ? ' scale' : '');
+    if (it.scale){
+      for (var v = 0; v <= 10; v++){
+        (function(v){
+          var d = document.createElement('div');
+          d.className = 'opt' + (answers[idx] === v ? ' selected' : '');
+          d.textContent = String(v);
+          d.addEventListener('click', function(){ answers[idx] = v; renderQuestion(); });
+          row.appendChild(d);
+        })(v);
+      }
+    } else if (it.multi){
+      it.o.forEach(function(o, v){
+        var d = document.createElement('div');
+        var on = answers[idx].indexOf(v) >= 0;
+        d.className = 'opt' + (on ? ' selected' : '');
+        var b = document.createElement('span'); b.className = 'box';
+        var tx = document.createElement('span'); tx.textContent = o.l;
+        d.appendChild(b); d.appendChild(tx);
+        d.addEventListener('click', function(){
+          var a = answers[idx];
+          var i = a.indexOf(v);
+          if (i >= 0){ a.splice(i,1); }
+          else {
+            if (v === 0){ a.length = 0; }
+            else { var j = a.indexOf(0); if (j >= 0) a.splice(j,1); }
+            a.push(v);
+          }
+          renderQuestion();
+        });
+        row.appendChild(d);
+      });
+    } else {
+      it.o.forEach(function(o, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx] === v ? ' selected' : '');
+        d.textContent = o.l;
+        d.addEventListener('click', function(){ answers[idx] = v; renderQuestion(); });
+        row.appendChild(d);
+      });
+    }
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !ready();
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!ready()) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); }
+    else { showResult(); }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var f = items[0].o[answers[0]].p;
+    var q = items[1].o[answers[1]].p;
+    var g = answers[2];
+    var sum = f + q + g;
+    var cat;
+    if (sum === 0) cat = "Aucune gêne ni perte d'urine rapportée (score 0).";
+    else if (sum <= 5) cat = "Incontinence urinaire de sévérité légère (1 à 5).";
+    else if (sum <= 12) cat = "Incontinence urinaire de sévérité modérée (6 à 12).";
+    else if (sum <= 18) cat = "Incontinence urinaire de sévérité importante (13 à 18).";
+    else cat = "Incontinence urinaire de sévérité très importante (19 à 21).";
+    var circ = answers[3].map(function(i){ return items[3].o[i].l; });
+    document.getElementById('score-val').textContent = String(sum);
+    document.getElementById('detail-text').textContent = "Détail : fréquence " + f + " (sur 5) + quantité " + q + " (sur 6) + gêne " + g + " (sur 10). Circonstances des pertes (non cotées) : " + circ.join(" ; ") + ".";
+    document.getElementById('level-text').textContent = cat + " Plus le score est élevé, plus l'incontinence est sévère et gênante. Ces tranches sont celles publiées pour l'instrument (Klovning et al., 2009), à titre de repère ; elles ne constituent pas un diagnostic et sont à discuter avec un médecin.";
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = [null,null,null,[]];
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ICIQ-UI SF — Questionnaire sur les fuites d'urine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#2F6F9F 0%,#8DBEDC 55%,#17405F 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(220,245,240,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#0F4A46;background:#E2F1EF;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#1F7A74;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#0F4A46;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">ICIQ-UI SF</span></div>
+
+  <h1 class="serif">Questionnaire sur les fuites d'urine</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">International Consultation on Incontinence Questionnaire – Urinary Incontinence Short Form — Avery et al. (2004)</p>
+  <div class="meta-row">
+    <span class="pill">4 questions</span>
+    <span class="pill">2 minutes</span>
+    <span class="pill">Score 0 à 21</span>
+    <span class="pill">Français</span>
+    <span class="pill">Licence requise : oui</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="iciq-ui-sf.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>L'ICIQ-UI SF évalue la fréquence, la quantité et la gêne liées aux fuites d'urine, chez la femme comme chez l'homme, en recherche et en pratique clinique. Il comprend trois questions cotées (fréquence 0 à 5, quantité 0-2-4-6, gêne sur une échelle de 0 à 10) et une quatrième question, non cotée, sur les circonstances des pertes d'urine (plusieurs réponses possibles). La période de référence est les quatre dernières semaines. Les deux questions d'identification du formulaire papier (date de naissance, sexe) n'ont pas été reprises.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Score total = fréquence (0-5) + quantité (0, 2, 4 ou 6) + gêne (0-10), soit de 0 à 21 : plus il est élevé, plus l'incontinence est sévère et gênante. Tranches de sévérité publiées (Klovning et al., 2009) : 1-5 légère ; 6-12 modérée ; 13-18 importante ; 19-21 très importante. Ces tranches sont un repère, non un diagnostic. La question sur les circonstances des pertes n'entre pas dans le score ; elle oriente l'interrogatoire (effort, urgence, nocturne, etc.).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p><strong>Licence requise : oui.</strong> Copyright © « ICIQ Group » (ICIQ-UI SF). Selon le site officiel iciq.net, l'usage clinique de routine et la recherche non commerciale sont gratuits mais soumis à une inscription et à une demande avant téléchargement des traductions ; une licence payante s'applique à la recherche financée à grande échelle et à tout usage commercial. Instrument construit ici malgré la licence, conformément à la décision du 30/09/2026 ; la diffusion publique reste soumise à l'autorisation du détenteur des droits.</p>
+    <p class="source-note">Texte des items et grille de points : « ICIQ-SF (French) », Annexe 4 de l'article de Progrès en Urologie diffusé par l'Association française d'urologie (urofrance.org), formulaire reproduit avec la mention « Copyright © ICIQ Group » ; deux coquilles du formulaire ont été corrigées (« une petit quantité », « vous avezdes »). Original : Avery K., Donovan J., Peters T.J., Shaw C., Gotoh M. &amp; Abrams P. (2004), « ICIQ: a brief and robust measure for evaluating the symptoms and impact of urinary incontinence », Neurourology and Urodynamics, 23(4), 322-330. Tranches de sévérité : Klovning A., Avery K., Sandvik H. &amp; Hunskaar S. (2009), Neurourology and Urodynamics (reprises par la fiche Shirley Ryan AbilityLab). Correspondance exacte avec la version française officielle téléchargeable sur iciq.net (inscription requise) non vérifiée.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

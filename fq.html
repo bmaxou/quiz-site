@@ -1,0 +1,603 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>FQ — Cabinet Bouche &amp; Chmura</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F4F1EA; --surface:#FFFFFF; --surface-2:#EAE6D9; --ink:#20241E; --ink-soft:#63695D;
+    --line:#E0D9C9; --accent:#1E3A5F; --accent-ink:#F4F1EA; --accent-soft:#E1E7EC; --terracotta:#A0824C;
+    --progress-bg:#E6E1D3; --progress-fill:#7FBF9E;
+    --shadow: 0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',-apple-system,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,h3,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:var(--ink);}
+  .wrap{max-width:520px;margin:0 auto;padding:48px 24px 80px;}
+  .back-top{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--ink-soft);text-decoration:none;margin-bottom:20px;}
+  .back-top:hover{color:var(--ink);}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--ink-soft);display:inline-block;}
+  h1{font-size:28px;margin:0 0 10px;}
+  .intro-text{color:var(--ink-soft);font-size:15px;margin:0 0 28px;}
+
+  .start-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:32px 28px;box-shadow:var(--shadow);}
+  .pills{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 20px;}
+  .pill{font-size:12.5px;font-weight:600;color:var(--ink-soft);background:var(--surface-2);border-radius:999px;padding:6px 13px;display:inline-flex;align-items:center;gap:6px;}
+  .instructions{font-size:14.5px;color:var(--ink-soft);margin:0 0 16px;line-height:1.7;}
+  .lang-note{font-size:12.5px;color:var(--terracotta);font-style:italic;margin:0 0 22px;line-height:1.6;}
+
+  .quiz-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:28px 26px 26px;box-shadow:var(--shadow);}
+  .progress-track{height:8px;border-radius:99px;background:var(--progress-bg);overflow:hidden;margin-bottom:14px;}
+  .progress-fill{height:100%;background:var(--progress-fill);border-radius:99px;width:0%;transition:width .3s ease;}
+  .q-count{font-size:12.5px;color:var(--ink-soft);font-weight:600;margin:0 0 6px;}
+  .q-unc{font-size:11.5px;color:var(--terracotta);font-weight:600;margin:0 0 14px;}
+  .q-item{font-size:17px;font-weight:600;color:var(--ink);margin:0 0 26px;font-family:'Cormorant Garamond',Georgia,serif;line-height:1.35;}
+  .options{display:flex;flex-direction:column;gap:10px;}
+  .option-btn{font:inherit;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:14.5px;color:var(--ink);cursor:pointer;transition:border-color .15s ease,background .15s ease,transform .1s ease;}
+  .option-btn:hover{border-color:var(--accent);}
+  .option-btn.selected{border-color:var(--accent);background:var(--accent-soft);font-weight:600;}
+  .back-link{display:inline-flex;align-items:center;gap:6px;margin-top:22px;font-size:13px;color:var(--ink-soft);background:none;border:none;font:inherit;cursor:pointer;padding:0;}
+  .back-link:hover{color:var(--ink);}
+  .back-link[hidden]{display:none;}
+
+  #result{display:none;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:30px 28px;box-shadow:var(--shadow);}
+  #result h2.serif{font-size:22px;margin:0 0 6px;}
+  .meta-line{font-size:13.5px;color:var(--ink-soft);margin:0 0 24px;}
+  .section-title{font-size:12.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft);margin:0 0 12px;padding-top:18px;border-top:1px solid var(--line);}
+  .section-title:first-of-type{border-top:none;padding-top:0;}
+  .score-line{font-size:17px;margin:0 0 10px;}
+  .score-line strong{font-size:22px;color:var(--accent);}
+  .dim-note{font-size:13.5px;color:var(--ink-soft);margin:0 0 20px;line-height:1.65;}
+  .answer-block{border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin-bottom:10px;}
+  .answer-block .q-no{font-size:12px;font-weight:700;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.05em;margin:0 0 8px;}
+  .answer-block .item{font-size:14.5px;font-weight:600;color:var(--ink);margin:0 0 8px;}
+  .answer-block .resp{font-size:14px;font-weight:600;color:var(--ink);}
+  .answer-block .resp .sc{font-weight:400;color:var(--ink-soft);}
+
+  .btn{font:inherit;font-size:15px;font-weight:600;padding:13px 30px;border-radius:999px;border:none;background:var(--accent);color:var(--accent-ink);cursor:pointer;transition:background .15s ease;width:100%;}
+  .btn:hover{background:#16273D;}
+  .btn-outline{background:none;border:1px solid var(--accent);color:var(--accent);margin-top:14px;}
+  .btn-outline:hover{background:var(--accent-soft);}
+  .hint{font-size:12.5px;color:var(--ink-soft);margin-top:14px;text-align:center;}
+  .footnote{margin-top:40px;font-size:11.5px;color:var(--ink-soft);border-top:1px solid var(--line);padding-top:16px;line-height:1.7;}
+  [hidden]{display:none !important;}
+
+  @media print{
+    .back-top, .eyebrow, h1, .intro-text, .footnote, .btn-outline{ display:none !important; }
+    body{background:#fff;}
+    #result{box-shadow:none;border:none;padding:0;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back-top" href="index.html">&larr; Tous les tests</a>
+  <div class="eyebrow">Auto-évaluation</div>
+  <h1 class="serif">Quotient amitié et relation (FQ)</h1>
+  <p class="intro-text">Ce résultat ne remplace pas un échange avec votre praticien, il sert de point de départ pour en discuter ensemble.</p>
+
+  <div class="start-card" id="startScreen">
+    <div class="pills">
+      <span class="pill">35 questions</span>
+      <span class="pill">10 minutes</span>
+    </div>
+    <p class="instructions">Ce questionnaire comprend 35 questions. Pour chaque question, sélectionnez la proposition qui vous correspond le plus.</p>
+    <p class="lang-note">⚠️ Le document officiel français (Autism Research Centre) n'est traduit que partiellement : les questions 18-21 et 25-35 restent en anglais dans la source elle-même (traduction indicative ajoutée entre parenthèses). Certaines réponses n'ont pas de valeur numérique publiée dans l'article original : elles sont enregistrées mais n'entrent pas dans le score.</p>
+    <button type="button" class="btn" id="startBtn">Commencer</button>
+    <p class="hint">Rien n'est envoyé ni conservé sur un serveur : si vous quittez avant la fin, vos réponses sont perdues et il faudra recommencer.</p>
+  </div>
+
+  <div class="quiz-card" id="quizScreen" hidden>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <p class="q-count" id="qCount">Question 1/35</p>
+    <p class="q-unc" id="qUnc" hidden>Cette réponse est enregistrée mais n'a pas de valeur numérique publiée : elle n'entre pas dans le score.</p>
+    <p class="q-item" id="qItem"></p>
+    <div class="options" id="qOptions"></div>
+    <button type="button" class="back-link" id="backBtn" hidden>&larr; Question précédente</button>
+  </div>
+
+  <div id="result">
+    <h2 class="serif">Quotient amitié et relation (FQ)</h2>
+    <p class="meta-line">Passation : <span id="passationDate"></span></p>
+
+    <p class="section-title">Score</p>
+    <p class="score-line">Score total (partiel) : <strong id="scoreVal">0</strong>/135</p>
+    <p class="dim-note">Score calculé sur les 27 items dont le barème numérique de l'Appendix original est confirmé (maximum théorique 135). 8 items (8, 11, 17, 19, 21, 24, 26, 35) n'ont pas de valeur numérique publiée dans l'article original ou ne sont pas cotés par la source elle-même : leurs réponses sont enregistrées ci-dessous en relevé brut, sans entrer dans ce total. Aucun seuil clinique de coupure publié par les auteurs — un score plus élevé indique un style relationnel plus proche de la moyenne féminine/empathique décrite par les auteurs, un score plus bas un style plus proche de la moyenne masculine/orientée vers l'action, sans valeur diagnostique en soi.</p>
+
+    <p class="section-title">Réponses du patient</p>
+    <div id="answersList"></div>
+
+    <button type="button" class="btn" id="downloadBtn">Télécharger le résultat (PDF)</button>
+    <button type="button" class="btn btn-outline" id="restartBtn">Refaire le test</button>
+  </div>
+
+  <p class="footnote">
+    Friendship Questionnaire (FQ) — Baron-Cohen, S., &amp; Wheelwright, S. (2003). The Friendship Questionnaire: An investigation of adults with Asperger Syndrome or High-Functioning Autism, and normal sex differences. <em>Journal of Autism and Developmental Disorders</em>, 33(5), 509-517. Textes officiels de l'Autism Research Centre (Cambridge) : FQ_French.pdf (questionnaire, partiellement traduit), FQ_ScoringNote.pdf (errata de cotation), article original 2003 (Appendix, barème). Copyright &copy;SBC/SJW MRC 2000, en libre téléchargement par l'Autism Research Centre. Ce résultat est un repère, il ne constitue pas un diagnostic.
+  </p>
+</div>
+
+<script type="application/json" id="items-data">[{"stem": "Parmi les affirmations suivantes, laquelle vous correspond le plus ?", "unc": false, "opts": [{"label": "J'ai un ou deux Meilleur(s) ami(s)", "pts": 5}, {"label": "J'ai plusieurs amis que je considère comme meilleurs amis", "pts": 2}, {"label": "Je n'ai pas d'ami que je considère comme Meilleur ami", "pts": 0}]}, {"stem": "Qu'est-ce qui est le plus important dans l'amitié pour vous ?", "unc": false, "opts": [{"label": "Avoir quelqu'un à qui se confier", "pts": 5}, {"label": "Avoir quelqu'un avec qui s'amuser", "pts": 0}]}, {"stem": "Si vous deviez choisir, vous préférez avoir un ami qui…", "unc": false, "opts": [{"label": "Aime faire les mêmes choses que moi", "pts": 0}, {"label": "Voit la vie comme moi", "pts": 5}]}, {"stem": "Laquelle de ces deux affirmations vous correspond le plus ?", "unc": false, "opts": [{"label": "J'aime être proche des gens", "pts": 5}, {"label": "J'aime garder mes distances avec les gens", "pts": 0}]}, {"stem": "Quand je parle avec un ami au téléphone, c'est plutôt pour…", "unc": false, "opts": [{"label": "Organiser des activités", "pts": 0}, {"label": "Discuter", "pts": 5}]}, {"stem": "Avec un ami, j'ai tendance à…", "unc": false, "opts": [{"label": "D'abord penser à une activité que je souhaite faire, puis trouver quelqu'un avec qui la réaliser", "pts": 0}, {"label": "D'abord rencontrer quelqu'un, puis réfléchir à une activité à réaliser", "pts": 5}]}, {"stem": "Je préfère passer du temps avec un ami…", "unc": false, "opts": [{"label": "En partageant une activité (cinéma, golf…)", "pts": 0}, {"label": "Pour discuter (en terrasse, autour d'un café)", "pts": 5}]}, {"stem": "Si je déménageais dans un nouveau lieu…", "unc": true, "opts": [{"label": "J'aurais plus tendance à garder contact avec mes anciens amis plutôt que d'en faire de nouveaux", "pts": null}, {"label": "J'aurais plus tendance à chercher de nouveaux amis plutôt que d'entretenir mes anciennes relations", "pts": null}]}, {"stem": "Pour mes amis, je suis davantage…", "unc": false, "opts": [{"label": "Quelqu'un qui les soutient plutôt que quelqu'un avec qui on s'amuse", "pts": 5}, {"label": "Quelqu'un avec qui on s'amuse plutôt que quelqu'un qui les soutient", "pts": 0}]}, {"stem": "Si un ami avait un problème, je serais meilleur pour…", "unc": false, "opts": [{"label": "Discuter des émotions liées à ce problème plutôt que de trouver des solutions", "pts": 5}, {"label": "Trouver des solutions plutôt que de discuter des émotions liées à ce problème", "pts": 0}]}, {"stem": "Si un ami avait un problème…", "unc": true, "opts": [{"label": "J'attendrais qu'il vienne de lui-même m'en parler", "pts": null}, {"label": "Je prendrais contact avec lui pour en discuter", "pts": null}]}, {"stem": "Quand j'ai des problèmes personnels, je préfère…", "unc": false, "opts": [{"label": "Les traiter seul", "pts": 0}, {"label": "Les partager avec un ami", "pts": 5}, {"label": "Tenter quelque chose et puis oublier", "pts": 0}]}, {"stem": "Quand j'ai quelque chose de difficile à dire à un ami, je préfère…", "unc": false, "opts": [{"label": "Aborder le sujet doucement", "pts": 5}, {"label": "L'aborder directement", "pts": 0}]}, {"stem": "Si je me dispute avec un ami et que je pense que je n'ai rien fait de mal, je…", "unc": false, "opts": [{"label": "Fais tout pour réparer la relation", "pts": 5}, {"label": "Suis prêt à faire le premier pas, jusqu'à ce qu'il revienne", "pts": 3}, {"label": "Suis prêt à régler le problème, s'il fait le premier pas", "pts": 1}, {"label": "N'aurais plus confiance et ne pourrais plus être son ami", "pts": 0}]}, {"stem": "Mon lieu de travail idéal serait…", "unc": false, "opts": [{"label": "Dans mon bureau, sans visiteurs de la journée", "pts": 0}, {"label": "Dans mon bureau, avec quelques visiteurs dans la journée", "pts": 1}, {"label": "Dans un bureau avec un ou deux collègues", "pts": 3}, {"label": "Dans un espace de travail collectif", "pts": 5}]}, {"stem": "Avec quelle facilité pouvez-vous parler de vos émotions avec un ami ?", "unc": false, "opts": [{"label": "Très facilement", "pts": 5}, {"label": "Assez facilement", "pts": 4}, {"label": "Pas très facile", "pts": 2}, {"label": "Assez difficile", "pts": 1}, {"label": "Très difficile", "pts": 0}]}, {"stem": "Avec quelle facilité pouvez-vous parler de vos émotions avec un inconnu ?", "unc": true, "opts": [{"label": "Très facilement", "pts": null}, {"label": "Assez facilement", "pts": null}, {"label": "Pas très facile", "pts": null}, {"label": "Assez difficile", "pts": null}, {"label": "Très difficile", "pts": null}]}, {"stem": "In terms of personality, how similar to your friends do you tend to be? (En termes de personnalité, dans quelle mesure ressemblez-vous à vos amis ?)", "unc": false, "opts": [{"label": "Très similaires", "pts": 5}, {"label": "Assez similaires", "pts": 3}, {"label": "Pas très similaires", "pts": 1}, {"label": "Très différents", "pts": 0}]}, {"stem": "In terms of interests, how similar to your friends do you tend to be? (En termes de centres d'intérêt, dans quelle mesure ressemblez-vous à vos amis ?)", "unc": true, "opts": [{"label": "Very similar", "pts": null}, {"label": "Quite similar", "pts": null}, {"label": "Not very similar", "pts": null}, {"label": "Very dissimilar", "pts": null}]}, {"stem": "How important is it to you what your friends think of you? (Quelle importance accordez-vous à ce que vos amis pensent de vous ?)", "unc": false, "opts": [{"label": "Of no importance", "pts": 0}, {"label": "Of little importance", "pts": 1}, {"label": "Fairly important", "pts": 2}, {"label": "Very important", "pts": 4}, {"label": "Of upmost importance", "pts": 5}]}, {"stem": "How important is it to you what strangers think of you? (Quelle importance accordez-vous à ce que des inconnus pensent de vous ?)", "unc": true, "opts": [{"label": "Of no importance", "pts": null}, {"label": "Of little importance", "pts": null}, {"label": "Fairly important", "pts": null}, {"label": "Very important", "pts": null}, {"label": "Of upmost importance", "pts": null}]}, {"stem": "How easy do you find it to admit to your friends when you're wrong? (Avec quelle facilité admettez-vous vos torts auprès de vos amis ?)", "unc": false, "opts": [{"label": "Très facilement", "pts": 5}, {"label": "Assez facilement", "pts": 4}, {"label": "Pas très facile", "pts": 2}, {"label": "Assez difficile", "pts": 1}, {"label": "Très difficile", "pts": 0}]}, {"stem": "How easy do you find it to tell a friend about your weaknesses and failures? (Avec quelle facilité parlez-vous à un ami de vos faiblesses et de vos échecs ?)", "unc": false, "opts": [{"label": "Très facilement", "pts": 5}, {"label": "Assez facilement", "pts": 4}, {"label": "Pas très facile", "pts": 2}, {"label": "Assez difficile", "pts": 1}, {"label": "Très difficile", "pts": 0}]}, {"stem": "How easy do you find it to tell a friend about your achievements and successes? (Avec quelle facilité parlez-vous à un ami de vos réussites et de vos succès ?)", "unc": true, "opts": [{"label": "Très facilement", "pts": null}, {"label": "Assez facilement", "pts": null}, {"label": "Pas très facile", "pts": null}, {"label": "Assez difficile", "pts": null}, {"label": "Très difficile", "pts": null}]}, {"stem": "How interested are you in the everyday details of your close friends' lives? (Quel intérêt portez-vous aux détails du quotidien de vos amis proches ?)", "unc": false, "opts": [{"label": "Completely disinterested", "pts": 0}, {"label": "Not very interested", "pts": 1}, {"label": "Quite interested", "pts": 3}, {"label": "Very interested", "pts": 5}]}, {"stem": "How interested are you in the everyday details of your casual friends' lives? (Quel intérêt portez-vous aux détails du quotidien de vos connaissances plus lointaines ?)", "unc": true, "opts": [{"label": "Completely disinterested", "pts": null}, {"label": "Not very interested", "pts": null}, {"label": "Quite interested", "pts": null}, {"label": "Very interested", "pts": null}]}, {"stem": "When you are in a group, how important is it for you to know the 'gossip' / social news about the people you are with? (En groupe, quelle importance accordez-vous à connaître les nouvelles/ragots concernant les personnes présentes ?)", "unc": false, "opts": [{"label": "Of no importance", "pts": 0}, {"label": "Of little importance", "pts": 1}, {"label": "Fairly important", "pts": 2}, {"label": "Very important", "pts": 4}, {"label": "Of great importance", "pts": 5}]}, {"stem": "Do you work harder at your career than at maintaining your relationships with friends? (Travaillez-vous plus dur pour votre carrière que pour entretenir vos relations amicales ?)", "unc": false, "opts": [{"label": "Yes", "pts": 0}, {"label": "No", "pts": 5}, {"label": "Equal", "pts": 2}]}, {"stem": "How often do you make plans to meet with friends? (À quelle fréquence prévoyez-vous de rencontrer des amis ?)", "unc": false, "opts": [{"label": "Once or twice a year", "pts": 0}, {"label": "Once every 2 or 3 months", "pts": 1}, {"label": "Once a month", "pts": 2}, {"label": "Once every couple of weeks", "pts": 3}, {"label": "Once or twice a week", "pts": 4}, {"label": "3 or 4 times a week", "pts": 5}, {"label": "More than any of the above", "pts": 5}]}, {"stem": "How would you prefer to keep in touch with friends ? (Indiquez votre premier choix parmi les trois moyens suivants)", "unc": false, "opts": [{"label": "Face to face contact", "pts": 5}, {"label": "Email/letters", "pts": 0}, {"label": "Telephone calls", "pts": 2}]}, {"stem": "How easy do you find it to make new friends? (Avec quelle facilité vous faites-vous de nouveaux amis ?)", "unc": false, "opts": [{"label": "Very easy", "pts": 5}, {"label": "Quite easy", "pts": 4}, {"label": "Not very easy", "pts": 2}, {"label": "Quite difficult", "pts": 1}, {"label": "Very difficult", "pts": 0}]}, {"stem": "What would be the minimum social contact you would need to get through a day? (Quel serait le contact social minimum dont vous auriez besoin pour tenir une journée ?)", "unc": false, "opts": [{"label": "No contact", "pts": 0}, {"label": "Just being near people", "pts": 1}, {"label": "A casual chat", "pts": 2}, {"label": "A chat with a friend", "pts": 3}, {"label": "Two or three chats during the day", "pts": 4}, {"label": "More than the above", "pts": 5}]}, {"stem": "What would be the minimum social contact you would need to get through a week? (Quel serait le contact social minimum dont vous auriez besoin pour tenir une semaine ?)", "unc": false, "opts": [{"label": "None", "pts": 0}, {"label": "Being around people", "pts": 1}, {"label": "Casual chats", "pts": 2}, {"label": "One chat with a friend", "pts": 3}, {"label": "Two or three chats during the week", "pts": 3}, {"label": "One chat every day", "pts": 4}, {"label": "Two or three chats every day", "pts": 5}, {"label": "More than the above", "pts": 5}]}, {"stem": "Quand vous parlez avec des amis, quel est le premier sujet dont vous parlez le plus (indiquez votre rang 1) ?", "unc": false, "opts": [{"label": "Politics and current affairs", "pts": 0}, {"label": "Hobbies and interests", "pts": 0}, {"label": "Personal matters", "pts": 5}, {"label": "Work", "pts": 0}, {"label": "Family and friends", "pts": 5}, {"label": "The weather", "pts": 0}, {"label": "What you've been doing since last time you spoke", "pts": 0}]}, {"stem": "Lors d'une occasion sociale, en rencontrant quelqu'un pour la première fois, quel sujet évoquez-vous en priorité (rang 1) ?", "unc": true, "opts": [{"label": "Politics and current affairs", "pts": null}, {"label": "Hobbies and interests", "pts": null}, {"label": "Personal matters", "pts": null}, {"label": "Work", "pts": null}, {"label": "Family and friends", "pts": null}, {"label": "The weather", "pts": null}, {"label": "What you've been doing recently", "pts": null}]}]</script>
+<script>
+(function(){
+  const items = JSON.parse(document.getElementById('items-data').textContent);
+  const answers = new Array(items.length).fill(null);
+  let current = 0;
+
+  const startScreen = document.getElementById('startScreen');
+  const quizScreen = document.getElementById('quizScreen');
+  const startBtn = document.getElementById('startBtn');
+  const qCount = document.getElementById('qCount');
+  const qUnc = document.getElementById('qUnc');
+  const qItem = document.getElementById('qItem');
+  const qOptions = document.getElementById('qOptions');
+  const backBtn = document.getElementById('backBtn');
+  const progressFill = document.getElementById('progressFill');
+  const resultBox = document.getElementById('result');
+
+  startBtn.addEventListener('click', function(){
+    startScreen.hidden = true;
+    quizScreen.hidden = false;
+    renderQuestion();
+  });
+
+  backBtn.addEventListener('click', function(){
+    if(current > 0){
+      current -= 1;
+      renderQuestion();
+    }
+  });
+
+  function renderQuestion(){
+    const it = items[current];
+    qCount.textContent = 'Question ' + (current + 1) + '/' + items.length;
+    qUnc.hidden = !it.unc;
+    qItem.textContent = it.stem;
+    progressFill.style.width = (((current) / items.length) * 100) + '%';
+    backBtn.hidden = current === 0;
+
+    qOptions.innerHTML = '';
+    it.opts.forEach(function(opt, idx){
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'option-btn';
+      btn.textContent = opt.label;
+      if(answers[current] === idx){ btn.classList.add('selected'); }
+      btn.addEventListener('click', function(){ selectAnswer(idx, btn); });
+      qOptions.appendChild(btn);
+    });
+  }
+
+  function selectAnswer(idx, btnEl){
+    answers[current] = idx;
+    Array.from(qOptions.children).forEach(function(b){ b.classList.remove('selected'); });
+    btnEl.classList.add('selected');
+    progressFill.style.width = (((current + 1) / items.length) * 100) + '%';
+
+    setTimeout(function(){
+      if(current < items.length - 1){
+        current += 1;
+        renderQuestion();
+      } else {
+        showResult();
+      }
+    }, 380);
+  }
+
+  function showResult(){
+    quizScreen.hidden = true;
+
+    document.getElementById('passationDate').textContent = new Date().toLocaleString('fr-FR', {day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit'});
+
+    let total = 0;
+    items.forEach(function(it, i){
+      const idx = answers[i];
+      if(idx === null) return;
+      const pts = it.opts[idx].pts;
+      if(pts !== null && pts !== undefined){ total += pts; }
+    });
+    document.getElementById('scoreVal').textContent = total;
+
+    const answersList = document.getElementById('answersList');
+    answersList.innerHTML = '';
+    items.forEach(function(it, idx){
+      const aIdx = answers[idx];
+      const opt = aIdx === null ? null : it.opts[aIdx];
+      const respLabel = opt ? opt.label : '(non répondu)';
+      const scText = (opt && opt.pts !== null && opt.pts !== undefined) ? ('(Score : ' + opt.pts + ')') : '(non coté)';
+      const block = document.createElement('div');
+      block.className = 'answer-block';
+      block.innerHTML =
+        '<p class="q-no">Question ' + (idx + 1) + '</p>' +
+        '<p class="item">' + escapeHtml(it.stem) + '</p>' +
+        '<p class="resp">' + escapeHtml(respLabel) + ' <span class="sc">' + scText + '</span></p>';
+      answersList.appendChild(block);
+    });
+
+    resultBox.style.display = 'block';
+    resultBox.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  function escapeHtml(s){
+    return String(s).replace(/[&<>"']/g, function(c){
+      return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];
+    });
+  }
+
+  document.getElementById('downloadBtn').addEventListener('click', function(){
+    window.print();
+  });
+
+  document.getElementById('restartBtn').addEventListener('click', function(){
+    answers.fill(null);
+    current = 0;
+    resultBox.style.display = 'none';
+    startScreen.hidden = false;
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>FQ — Fiche — Cabinet Bouche &amp; Chmura</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  img{max-width:100%}
+  [hidden]{display:none!important}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:920px;margin:0 auto;padding:32px 24px 80px;}
+  .crumb{font-size:12.5px;color:#9A9E90;margin:0 0 22px;}
+  .crumb a{color:#63695D;text-decoration:none;}
+  .crumb a:hover{text-decoration:underline;}
+
+  .layout{display:flex;gap:28px;align-items:flex-start;}
+  .main-col{flex:1;min-width:0;}
+
+  .fiche-head{display:flex;gap:22px;align-items:flex-start;margin-bottom:26px;flex-wrap:wrap;}
+  .fiche-photo{position:relative;width:112px;height:112px;flex-shrink:0;border-radius:14px;overflow:hidden;
+    background:linear-gradient(135deg,#1E5C8A 0%,#5FA3C9 55%,#0E3552 100%);}
+  .fiche-photo::before{content:"";position:absolute;width:150px;height:150px;border-radius:50%;
+    background:radial-gradient(circle,rgba(224,196,138,.55),transparent 70%);top:-50px;right:-40px;}
+  .fiche-photo .acronym{position:absolute;left:12px;bottom:10px;font-family:'Cormorant Garamond',Georgia,serif;
+    font-weight:600;font-size:19px;color:#fff;}
+  .fiche-title{flex:1;min-width:220px;}
+  .fiche-title h1{font-size:24px;margin:0 0 14px;}
+  .fiche-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;}
+  .round-btn{width:38px;height:38px;border-radius:50%;background:#F4F1EA;border:1px solid #E0D9C9;
+    display:flex;align-items:center;justify-content:center;cursor:pointer;color:#63695D;font-size:15px;padding:0;}
+  .round-btn.saved{color:#A0824C;}
+
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;transition:opacity .15s ease,background .15s ease,color .15s ease;}
+  .btn:hover{opacity:.85;}
+  .btn-primary{background:#1E3A5F;color:#fff;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-added{background:#E4EEE8;color:#3D6B4F;border-color:#C9DED2;}
+  .btn-added:hover{opacity:1;}
+  .btn[disabled]{cursor:not-allowed;opacity:.55;}
+
+  .desc-text{font-size:15px;color:#3A3E33;margin:0 0 26px;max-width:640px;}
+
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#3D6B4F;
+    background:#E4EEE8;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+
+  .meta-list{list-style:none;margin:0 0 32px;padding:0;display:flex;flex-direction:column;gap:9px;max-width:520px;}
+  .meta-list li{display:flex;align-items:center;gap:10px;font-size:13.5px;color:#63695D;}
+  .meta-list .ico{width:18px;text-align:center;flex-shrink:0;}
+  .meta-list a{color:#1E3A5F;font-weight:600;text-decoration:none;}
+  .meta-list a:hover{text-decoration:underline;}
+
+  h2.section{font-size:19px;margin:0 0 14px;padding-top:26px;border-top:1px solid #E0D9C9;}
+  h2.section:first-of-type{border-top:none;padding-top:0;}
+
+  .preview-card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:14px;padding:20px 22px;margin-bottom:14px;}
+  .preview-card .stem{font-size:12.5px;color:#9A9E90;margin:0 0 6px;}
+  .preview-card .item{font-family:'Cormorant Garamond',Georgia,serif;font-size:18px;margin:0 0 16px;}
+  .preview-opts{display:flex;flex-wrap:wrap;gap:8px;}
+  .preview-opts span{font-size:12.5px;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:6px 13px;}
+  .reveal-link{appearance:none;background:none;border:none;font:inherit;color:#1E3A5F;font-weight:700;font-size:13.5px;cursor:pointer;padding:0;}
+  .reveal-link:hover{text-decoration:underline;}
+  .all-questions{list-style:decimal;margin:14px 0 0;padding-left:20px;font-size:13.5px;color:#3A3E33;display:flex;flex-direction:column;gap:10px;}
+
+  .cotation-text{font-size:14px;color:#3A3E33;margin:0 0 16px;max-width:640px;}
+  .source-note{font-size:11.5px;color:#9A9E90;margin:0 0 30px;}
+
+  .sendbox{width:296px;flex-shrink:0;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:22px;position:sticky;top:24px;}
+  .sendbox h2.serif{font-size:17px;margin:0 0 16px;padding-top:0;border-top:none;}
+  .sendbox-empty{text-align:center;padding:20px 4px 8px;}
+  .sendbox-empty .mark{width:52px;height:52px;margin:0 auto 14px;border-radius:50%;background:#F4F1EA;display:flex;align-items:center;justify-content:center;font-size:22px;color:#9A9E90;}
+  .sendbox-empty p{font-size:13px;color:#9A9E90;margin:0;}
+  .sendbox-item{display:flex;align-items:center;justify-content:space-between;gap:8px;background:#F4F1EA;border-radius:8px;padding:8px 10px;font-size:13px;font-weight:600;margin-bottom:8px;}
+  .sendbox-item button{appearance:none;border:none;background:none;color:#9A9E90;cursor:pointer;font-size:14px;line-height:1;padding:2px;}
+  .sendbox-item button:hover{color:#B4483C;}
+  .field-label{display:block;font-size:12.5px;font-weight:600;color:#63695D;margin:16px 0 6px;}
+  .field-input{width:100%;font-family:'Inter',sans-serif;font-size:14px;color:#20241E;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:8px;padding:9px 12px;}
+  .field-hint{font-size:11.5px;color:#9A9E90;margin:6px 0 0;}
+  .sendbox .btn-primary{width:100%;justify-content:center;margin-top:14px;}
+  .msg-box{width:100%;font-family:'Inter',sans-serif;font-size:13px;color:#20241E;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:10px;padding:12px;resize:vertical;min-height:132px;margin-top:14px;}
+  .confirm{font-size:12.5px;color:#3D6B4F;margin-top:8px;}
+
+  @media (max-width:760px){
+    .layout{flex-direction:column;}
+    .sendbox{width:100%;position:static;order:-1;}
+  }
+
+  .modal-overlay{position:fixed;inset:0;background:rgba(32,36,30,.5);display:flex;align-items:center;justify-content:center;padding:24px;z-index:20;}
+  .modal-box{background:#fff;border-radius:18px;max-width:360px;width:100%;max-height:88vh;overflow:auto;padding:20px;}
+  .modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+  .modal-head span{font-family:'Cormorant Garamond',Georgia,serif;font-size:18px;}
+  .modal-head button{appearance:none;border:none;background:#F4F1EA;width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:16px;color:#63695D;}
+  .phone-frame{border:8px solid #20241E;border-radius:32px;overflow:hidden;background:#fff;box-shadow:0 20px 40px -18px rgba(20,26,32,.4);}
+  .phone-frame iframe{display:block;width:100%;height:540px;border:none;}
+</style>
+<div class="wrap">
+  <p class="crumb"><a href="index.html">Accueil</a> &rsaquo; <a href="index.html">Questionnaires</a> &rsaquo; FQ</p>
+
+  <div class="layout">
+    <div class="main-col">
+
+      <div class="fiche-head">
+        <div class="fiche-photo"><span class="acronym">FQ</span></div>
+        <div class="fiche-title">
+          <h1 class="serif">Quotient amitié et relation (Friendship Questionnaire, FQ)</h1>
+          <div class="fiche-actions">
+            <button class="btn btn-primary" type="button" data-add>Ajouter à la boîte d'envoi</button>
+            <button class="btn btn-secondary" type="button" data-open-demo>Mode démo</button>
+            <button class="round-btn" type="button" data-bookmark aria-label="Enregistrer dans mes favoris">&#9734;</button>
+          </div>
+        </div>
+      </div>
+
+      <span class="badge-standard">&#10003; Standardisé</span>
+      <p class="desc-text">Ce questionnaire explore le style relationnel et amical (importance accordée à l'amitié, style de communication émotionnelle, fréquence et nature des contacts sociaux). 35 items, en partie traduits en français (items 1-17), le reste restant en anglais dans le document officiel français lui-même (traduction indicative ajoutée entre parenthèses dans cette version).</p>
+
+      <ul class="meta-list">
+        <li><span class="ico">&#10003;</span> 35 questions</li>
+        <li><span class="ico">&#9201;</span> 10 minutes</li>
+        <li><span class="ico">&#127760;</span> Français partiel / anglais (items 18-21, 25-35)</li>
+        <li><span class="ico">&#128214;</span> Friendship Questionnaire (FQ)</li>
+        <li><span class="ico">&#128100;</span> Adulte</li>
+        <li><span class="ico">&#9997;</span> Baron-Cohen, S., &amp; Wheelwright, S. (2003)</li>
+        <li><span class="ico">&#127991;</span> <a href="index.html">TSA</a></li>
+      </ul>
+
+      <h2 class="serif section">Aperçu des questions</h2>
+      <div class="preview-card">
+        <p class="stem">Parmi les affirmations suivantes, laquelle vous correspond le plus ?</p>
+        <div class="preview-opts">
+          <span>J'ai un ou deux Meilleur(s) ami(s)</span>
+          <span>J'ai plusieurs amis que je considère comme meilleurs amis</span>
+          <span>Je n'ai pas d'ami que je considère comme Meilleur ami</span>
+        </div>
+      </div>
+      <button class="reveal-link" type="button" data-reveal-questions>Voir toutes les questions &rsaquo;</button>
+      <ol class="all-questions" data-all-questions hidden start="2">
+        <li>Qu'est-ce qui est le plus important dans l'amitié pour vous ?<br><span style="color:#9A9E90;">Avoir quelqu'un à qui se confier / Avoir quelqu'un avec qui s'amuser</span></li>
+        <li>Si vous deviez choisir, vous préférez avoir un ami qui…<br><span style="color:#9A9E90;">Aime faire les mêmes choses que moi / Voit la vie comme moi</span></li>
+        <li>Laquelle de ces deux affirmations vous correspond le plus ?<br><span style="color:#9A9E90;">J'aime être proche des gens / J'aime garder mes distances avec les gens</span></li>
+        <li>Quand je parle avec un ami au téléphone, c'est plutôt pour…<br><span style="color:#9A9E90;">Organiser des activités / Discuter</span></li>
+        <li>Avec un ami, j'ai tendance à…<br><span style="color:#9A9E90;">D'abord penser à une activité que je souhaite faire, puis trouver quelqu'un avec qui la réaliser / D'abord rencontrer quelqu'un, puis réfléchir à une activité à réaliser</span></li>
+        <li>Je préfère passer du temps avec un ami…<br><span style="color:#9A9E90;">En partageant une activité (cinéma, golf…) / Pour discuter (en terrasse, autour d'un café)</span></li>
+        <li>Si je déménageais dans un nouveau lieu… <em>(non coté)</em><br><span style="color:#9A9E90;">J'aurais plus tendance à garder contact avec mes anciens amis plutôt que d'en faire de nouveaux / J'aurais plus tendance à chercher de nouveaux amis plutôt que d'entretenir mes anciennes relations</span></li>
+        <li>Pour mes amis, je suis davantage…<br><span style="color:#9A9E90;">Quelqu'un qui les soutient plutôt que quelqu'un avec qui on s'amuse / Quelqu'un avec qui on s'amuse plutôt que quelqu'un qui les soutient</span></li>
+        <li>Si un ami avait un problème, je serais meilleur pour…<br><span style="color:#9A9E90;">Discuter des émotions liées à ce problème plutôt que de trouver des solutions / Trouver des solutions plutôt que de discuter des émotions liées à ce problème</span></li>
+        <li>Si un ami avait un problème… <em>(non coté)</em><br><span style="color:#9A9E90;">J'attendrais qu'il vienne de lui-même m'en parler / Je prendrais contact avec lui pour en discuter</span></li>
+        <li>Quand j'ai des problèmes personnels, je préfère…<br><span style="color:#9A9E90;">Les traiter seul / Les partager avec un ami / Tenter quelque chose et puis oublier</span></li>
+        <li>Quand j'ai quelque chose de difficile à dire à un ami, je préfère…<br><span style="color:#9A9E90;">Aborder le sujet doucement / L'aborder directement</span></li>
+        <li>Si je me dispute avec un ami et que je pense que je n'ai rien fait de mal, je…<br><span style="color:#9A9E90;">Fais tout pour réparer la relation / Suis prêt à faire le premier pas, jusqu'à ce qu'il revienne / Suis prêt à régler le problème, s'il fait le premier pas / N'aurais plus confiance et ne pourrais plus être son ami</span></li>
+        <li>Mon lieu de travail idéal serait…<br><span style="color:#9A9E90;">Dans mon bureau, sans visiteurs de la journée / Dans mon bureau, avec quelques visiteurs dans la journée / Dans un bureau avec un ou deux collègues / Dans un espace de travail collectif</span></li>
+        <li>Avec quelle facilité pouvez-vous parler de vos émotions avec un ami ?<br><span style="color:#9A9E90;">Très facilement / Assez facilement / Pas très facile / Assez difficile / Très difficile</span></li>
+        <li>Avec quelle facilité pouvez-vous parler de vos émotions avec un inconnu ? <em>(non coté)</em><br><span style="color:#9A9E90;">Très facilement / Assez facilement / Pas très facile / Assez difficile / Très difficile</span></li>
+        <li>In terms of personality, how similar to your friends do you tend to be? (En termes de personnalité, dans quelle mesure ressemblez-vous à vos amis ?)<br><span style="color:#9A9E90;">Très similaires / Assez similaires / Pas très similaires / Très différents</span></li>
+        <li>In terms of interests, how similar to your friends do you tend to be? (En termes de centres d'intérêt, dans quelle mesure ressemblez-vous à vos amis ?) <em>(non coté)</em><br><span style="color:#9A9E90;">Very similar / Quite similar / Not very similar / Very dissimilar</span></li>
+        <li>How important is it to you what your friends think of you? (Quelle importance accordez-vous à ce que vos amis pensent de vous ?)<br><span style="color:#9A9E90;">Of no importance / Of little importance / Fairly important / Very important / Of upmost importance</span></li>
+        <li>How important is it to you what strangers think of you? (Quelle importance accordez-vous à ce que des inconnus pensent de vous ?) <em>(non coté)</em><br><span style="color:#9A9E90;">Of no importance / Of little importance / Fairly important / Very important / Of upmost importance</span></li>
+        <li>How easy do you find it to admit to your friends when you're wrong? (Avec quelle facilité admettez-vous vos torts auprès de vos amis ?)<br><span style="color:#9A9E90;">Très facilement / Assez facilement / Pas très facile / Assez difficile / Très difficile</span></li>
+        <li>How easy do you find it to tell a friend about your weaknesses and failures? (Avec quelle facilité parlez-vous à un ami de vos faiblesses et de vos échecs ?)<br><span style="color:#9A9E90;">Très facilement / Assez facilement / Pas très facile / Assez difficile / Très difficile</span></li>
+        <li>How easy do you find it to tell a friend about your achievements and successes? (Avec quelle facilité parlez-vous à un ami de vos réussites et de vos succès ?) <em>(non coté)</em><br><span style="color:#9A9E90;">Très facilement / Assez facilement / Pas très facile / Assez difficile / Très difficile</span></li>
+        <li>How interested are you in the everyday details of your close friends' lives? (Quel intérêt portez-vous aux détails du quotidien de vos amis proches ?)<br><span style="color:#9A9E90;">Completely disinterested / Not very interested / Quite interested / Very interested</span></li>
+        <li>How interested are you in the everyday details of your casual friends' lives? (Quel intérêt portez-vous aux détails du quotidien de vos connaissances plus lointaines ?) <em>(non coté)</em><br><span style="color:#9A9E90;">Completely disinterested / Not very interested / Quite interested / Very interested</span></li>
+        <li>When you are in a group, how important is it for you to know the 'gossip' / social news about the people you are with? (En groupe, quelle importance accordez-vous à connaître les nouvelles/ragots concernant les personnes présentes ?)<br><span style="color:#9A9E90;">Of no importance / Of little importance / Fairly important / Very important / Of great importance</span></li>
+        <li>Do you work harder at your career than at maintaining your relationships with friends? (Travaillez-vous plus dur pour votre carrière que pour entretenir vos relations amicales ?)<br><span style="color:#9A9E90;">Yes / No / Equal</span></li>
+        <li>How often do you make plans to meet with friends? (À quelle fréquence prévoyez-vous de rencontrer des amis ?)<br><span style="color:#9A9E90;">Once or twice a year / Once every 2 or 3 months / Once a month / Once every couple of weeks / Once or twice a week / 3 or 4 times a week / More than any of the above</span></li>
+        <li>How would you prefer to keep in touch with friends ? (Indiquez votre premier choix parmi les trois moyens suivants)<br><span style="color:#9A9E90;">Face to face contact / Email/letters / Telephone calls</span></li>
+        <li>How easy do you find it to make new friends? (Avec quelle facilité vous faites-vous de nouveaux amis ?)<br><span style="color:#9A9E90;">Very easy / Quite easy / Not very easy / Quite difficult / Very difficult</span></li>
+        <li>What would be the minimum social contact you would need to get through a day? (Quel serait le contact social minimum dont vous auriez besoin pour tenir une journée ?)<br><span style="color:#9A9E90;">No contact / Just being near people / A casual chat / A chat with a friend / Two or three chats during the day / More than the above</span></li>
+        <li>What would be the minimum social contact you would need to get through a week? (Quel serait le contact social minimum dont vous auriez besoin pour tenir une semaine ?)<br><span style="color:#9A9E90;">None / Being around people / Casual chats / One chat with a friend / Two or three chats during the week / One chat every day / Two or three chats every day / More than the above</span></li>
+        <li>Quand vous parlez avec des amis, quel est le premier sujet dont vous parlez le plus (indiquez votre rang 1) ?<br><span style="color:#9A9E90;">Politics and current affairs / Hobbies and interests / Personal matters / Work / Family and friends / The weather / What you've been doing since last time you spoke</span></li>
+        <li>Lors d'une occasion sociale, en rencontrant quelqu'un pour la première fois, quel sujet évoquez-vous en priorité (rang 1) ? <em>(non coté)</em><br><span style="color:#9A9E90;">Politics and current affairs / Hobbies and interests / Personal matters / Work / Family and friends / The weather / What you've been doing recently</span></li>
+      </ol>
+
+      <h2 class="serif section">Cotations &amp; interprétations</h2>
+      <p class="cotation-text">Score total (partiel) = somme des points des 27 items dont le barème numérique de l'Appendix de l'article original est confirmé (maximum théorique 135). 8 items (8, 11, 17, 19, 21, 24, 26, 35) n'ont pas de valeur numérique publiée dans l'article ou ne sont explicitement pas cotés par la source elle-même : leurs réponses sont enregistrées et affichées, mais n'entrent pas dans le total. Les items 30 et 34, qui demandent normalement un classement complet des propositions, sont simplifiés ici au premier choix uniquement (seul rang coté par le barème officiel) ; l'item 35, de même nature, n'a aucun barème confirmé et reste en relevé brut.</p>
+      <p class="cotation-text">Aucun seuil clinique de coupure n'est publié par les auteurs pour cet instrument. Le score se lit comme un indicateur dimensionnel du style relationnel (empathique/verbal vs orienté vers l'action), pas comme un score diagnostique.</p>
+      <p class="source-note">Source : Baron-Cohen, S., &amp; Wheelwright, S. (2003). The Friendship Questionnaire: An investigation of adults with Asperger Syndrome or High-Functioning Autism, and normal sex differences. <em>Journal of Autism and Developmental Disorders</em>, 33(5), 509-517. Textes officiels de l'Autism Research Centre (Cambridge) : FQ_French.pdf, FQ_ScoringNote.pdf (errata de cotation), article original 2003 (Appendix, barème) — extraits directement du PDF (pdftotext), sans résumeur. Copyright &copy;SBC/SJW MRC 2000, en libre téléchargement par l'Autism Research Centre lui-même ; aucune clause de licence restrictive identifiée. Outil de repérage, ne remplace pas une évaluation clinique complète.</p>
+
+    </div>
+
+    <aside class="sendbox">
+      <h2 class="serif">Boîte d'envoi</h2>
+      <div data-sendbox-body>
+        <div class="sendbox-empty">
+          <div class="mark">＋</div>
+          <p>Ajoutez des questionnaires pour créer un lien à transmettre à un patient.</p>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<div class="modal-overlay" id="demoModal" hidden>
+  <div class="modal-box">
+    <div class="modal-head"><span class="serif">Aperçu du questionnaire</span><button type="button" data-close-demo aria-label="Fermer">&times;</button></div>
+    <div class="phone-frame"><iframe id="demoFrame" title="Aperçu FQ"></iframe></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var STORAGE_KEY = 'mentaal_envois_apercu';
+  var TEST_NAME = 'FQ';
+  var TEST_LINK = 'fq.html';
+  var selected = [];
+
+  function loadEnvois(){
+    try{
+      var raw = window.localStorage.getItem(STORAGE_KEY);
+      var list = raw ? JSON.parse(raw) : [];
+      return list.map(function(e){
+        if (e.tests) return e;
+        return { label: e.label, tests: e.test ? [e.test] : [], date: e.date };
+      });
+    }catch(e){ return []; }
+  }
+  function saveEnvois(list){
+    try{ window.localStorage.setItem(STORAGE_KEY, JSON.stringify(list)); }catch(e){}
+  }
+  function escapeHtml(s){
+    return String(s).replace(/[&<>"']/g, function(c){
+      return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];
+    });
+  }
+
+  document.querySelectorAll('[data-bookmark]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      btn.classList.toggle('saved');
+      btn.innerHTML = btn.classList.contains('saved') ? '&#9733;' : '&#9734;';
+    });
+  });
+
+  var revealBtn = document.querySelector('[data-reveal-questions]');
+  var allQuestions = document.querySelector('[data-all-questions]');
+  revealBtn.addEventListener('click', function(){
+    allQuestions.hidden = !allQuestions.hidden;
+    revealBtn.textContent = allQuestions.hidden ? 'Voir toutes les questions ›' : 'Masquer les questions';
+  });
+
+  var demoModal = document.getElementById('demoModal');
+  var demoFrame = document.getElementById('demoFrame');
+  document.querySelector('[data-open-demo]').addEventListener('click', function(){
+    demoFrame.src = TEST_LINK;
+    demoModal.hidden = false;
+  });
+  document.querySelector('[data-close-demo]').addEventListener('click', function(){
+    demoModal.hidden = true;
+    demoFrame.src = '';
+  });
+  demoModal.addEventListener('click', function(e){
+    if (e.target === demoModal){ demoModal.hidden = true; demoFrame.src = ''; }
+  });
+
+  var addBtn = document.querySelector('.fiche-actions [data-add]');
+  addBtn.addEventListener('click', function(){
+    var idx = selected.findIndex(function(s){ return s.test === TEST_NAME; });
+    if (idx === -1){
+      selected.push({ test: TEST_NAME, link: TEST_LINK });
+      addBtn.textContent = 'Ajouté ✓';
+      addBtn.classList.remove('btn-primary'); addBtn.classList.add('btn-added');
+    } else {
+      selected.splice(idx, 1);
+      addBtn.textContent = "Ajouter à la boîte d'envoi";
+      addBtn.classList.remove('btn-added'); addBtn.classList.add('btn-primary');
+    }
+    renderSendbox();
+  });
+
+  function renderSendbox(){
+    var body = document.querySelector('[data-sendbox-body]');
+    if (selected.length === 0){
+      body.innerHTML = '<div class="sendbox-empty"><div class="mark">＋</div>' +
+        '<p>Ajoutez des questionnaires pour créer un lien à transmettre à un patient.</p></div>';
+      return;
+    }
+    var html = '';
+    selected.forEach(function(s, i){
+      html += '<div class="sendbox-item"><span>' + escapeHtml(s.test) + '</span>' +
+        '<button type="button" data-remove-selected="' + i + '" aria-label="Retirer">&times;</button></div>';
+    });
+    html += '<label class="field-label">Repère patient</label>' +
+      '<input class="field-input" data-patient-label type="text" placeholder="Prénom ou initiales">' +
+      '<p class="field-hint">Reste uniquement dans ce navigateur. Le lien envoyé ne contient aucune information sur le patient.</p>' +
+      '<button class="btn btn-primary" type="button" data-generate>Créer le message</button>' +
+      '<textarea class="msg-box" data-message hidden readonly></textarea>' +
+      '<p class="confirm" data-confirm hidden>Enregistré dans « Mes patients ».</p>' +
+      '<button class="btn btn-secondary" type="button" data-reset hidden>Nouvel envoi</button>';
+    body.innerHTML = html;
+
+    body.querySelectorAll('[data-remove-selected]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var i = parseInt(btn.getAttribute('data-remove-selected'), 10);
+        selected.splice(i, 1);
+        addBtn.textContent = "Ajouter à la boîte d'envoi";
+        addBtn.classList.remove('btn-added'); addBtn.classList.add('btn-primary');
+        renderSendbox();
+      });
+    });
+
+    body.querySelector('[data-generate]').addEventListener('click', function(){
+      var input = body.querySelector('[data-patient-label]');
+      var label = (input.value || '').trim();
+      if (!label){ input.focus(); return; }
+
+      var lines = selected.map(function(s){ return '- ' + s.test + ' : ' + s.link; });
+      var message = 'Bonjour,\n\n' +
+        'Comme convenu, voici le' + (selected.length > 1 ? 's liens' : ' lien') + ' pour compléter, à votre rythme :\n' +
+        lines.join('\n') + '\n\n' +
+        'Cela prend quelques minutes. Une fois terminé, vous pourrez télécharger votre fiche de résultat directement.\n\n' +
+        'À bientôt,\n' +
+        'Cabinet Bouche & Chmura';
+
+      var box = body.querySelector('[data-message]');
+      box.value = message;
+      box.hidden = false;
+
+      var list = loadEnvois();
+      list.push({ label: label, tests: selected.map(function(s){ return s.test; }), date: new Date().toISOString() });
+      saveEnvois(list);
+
+      body.querySelector('[data-confirm]').hidden = false;
+      input.setAttribute('disabled', 'disabled');
+      body.querySelector('[data-generate]').hidden = true;
+      body.querySelectorAll('[data-remove-selected]').forEach(function(btn){ btn.setAttribute('disabled', 'disabled'); });
+      var resetBtn = body.querySelector('[data-reset]');
+      resetBtn.hidden = false;
+      resetBtn.addEventListener('click', function(){ renderSendbox(); });
+
+      addBtn.textContent = "Ajouter à la boîte d'envoi";
+      addBtn.classList.remove('btn-added'); addBtn.classList.add('btn-primary');
+      selected = [];
+    });
+  }
+})();
+</script>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

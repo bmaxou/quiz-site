@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KCCQ-12 — Kansas City Cardiomyopathy Questionnaire (forme courte)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#1F7A74;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#1F7A74;background:#E2F1EF;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#1F7A74;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#1F7A74;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 20px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  .q-stem{font-size:13.5px;color:#63695D;margin:0 0 14px;font-style:italic;}
+  .res-tab{width:100%;border-collapse:collapse;margin:0 0 20px;font-size:14px;}
+  .res-tab td{padding:10px 8px;border-bottom:1px solid #E0D9C9;vertical-align:top;}
+  .res-tab td.val{text-align:right;font-weight:700;color:#1F7A74;white-space:nowrap;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">KCCQ-12 — Kansas City Cardiomyopathy Questionnaire</h1>
+    <p class="lead">Ce questionnaire porte sur votre insuffisance cardiaque et sur la façon dont elle peut affecter votre vie au cours des 2 dernières semaines. Il n'y a pas de bonnes ou de mauvaises réponses : choisissez la réponse qui vous correspond le mieux.</p>
+    <p class="lang-note">Version anglaise officielle (KCCQ-12, Rev. 2012) : aucune version française officielle n'a pu être récupérée. Outil sous licence (Outcomes Instruments, LLC) : « Licence requise : oui ».</p>
+    <div class="pill-row">
+      <span class="pill">12 questions</span>
+      <span class="pill">3 minutes</span>
+      <span class="pill">4 domaines, 0 à 100</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-stem" id="q-stem"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-text" id="level-text"></p>
+    <table class="res-tab" id="res-tab"></table>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">KCCQ-12 — Spertus J.A. &amp; Jones P.G. (2015), Circulation: Cardiovascular Quality and Outcomes, 8(5), 469-476. Kansas City Cardiomyopathy Questionnaire © Spertus (Outcomes Instruments, LLC), tous droits réservés. Outil de suivi de l'impact de l'insuffisance cardiaque, ne remplace pas une évaluation médicale.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [{"id": "1a", "dom": "PL", "stem": "Heart failure affects different people in different ways. Some feel shortness of breath while others feel fatigue. Please indicate how much you are limited by heart failure (shortness of breath or fatigue) in your ability to do the following activities over the past 2 weeks.", "t": "a. Showering/bathing", "o": ["Extremely Limited", "Quite a bit Limited", "Moderately Limited", "Slightly Limited", "Not at all Limited", "Limited for other reasons or did not do the activity"]}, {"id": "1b", "dom": "PL", "stem": "Heart failure affects different people in different ways. Some feel shortness of breath while others feel fatigue. Please indicate how much you are limited by heart failure (shortness of breath or fatigue) in your ability to do the following activities over the past 2 weeks.", "t": "b. Walking 1 block on level ground", "o": ["Extremely Limited", "Quite a bit Limited", "Moderately Limited", "Slightly Limited", "Not at all Limited", "Limited for other reasons or did not do the activity"]}, {"id": "1c", "dom": "PL", "stem": "Heart failure affects different people in different ways. Some feel shortness of breath while others feel fatigue. Please indicate how much you are limited by heart failure (shortness of breath or fatigue) in your ability to do the following activities over the past 2 weeks.", "t": "c. Hurrying or jogging (as if to catch a bus)", "o": ["Extremely Limited", "Quite a bit Limited", "Moderately Limited", "Slightly Limited", "Not at all Limited", "Limited for other reasons or did not do the activity"]}, {"id": "2", "dom": "SF", "stem": "", "t": "2. Over the past 2 weeks, how many times did you have swelling in your feet, ankles or legs when you woke up in the morning?", "o": ["Every morning", "3 or more times per week but not every day", "1-2 times per week", "Less than once a week", "Never over the past 2 weeks"]}, {"id": "3", "dom": "SF", "stem": "", "t": "3. Over the past 2 weeks, on average, how many times has fatigue limited your ability to do what you wanted?", "o": ["All of the time", "Several times per day", "At least once a day", "3 or more times per week but not every day", "1-2 times per week", "Less than once a week", "Never over the past 2 weeks"]}, {"id": "4", "dom": "SF", "stem": "", "t": "4. Over the past 2 weeks, on average, how many times has shortness of breath limited your ability to do what you wanted?", "o": ["All of the time", "Several times per day", "At least once a day", "3 or more times per week but not every day", "1-2 times per week", "Less than once a week", "Never over the past 2 weeks"]}, {"id": "5", "dom": "SF", "stem": "", "t": "5. Over the past 2 weeks, on average, how many times have you been forced to sleep sitting up in a chair or with at least 3 pillows to prop you up because of shortness of breath?", "o": ["Every night", "3 or more times per week but not every day", "1-2 times per week", "Less than once a week", "Never over the past 2 weeks"]}, {"id": "6", "dom": "QL", "stem": "", "t": "6. Over the past 2 weeks, how much has your heart failure limited your enjoyment of life?", "o": ["It has extremely limited my enjoyment of life", "It has limited my enjoyment of life quite a bit", "It has moderately limited my enjoyment of life", "It has slightly limited my enjoyment of life", "It has not limited my enjoyment of life at all"]}, {"id": "7", "dom": "QL", "stem": "", "t": "7. If you had to spend the rest of your life with your heart failure the way it is right now, how would you feel about this?", "o": ["Not at all satisfied", "Mostly dissatisfied", "Somewhat satisfied", "Mostly satisfied", "Completely satisfied"]}, {"id": "8a", "dom": "SL", "stem": "How much does your heart failure affect your lifestyle? Please indicate how your heart failure may have limited your participation in the following activities over the past 2 weeks.", "t": "a. Hobbies, recreational activities", "o": ["Severely Limited", "Limited quite a bit", "Moderately limited", "Slightly limited", "Did not limit at all", "Does not apply or did not do for other reasons"]}, {"id": "8b", "dom": "SL", "stem": "How much does your heart failure affect your lifestyle? Please indicate how your heart failure may have limited your participation in the following activities over the past 2 weeks.", "t": "b. Working or doing household chores", "o": ["Severely Limited", "Limited quite a bit", "Moderately limited", "Slightly limited", "Did not limit at all", "Does not apply or did not do for other reasons"]}, {"id": "8c", "dom": "SL", "stem": "How much does your heart failure affect your lifestyle? Please indicate how your heart failure may have limited your participation in the following activities over the past 2 weeks.", "t": "c. Visiting family or friends out of your home", "o": ["Severely Limited", "Limited quite a bit", "Moderately limited", "Slightly limited", "Did not limit at all", "Does not apply or did not do for other reasons"]}];
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+  function renderQuestion(){
+    var it = items[idx];
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-stem').textContent = it.stem || '';
+    document.getElementById('q-stem').style.display = it.stem ? '' : 'none';
+    document.getElementById('q-text').textContent = it.t;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    it.o.forEach(function(lab, v){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === v ? ' selected' : '');
+      d.textContent = lab;
+      d.addEventListener('click', function(){ answers[idx] = v; renderQuestion(); });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){ if (idx > 0){ idx--; renderQuestion(); } });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+  // Cotation : réponse codée v+1 (1 = pire état). Code 6 des items 1 et 8 = « autre raison / non concerné » (non coté).
+  function domaine(ids){
+    var vals = [];
+    for (var i = 0; i < items.length; i++){
+      if (ids.indexOf(items[i].id) < 0) continue;
+      var c = answers[i] + 1;
+      if (c > 5) return null;
+      vals.push(c);
+    }
+    if (vals.length !== ids.length) return null;
+    var m = vals.reduce(function(a,x){return a+x;},0) / vals.length;
+    return (m - 1) / 4 * 100;
+  }
+  function fmt(x){ return x === null ? 'Non calculé' : (Math.round(x * 10) / 10).toString().replace('.', ',') + ' / 100'; }
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var rows = [
+      ['Limitation physique (questions 1a-1c)', fmt(domaine(['1a','1b','1c']))],
+      ['Qualité de vie (questions 6-7)', fmt(domaine(['6','7']))],
+      ['Limitation sociale (questions 8a-8c)', fmt(domaine(['8a','8b','8c']))]
+    ];
+    var sf = [];
+    items.forEach(function(it, i){ if (it.dom === 'SF') sf.push('Q' + it.id + ' : ' + (answers[i] + 1) + '/' + it.o.length); });
+    rows.push(['Fréquence des symptômes (questions 2-5), réponses brutes', sf.join(' · ')]);
+    var t = document.getElementById('res-tab');
+    t.innerHTML = '';
+    rows.forEach(function(r){
+      var tr = document.createElement('tr');
+      var a = document.createElement('td'); a.textContent = r[0];
+      var c = document.createElement('td'); c.textContent = r[1]; c.className = 'val';
+      tr.appendChild(a); tr.appendChild(c); t.appendChild(tr);
+    });
+    document.getElementById('level-text').textContent = "Chaque domaine est exprimé de 0 (pire état de santé) à 100 (meilleur état). Un domaine est « non calculé » si une réponse « autre raison / non concerné » a été choisie. Le score de fréquence des symptômes et le score global de synthèse ne sont pas calculés ici (pondération officielle non vérifiée) : les réponses brutes sont indiquées pour une cotation par le praticien. À discuter avec un professionnel de santé.";
+  }
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null); idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KCCQ-12 — Kansas City Cardiomyopathy Questionnaire (forme courte)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#9B2D4A 0%,#D98AA0 55%,#5E1730 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(220,245,240,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#0F4A46;background:#E2F1EF;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#1F7A74;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#0F4A46;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">KCCQ-12</span></div>
+
+  <h1 class="serif">Kansas City Cardiomyopathy Questionnaire — forme courte</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">KCCQ-12, 12 items — Spertus &amp; Jones (2015), forme courte du KCCQ (Green, Porter, Bresnahan &amp; Spertus, 2000)</p>
+  <div class="meta-row">
+    <span class="pill">12 questions</span>
+    <span class="pill">3 minutes</span>
+    <span class="pill">4 domaines, 0 à 100</span>
+    <span class="pill">Anglais</span>
+    <span class="pill">Licence requise : oui</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="kccq-12.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le KCCQ-12 est la forme courte du Kansas City Cardiomyopathy Questionnaire : un auto-questionnaire de 12 items qui mesure l'impact de l'insuffisance cardiaque sur l'état de santé perçu, sur les 2 dernières semaines. Il couvre quatre domaines : la limitation physique (3 items : douche/toilette, marche sur un pâté de maisons, se dépêcher ou courir), la fréquence des symptômes (4 items : chevilles gonflées au réveil, fatigue, essoufflement, dormir assis ou sur au moins 3 oreillers), la qualité de vie (2 items : plaisir de vivre et satisfaction si l'état restait tel quel) et la limitation sociale (3 items : loisirs, travail ou tâches ménagères, visites à la famille ou aux amis).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque réponse est codée 1, 2, 3… du pire au meilleur état. Les items 1 et 8 comportent une réponse supplémentaire (« autre raison / non concerné », code 6), non cotée. Chaque domaine est ramené à une échelle de 0 (pire état de santé) à 100 (meilleur état) ; le score global de synthèse publié est la moyenne des quatre scores de domaine (Spertus &amp; Jones, 2015). Les bandes d'interprétation publiées pour le score global (0-24, 25-49, 50-74, 75-100) ne sont pas appliquées ici.</p>
+    <p><strong>Ce que cette page calcule :</strong> les domaines <em>limitation physique</em>, <em>qualité de vie</em> et <em>limitation sociale</em> sont exprimés de 0 à 100 à partir de la moyenne de leurs items (leurs items ont tous 5 niveaux de réponse ; tout domaine contenant une réponse « autre raison / non concerné » est signalé « non calculé »). <strong>La fréquence des symptômes</strong> (items à 5 et 7 niveaux) <strong>et le score global de synthèse ne sont pas calculés</strong> : la pondération exacte du manuel officiel n'a pas pu être vérifiée, et rien n'a été inventé ; les réponses brutes sont affichées pour une cotation par le praticien avec le manuel officiel. Les règles du manuel pour les données manquantes ne sont pas non plus reproduites.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p><strong>Licence requise : oui.</strong> Kansas City Cardiomyopathy Questionnaire © John A. Spertus, MD, MPH, tous droits réservés ; licence délivrée par Outcomes Instruments, LLC (cvoutcomes.org), tarification par patient. Instrument construit ici malgré la licence, conformément à la décision du 30/09/2026 ; la diffusion publique reste soumise à l'autorisation du détenteur des droits.</p>
+    <p class="source-note">Texte des items : formulaire KCCQ-12 officiel en anglais (Rev. 2012-04-11), vérifié sur deux exemplaires concordants (reginfo.gov, document CMS, et cvam.com). Aucune version française officielle n'a pu être récupérée ; la version anglaise est donc proposée telle quelle, sans traduction. Structure de l'instrument et mode de calcul des domaines : Spertus J.A. &amp; Jones P.G. (2015), « Development and Validation of a Short Version of the Kansas City Cardiomyopathy Questionnaire », Circulation: Cardiovascular Quality and Outcomes, 8(5), 469-476 (PMC4885562). Version d'origine à 23 items : Green C.P., Porter C.B., Bresnahan D.R. &amp; Spertus J.A. (2000), Journal of the American College of Cardiology, 35(5), 1245-1255 ; non construite ici.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

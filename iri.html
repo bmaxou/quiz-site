@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IRI — Indice de réactivité interpersonnelle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#5B4B8A;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 6px;}
+  .domain-tag{font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#5B4B8A;margin:0 0 10px;}
+  .q-text{font-size:16px;margin:0 0 18px;}
+  .scale-labels{display:flex;justify-content:space-between;font-size:12px;color:#63695D;margin:0 0 8px;font-weight:600;}
+  .num-row{display:flex;gap:6px;}
+  .num-btn{flex:1;aspect-ratio:1;border-radius:50%;border:1px solid #E0D9C9;background:#fff;cursor:pointer;font-size:14px;font-weight:700;color:#20241E;font-family:'Inter',sans-serif;}
+  .num-btn.selected{background:#5B4B8A;color:#fff;border-color:#5B4B8A;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#5B4B8A;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#5B4B8A;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 20px;}
+  .subscale-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .subscale-row:last-child{border-bottom:none;}
+  .subscale-val{font-weight:700;color:#5B4B8A;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">IRI — Indice de réactivité interpersonnelle</h1>
+    <p class="lead">Ce questionnaire explore votre empathie dispositionnelle — la façon dont vous réagissez, en général, aux expériences des autres — à travers 28 affirmations réparties en quatre dimensions : prise de perspective, fantaisie, préoccupation empathique et détresse personnelle.</p>
+    <p class="lang-note">Questionnaire transcrit en anglais (version originale officielle) : aucune traduction française intégrale vérifiée n'a été retrouvée lors du sourçage.</p>
+    <div class="pill-row">
+      <span class="pill">28 questions</span>
+      <span class="pill">6-8 minutes</span>
+      <span class="pill">Échelle 0-4</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="domain-tag" id="domain-tag"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="scale-labels"><span id="lo-label"></span><span id="hi-label"></span></div>
+    <div class="num-row" id="num-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Pr&eacute;c&eacute;dent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">R&eacute;sultat</h1>
+    <p class="result-score" id="score-val"></p>
+    <p class="result-max">score total, sur 112 (28 items de 0 à 4, items inversés recotés)</p>
+    <div id="sub-rows"></div>
+    <p class="result-text">Plus un score — dimensionnel ou total — est élevé, plus la tendance rapportée sur cette facette de l'empathie est importante. Chaque dimension (7 items) est cotée de 0 à 28. Mesure dimensionnelle, sans seuil clinique officiel ; les quatre dimensions sont indépendantes (pas de profil « bon/mauvais » global).</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Davis, M.H. (1980). A multidimensional approach to individual differences in empathy. JSAS Catalog of Selected Documents in Psychology, 10, 85. Davis, M.H. (1983). Measuring individual differences in empathy: Evidence for a multidimensional approach. Journal of Personality and Social Psychology, 44, 113-126. Outil dimensionnel, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [{"d": "Fantaisie", "rev": false, "t": "I daydream and fantasize, with some regularity, about things that might happen to me."}, {"d": "Préoccupation empathique", "rev": false, "t": "I often have tender, concerned feelings for people less fortunate than me."}, {"d": "Prise de perspective", "rev": true, "t": "I sometimes find it difficult to see things from the “other guy’s” point of view."}, {"d": "Préoccupation empathique", "rev": true, "t": "Sometimes I don’t feel very sorry for other people when they are having problems."}, {"d": "Fantaisie", "rev": false, "t": "I really get involved with the feelings of the characters in a novel."}, {"d": "Détresse personnelle", "rev": false, "t": "In emergency situations, I feel apprehensive and ill-at-ease."}, {"d": "Fantaisie", "rev": true, "t": "I am usually objective when I watch a movie or play, and I don’t often get completely caught up in it."}, {"d": "Prise de perspective", "rev": false, "t": "I try to look at everybody’s side of a disagreement before I make a decision."}, {"d": "Préoccupation empathique", "rev": false, "t": "When I see someone being taken advantage of, I feel kind of protective towards them."}, {"d": "Détresse personnelle", "rev": false, "t": "I sometimes feel helpless when I am in the middle of a very emotional situation."}, {"d": "Prise de perspective", "rev": false, "t": "I sometimes try to understand my friends better by imagining how things look from their perspective."}, {"d": "Fantaisie", "rev": true, "t": "Becoming extremely involved in a good book or movie is somewhat rare for me."}, {"d": "Détresse personnelle", "rev": true, "t": "When I see someone get hurt, I tend to remain calm."}, {"d": "Préoccupation empathique", "rev": true, "t": "Other people’s misfortunes do not usually disturb me a great deal."}, {"d": "Prise de perspective", "rev": true, "t": "If I’m sure I’m right about something, I don’t waste much time listening to other people’s arguments."}, {"d": "Fantaisie", "rev": false, "t": "After seeing a play or movie, I have felt as though I were one of the characters."}, {"d": "Détresse personnelle", "rev": false, "t": "Being in a tense emotional situation scares me."}, {"d": "Préoccupation empathique", "rev": true, "t": "When I see someone being treated unfairly, I sometimes don’t feel very much pity for them."}, {"d": "Détresse personnelle", "rev": true, "t": "I am usually pretty effective in dealing with emergencies."}, {"d": "Préoccupation empathique", "rev": false, "t": "I am often quite touched by things that I see happen."}, {"d": "Prise de perspective", "rev": false, "t": "I believe that there are two sides to every question and try to look at them both."}, {"d": "Préoccupation empathique", "rev": false, "t": "I would describe myself as a pretty soft-hearted person."}, {"d": "Fantaisie", "rev": false, "t": "When I watch a good movie, I can very easily put myself in the place of a leading character."}, {"d": "Détresse personnelle", "rev": false, "t": "I tend to lose control during emergencies."}, {"d": "Prise de perspective", "rev": false, "t": "When I’m upset at someone, I usually try to “put myself in his shoes” for a while."}, {"d": "Fantaisie", "rev": false, "t": "When I am reading an interesting story or novel, I imagine how I would feel if the events in the story were happening to me."}, {"d": "Détresse personnelle", "rev": false, "t": "When I see someone who badly needs help in an emergency, I go to pieces."}, {"d": "Prise de perspective", "rev": false, "t": "Before criticizing somebody, I try to imagine how I would feel if I were in their place."}];
+  var loLabel = "0 \u2014 Does not describe me well";
+  var hiLabel = "4 \u2014 Describes me very well";
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function renderQuestion(){
+    var it = items[idx];
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('domain-tag').textContent = it.d;
+    document.getElementById('q-text').textContent = it.t;
+    document.getElementById('lo-label').textContent = loLabel;
+    document.getElementById('hi-label').textContent = hiLabel;
+    var row = document.getElementById('num-row');
+    row.innerHTML = '';
+    for (var v = 0; v <= 4; v++){
+      (function(v){
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'num-btn' + (answers[idx] === v ? ' selected' : '');
+        b.textContent = v;
+        b.addEventListener('click', function(){
+          answers[idx] = v;
+          renderQuestion();
+        });
+        row.appendChild(b);
+      })(v);
+    }
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function recoded(i){
+    var v = answers[i];
+    return items[i].rev ? (4 - v) : v;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var domains = ["Prise de perspective", "Fantaisie", "Préoccupation empathique", "Détresse personnelle"];
+    var total = 0;
+    var rows = '';
+    domains.forEach(function(d){
+      var sum = 0;
+      items.forEach(function(it, i){ if (it.d === d) sum += recoded(i); });
+      total += sum;
+      rows += '<div class="subscale-row"><span>' + d + '</span><span class="subscale-val">' + sum + ' / 28</span></div>';
+    });
+    document.getElementById('sub-rows').innerHTML = rows;
+    document.getElementById('score-val').textContent = total;
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IRI — Indice de réactivité interpersonnelle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#5B4B8A 0%,#9B8DC4 55%,#2E2550 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.3),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#5B4B8A;background:#EDE9F6;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#5B4B8A;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#5B4B8A;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">IRI</span></div>
+
+  <h1 class="serif">Indice de réactivité interpersonnelle (IRI)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Interpersonal Reactivity Index — Davis (1980, 1983)</p>
+  <div class="meta-row">
+    <span class="pill">28 questions</span>
+    <span class="pill">6-8 minutes</span>
+    <span class="pill">Échelle 0-4</span>
+    <span class="pill">Anglais</span>
+    <span class="pill">Empathie dispositionnelle</span>
+    <span class="pill">Licence requise : non</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="iri.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Pr&eacute;sentation de l'outil</h2>
+    <p>L'IRI mesure l'empathie dispositionnelle à travers quatre sous-échelles indépendantes de 7 items chacune : la prise de perspective (tendance spontanée à adopter le point de vue psychologique d'autrui), la fantaisie (tendance à se transposer imaginairement dans des situations fictives, romans, films), la préoccupation empathique (tendance à éprouver de la sympathie et de la compassion pour autrui) et la détresse personnelle (tendance à éprouver soi-même de la détresse face à la détresse d'autrui). Chaque item est coté de 0 (« ne me décrit pas bien ») à 4 (« me décrit très bien »), 9 items étant formulés négativement et inversés avant addition.</p>
+    <p class="source-note">Diffusion directe et libre par la page officielle du laboratoire de l'auteur (Mark H. Davis, Eckerd College, eckerd.edu/psychology/iri) : « The IRI is freely available for all non-commercial uses... Requests to use the IRI for any commercial project should be directed to the author. » Texte intégral des 28 items et clé de cotation (y compris les items inversés) récupérés directement depuis le document officiel lié par cette page. Aucune traduction française intégrale vérifiée retrouvée lors du sourçage (une validation française existe, Gilet, Mella, Studer, Grühn &amp; Labouvie-Vief, 2013) : items transcrits en anglais, langue originale.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interpr&eacute;tation</h2>
+    <p>9 items sont formulés négativement et inversés avant addition (score inversé = 4 − score brut) : 2 items de la sous-échelle Prise de perspective, 2 de Fantaisie, 3 de Préoccupation empathique et 2 de Détresse personnelle. Chaque sous-échelle (7 items) est cotée de 0 à 28. Le score total (28 items) est coté de 0 à 112. Les quatre sous-échelles sont conçues comme indépendantes : il n'existe pas de profil global « bon/mauvais », chacune mesure une facette distincte de l'empathie.</p>
+    <p class="source-note">Mesure dimensionnelle continue, aucun seuil clinique officiel publié par l'auteur : à interpréter par sous-échelle, à titre indicatif ou en comparaison dans le temps.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p>Davis, M.H. (1980). A multidimensional approach to individual differences in empathy. <em>JSAS Catalog of Selected Documents in Psychology</em>, 10, 85. Davis, M.H. (1983). Measuring individual differences in empathy: Evidence for a multidimensional approach. <em>Journal of Personality and Social Psychology</em>, 44, 113-126. Validation française : Gilet A.-L., Mella N., Studer J., Grühn D. &amp; Labouvie-Vief G. (2013), <em>Canadian Journal of Behavioural Science</em>.</p>
+    <p class="source-note"><strong>Licence requise : non.</strong> Instrument diffusé gratuitement par l'auteur détenteur des droits pour tout usage non commercial (page officielle eckerd.edu/psychology/iri), avec document dédié « Permissions and Advice on Using the IRI ». Outil dimensionnel, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var htmlOut = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(htmlOut); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>
