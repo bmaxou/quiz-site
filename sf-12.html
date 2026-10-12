@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SF-12 — Questionnaire de santé perçue en 12 items</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#3D5A80;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .stem{font-size:13px;color:#63695D;margin:0 0 8px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#3D5A80;background:#E3EBF5;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#3D5A80;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .score-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:0 0 14px;}
+  .score-box{border:1px solid #E0D9C9;border-radius:12px;padding:14px 16px;background:#FBFAF6;}
+  .score-label{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#63695D;margin:0 0 4px;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;line-height:1.1;color:#3D5A80;margin:0;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 16px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media (max-width:520px){.score-grid{grid-template-columns:1fr;}}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">SF-12 — Questionnaire de santé perçue en 12 items</h1>
+    <p class="lead">Ces 12 questions portent sur votre santé telle que vous la ressentez, surtout au cours des 4 dernières semaines. Elles permettent de mieux savoir comment vous vous sentez dans votre vie de tous les jours. Si vous ne savez pas très bien comment répondre, choisissez la réponse la plus proche de votre situation.</p>
+    <p class="lang-note">Version française IQOLA (formulation identique à celle des items correspondants du SF-36). Outil sous licence : « Licence requise : oui ».</p>
+    <div class="pill-row">
+      <span class="pill">12 questions</span>
+      <span class="pill">2 à 3 minutes</span>
+      <span class="pill">2 scores : physique et mental</span>
+      <span class="pill">Français</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="stem" id="stem-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div class="score-grid">
+      <div class="score-box"><p class="score-label">Santé physique (PCS-12)</p><p class="result-score" id="pcs-val"></p></div>
+      <div class="score-box"><p class="score-label">Santé mentale (MCS-12)</p><p class="result-score" id="mcs-val"></p></div>
+    </div>
+    <p class="result-max">scores standardisés (moyenne 50, écart-type 10 dans la population générale américaine de référence) : plus le score est élevé, meilleure est la santé perçue</p>
+    <p class="result-text" id="pcs-text"></p>
+    <p class="result-text" id="mcs-text"></p>
+    <p class="result-text" id="extra-text"></p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">SF-12 Health Survey (version 1) — Ware J.E., Kosinski M. &amp; Keller S.D. (1996), Medical Care, 34(3), 220-233 ; version française IQOLA : Gandek B. et al. (1998), Journal of Clinical Epidemiology, 51(11), 1171-1178. Instrument sous licence (© QualityMetric ; formulation française © New England Medical Center). Outil d'évaluation de la santé perçue, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [{"id": "GH1", "s": "", "t": "Dans l'ensemble, pensez-vous que votre santé est :", "o": ["Excellente", "Très bonne", "Bonne", "Médiocre", "Mauvaise"], "p": [0, -1.31872, -3.02396, -5.56461, -8.37399], "m": [0, -0.06064, 0.03482, -0.16891, -1.71175]}, {"id": "PF02", "s": "Voici une liste d'activités que vous pouvez avoir à faire dans votre vie de tous les jours. Pour chacune d'entre elles, indiquez si vous êtes limité(e) en raison de votre état de santé actuel.", "t": "Efforts physiques modérés tels que déplacer une table, passer l'aspirateur, jouer aux boules", "o": ["Oui, beaucoup limité(e)", "Oui, un peu limité(e)", "Non, pas du tout limité(e)"], "p": [-7.23216, -3.45555, 0], "m": [3.93115, 1.8684, 0]}, {"id": "PF04", "s": "Voici une liste d'activités que vous pouvez avoir à faire dans votre vie de tous les jours. Pour chacune d'entre elles, indiquez si vous êtes limité(e) en raison de votre état de santé actuel.", "t": "Monter plusieurs étages par l'escalier", "o": ["Oui, beaucoup limité(e)", "Oui, un peu limité(e)", "Non, pas du tout limité(e)"], "p": [-6.24397, -2.73557, 0], "m": [2.68282, 1.43103, 0]}, {"id": "RP2", "s": "Au cours de ces 4 dernières semaines, et en raison de votre état physique…", "t": "Avez-vous accompli moins de choses que vous auriez souhaité ?", "o": ["Oui", "Non"], "p": [-4.61617, 0], "m": [1.4406, 0]}, {"id": "RP3", "s": "Au cours de ces 4 dernières semaines, et en raison de votre état physique…", "t": "Avez-vous dû arrêter de faire certaines choses ?", "o": ["Oui", "Non"], "p": [-5.51747, 0], "m": [1.66968, 0]}, {"id": "RE2", "s": "Au cours de ces 4 dernières semaines, et en raison de votre état émotionnel (comme vous sentir triste, nerveux(se) ou déprimé(e))…", "t": "Avez-vous accompli moins de choses que vous auriez souhaité ?", "o": ["Oui", "Non"], "p": [3.04365, 0], "m": [-6.82672, 0]}, {"id": "RE3", "s": "Au cours de ces 4 dernières semaines, et en raison de votre état émotionnel (comme vous sentir triste, nerveux(se) ou déprimé(e))…", "t": "Avez-vous eu des difficultés à faire ce que vous aviez à faire avec autant de soin et d'attention que d'habitude ?", "o": ["Oui", "Non"], "p": [2.32091, 0], "m": [-5.69921, 0]}, {"id": "BP2", "s": "", "t": "Au cours de ces 4 dernières semaines, dans quelle mesure vos douleurs physiques vous ont-elles limité(e) dans votre travail ou vos activités domestiques ?", "o": ["Pas du tout", "Un petit peu", "Moyennement", "Beaucoup", "Énormément"], "p": [0, -3.8013, -6.50522, -8.38063, -11.25544], "m": [0, 0.90384, 1.49384, 1.76691, 1.48619]}, {"id": "MH3", "s": "Les questions qui suivent portent sur comment vous vous êtes senti(e) au cours de ces 4 dernières semaines. Pour chaque question, veuillez indiquer la réponse qui vous semble la plus appropriée. Au cours de ces 4 dernières semaines, y a-t-il eu des moments où…", "t": "Vous vous êtes senti(e) calme et détendu(e) ?", "o": ["En permanence", "Très souvent", "Souvent", "Quelquefois", "Rarement", "Jamais"], "p": [0, 0.66514, 1.36689, 2.37241, 2.90426, 3.46638], "m": [0, -1.94949, -4.09842, -6.31121, -7.92717, -10.19085]}, {"id": "VT2", "s": "Les questions qui suivent portent sur comment vous vous êtes senti(e) au cours de ces 4 dernières semaines. Pour chaque question, veuillez indiquer la réponse qui vous semble la plus appropriée. Au cours de ces 4 dernières semaines, y a-t-il eu des moments où…", "t": "Vous vous êtes senti(e) débordant(e) d'énergie ?", "o": ["En permanence", "Très souvent", "Souvent", "Quelquefois", "Rarement", "Jamais"], "p": [0, -0.42251, -1.14387, -1.6185, -2.02168, -2.44706], "m": [0, -0.92057, -1.65178, -3.29805, -4.88962, -6.02409]}, {"id": "MH4", "s": "Les questions qui suivent portent sur comment vous vous êtes senti(e) au cours de ces 4 dernières semaines. Pour chaque question, veuillez indiquer la réponse qui vous semble la plus appropriée. Au cours de ces 4 dernières semaines, y a-t-il eu des moments où…", "t": "Vous vous êtes senti(e) triste et abattu(e) ?", "o": ["En permanence", "Très souvent", "Souvent", "Quelquefois", "Rarement", "Jamais"], "p": [4.61446, 3.41593, 2.34247, 1.28044, 0.41188, 0], "m": [-16.15395, -10.77911, -8.09914, -4.59055, -1.95934, 0]}, {"id": "SF2", "s": "", "t": "Au cours de ces 4 dernières semaines, y a-t-il eu des moments où votre état de santé, physique ou émotionnel, vous a gêné(e) dans votre vie sociale et vos relations avec les autres, votre famille, vos amis, vos connaissances ?", "o": ["En permanence", "Une bonne partie du temps", "De temps en temps", "Rarement", "Jamais"], "p": [-0.33682, -0.94342, -0.18043, 0.11038, 0], "m": [-6.29724, -8.26066, -5.63286, -3.13896, 0]}];
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function lvl(score){
+    if (score >= 55) return "supérieur d'au moins un demi-écart-type à la moyenne de référence";
+    if (score >= 45) return "dans la fourchette moyenne de la population de référence (45 à 55)";
+    if (score >= 40) return "inférieur à la moyenne de référence (entre un demi et un écart-type en dessous)";
+    return "nettement inférieur à la moyenne de référence (plus d'un écart-type en dessous, score inférieur à 40)";
+  }
+
+  function renderQuestion(){
+    var it = items[idx];
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('stem-text').textContent = it.s;
+    document.getElementById('stem-text').hidden = !it.s;
+    document.getElementById('q-text').textContent = it.t;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    it.o.forEach(function(label, v){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === v ? ' selected' : '');
+      d.textContent = label;
+      d.addEventListener('click', function(){
+        answers[idx] = v;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){
+      idx++; renderQuestion();
+    } else {
+      showResult();
+    }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var pcs = 56.57706, mcs = 60.75781;
+    items.forEach(function(it, i){ pcs += it.p[answers[i]]; mcs += it.m[answers[i]]; });
+    document.getElementById('pcs-val').textContent = pcs.toFixed(1);
+    document.getElementById('mcs-val').textContent = mcs.toFixed(1);
+    document.getElementById('pcs-text').textContent = "Santé physique : score " + pcs.toFixed(1) + ", " + lvl(pcs) + ".";
+    document.getElementById('mcs-text').textContent = "Santé mentale : score " + mcs.toFixed(1) + ", " + lvl(mcs) + ".";
+    document.getElementById('extra-text').textContent = "Ces repères se lisent par rapport à la population générale américaine de référence (moyenne 50, écart-type 10) : aucune norme française n'est appliquée ici. Les deux scores sont des indicateurs de santé perçue, pas un diagnostic.";
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SF-12 — Questionnaire de santé perçue en 12 items</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#3D5A80 0%,#8FA9C9 55%,#1F3350 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.45),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#1F3350;background:#E3EBF5;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#3D5A80;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#1F3350;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">SF-12</span></div>
+
+  <h1 class="serif">Questionnaire de santé perçue en 12 items (SF-12)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">SF-12 Health Survey, version 1 — Ware, Kosinski &amp; Keller (1996), version française IQOLA (Gandek et al., 1998)</p>
+  <div class="meta-row">
+    <span class="pill">12 questions</span>
+    <span class="pill">2 à 3 minutes</span>
+    <span class="pill">2 scores : physique (PCS-12) et mental (MCS-12)</span>
+    <span class="pill">Français</span>
+    <span class="pill">Licence requise : oui</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="sf-12.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le SF-12 est la forme courte du SF-36 : 12 items tirés du SF-36 (santé générale, limitations physiques pour des efforts modérés et pour monter plusieurs étages, difficultés dans les activités en raison de l'état physique puis de l'état émotionnel, interférence de la douleur, calme, énergie, tristesse, retentissement sur la vie sociale). Il fournit deux scores de synthèse, l'un de santé physique (PCS-12), l'autre de santé mentale (MCS-12), pour un temps de passation de 2 à 3 minutes. Cette page reproduit la version 1 du questionnaire, à réponses dichotomiques pour les items de limitation de rôle.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque réponse reçoit une pondération propre à chaque score (algorithme de Ware, Kosinski &amp; Keller, 1996, pondérations orthogonales) ; la somme des pondérations s'ajoute à une constante (56,57706 pour le PCS-12, 60,75781 pour le MCS-12). Les scores sont standardisés sur la population générale américaine de référence (moyenne 50, écart-type 10) : plus le score est élevé, meilleure est la santé perçue. Repères de lecture (simples repères statistiques autour de la moyenne 50, non officiels) : 45 à 55 fourchette moyenne ; moins de 40 plus d'un écart-type sous la moyenne de référence. Les 12 items doivent tous être renseignés. La page n'applique aucune norme française, qui n'a pas été retenue ici.</p>
+    <p>Précaution de lecture : le PCS-12 et le MCS-12 de cet algorithme sont calculés avec des pondérations orthogonales, qui peuvent produire un score de santé mentale artificiellement élevé chez une personne très limitée physiquement (et inversement) ; à interpréter avec le tableau clinique.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p><strong>Licence requise : oui.</strong> Le SF-12 est un instrument protégé (QualityMetric, désormais Optum) et son usage est soumis à licence ; la formulation française est protégée par le New England Medical Center (projet IQOLA). Instrument construit ici malgré la licence, conformément à la décision du 30/09/2026 ; la diffusion publique reste soumise à l'autorisation du détenteur des droits.</p>
+    <p class="source-note">Texte des 12 items : version française IQOLA du SF-36 reproduite dans la version française 1.2 du KDQOL-SF distribuée par la RAND (« Les questions 1 à 11 appartiennent au Projet IQOLA du SF-36 Health Survey en version française », reproduction avec la permission du New England Medical Center), dont les questions retenues correspondent aux 12 items du SF-12 version 1 (santé générale ; efforts modérés ; plusieurs étages ; état physique : moins de choses accomplies, dû arrêter certaines choses ; état émotionnel : moins de choses accomplies, moins de soin ; douleur ; calme ; énergie ; tristesse ; vie sociale). Seule la ponctuation finale (« ? ») a été complétée pour les questions où le PDF source ne la reproduit pas. Pondérations PCS-12 et MCS-12 (orthogonales) et constantes : Farivar S.S., Cunningham W.E. &amp; Hays R.D. (2007), « Correlated physical and mental health summary scores for the SF-36 and SF-12 Health Survey, V.1 », Health and Quality of Life Outcomes, 5:54, Tableau 5 (PMC2065865, accès libre), qui reprend l'algorithme de Ware et al. (1996). Références : Ware J.E., Kosinski M. &amp; Keller S.D. (1996), Medical Care, 34(3), 220-233 ; Gandek B. et al. (1998), J Clin Epidemiol, 51(11), 1171-1178.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Skindex-29 — Qualité de vie en dermatologie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#9A4F37;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .period{font-size:12.5px;font-weight:600;color:#9A4F37;margin:0 0 8px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#9A4F37;background:#F6E3D9;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#9A4F37;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#9A4F37;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 20px;}
+  .sc-title{font-size:13px;font-weight:700;color:#9A4F37;margin:18px 0 6px;}
+  .sc-row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-top:1px solid #EFEBE1;font-size:14px;}
+  .sc-row b{font-variant-numeric:tabular-nums;white-space:nowrap;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">Skindex-29 — Qualité de vie en dermatologie</h1>
+    <p class="lead">Cette enquête concerne la maladie de peau qui vous a le plus gêné(e) au cours des quatre dernières semaines. Pour chaque affirmation, indiquez à quelle fréquence elle vous décrit : jamais, rarement, parfois, souvent ou tout le temps.</p>
+    <p class="lang-note">Items en anglais (version originale). Instructions rendues en français ; la version française « Skindex-France » n'a pas été récupérable en accès libre. Outil sous licence (M. M. Chren) : « Licence requise : oui ».</p>
+    <div class="pill-row">
+      <span class="pill">30 questions</span><span class="pill">5 minutes</span><span class="pill">3 scores de 0 à 100</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="period" id="period-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div class="sc-row"><span>Symptômes (7 items)</span><b id="sym-val"></b></div>
+    <div class="sc-row"><span>Émotions (10 items)</span><b id="emo-val"></b></div>
+    <div class="sc-row"><span>Fonctionnement (12 items)</span><b id="fun-val"></b></div>
+    <p class="result-text" style="margin-top:18px">Chaque réponse est ramenée à une échelle de 0 à 100 (jamais = 0, rarement = 25, parfois = 50, souvent = 75, tout le temps = 100) et chaque score est la moyenne des items de l'échelle : plus il est élevé, plus le retentissement de la maladie de peau est important. L'item 18 (inquiétude sur les effets secondaires des traitements) n'entre dans aucune échelle. Aucun score total ni seuil de gravité n'est repris ici, faute de définition vérifiée dans les sources consultées ; le résultat s'interprète avec la situation clinique.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Skindex-29 — © M. M. Chren, 1996. Outil de repérage du retentissement des maladies de peau sur la qualité de vie, ne remplace pas une évaluation clinique.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["My skin hurts", "My skin condition affects how well I sleep", "I worry that my skin condition may be serious", "My skin condition makes it hard to work or do hobbies", "My skin condition affects my social life", "My skin condition makes me feel depressed", "My skin condition burns or stings", "I tend to stay at home because of my skin condition", "I worry about getting scars from my skin condition", "My skin itches", "My skin condition affects how close I can be with those I love", "I am ashamed of my skin condition", "I worry that my skin condition may get worse", "I tend to do things by myself because of my skin condition", "I am angry about my skin condition", "Water bothers my skin condition (bathing, washing hands)", "My skin condition makes showing affection difficult", "I worry about side-effects from skin medications / treatments", "My skin is irritated", "My skin condition affects my interactions with others", "I am embarrassed by my skin condition", "My skin condition is a problem for the people I love", "I am frustrated by my skin condition", "My skin is sensitive", "My skin condition affects my desire to be with people", "I am humiliated by my skin condition", "My skin condition bleeds", "I am annoyed by my skin condition", "My skin condition interferes with my sex life", "My skin condition makes me tired"];
+  var opts = ["1 — Jamais (Never)", "2 — Rarement (Rarely)", "3 — Parfois (Sometimes)", "4 — Souvent (Often)", "5 — Tout le temps (All the time)"];
+  var SYM = [1, 7, 10, 16, 19, 24, 27], EMO = [3, 6, 9, 12, 13, 15, 21, 23, 26, 28], FUN = [2, 4, 5, 8, 11, 14, 17, 20, 22, 25, 29, 30];
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+  var NA = 'NA';
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('period-text').textContent = 'Au cours des 4 dernières semaines, à quelle fréquence cette affirmation vous décrit-elle ?';
+    document.getElementById('q-text').textContent = items[idx];
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    var list = opts.map(function(label, k){ return {label: label, v: k + 1}; });
+    if (idx === 28) list.push({label: 'Non concerné(e)', v: NA});
+    list.forEach(function(o){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === o.v ? ' selected' : '');
+      d.textContent = o.label;
+      d.addEventListener('click', function(){
+        answers[idx] = o.v;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function scale(list){
+    var s = 0, n = 0;
+    list.forEach(function(q){
+      var a = answers[q-1];
+      if (a === NA || a === null) return;
+      s += (a - 1) * 25; n++;
+    });
+    return {mean: n ? s / n : null, n: n, tot: list.length};
+  }
+  function fmt(r){
+    if (r.mean === null) return 'non calculable';
+    return (Math.round(r.mean * 10) / 10).toString().replace('.', ',') + ' / 100' + (r.n < r.tot ? '  (' + r.n + ' items sur ' + r.tot + ')' : '');
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    document.getElementById('sym-val').textContent = fmt(scale(SYM));
+    document.getElementById('emo-val').textContent = fmt(scale(EMO));
+    document.getElementById('fun-val').textContent = fmt(scale(FUN));
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Skindex-29 — Qualité de vie en dermatologie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#9A4F37 0%,#EBB9A0 55%,#5A2A1C 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,250,245,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#5A2A1C;background:#F6E3D9;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#9A4F37;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#5A2A1C;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">Skindex-29</span></div>
+
+  <h1 class="serif">Skindex-29 — Qualité de vie dans les maladies de peau</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Skindex-29, questionnaire de qualité de vie en dermatologie — Chren et al. ; scores Symptômes, Émotions et Fonctionnement.</p>
+  <div class="meta-row">
+    <span class="pill">30 questions</span><span class="pill">5 minutes</span><span class="pill">3 scores de 0 à 100</span><span class="pill">Items en anglais</span><span class="pill">Licence requise : oui</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="skindex-29.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le Skindex-29 évalue le retentissement d'une maladie de peau sur la qualité de vie au cours des quatre dernières semaines, pour la maladie de peau qui a le plus gêné la personne. Il comprend 30 affirmations, dont 29 sont cotées, réparties en trois échelles : symptômes (7 items), émotions (10 items) et fonctionnement (12 items). Chaque affirmation se coche de « jamais » à « tout le temps ».</p>
+    <p><strong>Items en anglais.</strong> La version française (« Skindex-France », Leplège et al., 2003) n'est pas accessible en libre accès : les items sont présentés dans leur version originale anglaise, sans traduction improvisée. Seules les instructions sont rendues en français.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Les cinq réponses sont ramenées à une échelle linéaire de 0 à 100 (jamais = 0, rarement = 25, parfois = 50, souvent = 75, tout le temps = 100) et le score de chaque échelle est la moyenne des réponses aux items de cette échelle ; plus le score est élevé, plus la qualité de vie est altérée. Symptômes : items 1, 7, 10, 16, 19, 24 et 27. Émotions : items 3, 6, 9, 12, 13, 15, 21, 23, 26 et 28. Fonctionnement : items 2, 4, 5, 8, 11, 14, 17, 20, 22, 25, 29 et 30. L'item 18 (effets secondaires des traitements) n'est pas coté. Ajout propre à cette version : l'option « Non concerné(e) » pour l'item 29 (vie sexuelle), absente du formulaire original, l'échelle Fonctionnement étant alors calculée sur 11 items. Cette page ne calcule pas de score total et ne reprend aucun seuil de gravité : leur définition n'a pas pu être vérifiée dans une source libre.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p><strong>Licence requise : oui.</strong> Skindex-29 © M. M. Chren, 1996 ; distribution encadrée par Mapi Research Trust (ePROVIDE). Instrument construit ici malgré la licence, conformément à la décision du 30/09/2026 ; la diffusion publique reste soumise à l'autorisation du détenteur des droits.</p>
+    <p class="source-note">Texte des 30 items, consignes et modalités de réponse : formulaire reproduit en annexe de Syed A.S., Sethi S., Chauhan S. &amp; Jindal R. (2026), « A comparative study on the measurement properties (criterion validity, informativity, and floor and ceiling effects) of DLQI and Skindex-29 », Indian Journal of Dermatology, DOI 10.4103/ijd.ijd_738_23 (accès libre, CC BY-NC-SA) ; cotation (échelle linéaire 0-100, moyenne par échelle, item 18 non coté) : même article. Répartition des items entre les trois échelles : Tewelde T. et al. (2024), Scientific Reports, 14, 16272, DOI 10.1038/s41598-024-67224-1 (accès libre, CC BY, tableau 3), concordante avec la liste des items par échelle. Référence de l'instrument : Chren M.M. (2012), « The Skindex instruments to measure the effects of skin disease on quality of life », Dermatologic Clinics, 30, 231-236.</p>
+  </div>
+</div>
+</template>
+
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SSQ6 - Soutien social (forme courte)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}}
+  .card{{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}}
+  h1{{font-size:26px;margin:0 0 12px;}}
+  .lead{{font-size:14.5px;color:#63695D;margin:0 0 20px;}}
+  .lang-note{{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}}
+  .pill-row{{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}}
+  .pill{{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}}
+  .start-btn{{background:#4A6B5A;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}}
+  .progress{{font-size:12px;color:#9A9E90;margin:0 0 6px;}}
+  .domain-tag{{font-size:11.5px;font-weight:700;color:#4A6B5A;text-transform:uppercase;letter-spacing:.05em;margin:0 0 10px;}}
+  .domain-intro{{font-size:13px;color:#63695D;background:#EFF3F1;border-radius:10px;padding:10px 14px;margin:0 0 14px;}}
+  .q-text{{font-size:16px;margin:0 0 20px;}}
+  .opt-row{{display:flex;flex-direction:column;gap:8px;}}
+  .opt{{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}}
+  .opt.selected{{border-color:#4A6B5A;background:#4A6B5ALIGHT;}}
+  .nav-row{{display:flex;justify-content:space-between;margin-top:24px;}}
+  .btn{{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}}
+  .btn-secondary{{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}}
+  .btn-primary{{background:#4A6B5A;color:#fff;}}
+  .btn[disabled]{{opacity:.4;cursor:not-allowed;}}
+  .result-score{{font-family:'Cormorant Garamond',Georgia,serif;font-size:36px;color:#4A6B5A;margin:0 0 4px;}}
+  .result-max{{font-size:13px;color:#9A9E90;margin:0 0 20px;}}
+  .subscore-grid{{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 20px;}}
+  .subscore{{background:#F4F1EA;border:1px solid #E0D9C9;border-radius:10px;padding:10px 14px;}}
+  .subscore .lbl{{font-size:11.5px;font-weight:700;color:#63695D;text-transform:uppercase;letter-spacing:.03em;margin-bottom:4px;}}
+  .subscore .val{{font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;color:#20241E;}}
+  .footnote{{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}}
+  .caveat{{background:#FBF3E7;border:1px solid #E7D9BC;border-radius:12px;padding:14px 16px;font-size:13.5px;color:#5A4A2A;margin:0 0 20px;}}
+  .answers-table{{width:100%;border-collapse:collapse;margin:8px 0 20px;font-size:12.5px;max-height:520px;overflow-y:auto;display:block;}}
+  .answers-table td{{padding:7px 8px;border-bottom:1px solid #E0D9C9;vertical-align:top;}}
+  .answers-table td:first-child{{color:#20241E;width:70%;}}
+  .answers-table td:last-child{{color:#4A6B5A;font-weight:700;text-align:right;white-space:nowrap;}}
+  .check-list{{display:flex;flex-direction:column;gap:6px;margin:0 0 20px;}}
+  .check-item{{display:flex;align-items:flex-start;gap:10px;padding:9px 12px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:13.5px;}}
+  .check-item input{{margin-top:3px;}}
+  .rank-row{{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 14px;border:1px solid #E0D9C9;border-radius:10px;margin-bottom:8px;font-size:13.5px;}}
+  .rank-row select{{font-family:'Inter',sans-serif;font-size:13.5px;border:1px solid #E0D9C9;border-radius:8px;padding:6px 8px;}}
+  .field-row{{display:flex;flex-direction:column;gap:6px;margin:0 0 16px;}}
+  .field-row label{{font-size:12px;font-weight:700;color:#63695D;text-transform:uppercase;letter-spacing:.03em;}}
+  .field-row input[type=number], .field-row input[type=text]{{font-family:'Inter',sans-serif;font-size:14px;border:1px solid #E0D9C9;border-radius:8px;padding:10px 12px;}}
+  .yn-row{{display:flex;gap:10px;margin:0 0 12px;}}
+  .yn-btn{{flex:1;text-align:center;padding:10px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:13.5px;font-weight:600;}}
+  .yn-btn.selected{{border-color:#4A6B5A;background:#4A6B5ALIGHT;}}
+  .cat-block{{margin:0 0 22px;}}
+  .cat-block h3{{font-size:15px;margin:0 0 8px;color:#4A6B5A;}}
+  @media print{{ .no-print{{display:none!important;}} body{{background:#fff;}} .card{{box-shadow:none;border:none;}} .answers-table{{display:table;max-height:none;overflow:visible;}} }}
+  @media (max-width:480px){{ .subscore-grid{{grid-template-columns:1fr;}} }}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">SSQ6 - Soutien social (forme courte)</h1>
+    <p class="lead">Social Support Questionnaire, forme courte à 6 items (Sarason et al., 1987). Pour chaque question, indiquez le nombre de personnes sur qui vous pouvez compter (0 à 9), puis votre satisfaction générale à ce sujet.</p>
+    <p class="lang-note">Questionnaire transcrit en anglais (version originale) avec traduction française de travail : une adaptation française validée existe (Bruchon-Schweitzer &amp; Rascle) mais son texte intégral n'a pas pu être retrouvé lors du sourçage. Saisie du nombre de personnes simplifiée en champ numérique (0-9), conformément à la consigne de simplification de l'interface pour cette page.</p>
+    <div class="pill-row">
+      <span class="pill">6 questions</span>
+      <span class="pill">3 minutes</span>
+      <span class="pill">2 scores : SSQN et SSQS</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="field-row">
+      <label for="n-field">Nombre de personnes (0 à 9, 0 = personne)</label>
+      <input type="number" id="n-field" min="0" max="9" step="1">
+    </div>
+    <div class="field-row">
+      <label for="sat-field">Satisfaction générale</label>
+      <select id="sat-field">
+        <option value="">Choisir…</option>
+        <option value="1">1 - Très insatisfait(e)</option><option value="2">2 - Insatisfait(e)</option><option value="3">3 - Plutôt insatisfait(e)</option><option value="4">4 - Plutôt satisfait(e)</option><option value="5">5 - Satisfait(e)</option><option value="6">6 - Très satisfait(e)</option>
+      </select>
+    </div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div class="subscore-grid" id="subscore-grid"></div>
+    <p class="lead">SSQN = nombre moyen de personnes citées par item ; SSQS = satisfaction moyenne par item. Plus les scores sont élevés, plus le soutien social perçu est important. Aucun seuil clinique officiel.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Sarason, I. G., Sarason, B. R., Shearin, E. N., &amp; Pierce, G. R. (1987). A brief measure of social support: Practical and theoretical implications. Journal of Social and Personal Relationships, 4(4), 497-510. Outil de repérage, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["Whom can you really count on to be dependable when you need help? — Sur qui pouvez-vous vraiment compter pour être fiable quand vous avez besoin d'aide ?", "Whom can you really count on to help you feel more relaxed when you are under pressure or tense? — Sur qui pouvez-vous vraiment compter pour vous aider à vous sentir plus détendu(e) quand vous êtes sous pression ou tendu(e) ?", "Who accepts you totally, including both your worst and your best points? — Qui vous accepte totalement, y compris vos pires et vos meilleurs côtés ?", "Whom can you really count on to care about you, regardless of what is happening to you? — Sur qui pouvez-vous vraiment compter pour se soucier de vous, quoi qu'il vous arrive ?", "Whom can you really count on to help you feel better when you are feeling generally down-in-the-dumps? — Sur qui pouvez-vous vraiment compter pour vous aider à vous sentir mieux quand vous avez le moral à zéro ?", "Whom can you count on to console you when you are very upset? — Sur qui pouvez-vous compter pour vous consoler quand vous êtes très contrarié(e) ?"];
+  var nAnswers = new Array(items.length).fill(null);
+  var sAnswers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function currentValid(){
+    return nAnswers[idx] !== null && nAnswers[idx] !== '' && sAnswers[idx] !== null && sAnswers[idx] !== '';
+  }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var nField = document.getElementById('n-field');
+    var sField = document.getElementById('sat-field');
+    nField.value = nAnswers[idx] === null ? '' : nAnswers[idx];
+    sField.value = sAnswers[idx] === null ? '' : sAnswers[idx];
+    document.getElementById('btn-prev').disabled = idx === 0;
+    updateNextState();
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  function updateNextState(){
+    document.getElementById('btn-next').disabled = !currentValid();
+  }
+
+  document.getElementById('n-field').addEventListener('input', function(e){
+    var v = e.target.value;
+    nAnswers[idx] = v === '' ? null : Math.max(0, Math.min(9, parseInt(v,10)));
+    updateNextState();
+  });
+  document.getElementById('sat-field').addEventListener('change', function(e){
+    sAnswers[idx] = e.target.value === '' ? null : parseInt(e.target.value, 10);
+    updateNextState();
+  });
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!currentValid()) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var sumN = nAnswers.reduce(function(a,b){ return a+b; }, 0);
+    var sumS = sAnswers.reduce(function(a,b){ return a+b; }, 0);
+    var ssqn = sumN / items.length;
+    var ssqs = sumS / items.length;
+    var grid = document.getElementById('subscore-grid');
+    grid.innerHTML = '<div class="subscore"><div class="lbl">SSQN — nombre moyen de personnes</div><div class="val">' + ssqn.toFixed(2) + '</div></div>' +
+                      '<div class="subscore"><div class="lbl">SSQS — satisfaction moyenne</div><div class="val">' + ssqs.toFixed(2) + ' / 6</div></div>';
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    nAnswers = new Array(items.length).fill(null);
+    sAnswers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SSQ6 - Soutien social (forme courte)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#4A6B5A 0%,#7C9E8A 55%,#243A2E 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(200,215,235,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:22px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#22334D;background:#E9EEF5;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .caveat{background:#FBF3E7;border:1px solid #E7D9BC;border-radius:12px;padding:14px 16px;font-size:13.5px;color:#5A4A2A;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#4A6B5A;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#22334D;border-color:#E0D9C9;}
+
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <div class="fiche-photo"><span class="acronym">SSQ6</span></div>
+  <h1 class="serif">Questionnaire de soutien social de Sarason, forme courte (SSQ6)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Social Support Questionnaire, short form - Sarason, Sarason, Shearin &amp; Pierce (1987)</p>
+  <div class="meta-row">
+    <span class="pill">6 questions</span><span class="pill">3 minutes</span><span class="pill">Auto-questionnaire</span><span class="pill">Anglais</span>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" href="ssq6.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p class='caveat' style='margin-bottom:14px;'>⚠️ Interface simplifiée pour cette page : la version originale invite à lister jusqu'à 9 personnes par leurs initiales et leur lien ; cette page utilise un simple champ numérique (0-9) pour le nombre de personnes, sans changer la structure de cotation.</p>
+    <p>Le SSQ6 mesure le soutien social perçu à travers deux dimensions pour chacune de ses 6 questions : le nombre de personnes disponibles (SSQN) et la satisfaction à l'égard de ce soutien (SSQS).</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Pour chaque item : Partie 1 = nombre de personnes citées (0 à 9) ; Partie 2 = satisfaction générale (1 = Très insatisfait(e) à 6 = Très satisfait(e)). SSQN (score « nombre ») = nombre moyen de personnes citées (somme des 6 items ÷ 6). SSQS (score « satisfaction ») = satisfaction moyenne (somme des 6 items ÷ 6). Plus les scores sont élevés, plus le soutien perçu est important. Aucun seuil clinique officiel.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Source</h2>
+    <p class="source-note">Sarason, I. G., Sarason, B. R., Shearin, E. N., &amp; Pierce, G. R. (1987). A brief measure of social support: Practical and theoretical implications. Journal of Social and Personal Relationships, 4(4), 497-510. Droits académiques libres. Outil de repérage, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

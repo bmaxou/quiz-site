@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SQ-R — Quotient de systématisation révisé</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#E8A62E;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#E8A62E;background:#FDF3DD;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#E8A62E;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#E8A62E;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .subscale-row{display:flex;justify-content:space-between;font-size:13.5px;border-top:1px solid #E0D9C9;padding:8px 0;}
+  .subscale-row b{color:#1E3A5F;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">SQ-R — Quotient de systématisation (révisé)</h1>
+    <p class="lead">Ce questionnaire mesure la tendance à systématiser (comprendre et construire des systèmes à partir de règles), à travers 75 affirmations.</p>
+    <p class="lang-note">Questionnaire transcrit en anglais (version originale) : aucune traduction française officielle validée retrouvée en accès libre lors du sourçage.</p>
+    <div class="pill-row">
+      <span class="pill">75 questions</span>
+      <span class="pill">15 minutes</span>
+      <span class="pill">Échelle 4 points</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [{"t": "I find it very easy to use train timetables, even if this involves several connections.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "agree"}, {"t": "I like music or book shops because they are clearly organised.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "agree"}, {"t": "I would not enjoy organising events e.g. fundraising evenings, fetes, conferences.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "disagree"}, {"t": "When I read something, I always notice whether it is grammatically correct.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "agree"}, {"t": "I find myself categorising people into types (in my own mind).", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "agree"}, {"t": "I find it difficult to read and understand maps.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "disagree"}, {"t": "When I look at a mountain, I think about how precisely it was formed.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "agree"}, {"t": "I am not interested in the details of exchange rates, interest rates, stocks and shares.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "disagree"}, {"t": "If I were buying a car, I would want to obtain specific information about its engine capacity.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "agree"}, {"t": "I find it difficult to learn how to programme video recorders.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "disagree"}, {"t": "When I like something I like to collect a lot of different examples of that type of object, so I can see how they differ from each other.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "agree"}, {"t": "When I learn a language, I become intrigued by its grammatical rules.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "agree"}, {"t": "I like to know how committees are structured in terms of who the different committee members represent or what their functions are.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "agree"}, {"t": "If I had a collection (e.g. CDs, coins, stamps), it would be highly organised.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "agree"}, {"t": "I find it difficult to understand instruction manuals for putting appliances together.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "disagree"}, {"t": "When I look at a building, I am curious about the precise way it was constructed.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "agree"}, {"t": "I am not interested in understanding how wireless communication works (e.g. mobile phones).", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "disagree"}, {"t": "When travelling by train, I often wonder exactly how the rail networks are coordinated.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "agree"}, {"t": "I enjoy looking through catalogues of products to see the details of each product and how it compares to others.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "agree"}, {"t": "Whenever I run out of something at home, I always add it to a shopping list.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "agree"}, {"t": "I know, with reasonable accuracy, how much money has come in and gone out of my bank account this month.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "agree"}, {"t": "When I was young I did not enjoy collecting sets of things e.g. stickers, football cards etc.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "disagree"}, {"t": "I am interested in my family tree and in understanding how everyone is related to each other in the family.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "agree"}, {"t": "When I learn about historical events, I do not focus on exact dates.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "disagree"}, {"t": "I find it easy to grasp exactly how odds work in betting.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "agree"}, {"t": "I do not enjoy games that involve a high degree of strategy (e.g. chess, Risk, Games Workshop).", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "disagree"}, {"t": "When I learn about a new category I like to go into detail to understand the small differences between different members of that category.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "agree"}, {"t": "I do not find it distressing if people who live with me upset my routines.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "disagree"}, {"t": "When I look at an animal, I like to know the precise species it belongs to.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "agree"}, {"t": "I can remember large amounts of information about a topic that interests me e.g. flags of the world, airline logos.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "agree"}, {"t": "At home, I do not carefully file all important documents e.g. guarantees, insurance policies.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "disagree"}, {"t": "I am fascinated by how machines work.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "agree"}, {"t": "When I look at a piece of furniture, I do not notice the details of how it was constructed.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "disagree"}, {"t": "I know very little about the different stages of the legislation process in my country.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "disagree"}, {"t": "I do not tend to watch science documentaries on television or read articles about science and nature.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "disagree"}, {"t": "If someone stops to ask me the way, I'd be able to give directions to any part of my home town.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "agree"}, {"t": "When I look at a painting, I do not usually think about the technique involved in making it.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "disagree"}, {"t": "I prefer social interactions that are structured around a clear activity, e.g. a hobby.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "agree"}, {"t": "I do not always check off receipts etc. against my bank statement.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "disagree"}, {"t": "I am not interested in how the government is organised into different ministries and departments.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "disagree"}, {"t": "I am interested in knowing the path a river takes from its source to the sea.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "agree"}, {"t": "I have a large collection e.g. of books, CDs, videos etc.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "agree"}, {"t": "If there was a problem with the electrical wiring in my home, I'd be able to fix it myself.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "agree"}, {"t": "My clothes are not carefully organised into different types in my wardrobe.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "disagree"}, {"t": "I rarely read articles or webpages about new technology.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "disagree"}, {"t": "I can easily visualise how the motorways in my region link up.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "agree"}, {"t": "When an election is being held, I am not interested in the results for each constituency.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "disagree"}, {"t": "I do not particularly enjoy learning about facts and figures in history.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "disagree"}, {"t": "I do not tend to remember people's birthdays (in terms of which day and month this falls).", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "disagree"}, {"t": "When I am walking in the country, I am curious about how the various kinds of trees differ.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "agree"}, {"t": "I find it difficult to understand information the bank sends me on different investment and saving systems.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "disagree"}, {"t": "If I were buying a camera, I would not look carefully into the quality of the lens.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "disagree"}, {"t": "If I were buying a computer, I would want to know exact details about its hard drive capacity and processor speed.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "agree"}, {"t": "I do not read legal documents very carefully.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "disagree"}, {"t": "When I get to the checkout at a supermarket I pack different categories of goods into separate bags.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "agree"}, {"t": "I do not follow any particular system when I'm cleaning at home.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "disagree"}, {"t": "I do not enjoy in-depth political discussions.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "disagree"}, {"t": "I am not very meticulous when I carry out D.I.Y or home improvements.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "disagree"}, {"t": "I would not enjoy planning a business from scratch to completion.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "disagree"}, {"t": "If I were buying a stereo, I would want to know about its precise technical features.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "agree"}, {"t": "I tend to keep things that other people might throw away, in case they might be useful for something in the future.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "agree"}, {"t": "I avoid situations which I can not control.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "agree"}, {"t": "I do not care to know the names of the plants I see.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "disagree"}, {"t": "When I hear the weather forecast, I am not very interested in the meteorological patterns.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "disagree"}, {"t": "It does not bother me if things in the house are not in their proper place.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "disagree"}, {"t": "In maths, I am intrigued by the rules and patterns governing numbers.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "agree"}, {"t": "I find it difficult to learn my way around a new city.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "disagree"}, {"t": "I could list my favourite 10 books, recalling titles and authors' names from memory.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "agree"}, {"t": "When I read the newspaper, I am drawn to tables of information, such as football league scores or stock market indices.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "agree"}, {"t": "When I'm in a plane, I do not think about the aerodynamics.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "disagree"}, {"t": "I do not keep careful records of my household bills.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "disagree"}, {"t": "When I have a lot of shopping to do, I like to plan which shops I am going to visit and in what order.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "agree"}, {"t": "When I cook, I do not think about exactly how different methods and ingredients contribute to the final product.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "disagree"}, {"t": "When I listen to a piece of music, I always notice the way it's structured.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "agree"}, {"t": "I could generate a list of my favourite 10 songs from memory, including the title and the artist's name who performed each song.", "opts": ["1 — Strongly agree", "2 — Slightly agree", "3 — Slightly disagree", "4 — Strongly disagree"], "k": "agree"}];
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx].t;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    items[idx].opts.forEach(function(label, v){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === v+1 ? ' selected' : '');
+      d.textContent = label;
+      d.addEventListener('click', function(){
+        answers[idx] = v+1;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){
+      idx++; renderQuestion();
+    } else {
+      showResult();
+    }
+  });
+
+  function computeResult(){
+    
+    function pointsOf(item, a){
+      // a: 1=Strongly agree,2=Slightly agree,3=Slightly disagree,4=Strongly disagree
+      if (item.k === 'agree'){
+        if (a === 1) return 2;
+        if (a === 2) return 1;
+        return 0;
+      } else {
+        if (a === 4) return 2;
+        if (a === 3) return 1;
+        return 0;
+      }
+    }
+    var total = 0;
+    items.forEach(function(item, i){ total += pointsOf(item, answers[i]); });
+    var html = '';
+    html += '<p class="result-score">' + total + ' / 150</p>';
+    html += '<p class="result-max">score total (0 à 150)</p>';
+    html += '<p class="result-text">Seuil indicatif : score &#8805; 75 évocateur de traits autistiques marqués (population de comparaison de l\'Autism Research Centre, Cambridge). Ce seuil est indicatif, à interpréter en complément de l\'entretien clinique.</p>';
+    document.getElementById('result-body').innerHTML = html;
+
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SQ-R — Quotient de systématisation révisé</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#E8A62E 0%,#F3C871 55%,#8A6410 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#8A6410;background:#FDF3DD;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#E8A62E;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#8A6410;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">SQ-R</span></div>
+
+  <h1 class="serif">Quotient de systématisation, version révisée (Systemizing Quotient-Revised)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Wheelwright, Baron-Cohen et al. (2006), Autism Research Centre, Université de Cambridge</p>
+  <div class="meta-row">
+    <span class="pill">75 questions</span>
+    <span class="pill">15 minutes</span>
+    <span class="pill">Échelle 4 points</span>
+    <span class="pill">Anglais</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="sq-r.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le SQ-R (Systemizing Quotient-Revised) mesure la tendance à analyser, comprendre et construire des systèmes régis par des règles (mécaniques, naturels, abstraits, organisationnels). Développé par l'Autism Research Centre (Université de Cambridge), dans la même tradition que l'AQ et l'EQ déjà publiés dans ce catalogue.</p>
+    <p>Il s'agit de la version révisée et étendue (75 items, Wheelwright et al. 2006) qui remplace le SQ original de 2003 (60 items).</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque item peut rapporter 0, 1 ou 2 points selon le sens de cotation propre à l'item (39 items « accord-cotés », 36 items « désaccord-cotés »). Score total = somme des 75 items (0 à 150). Seuil indicatif : score &#8805; 75 évocateur de traits autistiques marqués (population de comparaison).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source</h2>
+    <p class="source-note">Wheelwright, S., Baron-Cohen, S., Goldenfeld, N., Delaney, J., Fine, D., Smith, R., Weil, L., & Wakabayashi, A. (2006). Brain Research, 1079(1), 47-56. Droits confirmés sur la page officielle de l'Autism Research Centre : usage libre pour la recherche, non commercial, avec attribution obligatoire.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WHO-5 — Indice de bien-être de l'OMS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#EEF3F2;color:#1C2A28;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#1C2A28;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#5C736E;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#5C736E;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #D3E2DE;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#5C736E;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#5C736E;background:#EEF3F2;border:1px solid #D3E2DE;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#2E7D72;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .example-box{font-size:13px;color:#5C736E;background:#F4F8F7;border:1px solid #D3E2DE;border-radius:10px;padding:12px 14px;margin:0 0 20px;}
+  .progress{font-size:12px;color:#8FA39E;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #D3E2DE;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#2E7D72;background:#E4F1EE;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#EEF3F2;color:#1C2A28;border-color:#D3E2DE;}
+  .btn-primary{background:#2E7D72;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#2E7D72;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#8FA39E;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#1C2A28;margin:0 0 20px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#5C736E;border-top:1px solid #D3E2DE;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">WHO-5 — Indice de bien-être de l'OMS</h1>
+    <p class="lead">Veuillez indiquer, pour chacune des cinq affirmations suivantes, laquelle se rapproche le plus de ce que vous avez ressenti au cours des deux dernières semaines.</p>
+    <p class="example-box">Exemple : si vous vous êtes senti(e) bien et de bonne humeur plus de la moitié du temps au cours des deux dernières semaines, vous choisiriez « Plus de la moitié du temps ».</p>
+    <div class="pill-row">
+      <span class="pill">5 questions</span>
+      <span class="pill">2 minutes</span>
+      <span class="pill">Échelle 0-5</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-score" id="score-val"></p>
+    <p class="result-max">sur 100 (score brut sur 25, multiplié par 4)</p>
+    <p class="result-text" id="level-text"></p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">WHO-5 — Indice de bien-être de l'Organisation mondiale de la santé (1998 ; copyright cédé à l'OMS en 2024). Outil de dépistage bref, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [
+    "Je me suis senti(e) bien et de bonne humeur",
+    "Je me suis senti(e) calme et tranquille",
+    "Je me suis senti(e) plein(e) d'énergie et vigoureux(se)",
+    "Je me suis réveillé(e) en me sentant frais(che) et dispos(e)",
+    "Ma vie quotidienne a été remplie de choses intéressantes"
+  ];
+  var opts = [
+    {l:"Tout le temps", v:5},
+    {l:"La plupart du temps", v:4},
+    {l:"Plus de la moitié du temps", v:3},
+    {l:"Moins de la moitié du temps", v:2},
+    {l:"De temps en temps", v:1},
+    {l:"Jamais", v:0}
+  ];
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = 'Au cours des deux dernières semaines : ' + items[idx];
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    opts.forEach(function(opt){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === opt.v ? ' selected' : '');
+      d.textContent = opt.l;
+      d.addEventListener('click', function(){
+        answers[idx] = opt.v;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){
+      idx++; renderQuestion();
+    } else {
+      showResult();
+    }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var sum = 0;
+    answers.forEach(function(v){ sum += v; });
+    var pct = sum * 4;
+    document.getElementById('score-val').textContent = pct;
+    var txt;
+    if (pct <= 50) {
+      txt = "Un score de 50 ou moins est, dans la littérature internationale (Topp et al., 2015), un seuil couramment recommandé pour évoquer un bien-être réduit justifiant une évaluation complémentaire (par exemple d'une dépression) — il ne constitue pas à lui seul un diagnostic.";
+    } else {
+      txt = "Un score supérieur à 50 ne signale pas, selon le seuil couramment utilisé dans la littérature internationale (Topp et al., 2015), un bien-être réduit au sens de cet outil de dépistage bref.";
+    }
+    document.getElementById('level-text').textContent = txt;
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WHO-5 — Indice de bien-être de l'OMS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#EEF3F2;color:#1C2A28;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#1C2A28;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#5C736E;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#5C736E;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#2E7D72 0%,#7FBDB3 55%,#123833 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(220,245,240,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#155A50;background:#E4F1EE;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#5C736E;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#5C736E;background:#FFFFFF;border:1px solid #D3E2DE;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#8FA39E;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#2E7D72;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#155A50;border-color:#D3E2DE;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">WHO-5</span></div>
+
+  <h1 class="serif">Indice de bien-être de l'OMS (WHO-5)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">World Health Organization-Five Well-Being Index — Psychiatric Research Unit, WHO Collaborating Centre in Mental Health (1998)</p>
+  <div class="meta-row">
+    <span class="pill">5 questions</span>
+    <span class="pill">2 minutes</span>
+    <span class="pill">Échelle 0-5 par item</span>
+    <span class="pill">Français officiel</span>
+    <span class="pill">Licence requise : non</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="who5.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le WHO-5 est un outil bref (5 items) de dépistage du bien-être subjectif, portant sur les deux dernières semaines. Il est utilisé comme indicateur général de bien-être et comme premier filtre de détresse dépressive avant un outil diagnostique. Aucun item n'est formulé négativement ni inversé à la cotation.</p>
+    <p class="source-note">Traduction française officielle publiée par le Psychiatric Research Unit (WHO Collaborating Centre in Mental Health, Frederiksborg General Hospital, Danemark), diffusée directement par l'OMS (cdn.who.int). Cette traduction a été réalisée avant la cession du copyright à l'OMS en 2024 ; l'OMS précise ne pas être responsable de son exactitude et qu'en cas d'incohérence, la version anglaise fait foi.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque item est coté de 0 (Jamais) à 5 (Tout le temps). Le score brut (somme des 5 items, 0-25) est multiplié par 4 pour obtenir un score sur 100 : plus le score est élevé, meilleur est le bien-être rapporté.</p>
+    <p>Le document officiel ne fixe pas de seuil clinique. Un seuil de 50 ou moins est cependant couramment recommandé dans la littérature internationale pour évoquer un bien-être réduit justifiant une évaluation complémentaire, par exemple d'une dépression (sensibilité pondérée 0,86, spécificité 0,81 sur l'ensemble des études revues) : Topp C.W., Østergaard S.D., Søndergaard S. &amp; Bech P. (2015), « The WHO-5 Well-Being Index: A Systematic Review of the Literature », <em>Psychotherapy and Psychosomatics</em>, 84(3), 167-176. Ce seuil reste un repère de dépistage, non un diagnostic.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p class="source-note">Psychiatric Research Unit, WHO Collaborating Centre for Mental Health (1998), <em>WHO (Five) Well-Being Index</em>. Copyright cédé par le Psychiatric Centre North Zealand à l'Organisation mondiale de la santé en 2024 ; diffusé depuis comme produit en libre accès de l'OMS sous licence Creative Commons CC BY-NC-SA 3.0 IGO (attribution, usage non commercial, partage dans les mêmes conditions — compatible avec un usage clinique individuel non lucratif). Traduction française : cdn.who.int/media/docs/default-source/mental-health/indice-(en-cinq-points)-de-bien--tre-de-l-oms.pdf. Référence de validation du seuil de dépistage : https://doi.org/10.1159/000376585.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

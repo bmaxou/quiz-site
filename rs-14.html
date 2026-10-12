@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RS-14 — Échelle de résilience de Wagnild et Young (forme courte)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#8A7A1E;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .stem{font-size:13px;color:#63695D;margin:0 0 8px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#8A7A1E;background:#F6F0CC;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#8A7A1E;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#8A7A1E;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 16px;}
+  .alert{font-size:14px;background:#FBEFEA;border:1px solid #E8C9BC;border-radius:10px;padding:12px 14px;margin:0 0 18px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">RS-14 — Échelle de résilience de Wagnild et Young (forme courte)</h1>
+    <p class="lead">Cette échelle explore des qualités personnelles liées à la résilience. Pour chaque énoncé, indiquez votre degré d'accord, de 1 (fortement en désaccord) à 7 (fortement d'accord).</p>
+    <p class="lang-note">Items en anglais (14-item Resilience Scale) : aucune version française accessible en texte intégral. Outil sous licence : « Licence requise : oui ».</p>
+    <div class="pill-row">
+      <span class="pill">14 questions</span>
+      <span class="pill">3 minutes</span>
+      <span class="pill">Score 14 à 98</span>
+      <span class="pill">Anglais</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="stem" id="stem-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-score" id="score-val"></p>
+    <p class="result-max">score total (somme des 14 items cotés de 1 à 7), sur une échelle de 14 à 98 (plus il est élevé, plus la résilience déclarée est élevée)</p>
+    <p class="alert" id="alert-text" hidden></p>
+    <p class="result-text" id="level-text"></p>
+    <p class="result-text" id="extra-text"></p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">The Resilience Scale (RS-14) — Wagnild G.M. &amp; Young H.M. (1993) ; forme courte à 14 items : Wagnild G.M. (2009). © Wagnild &amp; Young, tous droits réservés (licence : resiliencecenter.com). Outil de repérage de la résilience déclarée, ne remplace pas une évaluation clinique.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var STEM = 'Indiquez votre degré d\'accord avec l\'énoncé, de 1 (strongly disagree) à 7 (strongly agree).';
+  var items = [{"t": "1 - I usually manage one way or another.", "o": 0}, {"t": "2 - I feel proud that I have accomplished things in life.", "o": 0}, {"t": "3 - I usually take things in stride.", "o": 0}, {"t": "4 - I am friends with myself.", "o": 0}, {"t": "5 - I feel that I can handle many things at a time.", "o": 0}, {"t": "6 - I am determined.", "o": 0}, {"t": "7 - I can get through difficult times because I've experienced difficulty before.", "o": 0}, {"t": "8 - I have self-discipline.", "o": 0}, {"t": "9 - I keep interested in things.", "o": 0}, {"t": "10 - I can usually find something to laugh about.", "o": 0}, {"t": "11 - My belief in myself gets me through hard times.", "o": 0}, {"t": "12 - In an emergency, I'm someone people can generally rely on.", "o": 0}, {"t": "13 - My life has meaning.", "o": 0}, {"t": "14 - When I'm in a difficult situation, I can usually find my way out of it.", "o": 0}];
+  var OPTS = ["1 — Strongly disagree","2","3","4","5","6","7 — Strongly agree"];
+  function optsFor(i){ return OPTS; }
+  function compute(a){
+    var s = 0;
+    for (var i = 0; i < 14; i++){ s += a[i] + 1; }
+    var level;
+    if (s < 65) level = "Résilience faible (score inférieur à 65).";
+    else if (s <= 81) level = "Résilience moyennement faible à moyenne (65 à 81).";
+    else if (s <= 90) level = "Résilience moyennement élevée (82 à 90).";
+    else level = "Résilience élevée (score supérieur à 90).";
+    level += " Ces repères sont ceux utilisés dans la littérature et attribués à Wagnild & Young ; certaines publications les subdivisent davantage. Ils n'ont pas valeur de diagnostic.";
+    return {score: s, level: level, extra: "", alert: ""};
+  }
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('stem-text').textContent = STEM;
+    document.getElementById('q-text').textContent = items[idx].t;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    optsFor(idx).forEach(function(label, v){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === v ? ' selected' : '');
+      d.textContent = label;
+      d.addEventListener('click', function(){
+        answers[idx] = v;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){
+      idx++; renderQuestion();
+    } else {
+      showResult();
+    }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var r = compute(answers);
+    document.getElementById('score-val').textContent = String(r.score);
+    document.getElementById('level-text').textContent = r.level;
+    document.getElementById('extra-text').textContent = r.extra || '';
+    var al = document.getElementById('alert-text');
+    if (r.alert){ al.textContent = r.alert; al.hidden = false; } else { al.hidden = true; }
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RS-14 — Échelle de résilience de Wagnild et Young (forme courte)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#8A7A1E 0%,#E2D26A 55%,#4A410C 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.45),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#5C5010;background:#F6F0CC;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#8A7A1E;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#5C5010;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">RS-14</span></div>
+
+  <h1 class="serif">Échelle de résilience de Wagnild et Young, forme courte (RS-14)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">14-item Resilience Scale — Wagnild &amp; Young (1993), forme courte Wagnild (2009)</p>
+  <div class="meta-row">
+    <span class="pill">14 questions</span>
+      <span class="pill">3 minutes</span>
+      <span class="pill">Score 14 à 98</span>
+      <span class="pill">Anglais</span>
+      <span class="pill">Licence requise : oui</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="rs-14.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>La RS-14 est la forme courte de la Resilience Scale de Wagnild et Young. Elle mesure la résilience dispositionnelle de l'adulte, entendue comme la capacité à faire face aux difficultés, à rester déterminé, à accepter sa vie et à garder le sens de ce qu'on vit. Les 14 énoncés se répondent sur une échelle d'accord en 7 points (1 = fortement en désaccord, 7 = fortement d'accord). Les analyses factorielles publiées décrivent selon les études un facteur unique ou deux facteurs (compétence personnelle ; acceptation de soi et de la vie) ; ces sous-scores ne sont pas calculés ici.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Les 14 items sont tous formulés dans le même sens ; le score total est la somme des réponses (1 à 7), de 14 à 98. Repères usuels de la littérature attribués à Wagnild et Young : moins de 65 résilience faible, 65 à 81 moyennement faible à moyenne, 82 à 90 moyennement élevée, plus de 90 élevée (certaines publications distinguent en outre « très faible » et « faible » sous 65). Ces tranches ne sont pas des seuils diagnostiques.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p><strong>Licence requise : oui.</strong> La Resilience Scale est protégée (© Wagnild &amp; Young) : le Resilience Center exige l'achat d'un accord de licence pour utiliser la version autorisée. Instrument construit ici malgré la licence, conformément à la décision du 30/09/2026 ; la diffusion publique reste soumise à l'autorisation du détenteur des droits.</p><p class="source-note">Texte des 14 items : version anglaise reproduite à l'identique dans plusieurs articles en libre accès (tableau des items du RS-14 dans Frontiers in Psychiatry / PMC9669744, Neurological Sciences / PMC8631562 et Health and Quality of Life Outcomes / PMC7031896), concordants entre eux. Aucune version française des items n'a pu être consultée en texte intégral : une validation française existe (« Psychometric properties of the Resilience Scale-14 in a sample of college students from France », L'Encéphale, PMID 29960683) mais elle n'est pas accessible librement. Cotation : somme de 14 items cotés de 1 à 7 (14-98) ; tranches d'interprétation : Wagnild &amp; Young (1993) et Wagnild (2009), telles que rapportées dans Child &amp; Adolescent Social Work Journal / PMC11929671.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

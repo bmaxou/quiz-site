@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SPQ — Questionnaire de personnalité schizotypique de Raine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#7A4E7E;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#7A4E7E;background:#F1E6F2;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#7A4E7E;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#7A4E7E;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 20px;}
+  table.sub{width:100%;border-collapse:collapse;font-size:13.5px;margin:0 0 18px;}
+  table.sub th,table.sub td{text-align:left;padding:7px 6px;border-bottom:1px solid #E0D9C9;}
+  table.sub td.n,table.sub th.n{text-align:right;white-space:nowrap;}
+  table.sub th{font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:#63695D;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">SPQ — Questionnaire de personnalité schizotypique de Raine</h1>
+    <p class="lead">Ce questionnaire explore certains aspects de la personnalité à travers 74 affirmations auxquelles vous répondez par oui ou par non. Répondez à toutes les questions, même si certaines vous paraissent éloignées de vos préoccupations ou semblent se ressembler. Si la réponse varie selon le contexte, pensez à une situation « moyenne » : au fond, est-ce que, en général, je pense plutôt comme ceci ou comme cela ?</p>
+    <p class="lang-note">Traduction française (Dumas et al., 1999). Outil à autorisation de l'auteur : « Licence requise : oui ».</p>
+    <div class="pill-row">
+      <span class="pill">74 questions</span>
+      <span class="pill">10 minutes</span>
+      <span class="pill">Oui / Non</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-score" id="score-val"></p>
+    <p class="result-max">score total (nombre de réponses « oui »), sur 74</p>
+    <table class="sub" id="sub-table"></table>
+    <p class="result-text" id="level-text"></p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">SPQ (Schizotypal Personality Questionnaire) — Raine A., 1991, Schizophrenia Bulletin, 17(4), 555-564 ; traduction française : Dumas, Rosenfeld, Saoud, Dalery &amp; d'Amato (1999). Outil de repérage dimensionnel des traits schizotypiques, ne pose aucun diagnostic et ne remplace pas une évaluation clinique.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [
+"Il m’arrive d’avoir l’impression que ce que je vois à la télévision ou ce que je lis dans les journaux m’est personnellement destiné.",
+"Il m’arrive d’éviter les lieux où il y a de la foule, car j’y deviens facilement anxieux.",
+"J’ai déjà eu des expériences en rapport avec des choses surnaturelles.",
+"Il peut m’arriver de prendre des ombres ou certains objets pour des personnes ; ou bien certains bruits pour des voix.",
+"Je pense que beaucoup de gens me considèrent comme quelqu’un d’un peu bizarre ou d’un peu curieux.",
+"Je trouve peu d’intérêt à faire la connaissance d’autres personnes.",
+"Les gens ont parfois du mal à comprendre ce que je dis quand je me lance dans une explication.",
+"Les gens me trouvent parfois lointain ou distant.",
+"J’ai le sentiment qu’on parle de moi dans mon dos.",
+"Je me rends compte que les gens me remarquent quand je sors pour aller au restaurant ou au cinéma.",
+"Je deviens facilement très nerveux quand je suis obligé de tenir des conversations de courtoisie avec les gens.",
+"Je pense que certaines personnes ont le don de télépathie (lecteur de la pensée des autres).",
+"Il m’est déjà arrivé d’avoir la sensation de sentir une force ou une présence auprès de moi alors même que j’étais tout seul à ce moment-là.",
+"Les gens font parfois des commentaires sur mes comportements ou certaines de mes manières qu’ils trouvent inhabituelles.",
+"En général, j’aime mieux garder pour moi ce que je pense.",
+"Je saute parfois du coq à l’âne quand je discute.",
+"J’ai du mal à exprimer mes véritables sentiments, que ce soit au moyen de la parole ou avec le regard.",
+"J’ai souvent le sentiment qu’il y a quelque chose en moi qui ne revient pas aux gens.",
+"Il arrive que les gens me fassent des allusions voilées ou disent des choses à double sens.",
+"Ça me rend nerveux de sentir quelqu’un marcher derrière moi.",
+"Je suis parfois convaincu que d’autres personnes seraient capables de dire ce que je suis en train de penser.",
+"Quand je me regarde dans un miroir ou quand je regarde quelqu’un d’autre dans un miroir, il m’arrive d’avoir l’impression de voir le visage se modifier légèrement.",
+"Il arrive parfois que les gens pensent que je suis un peu étrange.",
+"La plupart du temps, je reste silencieux quand je suis avec d’autres personnes.",
+"Il m’arrive quelquefois de perdre le fil de ce que je suis en train de dire.",
+"Je ris et je souris rarement.",
+"J’ai parfois le sentiment que mes amis ou mes collègues de travail ne sont pas vraiment loyaux ou dignes de foi.",
+"J’ai déjà remarqué que certains objets ou certaines situations apparemment sans importance peuvent être des sortes de messages si l’on arrive à les décrypter.",
+"Je suis facilement anxieux quand je rencontre des gens pour la première fois.",
+"Je pense que la clairvoyance est un don que possèdent certaines personnes (parapsychologie, connaissance de l’avenir ou autre).",
+"Il m’est parfois arrivé d’entendre une voix intérieure qui disait ou commentait mes pensées tout haut.",
+"Certaines personnes pensent que je suis quelqu’un de très bizarre.",
+"Ça m’est souvent difficile de me sentir proche des gens sur le plan émotionnel.",
+"Il m’arrive souvent de partir dans tous les sens quand je parle de quelque chose.",
+"J’ai du mal à utiliser les expressions du visage ou les gestes des mains pour communiquer avec les gens.",
+"Je sens que je dois rester sur mes gardes même avec mes amis.",
+"Il m’arrive parfois de voir des signes précis dans les publicités, les enseignes ou les vitrines de la rue, ou dans la façon dont les objets sont agencés autour de moi.",
+"Je me sens souvent nerveux quand je me trouve dans un groupe de gens que je ne connais pas.",
+"J’ai parfois le sentiment que d’autres personnes peuvent ressentir mes sentiments tout en étant loin de moi.",
+"Il me semble avoir déjà vu certaines choses que les autres ne pouvaient pas voir.",
+"J’ai le sentiment de n’être vraiment proche de personne en dehors de ma famille ou de mon conjoint ; ou qu’il n’y a pas vraiment quelqu’un à qui je puisse me confier ou parler de mes problèmes personnels.",
+"Certains me trouvent parfois vague ou peu clair lors des conversations.",
+"J’ai du mal à répondre aux invitations ou à rendre les politesses aux gens.",
+"Je relève souvent des remarques dépréciatives ou des menaces cachées dans ce que les gens disent ou font.",
+"Lorsque je fais mes courses, j’ai le sentiment que les gens me remarquent.",
+"Je me sens très mal à l’aise dans les situations où je suis en présence de gens que je ne connais pas.",
+"J’ai déjà eu des expériences particulières en rapport avec l’astrologie, la divination, le contact avec d’autres êtres, les perceptions extrasensorielles, ou tout simplement j’ai le sentiment d’avoir un sixième sens.",
+"Il arrive que les objets qui m’entourent paraissent parfois inhabituellement trop grands ou trop petits, comme si leurs proportions avaient changées.",
+"Ecrire une lettre à un ami est si compliqué que cela n’en vaut souvent pas la peine.",
+"Il m’arrive d’utiliser les mots de travers.",
+"J’ai tendance à éviter de regarder les gens dans les yeux quand je leur parle.",
+"Je pense qu’il vaut mieux que les gens n’en sachent pas trop sur moi.",
+"Lorsque je vois des gens parler entre eux, je me demande souvent s’ils ne parlent pas de moi.",
+"Je serais très angoissé si je devais faire un discours devant un grand groupe de gens.",
+"J’ai déjà eu l’impression de parvenir à communiquer avec d’autres personnes rien que par la pensée.",
+"Il arrive que mon odorat devienne parfois inhabituellement développé.",
+"J’ai tendance à me tenir en retrait dans les situations sociales.",
+"J’ai tendance à m’écarter du sujet pendant une conversation.",
+"J’ai souvent l’impression que les autres ont quelque chose contre moi.",
+"J’ai parfois l’impression que les autres me dévisagent.",
+"Il m’arrive d’être subitement distrait par des sons lointains auxquels je n’accorde normalement aucune attention.",
+"J’attache peu d’importance au fait d’avoir des amis proches.",
+"J’ai parfois le sentiment que les gens parlent de moi.",
+"Mes pensées sont parfois si intenses que je peux presque les entendre.",
+"Je dois rester souvent vigilant pour que les gens n’abusent pas de ma confiance ou de ma bonne volonté.",
+"J’ai le sentiment qu’il ne m’est pas possible d’être proche des gens.",
+"Je suis quelqu’un d’original ou d’assez spécial ; en tout cas assez différent des autres.",
+"Ma manière de m’exprimer n’est pas très expressive et vivante.",
+"Je trouve qu’il est difficile de communiquer clairement aux autres ce que j’ai envie de leur dire.",
+"J’ai quelques habitudes excentriques.",
+"Je me sens très mal à l’aise quand je parle à des gens que je ne connais pas bien.",
+"On me fait parfois la remarque que mes propos sont embrouillés.",
+"J’ai tendance à garder mes sentiments pour moi.",
+"Les gens m’évitent parfois à cause de mon apparence excentrique."
+];
+  var subs = [{"n": "Idées de référence", "i": [1, 10, 19, 28, 37, 45, 53, 60, 63], "f": "cog"}, {"n": "Anxiété sociale excessive", "i": [2, 11, 20, 29, 38, 46, 54, 71], "f": "int"}, {"n": "Croyances bizarres et pensée magique", "i": [3, 12, 21, 30, 39, 47, 55], "f": "cog"}, {"n": "Expériences perceptives inhabituelles", "i": [4, 13, 22, 31, 40, 48, 56, 61, 64], "f": "cog"}, {"n": "Comportement bizarre ou excentrique", "i": [5, 14, 23, 32, 67, 70, 74], "f": "des"}, {"n": "Absence d’amis proches", "i": [6, 15, 24, 33, 41, 49, 57, 62, 66], "f": "int"}, {"n": "Discours bizarre", "i": [7, 16, 25, 34, 42, 50, 58, 69, 72], "f": "des"}, {"n": "Pauvreté des affects", "i": [8, 17, 26, 35, 43, 51, 68, 73], "f": "int"}, {"n": "Méfiance", "i": [9, 18, 27, 36, 44, 52, 59, 65], "f": "cog"}];
+  var facNames = {cog:"Cognitivo-perceptif", int:"Interpersonnel", des:"Désorganisé"};
+  var opts = ["Oui","Non"];
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    opts.forEach(function(label, v){
+      var val = (v === 0) ? 1 : 0;
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === val ? ' selected' : '');
+      d.textContent = label;
+      d.addEventListener('click', function(){
+        answers[idx] = val;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){
+      idx++; renderQuestion();
+    } else {
+      showResult();
+    }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var total = 0;
+    answers.forEach(function(a){ total += a; });
+    var fac = {cog:[0,0], int:[0,0], des:[0,0]};
+    var html = '<tr><th>Sous-échelle</th><th class="n">Score</th></tr>';
+    subs.forEach(function(s){
+      var sc = 0;
+      s.i.forEach(function(n){ sc += answers[n-1]; });
+      fac[s.f][0] += sc; fac[s.f][1] += s.i.length;
+      html += '<tr><td>' + s.n + '</td><td class="n">' + sc + ' / ' + s.i.length + '</td></tr>';
+    });
+    html += '<tr><th>Facteur</th><th class="n">Score</th></tr>';
+    ['cog','int','des'].forEach(function(k){
+      html += '<tr><td>' + facNames[k] + '</td><td class="n">' + fac[k][0] + ' / ' + fac[k][1] + '</td></tr>';
+    });
+    document.getElementById('sub-table').innerHTML = html;
+    document.getElementById('score-val').textContent = String(total);
+    document.getElementById('level-text').textContent = "Plus le score est élevé, plus les traits schizotypiques rapportés sont nombreux. Il n'existe pas ici de seuil clinique : Raine propose de situer un score par rapport à la distribution d'un échantillon de référence (déciles extrêmes), et aucune norme française n'est reprise dans cette version. Le résultat se lit avec l'entretien clinique.";
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SPQ — Questionnaire de personnalité schizotypique de Raine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#7A4E7E 0%,#C9A8CC 55%,#4A2B4D 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(250,236,252,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#4A2B4D;background:#F1E6F2;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#7A4E7E;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#4A2B4D;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">SPQ</span></div>
+
+  <h1 class="serif">Questionnaire de personnalité schizotypique de Raine</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Schizotypal Personality Questionnaire (SPQ) — Raine (1991) ; traduction et adaptation françaises : Dumas et al. (1999)</p>
+  <div class="meta-row">
+    <span class="pill">74 questions</span>
+    <span class="pill">10 minutes</span>
+    <span class="pill">Oui / Non</span>
+    <span class="pill">Français</span>
+    <span class="pill">Licence requise : oui</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="spq-raine.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le SPQ est un auto-questionnaire de 74 items dichotomiques (oui/non), construit sur les neuf critères du trouble de la personnalité schizotypique du DSM-III-R : idées de référence, anxiété sociale excessive, croyances bizarres et pensée magique, expériences perceptives inhabituelles, comportement bizarre ou excentrique, absence d'amis proches, discours bizarre, pauvreté des affects et méfiance. Il s'utilise pour repérer les traits schizotypiques de façon dimensionnelle, en population générale ou clinique. Attention : ce SPQ (schizotypie) n'est pas le SPQ « questionnaire des phobies spécifiques » du catalogue Quiz.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque réponse « oui » vaut 1 point, chaque « non » 0 ; aucun item n'est inversé. Le score total (0 à 74) est la somme des réponses « oui ». Neuf sous-échelles : idées de référence (9 items), anxiété sociale excessive (8), croyances bizarres et pensée magique (7), expériences perceptives inhabituelles (9), comportement bizarre ou excentrique (7), absence d'amis proches (9), discours bizarre (9), pauvreté des affects (8), méfiance (8). Elles se regroupent en trois facteurs : cognitivo-perceptif (33 items : idées de référence, croyances bizarres, expériences perceptives, méfiance), interpersonnel (25 items : anxiété sociale, absence d'amis proches, pauvreté des affects) et désorganisé (16 items : comportement bizarre, discours bizarre). Raine ne propose pas de seuil absolu : il situe un score par rapport aux déciles extrêmes de la distribution d'un échantillon de référence. Cette version ne reprend aucun seuil ni aucune norme française ; le score est à lire avec l'entretien clinique et ne pose aucun diagnostic.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p><strong>Licence requise : oui.</strong> Le SPQ est diffusé gratuitement pour la recherche, l'auteur (Adrian Raine, Université de Pennsylvanie) demandant un courriel préalable décrivant l'utilisation prévue. Instrument construit ici malgré cette exigence, conformément à la décision du 30/09/2026 ; la diffusion publique reste soumise à l'accord de l'auteur.</p>
+    <p><strong>Réserve sur le texte.</strong> Le texte français des 74 items provient de la reproduction intégrale du questionnaire en annexe d'une thèse de médecine (« Personnalité schizotypique en milieu universitaire à Marrakech », 2007), qui utilise la traduction française du SPQ ; le texte officiel de Dumas et al. (1999) n'est pas accessible en ligne. Onze coquilles de saisie évidentes ont été corrigées (« fans » pour « dans », « ion » pour « on », « o » pour « ou », etc.) ; la concordance a été vérifiée sur neuf items avec les exemples publiés par Badoud et al. (2011, <em>L'Encéphale</em>, 37(4), 299-307), qui emploient la traduction de Dumas. La clé de cotation par sous-échelle vient du même tableau de la thèse ; elle se recoupe avec les tailles des trois facteurs (33, 25 et 16 items) rapportées par Badoud et al. À confirmer avec le texte officiel avant tout usage hors cabinet.</p>
+    <p class="source-note">Références : Raine A. (1991), The SPQ: a scale for the assessment of schizotypal personality based on DSM-III-R criteria, Schizophrenia Bulletin, 17(4), 555-564. Dumas P., Rosenfeld F., Saoud M., Dalery J. &amp; d'Amato T. (1999), Traduction et adaptation française du questionnaire de personnalité schizotypique de Raine, L'Encéphale, 25(4), 315-322. Badoud D. et al. (2011), Validation de la version française du questionnaire de personnalité schizotypique de Raine dans la population adolescente : étude de la structure factorielle, L'Encéphale, 37(4), 299-307, DOI 10.1016/j.encep.2010.08.017.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

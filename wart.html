@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WART — Test de risque d'addiction au travail</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#2F6B5E;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#2F6B5E;background:#E3F0EC;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#2F6B5E;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#2F6B5E;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 20px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">WART — Test de risque d'addiction au travail</h1>
+    <p class="lead">Vingt-cinq affirmations sur vos habitudes de travail, chacune notée de 1 (pas du tout vrai) à 4 (toujours vrai). Répondez selon ce qui vous décrit le plus souvent.</p>
+    <p class="lang-note">Version française de Ravoux, Pereira et al. (2018), validée auprès de travailleurs français. ⚠ À ne pas confondre avec la Bergen Work Addiction Scale (BWAS) ni avec le WAMI.</p>
+    <div class="pill-row">
+      <span class="pill">25 questions</span>
+      <span class="pill">4 minutes</span>
+      <span class="pill">Échelle 1-4</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-score" id="score-val"></p>
+    <p class="result-max">score total (somme des 25 réponses, de 25 à 100)</p>
+    <p class="result-text" id="level-text"></p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">WART (Work Addiction Risk Test) — Robinson, 1989 ; version française : Ravoux, Pereira et al., 2018, JMIR Mental Health, 5(1):e12. Ce résultat est un repère, il ne constitue pas un diagnostic.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [{"t": "Je préfère faire la plupart des choses moi même plutôt que de demander de l'aide"}, {"t": "Je deviens très impatient lorsque je dois attendre quelqu'un ou lorsque que quelque chose prend trop de temps, comme une longue file d'attente qui avance lentement"}, {"t": "Je donne l'impression d'être pressé et de toujours courir après le temps"}, {"t": "Cela m’énerve d’être interrompu lorsque je suis occupé à quelque chose"}, {"t": "Je me maintiens occupé et je garde toujours des choses à faire"}, {"t": "Je me retrouve à faire 2 ou 3 choses en même temps, comme déjeuner et écrire un mémo tout en parlant au téléphone"}, {"t": "Je m’engage excessivement en voulant faire plus que je ne peux"}, {"t": "Je me sens coupable quand je ne travaille pas sur quelque chose"}, {"t": "Il est important que je voie les résultats concrets de ce que je fais"}, {"t": "Je suis plus intéressé par le résultat final de mon travail que par la méthode"}, {"t": "Les choses ne semblent jamais avancer assez vite ou être réalisées assez rapidement pour moi."}, {"t": "Je perds mon calme quand les choses ne vont pas dans mon sens ou qu’elles ne tournent pas en ma faveur"}, {"t": "Sans même le réaliser, Je repose la même question alors que je viens d’avoir la réponse une première fois"}, {"t": "Je passe beaucoup de temps à tout planifier dans ma tête et à penser aux évènements futurs dans ma tête au détriment du moment présent"}, {"t": "Je suis encore en train de travailler après que mes collègues aient décidés de s’arrêter"}, {"t": "Je m’énerve quand les gens n’atteignent pas mes standards de perfection"}, {"t": "Je m’énerve dans les situations où je n’ai pas le contrôle des choses"}, {"t": "J’ai tendance à me mettre sous pression en m’imposant des délais à respecter lorsque je travaille"}, {"t": "J’ai du mal à me relaxer lorsque je ne travaille pas"}, {"t": "Je passe plus de temps à travailler qu’avec des amis, dans des passe-temps ou des activités de loisir"}, {"t": "Je me jette dans les projets afin de prendre de l’avance avant même que les étapes aient étés définies"}, {"t": "Je suis en colère contre moi même lorsque que je fais la moindre erreur"}, {"t": "Je consacre plus d’idées, de temps, d’énergie à mon travail qu’à mes relations avec mon conjoint et ma famille"}, {"t": "J’oublie, ignore ou minimise d’importants évènements familiaux comme les anniversaires, les fêtes ou les vacances"}, {"t": "Je prends des décisions importantes avant d’avoir tous les faits et de pouvoir les examiner en détail"}];
+  var opts = ["1 — Pas du tout vrai","2 — Peu souvent","3 — Souvent","4 — Toujours vrai"];
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx].t;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    opts.forEach(function(label, v){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === v+1 ? ' selected' : '');
+      d.textContent = label;
+      d.addEventListener('click', function(){
+        answers[idx] = v+1;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){
+      idx++; renderQuestion();
+    } else {
+      showResult();
+    }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var sum = 0;
+    items.forEach(function(item, i){ sum += answers[i]; });
+    var niv = sum >= 67 ? "Haut risque d'addiction au travail (67 à 100)." : (sum >= 57 ? "Risque moyen d'addiction au travail (57 à 66)." : "Risque faible d'addiction au travail (25 à 56).");
+    document.getElementById('score-val').textContent = sum + ' / 100';
+    document.getElementById('level-text').textContent = niv + " Cet outil est un repère de dépistage, il ne pose pas de diagnostic et ne remplace pas une évaluation clinique.";
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WART — Test de risque d'addiction au travail</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#2F6B5E 0%,#6FAE9E 55%,#1F4A40 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#1F4A40;background:#E3F0EC;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#2F6B5E;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#1F4A40;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">WART</span></div>
+
+  <h1 class="serif">Test de risque d'addiction au travail</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Work Addiction Risk Test — Robinson B.E. (1989) ; version française Ravoux H., Pereira B. et al. (2018)</p>
+  <div class="meta-row">
+    <span class="pill">25 questions</span>
+    <span class="pill">4 minutes</span>
+    <span class="pill">Échelle 1-4</span>
+    <span class="pill">Adultes en emploi</span>
+    <span class="pill">Français</span>
+    <span class="pill">Licence requise : oui</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="wart.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le WART est un auto-questionnaire de 25 affirmations sur les habitudes de travail (impatience, suractivité, difficulté à déléguer, culpabilité à ne pas travailler, perfectionnisme, retentissement sur la vie familiale). Il sert de repère de dépistage du risque d'addiction au travail (workaholism), distinct de la Bergen Work Addiction Scale (BWAS) et du WAMI.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque item est coté de 1 (« Pas du tout vrai ») à 4 (« Toujours vrai ») ; le score total est la somme des 25 réponses, de 25 à 100. Interprétation indiquée avec la version française : 67 à 100 = haut risque d'addiction au travail ; 57 à 66 = risque moyen ; 25 à 56 = risque faible. Aucun item n'est inversé. Les cinq dimensions théoriques de l'anglais ne se retrouvent pas dans l'analyse de la version française : seul le score total est présenté ici.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p>Robinson B.E. (1989), <em>Work Addiction</em> ; version française : Ravoux H., Pereira B., Brousse G. et al. (2018), « Work Addiction Test Questionnaire to Assess Workaholism: Validation of French Version », <em>JMIR Mental Health</em>, 5(1):e12, DOI 10.2196/mental.8215 (article en libre accès CC BY, version française des 25 items et feuille d'interprétation en annexe 1). Items transcrits tels quels depuis cette annexe.</p>
+    <p class="source-note"><strong>Licence requise : oui.</strong> Instrument protégé par le copyright de l'auteur (Bryan E. Robinson) ; aucune page officielle d'accès libre n'a été retrouvée et l'usage est présumé soumis à son autorisation. Construit malgré tout sur décision du cabinet (30/09/2026). Outil de repérage : ne remplace pas une évaluation clinique complète.</p>
+  </div>
+
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RSQ-Downey — Sensibilité au rejet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:660px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .progress-track{height:6px;background:#E0D9C9;border-radius:99px;overflow:hidden;margin-bottom:28px;}
+  .progress-fill{height:100%;background:#8B2E4A;border-radius:99px;transition:width .25s ease;}
+  .qnum{font-size:12px;font-weight:700;color:#8B2E4A;letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px;}
+  .qtext{font-size:16.5px;font-family:'Cormorant Garamond',Georgia,serif;margin:0 0 20px;}
+  .scale-block{margin-bottom:18px;}
+  .scale-label{font-size:13px;font-weight:600;color:#20241E;margin:0 0 8px;}
+  .scale-row{display:flex;gap:6px;justify-content:space-between;}
+  .scale-btn{flex:1;border-radius:8px;border:1px solid #E0D9C9;background:#F4F1EA;font-family:'Inter',sans-serif;font-weight:700;font-size:13px;color:#20241E;cursor:pointer;padding:9px 0;}
+  .scale-btn.selected{background:#8B2E4A;color:#fff;border-color:#8B2E4A;}
+  .scale-labels{display:flex;justify-content:space-between;font-size:10.5px;color:#9A9E90;margin:4px 0 0;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#8B2E4A;color:#fff;}
+  .btn[disabled]{opacity:.45;cursor:not-allowed;}
+  .start-btn{background:#8B2E4A;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 12px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 16px;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;margin:6px 0 4px;color:#8B2E4A;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">RSQ — Sensibilité au rejet (Downey)</h1>
+    <p class="lead">9 situations hypothétiques. Pour chacune, indiquez à quel point vous seriez préoccupé(e) par la réaction de l'autre, puis à quel point vous vous attendriez à une réaction favorable.</p>
+    <p class="lang-note">Items transcrits en anglais (texte officiel) avec traduction de travail non officielle.</p>
+    <div class="pill-row">
+      <span class="pill">9 situations</span>
+      <span class="pill">5 minutes</span>
+      <span class="pill">2 échelles 1-6</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+    <div class="qnum" id="qnum">Situation 1 / 9</div>
+    <p class="qtext" id="qtext"></p>
+    <div class="scale-block">
+      <p class="scale-label" id="label-a"></p>
+      <div class="scale-row" id="row-a"></div>
+      <div class="scale-labels"><span>1 - Pas du tout préoccupé(e)</span><span>6 - Très préoccupé(e)</span></div>
+    </div>
+    <div class="scale-block">
+      <p class="scale-label" id="label-b"></p>
+      <div class="scale-row" id="row-b"></div>
+      <div class="scale-labels"><span>1 - Très improbable</span><span>6 - Très probable</span></div>
+    </div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-back" disabled>Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div class="result-score" id="score-total"></div>
+    <p class="result-text">score moyen de sensibilité au rejet, sur 36</p>
+    <p class="result-text" id="score-interp"></p>
+    <div class="nav-row no-print" style="margin-top:20px;">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">RSQ-Downey (Adult Rejection Sensitivity Questionnaire) — Berenson, Gyurak, Ayduk, Downey, Garner, Mogg, Bradley &amp; Pine (2009). Concept fondateur : Downey &amp; Feldman (1996). Outil de recherche, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var scenarios = [
+    {
+      s: "Vous demandez à vos parents ou à un autre membre de votre famille de vous prêter de l'argent pour vous aider à traverser une période financière difficile.",
+      a: "Dans quelle mesure seriez-vous préoccupé(e) quant au fait que votre famille ait envie ou non de vous aider ?",
+      b: "Je m'attendrais à ce qu'ils acceptent de m'aider autant qu'ils le peuvent."
+    },
+    {
+      s: "Vous allez voir un(e) ami(e) proche pour lui parler après avoir dit ou fait quelque chose qui l'a sérieusement contrarié(e).",
+      a: "Dans quelle mesure seriez-vous préoccupé(e) quant au fait que votre ami(e) ait envie ou non de vous parler ?",
+      b: "Je m'attendrais à ce qu'il/elle ait envie de me parler pour arranger les choses."
+    },
+    {
+      s: "Vous abordez la question de la protection sexuelle avec votre partenaire et vous lui dites à quel point cela vous semble important.",
+      a: "Dans quelle mesure seriez-vous préoccupé(e) quant à sa réaction ?",
+      b: "Je m'attendrais à ce qu'il/elle soit disposé(e) à en discuter sans se braquer."
+    },
+    {
+      s: "Vous demandez à votre supérieur(e) de l'aide pour un problème au travail.",
+      a: "Dans quelle mesure seriez-vous préoccupé(e) quant au fait que cette personne ait envie ou non de vous aider ?",
+      b: "Je m'attendrais à ce qu'il/elle ait envie de m'aider."
+    },
+    {
+      s: "Après une dispute amère, vous appelez votre partenaire parce que vous voulez vous réconcilier.",
+      a: "Dans quelle mesure seriez-vous préoccupé(e) quant au fait qu'il/elle ait envie ou non de se réconcilier ?",
+      b: "Je m'attendrais à ce qu'il/elle soit au moins aussi désireux(se) que moi."
+    },
+    {
+      s: "Vous demandez à vos parents de venir à un événement important pour vous.",
+      a: "Dans quelle mesure seriez-vous préoccupé(e) quant au fait qu'ils aient envie ou non de venir ?",
+      b: "Je m'attendrais à ce qu'ils aient envie de venir."
+    },
+    {
+      s: "Lors d'une soirée, vous remarquez quelqu'un que vous aimeriez connaître et vous engagez la conversation.",
+      a: "Dans quelle mesure seriez-vous préoccupé(e) quant au fait que cette personne ait envie ou non de vous parler ?",
+      b: "Je m'attendrais à ce qu'il/elle ait envie de me parler."
+    },
+    {
+      s: "Vous remarquez une distance avec votre partenaire ces derniers temps et lui demandez si quelque chose ne va pas.",
+      a: "Dans quelle mesure seriez-vous préoccupé(e) quant au fait qu'il/elle vous aime encore et veuille rester avec vous ?",
+      b: "Je m'attendrais à ce qu'il/elle me montre un amour et un engagement sincères, quoi qu'il arrive par ailleurs."
+    },
+    {
+      s: "Vous appelez un(e) ami(e) parce que vous avez quelque chose en tête dont vous ressentez vraiment le besoin de parler.",
+      a: "Dans quelle mesure seriez-vous préoccupé(e) quant au fait que votre ami(e) ait envie ou non de vous écouter ?",
+      b: "Je m'attendrais à ce qu'il/elle m'écoute et me soutienne."
+    }
+  ];
+  var aVals = new Array(scenarios.length).fill(null);
+  var bVals = new Array(scenarios.length).fill(null);
+  var current = 0;
+
+  var screenStart = document.getElementById('screen-start');
+  var screenQuiz = document.getElementById('screen-quiz');
+  var screenResult = document.getElementById('screen-result');
+  var qnum = document.getElementById('qnum');
+  var qtext = document.getElementById('qtext');
+  var progressFill = document.getElementById('progress-fill');
+  var btnBack = document.getElementById('btn-back');
+  var btnNext = document.getElementById('btn-next');
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    screenStart.hidden = true; screenQuiz.hidden = false; renderQuestion();
+  });
+
+  function makeRow(containerId, arr, i){
+    var row = document.getElementById(containerId);
+    row.innerHTML = '';
+    for (var v = 1; v <= 6; v++){
+      (function(val){
+        var b = document.createElement('button');
+        b.type = 'button'; b.className = 'scale-btn'; b.textContent = val;
+        if (arr[i] === val) b.classList.add('selected');
+        b.addEventListener('click', function(){
+          arr[i] = val;
+          renderQuestion();
+        });
+        row.appendChild(b);
+      })(v);
+    }
+  }
+
+  function renderQuestion(){
+    var i = current;
+    qnum.textContent = 'Situation ' + (i+1) + ' / ' + scenarios.length;
+    qtext.textContent = scenarios[i].s;
+    document.getElementById('label-a').textContent = scenarios[i].a;
+    document.getElementById('label-b').textContent = scenarios[i].b;
+    progressFill.style.width = Math.round((i / scenarios.length) * 100) + '%';
+    btnBack.disabled = (i === 0);
+    makeRow('row-a', aVals, i);
+    makeRow('row-b', bVals, i);
+    btnNext.disabled = !(aVals[i] !== null && bVals[i] !== null);
+    btnNext.textContent = i === scenarios.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  btnBack.addEventListener('click', function(){
+    if (current > 0) { current--; renderQuestion(); }
+  });
+  btnNext.addEventListener('click', function(){
+    if (aVals[current] === null || bVals[current] === null) return;
+    if (current < scenarios.length - 1) { current++; renderQuestion(); } else { showResult(); }
+  });
+
+  function showResult(){
+    screenQuiz.hidden = true; screenResult.hidden = false;
+    var sum = 0;
+    for (var i=0;i<scenarios.length;i++){
+      var rejExpect = 7 - bVals[i];
+      sum += aVals[i] * rejExpect;
+    }
+    var mean = sum / scenarios.length;
+    document.getElementById('score-total').textContent = mean.toFixed(2);
+    var level;
+    if (mean < 1.39) level = 'très bas';
+    else if (mean < 5) level = 'bas';
+    else if (mean < 6.8) level = 'modérément bas';
+    else if (mean < 10.4) level = 'moyen';
+    else if (mean < 12.2) level = 'modérément élevé';
+    else if (mean <= 15.85) level = 'élevé';
+    else level = 'très élevé';
+    document.getElementById('score-interp').textContent = 'Score de sensibilité au rejet, niveau indicatif : ' + level + '. Formule : pour chaque situation, attente de rejet = 7 - (réponse b) ; sensibilité de la situation = (réponse a) × (attente de rejet) ; score total = moyenne des 9 situations. Normes de l\'échantillon de validation (N=685 adultes) : moyenne = 8,61 (ÉT=3,61). L\'autrice précise que ces catégories sont indicatives, l\'échelle continue étant préférable pour toute comparaison. Aucun seuil diagnostique formel : c\'est une mesure dimensionnelle de recherche.';
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    aVals = new Array(scenarios.length).fill(null);
+    bVals = new Array(scenarios.length).fill(null);
+    current = 0;
+    screenResult.hidden = true; screenStart.hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RSQ-Downey — Sensibilité au rejet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#8B2E4A 0%,#C36A85 55%,#521A2C 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(240,205,215,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:24px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#6B1E30;background:#F5DDE4;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .warn{font-size:12.5px;background:#FBF0E8;border:1px solid #E7CBB0;border-radius:10px;padding:12px 14px;color:#7A4A20;margin:0 0 20px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#8B2E4A;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#8B2E4A;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <div class="fiche-photo"><span class="acronym">RSQ</span></div>
+  <h1 class="serif">Questionnaire de sensibilité au rejet (adulte)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Adult Rejection Sensitivity Questionnaire — Downey, Berenson et al. ; version transcrite : Berenson, Gyurak, Ayduk, Downey, Garner, Mogg, Bradley &amp; Pine (2009)</p>
+  <div class="meta-row">
+    <span class="pill">9 situations (18 items)</span>
+    <span class="pill">5 minutes</span>
+    <span class="pill">2 échelles 1-6</span>
+    <span class="pill">Anglais + traduction</span>
+    <span class="pill">Dépendance affective, Anxiété</span>
+  </div>
+  <p class="warn">À ne pas confondre avec le Relationship Scales Questionnaire (RSQ) de Griffin &amp; Bartholomew, déjà construit séparément dans ce catalogue sous le nom <code>rsq-griffin-bartholomew</code> : même sigle, instrument totalement différent. Ce fichier-ci porte le nom <code>rsq-downey</code>.</p>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="rsq-downey.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Ce questionnaire mesure la sensibilité au rejet : la tendance à anticiper avec anxiété, à percevoir facilement et à réagir fortement au rejet dans les relations proches (famille, couple, amitié, travail). Il présente 9 situations sociales hypothétiques ; pour chacune, la personne évalue à la fois sa préoccupation anticipée et l'attente d'une réponse favorable de l'autre.</p>
+    <p class="source-note">Traduction française de travail réalisée pour cette fiche, non officielle ; le texte anglais est le texte officiel de l'autrice.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Pour chaque situation : attente de rejet = 7 - (réponse b, attente d'acceptation) ; sensibilité au rejet de la situation = (réponse a, préoccupation) × (attente de rejet), résultat entre 1 et 36. Score total = moyenne des 9 scores de situation.</p>
+    <p>Normes de l'échantillon de validation (N=685 adultes, Berenson et al. 2009) : moyenne = 8,61 (ÉT=3,61), étendue observée 1,00-24,22. Catégories indicatives (l'autrice précise que l'échelle continue reste préférable) : &lt;1,39 très bas ; 1,39-5 bas ; 5-6,8 modérément bas ; 6,8-10,4 moyen ; 10,4-12,2 modérément élevé ; 12,2-15,85 élevé ; &gt;15,85 très élevé. Des scores significativement plus élevés ont été rapportés en trouble de la personnalité borderline (M=15,84) et évitante (M=17,35) comparé à des témoins sains (M=6,47), à titre indicatif de recherche uniquement.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source</h2>
+    <p class="source-note">Berenson, K. R., Gyurak, A., Ayduk, O., Downey, G., Garner, M. J., Mogg, K., Bradley, B. P., &amp; Pine, D. S. (2009). Rejection sensitivity and disruption of attention by social threat cues. Journal of Research in Personality, 43, 1064-1072. Concept fondateur : Downey, G., &amp; Feldman, S. I. (1996). Journal of Personality and Social Psychology, 70(6), 1327-1343. Diffusion académique explicitement libre déclarée par l'autrice (Kathy R. Berenson, Gettysburg College) : « This measure is available to the public. You are welcome to use, reprint, translate, and modify the measure in whatever ways best suit your research, and you do not need to ask permission. »</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>
