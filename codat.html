@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CODAT - Codependency Assessment Tool</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#3D5A80;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#3D5A80;background:#E9EEF5;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#3D5A80;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:36px;color:#3D5A80;margin:0 0 4px;}
+  .result-max{font-size:13px;color:#9A9E90;margin:0 0 16px;}
+  .subresult{font-size:13.5px;margin:6px 0;padding:8px 10px;border-bottom:1px solid #E0D9C9;display:flex;justify-content:space-between;}
+  .subresult span:last-child{font-weight:700;color:#3D5A80;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">CODAT - Outil d'évaluation de la codépendance</h1>
+    <p class="lead">Codependency Assessment Tool. Indiquez à quelle fréquence vous ressentez ce que décrit chaque item, sur une échelle allant de rarement ou jamais à la plupart du temps.</p>
+    <p class="lang-note">Traduction française de travail, non officielle ; texte original en anglais dans la publication source (article académique, diffusion libre via TOAD).</p>
+    <div class="pill-row">
+      <span class="pill">25 questions</span>
+      <span class="pill">6 minutes</span>
+      <span class="pill">Échelle 1-5</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-score" id="score-total"></p>
+    <p class="result-max">score total, sur 125 (item 20 recodé ; plus le score est élevé, plus le niveau de codépendance rapporté est important)</p>
+    <div id="subscales"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Hughes-Hammer, C., Martsolf, D. S., &amp; Zeller, R. A. (1998). Development and testing of the Codependency Assessment Tool. Archives of Psychiatric Nursing, 12(5), 264-272. Aucun seuil clinique officiel de coupure publié : mesure dimensionnelle, à lire en profil relatif. Outil de repérage, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var subNames = {
+    A: "Centration sur autrui / négligence de soi",
+    E: "Estime de soi",
+    D: "Dissimulation de soi",
+    S: "Préoccupations somatiques",
+    F: "Famille d'origine"
+  };
+  var subMax = { A:25, E:30, D:25, S:20, F:25 };
+  var items = [
+    {sub:'A', t:"Je me sens obligé(e)/forcé(e) d'aider les autres à résoudre leurs problèmes (ex. donner des conseils non sollicités)."},
+    {sub:'A', t:"J'essaie de contrôler les événements et la façon dont les autres devraient se comporter."},
+    {sub:'A', t:"J'ai peur de laisser les autres être qui ils sont et de laisser les événements se dérouler naturellement."},
+    {sub:'E', t:"J'ai honte de qui je suis."},
+    {sub:'A', t:"J'essaie de contrôler les événements et les gens par l'impuissance, la culpabilisation, la coercition, les menaces, les conseils, la manipulation ou la domination."},
+    {sub:'S', t:"Je m'inquiète d'avoir des problèmes d'estomac, de foie, d'intestin ou de vessie."},
+    {sub:'S', t:"Je suis préoccupé(e) par l'idée que mon corps me lâche."},
+    {sub:'A', t:"Je me sens obligé(e)/forcé(e) d'aider les autres à résoudre leurs problèmes (ex. donner des conseils)."},
+    {sub:'S', t:"J'ai le sentiment que ma santé générale est mauvaise comparée à celle de ma famille et de mes amis."},
+    {sub:'D', t:"Je fais bonne figure quand je suis en réalité triste ou en colère."},
+    {sub:'D', t:"Je garde mes sentiments pour moi et je donne le change."},
+    {sub:'E', t:"Je me sens malade et épuisé(e)."},
+    {sub:'D', t:"Je me cache pour que personne ne me connaisse vraiment."},
+    {sub:'D', t:"Je garde un contrôle strict sur mes émotions."},
+    {sub:'F', t:"En grandissant, ma famille ne parlait pas ouvertement des problèmes."},
+    {sub:'S', t:"J'ai des troubles d'estomac, de vessie ou d'intestin."},
+    {sub:'E', t:"Je me critique pour tout, y compris ma façon de penser, ressentir, paraître, agir et me comporter."},
+    {sub:'D', t:"Je refoule les pensées et sentiments douloureux hors de ma conscience."},
+    {sub:'F', t:"J'ai grandi dans une famille perturbée, insensible, dépendante à des substances, ou submergée de problèmes."},
+    {sub:'F', t:"Ma famille exprimait ouvertement ses sentiments et son affection quand je grandissais.", reverse:true},
+    {sub:'E', t:"Je me blâme trop pour tout."},
+    {sub:'F', t:"Je suis aujourd'hui malheureux(se) de la façon dont ma famille gérait les problèmes quand je grandissais."},
+    {sub:'F', t:"Je suis malheureux(se) de la façon dont ma famille communiquait quand je grandissais."},
+    {sub:'E', t:"Je me sens humilié(e) ou gêné(e)."},
+    {sub:'E', t:"Je me déteste."}
+  ];
+  var opts = ["1 - Rarement ou jamais","2","3","4","5 - La plupart du temps"];
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx].t;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    opts.forEach(function(label, v){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === v+1 ? ' selected' : '');
+      d.textContent = label;
+      d.addEventListener('click', function(){
+        answers[idx] = v+1;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var total = 0;
+    var subs = {A:0,E:0,D:0,S:0,F:0};
+    items.forEach(function(it, i){
+      var v = answers[i];
+      if (it.reverse) v = 6 - v;
+      total += v;
+      subs[it.sub] += v;
+    });
+    document.getElementById('score-total').textContent = total;
+    var html = '';
+    ['A','E','D','S','F'].forEach(function(k){
+      html += '<div class="subresult"><span>' + subNames[k] + '</span><span>' + subs[k] + ' / ' + subMax[k] + '</span></div>';
+    });
+    document.getElementById('subscales').innerHTML = html;
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CODAT - Codependency Assessment Tool</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#8A1F5C 0%,#C43F94 55%,#4D0F33 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(200,215,235,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#22334D;background:#E9EEF5;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#3D5A80;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#22334D;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <div class="fiche-photo"><span class="acronym">CODAT</span></div>
+  <h1 class="serif">Outil d'évaluation de la codépendance</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Codependency Assessment Tool - Hughes-Hammer, Martsolf &amp; Zeller (1998)</p>
+  <div class="meta-row">
+    <span class="pill">25 questions</span>
+    <span class="pill">6 minutes</span>
+    <span class="pill">Échelle 1-5</span>
+    <span class="pill">Anglais</span>
+    <span class="pill">Dépendance affective</span>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" href="codat.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le CODAT est un auto-questionnaire de 25 items publié dans une revue infirmière à comité de lecture, qui explore le fonctionnement codépendant tel que décrit dans la littérature clinique : centration sur les besoins d'autrui au détriment de soi, atteinte de l'estime de soi, dissimulation des émotions réelles, préoccupations somatiques, et souvenir d'une famille d'origine peu expressive. Il comporte 5 sous-échelles : Centration sur autrui/négligence de soi (5 items), Estime de soi (6 items), Dissimulation de soi (5 items), Préoccupations somatiques (4 items) et Famille d'origine (5 items). Un seul item est formulé positivement (item 20) et fait l'objet d'un recodage avant addition.</p>
+    <p class="source-note">Aucune traduction française officielle validée n'a été identifiée : les items sont proposés ici dans une traduction de travail non officielle, réalisée pour cette page à partir du texte original en anglais.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque item est coté de 1 (rarement ou jamais) à 5 (la plupart du temps). L'item 20, seul item positif, est recodé (6 moins la valeur brute) avant tout calcul. Le score total est la somme des 25 items recodés, de 25 à 125 : plus il est élevé, plus le niveau de codépendance rapporté est important. Le score de chaque sous-échelle est la somme des items qui la composent.</p>
+    <p class="source-note">Aucun seuil clinique officiel de coupure n'a été publié par les auteurs : c'est une mesure dimensionnelle, à interpréter en profil relatif plutôt que par un seuil fixe.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Source</h2>
+    <p class="source-note">Hughes-Hammer, C., Martsolf, D. S., &amp; Zeller, R. A. (1998). Development and testing of the Codependency Assessment Tool. Archives of Psychiatric Nursing, 12(5), 264-272. Texte intégral et clé de cotation diffusés librement par l'agrégateur académique TOAD (Tests and Open (Access) Database), recoupés avec une réplication turque publiée dans la même revue (2009, PMID 19926026). Outil de repérage, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

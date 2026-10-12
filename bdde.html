@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BDDE - Examen du trouble dysmorphique corporel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#3D5A80;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#3D5A80;background:#E9EEF5;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#3D5A80;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:36px;color:#3D5A80;margin:0 0 4px;}
+  .result-max{font-size:13px;color:#9A9E90;margin:0 0 16px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">BDDE - Trouble dysmorphique corporel</h1>
+    <p class="lead">Body Dysmorphic Disorder Examination. Entretien semi-structuré, hétéro-administré : pour chaque item, le clinicien coche la cotation de 0 (absence/minimum) à 6 (extrême/maximum) reflétant ce que rapporte la personne à propos de la « particularité » physique qui la préoccupe.</p>
+    <p class="lang-note">Les items ci-dessous sont traduits depuis la traduction néerlandaise officielle du BDDE-SRQ (Copyright Jeff Reiter &amp; James Rosen, traduction avec permission des auteurs, Université de Maastricht), le texte anglais original n'ayant pas pu être retrouvé en accès libre.</p>
+    <div class="pill-row">
+      <span class="pill">25 items (28 cotations)</span>
+      <span class="pill">10 minutes</span>
+      <span class="pill">Hétéro-administré</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-score" id="score-total"></p>
+    <p class="result-max" id="score-total-flag">score total BDDE, sur 168 (28 cotations 0-6 réparties sur les 25 items 1-15 et 17-26, les items 9, 10 et 11 comportant chacun deux cotations a/b), aucun seuil clinique publié dans les sources consultées</p>
+    <p class="lead">Ce score ne peut en aucun cas remplacer une évaluation clinique. Rappel des critères diagnostiques DSM-IV associés à cet instrument : préoccupation excessive pour un défaut d'apparence imaginaire ou mineur (critère A) ; détresse ou altération cliniquement significative du fonctionnement (critère B) ; préoccupation non mieux expliquée par un autre trouble mental (critère C).</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Rosen, J.C., &amp; Reiter, J. (1996). Development of the Body Dysmorphic Disorder Examination. Behaviour Research and Therapy, 34(9), 755-766. Traduction française de travail depuis la traduction néerlandaise officielle, non officielle. Outil de repérage, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var opts = ["0","1","2","3","4","5","6"];
+
+  var items = [
+    "1. Fréquence perçue de la même « particularité » chez les pairs (âge/sexe).",
+    "2. Fréquence de vérification de la particularité (en jours sur les 4 dernières semaines).",
+    "3. Degré d'insatisfaction envers la particularité.",
+    "4. Degré d'insatisfaction envers l'apparence générale.",
+    "5. Fréquence de recherche de réassurance auprès d'autrui.",
+    "6. Fréquence de pensées intrusives bouleversantes liées à la particularité (en jours).",
+    "7. Anxiété ou malaise en public (lieux avec inconnus).",
+    "8. Anxiété ou malaise en situation sociale (collègues, amis, famille).",
+    "9a. Fréquence du sentiment d'être remarqué par autrui.",
+    "9b. Détresse liée au sentiment d'être remarqué par autrui.",
+    "10a. Fréquence de remarques spontanées d'autrui sur la particularité.",
+    "10b. Détresse liée à des remarques spontanées d'autrui.",
+    "11a. Fréquence d'un traitement différentiel perçu.",
+    "11b. Détresse liée à un traitement différentiel perçu.",
+    "12. Importance de l'apparence dans l'estime de soi.",
+    "13. Jugement négatif de soi-même attribué à l'apparence.",
+    "14. Jugement négatif perçu de la part d'autrui.",
+    "15. Attractivité physique perçue par autrui.",
+    "17. Évitement de lieux publics.",
+    "18. Évitement de situations sociales ou professionnelles.",
+    "19. Évitement du contact physique.",
+    "20. Limitation volontaire du contact physique.",
+    "21. Évitement d'activités physiques.",
+    "22. Camouflage (habillement, maquillage), en jours.",
+    "23. Changement de posture ou de mouvements pour dissimuler, en jours.",
+    "24. Évitement de se regarder (miroirs, vitrines), en jours.",
+    "25. Évitement de se montrer dénudé(e) à autrui.",
+    "26. Comparaison de son apparence à celle d'autrui, en jours."
+  ];
+
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Item ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    opts.forEach(function(label, v){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === v ? ' selected' : '');
+      d.textContent = v + (v === '0' ? ' (absence / jamais)' : (v === '6' ? ' (extrême / tout le temps)' : ''));
+      d.addEventListener('click', function(){
+        answers[idx] = v;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var total = answers.reduce(function(a,b){ return a + parseInt(b,10); }, 0);
+    document.getElementById('score-total').textContent = total;
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BDDE - Examen du trouble dysmorphique corporel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#6B4A2E 0%,#A0764C 55%,#3D2A18 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(200,215,235,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#22334D;background:#E9EEF5;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .caveat{background:#FBF3E7;border:1px solid #E7D9BC;border-radius:12px;padding:14px 16px;font-size:13.5px;color:#5A4A2A;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#3D5A80;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#22334D;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <div class="fiche-photo"><span class="acronym">BDDE</span></div>
+  <h1 class="serif">Examen du trouble dysmorphique corporel (BDDE)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Body Dysmorphic Disorder Examination - Rosen &amp; Reiter (1996)</p>
+  <div class="meta-row">
+    <span class="pill">25 items</span>
+    <span class="pill">10 minutes</span>
+    <span class="pill">Hétéro-administré</span>
+    <span class="pill">Acceptation corporelle</span>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" href="bdde.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le BDDE explore, par entretien semi-structuré, la préoccupation pour une « particularité » d'apparence (fréquence des vérifications, insatisfaction, pensées intrusives, retentissement social et affectif, évitements et comportements de camouflage). Chaque item est coté par le clinicien de 0 à 6. Les items 9, 10 et 11 comportent chacun deux cotations (a : fréquence, b : détresse associée). Un item 16 (deux questions oui/non sur les moments où la particularité a semblé moins grave ou normale) existe dans l'instrument original mais n'est pas coté : il n'est donc pas repris dans cet outil interactif, conformément au guide de cotation officiel.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Score total = somme des cotations des items 1 à 15 et 17 à 26 (28 cotations au total, les items 9, 10 et 11 comptant chacun pour deux), étendue 0 à 168. Aucun seuil clinique ni score de coupure publié dans les sources consultées.</p>
+    <p>Critères diagnostiques DSM-IV associés à l'instrument (texte officiel du guide de cotation, vérifié verbatim) : A. préoccupation pour un défaut imaginaire de l'apparence, ou préoccupation manifestement excessive si une légère anomalie physique est présente ; B. la préoccupation entraîne une souffrance ou une altération cliniquement significative du fonctionnement social, professionnel ou dans d'autres domaines importants ; C. la préoccupation n'est pas mieux expliquée par un autre trouble mental.</p>
+    <p class="caveat">⚠️ Réserve de fidélité majeure : le texte anglais original de l'article (paywall ScienceDirect) n'a pas pu être retrouvé en accès libre. Les items de cette page sont traduits en français depuis la traduction néerlandaise officielle et intégrale du BDDE-SRQ (copyright 1995 Jeff Reiter &amp; James Rosen, traduction avec la permission des auteurs, Université de Maastricht), et non depuis le texte anglais original : la formulation anglaise exacte n'est donc pas garantie. Seul le guide officiel de cotation (« Instructions to Users of the BDDE-SR », version 3.2, janvier 1994) a été retrouvé en anglais verbatim, d'où proviennent les critères diagnostiques ci-dessus.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Source</h2>
+    <p class="source-note">Rosen, J.C., &amp; Reiter, J. (1996). Development of the Body Dysmorphic Disorder Examination. Behaviour Research and Therapy, 34(9), 755-766. Propriété académique des auteurs, disponible sur demande, traduit avec leur permission par l'Université de Maastricht (Sandra Mulkens &amp; Christine Kerzel), aucune mention de paiement ni de licence commerciale même pour usage clinique. Outil de repérage, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

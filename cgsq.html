@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CGSQ — Questionnaire de tension du parent aidant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#9A4A3F;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-stem{font-size:12.5px;letter-spacing:.04em;text-transform:uppercase;color:#63695D;font-weight:600;margin:0 0 10px;}
+  .q-text{font-size:16px;margin:0 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;margin-top:14px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#9A4A3F;background:#F6E7E3;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#9A4A3F;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#9A4A3F;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .sub-table{width:100%;border-collapse:collapse;margin:10px 0 18px;font-size:14px;}
+  .sub-table th,.sub-table td{text-align:left;padding:9px 6px;border-bottom:1px solid #E0D9C9;}
+  .sub-table th{font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:#63695D;font-weight:600;}
+  .sub-table td.num{font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;color:#6E2F27;text-align:right;white-space:nowrap;}
+  .sub-table th.num{text-align:right;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 20px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">CGSQ — Questionnaire de tension du parent aidant</h1>
+    <p class="lead">Ce questionnaire explore, sur les 6 derniers mois, le retentissement sur la famille du fait de vivre avec un enfant présentant un trouble émotionnel ou comportemental : perturbations concrètes de la vie familiale, ressenti de honte, de colère, de tristesse, d'isolement et d'inquiétude pour l'avenir.</p>
+    <p class="lang-note">Questions en anglais (version originale officielle, Brannan, Heflinger &amp; Bickman). Outil sous licence : « Licence requise : oui » (autorisation des auteurs demandée avant tout usage).</p>
+    <div class="pill-row">
+      <span class="pill">21 questions</span>
+      <span class="pill">5 minutes</span>
+      <span class="pill">Échelle 1-5 par item</span>
+      <span class="pill">3 sous-échelles + score global</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-stem" id="q-stem"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-score" id="score-val"></p>
+    <p class="result-max">score global (somme des 3 moyennes de sous-échelles), sur un intervalle de 3 à 15</p>
+    <table class="sub-table">
+      <thead><tr><th>Sous-échelle</th><th class="num">Moyenne (1-5)</th></tr></thead>
+      <tbody>
+        <tr><td>Tension objective (items 1-11)</td><td class="num" id="sub-obj"></td></tr>
+        <tr><td>Tension subjective internalisée (items 12, 16, 17, 18, 20, 21)</td><td class="num" id="sub-int"></td></tr>
+        <tr><td>Tension subjective externalisée (items 13, 14 inversé, 15, 19)</td><td class="num" id="sub-ext"></td></tr>
+      </tbody>
+    </table>
+    <p class="result-text" id="level-text"></p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">CGSQ — Caregiver Strain Questionnaire, Brannan A.M., Heflinger C.A. &amp; Bickman L. (1997), Journal of Emotional and Behavioral Disorders, 5(4), 212-222. © 1994 Vanderbilt University. Outil d'évaluation du retentissement familial ; ne remplace pas une évaluation clinique.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [{"s": "A", "t": "Interruption of personal time resulting from your child's emotional or behavioral problem?"}, {"s": "A", "t": "You missing work or neglecting other duties because of your child's emotional or behavioral problem?"}, {"s": "A", "t": "Disruption of family routines due to your child's emotional or behavioral problem?"}, {"s": "A", "t": "Any family member having to do without things because of your child's emotional or behavioral problem?"}, {"s": "A", "t": "Any family member suffering negative mental or physical health effects as a result of your child's emotional or behavioral problem?"}, {"s": "A", "t": "Your child getting into trouble with the neighbors, the school, the community, or law enforcement?"}, {"s": "A", "t": "Financial strain for your family as a result of your child's emotional or behavioral problem?"}, {"s": "A", "t": "Less attention paid to other family members because of your child's emotional or behavioral problem?"}, {"s": "A", "t": "Disruption or upset of relationships within the family due to your child's emotional or behavioral problem?"}, {"s": "A", "t": "Disruption of your family's social activities resulting from your child's emotional or behavioral problem?"}, {"s": "B", "t": "How isolated did you feel as a result of your child's emotional or behavioral problem?"}, {"s": "B", "t": "How sad or unhappy did you feel as a result of your child's emotional or behavioral problem?"}, {"s": "B", "t": "How embarrassed did you feel about your child's emotional or behavioral problem?"}, {"s": "B", "t": "How well did you relate to your child?"}, {"s": "B", "t": "How angry did you feel toward your child?"}, {"s": "B", "t": "How worried did you feel about your child's future?"}, {"s": "B", "t": "How worried did you feel about your family's future?"}, {"s": "B", "t": "How guilty did you feel about your child's emotional or behavioral problem?"}, {"s": "B", "t": "How resentful did you feel toward your child?"}, {"s": "B", "t": "How tired or strained did you feel as a result of your child's emotional or behavioral problem?"}, {"s": "B", "t": "In general, how much of a toll has your child's emotional or behavioral problem taken on your family?"}];
+  var stems = {
+    "A": "In the past 6 months, how much of a problem was the following:",
+    "B": "In the past 6 months:"
+  };
+  var options = ["Not at all", "A little", "Somewhat", "Quite a bit", "Very much"];
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+  function renderQuestion(){
+    var it = items[idx];
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-stem').textContent = stems[it.s];
+    document.getElementById('q-text').textContent = it.t;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    options.forEach(function(label, v){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === v+1 ? ' selected' : '');
+      d.textContent = label;
+      d.addEventListener('click', function(){ answers[idx] = v+1; renderQuestion(); });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){ if (idx > 0){ idx--; renderQuestion(); } });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+  function mean(list){ var s = 0; list.forEach(function(n){ s += n; }); return s / list.length; }
+  function fmt(x){ return (Math.round(x * 100) / 100).toFixed(2).replace('.', ','); }
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var a = answers;
+    // Cotation officielle (Univ. de Miami, El Centro Measures Library) : numéros d'items 1-21
+    var obj = mean(a.slice(0, 11));
+    var ext = mean([a[12], 6 - a[13], a[14], a[18]]);
+    var inte = mean([a[11], a[15], a[16], a[17], a[19], a[20]]);
+    var glob = obj + ext + inte;
+    document.getElementById('score-val').textContent = fmt(glob);
+    document.getElementById('sub-obj').textContent = fmt(obj);
+    document.getElementById('sub-int').textContent = fmt(inte);
+    document.getElementById('sub-ext').textContent = fmt(ext);
+    document.getElementById('level-text').textContent = "Plus les scores sont élevés, plus la tension ressentie par le parent est importante. Aucun seuil clinique n'est publié avec la cotation officielle : les scores se lisent par comparaison avec les passations antérieures du même parent (suivi dans le temps) ou avec des données de référence de la littérature, et se complètent d'un entretien clinique.";
+  }
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null); idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CGSQ — Questionnaire de tension du parent aidant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#8A3B30 0%,#D9A89C 55%,#4A1E18 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.45),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#6E2F27;background:#F6E7E3;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#9A4A3F;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#6E2F27;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">CGSQ</span></div>
+
+  <h1 class="serif">Questionnaire de tension du parent aidant (CGSQ)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Caregiver Strain Questionnaire — Brannan, Heflinger &amp; Bickman (1997), Vanderbilt University</p>
+  <div class="meta-row">
+    <span class="pill">21 questions</span>
+    <span class="pill">5 minutes</span>
+    <span class="pill">Échelle 1-5 par item</span>
+    <span class="pill">Anglais</span>
+    <span class="pill">Licence requise : oui</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="cgsq.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le CGSQ est un auto-questionnaire de 21 items évaluant le retentissement sur la famille du fait de vivre avec un enfant ou adolescent présentant un trouble émotionnel ou comportemental, sur les 6 derniers mois. Il distingue la tension objective (perturbations observables : temps personnel, travail, routines familiales, finances, vie sociale, problèmes avec l'entourage et la justice) et la tension subjective, internalisée (tristesse, isolement, inquiétude pour l'avenir, culpabilité, fatigue) ou externalisée (honte, colère, ressentiment envers l'enfant, qualité de la relation). Très utilisé aussi auprès de parents d'enfants avec un trouble du spectre de l'autisme.</p>
+    <p class="source-note">Les 21 questions et les 5 modalités de réponse sont reproduites telles qu'elles figurent dans le document officiel anglais (« Caregiver Strain Questionnaire », © 1994 Vanderbilt University, Brannan, Heflinger &amp; Bickman), diffusé par la bibliothèque de mesures El Centro de l'Université de Miami. Une validation française existe (FCGSQ-21 : Fourcade, Ferrand, Afzali, Kruck &amp; Rogé, 2019, Psychologie française, 64(3), 277-294), mais son texte n'est pas accessible en ligne : cette page est donc en anglais.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Cotation officielle (instructions de l'Université de Miami) : tension objective = moyenne des items 1 à 11 ; tension subjective externalisée = moyenne des items 13, 14 (inversé), 15 et 19 ; tension subjective internalisée = moyenne des items 12, 16, 17, 18, 20 et 21 ; score global = somme des trois scores de sous-échelles. Il est recommandé de ne pas calculer une sous-échelle si plus de 15 % de ses items manquent, et de ne pas calculer le score global si une sous-échelle manque (cette page exige une réponse à chaque question). Codage retenu ici : 1 (« Not at all ») à 5 (« Very much ») comme dans l'article princeps ; la page de la bibliothèque de mesures indique un codage 0-4, ce qui décale chaque moyenne d'un point sans changer les comparaisons à codage identique ; l'item 14 est inversé (6 moins la réponse). Plus les scores sont élevés, plus la tension est forte. Aucun seuil clinique n'est fourni avec la cotation officielle : les scores se lisent en suivi dans le temps ou par rapport aux données de la littérature.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p><strong>Licence requise : oui.</strong> Le document officiel porte la mention « Copyright 1994 Vanderbilt University (Brannan, Heflinger, &amp; Bickman) — All rights reserved », et la bibliothèque de mesures de l'Université de Miami demande de contacter les auteurs pour obtenir leur autorisation avant tout usage, sans tarif documenté. Page construite sur décision du praticien de publier les tests sous licence ; vérifier l'autorisation des auteurs avant diffusion à des patients.</p><p class="source-note">Sources : https://elcentro.sonhs.miami.edu/research/measures-library/cgsq/index.html (CGSQ_Items_Eng.doc, CGSQ_Scoring_Instructions.doc). Article princeps : Brannan A.M., Heflinger C.A. &amp; Bickman L. (1997), « The Caregiver Strain Questionnaire: Measuring the Impact on the Family of Living with a Child with Serious Emotional Disturbance », Journal of Emotional and Behavioral Disorders, 5(4), 212-222.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

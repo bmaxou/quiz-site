@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ASI-3 — Indice de sensibilité à l'anxiété (version 3)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#FBF4EC;color:#2A2016;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#2A2016;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#8A6B4C;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#8A6B4C;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #EBDCC8;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#8A6B4C;margin:0 0 20px;}
+  .lang-note{font-size:12px;color:#A68B6B;font-style:italic;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#8A6B4C;background:#FBF4EC;border:1px solid #EBDCC8;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#A6531E;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .progress{font-size:12px;color:#A68B6B;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #EBDCC8;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#A6531E;background:#F7E7D8;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#FBF4EC;color:#2A2016;border-color:#EBDCC8;}
+  .btn-primary{background:#A6531E;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#A6531E;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#A68B6B;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#2A2016;margin:0 0 20px;}
+  .subscale-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #EBDCC8;font-size:14px;}
+  .subscale-row:last-child{border-bottom:none;}
+  .subscale-val{font-weight:700;color:#A6531E;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#8A6B4C;border-top:1px solid #EBDCC8;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">ASI-3 — Indice de sensibilité à l'anxiété</h1>
+    <p class="lead">Ce questionnaire explore la crainte des sensations liées à l'anxiété (peur de la peur), à travers trois dimensions : préoccupations physiques, cognitives et sociales.</p>
+    <p class="lang-note">Questionnaire en anglais : aucune traduction française validée n'a été confirmée lors du sourçage.</p>
+    <div class="pill-row">
+      <span class="pill">18 items</span>
+      <span class="pill">5 minutes</span>
+      <span class="pill">Échelle 0-4</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-score" id="score-val"></p>
+    <p class="result-max">score total, sur 72 (18 items de 0 à 4)</p>
+    <div id="subscale-rows"></div>
+    <p class="result-text">Plus le score est élevé, plus la sensibilité à l'anxiété rapportée est importante. Mesure dimensionnelle, sans seuil clinique officiel ; à interpréter par sous-échelle et globalement.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Taylor, S., Zvolensky, M.J., Cox, B.J. et al. (2007). Robust Dimensions of Anxiety Sensitivity: Development and Initial Validation of the Anxiety Sensitivity Index-3. Psychological Assessment, 19(2), 176-188. Outil dimensionnel, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [
+    "It is important for me not to appear nervous.",
+    "When I cannot keep my mind on a task, I worry that I might be going crazy.",
+    "It scares me when my heart beats rapidly.",
+    "When my stomach is upset, I worry that I might be seriously ill.",
+    "It scares me when I am unable to keep my mind on a task.",
+    "When I tremble in the presence of others, I fear what people might think of me.",
+    "When my chest feels tight, I get scared that I won't be able to breathe properly.",
+    "When I feel pain in my chest, I worry that I'm going to have a heart attack.",
+    "I worry that other people will notice my anxiety.",
+    "When I feel “spacey” or spaced out I worry that I may be mentally ill.",
+    "It scares me when I blush in front of people.",
+    "When I notice my heart skipping a beat, I worry that there is something seriously wrong with me.",
+    "When I begin to sweat in a social situation, I fear people will think negatively of me.",
+    "When my thoughts seem to speed up, I worry that I might be going crazy.",
+    "When my throat feels tight, I worry that I could choke to death.",
+    "When I have trouble thinking clearly, I worry that there is something wrong with me.",
+    "I think it would be horrible for me to faint in public.",
+    "When my mind goes blank, I worry there is something terribly wrong with me."
+  ];
+  var subscaleOf = [ "Sociales","Cognitives","Physiques","Physiques","Cognitives","Sociales","Physiques","Physiques","Sociales","Cognitives","Sociales","Physiques","Sociales","Cognitives","Physiques","Cognitives","Sociales","Cognitives" ];
+  var subscales = ["Physiques","Cognitives","Sociales"];
+  var opts = [
+    {l:"0 — Very little", v:0},
+    {l:"1 — A little", v:1},
+    {l:"2 — Some", v:2},
+    {l:"3 — Much", v:3},
+    {l:"4 — Very much", v:4}
+  ];
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    opts.forEach(function(opt){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === opt.v ? ' selected' : '');
+      d.textContent = opt.l;
+      d.addEventListener('click', function(){
+        answers[idx] = opt.v;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var total = 0;
+    var sub = {};
+    subscales.forEach(function(s){ sub[s] = 0; });
+    answers.forEach(function(v, i){
+      total += v;
+      sub[subscaleOf[i]] += v;
+    });
+    var rows = '';
+    subscales.forEach(function(s){
+      rows += '<div class="subscale-row"><span>' + s + '</span><span class="subscale-val">' + sub[s] + ' / 24</span></div>';
+    });
+    document.getElementById('subscale-rows').innerHTML = rows;
+    document.getElementById('score-val').textContent = total;
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ASI-3 — Indice de sensibilité à l'anxiété (version 3)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#FBF4EC;color:#2A2016;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#2A2016;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#8A6B4C;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#8A6B4C;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#A6531E 0%,#D99A54 55%,#5C2E0A 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.3),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#5C2E0A;background:#F7E7D8;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#8A6B4C;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#8A6B4C;background:#FFFFFF;border:1px solid #EBDCC8;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#A68B6B;}
+  .caveat{background:#FBEFE0;border:1px solid #E8CFA6;border-radius:10px;padding:12px 14px;font-size:13px;color:#5C3A14;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#A6531E;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#5C2E0A;border-color:#EBDCC8;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">ASI-3</span></div>
+
+  <h1 class="serif">Indice de sensibilité à l'anxiété (ASI-3)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Anxiety Sensitivity Index-3 — Taylor, Zvolensky, Cox et al. (2007)</p>
+  <div class="meta-row">
+    <span class="pill">18 items</span>
+    <span class="pill">5 minutes</span>
+    <span class="pill">Échelle 0-4</span>
+    <span class="pill">Anglais</span>
+    <span class="pill">Anxiété</span>
+    <span class="pill">Licence requise : incertaine</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="asi-3.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>L'ASI-3 mesure la sensibilité à l'anxiété (la crainte des sensations associées à l'anxiété, indépendamment de l'anxiété elle-même), à travers trois sous-échelles de 6 items chacune : préoccupations physiques (peur des sensations corporelles, ex. accélération cardiaque, oppression thoracique), préoccupations cognitives (peur de perdre le contrôle de ses pensées, ex. peur de devenir fou) et préoccupations sociales (peur du jugement d'autrui face à des signes visibles d'anxiété). Aucun item n'est inversé à la cotation.</p>
+    <p class="source-note">Items reproduits en anglais, tels que publiés dans l'article princeps (Taylor et al., 2007) et recoupés avec l'annexe B de Luo, Chen, Chen &amp; Zhan (2024, <em>Humanities &amp; Social Sciences Communications</em>, ouvert en Online Appendix) et la page de référence de l'Affective &amp; Biobehavioral Research Core, University of Wisconsin-Madison. Aucune traduction française validée n'a été retrouvée lors du sourçage.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque item est coté de 0 (Very little) à 4 (Very much). Le score total (somme des 18 items, 0-72) et les trois scores de sous-échelle (somme de 6 items chacune, 0-24) sont calculés. Plus le score est élevé, plus la sensibilité à l'anxiété rapportée est importante.</p>
+    <p class="source-note">Mesure dimensionnelle continue, aucun seuil clinique officiel publié dans l'article princeps : à interpréter par sous-échelle et globalement, en complément d'une évaluation clinique.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p>Taylor, S., Zvolensky, M.J., Cox, B.J., Deacon, B., Heimberg, R.G., Ledley, D.R., Abramowitz, J.S., Holaway, R.M., Sandin, B., Stewart, S.H., Coles, M., Eng, W., Daly, E.S., Arrindell, W.A., Bouvard, M. &amp; Cardenas, S.J. (2007). Robust Dimensions of Anxiety Sensitivity: Development and Initial Validation of the Anxiety Sensitivity Index-3. <em>Psychological Assessment</em>, 19(2), 176-188.</p>
+    <p class="caveat"><strong>Réserve de droits (licence requise : incertaine).</strong> Lors du sourçage, une page universitaire de référence sur cet instrument indique explicitement ne pas détenir l'autorité de droits d'auteur nécessaire pour accorder une permission d'usage (« We do not have copyright authority over these measures and cannot grant permission for use »). Aucune autorisation explicite de l'éditeur ou des auteurs n'a donc été confirmée pour cet usage. Construit malgré cette réserve à la demande explicite de Max (03/10/2026), pour un usage strictement personnel et non commercial. À reconsidérer si une clarification des droits venait à contredire cet usage.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

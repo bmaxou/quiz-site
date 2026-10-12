@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BESAA — Échelle d'estime corporelle pour adolescents et adultes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#FAF2F6;color:#2E222A;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#2E222A;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#8A5A72;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#8A5A72;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #EAD4DF;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#8A5A72;margin:0 0 20px;}
+  .lang-note{font-size:12px;color:#B084A0;font-style:italic;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#8A5A72;background:#FAF2F6;border:1px solid #EAD4DF;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#8A4F6E;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .progress{font-size:12px;color:#B084A0;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #EAD4DF;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#8A4F6E;background:#F3E1EA;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#FAF2F6;color:#2E222A;border-color:#EAD4DF;}
+  .btn-primary{background:#8A4F6E;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#8A4F6E;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#B084A0;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#2E222A;margin:0 0 20px;}
+  .subscale-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #EAD4DF;font-size:14px;}
+  .subscale-row:last-child{border-bottom:none;}
+  .subscale-val{font-weight:700;color:#8A4F6E;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#8A5A72;border-top:1px solid #EAD4DF;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">BESAA — Échelle d'estime corporelle</h1>
+    <p class="lead">Ce questionnaire explore l'estime corporelle à travers trois dimensions : l'apparence générale, le poids et le regard perçu d'autrui.</p>
+    <p class="lang-note">Questionnaire en anglais : aucune traduction française validée n'a été confirmée lors du sourçage.</p>
+    <div class="pill-row">
+      <span class="pill">23 items</span>
+      <span class="pill">5-7 minutes</span>
+      <span class="pill">Échelle 0-4</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-score" id="score-val"></p>
+    <p class="result-max">score total, sur 92 (23 items de 0 à 4, items négatifs inversés)</p>
+    <div id="subscale-rows"></div>
+    <p class="result-text">Plus le score est élevé, plus l'estime corporelle rapportée est positive. Mesure dimensionnelle, sans seuil clinique officiel ; à interpréter par sous-échelle et globalement.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Mendelson, B.K., Mendelson, M.J. &amp; White, D.R. (2001). Body-esteem scale for adolescents and adults. Journal of Personality Assessment, 76(1), 90-106. Outil dimensionnel, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [
+    "I like what I look like in pictures.",
+    "Other people consider me good looking.",
+    "I'm proud of my body.",
+    "I'm preoccupied with trying to change my body weight.",
+    "I think my appearance would help me get a job.",
+    "I like what I see when I look in the mirror.",
+    "There are lots of things I'd change about my looks if I could.",
+    "I'm satisfied with my weight.",
+    "I wish I looked better.",
+    "I really like what I weigh.",
+    "I wish I looked like someone else.",
+    "People my own age like my looks.",
+    "My looks upset me.",
+    "I'm as nice looking as most people.",
+    "I'm pretty happy about the way I look.",
+    "I feel I weigh the right amount for my height.",
+    "I feel ashamed of how I look.",
+    "Weighing myself depresses me.",
+    "My weight makes me unhappy.",
+    "My looks help me to get dates.",
+    "I worry about the way I look.",
+    "I think I have a good body.",
+    "I look as nice as I'd like to."
+  ];
+  // 1 = Appearance, 2 = Attribution, 3 = Weight (ordre original Mendelson et al. 2001)
+  var subscaleOf = [1,2,3,3,2,1,1,3,1,3,1,2,1,2,1,3,1,3,3,2,1,3,1];
+  var subscaleNames = {1:"Apparence", 2:"Attribution (regard d'autrui)", 3:"Poids"};
+  var reversed = [4,7,9,11,13,17,18,19,21]; // numéros d'item (1-indexés) inversés à la cotation
+  var opts = [
+    {l:"0 — Never", v:0},
+    {l:"1 — Rarely", v:1},
+    {l:"2 — Sometimes", v:2},
+    {l:"3 — Often", v:3},
+    {l:"4 — Always", v:4}
+  ];
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    opts.forEach(function(opt){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === opt.v ? ' selected' : '');
+      d.textContent = opt.l;
+      d.addEventListener('click', function(){
+        answers[idx] = opt.v;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function recoded(n){
+    var v = answers[n-1];
+    return reversed.indexOf(n) !== -1 ? (4 - v) : v;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var total = 0;
+    var sub = {1:0,2:0,3:0};
+    for (var n = 1; n <= items.length; n++){
+      var r = recoded(n);
+      total += r;
+      sub[subscaleOf[n-1]] += r;
+    }
+    var maxBySub = {1:40,2:20,3:32};
+    var rows = '';
+    [1,2,3].forEach(function(s){
+      rows += '<div class="subscale-row"><span>' + subscaleNames[s] + '</span><span class="subscale-val">' + sub[s] + ' / ' + maxBySub[s] + '</span></div>';
+    });
+    document.getElementById('subscale-rows').innerHTML = rows;
+    document.getElementById('score-val').textContent = total;
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BESAA — Échelle d'estime corporelle pour adolescents et adultes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#FAF2F6;color:#2E222A;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#2E222A;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#8A5A72;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#8A5A72;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#8A4F6E 0%,#D8A7C9 55%,#5A2C50 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.3),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#5A2C50;background:#F3E1EA;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#8A5A72;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#8A5A72;background:#FFFFFF;border:1px solid #EAD4DF;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#B084A0;}
+  .caveat{background:#FBEAF2;border:1px solid #E8B8D2;border-radius:10px;padding:12px 14px;font-size:13px;color:#5C1F42;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#8A4F6E;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#5A2C50;border-color:#EAD4DF;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">BESAA</span></div>
+
+  <h1 class="serif">Échelle d'estime corporelle pour adolescents et adultes (BESAA)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Body-Esteem Scale for Adolescents and Adults — Mendelson, Mendelson &amp; White (2001)</p>
+  <div class="meta-row">
+    <span class="pill">23 items</span>
+    <span class="pill">5-7 minutes</span>
+    <span class="pill">Échelle 0-4</span>
+    <span class="pill">Anglais</span>
+    <span class="pill">Acceptation corporelle</span>
+    <span class="pill">Licence requise : incertaine</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="besaa.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le BESAA mesure l'estime corporelle à travers trois sous-échelles : Apparence (10 items, satisfaction générale envers son apparence), Attribution (5 items, perception du regard d'autrui sur son physique) et Poids (8 items, satisfaction envers son poids). 9 items sont formulés négativement et inversés à la cotation (items 4, 7, 9, 11, 13, 17, 18, 19 et 21).</p>
+    <p class="source-note">Items reproduits en anglais, tels que publiés dans l'article princeps (Mendelson et al., 2001) et recoupés avec trois sources indépendantes : un tableau de la validation turque (Türkmen-Apaydin et al.), le détail des items inversés de la validation brésilienne (preprint, Universidade), et la liste complète de la validation italienne (TPM — Testing, Psychometrics, Methodology). Aucune traduction française validée n'a été retrouvée lors du sourçage.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque item est coté de 0 (Never) à 4 (Always). Les 9 items négatifs sont inversés avant addition (score inversé = 4 − score brut). Les trois scores de sous-échelle (Apparence 0-40, Attribution 0-20, Poids 0-32) et le score total (0-92) sont calculés par simple addition. Plus le score est élevé, plus l'estime corporelle rapportée est positive.</p>
+    <p class="source-note">Mesure dimensionnelle continue, aucun seuil clinique officiel publié dans l'article princeps : à interpréter par sous-échelle et globalement, en complément d'une évaluation clinique.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p>Mendelson, B.K., Mendelson, M.J. &amp; White, D.R. (2001). Body-esteem scale for adolescents and adults. <em>Journal of Personality Assessment</em>, 76(1), 90-106.</p>
+    <p class="caveat"><strong>Réserve de droits (licence requise : incertaine).</strong> Lors du sourçage, le texte intégral de l'instrument n'a été retrouvé que via des articles tiers (publications de validation, certaines en licence CC-BY) qui le reproduisent, et non via une diffusion directe par l'éditeur (Taylor &amp; Francis / <em>Journal of Personality Assessment</em>) ou les auteurs. Aucune autorisation explicite de l'éditeur ou des auteurs n'a donc été confirmée pour cet usage. Construit malgré cette réserve à la demande explicite de Max (03/10/2026), pour un usage strictement personnel et non commercial. À reconsidérer si une clarification des droits venait à contredire cet usage.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

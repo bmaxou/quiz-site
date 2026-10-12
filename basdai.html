@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BASDAI — Indice d'activité de la spondylarthrite ankylosante</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#3F5B6B;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .sec-text{font-size:12.5px;color:#9A9E90;margin:0 0 10px;font-style:italic;}
+  .q-text{font-size:16px;margin:0 0 6px;font-weight:600;}
+  .q-desc{font-size:13.5px;color:#63695D;margin:0 0 16px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#3F5B6B;background:#E1E9EC;}
+  .vas-box{padding:8px 0;}
+  .vas-box input[type=range]{width:100%;accent-color:#3F5B6B;}
+  .poles{display:flex;justify-content:space-between;font-size:12.5px;color:#63695D;margin:0 0 6px;gap:12px;}
+  .poles .pole{max-width:48%;}
+  .vas-mid{display:flex;justify-content:space-between;align-items:center;margin-top:10px;color:#9A9E90;font-size:11px;}
+  .vas-val{font-family:'Cormorant Garamond',Georgia,serif;font-size:34px;color:#3F5B6B;margin:10px 0 0;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#263C48;border-color:#E0D9C9;}
+  .btn-primary{background:#3F5B6B;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#3F5B6B;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 14px;}
+  .result-list{font-size:13.5px;margin:0 0 16px;padding-left:20px;}
+  .result-list li{margin-bottom:6px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">BASDAI — Indice d'activité de la spondylarthrite ankylosante</h1>
+    <p class="lead">Six échelles visuelles analogiques pour évaluer l'activité de votre spondylarthrite ankylosante au cours des 48 dernières heures : fatigue, douleur, gêne au toucher, raideur matinale.</p>
+    
+    <div class="pill-row">
+      <span class="pill">6 questions</span><span class="pill">3 minutes</span><span class="pill">Échelles 0-100</span><span class="pill">Français</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="sec-text" id="sec-text" hidden></p>
+    <p class="q-text" id="q-text"></p>
+    <p class="q-desc" id="q-desc"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Garrett S. et al. (1994), Bath Ankylosing Spondylitis Disease Activity Index (BASDAI), University of Bath. Outil de dépistage, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+
+  var items = [{"t": "1. Où situeriez-vous votre degré global de fatigue ?", "d": "Marquez la position qui correspond aux dernières 48 heures.", "lo": "Absent", "hi": "Extrême", "min": 0, "max": 100}, {"t": "2. Où situeriez-vous votre degré global de douleur au niveau du cou, du dos et des hanches dans le cadre de votre spondylarthrite ankylosante ?", "d": "Marquez la position qui correspond aux dernières 48 heures.", "lo": "Absent", "hi": "Extrême", "min": 0, "max": 100}, {"t": "3. Où situeriez-vous votre degré global de douleur / gonflement articulaire en dehors du cou, du dos et des hanches ?", "d": "Marquez la position qui correspond aux dernières 48 heures.", "lo": "Absent", "hi": "Extrême", "min": 0, "max": 100}, {"t": "4. Où situeriez-vous votre degré global de gêne pour les zones sensibles au toucher ou la pression ?", "d": "Marquez la position qui correspond aux dernières 48 heures.", "lo": "Absent", "hi": "Extrême", "min": 0, "max": 100}, {"t": "5. Où situeriez-vous votre degré global de raideur matinale depuis votre réveil ?", "d": "Marquez la position qui correspond aux dernières 48 heures.", "lo": "Absent", "hi": "Extrême", "min": 0, "max": 100}, {"t": "6. Quelle est la durée de votre raideur matinale à partir de votre réveil ?", "d": "Marquez la position qui correspond aux dernières 48 heures.", "lo": "0 heure", "hi": "2 heures ou plus", "min": 0, "max": 100}];
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+
+  function renderQuestion(){
+    var it = items[idx];
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    var secEl = document.getElementById('sec-text');
+    secEl.hidden = true;
+    document.getElementById('q-text').textContent = it.t;
+    document.getElementById('q-desc').textContent = it.d || '';
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    var box = document.createElement('div'); box.className = 'vas-box';
+    var cur = answers[idx] === null ? Math.round((it.min + it.max) / 2) : answers[idx];
+    box.innerHTML = '<div class="poles"><div class="pole">' + esc(it.lo) + '</div><div class="pole" style="text-align:right">' + esc(it.hi) + '</div></div>' +
+      '<input type="range" id="vas-range" min="' + it.min + '" max="' + it.max + '" step="1" value="' + cur + '" aria-label="Curseur">' +
+      '<p class="vas-val" id="vas-val"></p>';
+    row.appendChild(box);
+    var rg = document.getElementById('vas-range');
+    function setV(){
+      answers[idx] = parseInt(rg.value, 10);
+      document.getElementById('vas-val').textContent = answers[idx] + ' / ' + it.max;
+      document.getElementById('btn-next').disabled = false;
+    }
+    rg.addEventListener('input', setV);
+    rg.addEventListener('change', setV);
+    if (answers[idx] !== null){ document.getElementById('vas-val').textContent = answers[idx] + ' / ' + it.max; }
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+
+  function RESULT(a){
+    var step1 = (a[4] + a[5]) / 2;
+    var step2 = (a[0] + a[1] + a[2] + a[3] + step1) / 5;
+    var score = Math.round(step2 * 10) / 10;
+    var h = '<p class="result-score">' + String(score).replace('.', ',') + ' / 100</p>';
+    h += '<p class="result-max">score BASDAI (moyenne des 4 premières questions et de la moyenne des questions 5 et 6)</p>';
+    var txt;
+    if (score < 40) txt = 'Score sous le repère de 40/100 habituellement cité pour une maladie active : à resituer dans le suivi clinique global.';
+    else txt = 'Score à 40/100 ou au-delà : repère habituellement cité dans la littérature pour une maladie active (seuil utilisé notamment pour discuter d\'un traitement de fond biologique) — à confirmer par un examen clinique, ce n\'est pas un diagnostic automatique.';
+    h += '<p class="result-text">' + txt + '</p>';
+    h += '<p class="result-text">Détail : fatigue ' + a[0] + '/100, douleur axiale ' + a[1] + '/100, douleur/gonflement périphérique ' + a[2] + '/100, gêne au toucher/pression ' + a[3] + '/100, intensité de la raideur matinale ' + a[4] + '/100, durée de la raideur matinale ' + a[5] + '/100.</p>';
+    return h;
+  }
+
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    document.getElementById('result-body').innerHTML = RESULT(answers);
+  }
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BASDAI — Indice d'activité de la spondylarthrite ankylosante</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#3F5B6B 0%,#8FB0BE 55%,#16242B 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.4),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:22px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#263C48;background:#E1E9EC;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#3F5B6B;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#263C48;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <div class="fiche-photo"><span class="acronym">BASDAI</span></div>
+  <h1 class="serif">BASDAI — Bath Ankylosing Spondylitis Disease Activity Index</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Garrett S. et al. (1994), University of Bath — version française ASAS.</p>
+  <div class="meta-row">
+    <span class="pill">6 questions</span><span class="pill">3 minutes</span><span class="pill">Spondylarthrite ankylosante</span><span class="pill">Français</span><span class="pill">Licence requise : non</span>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" href="basdai.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le BASDAI évalue l'activité de la spondylarthrite ankylosante (et plus largement des spondylarthrites axiales) sur les 48 dernières heures, à travers 6 échelles visuelles analogiques : fatigue, douleur axiale (cou/dos/hanches), douleur/gonflement articulaire périphérique, gêne aux zones sensibles au toucher/pression, intensité puis durée de la raideur matinale.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque réponse est mesurée sur une ligne de 0 (absent) à 100 (extrême) — pour la question 6, de 0 heure à 2 heures ou plus. Calcul officiel : moyenne des questions 5 et 6, puis moyenne de cette valeur avec les 4 premières questions. Le score va de 0 à 100. Un score ≥ 40/100 est le repère habituellement cité dans la littérature pour une maladie active ; ce n'est pas un seuil diagnostique automatique.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p>Garrett S., Jenkinson T., Kennedy L.G., Whitelock H., Gaisford P. &amp; Calin A. (1994). <em>A new approach to defining disease status in ankylosing spondylitis: the Bath Ankylosing Spondylitis Disease Activity Index.</em> J Rheumatol, 21(12), 2286-2291. Version française validée : Claudepierre P. et al. (1997), J Rheumatol, 24(10), 1954-1958 ; texte officiel français diffusé par l'ASAS (Assessment of SpondyloArthritis international Society), asas-group.org/basdai_fr.pdf.</p>
+<p class="source-note"><strong>Licence requise : non.</strong> Gratuit pour l'usage académique et clinique (en public domain pour l'usage clinique/académique selon ePROVIDE/Mapi-Trust) ; seul un usage par l'industrie pharmaceutique nécessite une licence auprès du détenteur du copyright (A. Calin) depuis 2011. Les 6 questions et la méthode de calcul sont reprises telles que publiées sur le document officiel français de l'ASAS ; aucun item n'a été inventé.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

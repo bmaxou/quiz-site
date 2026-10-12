@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A-TDPs — Échelle de Trouble de Deuil Prolongé de Aarhus</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F3F2ED;color:#232821;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#232821;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#5B6B5E;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#5B6B5E;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #D9DECF;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:25px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#5B6B5E;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#5B6B5E;background:#F3F2ED;border:1px solid #D9DECF;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#5B6B5E;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#8A9183;font-style:italic;margin:0 0 20px;}
+  .warn-note{font-size:12.5px;color:#6B4A2A;background:#F6ECDD;border:1px solid #E3D2B4;border-radius:10px;padding:12px 14px;margin:0 0 20px;}
+  .progress{font-size:12px;color:#8A9183;margin:0 0 14px;}
+  .q-stem{font-size:12.5px;letter-spacing:.04em;text-transform:uppercase;color:#5B6B5E;font-weight:600;margin:0 0 10px;}
+  .q-text{font-size:16px;margin:0 0 6px;}
+  .q-note{font-size:12.5px;color:#8A9183;margin:0 0 14px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;margin-top:14px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #D9DECF;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#5B6B5E;background:#E3E8DE;}
+  .text-input{width:100%;font-family:'Inter',sans-serif;font-size:15px;padding:12px 14px;border:1px solid #D9DECF;border-radius:10px;margin-top:10px;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F3F2ED;color:#232821;border-color:#D9DECF;}
+  .btn-primary{background:#5B6B5E;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-verdict{font-size:14.5px;margin:0 0 6px;padding:12px 14px;border-radius:10px;background:#F3F2ED;border:1px solid #D9DECF;}
+  .result-verdict b{color:#5B6B5E;}
+  table.grid{width:100%;border-collapse:collapse;font-size:12.5px;margin:16px 0;}
+  table.grid th, table.grid td{border:1px solid #D9DECF;padding:6px 8px;text-align:left;vertical-align:top;}
+  table.grid th{background:#F3F2ED;font-weight:700;}
+  table.grid td.ok{background:#E3E8DE;font-weight:700;text-align:center;}
+  table.grid td.no{text-align:center;color:#8A9183;}
+  .disclaimer{font-size:13px;color:#6B4A2A;background:#F6ECDD;border:1px solid #E3D2B4;border-radius:10px;padding:14px 16px;margin:20px 0;font-weight:600;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#5B6B5E;border-top:1px solid #D9DECF;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">A-TDPs — Échelle de Trouble de Deuil Prolongé de Aarhus</h1>
+    <p class="lead">Ce questionnaire évalue différentes réactions face au deuil, à partir de votre propre expérience au cours du dernier mois. Il n'y a pas de bonne ou de mauvaise réponse.</p>
+    <p class="lang-note">Version française officielle (The Aarhus PGD scale / A-PGDs), diffusée par l'Unité de Recherche sur le Deuil, Université de Aarhus (Danemark). « Licence requise : non » — « La A-TDPs peut être utilisée librement par les professionnels adéquats ».</p>
+    <p class="warn-note">Outil de dépistage. Un diagnostic formel ne peut pas être établi sur la seule base de l'auto-évaluation : il nécessite une entrevue clinique structurée.</p>
+    <div class="pill-row">
+      <span class="pill">20 questions principales</span>
+      <span class="pill">+ 4 questions conditionnelles</span>
+      <span class="pill">10 minutes</span>
+      <span class="pill">Dépistage CIM-11 / DSM-5-TR</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-stem" id="q-stem"></p>
+    <p class="q-text" id="q-text"></p>
+    <p class="q-note" id="q-note"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <input class="text-input" id="text-field" type="text" style="display:none">
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-na" class="card" hidden>
+    <h1 class="serif">Sans objet</h1>
+    <p class="lead">Ce questionnaire s'adresse aux personnes ayant perdu un proche. Sans perte à évaluer, il ne s'applique pas.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart-na">Recommencer</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="verdicts"></div>
+    <table class="grid" id="grid-table"></table>
+    <p class="disclaimer">Un diagnostic formel NE PEUT PAS être établi sur la base de l'auto-évaluation. Cela nécessiterait une entrevue clinique structurée et une évaluation clinique.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">A-PGDs / A-TDPs — The Aarhus PGD scale, O'Connor, Vang, Shevlin, Elklit, Komischke-Konnerup, Lundorff &amp; Bryant (2023), Unité de Recherche sur le Deuil, Université de Aarhus. Outil de dépistage, ne remplace pas une évaluation clinique structurée.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var LIKERT = ["Pas du tout","Un petit peu","Dans une certaine mesure","Beaucoup","De manière écrasante"];
+
+  function withBlank(t){
+    return t.replace(/\{NOM\}/g, state.nom || 'votre proche');
+  }
+
+  // steps[].type: 'gate' | 'text' | 'number' | 'likert' | 'yesno'
+  var steps = [
+    {id:'q0', type:'gate', text:"Avez-vous perdu l'un de vos proches ?"},
+    {id:'qui', type:'text', text:"Qui avez-vous perdu ?", note:"Par exemple : un compagnon, vos parents, un frère, une sœur, un enfant ou un autre proche."},
+    {id:'nom', type:'text', text:"Quel était le nom de votre proche ?", note:"Ce nom sera utilisé pour compléter les questions suivantes."},
+    {id:'mois', type:'number', text:"Combien de mois se sont écoulés depuis le décès ?"},
+    {id:'i1', type:'likert', text:"Est-ce que {NOM} vous a manqué(e) au cours du dernier mois ?", crit:'C'},
+    {id:'i2', type:'likert', text:"Au cours du dernier mois, avez-vous été préoccupé par des pensées de {NOM} même quand vous ne vouliez pas penser à elle/lui ?", crit:'C'},
+    {id:'i3', type:'likert', text:"Avez-vous eu des sentiments de tristesse ou de chagrin au cours du dernier mois ?", crit:'D'},
+    {id:'i4', type:'likert', text:"Avez-vous ressenti de la culpabilité au cours du dernier mois ?", crit:'D'},
+    {id:'i5', type:'likert', text:"Avez-vous ressenti de la colère au cours du dernier mois ?", crit:'D'},
+    {id:'i6', type:'likert', text:"Au cours du dernier mois, a-t-il été compliqué pour vous de croire que {NOM} était décédé(e) ?", crit:'D'},
+    {id:'i7', type:'likert', text:"Au cours du dernier mois, vous êtes-vous senti responsable pour votre deuil ?", crit:'D'},
+    {id:'i8', type:'likert', text:"Au cours du dernier mois, avez-vous eu des difficultés à accepter le décès de {NOM} ?", crit:'D'},
+    {id:'i9', type:'likert', text:"Au cours du dernier mois, vous êtes-vous senti comme ayant perdu une partie de vous-même ?", note:"Par exemple : comme si une partie de vous était morte.", crit:'D'},
+    {id:'i10', type:'likert', text:"Au cours du dernier mois, avez-vous été incapable de ressentir des émotions positives ?", crit:'D'},
+    {id:'i11', type:'likert', text:"Au cours du dernier mois, vous êtes-vous ressenti émotionnellement insensible ?", note:"Par exemple : difficultés à ressentir des émotions comme avant le décès, sensation d'être émotionnellement abasourdi.", crit:'D'},
+    {id:'i12', type:'likert', text:"Avez-vous eu des difficultés à engager dans des activités sociales ou autres au cours du dernier mois ?", crit:'D'},
+    {id:'i13', type:'likert', text:"Avez-vous ressenti de la solitude au cours du dernier mois ?", crit:'D'},
+    {id:'i14', type:'likert', text:"Au cours du dernier mois, avez-vous essayé d'éviter les rappels du décès de {NOM} ?", note:"Par exemple : en évitant certaines pensées, sentiments, lieux, musiques, sujets de conversation, etc., ou en restant constamment occupé(e).", crit:'D'},
+    {id:'i15', type:'likert', text:"Au cours du dernier mois, avez-vous pensé que la vie n'avait aucun sens depuis le décès de {NOM} ?", crit:'D'},
+    {id:'i16', type:'likert', text:"Au cours du dernier mois, avez-vous ressenti de l'amertume ?", crit:'D'},
+    {id:'i17', type:'likert', text:"Dans l'ensemble, ces difficultés ont-elles entraîné un déclin de votre fonctionnement ?", note:"C'est-à-dire votre capacité à fonctionner dans la vie quotidienne.", crit:'E'},
+    {id:'i17a', type:'yesno', text:"Cela s'applique-t-il à votre travail / vos études / vos tâches quotidiennes ?", cond17:true},
+    {id:'i17b', type:'yesno', text:"Cela s'applique-t-il à votre vie sociale ?", cond17:true},
+    {id:'i17c', type:'yesno', text:"Cela s'applique-t-il à votre vie de famille / vos obligations domestiques ?", cond17:true},
+    {id:'i17d', type:'yesno', text:"Cela s'applique-t-il à d'autres dimensions que celles mentionnées ?", cond17:true},
+    {id:'i18', type:'yesno', text:"L'une de vos connaissances a-t-elle exprimé des inquiétudes vis-à-vis de votre réaction face au deuil ?", note:"Par exemple : elles pensent que votre réaction est excessive par rapport à ce qu'elles considèrent normal en fonction de vos normes sociales, culturelles et religieuses.", crit:'F'},
+    {id:'i19', type:'yesno', text:"Êtes-vous inquiet(e) de votre propre réaction face au deuil, y compris qu'elle soit plus sévère ou intense que vous le pensiez ?", note:"Par exemple : en comparaison avec les personnes qui vous entourent ou avec ce que vous considérez de normal.", crit:'F'},
+    {id:'i20', type:'yesno', text:"Diriez-vous que vous vous êtes senti comme cela pendant les 6 derniers mois ?", note:"Merci de répondre à cette question en considérant l'ensemble de vos réponses aux questions précédentes.", crit:'G'}
+  ];
+
+  var answers = {};
+  var state = {nom:''};
+  var idx = 0;
+
+  function stepHidden(i){
+    if(i < 0 || i >= steps.length) return false;
+    if(steps[i].cond17){
+      var s17 = answers['i17'];
+      return !(typeof s17 === 'number' && s17 >= 2);
+    }
+    return false;
+  }
+
+  function firstVisible(from, dir){
+    var i = from;
+    while(i >= 0 && i < steps.length && stepHidden(i)) i += dir;
+    return i;
+  }
+
+  function visibleCount(){
+    var n = 0;
+    for(var i=0;i<steps.length;i++){ if(!stepHidden(i)) n++; }
+    return n;
+  }
+  function visiblePosition(i){
+    var n = 0;
+    for(var k=0;k<=i;k++){ if(!stepHidden(k)) n++; }
+    return n;
+  }
+
+  function renderStep(){
+    var st = steps[idx];
+    document.getElementById('progress-text').textContent = 'Question ' + visiblePosition(idx) + ' / ' + visibleCount();
+    document.getElementById('q-stem').textContent = st.type === 'gate' ? '' : (st.type==='text'||st.type==='number' ? '' : 'Au cours du dernier mois');
+    document.getElementById('q-text').innerHTML = withBlank(st.text);
+    document.getElementById('q-note').textContent = st.note ? st.note : '';
+    var row = document.getElementById('opt-row');
+    var field = document.getElementById('text-field');
+    row.innerHTML = '';
+    field.style.display = 'none';
+
+    if(st.type === 'likert'){
+      field.style.display = 'none';
+      LIKERT.forEach(function(label, i){
+        var v = i+1;
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[st.id] === v ? ' selected' : '');
+        d.textContent = label + ' (' + v + ')';
+        d.addEventListener('click', function(){ answers[st.id] = v; renderStep(); });
+        row.appendChild(d);
+      });
+    } else if(st.type === 'yesno' || st.type === 'gate'){
+      ['oui','non'].forEach(function(v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[st.id] === v ? ' selected' : '');
+        d.textContent = v === 'oui' ? 'Oui' : 'Non';
+        d.addEventListener('click', function(){ answers[st.id] = v; renderStep(); });
+        row.appendChild(d);
+      });
+    } else if(st.type === 'text' || st.type === 'number'){
+      field.style.display = 'block';
+      field.type = st.type === 'number' ? 'number' : 'text';
+      field.value = answers[st.id] || '';
+      field.oninput = function(){
+        answers[st.id] = field.value;
+        if(st.id === 'nom') state.nom = field.value;
+        updateNextEnabled();
+      };
+      setTimeout(function(){ field.focus(); }, 0);
+    }
+    updateNextEnabled();
+    document.getElementById('btn-prev').disabled = (firstVisible(idx-1,-1) < 0);
+    var isLast = firstVisible(idx+1,1) >= steps.length;
+    document.getElementById('btn-next').textContent = isLast ? 'Voir le résultat' : 'Suivant';
+  }
+
+  function updateNextEnabled(){
+    var st = steps[idx];
+    var ok = false;
+    var v = answers[st.id];
+    if(st.type === 'likert') ok = (typeof v === 'number');
+    else if(st.type === 'yesno' || st.type === 'gate') ok = (v === 'oui' || v === 'non');
+    else if(st.type === 'number') ok = (v !== undefined && v !== '' && !isNaN(parseFloat(v)));
+    else if(st.type === 'text') ok = (v !== undefined && String(v).trim().length > 0);
+    document.getElementById('btn-next').disabled = !ok;
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    idx = 0;
+    renderStep();
+  });
+
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    var p = firstVisible(idx-1,-1);
+    if(p >= 0){ idx = p; renderStep(); }
+  });
+
+  document.getElementById('btn-next').addEventListener('click', function(){
+    var st = steps[idx];
+    updateNextEnabled();
+    if(document.getElementById('btn-next').disabled) return;
+
+    if(st.id === 'q0' && answers.q0 === 'non'){
+      document.getElementById('screen-quiz').hidden = true;
+      document.getElementById('screen-na').hidden = false;
+      return;
+    }
+
+    var n = firstVisible(idx+1,1);
+    if(n < steps.length){ idx = n; renderStep(); }
+    else { showResult(); }
+  });
+
+  document.getElementById('btn-restart-na').addEventListener('click', function(){
+    answers = {}; state = {nom:''}; idx = 0;
+    document.getElementById('screen-na').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+
+  function present(id){ return (typeof answers[id] === 'number') && answers[id] >= 4; }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+
+    var mois = parseFloat(answers.mois);
+    var critA = (answers.q0 === 'oui');
+    var bIcd = mois > 6, bDsm = mois > 12;
+
+    var cItems = ['i1','i2'];
+    var cCount = cItems.filter(present).length;
+    var cIcd = cCount > 1, cDsm = cCount > 1;
+
+    var dItems = ['i3','i4','i5','i6','i7','i8','i9','i10','i11','i12','i13','i14','i15','i16'];
+    var dCount = dItems.filter(present).length;
+    var dIcd = dCount > 1, dDsm = dCount > 3;
+
+    var eOk = present('i17') && (answers.i17a === 'oui' || answers.i17b === 'oui' || answers.i17c === 'oui' || answers.i17d === 'oui');
+
+    var fOk = (answers.i18 === 'oui' || answers.i19 === 'oui');
+
+    var gIcd = (answers.i20 === 'oui'), gDsm = (answers.i20 === 'oui');
+
+    var icd = critA && bIcd && cIcd && dIcd && eOk && fOk && gIcd;
+    var dsm = critA && bDsm && cDsm && dDsm && eOk && fOk && gDsm;
+
+    var v = document.getElementById('verdicts');
+    v.innerHTML =
+      '<p class="result-verdict">Potentiel trouble de deuil prolongé — <b>CIM-11</b> : <b>' + (icd ? 'Oui' : 'Non') + '</b></p>' +
+      '<p class="result-verdict">Potentiel trouble de deuil prolongé — <b>DSM-5-TR</b> : <b>' + (dsm ? 'Oui' : 'Non') + '</b></p>';
+
+    function cell(ok){ return '<td class="' + (ok ? 'ok' : 'no') + '">' + (ok ? '&#10003;' : '—') + '</td>'; }
+
+    var rows = [
+      ['Critère A — décès d\'un proche', '', critA, critA],
+      ['Critère B — critère de temps (' + (isNaN(mois) ? '?' : mois) + ' mois écoulés)', '&gt; 6 mois / &gt; 12 mois', bIcd, bDsm],
+      ['Critère C — manque / préoccupation (' + cCount + '/2 présents)', '&gt; 1 symptôme', cIcd, cDsm],
+      ['Critère D — changements cognitifs/affectifs/comportementaux (' + dCount + '/14 présents)', '&gt; 1 / &gt; 3 symptômes', dIcd, dDsm],
+      ['Critère E — altération du fonctionnement', 'Présent', eOk, eOk],
+      ['Critère F — réaction excédant les normes sociales/culturelles/religieuses', 'Présent = Oui', fOk, fOk],
+      ['Critère G — durée des symptômes (item 20)', '&gt; 6 mois / &gt; 1 mois', gIcd, gDsm]
+    ];
+
+    var html = '<tr><th>Critère</th><th>Seuil officiel</th><th>CIM-11</th><th>DSM-5-TR</th></tr>';
+    rows.forEach(function(r){
+      html += '<tr><td>' + r[0] + '<br><span style="color:#8A9183">' + r[1] + '</span></td><td></td>' + cell(r[2]) + cell(r[3]) + '</tr>';
+    });
+    document.getElementById('grid-table').innerHTML = html;
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = {}; state = {nom:''}; idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A-TDPs — Échelle de Trouble de Deuil Prolongé de Aarhus</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F3F2ED;color:#232821;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#232821;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#5B6B5E;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#5B6B5E;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#5B6B5E 0%,#A9B8A3 55%,#2E3B30 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.45),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:22px;color:#fff;}
+  h1{font-size:26px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#3C4A3E;background:#E3E8DE;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#5B6B5E;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#5B6B5E;background:#FFFFFF;border:1px solid #D9DECF;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#8A9183;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#5B6B5E;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#3C4A3E;border-color:#D9DECF;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">A-TDPs</span></div>
+
+  <h1 class="serif">Échelle de Trouble de Deuil Prolongé de Aarhus (A-TDPs / A-PGDs)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">O'Connor, Vang, Shevlin, Elklit, Komischke-Konnerup, Lundorff &amp; Bryant (2023) — Unité de Recherche sur le Deuil, Département de Psychologie, Université de Aarhus (Danemark)</p>
+  <div class="meta-row">
+    <span class="pill">20 questions principales + 4 conditionnelles</span>
+    <span class="pill">10 minutes</span>
+    <span class="pill">Échelle 1-5 + items oui/non</span>
+    <span class="pill">Français</span>
+    <span class="pill">Licence requise : non</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="a-pgds.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>L'A-TDPs est un auto-questionnaire de dépistage/diagnostic dimensionnel du trouble de deuil prolongé (TDP), opérationnalisant à la fois les critères de la CIM-11 et du DSM-5-TR à partir du même jeu de 20 items portant sur le dernier mois (manque, préoccupation, tristesse, culpabilité, colère, incrédulité/déni, auto-blâme, manque d'acceptation, trouble de l'identité, absence d'affect positif, insensibilité émotionnelle, retrait des activités, solitude, évitement, perte de sens, amertume, altération du fonctionnement avec 4 sous-domaines conditionnels, et deux items sur l'écart aux normes sociales/culturelles/religieuses), précédés d'un repérage de la perte (qui, nom, délai en mois) et suivis d'un item de durée des symptômes. Chaque item principal est coté de 1 (« Pas du tout ») à 5 (« De manière écrasante »).</p>
+    <p class="source-note">Version française officielle (« L'échelle de TDP de Aarhus (A-TDPs) »), diffusée directement par l'Unité de Recherche sur le Deuil de l'Université de Aarhus, incluant la grille de cotation officielle. Les 20 items, les 4 sous-questions conditionnelles de l'item 17 et les 5 modalités de réponse sont reproduits tels qu'ils figurent dans ce document. ⚠️ Instrument distinct du PG-13 (Prigerson, critères DSM-5, catalogue Quiz, déjà publié) : l'A-TDPs permet de coter simultanément les deux référentiels diagnostiques (CIM-11 et DSM-5-TR) à partir d'un seul passage.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Un symptôme (items 1 à 17) est considéré présent si la personne obtient un score de 4 ou plus. La grille officielle croise 7 critères (A à G) avec deux colonnes de seuils, l'une pour la CIM-11, l'autre pour le DSM-5-TR :</p>
+    <p><b>Critère A</b> (décès d'un proche) : présent si une perte est rapportée. <b>Critère B</b> (critère de temps, depuis le décès) : plus de 6 mois pour la CIM-11, plus de 12 mois pour le DSM-5-TR. <b>Critère C</b> (manque, préoccupation — items 1-2) : plus d'1 symptôme présent, pour les deux référentiels. <b>Critère D</b> (tristesse, culpabilité, colère, incrédulité, auto-blâme, manque d'acceptation, trouble identitaire, absence d'affect positif, insensibilité, retrait des activités, solitude, évitement, perte de sens, amertume — items 3-16) : plus d'1 symptôme pour la CIM-11, plus de 3 symptômes pour le DSM-5-TR. <b>Critère E</b> (altération du fonctionnement, item 17 et ses 4 sous-domaines 17a-d) : présent pour les deux référentiels. <b>Critère F</b> (la réaction excède les normes sociales/culturelles/religieuses, items 18-19) : présent si l'un des deux items reçoit une réponse « Oui ». <b>Critère G</b> (durée des symptômes, item 20) : seuils de plus de 6 mois (CIM-11) et de plus d'1 mois (DSM-5-TR) rattachés au même item, tels qu'imprimés dans la clé officielle. Un trouble de deuil prolongé « potentiel » (CIM-11 ou DSM-5-TR) n'est signalé que si tous les critères A à G sont remplis pour le référentiel concerné.</p>
+    <p><b>Le document officiel précise explicitement : « Un diagnostic formel NE PEUT PAS être établi sur la base de l'auto-évaluation [...]. Cela nécessiterait une entrevue clinique structurée et une évaluation clinique. »</b> L'outil du site reproduit cette grille de calcul à titre de dépistage et affiche le détail critère par critère pour faciliter la relecture clinique ; il ne pose aucun diagnostic.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p><strong>Licence requise : non.</strong> Le document officiel français précise : « L'échelle de TDP de Aarhus (A-TDPs) a été développée par l'Unité de Recherche sur le Deuil, Département de Psychologie, Université de Aarhus, Danemark, sous la direction de la Professeure Maja O'Connor et soutenue par TrygFonden. La A-TDPs peut être utilisée librement par les professionnels adéquats. » Aucune mention de paiement ni de formulaire d'autorisation nominative ; un contact est fourni seulement pour les questions (maja@psy.au.dk).</p>
+    <p class="source-note">Questionnaire et clé de cotation officiels en français : « The Aarhus PGD scale (A-PGDs) / L'échelle de TDP de Aarhus (A-TDPs) », Université de Aarhus, téléchargés depuis psy.au.dk/fileadmin/Psykologi/Forskning/Forskningsenheder/Sorgforskning/Aarhus_PGDscale_French_Final.pdf. Développement et validation : O'Connor, M., Vang, M. L., Shevlin, M., Elklit, A., Komischke-Konnerup, K. B., Lundorff, M., &amp; Bryant, R. (2023). « Development and validation of the Aarhus PGD scale for the operationalization of ICD-11 and DSM-5-TR prolonged grief disorder ». Journal of Affective Disorders. https://doi.org/10.1016/j.jad.2023.09.022. Sources : https://pmc.ncbi.nlm.nih.gov/articles/PMC12973823/ ; https://pubmed.ncbi.nlm.nih.gov/41801980/.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

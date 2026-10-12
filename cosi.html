@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>COSI — Échelle des objectifs personnalisés (audition)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#C9A979;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#C9A979;background:#F7EFE1;}
+  .opt.disabled{opacity:.4;cursor:not-allowed;}
+  .opt-group{margin:0 0 22px;}
+  .opt-group-label{font-size:12.5px;font-weight:700;color:#63695D;text-transform:uppercase;letter-spacing:.06em;margin:0 0 10px;}
+  .other-input{width:100%;margin-top:8px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:8px;font-family:'Inter',sans-serif;font-size:14px;}
+  .rank-badge{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:#C9A979;color:#fff;font-size:12px;font-weight:700;margin-right:4px;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#C9A979;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 20px;}
+  table.result-table{width:100%;border-collapse:collapse;margin:0 0 20px;font-size:13.5px;}
+  table.result-table th{text-align:left;font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:#63695D;border-bottom:1px solid #E0D9C9;padding:0 8px 8px 0;}
+  table.result-table td{padding:10px 8px 10px 0;border-bottom:1px solid #EFEAE0;vertical-align:top;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">COSI — Échelle des objectifs personnalisés (audition)</h1>
+    <p class="lead">Ce questionnaire vous invite à choisir, parmi une liste de situations d'écoute courantes, jusqu'à 5 besoins prioritaires liés à votre audition, puis à évaluer pour chacun l'évolution ressentie et la capacité actuelle d'audition.</p>
+    <p class="lang-note">Catégories transcrites en anglais (version originale NAL) : aucune transcription vérifiée de la version française n'a été retrouvée lors du sourçage.</p>
+    <div class="pill-row">
+      <span class="pill">Jusqu'à 5 besoins</span>
+      <span class="pill">5 minutes</span>
+      <span class="pill">Sans score global</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-select" class="card" hidden>
+    <p class="progress">Sélectionnez jusqu'à 5 situations, par ordre d'importance pour vous</p>
+    <p class="q-text">Cliquez sur une situation pour la sélectionner ; cliquez à nouveau pour la retirer. L'ordre de sélection fixe le rang (1 = le plus important).</p>
+    <div class="opt-row" id="cat-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-back-start">Précédent</button>
+      <button class="btn btn-primary" id="btn-to-rate" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-rate" class="card" hidden>
+    <p class="progress" id="rate-progress"></p>
+    <p class="q-text" id="rate-need"></p>
+    <div class="opt-group">
+      <p class="opt-group-label">Évolution depuis l'appareillage (ou l'aide mise en place)</p>
+      <div class="opt-row" id="degree-row"></div>
+    </div>
+    <div class="opt-group">
+      <p class="opt-group-label">Capacité actuelle dans cette situation</p>
+      <div class="opt-row" id="ability-row"></div>
+    </div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev-rate">Précédent</button>
+      <button class="btn btn-primary" id="btn-next-rate" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-text">Il n'existe pas de score global pour le COSI : chaque besoin se lit individuellement, et se compare dans le temps pour une même personne.</p>
+    <table class="result-table">
+      <thead><tr><th>Rang</th><th>Besoin</th><th>Évolution</th><th>Capacité actuelle</th></tr></thead>
+      <tbody id="result-body"></tbody>
+    </table>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">COSI (Client Oriented Scale of Improvement) — National Acoustic Laboratories (Dillon, James &amp; Ginis, 1997). Outil centré sur les objectifs individuels, ne fournit pas de score global ni de seuil clinique.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var CATS = [
+    "Conversation with 1 or 2 in quiet",
+    "Conversation with 1 or 2 in noise",
+    "Conversation with group in quiet",
+    "Conversation with group in noise",
+    "Television/Radio @ normal volume",
+    "Familiar speaker on phone",
+    "Unfamiliar speaker on phone",
+    "Hearing phone ring from another room",
+    "Hear front door bell or knock",
+    "Hear traffic",
+    "Increased social contact",
+    "Feel embarrassed or stupid",
+    "Feeling left out",
+    "Feeling upset or angry",
+    "Church or meeting",
+    "Other"
+  ];
+  var OTHER_IDX = 15;
+  var DEGREE = ["Worse","No Difference","Slightly Better","Better","Much Better"];
+  var ABILITY = ["Hardly Ever (10%)","Occasionally (25%)","Half the Time (50%)","Most of the Time (75%)","Almost Always (95%)"];
+  var MAX_NEEDS = 5;
+
+  var selected = []; // array of {idx, label, degree:null, ability:null}
+  var rateIdx = 0;
+  var otherText = "";
+
+  function renderCats(){
+    var row = document.getElementById('cat-row');
+    row.innerHTML = '';
+    CATS.forEach(function(label, i){
+      var pos = selected.findIndex(function(s){ return s.idx === i; });
+      var d = document.createElement('div');
+      d.className = 'opt' + (pos >= 0 ? ' selected' : '') + (pos < 0 && selected.length >= MAX_NEEDS ? ' disabled' : '');
+      var rankHtml = pos >= 0 ? '<span class="rank-badge">' + (pos+1) + '</span>' : '';
+      d.innerHTML = rankHtml + (i === OTHER_IDX ? 'Other (please specify)' : label);
+      d.addEventListener('click', function(){
+        if (pos >= 0){
+          selected.splice(pos, 1);
+          renderCats();
+          return;
+        }
+        if (selected.length >= MAX_NEEDS) return;
+        selected.push({ idx: i, label: (i === OTHER_IDX ? null : label), degree: null, ability: null });
+        renderCats();
+      });
+      row.appendChild(d);
+      if (i === OTHER_IDX && pos >= 0){
+        var input = document.createElement('input');
+        input.type = 'text';
+        input.className = 'other-input no-print';
+        input.placeholder = 'Précisez la situation...';
+        input.value = otherText;
+        input.addEventListener('input', function(){
+          otherText = input.value;
+          selected[pos].label = otherText || "Other";
+        });
+        row.appendChild(input);
+      }
+    });
+    document.getElementById('btn-to-rate').disabled = selected.length === 0;
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-select').hidden = false;
+    renderCats();
+  });
+
+  document.getElementById('btn-back-start').addEventListener('click', function(){
+    document.getElementById('screen-select').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+
+  document.getElementById('btn-to-rate').addEventListener('click', function(){
+    if (selected.length === 0) return;
+    rateIdx = 0;
+    document.getElementById('screen-select').hidden = true;
+    document.getElementById('screen-rate').hidden = false;
+    renderRate();
+  });
+
+  function renderRate(){
+    var need = selected[rateIdx];
+    document.getElementById('rate-progress').textContent = 'Besoin ' + (rateIdx+1) + ' / ' + selected.length;
+    document.getElementById('rate-need').textContent = (rateIdx+1) + '. ' + (need.label || "Other");
+
+    var degreeRow = document.getElementById('degree-row');
+    degreeRow.innerHTML = '';
+    DEGREE.forEach(function(label, v){
+      var d = document.createElement('div');
+      d.className = 'opt' + (need.degree === v ? ' selected' : '');
+      d.textContent = label;
+      d.addEventListener('click', function(){ need.degree = v; renderRate(); });
+      degreeRow.appendChild(d);
+    });
+
+    var abilityRow = document.getElementById('ability-row');
+    abilityRow.innerHTML = '';
+    ABILITY.forEach(function(label, v){
+      var d = document.createElement('div');
+      d.className = 'opt' + (need.ability === v ? ' selected' : '');
+      d.textContent = label;
+      d.addEventListener('click', function(){ need.ability = v; renderRate(); });
+      abilityRow.appendChild(d);
+    });
+
+    document.getElementById('btn-prev-rate').disabled = rateIdx === 0;
+    document.getElementById('btn-next-rate').disabled = (need.degree === null || need.ability === null);
+    document.getElementById('btn-next-rate').textContent = rateIdx === selected.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-prev-rate').addEventListener('click', function(){
+    if (rateIdx > 0){ rateIdx--; renderRate(); }
+    else {
+      document.getElementById('screen-rate').hidden = true;
+      document.getElementById('screen-select').hidden = false;
+      renderCats();
+    }
+  });
+
+  document.getElementById('btn-next-rate').addEventListener('click', function(){
+    var need = selected[rateIdx];
+    if (need.degree === null || need.ability === null) return;
+    if (rateIdx < selected.length - 1){
+      rateIdx++; renderRate();
+    } else {
+      showResult();
+    }
+  });
+
+  function showResult(){
+    document.getElementById('screen-rate').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var body = document.getElementById('result-body');
+    body.innerHTML = '';
+    selected.forEach(function(need, i){
+      var tr = document.createElement('tr');
+      var tdRank = document.createElement('td'); tdRank.textContent = (i+1);
+      var tdLabel = document.createElement('td'); tdLabel.textContent = need.label || "Other";
+      var tdDeg = document.createElement('td'); tdDeg.textContent = DEGREE[need.degree];
+      var tdAb = document.createElement('td'); tdAb.textContent = ABILITY[need.ability];
+      tr.appendChild(tdRank); tr.appendChild(tdLabel); tr.appendChild(tdDeg); tr.appendChild(tdAb);
+      body.appendChild(tr);
+    });
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    selected = [];
+    otherText = "";
+    rateIdx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>COSI — Échelle des objectifs personnalisés (audition)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#C9A979 0%,#E6D3AE 55%,#8A6440 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,245,228,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#8A6440;background:#F7EFE1;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#C9A979;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#8A6440;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">COSI</span></div>
+
+  <h1 class="serif">Échelle des objectifs personnalisés (audition)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Client Oriented Scale of Improvement — National Acoustic Laboratories (Dillon, James &amp; Ginis, 1997)</p>
+  <div class="meta-row">
+    <span class="pill">Jusqu'à 5 besoins</span>
+    <span class="pill">5 minutes</span>
+    <span class="pill">Sans score global</span>
+    <span class="pill">Anglais</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="cosi.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le COSI est un outil centré sur la personne, conçu pour documenter le bénéfice perçu d'un appareillage auditif (ou de toute autre intervention sur l'audition) au regard des besoins concrets exprimés par le patient lui-même, plutôt qu'au regard d'une liste standardisée de situations imposées.</p>
+    <p>Le patient choisit, parmi 16 catégories officielles de situations d'écoute (15 situations types + « Other » pour une situation libre), jusqu'à 5 besoins prioritaires, classés par ordre d'importance. Pour chaque besoin retenu, il évalue ensuite : (1) l'évolution ressentie depuis l'intervention (de « Worse » à « Much Better ») et (2) sa capacité d'audition actuelle dans cette situation (de « Hardly Ever » à « Almost Always », associée à un pourcentage indicatif de 10 % à 95 %).</p>
+    <p class="source-note">Catégories et échelles transcrites en anglais (version originale NAL) : aucune transcription vérifiée de la version française n'a été retrouvée lors du sourçage ; une adaptation française existe dans la littérature (Tuset, Daval, Levy, Nekrouf, Ayache &amp; Gargula, 2026) mais son texte exact n'a pas pu être récupéré pour reproduction fidèle.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Le COSI ne produit volontairement aucun score global : chaque besoin sélectionné se lit individuellement. L'intérêt clinique est de comparer, pour une même personne et un même besoin, l'évolution rapportée (échelle de changement) et le niveau de capacité atteint (échelle d'habileté finale), avant/après intervention ou au fil du suivi. Les besoins non sélectionnés ne sont pas évalués.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p class="source-note">Dillon, H., James, A., &amp; Ginis, J. (1997). Client Oriented Scale of Improvement (COSI) and its relationship to several other measures of benefit and satisfaction provided by hearing aids. Journal of the American Academy of Audiology, 8(1), 27-43. National Acoustic Laboratories (Australie).</p>
+    <p class="source-note">Statut de droits confirmé par la page officielle du National Acoustic Laboratories : téléchargement et reproduction libres, usage clinique individuel gratuit. Seule restriction explicite : la commercialisation du COSI est strictement interdite sans l'accord du NAL. Licence requise : non (pour un usage clinique individuel comme celui de cette page).</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

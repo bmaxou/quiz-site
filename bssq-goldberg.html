@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>BSSQ-Goldberg — Cabinet Bouche &amp; Chmura</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F4F1EA; --surface:#FFFFFF; --surface-2:#EAE6D9; --ink:#20241E; --ink-soft:#63695D;
+    --line:#E0D9C9; --accent:#8A1F5C; --accent-ink:#F4F1EA; --accent-soft:#F1DCE9;
+    --progress-bg:#E6E1D3; --progress-fill:#C43F94;
+    --shadow: 0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',-apple-system,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,h3,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:var(--ink);}
+  .wrap{max-width:520px;margin:0 auto;padding:48px 24px 80px;}
+  .back-top{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--ink-soft);text-decoration:none;margin-bottom:20px;}
+  .back-top:hover{color:var(--ink);}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--ink-soft);display:inline-block;}
+  h1{font-size:26px;margin:0 0 10px;}
+  .intro-text{color:var(--ink-soft);font-size:15px;margin:0 0 28px;}
+  .start-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:32px 28px;box-shadow:var(--shadow);}
+  .pills{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 20px;}
+  .pill{font-size:12.5px;font-weight:600;color:var(--ink-soft);background:var(--surface-2);border-radius:999px;padding:6px 13px;display:inline-flex;align-items:center;gap:6px;}
+  .instructions{font-size:14.5px;color:var(--ink-soft);margin:0 0 22px;line-height:1.7;}
+  .quiz-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:28px 26px 26px;box-shadow:var(--shadow);}
+  .progress-track{height:8px;border-radius:99px;background:var(--progress-bg);overflow:hidden;margin-bottom:14px;}
+  .progress-fill{height:100%;background:var(--progress-fill);border-radius:99px;width:0%;transition:width .3s ease;}
+  .q-count{font-size:12.5px;color:var(--ink-soft);font-weight:600;margin:0 0 20px;}
+  .q-item{font-size:18px;font-weight:600;color:var(--ink);margin:0 0 26px;font-family:'Cormorant Garamond',Georgia,serif;line-height:1.35;}
+  .options{display:flex;flex-direction:column;gap:10px;}
+  .option-btn{font:inherit;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:14.5px;color:var(--ink);cursor:pointer;transition:border-color .15s ease,background .15s ease;}
+  .option-btn:hover{border-color:var(--accent);}
+  .option-btn.selected{border-color:var(--accent);background:var(--accent-soft);font-weight:600;}
+  .back-link{display:inline-flex;align-items:center;gap:6px;margin-top:22px;font-size:13px;color:var(--ink-soft);background:none;border:none;font:inherit;cursor:pointer;padding:0;}
+  .back-link:hover{color:var(--ink);}
+  .back-link[hidden]{display:none;}
+  #result{display:none;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:30px 28px;box-shadow:var(--shadow);}
+  #result h2.serif{font-size:22px;margin:0 0 6px;}
+  .meta-line{font-size:13.5px;color:var(--ink-soft);margin:0 0 24px;}
+  .score-line{font-size:17px;margin:0 0 10px;}
+  .score-line strong{font-size:22px;color:var(--accent);}
+  .note-informel{font-size:12.5px;color:var(--ink-soft);margin:0 0 6px;line-height:1.65;}
+  .btn{font:inherit;font-size:15px;font-weight:600;padding:13px 30px;border-radius:999px;border:none;background:var(--accent);color:var(--accent-ink);cursor:pointer;transition:background .15s ease;width:100%;}
+  .btn:hover{background:#6D1749;}
+  .btn-outline{background:none;border:1px solid var(--accent);color:var(--accent);margin-top:14px;}
+  .btn-outline:hover{background:var(--accent-soft);}
+  .hint{font-size:12.5px;color:var(--ink-soft);margin-top:14px;text-align:center;}
+  .footnote{margin-top:40px;font-size:11.5px;color:var(--ink-soft);border-top:1px solid var(--line);padding-top:16px;line-height:1.7;}
+  [hidden]{display:none !important;}
+  @media print{
+    .back-top, .eyebrow, h1, .intro-text, .footnote, .btn-outline{ display:none !important; }
+    body{background:#fff;}
+    #result{box-shadow:none;border:none;padding:0;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back-top" href="index.html">&larr; Tous les tests</a>
+  <div class="eyebrow">Spectre bipolaire</div>
+  <h1 class="serif">Questionnaire de screening du spectre bipolaire de Goldberg (BSSQ)</h1>
+  <p class="intro-text">Ce résultat ne remplace pas un échange avec votre praticien, il sert de point de départ pour en discuter ensemble.</p>
+
+  <div class="start-card" id="startScreen">
+    <div class="pills">
+      <span class="pill">12 questions</span>
+      <span class="pill">3 minutes</span>
+      <span class="pill">En anglais</span>
+    </div>
+    <p class="instructions">Ces items se réfèrent à la façon dont vous vous êtes senti(e) et
+    comporté(e) pendant une grande partie de votre vie. Les questions sont présentées dans leur
+    version originale en anglais, aucune traduction française validée n'ayant été retrouvée.</p>
+    <button type="button" class="btn" id="startBtn">Commencer</button>
+    <p class="hint">Rien n'est envoyé ni conservé sur un serveur : si vous quittez avant la fin, vos réponses sont perdues et il faudra recommencer.</p>
+  </div>
+
+  <div class="quiz-card" id="quizScreen" hidden>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <p class="q-count" id="qCount">Question 1/12</p>
+    <p class="q-item" id="qItem"></p>
+    <div class="options" id="qOptions"></div>
+    <button type="button" class="back-link" id="backBtn" hidden>&larr; Question précédente</button>
+  </div>
+
+  <div id="result">
+    <h2 class="serif">Questionnaire de screening du spectre bipolaire de Goldberg (BSSQ)</h2>
+    <p class="meta-line">Passation : <span id="passationDate"></span></p>
+    <p class="score-line">Score total : <strong id="scoreVal">0</strong>/60</p>
+    <p class="note-informel" id="interpretText"></p>
+    <p class="note-informel">⚠️ Aucune publication scientifique princeps à comité de lecture n'a été
+    identifiée pour cet outil précis (à distinguer du « Goldberg Mania Questionnaire », instrument
+    différent du même auteur) : c'est un outil de repérage clinique informel largement diffusé, mais
+    moins « validé » au sens académique strict que les autres instruments de ce catalogue. Les
+    seuils ci-dessus sont indicatifs, non issus d'une validation psychométrique publiée formellement.</p>
+    <button type="button" class="btn" id="downloadBtn">Télécharger le résultat (PDF)</button>
+    <button type="button" class="btn btn-outline" id="restartBtn">Refaire le test</button>
+  </div>
+
+  <p class="footnote">
+    Goldberg Bipolar Spectrum Screening Questionnaire — Dr Ivan K. Goldberg, M.D. Outil de repérage
+    clinique informel, diffusé librement depuis le début des années 1990, jamais commercialisé.
+    ⚠️ Distinct du BSSQ-Barkley (Questionnaire des situations scolaires de Barkley), déjà présent
+    dans ce catalogue sous « BSSQ ». Ce résultat est un repère, il ne constitue pas un diagnostic.
+  </p>
+</div>
+
+<script>
+(function(){
+  const ITEMS = [
+    "At times I am much more talkative or speak much faster than usual.",
+    "There have been times when I was much more active or did many more things than usual.",
+    "I get into moods where I feel very speeded up or irritable.",
+    "There have been times when I have felt both high (elated) and low (depressed) at the same time.",
+    "At times I have been much more interested in sex than usual.",
+    "My self-confidence ranges from great self-doubt to equally great overconfidence.",
+    "There have been GREAT variations in the quantity or quality of my work.",
+    "For no apparent reason I sometimes have been VERY angry or hostile.",
+    "I have periods of mental dullness and other periods of very creative thinking.",
+    "At times I am greatly interested in being with people and at other times I just want to be left alone.",
+    "I have had periods of great optimism and other periods of equally great pessimism.",
+    "I have had periods of tearfulness and crying and other times when I laugh and joke excessively."
+  ];
+  const OPTS = ["Pas du tout","Un peu","Quelque peu","Modérément","Beaucoup","Énormément"];
+  const answers = new Array(ITEMS.length).fill(null);
+  let current = 0;
+
+  const startScreen = document.getElementById('startScreen');
+  const quizScreen = document.getElementById('quizScreen');
+  const startBtn = document.getElementById('startBtn');
+  const qCount = document.getElementById('qCount');
+  const qItem = document.getElementById('qItem');
+  const qOptions = document.getElementById('qOptions');
+  const backBtn = document.getElementById('backBtn');
+  const progressFill = document.getElementById('progressFill');
+  const resultBox = document.getElementById('result');
+
+  startBtn.addEventListener('click', function(){
+    startScreen.hidden = true;
+    quizScreen.hidden = false;
+    renderQuestion();
+  });
+
+  backBtn.addEventListener('click', function(){
+    if(current > 0){ current -= 1; renderQuestion(); }
+  });
+
+  function renderQuestion(){
+    qCount.textContent = 'Question ' + (current + 1) + '/' + ITEMS.length;
+    qItem.textContent = ITEMS[current];
+    progressFill.style.width = ((current / ITEMS.length) * 100) + '%';
+    backBtn.hidden = current === 0;
+    qOptions.innerHTML = '';
+    OPTS.forEach(function(opt, idx){
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'option-btn';
+      btn.textContent = idx + ' — ' + opt;
+      if(answers[current] === idx){ btn.classList.add('selected'); }
+      btn.addEventListener('click', function(){ selectAnswer(idx, btn); });
+      qOptions.appendChild(btn);
+    });
+  }
+
+  function selectAnswer(idx, btnEl){
+    answers[current] = idx;
+    Array.from(qOptions.children).forEach(function(b){ b.classList.remove('selected'); });
+    btnEl.classList.add('selected');
+    progressFill.style.width = (((current + 1) / ITEMS.length) * 100) + '%';
+    setTimeout(function(){
+      if(current < ITEMS.length - 1){ current += 1; renderQuestion(); }
+      else { showResult(); }
+    }, 300);
+  }
+
+  function showResult(){
+    quizScreen.hidden = true;
+    document.getElementById('passationDate').textContent = new Date().toLocaleString('fr-FR', {day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit'});
+    let total = 0;
+    answers.forEach(function(a){ total += a; });
+    document.getElementById('scoreVal').textContent = total;
+    let interp;
+    if (total <= 15) interp = "0-15 : évocateur de dépression unipolaire/majeure (repère indicatif).";
+    else if (total <= 24) interp = "16-24 : dépression majeure ou trouble du spectre bipolaire possible (repère indicatif).";
+    else interp = "25 et plus : évocateur d'un trouble du spectre bipolaire (repère indicatif).";
+    document.getElementById('interpretText').textContent = interp;
+    resultBox.style.display = 'block';
+    resultBox.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  document.getElementById('downloadBtn').addEventListener('click', function(){ window.print(); });
+  document.getElementById('restartBtn').addEventListener('click', function(){
+    answers.fill(null);
+    current = 0;
+    resultBox.style.display = 'none';
+    startScreen.hidden = false;
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BSSQ-Goldberg — Screening du spectre bipolaire</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#8A1F5C 0%,#C43F94 55%,#4D0F33 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(230,170,210,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:24px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#1A2233;background:#E7E9EE;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .warn-note{font-size:12.5px;color:#7A5A1E;background:#FBF3E3;border:1px solid #E7D2A0;border-radius:10px;padding:10px 14px;}
+  .actions{display:flex;gap:12px;flex-wrap:wrap;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#8A1F5C;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#1A2233;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">BSSQ</span></div>
+
+  <h1 class="serif">Questionnaire de screening du spectre bipolaire de Goldberg</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Goldberg Bipolar Spectrum Screening Questionnaire — Dr Ivan K. Goldberg</p>
+  <div class="meta-row">
+    <span class="pill">12 items</span>
+    <span class="pill">3 minutes</span>
+    <span class="pill">Anglais</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="bssq-goldberg.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <p class="warn-note">⚠️ Le sigle BSSQ est partagé avec le « Questionnaire des situations
+    scolaires de Barkley », déjà présent dans ce catalogue sous « BSSQ » — instruments totalement
+    distincts, fichier nommé <code>bssq-goldberg</code> pour éviter toute confusion. À noter aussi :
+    aucune publication scientifique princeps à comité de lecture n'a été identifiée pour cet outil
+    précis, contrairement aux autres instruments de ce catalogue — c'est un outil de repérage
+    clinique informel largement diffusé mais moins « validé » au sens académique strict.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Repérage rapide du spectre bipolaire, 12 items portant sur la façon dont la personne s'est
+    sentie et comportée pendant une grande partie de sa vie.</p>
+    <p class="source-note">Droits : outil librement disponible depuis sa création, jamais
+    commercialisé par un éditeur de tests, reproduit à l'identique sur de multiples sites cliniques
+    indépendants. Usage clinique/personnel non commercial conforme.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Échelle 0-5 par item, score total 0-60. Seuils indicatifs (non issus d'une validation
+    psychométrique publiée formellement) : 0-15 évocateur de dépression unipolaire/majeure ; 16-24
+    dépression majeure ou trouble du spectre bipolaire possible ; 25 et plus évocateur d'un trouble
+    du spectre bipolaire.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source</h2>
+    <p class="source-note">counsellingresource.com/quizzes/bipolar-testing/goldberg-bipolar/ et
+    pdfcoffee.com (contenu identique confirmé sur les deux sources).</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CADDRA - Liste d'évaluation du TDAH</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#2D6A7A;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .section-label{font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#2D6A7A;margin:0 0 8px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#2D6A7A;background:#DEEBEE;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E4550;border-color:#E0D9C9;}
+  .btn-primary{background:#2D6A7A;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 8px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#1E4550;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .result-table .atteint{color:#8B1E2E;}
+  .result-max{font-size:13px;color:#9A9E90;margin:0 0 16px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">CADDRA — Liste d'évaluation du TDAH</h1>
+    <p class="lead">Cette liste explore l'attention, l'hyperactivité/impulsivité et le comportement d'opposition. Elle peut être remplie par le patient, un parent, un proche ou un enseignant, pour une évaluation actuelle ou rétrospective (enfance).</p>
+    <p class="lang-note">Questionnaire transcrit en anglais (version originale) : aucune traduction française officielle validée n'a été retrouvée lors du sourçage.</p>
+    <div class="pill-row">
+      <span class="pill">26 questions</span>
+      <span class="pill">5 minutes</span>
+      <span class="pill">3 sections</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="section-label" id="section-label"></p>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <table class="result-table" id="result-table"></table>
+    <p class="result-max">Un item est considéré « cliniquement significatif » s'il est coté 2 (Pretty much) ou 3 (Very much). Seuils indicatifs de la CADDRA : Attention &ge; 6/9, Hyperactivité/Impulsivité &ge; 6/9, Opposition &ge; 4/8.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">CADDRA (Canadian ADHD Resource Alliance). ADHD Checklist, CADDRA ADHD Assessment Toolkit (CAAT), section 8.20. Diffusion libre par un organisme professionnel à but non lucratif. Items proches de ceux du SNAP-IV, reformulés sans fréquence. Ce résultat est un repère, il ne constitue pas un diagnostic.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var sections = [
+    { key:"attention", label:"Section 1 — Attention", threshold:6, max:9, items:[
+      "Fails to give close attention to details, careless mistakes",
+      "Difficulty sustaining attention in tasks or fun activities",
+      "Does not seem to listen when spoken to directly",
+      "Does not follow through on instructions and fails to finish work",
+      "Difficulty organizing tasks and activities",
+      "Avoids tasks that require sustained mental effort (boring)",
+      "Losing things",
+      "Easily distracted",
+      "Forgetful in daily activities"
+    ]},
+    { key:"hyperactivite", label:"Section 2 — Hyperactivité/Impulsivité", threshold:6, max:9, items:[
+      "Fidgety or squirms in seat",
+      "Leaves seat when sitting is expected",
+      "Feels restless",
+      "Difficulty in doing fun things quietly",
+      "Always on the go or acts as if \"driven by a motor\"",
+      "Talks excessively",
+      "Blurts answers before questions have been completed",
+      "Difficulty awaiting turn",
+      "Interrupting or intruding on others"
+    ]},
+    { key:"opposition", label:"Section 3 — Opposition", threshold:4, max:8, items:[
+      "Loses temper",
+      "Argues with adults",
+      "Actively defies or refuses to comply with requests or rules",
+      "Deliberately annoys people",
+      "Blames others for his or her mistakes or misbehavior",
+      "Touchy or easily annoyed by others",
+      "Angry or resentful",
+      "Spiteful or vindictive"
+    ]}
+  ];
+
+  var flatItems = [];
+  sections.forEach(function(sec){
+    sec.items.forEach(function(text){ flatItems.push({ text:text, sectionKey:sec.key, sectionLabel:sec.label }); });
+  });
+
+  var opts = ["0 — Not at all","1 — Somewhat","2 — Pretty much","3 — Very much"];
+  var answers = new Array(flatItems.length).fill(null);
+  var idx = 0;
+
+  function renderQuestion(){
+    var item = flatItems[idx];
+    document.getElementById('section-label').textContent = item.sectionLabel;
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + flatItems.length;
+    document.getElementById('q-text').textContent = item.text;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    opts.forEach(function(label, v){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === v ? ' selected' : '');
+      d.textContent = label;
+      d.addEventListener('click', function(){
+        answers[idx] = v;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === flatItems.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < flatItems.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var table = document.getElementById('result-table');
+    table.innerHTML = '';
+    sections.forEach(function(sec){
+      var count = 0;
+      flatItems.forEach(function(item, i){
+        if (item.sectionKey === sec.key && answers[i] >= 2){ count++; }
+      });
+      var atteint = count >= sec.threshold;
+      var tr = document.createElement('tr');
+      var td1 = document.createElement('td');
+      td1.textContent = sec.label.replace(/^Section \d — /, '') + ' — items significatifs (seuil ' + sec.threshold + '/' + sec.max + ')';
+      var td2 = document.createElement('td');
+      td2.textContent = count + '/' + sec.max + (atteint ? ' — seuil atteint' : '');
+      if (atteint){ td2.className = 'atteint'; }
+      tr.appendChild(td1); tr.appendChild(td2);
+      table.appendChild(tr);
+    });
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(flatItems.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CADDRA - Liste d'évaluation du TDAH</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#2D6A7A 0%,#5FA1AE 55%,#153B44 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(200,230,235,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:24px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#1E4550;background:#DEEBEE;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#2D6A7A;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#1E4550;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">CADDRA</span></div>
+
+  <h1 class="serif">Liste d'évaluation du TDAH de la CADDRA (ADHD Checklist)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">ADHD Checklist — CADDRA ADHD Assessment Toolkit (CAAT), section 8.20</p>
+  <div class="meta-row">
+    <span class="pill">26 questions</span>
+    <span class="pill">5 minutes</span>
+    <span class="pill">3 sections</span>
+    <span class="pill">Anglais</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="caddra.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>L'ADHD Checklist fait partie de la trousse d'évaluation du TDAH de la CADDRA (Canadian ADHD Resource Alliance), organisme professionnel canadien à but non lucratif. Elle peut être remplie par le patient, un parent, un proche ou un enseignant, pour une évaluation rétrospective (enfance) ou actuelle, et sert d'alternative ou de complément de suivi rapide au Weiss Symptom Record (WSR).</p>
+    <p class="source-note">Distincte du WSR, du SNAP-IV et du VADRS/Vanderbilt, déjà présents dans ce catalogue et également issus de/diffusés par la CADDRA : c'est un outil autonome de la même trousse, pas une redistribution de l'un des trois autres. La notice officielle précise que ses items sont proches de ceux du SNAP-IV, mais reformulés sans référence à la fréquence.</p>
+    <p class="source-note">Questionnaire transcrit en anglais (version originale) : aucune traduction française officielle validée n'a été retrouvée lors du sourçage.</p>
+    <p class="source-note">Droits : PDF public en téléchargement libre sur le site d'un organisme professionnel canadien à but non lucratif, aucune mention de copyright restrictif, aucun paiement, aucune formation ou certification requise. Usage clinique personnel libre.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>26 items répartis en 3 sections, échelle 0-3 (Not at all, Somewhat, Pretty much, Very much). Un item est considéré « cliniquement significatif » s'il est coté 2 ou 3. On compte le nombre d'items cliniquement significatifs par section, comparé à un seuil de section : Attention (9 items, seuil &ge; 6/9), Hyperactivité/Impulsivité (9 items, seuil &ge; 6/9), Opposition (8 items, seuil &ge; 4/8). Le formulaire officiel prévoit aussi des champs administratifs (identité, date, évaluation rétrospective ou actuelle, médication en cours) qui ne sont pas repris ici, ce catalogue étant à usage personnel.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source</h2>
+    <p class="source-note">CADDRA (Canadian ADHD Resource Alliance). ADHD Checklist, CADDRA ADHD Assessment Toolkit (CAAT), section 8.20, version novembre 2014, mise à jour continue sur caddra.ca.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

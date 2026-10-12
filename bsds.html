@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BSDS - Échelle de diagnostic du spectre bipolaire</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:680px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#C1652F;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .passage{font-size:14.5px;color:#20241E;background:#F4F1EA;border-radius:10px;padding:16px 18px;margin:0 0 22px;}
+  .instr{font-size:13.5px;color:#63695D;margin:0 0 16px;}
+  .chk-list{display:flex;flex-direction:column;gap:6px;margin:0 0 26px;}
+  .chk-item{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:13.5px;}
+  .chk-item input{margin-top:3px;}
+  .chk-item.checked{border-color:#C1652F;background:#FBEAE0;}
+  .global-title{font-size:14px;font-weight:700;color:#20241E;margin:0 0 10px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;margin:0 0 26px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#C1652F;background:#FBEAE0;}
+  .nav-row{display:flex;justify-content:flex-end;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#C1652F;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:36px;color:#C1652F;margin:0 0 4px;}
+  .result-max{font-size:13px;color:#9A9E90;margin:0 0 20px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">BSDS - Spectre bipolaire</h1>
+    <p class="lead">Bipolar Spectrum Diagnostic Scale. Ce test est différent des autres : il se compose d'un récit à lire en entier, puis de phrases à cocher si elles vous décrivent.</p>
+    <p class="lang-note">⚠️ Aucune traduction française validée académiquement retrouvée : le récit et les phrases sont présentés en anglais, texte original.</p>
+    <div class="pill-row">
+      <span class="pill">Récit de 19 phrases</span>
+      <span class="pill">5 minutes</span>
+      <span class="pill">Cotation 0-25</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="instr">Please read through the entire passage below before checking any boxes.</p>
+    <div class="passage" id="passage-text"></div>
+    <p class="instr">Now that you have read this passage, please check one of the following four boxes:</p>
+    <div class="opt-row" id="global-row"></div>
+    <p class="instr">Now please go back and check each sentence below that definitely describes you.</p>
+    <div class="chk-list" id="chk-list"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-primary" id="btn-next">Voir le résultat</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-score" id="score-total"></p>
+    <p class="result-max" id="score-total-flag"></p>
+    <p class="lead">Ce résultat ne peut en aucun cas remplacer une évaluation clinique.</p>
+    <div class="nav-row no-print" style="justify-content:space-between;">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Ghaemi, S.N., Miller, C.J., Berv, D.A., Klugman, J., Rosenquist, K.J., &amp; Pies, R.W. (2005). Sensitivity and specificity of a new bipolar spectrum diagnostic scale. Journal of Affective Disorders, 84(2-3), 273-277. Formulaire patient en diffusion clinique gratuite largement répandue. Outil de repérage, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var passage = [
+    "Some individuals notice that their mood and/or energy levels shift drastically from time to time.",
+    "These individuals notice that, at times, their mood and/or energy level is very low, and at other times, very high.",
+    "During their “low” phases, these individuals often feel a lack of energy; a need to stay in bed or get extra sleep; and little or no motivation to do things they need to do.",
+    "They often put on weight during these periods.",
+    "During their low phases, these individuals often feel “blue”, sad all the time, or depressed.",
+    "Sometimes, during these low phases, they feel hopeless or even suicidal.",
+    "Their ability to function at work or socially is impaired.",
+    "Typically, these low phases last for a few weeks, but sometimes they last only a few days.",
+    "Individuals with this type of pattern may experience a period of “normal” mood in between mood swings, during which their mood and energy level feels “right” and their ability to function is not disturbed.",
+    "They may then notice a marked shift or “switch” in the way they feel.",
+    "Their energy increases above what is normal for them, and they often get many things done they would not ordinarily be able to do.",
+    "Sometimes, during these “high” periods, these individuals feel as if they have too much energy or feel “hyper”.",
+    "Some individuals, during these high periods, may feel irritable, “on edge”, or aggressive.",
+    "Some individuals, during these high periods, take on too many activities at once.",
+    "During these high periods, some individuals may spend money in ways that cause them trouble.",
+    "They may be more talkative, outgoing, or sexual during these periods.",
+    "Sometimes, their behavior during these high periods seems strange or annoying to others.",
+    "Sometimes, these individuals get into difficulty with co-workers or the police, during these high periods.",
+    "Sometimes, they increase their alcohol or non-prescription drug use during these high periods."
+  ];
+  var globalOpts = [
+    {label:"This story fits me very well, or almost perfectly", pts:6},
+    {label:"This story fits me fairly well", pts:4},
+    {label:"This story fits me to some degree, but not in most respects", pts:2},
+    {label:"This story does not really describe me at all", pts:0}
+  ];
+
+  var checked = new Array(passage.length).fill(false);
+  var globalChoice = null;
+
+  var passageEl = document.getElementById('passage-text');
+  passageEl.innerHTML = passage.map(function(p){ return '<p style="margin:0 0 8px;">' + p + '</p>'; }).join('');
+
+  var globalRow = document.getElementById('global-row');
+  globalOpts.forEach(function(opt, i){
+    var d = document.createElement('div');
+    d.className = 'opt';
+    d.textContent = opt.label;
+    d.addEventListener('click', function(){
+      globalChoice = i;
+      Array.prototype.forEach.call(globalRow.children, function(c, ci){ c.classList.toggle('selected', ci === i); });
+    });
+    globalRow.appendChild(d);
+  });
+
+  var chkList = document.getElementById('chk-list');
+  passage.forEach(function(p, i){
+    var label = document.createElement('label');
+    label.className = 'chk-item';
+    label.innerHTML = '<input type="checkbox"><span>' + (i+1) + '. ' + p + '</span>';
+    var input = label.querySelector('input');
+    input.addEventListener('change', function(){
+      checked[i] = input.checked;
+      label.classList.toggle('checked', input.checked);
+    });
+    chkList.appendChild(label);
+  });
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+  });
+
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (globalChoice === null){
+      alert('Merci de cocher une des quatre cases avant de continuer.');
+      return;
+    }
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var checkedCount = checked.filter(Boolean).length;
+    var globalPts = globalOpts[globalChoice].pts;
+    var total = checkedCount + globalPts;
+    document.getElementById('score-total').textContent = total;
+    var interp = total >= 20 ? 'forte probabilité de trouble bipolaire' :
+                 total >= 13 ? 'probabilité modérée' :
+                 total >= 7 ? 'faible probabilité' : 'hautement improbable';
+    document.getElementById('score-total-flag').textContent = 'score total BSDS, sur 25 (' + checkedCount + ' phrase(s) cochée(s) + ' + globalPts + ' point(s) pour l’adéquation globale) — ' + interp;
+  });
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    checked = new Array(passage.length).fill(false);
+    globalChoice = null;
+    Array.prototype.forEach.call(chkList.querySelectorAll('input'), function(i){ i.checked = false; });
+    Array.prototype.forEach.call(chkList.querySelectorAll('.chk-item'), function(c){ c.classList.remove('checked'); });
+    Array.prototype.forEach.call(globalRow.children, function(c){ c.classList.remove('selected'); });
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BSDS - Échelle de diagnostic du spectre bipolaire</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#C1652F 0%,#E3A07C 55%,#6B3418 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(200,215,235,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#22334D;background:#E9EEF5;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#C1652F;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#22334D;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <div class="fiche-photo"><span class="acronym">BSDS</span></div>
+  <h1 class="serif">Échelle de diagnostic du spectre bipolaire (BSDS)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Bipolar Spectrum Diagnostic Scale - Ghaemi, Miller, Berv, Klugman, Rosenquist &amp; Pies (2005)</p>
+  <div class="meta-row">
+    <span class="pill">Récit de 19 phrases</span>
+    <span class="pill">5 minutes</span>
+    <span class="pill">Auto-questionnaire</span>
+    <span class="pill">Anglais</span>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" href="bsds.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>La BSDS a un format narratif inhabituel : au lieu d'une liste de questions séparées, elle présente un récit continu en 19 phrases décrivant l'alternance de phases basses et hautes typique du spectre bipolaire. Le répondant lit l'intégralité du récit, coche une case globale indiquant à quel point l'histoire lui correspond, puis revient cocher individuellement chaque phrase qui le décrit précisément.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Score = 1 point par phrase cochée parmi les 19 (0-19) + points selon la case globale cochée (6 points si « correspond très bien, presque parfaitement », 4 si « correspond assez bien », 2 si « correspond dans une certaine mesure », 0 si « ne me décrit pas du tout »). Score total 0-25. Interprétation : 0-6 hautement improbable ; 7-12 faible probabilité ; 13-19 probabilité modérée ; 20-25 forte probabilité de trouble bipolaire. Seuil optimal de dépistage : ≥13.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Source</h2>
+    <p class="source-note">Ghaemi, S.N., Miller, C.J., Berv, D.A., Klugman, J., Rosenquist, K.J., &amp; Pies, R.W. (2005). Sensitivity and specificity of a new bipolar spectrum diagnostic scale. Journal of Affective Disorders, 84(2-3), 273-277. Article original payant (Elsevier), mais le formulaire patient circule très largement en diffusion clinique gratuite, sans éditeur commercial ni portail de licence identifié (à la manière du PHQ-9). Outil de repérage, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

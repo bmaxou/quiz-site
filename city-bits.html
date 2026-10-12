@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>City BiTS — Échelle du Traumatisme lié à l'Accouchement</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:680px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:25px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 14px;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#B8456B;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 6px;}
+  .q-group{font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:#B8456B;font-weight:700;margin:0 0 10px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#B8456B;background:#F4DCE4;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#5E1F35;border-color:#E0D9C9;}
+  .btn-primary{background:#B8456B;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:40px;color:#B8456B;margin:0 0 4px;}
+  .result-max{font-size:13px;color:#9A9E90;margin:0 0 18px;}
+  table.rt{width:100%;border-collapse:collapse;font-size:13px;margin:10px 0 18px;}
+  table.rt th,table.rt td{border-bottom:1px solid #E0D9C9;padding:6px 8px;text-align:left;vertical-align:top;}
+  table.rt th{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:#63695D;}
+  table.rt td.ok{color:#2E7D52;font-weight:700;}
+  table.rt td.no{color:#9A9E90;}
+  h2.sec{font-size:17px;margin:20px 0 8px;}
+  .sum{font-size:14.5px;margin:0 0 10px;}
+  .note{font-size:13px;color:#63695D;background:#FBF9F4;border:1px solid #E0D9C9;border-radius:10px;padding:12px 14px;margin:10px 0;}
+  .footnote{margin-top:28px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">City BiTS — Échelle du Traumatisme lié à l'Accouchement</h1>
+    <p class="lead">Ce questionnaire vous interroge concernant votre expérience durant la naissance de votre bébé né le plus récemment. Il s'agit de dépister de potentiels événements traumatiques durant (ou juste après) le travail et la naissance, et d'évaluer si vous éprouvez des symptômes qui sont rapportés par certaines femmes après la naissance.</p>
+    <p class="lang-note">Développé à partir des critères du trouble de stress post-traumatique du DSM-5, appliqués à l'expérience de l'accouchement.</p>
+    <div class="pill-row">
+      <span class="pill">29 questions</span>
+      <span class="pill">10 minutes</span>
+      <span class="pill">Échelles mixtes</span>
+      <span class="pill">Français</span>
+      <span class="pill">Licence requise : non</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-group" id="q-group"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-score" id="score-val"></p>
+    <p class="result-max">score total de symptômes de stress post-traumatique (questions 3 à 22), sur 60</p>
+    <div id="result-body"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">City Birth Trauma Scale &#169; Ayers, Wright &amp; Thornton 2018, <em>Frontiers in Psychiatry</em> 9:409. Version française adaptée avec permission : Sandoz, Hingray, Stuijfzand, Lacroix, El Hage* &amp; Horsch* (*auteurs à contribution égale), 2021. Measurement and conceptualization of maternal PTSD following childbirth: Psychometric properties of the City Birth Trauma Scale—French Version (City BiTS-F). <em>Psychological Trauma: Theory, Research, Practice, and Policy</em>. https://doi.org/10.1037/tra0001068 Cette page est un outil de dépistage ; elle ne pose aucun diagnostic et ne remplace pas une évaluation clinique.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [{"g": "Durant le travail, la naissance ou juste après", "t": "Aviez-vous pensé que vous ou votre bébé seriez gravement blessés ?", "k": "bin", "o": [["Non", 0], ["Oui", 1]]}, {"g": "Durant le travail, la naissance ou juste après", "t": "Aviez-vous pensé que vous ou votre bébé alliez mourir ?", "k": "bin", "o": [["Non", 0], ["Oui", 1]]}, {"g": "Symptômes en lien avec la naissance", "t": "Souvenirs répétés et involontaires de la naissance (ou des parties de la naissance) que vous ne pouvez pas contrôler", "k": "freq", "o": [["Pas du tout", 0], ["1 fois", 1], ["2-4 fois", 2], ["≥ 5 fois", 3]]}, {"g": "Symptômes en lien avec la naissance", "t": "Mauvais rêves ou cauchemars de la naissance, ou en lien avec la naissance", "k": "freq", "o": [["Pas du tout", 0], ["1 fois", 1], ["2-4 fois", 2], ["≥ 5 fois", 3]]}, {"g": "Symptômes en lien avec la naissance", "t": "Flashbacks de la naissance et/ou reviviscence de l'expérience", "k": "freq", "o": [["Pas du tout", 0], ["1 fois", 1], ["2-4 fois", 2], ["≥ 5 fois", 3]]}, {"g": "Symptômes en lien avec la naissance", "t": "Être troublée lorsque quelque chose vous rappelle la naissance", "k": "freq", "o": [["Pas du tout", 0], ["1 fois", 1], ["2-4 fois", 2], ["≥ 5 fois", 3]]}, {"g": "Symptômes en lien avec la naissance", "t": "Être tendue ou anxieuse lorsque quelque chose vous rappelle la naissance", "k": "freq", "o": [["Pas du tout", 0], ["1 fois", 1], ["2-4 fois", 2], ["≥ 5 fois", 3]]}, {"g": "Symptômes en lien avec la naissance", "t": "Tenter d'éviter de penser au sujet de la naissance", "k": "freq", "o": [["Pas du tout", 0], ["1 fois", 1], ["2-4 fois", 2], ["≥ 5 fois", 3]]}, {"g": "Symptômes en lien avec la naissance", "t": "Tenter d'éviter les choses qui vous rappellent la naissance (p. ex., personnes, lieux, programmes télé, etc.)", "k": "freq", "o": [["Pas du tout", 0], ["1 fois", 1], ["2-4 fois", 2], ["≥ 5 fois", 3]]}, {"g": "Symptômes en lien avec la naissance", "t": "Incapable de vous rappeler des détails de la naissance", "k": "freq", "o": [["Pas du tout", 0], ["1 fois", 1], ["2-4 fois", 2], ["≥ 5 fois", 3]]}, {"g": "Symptômes en lien avec la naissance", "t": "Se blâmer ou blâmer les autres pour ce qui est arrivé durant la naissance", "k": "freq", "o": [["Pas du tout", 0], ["1 fois", 1], ["2-4 fois", 2], ["≥ 5 fois", 3]]}, {"g": "Symptômes en lien avec la naissance", "t": "Avoir des émotions négatives intenses au sujet de la naissance (p. ex., peur, colère, honte)", "k": "freq", "o": [["Pas du tout", 0], ["1 fois", 1], ["2-4 fois", 2], ["≥ 5 fois", 3]]}, {"g": "Symptômes ayant débuté ou qui se sont aggravés depuis la naissance", "t": "Avoir des croyances négatives sur vous-même, ou penser qu'il se passera quelque chose de terrible", "k": "freq", "o": [["Pas du tout", 0], ["1 fois", 1], ["2-4 fois", 2], ["≥ 5 fois", 3]]}, {"g": "Symptômes ayant débuté ou qui se sont aggravés depuis la naissance", "t": "Perdre de l'intérêt pour des activités importantes pour vous auparavant", "k": "freq", "o": [["Pas du tout", 0], ["1 fois", 1], ["2-4 fois", 2], ["≥ 5 fois", 3]]}, {"g": "Symptômes ayant débuté ou qui se sont aggravés depuis la naissance", "t": "Se sentir détachée des autres", "k": "freq", "o": [["Pas du tout", 0], ["1 fois", 1], ["2-4 fois", 2], ["≥ 5 fois", 3]]}, {"g": "Symptômes ayant débuté ou qui se sont aggravés depuis la naissance", "t": "Incapable de ressentir des émotions positives (p. ex., joie, excitation)", "k": "freq", "o": [["Pas du tout", 0], ["1 fois", 1], ["2-4 fois", 2], ["≥ 5 fois", 3]]}, {"g": "Symptômes ayant débuté ou qui se sont aggravés depuis la naissance", "t": "Se sentir irritable ou agressive", "k": "freq", "o": [["Pas du tout", 0], ["1 fois", 1], ["2-4 fois", 2], ["≥ 5 fois", 3]]}, {"g": "Symptômes ayant débuté ou qui se sont aggravés depuis la naissance", "t": "Sentiment autodestructeur, ou agir imprudemment", "k": "freq", "o": [["Pas du tout", 0], ["1 fois", 1], ["2-4 fois", 2], ["≥ 5 fois", 3]]}, {"g": "Symptômes ayant débuté ou qui se sont aggravés depuis la naissance", "t": "Se sentir tendue et à cran", "k": "freq", "o": [["Pas du tout", 0], ["1 fois", 1], ["2-4 fois", 2], ["≥ 5 fois", 3]]}, {"g": "Symptômes ayant débuté ou qui se sont aggravés depuis la naissance", "t": "Se sentir agitée ou sursauter facilement", "k": "freq", "o": [["Pas du tout", 0], ["1 fois", 1], ["2-4 fois", 2], ["≥ 5 fois", 3]]}, {"g": "Symptômes ayant débuté ou qui se sont aggravés depuis la naissance", "t": "Avoir du mal à vous concentrer", "k": "freq", "o": [["Pas du tout", 0], ["1 fois", 1], ["2-4 fois", 2], ["≥ 5 fois", 3]]}, {"g": "Symptômes ayant débuté ou qui se sont aggravés depuis la naissance", "t": "Mal dormir à cause de choses non liées au rythme de sommeil du bébé", "k": "freq", "o": [["Pas du tout", 0], ["1 fois", 1], ["2-4 fois", 2], ["≥ 5 fois", 3]]}, {"g": "Symptômes ayant débuté ou qui se sont aggravés depuis la naissance", "t": "Se sentir détachée ou comme si vous étiez dans un rêve", "k": "freq", "o": [["Pas du tout", 0], ["1 fois", 1], ["2-4 fois", 2], ["≥ 5 fois", 3]]}, {"g": "Symptômes ayant débuté ou qui se sont aggravés depuis la naissance", "t": "Sentir que des choses sont distordues ou irréelles", "k": "freq", "o": [["Pas du tout", 0], ["1 fois", 1], ["2-4 fois", 2], ["≥ 5 fois", 3]]}, {"g": "Si vous avez au moins un de ces symptômes", "t": "Quand ces symptômes ont débuté ?", "k": "cat", "o": [["Avant la naissance", 0], ["Dans les premiers 6 mois après la naissance", 1], ["Plus de 6 mois après la naissance", 2], ["Je n'ai pas ces symptômes", null]]}, {"g": "Si vous avez au moins un de ces symptômes", "t": "Combien de temps avez-vous ressenti ces symptômes ?", "k": "cat", "o": [["Moins d'un mois", 0], ["1-3 mois", 1], ["Plus de 3 mois", 2], ["Je n'ai pas ces symptômes", null]]}, {"g": "Pour finir", "t": "Ces symptômes vous causent-ils beaucoup de détresse ?", "k": "yns", "o": [["Oui", 2], ["Non", 0], ["Parfois", 1]]}, {"g": "Pour finir", "t": "Vous empêchent-ils de réaliser vos activités habituelles (p. ex., sociales, quotidiennes) ?", "k": "yns", "o": [["Oui", 2], ["Non", 0], ["Parfois", 1]]}, {"g": "Pour finir", "t": "Est-ce que certains de ces symptômes peuvent être dus à un médicament, une consommation d'alcool, de drogues, ou à une maladie ?", "k": "yne", "o": [["Oui", 2], ["Non", 0], ["Peut-être", 1]]}];
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-group').textContent = items[idx].g;
+    document.getElementById('q-text').textContent = items[idx].t;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    items[idx].o.forEach(function(opt, i){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === i ? ' selected' : '');
+      d.textContent = opt[0];
+      d.addEventListener('click', function(){
+        answers[idx] = i;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function val(i){
+    var optIdx = answers[i];
+    if (optIdx === null || optIdx === undefined) return null;
+    var v = items[i].o[optIdx][1];
+    return v; // may be null for "pas de symptômes"
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+
+    // index map: 0=Q1,1=Q2,2..23=Q3..Q24,24=Q25,25=Q26,26=Q27,27=Q28,28=Q29
+    var reexp = [2,3,4,5,6], avoid = [6+1,8].slice(); // placeholder, replaced below
+    reexp = [2,3,4,5,6];
+    avoid = [7,8];
+    var negcog = [9,10,11,12,13,14,15];
+    var hyper = [16,17,18,19,20,21];
+    var dissoc = [22,23];
+
+    function any1(list){ return list.some(function(i){ var v=val(i); return v!==null && v>=1; }); }
+    function count1(list){ return list.filter(function(i){ var v=val(i); return v!==null && v>=1; }).length; }
+    function sum(list){ return list.reduce(function(a,i){ var v=val(i); return a + (v===null?0:v); }, 0); }
+
+    var totalSympt = sum([2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21]); // Q3..Q22
+    var dissocScore = sum(dissoc);
+
+    var A = (val(0)===1) || (val(1)===1);
+    var B = any1(reexp);
+    var C = any1(avoid);
+    var D = count1(negcog) >= 2;
+    var E = count1(hyper) >= 2;
+    var q26 = val(25);
+    var F = (q26 !== null && q26 >= 1);
+    var q27 = val(26), q28 = val(27);
+    var G = (q27 !== null && q27 >= 1) || (q28 !== null && q28 >= 1);
+    var q29 = val(28);
+    var H = (q29 === 0); // not excluded only if answer is "Non"
+    var probable = A && B && C && D && E && F && G && H;
+    var dissocSub = (val(22) !== null && val(22) >= 1) || (val(23) !== null && val(23) >= 1);
+    var delayed = (val(24) === 2);
+
+    document.getElementById('score-val').textContent = totalSympt;
+
+    var rows = [
+      ['A — Critère de l\'événement (stresseur)', A],
+      ['B — Reviviscence (questions 3 à 7)', B],
+      ['C — Évitement (questions 8 à 9)', C],
+      ['D — Cognitions et humeur négatives (2 questions ou plus, 10 à 16)', D],
+      ['E — Hyperactivation (2 questions ou plus, 17 à 22)', E],
+      ['F — Durée (question 26)', F],
+      ['G — Détresse ou altération du fonctionnement (questions 27-28)', G],
+      ['H — Absence de cause organique (question 29)', H]
+    ];
+    var tbl = '<table class="rt"><thead><tr><th>Critère DSM-5</th><th>Rempli</th></tr></thead><tbody>';
+    rows.forEach(function(r){
+      tbl += '<tr><td>' + r[0] + '</td><td class="' + (r[1]?'ok':'no') + '">' + (r[1]?'Oui':'Non') + '</td></tr>';
+    });
+    tbl += '</tbody></table>';
+
+    var concl = probable
+      ? "L'ensemble des 8 critères diagnostiques du DSM-5 pour le TSPT lié à l'accouchement est rempli (profil compatible avec un TSPT probable)."
+      : "Au moins un des 8 critères diagnostiques du DSM-5 n'est pas rempli (profil non compatible avec un diagnostic probable de TSPT selon cette grille).";
+    if (dissocSub) concl += " Présence de symptômes dissociatifs (score " + dissocScore + "/6 sur les questions 23-24) : à considérer comme un sous-type \"avec symptômes dissociatifs\" si le diagnostic est par ailleurs retenu.";
+    if (delayed) concl += " Début des symptômes rapporté plus de 6 mois après la naissance : à considérer comme une forme \"à expression retardée\" si le diagnostic est par ailleurs retenu.";
+
+    document.getElementById('result-body').innerHTML =
+      '<p class="sum">Score dissociatif (questions 23-24, hors score de TSPT) : <strong>' + dissocScore + ' / 6</strong></p>' +
+      '<h2 class="sec serif">Critères diagnostiques DSM-5 (City BiTS)</h2>' + tbl +
+      '<p class="note">' + concl + '</p>' +
+      '<p class="note">Ce résultat est un outil de dépistage structuré, pas un diagnostic : seul un professionnel formé peut poser un diagnostic de TSPT lié à l\'accouchement.</p>';
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>City BiTS — Échelle du Traumatisme lié à l'Accouchement</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#B8456B 0%,#F4DCE4 55%,#5E1F35 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.4),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:22px;color:#fff;}
+  h1{font-size:26px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#5E1F35;background:#F4DCE4;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#B8456B;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#5E1F35;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <div class="fiche-photo"><span class="acronym">City BiTS</span></div>
+  <h1 class="serif">City BiTS — Échelle du Traumatisme lié à l'Accouchement</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Ayers S., Wright D.B. &amp; Thornton A. (2018), City University of London. </p>
+  <div class="meta-row">
+    <span class="pill">29 questions</span>
+    <span class="pill">10 minutes</span>
+    <span class="pill">Échelles mixtes</span>
+    <span class="pill">Trauma de la naissance</span>
+    <span class="pill">Français</span>
+    <span class="pill">Licence requise : non</span>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" href="city-bits.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Ce questionnaire vous interroge concernant votre expérience durant la naissance de votre bébé né le plus récemment. Il s'agit de dépister de potentiels événements traumatiques durant (ou juste après) le travail et la naissance, et d'évaluer si vous éprouvez des symptômes qui sont rapportés par certaines femmes après la naissance. Développé à partir des critères du trouble de stress post-traumatique du DSM-5, appliqués à l'expérience de l'accouchement.</p>
+    <p>Structure : 2 questions de critère d'événement (Oui/Non), 20 questions de symptômes de stress post-traumatique cotées de 0 (pas du tout) à 3 (5 fois ou plus) au cours de la dernière semaine (reviviscence, évitement, cognitions et humeur négatives, hyperactivation), 2 questions de symptômes dissociatifs (même échelle, non comptées dans le score de TSPT), puis des questions sur le début et la durée des symptômes, la détresse/l'altération du fonctionnement, et l'exclusion d'une cause organique.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Score total de symptômes de TSPT = somme des questions 3 à 22 (0-60). Score dissociatif distinct = somme des questions 23-24 (0-6, hors score de TSPT). Un TSPT probable selon le DSM-5 est retenu si les 8 critères sont remplis : A (événement, Oui à la question 1 ou 2), B (reviviscence, score &#8805;1 sur au moins une question 3-7), C (évitement, score &#8805;1 sur la question 8 ou 9), D (cognitions/humeur négatives, score &#8805;1 sur 2 questions ou plus parmi 10-16), E (hyperactivation, score &#8805;1 sur 2 questions ou plus parmi 17-22), F (durée, score &#8805;1 sur la question 26), G (détresse ou altération du fonctionnement, score &#8805;1 sur la question 27 ou 28), H (absence de cause organique, réponse « Non » à la question 29). Un score &#8805;1 sur la question 23 ou 24 oriente vers un sous-type « avec symptômes dissociatifs » ; une réponse « Plus de 6 mois après la naissance » à la question 25 oriente vers une forme « à expression retardée ». Aucun seuil numérique global n'est publié par les auteurs au-delà de cette grille de critères : rien n'a été ajouté ni inventé.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p>Ayers S., Wright D.B. &amp; Thornton A. (2018). Measuring and conceptualizing PTSD following childbirth: Validation of the City Birth Trauma Scale. <em>Frontiers in Psychiatry</em>, 9:409.</p>
+    <p class="source-note"><strong>Licence requise : non.</strong> Page officielle (citybirthtraumascale.com/questionnaires) : « The City Birth Trauma Scale is free to use in clinical practice or research under a Creative Commons license. » Items et grille de cotation transcrits depuis les documents officiels (version française (2021) téléchargée depuis citybirthtraumascale.com/translated-versions ; grille de cotation officielle, City-BiTS-scoring-information.pdf, city.ac.uk). Traduction française : Sandoz, Hingray, Stuijfzand, Lacroix, El Hage* &amp; Horsch* (*auteurs à contribution égale), 2021. Measurement and conceptualization of maternal PTSD following childbirth: Psychometric properties of the City Birth Trauma Scale—French Version (City BiTS-F). <em>Psychological Trauma: Theory, Research, Practice, and Policy</em>. https://doi.org/10.1037/tra0001068 Aucun item n'a été inventé ni complété.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>
