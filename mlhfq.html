@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MLHFQ — Questionnaire Living with Heart Failure du Minnesota</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#8A2E3A;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .stem{font-size:13px;color:#63695D;margin:0 0 8px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#8A2E3A;background:#F6E3E6;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#8A2E3A;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#8A2E3A;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 16px;}
+  .alert{font-size:14px;background:#FBEFEA;border:1px solid #E8C9BC;border-radius:10px;padding:12px 14px;margin:0 0 18px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">MLHFQ — Questionnaire Living with Heart Failure du Minnesota</h1>
+    <p class="lead">Ces questions portent sur l'effet de votre insuffisance cardiaque (de votre problème cardiaque) sur votre vie au cours du dernier mois (4 semaines). Pour chaque question, indiquez de 0 à 5 dans quelle mesure votre vie a été affectée. Si une question ne vous concerne pas, choisissez 0.</p>
+    <p class="lang-note">Items en anglais (Minnesota Living with Heart Failure Questionnaire) : version française officielle non accessible. Outil sous licence : « Licence requise : oui ».</p>
+    <div class="pill-row">
+      <span class="pill">21 questions</span>
+      <span class="pill">5 à 10 minutes</span>
+      <span class="pill">Score 0 à 105</span>
+      <span class="pill">Anglais</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="stem" id="stem-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-score" id="score-val"></p>
+    <p class="result-max">score total (somme des 21 items cotés de 0 à 5), sur une échelle de 0 à 105 (plus il est élevé, plus le retentissement de l'insuffisance cardiaque est important)</p>
+    <p class="alert" id="alert-text" hidden></p>
+    <p class="result-text" id="level-text"></p>
+    <p class="result-text" id="extra-text"></p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Minnesota Living with Heart Failure Questionnaire (MLHFQ) — Rector T.S. &amp; Cohn J.N. (1992), University of Minnesota. © University of Minnesota, tous droits réservés (licence requise). Outil d'évaluation de la qualité de vie liée à l'insuffisance cardiaque, ne remplace pas une évaluation médicale.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var STEM = 'Did your heart failure prevent you from living as you wanted during the past month (4 weeks) by —';
+  var items = [{"t": "1 - Causing swelling in your ankles or legs?", "o": 0}, {"t": "2 - Making you sit or lie down to rest during the day?", "o": 0}, {"t": "3 - Making your walking about or climbing stairs difficult?", "o": 0}, {"t": "4 - Making your working around the house or yard difficult?", "o": 0}, {"t": "5 - Making your going places away from home difficult?", "o": 0}, {"t": "6 - Making your sleeping well at night difficult?", "o": 0}, {"t": "7 - Making your relating to or doing things with your friends or family difficult?", "o": 0}, {"t": "8 - Making your working to earn a living difficult?", "o": 0}, {"t": "9 - Making your recreational pastimes, sports or hobbies difficult?", "o": 0}, {"t": "10 - Making your sexual activities difficult?", "o": 0}, {"t": "11 - Making you eat less of the foods you like?", "o": 0}, {"t": "12 - Making you short of breath?", "o": 0}, {"t": "13 - Making you tired, fatigued or low on energy?", "o": 0}, {"t": "14 - Making you stay in a hospital?", "o": 0}, {"t": "15 - Costing you money for medical care?", "o": 0}, {"t": "16 - Giving you side effects from treatments?", "o": 0}, {"t": "17 - Making you feel you are a burden to your family or friends?", "o": 0}, {"t": "18 - Making you feel a loss of self-control in your life?", "o": 0}, {"t": "19 - Making you worry?", "o": 0}, {"t": "20 - Making it difficult for you to concentrate or remember things?", "o": 0}, {"t": "21 - Making you feel depressed?", "o": 0}];
+  var OPTS = ["0 — No","1 — Very little","2","3","4","5 — Very much"];
+  function optsFor(i){ return OPTS; }
+  function compute(a){
+    var tot = 0, phys = 0, emo = 0, i;
+    for (i = 0; i < 21; i++){ tot += a[i]; }
+    [1,2,3,4,5,6,11,12].forEach(function(k){ phys += a[k]; });
+    [16,17,18,19,20].forEach(function(k){ emo += a[k]; });
+    var level;
+    if (tot < 24) level = "Retentissement faible sur la qualité de vie (score inférieur à 24).";
+    else if (tot <= 45) level = "Retentissement modéré (24 à 45).";
+    else level = "Retentissement important (score supérieur à 45).";
+    level += " Plus le score est bas, meilleure est la qualité de vie liée à l'insuffisance cardiaque. Ces tranches sont des repères publiés dans la littérature, non officiels, et n'ont pas valeur de diagnostic.";
+    var extra = "Dimension physique (questions 2 à 7, 12 et 13) : " + phys + " sur 40. Dimension émotionnelle (questions 17 à 21) : " + emo + " sur 25.";
+    return {score: tot, level: level, extra: extra, alert: ""};
+  }
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('stem-text').textContent = STEM;
+    document.getElementById('q-text').textContent = items[idx].t;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    optsFor(idx).forEach(function(label, v){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === v ? ' selected' : '');
+      d.textContent = label;
+      d.addEventListener('click', function(){
+        answers[idx] = v;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){
+      idx++; renderQuestion();
+    } else {
+      showResult();
+    }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var r = compute(answers);
+    document.getElementById('score-val').textContent = String(r.score);
+    document.getElementById('level-text').textContent = r.level;
+    document.getElementById('extra-text').textContent = r.extra || '';
+    var al = document.getElementById('alert-text');
+    if (r.alert){ al.textContent = r.alert; al.hidden = false; } else { al.hidden = true; }
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MLHFQ — Questionnaire Living with Heart Failure du Minnesota</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#8A2E3A 0%,#D9808C 55%,#4A0F18 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.45),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#5C1A24;background:#F6E3E6;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#8A2E3A;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#5C1A24;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">MLHFQ</span></div>
+
+  <h1 class="serif">Questionnaire Living with Heart Failure du Minnesota (MLHFQ)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Minnesota Living with Heart Failure Questionnaire — Rector &amp; Cohn (1992), Université du Minnesota</p>
+  <div class="meta-row">
+    <span class="pill">21 questions</span>
+      <span class="pill">5 à 10 minutes</span>
+      <span class="pill">Score 0 à 105</span>
+      <span class="pill">Anglais</span>
+      <span class="pill">Licence requise : oui</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="mlhfq.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le MLHFQ est un auto-questionnaire de référence mesurant le retentissement de l'insuffisance cardiaque sur la qualité de vie, au cours du dernier mois. Ses 21 items décrivent des gênes (œdème des chevilles, repos forcé dans la journée, marche, activités domestiques, sommeil, vie sociale, travail, loisirs, vie sexuelle, alimentation, essoufflement, fatigue, hospitalisation, coût des soins, effets secondaires) et des retentissements émotionnels (sentiment d'être un poids, perte de maîtrise, inquiétude, difficultés de concentration, humeur dépressive). Chaque item se répond de 0 (« No ») à 5 (« Very much »), seuls les repères 0, 1 et 5 étant nommés.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Le score total est la somme des 21 items, de 0 à 105 ; plus le score est élevé, plus la qualité de vie est altérée. Deux sous-scores sont calculés : dimension physique (items 2 à 7, 12 et 13, soit 8 items, de 0 à 40) et dimension émotionnelle (items 17 à 21, soit 5 items, de 0 à 25). Repères de lecture publiés dans la littérature (non officiels) : moins de 24 retentissement faible, 24 à 45 modéré, plus de 45 important ; une variation de 5 points ou plus est généralement considérée comme cliniquement significative. Un item inapplicable se coche à 0.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p><strong>Licence requise : oui.</strong> Le MLHFQ est protégé par le droit d'auteur (University of Minnesota) et son usage requiert une licence, avec des tarifs variables selon la nature de l'usage ; la version française est distribuée par Mapi. Instrument construit ici malgré la licence, conformément à la décision du 30/09/2026 ; la diffusion publique reste soumise à l'autorisation du détenteur des droits.</p><p class="source-note">Texte des 21 items, consigne et modalités de réponse : version anglaise reproduite en tableau dans un article en libre accès (« List of questions in the Minnesota Living with Heart Failure Questionnaire », Open Heart, PMC4860852), recoupée avec deux autres articles en libre accès (Journal of Patient-Reported Outcomes, PMC13424004 ; Quality of Life Research, PMC2759459) ; une seule publication (PMC7462190) diverge sur un mot de l'item 16 (« medications » au lieu de « treatments »), la formulation majoritaire est retenue. Aucune version française officielle en texte intégral n'a pu être consultée. Cotation (0-5 ; total 0-105 ; dimension physique items 2 à 7, 12 et 13, 0-40 ; dimension émotionnelle items 17 à 21, 0-25) : World Journal of Cardiology (PMC12186193) et BMJ Open (PMC5629730) ; repères 24 / 45 : PMC4860852 (source secondaire, repère non officiel).</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MAThyS — Évaluation multidimensionnelle des états thymiques</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#8A4A26;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .sec{font-size:12.5px;color:#63695D;background:#F4F1EA;border-radius:8px;padding:8px 12px;margin:0 0 16px;}
+  .q-text{font-size:16px;margin:0 0 6px;}
+  .q-desc{font-size:13px;color:#63695D;margin:0 0 18px;white-space:pre-line;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#8A4A26;background:#F6E6DA;}
+  .num-row{display:flex;flex-wrap:wrap;gap:6px;}
+  .num{min-width:44px;text-align:center;padding:10px 0;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600;background:#fff;}
+  .num.selected{border-color:#8A4A26;background:#F6E6DA;}
+  .num-ends{display:flex;justify-content:space-between;gap:12px;font-size:12px;color:#63695D;margin-top:8px;}
+  .vas-box{padding:8px 0;}
+  .vas-val{font-family:'Cormorant Garamond',Georgia,serif;font-size:40px;color:#8A4A26;margin:0 0 6px;}
+  .vas-box input[type=range]{width:100%;}
+  .poles{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0 0 14px;}
+  .pole{border:1px solid #E0D9C9;border-radius:10px;padding:10px 12px;font-size:14px;background:#FBF9F4;}
+  .pole-tag{display:block;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:#9A9E90;font-weight:600;margin-bottom:3px;}
+  .vas-mid{display:flex;justify-content:space-between;align-items:center;margin-top:6px;color:#9A9E90;font-size:11px;}
+  .vas-state{font-size:12px;color:#63695D;margin:8px 0 0;}
+  @media (max-width:520px){.poles{grid-template-columns:1fr;}}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#8A4A26;border-color:#E0D9C9;}
+  .btn-primary{background:#8A4A26;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:40px;color:#8A4A26;margin:0 0 4px;}
+  .result-max{font-size:13px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 14px;}
+  .result-list{font-size:14px;margin:0 0 16px;padding-left:20px;}
+  .result-list li{margin-bottom:4px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">MAThyS — Évaluation multidimensionnelle des états thymiques</h1>
+    <p class="lead">Vingt lignes pour situer votre humeur et votre fonctionnement au cours de la dernière semaine. Pour chaque ligne, deux propositions opposées : placez le trait au centre si vous êtes dans votre état habituel, ou du côté de la proposition qui vous décrit le mieux. Suivent sept questions sur la fréquence de certaines émotions.</p>
+    <p class="lang-note">Multidimensional Assessment of Thymic States (Henry et al., 2008). Texte des items en anglais (version publiée en accès libre) ; l'échelle a été conçue en français.</p>
+    <div class="pill-row">
+      <span class="pill">20 items</span><span class="pill">10 minutes</span><span class="pill">Échelles visuelles analogiques</span><span class="pill">Anglais</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="sec" id="sec-text" hidden></p>
+    <p class="q-text" id="q-text"></p>
+    <p class="q-desc" id="q-desc"></p>
+    <div id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Henry C., M'Bailara K., Mathieu F., Poinsot R., Ferrer F., Baudin A. &amp; Leboyer M. (2008), « Construction and validation of a dimensional scale exploring mood disorders: MAThyS (Multidimensional Assessment of Thymic States) », <em>BMC Psychiatry</em>, 8:82 (accès libre). Ce résultat n'est pas un diagnostic : il situe un niveau global d'inhibition/activation.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [{"t": "Item 1 / 20", "d": "Cette semaine, entre les deux propositions :", "kind": "vas", "min": 0, "max": 100, "scale": 10, "bip": 1, "lo": "I am less sensitive to colours than usual", "hi": "I am more sensitive to colours than usual", "hint": "Placez le trait sur la ligne entre les deux propositions : au centre si vous êtes dans votre état habituel ; sinon du côté de la proposition qui vous décrit le mieux, d'autant plus près de son extrémité que vous vous y reconnaissez. Faites glisser le curseur (ou utilisez les flèches du clavier), ou cliquez sur la ligne.", "sec": "This scale aims to evaluate your mood during the last week. For each item, indicate how you usually feel by making a vertical line between the two opposite statements."}, {"t": "Item 2 / 20", "d": "Cette semaine, entre les deux propositions :", "kind": "vas", "min": 0, "max": 100, "scale": 10, "bip": 1, "lo": "I do not feel tense", "hi": "I have a lot of tension", "hint": "Placez le trait sur la ligne entre les deux propositions : au centre si vous êtes dans votre état habituel ; sinon du côté de la proposition qui vous décrit le mieux, d'autant plus près de son extrémité que vous vous y reconnaissez. Faites glisser le curseur (ou utilisez les flèches du clavier), ou cliquez sur la ligne."}, {"t": "Item 3 / 20", "d": "Cette semaine, entre les deux propositions :", "kind": "vas", "min": 0, "max": 100, "scale": 10, "bip": 1, "lo": "I feel emotionally numb", "hi": "I lose control over my emotions sometimes.", "hint": "Placez le trait sur la ligne entre les deux propositions : au centre si vous êtes dans votre état habituel ; sinon du côté de la proposition qui vous décrit le mieux, d'autant plus près de son extrémité que vous vous y reconnaissez. Faites glisser le curseur (ou utilisez les flèches du clavier), ou cliquez sur la ligne."}, {"t": "Item 4 / 20", "d": "Cette semaine, entre les deux propositions :", "kind": "vas", "min": 0, "max": 100, "scale": 10, "bip": 1, "lo": "I am withdrawn", "hi": "I feel outgoing", "hint": "Placez le trait sur la ligne entre les deux propositions : au centre si vous êtes dans votre état habituel ; sinon du côté de la proposition qui vous décrit le mieux, d'autant plus près de son extrémité que vous vous y reconnaissez. Faites glisser le curseur (ou utilisez les flèches du clavier), ou cliquez sur la ligne."}, {"t": "Item 5 / 20", "d": "Cette semaine, entre les deux propositions :", "kind": "vas", "min": 0, "max": 100, "scale": 10, "bip": 1, "lo": "I'm easily distracted and the slightest thing attracts my attention", "hi": "I am not distracted by things going on around me.", "hint": "Placez le trait sur la ligne entre les deux propositions : au centre si vous êtes dans votre état habituel ; sinon du côté de la proposition qui vous décrit le mieux, d'autant plus près de son extrémité que vous vous y reconnaissez. Faites glisser le curseur (ou utilisez les flèches du clavier), ou cliquez sur la ligne."}, {"t": "Item 6 / 20", "d": "Cette semaine, entre les deux propositions :", "kind": "vas", "min": 0, "max": 100, "scale": 10, "bip": 1, "lo": "I am more sensitive to touch than usual", "hi": "I am less sensitive to touch than usual", "hint": "Placez le trait sur la ligne entre les deux propositions : au centre si vous êtes dans votre état habituel ; sinon du côté de la proposition qui vous décrit le mieux, d'autant plus près de son extrémité que vous vous y reconnaissez. Faites glisser le curseur (ou utilisez les flèches du clavier), ou cliquez sur la ligne."}, {"t": "Item 7 / 20", "d": "Cette semaine, entre les deux propositions :", "kind": "vas", "min": 0, "max": 100, "scale": 10, "bip": 1, "lo": "My mood seems to vary a lot, depending on my environment", "hi": "My mood is stable and changes little", "hint": "Placez le trait sur la ligne entre les deux propositions : au centre si vous êtes dans votre état habituel ; sinon du côté de la proposition qui vous décrit le mieux, d'autant plus près de son extrémité que vous vous y reconnaissez. Faites glisser le curseur (ou utilisez les flèches du clavier), ou cliquez sur la ligne."}, {"t": "Item 8 / 20", "d": "Cette semaine, entre les deux propositions :", "kind": "vas", "min": 0, "max": 100, "scale": 10, "bip": 1, "lo": "I am particularly sensitive to music", "hi": "I am less affected by music than usual", "hint": "Placez le trait sur la ligne entre les deux propositions : au centre si vous êtes dans votre état habituel ; sinon du côté de la proposition qui vous décrit le mieux, d'autant plus près de son extrémité que vous vous y reconnaissez. Faites glisser le curseur (ou utilisez les flèches du clavier), ou cliquez sur la ligne."}, {"t": "Item 9 / 20", "d": "Cette semaine, entre les deux propositions :", "kind": "vas", "min": 0, "max": 100, "scale": 10, "bip": 1, "lo": "My mind never stops", "hi": "My mind seems to be functioning in slow motion", "hint": "Placez le trait sur la ligne entre les deux propositions : au centre si vous êtes dans votre état habituel ; sinon du côté de la proposition qui vous décrit le mieux, d'autant plus près de son extrémité que vous vous y reconnaissez. Faites glisser le curseur (ou utilisez les flèches du clavier), ou cliquez sur la ligne."}, {"t": "Item 10 / 20", "d": "Cette semaine, entre les deux propositions :", "kind": "vas", "min": 0, "max": 100, "scale": 10, "bip": 1, "lo": "I am more responsive than usual to things going on around me", "hi": "I am less responsive than usual to things going on around me.", "hint": "Placez le trait sur la ligne entre les deux propositions : au centre si vous êtes dans votre état habituel ; sinon du côté de la proposition qui vous décrit le mieux, d'autant plus près de son extrémité que vous vous y reconnaissez. Faites glisser le curseur (ou utilisez les flèches du clavier), ou cliquez sur la ligne."}, {"t": "Item 11 / 20", "d": "Cette semaine, entre les deux propositions :", "kind": "vas", "min": 0, "max": 100, "scale": 10, "bip": 1, "lo": "I have no energy", "hi": "I feel very energetic.", "hint": "Placez le trait sur la ligne entre les deux propositions : au centre si vous êtes dans votre état habituel ; sinon du côté de la proposition qui vous décrit le mieux, d'autant plus près de son extrémité que vous vous y reconnaissez. Faites glisser le curseur (ou utilisez les flèches du clavier), ou cliquez sur la ligne."}, {"t": "Item 12 / 20", "d": "Cette semaine, entre les deux propositions :", "kind": "vas", "min": 0, "max": 100, "scale": 10, "bip": 1, "lo": "I feel like my thoughts are slowed down", "hi": "I feel like my ideas are racing though my head", "hint": "Placez le trait sur la ligne entre les deux propositions : au centre si vous êtes dans votre état habituel ; sinon du côté de la proposition qui vous décrit le mieux, d'autant plus près de son extrémité que vous vous y reconnaissez. Faites glisser le curseur (ou utilisez les flèches du clavier), ou cliquez sur la ligne."}, {"t": "Item 13 / 20", "d": "Cette semaine, entre les deux propositions :", "kind": "vas", "min": 0, "max": 100, "scale": 10, "bip": 1, "lo": "I find food tasteless", "hi": "I like to eat because I appreciate how food tastes more than usual", "hint": "Placez le trait sur la ligne entre les deux propositions : au centre si vous êtes dans votre état habituel ; sinon du côté de la proposition qui vous décrit le mieux, d'autant plus près de son extrémité que vous vous y reconnaissez. Faites glisser le curseur (ou utilisez les flèches du clavier), ou cliquez sur la ligne."}, {"t": "Item 14 / 20", "d": "Cette semaine, entre les deux propositions :", "kind": "vas", "min": 0, "max": 100, "scale": 10, "bip": 1, "lo": "I feel like communicating with other people less than usual", "hi": "I feel like communicating with other people more than usual", "hint": "Placez le trait sur la ligne entre les deux propositions : au centre si vous êtes dans votre état habituel ; sinon du côté de la proposition qui vous décrit le mieux, d'autant plus près de son extrémité que vous vous y reconnaissez. Faites glisser le curseur (ou utilisez les flèches du clavier), ou cliquez sur la ligne."}, {"t": "Item 15 / 20", "d": "Cette semaine, entre les deux propositions :", "kind": "vas", "min": 0, "max": 100, "scale": 10, "bip": 1, "lo": "I lack the motivation to do new things", "hi": "I am coming up with lots of new plans", "hint": "Placez le trait sur la ligne entre les deux propositions : au centre si vous êtes dans votre état habituel ; sinon du côté de la proposition qui vous décrit le mieux, d'autant plus près de son extrémité que vous vous y reconnaissez. Faites glisser le curseur (ou utilisez les flèches du clavier), ou cliquez sur la ligne."}, {"t": "Item 16 / 20", "d": "Cette semaine, entre les deux propositions :", "kind": "vas", "min": 0, "max": 100, "scale": 10, "bip": 1, "lo": "My lack of interest in doing things interferes with managing daily life", "hi": "I am more interested in doing things.", "hint": "Placez le trait sur la ligne entre les deux propositions : au centre si vous êtes dans votre état habituel ; sinon du côté de la proposition qui vous décrit le mieux, d'autant plus près de son extrémité que vous vous y reconnaissez. Faites glisser le curseur (ou utilisez les flèches du clavier), ou cliquez sur la ligne."}, {"t": "Item 17 / 20", "d": "Cette semaine, entre les deux propositions :", "kind": "vas", "min": 0, "max": 100, "scale": 10, "bip": 1, "lo": "I am making decisions faster than usual", "hi": "I am finding it harder than usual to make decisions", "hint": "Placez le trait sur la ligne entre les deux propositions : au centre si vous êtes dans votre état habituel ; sinon du côté de la proposition qui vous décrit le mieux, d'autant plus près de son extrémité que vous vous y reconnaissez. Faites glisser le curseur (ou utilisez les flèches du clavier), ou cliquez sur la ligne."}, {"t": "Item 18 / 20", "d": "Cette semaine, entre les deux propositions :", "kind": "vas", "min": 0, "max": 100, "scale": 10, "bip": 1, "lo": "My emotions are very intense.", "hi": "My emotions are not very strong", "hint": "Placez le trait sur la ligne entre les deux propositions : au centre si vous êtes dans votre état habituel ; sinon du côté de la proposition qui vous décrit le mieux, d'autant plus près de son extrémité que vous vous y reconnaissez. Faites glisser le curseur (ou utilisez les flèches du clavier), ou cliquez sur la ligne."}, {"t": "Item 19 / 20", "d": "Cette semaine, entre les deux propositions :", "kind": "vas", "min": 0, "max": 100, "scale": 10, "bip": 1, "lo": "I am moving slowly", "hi": "I feel restless or physically agitated", "hint": "Placez le trait sur la ligne entre les deux propositions : au centre si vous êtes dans votre état habituel ; sinon du côté de la proposition qui vous décrit le mieux, d'autant plus près de son extrémité que vous vous y reconnaissez. Faites glisser le curseur (ou utilisez les flèches du clavier), ou cliquez sur la ligne."}, {"t": "Item 20 / 20", "d": "Cette semaine, entre les deux propositions :", "kind": "vas", "min": 0, "max": 100, "scale": 10, "bip": 1, "lo": "I seem to be less sensitive to smells than usual", "hi": "I seem to be more sensitive to smells than usual", "hint": "Placez le trait sur la ligne entre les deux propositions : au centre si vous êtes dans votre état habituel ; sinon du côté de la proposition qui vous décrit le mieux, d'autant plus près de son extrémité que vous vous y reconnaissez. Faites glisser le curseur (ou utilisez les flèches du clavier), ou cliquez sur la ligne."}, {"t": "Sadness", "d": "Over the course of this period, indicate the types of emotion you have experienced, and how often you have experienced them.", "opts": [[0, "Never"], [1, "Occasionally"], [2, "Often"], [3, "Very often"], [4, "Constantly"]], "sec": "Partie descriptive (non cotée dans l'article de validation) : fréquence de chaque émotion au cours de la semaine écoulée."}, {"t": "Joy", "d": "Over the course of this period, indicate the types of emotion you have experienced, and how often you have experienced them.", "opts": [[0, "Never"], [1, "Occasionally"], [2, "Often"], [3, "Very often"], [4, "Constantly"]]}, {"t": "Irritability", "d": "Over the course of this period, indicate the types of emotion you have experienced, and how often you have experienced them.", "opts": [[0, "Never"], [1, "Occasionally"], [2, "Often"], [3, "Very often"], [4, "Constantly"]]}, {"t": "Panic", "d": "Over the course of this period, indicate the types of emotion you have experienced, and how often you have experienced them.", "opts": [[0, "Never"], [1, "Occasionally"], [2, "Often"], [3, "Very often"], [4, "Constantly"]]}, {"t": "Anxiety", "d": "Over the course of this period, indicate the types of emotion you have experienced, and how often you have experienced them.", "opts": [[0, "Never"], [1, "Occasionally"], [2, "Often"], [3, "Very often"], [4, "Constantly"]]}, {"t": "Anger", "d": "Over the course of this period, indicate the types of emotion you have experienced, and how often you have experienced them.", "opts": [[0, "Never"], [1, "Occasionally"], [2, "Often"], [3, "Very often"], [4, "Constantly"]]}, {"t": "Euphoria", "d": "Over the course of this period, indicate the types of emotion you have experienced, and how often you have experienced them.", "opts": [[0, "Never"], [1, "Occasionally"], [2, "Often"], [3, "Very often"], [4, "Constantly"]]}];
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+  var L0 = [1,2,3,4,11,12,13,14,15,16,19,20];
+  var DIMA = [['Émotion (items 3, 7, 10, 18)',[3,7,10,18]],['Cognition (items 5, 9, 12, 14)',[5,9,12,14]],['Fonction psychomotrice (items 2, 11, 19)',[2,11,19]],['Motivation (items 4, 15, 16, 17)',[4,15,16,17]],['Perception sensorielle (items 1, 6, 8, 13, 20)',[1,6,8,13,20]]];
+  var DIMF = [['Émotion',[3,7,10,18],[21.49,22.96,12.67,31.59]],['Motivation et fonction psychomotrice',[2,11,12,15,16,17,19],[35.57,35.44,12.4,48.19]],['Perception sensorielle',[1,6,8,13,20],[26.14,26.91,18.9,35.95]],['Communication interpersonnelle',[4,14],[10.72,10.55,4.6,14.32]],['Cognition',[5,9],[9.6,10.34,5.8,14.17]]];
+  var EMO = ['Sadness','Joy','Irritability','Panic','Anxiety','Anger','Euphoria'];
+  var FREQ = ['Never','Occasionally','Often','Very often','Constantly'];
+  var RESULT = function(a){
+    var sc = {}, tot = 0;
+    for (var n = 1; n <= 20; n++){
+      var mm = a[n-1];
+      sc[n] = (L0.indexOf(n) >= 0) ? mm / 10 : 10 - mm / 10;
+      tot += sc[n];
+    }
+    function sub(ids){ var s = 0; ids.forEach(function(k){ s += sc[k]; }); return s; }
+    function f1(x){ return (Math.round(x * 10) / 10).toFixed(1).replace('.', ','); }
+    var h = '<p class="result-score">' + f1(tot) + ' / 200</p>' +
+      '<p class="result-max">score global d\'inhibition / activation (somme des 20 items, chacun de 0 à 10)</p>';
+    var pos;
+    if (tot < 95) pos = 'Le score global se situe <strong>nettement sous 100</strong> : tendance générale à l\'<strong>inhibition</strong> (ralentissement, retrait, émoussement).';
+    else if (tot > 110) pos = 'Le score global se situe <strong>nettement au-dessus de 100</strong> : tendance générale à l\'<strong>activation</strong> (accélération, intensification, excitation).';
+    else pos = 'Le score global se situe <strong>autour de 100</strong> (soit 5 par item) : <strong>état proche de l\'état habituel</strong> de la personne.';
+    h += '<p class="result-text">' + pos + ' Les repères 95 et 110 ne sont pas des seuils validés : ils servent seulement à nommer la zone de lecture.</p>';
+    h += '<p class="result-text"><strong>Sous-scores par dimension (modèle a priori de l\'échelle)</strong></p><ul class="result-list">';
+    DIMA.forEach(function(d){ h += '<li>' + d[0] + ' : <strong>' + f1(sub(d[1])) + ' / ' + (d[1].length * 10) + '</strong></li>'; });
+    h += '</ul>';
+    h += '<p class="result-text"><strong>Sous-scores selon la structure factorielle de l\'étude de validation, avec les moyennes de l\'échantillon (Henry et al., 2008)</strong></p>';
+    h += '<table style="width:100%;border-collapse:collapse;font-size:12.5px;margin:0 0 14px"><thead><tr style="text-align:left;color:#63695D"><th style="padding:4px 6px 4px 0">Dimension</th><th style="padding:4px 6px">Vous</th><th style="padding:4px 6px">Témoins</th><th style="padding:4px 6px">Euthymiques</th><th style="padding:4px 6px">Dépression</th><th style="padding:4px 0 4px 6px">(Hypo)manie</th></tr></thead><tbody>';
+    DIMF.forEach(function(d){
+      var r = d[2].map(function(x){ return '<td style="padding:4px 6px;border-top:1px solid #E0D9C9">' + f1(x) + '</td>'; }).join('');
+      h += '<tr><td style="padding:4px 6px 4px 0;border-top:1px solid #E0D9C9">' + d[0] + '</td><td style="padding:4px 6px;border-top:1px solid #E0D9C9"><strong>' + f1(sub(d[1])) + '</strong></td>' + r + '</tr>';
+    });
+    h += '<tr><td style="padding:4px 6px 4px 0;border-top:1px solid #E0D9C9"><strong>Total</strong></td><td style="padding:4px 6px;border-top:1px solid #E0D9C9"><strong>' + f1(tot) + '</strong></td><td style="padding:4px 6px;border-top:1px solid #E0D9C9">103,6</td><td style="padding:4px 6px;border-top:1px solid #E0D9C9">106,2</td><td style="padding:4px 6px;border-top:1px solid #E0D9C9">54,4</td><td style="padding:4px 0 4px 6px;border-top:1px solid #E0D9C9">144,2</td></tr>';
+    h += '</tbody></table>';
+    h += '<p class="result-text"><strong>Fréquence des émotions sur la semaine (non cotée)</strong></p><ul class="result-list">';
+    for (var e = 0; e < 7; e++){ var v = a[20 + e]; h += '<li>' + EMO[e] + ' : ' + FREQ[v] + '</li>'; }
+    h += '</ul>';
+    h += '<p class="result-text">L\'échelle ne pose pas de diagnostic : elle situe un niveau global d\'inhibition/activation et des sous-scores par dimension. Les moyennes de comparaison viennent d\'un échantillon de 196 personnes (témoins, bipolaires euthymiques, épisodes dépressifs, épisodes maniaques/hypomaniaques) et ne sont pas des normes ni des seuils cliniques.</p>';
+    return h;
+  };
+
+  function vis(i){
+    var c = items[i].cond;
+    return !c || answers[c[0]] === c[1];
+  }
+  function step(i, dir){
+    var j = i + dir;
+    while (j >= 0 && j < items.length && !vis(j)) j += dir;
+    return j;
+  }
+  function visCount(){ var n = 0; for (var i = 0; i < items.length; i++) if (vis(i)) n++; return n; }
+  function visRank(i){ var n = 0; for (var k = 0; k <= i; k++) if (vis(k)) n++; return n; }
+  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+
+  function renderQuestion(){
+    var it = items[idx];
+    document.getElementById('progress-text').textContent = 'Question ' + visRank(idx) + ' / ' + visCount();
+    var secEl = document.getElementById('sec-text');
+    if (it.sec){ secEl.textContent = it.sec; secEl.hidden = false; } else { secEl.hidden = true; }
+    document.getElementById('q-text').textContent = it.t;
+    document.getElementById('q-desc').textContent = it.d || '';
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    if (it.kind === 'num'){
+      var nr = document.createElement('div'); nr.className = 'num-row';
+      for (var v = it.min; v <= it.max; v++){
+        (function(v){
+          var b = document.createElement('div');
+          b.className = 'num' + (answers[idx] === v ? ' selected' : '');
+          b.textContent = v;
+          b.addEventListener('click', function(){ answers[idx] = v; renderQuestion(); });
+          nr.appendChild(b);
+        })(v);
+      }
+      row.appendChild(nr);
+      var ends = document.createElement('div'); ends.className = 'num-ends';
+      ends.innerHTML = '<span>' + esc(it.lo) + '</span><span style="text-align:right">' + esc(it.hi) + '</span>';
+      row.appendChild(ends);
+    } else if (it.kind === 'vas'){
+      var box = document.createElement('div'); box.className = 'vas-box';
+      var cur = answers[idx] === null ? Math.round((it.min + it.max) / 2) : answers[idx];
+      box.innerHTML = '<div class="poles"><div class="pole"><span class="pole-tag">Extrémité gauche</span>' + esc(it.lo) + '</div><div class="pole"><span class="pole-tag">Extrémité droite</span>' + esc(it.hi) + '</div></div>' +
+        '<input type="range" id="vas-range" min="' + it.min + '" max="' + it.max + '" step="1" value="' + cur + '" aria-label="Position entre les deux propositions">' +
+        '<div class="vas-mid"><span>&#9664;</span><button type="button" class="btn btn-secondary" id="vas-center">Centre : état habituel</button><span>&#9654;</span></div>' +
+        '<p class="q-desc" style="margin-top:14px">' + esc(it.hint || '') + '</p>' +
+        '<p class="vas-state" id="vas-state">' + (answers[idx] === null ? 'Aucune position enregistrée.' : 'Position enregistrée.') + '</p>';
+      row.appendChild(box);
+      var rg = document.getElementById('vas-range');
+      function setV(){
+        answers[idx] = parseInt(rg.value, 10);
+        document.getElementById('vas-state').textContent = 'Position enregistrée.';
+        document.getElementById('btn-next').disabled = false;
+      }
+      rg.addEventListener('input', setV);
+      rg.addEventListener('change', setV);
+      rg.addEventListener('click', setV);
+      document.getElementById('vas-center').addEventListener('click', function(){ rg.value = 50; setV(); });
+    } else {
+      var list = document.createElement('div'); list.className = 'opt-row';
+      it.opts.forEach(function(pair){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx] === pair[0] ? ' selected' : '');
+        d.textContent = pair[1];
+        d.addEventListener('click', function(){ answers[idx] = pair[0]; renderQuestion(); });
+        list.appendChild(d);
+      });
+      row.appendChild(list);
+    }
+    document.getElementById('btn-prev').disabled = step(idx, -1) < 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = step(idx, 1) >= items.length ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    var j = step(idx, -1);
+    if (j >= 0){ idx = j; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    var j = step(idx, 1);
+    if (j < items.length){ idx = j; renderQuestion(); } else { showResult(); }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var a = answers.map(function(v, i){ return vis(i) ? v : null; });
+    document.getElementById('result-body').innerHTML = RESULT(a);
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MAThyS — Évaluation multidimensionnelle des états thymiques</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#2F5D3A 0%,#6FA37A 55%,#183320 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,210,.40),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#8A4A26;background:#F6E6DA;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .section ul{font-size:14.5px;margin:0 0 10px;padding-left:20px;}
+  .section li{margin-bottom:4px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#8A4A26;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#8A4A26;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <div class="fiche-photo"><span class="acronym">MAThyS</span></div>
+  <h1 class="serif">MAThyS — Évaluation multidimensionnelle des états thymiques</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Multidimensional Assessment of Thymic States (Henry C., M'Bailara K., Mathieu F., Poinsot R., Ferrer F., Baudin A. &amp; Leboyer M., 2008) — troubles bipolaires</p>
+  <div class="meta-row">
+    <span class="pill">20 items</span><span class="pill">10 minutes</span><span class="pill">Échelles visuelles analogiques</span><span class="pill">Anglais</span><span class="pill">Licence requise : oui</span>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" href="mathys.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>La MAThyS est une échelle dimensionnelle de l'humeur construite en France (équipe de Chantal Henry, Bordeaux) pour décrire les états thymiques des personnes ayant un trouble bipolaire, au-delà de l'opposition classique euphorie/tristesse. Elle compte 20 échelles visuelles analogiques de 10 cm, chacune tendue entre deux propositions opposées ; la personne situe son état de la semaine écoulée entre les deux. Les items explorent cinq dimensions : réactivité émotionnelle, vitesse cognitive, fonction psychomotrice, motivation et perception sensorielle, toutes sur un continuum <strong>inhibition — activation</strong>, ce qui permet de décrire aussi les états mixtes. Un second volet, non coté, relève la fréquence de sept émotions (tristesse, joie, irritabilité, panique, anxiété, colère, euphorie).</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque ligne se cote de 0 à 10 (distance en centimètres à partir de l'extrémité gauche) : <strong>0 = inhibition</strong> de l'état évalué, <strong>5 = état habituel</strong>, <strong>10 = excitation</strong>. Les items 1, 2, 3, 4, 11, 12, 13, 14, 15, 16, 19 et 20 se mesurent depuis la gauche (0 à 10) ; les items 5, 6, 7, 8, 9, 10, 17 et 18 se mesurent depuis la droite (10 à 0), c'est-à-dire que le score est <strong>10 moins la position</strong>. Le curseur de la page enregistre la position au dixième de centimètre. Score global = somme des 20 items, de 0 à 200 : plus il est bas, plus l'inhibition générale est marquée ; plus il est haut, plus l'excitation générale est marquée. Sous-scores par dimension (modèle a priori) : émotion (items 3, 7, 10, 18), cognition (5, 9, 12, 14), fonction psychomotrice (2, 11, 19), motivation (4, 15, 16, 17), perception sensorielle (1, 6, 8, 13, 20).</p>
+    <p>L'échelle <strong>ne pose pas de diagnostic et n'a pas de seuil clinique publié</strong>. La page affiche, à titre de repère statistique, les moyennes de l'échantillon de validation (196 personnes) selon la structure factorielle de l'article : total 103,6 chez les témoins, 106,2 chez les bipolaires euthymiques, 54,4 en épisode dépressif majeur, 144,2 en épisode maniaque ou hypomaniaque ; les repères « nettement sous 100 / autour de 100 / nettement au-dessus de 100 » de la page sont une aide de lecture, pas une norme.</p>
+    <p class="source-note">Remarques sur le texte : la structure factorielle (tableau 5 de l'article : 5 facteurs différents du modèle a priori) est donnée en regard des sous-scores a priori. Dans le fichier officiel, l'extrémité droite de l'item 16 figure entre parenthèses (« (I am more interested in doing things.) ») et l'item 15 se termine par un point d'interrogation isolé : la parenthèse et le point d'interrogation ont été retirés, sans autre modification du texte. Le volet « émotions » est reproduit tel quel mais n'est pas coté dans l'article.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p>Henry C., M'Bailara K., Mathieu F., Poinsot R., Ferrer F., Baudin A. &amp; Leboyer M. (2008), « Construction and validation of a dimensional scale exploring mood disorders: MAThyS (Multidimensional Assessment of Thymic States) », <em>BMC Psychiatry</em>, 8:82, doi 10.1186/1471-244X-8-82 (accès libre, fichier complémentaire 1 : texte de l'échelle). Version française d'origine : Henry C. et al. (2007), « Construction et validation d'une échelle dimensionnelle de l'humeur : Multidimensional Assessment of Thymic States (MAThyS) », <em>L'Encéphale</em> — texte français non accessible en ligne ; la page reprend donc la version anglaise publiée.</p>
+    <p class="source-note"><strong>Licence requise : oui.</strong> L'article précise que le texte (« verbatim ») et le guide de cotation sont fournis par l'auteure correspondante (Chantal Henry) : autorisation nominative à demander pour un usage en pratique. Construit malgré tout sur décision du cabinet (30/09/2026), à partir du texte publié en accès libre et des règles de cotation de l'article. Outil de description des états thymiques, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

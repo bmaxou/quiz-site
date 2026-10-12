@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ODI — Oswestry Disability Index</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#6B6456;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .sec-text{font-size:12.5px;color:#9A9E90;margin:0 0 10px;font-style:italic;}
+  .q-text{font-size:16px;margin:0 0 6px;font-weight:600;}
+  .q-desc{font-size:13.5px;color:#63695D;margin:0 0 16px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#6B6456;background:#ECE7DA;}
+  .vas-box{padding:8px 0;}
+  .vas-box input[type=range]{width:100%;accent-color:#6B6456;}
+  .poles{display:flex;justify-content:space-between;font-size:12.5px;color:#63695D;margin:0 0 6px;gap:12px;}
+  .poles .pole{max-width:48%;}
+  .vas-mid{display:flex;justify-content:space-between;align-items:center;margin-top:10px;color:#9A9E90;font-size:11px;}
+  .vas-val{font-family:'Cormorant Garamond',Georgia,serif;font-size:34px;color:#6B6456;margin:10px 0 0;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#4A4538;border-color:#E0D9C9;}
+  .btn-primary{background:#6B6456;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#6B6456;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 14px;}
+  .result-list{font-size:13.5px;margin:0 0 16px;padding-left:20px;}
+  .result-list li{margin-bottom:6px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">ODI — Oswestry Disability Index</h1>
+    <p class="lead">Dix sections évaluant le retentissement d'une douleur lombaire (ou de jambe) sur les activités de la vie quotidienne : douleur, soins personnels, port de charges, marche, position assise, position debout, sommeil, vie sexuelle, vie sociale, déplacements.</p>
+    
+    <div class="pill-row">
+      <span class="pill">10 sections</span><span class="pill">5 minutes</span><span class="pill">Français (Canada)</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="sec-text" id="sec-text" hidden></p>
+    <p class="q-text" id="q-text"></p>
+    <p class="q-desc" id="q-desc"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Fairbank J.C.T., Couper J., Davies J.B. &amp; O'Brien J.P. (1980). The Oswestry low back pain questionnaire. Physiotherapy, 66(8), 271-273. Outil de dépistage, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+
+  var items = [{"t": "Section 1 — Intensité de la douleur", "d": "Cochez la proposition qui décrit le mieux votre état aujourd'hui.", "opts": ["Je n'ai pas de douleur en ce moment.", "La douleur est très légère en ce moment.", "La douleur est modérée en ce moment.", "La douleur est assez forte en ce moment.", "La douleur est très forte en ce moment.", "La douleur est la pire qu'on puisse imaginer en ce moment."], "na": null}, {"t": "Section 2 — Soins personnels (se laver, s'habiller, etc.)", "d": "Cochez la proposition qui décrit le mieux votre état aujourd'hui.", "opts": ["Je peux faire mes soins personnels sans augmenter la douleur.", "Je peux faire mes soins personnels mais cela augmente la douleur.", "C'est douloureux de faire mes soins personnels et je les fais lentement et avec précaution.", "J'ai besoin d'un peu d'aide mais je peux faire la plupart de mes soins personnels.", "J'ai besoin d'aide tous les jours pour la plupart de mes soins personnels.", "Je ne m'habille pas, je me lave avec difficulté et je reste au lit."], "na": null}, {"t": "Section 3 — Soulever des objets", "d": "Cochez la proposition qui décrit le mieux votre état aujourd'hui.", "opts": ["Je peux soulever des objets lourds sans augmenter la douleur.", "Je peux soulever des objets lourds mais cela augmente la douleur.", "La douleur m'empêche de soulever des objets lourds à partir du sol mais je peux les soulever s'ils sont bien placés, par exemple sur une table.", "La douleur m'empêche de soulever des objets lourds mais je peux soulever des objets légers ou moyens s'ils sont bien placés.", "Je peux seulement soulever des objets très légers.", "Je ne peux rien soulever ni transporter."], "na": null}, {"t": "Section 4 — Marcher", "d": "Cochez la proposition qui décrit le mieux votre état aujourd'hui.", "opts": ["La douleur ne m'empêche pas de marcher peu importe la distance.", "La douleur m'empêche de marcher plus d'un mille (1,5 kilomètre).", "La douleur m'empêche de marcher plus d'un demi-mille (0,75 kilomètre).", "La douleur m'empêche de marcher plus de 100 verges (100 mètres).", "Je peux marcher seulement à l'aide d'une canne ou de béquilles.", "Je suis au lit la plupart du temps et je dois ramper pour aller aux toilettes."], "na": null}, {"t": "Section 5 — S'asseoir", "d": "Cochez la proposition qui décrit le mieux votre état aujourd'hui.", "opts": ["Je peux m'asseoir sur n'importe quel fauteuil aussi longtemps que je le veux.", "Je peux m'asseoir sur mon fauteuil préféré aussi longtemps que je le veux.", "La douleur m'empêche de m'asseoir plus d'une heure.", "La douleur m'empêche de m'asseoir plus d'une demi-heure.", "La douleur m'empêche de m'asseoir plus de 10 minutes.", "La douleur m'empêche complètement de m'asseoir."], "na": null}, {"t": "Section 6 — Se tenir debout", "d": "Cochez la proposition qui décrit le mieux votre état aujourd'hui.", "opts": ["Je peux me tenir debout aussi longtemps que je le veux sans augmenter la douleur.", "Je peux me tenir debout aussi longtemps que je le veux mais cela augmente la douleur.", "La douleur m'empêche de me tenir debout plus d'une heure.", "La douleur m'empêche de me tenir debout plus d'une demi-heure.", "La douleur m'empêche de me tenir debout plus de 10 minutes.", "La douleur m'empêche complètement de me tenir debout."], "na": null}, {"t": "Section 7 — Dormir", "d": "Cochez la proposition qui décrit le mieux votre état aujourd'hui.", "opts": ["Mon sommeil n'est jamais perturbé par la douleur.", "Mon sommeil est parfois perturbé par la douleur.", "À cause de la douleur, j'ai moins de 6 heures de sommeil.", "À cause de la douleur, j'ai moins de 4 heures de sommeil.", "À cause de la douleur, j'ai moins de 2 heures de sommeil.", "La douleur m'empêche complètement de dormir."], "na": null}, {"t": "Section 8 — Vie sexuelle (si applicable)", "d": "Cochez la proposition qui décrit le mieux votre état aujourd'hui.", "opts": ["Ma vie sexuelle est normale et elle ne cause pas d'augmentation de la douleur.", "Ma vie sexuelle est normale mais elle cause une certaine augmentation de la douleur.", "Ma vie sexuelle est presque normale mais elle est très douloureuse.", "Ma vie sexuelle est très limitée par la douleur.", "Ma vie sexuelle est presqu'absente à cause de la douleur.", "La douleur empêche toute vie sexuelle.", "Non applicable (pas de vie sexuelle active / sans objet)"], "na": 6}, {"t": "Section 9 — Vie sociale", "d": "Cochez la proposition qui décrit le mieux votre état aujourd'hui.", "opts": ["Ma vie sociale est normale et ne me cause pas d'augmentation de la douleur.", "Ma vie sociale est normale mais elle augmente le niveau de la douleur.", "La douleur n'a pas d'effet important sur ma vie sociale à part de limiter mes activités les plus vigoureuses, par exemple le sport, etc.", "La douleur a limité ma vie sociale et je ne sors plus autant qu'avant.", "La douleur a limité ma vie sociale à mon domicile.", "Je n'ai pas de vie sociale à cause de la douleur."], "na": null}, {"t": "Section 10 — Se déplacer", "d": "Cochez la proposition qui décrit le mieux votre état aujourd'hui.", "opts": ["Je peux me déplacer n'importe où sans douleur.", "Je peux me déplacer n'importe où mais cela augmente la douleur.", "La douleur est forte mais je peux me déplacer plus de deux heures.", "La douleur me limite à des déplacements de moins d'une heure.", "La douleur me limite à de courts déplacements nécessaires de moins de 30 minutes.", "La douleur m'empêche de me déplacer sauf pour recevoir des traitements."], "na": null}];
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+
+  function renderQuestion(){
+    var it = items[idx];
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    var secEl = document.getElementById('sec-text');
+    if (it.sec){ secEl.textContent = it.sec; secEl.hidden = false; } else { secEl.hidden = true; }
+    document.getElementById('q-text').textContent = it.t;
+    document.getElementById('q-desc').textContent = it.d || '';
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    it.opts.forEach(function(label, v){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === v ? ' selected' : '');
+      d.textContent = label;
+      d.addEventListener('click', function(){ answers[idx] = v; renderQuestion(); });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+
+  function RESULT(a){
+    var sum = 0, n = 0;
+    for (var i = 0; i < items.length; i++){
+      var it = items[i];
+      if (it.na !== null && it.na !== undefined && a[i] === it.na) continue;
+      sum += a[i]; n++;
+    }
+    var pct = n > 0 ? (sum / (5 * n)) * 100 : 0;
+    var pctR = Math.round(pct * 10) / 10;
+    var h = '<p class="result-score">' + String(pctR).replace('.', ',') + ' %</p>' +
+      '<p class="result-max">indice d\'incapacité, de 0 % (aucune incapacité) à 100 % (incapacité maximale) — ' + n + ' section(s) sur 10 prise(s) en compte' + (n < 10 ? ' (vie sexuelle exclue du calcul)' : '') + '</p>';
+    var txt;
+    if (pctR <= 20) txt = 'Incapacité minime : la plupart des activités de la vie quotidienne sont possibles. Repère indicatif de la littérature, pas un seuil diagnostique.';
+    else if (pctR <= 40) txt = 'Incapacité modérée : douleur et difficultés plus marquées pour certaines activités (position assise, soulever, se tenir debout).';
+    else if (pctR <= 60) txt = 'Incapacité sévère : la douleur est le problème principal dans la plupart des aspects de la vie quotidienne.';
+    else if (pctR <= 80) txt = 'Incapacité très sévère : le dos retentit sur tous les aspects de la vie quotidienne et professionnelle.';
+    else txt = 'Personne alitée ou exagération possible des symptômes : ce niveau invite à examiner attentivement la présentation clinique.';
+    h += '<p class="result-text">' + txt + ' Ces repères (0-20 %, 21-40 %, 41-60 %, 61-80 %, 81-100 %) sont ceux habituellement cités dans la littérature sur l\'ODI (Fairbank &amp; Pynsent, 2000) ; ils orientent la lecture mais ne remplacent pas une évaluation clinique.</p>';
+    return h;
+  }
+
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    document.getElementById('result-body').innerHTML = RESULT(answers);
+  }
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ODI — Oswestry Disability Index</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#6B6456 0%,#A39C86 55%,#2E2B22 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.4),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:22px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#4A4538;background:#ECE7DA;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#6B6456;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#4A4538;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <div class="fiche-photo"><span class="acronym">ODI</span></div>
+  <h1 class="serif">Oswestry Disability Index (ODI) — Échelle d'incapacité d'Oswestry</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Fairbank J.C.T. et al. (1980, révisé) — version française canadienne, UQTR.</p>
+  <div class="meta-row">
+    <span class="pill">10 sections</span><span class="pill">5 minutes</span><span class="pill">Douleur lombaire</span><span class="pill">Français (Canada)</span><span class="pill">Licence requise : non</span>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" href="odi.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>L'ODI évalue, par 10 sections (intensité de la douleur, soins personnels, soulever des objets, marcher, s'asseoir, se tenir debout, dormir, vie sexuelle, vie sociale, se déplacer), le retentissement d'une lombalgie chronique sur les activités de la vie quotidienne. Dans chaque section, la personne choisit l'affirmation qui décrit le mieux son état du jour parmi 6 degrés croissants d'incapacité (notés de 0 à 5).</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Score de chaque section répondue : 0 (aucune incapacité) à 5 (incapacité maximale). Indice d'incapacité (%) = somme des points / (5 × nombre de sections répondues) × 100. La section « vie sexuelle » peut être exclue du calcul si elle est sans objet, conformément à la règle de cotation officielle qui permet d'omettre une section non complétée en ajustant le dénominateur. Repères indicatifs de lecture habituellement cités (Fairbank &amp; Pynsent, 2000) : 0-20 % incapacité minime, 21-40 % modérée, 41-60 % sévère, 61-80 % très sévère, 81-100 % alitement ou tableau à réexaminer cliniquement — ce ne sont pas des seuils diagnostiques validés.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p>Fairbank J.C.T., Couper J., Davies J.B. &amp; O'Brien J.P. (1980). <em>The Oswestry low back pain questionnaire.</em> Physiotherapy, 66(8), 271-273. Version française (canadienne) : Chaire de recherche internationale en santé neuromusculosquelettique, Université du Québec à Trois-Rivières (UQTR), document « Échelle d'incapacité d'Oswestry » diffusé en accès libre.</p>
+<p class="source-note"><strong>Licence requise : non.</strong> Instrument académique largement diffusé gratuitement pour l'usage clinique et la recherche (fiche officielle Shirley Ryan AbilityLab : « Free to access for students, physicians, clinical practice, and non-funded academic users »). Les 10 sections et leurs 6 degrés de réponse chacune sont repris tels que publiés dans le document source ; aucun item n'a été inventé.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

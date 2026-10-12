@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PROMIS Douleur — Interférence, forme courte 8a</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#9A5B1E;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#9A5B1E;background:#F3E6D4;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#9A5B1E;border-color:#E0D9C9;}
+  .btn-primary{background:#9A5B1E;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#9A5B1E;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 14px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">PROMIS Douleur — Interférence, forme courte 8a</h1>
+    <p class="lead">Huit questions sur le retentissement de la douleur sur les activités quotidiennes au cours des 7 derniers jours (banque d'items PROMIS — Patient-Reported Outcomes Measurement Information System, National Institutes of Health).</p>
+    <p class="lang-note">Questionnaire transcrit en anglais (version officielle) : aucune traduction française intégrale vérifiable n'a été retrouvée lors du sourçage.</p>
+    <div class="pill-row">
+      <span class="pill">8 questions</span>
+      <span class="pill">2 minutes</span>
+      <span class="pill">Échelle de fréquence</span>
+      <span class="pill">Anglais</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-score" id="score-val"></p>
+    <p class="result-max">score brut sur 40 (8 items, de 1 à 5 chacun)</p>
+    <p class="result-text" id="level-text"></p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">PROMIS Pain Interference — Short Form 8a. PROMIS Health Organization &amp; PROMIS Cooperative Group, National Institutes of Health. Outil de dépistage, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [
+    "How much did pain interfere with your day to day activities?",
+    "How much did pain interfere with work around the home?",
+    "How much did pain interfere with your ability to participate in social activities?",
+    "How much did pain interfere with your household chores?",
+    "How much did pain interfere with the things you usually do for fun?",
+    "How much did pain interfere with your enjoyment of social activities?",
+    "How much did pain interfere with your enjoyment of life?",
+    "How much did pain interfere with your family life?"
+  ];
+  var stem = "In the past 7 days...";
+  var opts = ["1 — Not at all","2 — A little bit","3 — Somewhat","4 — Quite a bit","5 — Very much"];
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = stem + ' ' + items[idx];
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    opts.forEach(function(label, v){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === v+1 ? ' selected' : '');
+      d.textContent = label;
+      d.addEventListener('click', function(){
+        answers[idx] = v+1;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var raw = answers.reduce(function(a,b){ return a+b; }, 0);
+    document.getElementById('score-val').textContent = raw;
+    document.getElementById('level-text').textContent = "Score brut : " + raw + "/40 (somme des 8 réponses, de 1 à 5 chacune). Plus le score est élevé, plus le retentissement de la douleur rapporté sur les 7 derniers jours est important. ⚠️ Le manuel de cotation officiel convertit ce score brut en score T standardisé (moyenne 50, écart-type 10) via une table de calibration IRT ; cette table n'a pas pu être extraite de façon fiable du manuel consulté (tableaux en image) lors du sourçage — seul le score brut est affiché ici, rien n'a été inventé pour la convertir.";
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PROMIS Douleur — Interférence, forme courte 8a</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#9A5B1E 0%,#D9A764 55%,#5C350E 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(250,235,210,.45),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:22px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#9A5B1E;background:#F3E6D4;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#9A5B1E;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#9A5B1E;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <div class="fiche-photo"><span class="acronym">PROMIS Douleur</span></div>
+  <h1 class="serif">PROMIS Douleur — Interférence, forme courte 8a (Pain Interference — Short Form 8a)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">PROMIS Health Organization &amp; PROMIS Cooperative Group — National Institutes of Health (HealthMeasures)</p>
+  <div class="meta-row">
+    <span class="pill">8 questions</span>
+    <span class="pill">2 minutes</span>
+    <span class="pill">Score brut (IRT)</span>
+    <span class="pill">Adulte</span>
+    <span class="pill">Anglais</span>
+    <span class="pill">Licence requise : non</span>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" href="promis-douleur-interference-8a.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>PROMIS (Patient-Reported Outcomes Measurement Information System) est un système de banques d'items développé par les National Institutes of Health (NIH) américains, couvrant de nombreux domaines de santé perçue (anxiété, dépression, douleur, sommeil, fatigue, fonctionnement social...). La forme courte 8a du domaine Interférence de la douleur (« Pain Interference ») interroge le retentissement de la douleur sur les activités de la vie quotidienne, le travail, les loisirs, la vie sociale et familiale au cours des 7 derniers jours. Elle fait partie des sept domaines du profil PROMIS-57 (avec Fonctionnement physique, Dépression, Anxiété, Fatigue, Sommeil et Participation aux rôles sociaux).</p>
+    <p class="source-note">PROMIS étant une famille de dizaines de banques d'items, seules trois formes courtes ont été construites à ce jour dans ce chantier (Anxiété 8a, Dépression 4a, Douleur — Interférence 8a) ; d'autres domaines pertinents (sommeil, fonctionnement physique) pourront être construits lors d'un prochain passage si le texte officiel des items et sa clé de cotation peuvent être vérifiés avec certitude.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque item est coté de 1 (Not at all) à 5 (Very much) ; score brut de 8 à 40 (somme des 8 réponses), aucun item n'est inversé dans cette forme. ⚠️ Le manuel de cotation officiel HealthMeasures convertit normalement ce score brut en score T standardisé (IRT, moyenne 50, écart-type 10 en population générale américaine) via une table de calibration par score ; cette table s'est présentée, lors du sourçage, sous forme de tableaux en image non extractibles de façon fiable depuis les documents consultés (contrairement à la forme PROMIS Anxiété 8a, dont la table avait pu être transcrite intégralement) — elle n'a pas été reconstituée ni approximée. Seul le score brut est donc affiché, avec cette réserve explicite.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p>PROMIS Health Organization &amp; PROMIS Cooperative Group (National Institutes of Health). PROMIS Short Form v1.0 – Pain Interference 8a. Items vérifiés sur le formulaire officiel (National Institute of Neurological Disorders and Stroke, NINDS, hébergement direct du Case Report Form anglais). Manuel de cotation général : PROMIS Pain Interference Scoring Manual (HealthMeasures) — table de conversion score brut/score T non extraite avec certitude (tableaux en image), non reproduite.</p>
+    <p class="source-note"><strong>Licence requise : non.</strong> Page officielle du National Cancer Institute (HealthMeasures) : « All HealthMeasures content for self-reported measures, including questions, scoring information, and interpretation guides, is publicly available free of charge. » Citer la source lors de toute utilisation. Outil de dépistage, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

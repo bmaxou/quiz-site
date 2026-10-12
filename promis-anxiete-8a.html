@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PROMIS Anxiété — Forme courte 8a</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#B8401E;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#B8401E;background:#F6E4DC;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#B8401E;border-color:#E0D9C9;}
+  .btn-primary{background:#B8401E;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#B8401E;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 14px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">PROMIS Anxiété — Forme courte 8a</h1>
+    <p class="lead">Huit questions sur la fréquence de symptômes d'anxiété au cours des 7 derniers jours (banque d'items PROMIS — Patient-Reported Outcomes Measurement Information System, National Institutes of Health).</p>
+    <p class="lang-note">Questionnaire transcrit en anglais (version officielle) : aucune traduction française intégrale vérifiable n'a été retrouvée lors du sourçage.</p>
+    <div class="pill-row">
+      <span class="pill">8 questions</span>
+      <span class="pill">2 minutes</span>
+      <span class="pill">Échelle de fréquence</span>
+      <span class="pill">Anglais</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-score" id="score-val"></p>
+    <p class="result-max">score T (moyenne 50, écart-type 10 en population générale américaine)</p>
+    <p class="result-text" id="level-text"></p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">PROMIS Emotional Distress — Anxiety — Short Form 8a. PROMIS Health Organization &amp; PROMIS Cooperative Group, National Institutes of Health. Outil de dépistage, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [
+    "I felt fearful.",
+    "I found it hard to focus on anything other than my anxiety.",
+    "My worries overwhelmed me.",
+    "I felt uneasy.",
+    "I felt nervous.",
+    "I felt like I needed help for my anxiety.",
+    "I felt anxious.",
+    "I felt tense."
+  ];
+  var stem = "In the past 7 days...";
+  var opts = ["1 — Never","2 — Rarely","3 — Sometimes","4 — Often","5 — Always"];
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+  // Table officielle de conversion score brut (8-40) -> score T (PROMIS Anxiety Short Form 8a, HealthMeasures)
+  var rawToT = {8:37.1,9:43.2,10:45.9,11:47.8,12:49.4,13:50.8,14:52.1,15:53.2,16:54.3,17:55.4,18:56.4,19:57.4,20:58.4,21:59.4,22:60.4,23:61.4,24:62.5,25:63.5,26:64.5,27:65.6,28:66.6,29:67.7,30:68.7,31:69.8,32:70.8,33:71.9,34:73.0,35:74.1,36:75.4,37:76.7,38:78.2,39:80.0,40:83.1};
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = stem + ' ' + items[idx];
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    opts.forEach(function(label, v){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === v+1 ? ' selected' : '');
+      d.textContent = label;
+      d.addEventListener('click', function(){
+        answers[idx] = v+1;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var raw = answers.reduce(function(a,b){ return a+b; }, 0);
+    var t = rawToT[raw];
+    document.getElementById('score-val').textContent = t.toFixed(1);
+    document.getElementById('level-text').textContent = "Score brut : " + raw + "/40, converti en score T officiel (table HealthMeasures) = " + t.toFixed(1) + ". Un score T de 60 correspond à un écart-type au-dessus de la moyenne de la population générale américaine. Plus le score T est élevé, plus l'anxiété rapportée sur les 7 derniers jours est importante. Aucune bande de sévérité officielle (léger/modéré/sévère) n'a été retrouvée dans le manuel de cotation consulté : ne pas en inventer, se référer au score T et à son écart par rapport à la moyenne (50).";
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PROMIS Anxiété — Forme courte 8a</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#B8401E 0%,#E0855A 55%,#6B2410 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(250,220,200,.45),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:22px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#B8401E;background:#F6E4DC;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#B8401E;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#B8401E;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <div class="fiche-photo"><span class="acronym">PROMIS Anx.</span></div>
+  <h1 class="serif">PROMIS Anxiété — Forme courte 8a (Emotional Distress — Anxiety — Short Form 8a)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">PROMIS Health Organization &amp; PROMIS Cooperative Group — National Institutes of Health (HealthMeasures)</p>
+  <div class="meta-row">
+    <span class="pill">8 questions</span>
+    <span class="pill">2 minutes</span>
+    <span class="pill">Score T (IRT)</span>
+    <span class="pill">Adulte</span>
+    <span class="pill">Anglais</span>
+    <span class="pill">Licence requise : non</span>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" href="promis-anxiete-8a.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>PROMIS (Patient-Reported Outcomes Measurement Information System) est un système de banques d'items développé par les National Institutes of Health (NIH) américains, couvrant de nombreux domaines de santé perçue (anxiété, dépression, douleur, sommeil, fatigue, fonctionnement social...). La forme courte 8a du domaine Anxiété (codes d'items EDANX1 à EDANX8) interroge la fréquence de symptômes d'anxiété au cours des 7 derniers jours.</p>
+    <p class="source-note">PROMIS étant une famille de dizaines de banques d'items, seule la forme courte Anxiété 8a a été construite lors de ce passage ; d'autres domaines pertinents (dépression, douleur, sommeil, fatigue) peuvent être construits lors d'un prochain passage sur instruction.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque item est coté de 1 (Never) à 5 (Always) ; score brut de 8 à 40, converti en score T via la table officielle de calibration IRT publiée par HealthMeasures (moyenne 50, écart-type 10 dans la population générale américaine). Plus le score T est élevé, plus l'anxiété rapportée est importante. ⚠️ Le manuel de cotation consulté ne fournit aucune bande de sévérité officielle (léger/modéré/sévère) pour ce domaine : aucune bande n'a été inventée ici, seul le score T et son écart par rapport à la moyenne sont présentés.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p>PROMIS Health Organization &amp; PROMIS Cooperative Group (National Institutes of Health). PROMIS Short Form v1.0 – Emotional Distress – Anxiety 8a. Manuel de cotation : PROMIS Anxiety Scoring Manual (HealthMeasures). Items vérifiés sur un document d'essai clinique indépendant (codes EDANX1-EDANX8) ; table de conversion score brut/score T reproduite intégralement depuis le manuel officiel.</p>
+    <p class="source-note"><strong>Licence requise : non.</strong> Page officielle du National Cancer Institute (HealthMeasures) : « All HealthMeasures content for self-reported measures, including questions, scoring information, and interpretation guides, is publicly available free of charge. » Citer la source lors de toute utilisation. Outil de dépistage, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

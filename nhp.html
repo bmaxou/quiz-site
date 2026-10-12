@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NHP — Indicateur de santé perceptuelle de Nottingham</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#8C2F4B;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .period{font-size:12.5px;font-weight:600;color:#8C2F4B;margin:0 0 8px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#8C2F4B;background:#F6E3E9;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#8C2F4B;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#8C2F4B;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 20px;}
+  .sc-title{font-size:13px;font-weight:700;color:#8C2F4B;margin:18px 0 6px;}
+  .sc-row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-top:1px solid #EFEBE1;font-size:14px;}
+  .sc-row b{font-variant-numeric:tabular-nums;white-space:nowrap;text-align:right;}
+  .sc-row small{display:block;font-weight:400;color:#9A9E90;font-size:11.5px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">NHP — Indicateur de santé perceptuelle de Nottingham</h1>
+    <p class="lead">Pour chacune des 38 affirmations, répondez par Oui ou Non selon votre état actuel. Si vous hésitez, choisissez ce qui correspond le mieux à votre état aujourd'hui.</p>
+    <p class="lang-note">Version française (ISPN, Bucquet et al.). Outil sous licence : « Licence requise : oui ».</p>
+    <div class="pill-row">
+      <span class="pill">38 questions</span>
+      <span class="pill">10 minutes</span>
+      <span class="pill">Oui / Non</span>
+      <span class="pill">6 rubriques</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="period" id="period-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-max" style="margin-top:0">Profil en six rubriques, de 0 (aucune difficulté perçue) à 100 (difficultés maximales). Il n'existe pas de score unique.</p>
+    <div id="dom-rows"></div>
+    <p class="result-text" style="margin-top:18px">Chaque rubrique est la somme des coefficients de pondération des affirmations cochées « Oui » (coefficients de la version française, Bucquet et al., 1990). Plus le score est élevé, plus les problèmes perçus sont nombreux et sévères dans la rubrique. Aucun seuil clinique n'est repris ici : le profil se lit rubrique par rubrique, par comparaison à une population de référence ou d'une passation à l'autre.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Nottingham Health Profile (NHP) / Indicateur de santé perceptuelle de Nottingham (ISPN) — Hunt, McEwen & McKenna ; adaptation française Bucquet, Condon & Ritchie (1990). Mesure de la santé perçue, ne remplace pas une évaluation clinique.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [{"t": "Je me sens tout le temps fatigué(e)", "d": 4, "w": 38.98, "o": [[1, "Oui"], [0, "Non"]], "p": "Cochez la réponse selon votre état actuel."}, {"t": "J’ai des douleurs la nuit", "d": 2, "w": 12.73, "o": [[1, "Oui"], [0, "Non"]], "p": "Cochez la réponse selon votre état actuel."}, {"t": "Je suis de plus en plus découragé(e)", "d": 3, "w": 12.13, "o": [[1, "Oui"], [0, "Non"]], "p": "Cochez la réponse selon votre état actuel."}, {"t": "J’ai des douleurs insupportables", "d": 2, "w": 17.66, "o": [[1, "Oui"], [0, "Non"]], "p": "Cochez la réponse selon votre état actuel."}, {"t": "Je prends des médicaments pour dormir", "d": 5, "w": 26.33, "o": [[1, "Oui"], [0, "Non"]], "p": "Cochez la réponse selon votre état actuel."}, {"t": "Je me rends compte que plus rien ne me fait plaisir", "d": 3, "w": 13.24, "o": [[1, "Oui"], [0, "Non"]], "p": "Cochez la réponse selon votre état actuel."}, {"t": "Je me sens nerveux(se), tendu(e)", "d": 3, "w": 8.87, "o": [[1, "Oui"], [0, "Non"]], "p": "Cochez la réponse selon votre état actuel."}, {"t": "J’ai des douleurs quand je change de position", "d": 2, "w": 9.69, "o": [[1, "Oui"], [0, "Non"]], "p": "Cochez la réponse selon votre état actuel."}, {"t": "Je me sens seul(e)", "d": 1, "w": 20.43, "o": [[1, "Oui"], [0, "Non"]], "p": "Cochez la réponse selon votre état actuel."}, {"t": "Pour marcher, je suis limité(e) à l’intérieur (de mon domicile, du bâtiment, etc.)", "d": 0, "w": 13.82, "o": [[1, "Oui"], [0, "Non"]], "p": "Cochez la réponse selon votre état actuel."}, {"t": "J’ai des difficultés à me pencher en avant (pour lacer mes chaussures ou ramasser un objet par exemple)", "d": 0, "w": 9.69, "o": [[1, "Oui"], [0, "Non"]], "p": "Cochez la réponse selon votre état actuel."}, {"t": "Tout me demande un effort", "d": 4, "w": 34.48, "o": [[1, "Oui"], [0, "Non"]], "p": "Cochez la réponse selon votre état actuel."}, {"t": "Je me réveille très tôt le matin et j’ai du mal à me rendormir", "d": 5, "w": 13.95, "o": [[1, "Oui"], [0, "Non"]], "p": "Cochez la réponse selon votre état actuel."}, {"t": "Je suis totalement incapable de marcher", "d": 0, "w": 19.28, "o": [[1, "Oui"], [0, "Non"]], "p": "Cochez la réponse selon votre état actuel."}, {"t": "J’ai des difficultés à rentrer en contact avec les autres", "d": 1, "w": 18.59, "o": [[1, "Oui"], [0, "Non"]], "p": "Cochez la réponse selon votre état actuel."}, {"t": "Je trouve que les journées sont interminables", "d": 3, "w": 8.91, "o": [[1, "Oui"], [0, "Non"]], "p": "Cochez la réponse selon votre état actuel."}, {"t": "J’ai du mal à monter ou à descendre les escaliers ou les marches", "d": 0, "w": 11.44, "o": [[1, "Oui"], [0, "Non"]], "p": "Cochez la réponse selon votre état actuel."}, {"t": "J’ai du mal à tendre le bras (pour attraper les objets)", "d": 0, "w": 8.51, "o": [[1, "Oui"], [0, "Non"]], "p": "Cochez la réponse selon votre état actuel."}, {"t": "Je souffre quand je marche", "d": 2, "w": 11.4, "o": [[1, "Oui"], [0, "Non"]], "p": "Cochez la réponse selon votre état actuel."}, {"t": "Je me mets facilement en colère ces temps-ci", "d": 3, "w": 7.58, "o": [[1, "Oui"], [0, "Non"]], "p": "Cochez la réponse selon votre état actuel."}, {"t": "J’ai l’impression de n’avoir personne de proche à qui parler", "d": 1, "w": 20.03, "o": [[1, "Oui"], [0, "Non"]], "p": "Cochez la réponse selon votre état actuel."}, {"t": "Je reste éveillé(e) une grande partie de la nuit", "d": 5, "w": 22.86, "o": [[1, "Oui"], [0, "Non"]], "p": "Cochez la réponse selon votre état actuel."}, {"t": "J’ai du mal à faire face aux évènements", "d": 3, "w": 12.42, "o": [[1, "Oui"], [0, "Non"]], "p": "Cochez la réponse selon votre état actuel."}, {"t": "J’ai des douleurs quand je suis debout", "d": 2, "w": 10.36, "o": [[1, "Oui"], [0, "Non"]], "p": "Cochez la réponse selon votre état actuel."}, {"t": "J’ai des difficultés à m’habiller ou à me déshabiller", "d": 0, "w": 12.02, "o": [[1, "Oui"], [0, "Non"]], "p": "Cochez la réponse selon votre état actuel."}, {"t": "Je me fatigue vite", "d": 4, "w": 26.54, "o": [[1, "Oui"], [0, "Non"]], "p": "Cochez la réponse selon votre état actuel."}, {"t": "J’ai des difficultés à rester longtemps debout", "d": 0, "w": 11.46, "o": [[1, "Oui"], [0, "Non"]], "p": "Cochez la réponse selon votre état actuel."}, {"t": "J’ai des douleurs en permanence", "d": 2, "w": 18.14, "o": [[1, "Oui"], [0, "Non"]], "p": "Cochez la réponse selon votre état actuel."}, {"t": "Je mets beaucoup de temps à m’endormir", "d": 5, "w": 16.5, "o": [[1, "Oui"], [0, "Non"]], "p": "Cochez la réponse selon votre état actuel."}, {"t": "J’ai l’impression d’être une charge pour les autres", "d": 1, "w": 24.5, "o": [[1, "Oui"], [0, "Non"]], "p": "Cochez la réponse selon votre état actuel."}, {"t": "J’ai des soucis qui m’empêchent de dormir", "d": 3, "w": 10.57, "o": [[1, "Oui"], [0, "Non"]], "p": "Cochez la réponse selon votre état actuel."}, {"t": "Je trouve que la vie ne vaut pas la peine d’être vécue", "d": 3, "w": 15.49, "o": [[1, "Oui"], [0, "Non"]], "p": "Cochez la réponse selon votre état actuel."}, {"t": "Je dors mal la nuit", "d": 5, "w": 20.36, "o": [[1, "Oui"], [0, "Non"]], "p": "Cochez la réponse selon votre état actuel."}, {"t": "J’ai des difficultés à m’entendre avec les autres", "d": 1, "w": 16.36, "o": [[1, "Oui"], [0, "Non"]], "p": "Cochez la réponse selon votre état actuel."}, {"t": "J’ai besoin d’aide pour marcher dehors (une canne, quelqu’un pour me soutenir, etc.)", "d": 0, "w": 13.78, "o": [[1, "Oui"], [0, "Non"]], "p": "Cochez la réponse selon votre état actuel."}, {"t": "J’ai des douleurs en montant ou en descendant les escaliers ou les marches", "d": 2, "w": 10.44, "o": [[1, "Oui"], [0, "Non"]], "p": "Cochez la réponse selon votre état actuel."}, {"t": "Je me réveille déprimé(e) le matin", "d": 3, "w": 10.83, "o": [[1, "Oui"], [0, "Non"]], "p": "Cochez la réponse selon votre état actuel."}, {"t": "Je souffre quand je suis assis(e)", "d": 2, "w": 9.58, "o": [[1, "Oui"], [0, "Non"]], "p": "Cochez la réponse selon votre état actuel."}];
+  var doms = ["Mobilité physique", "Isolement social", "Douleur", "Réactions émotionnelles", "Énergie", "Sommeil"];
+
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function renderQuestion(){
+    var it = items[idx];
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('period-text').textContent = it.p || '';
+    document.getElementById('q-text').textContent = it.t;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    it.o.forEach(function(o){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === o[0] ? ' selected' : '');
+      d.textContent = o[1];
+      d.addEventListener('click', function(){
+        answers[idx] = o[0];
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var s = doms.map(function(){return 0;});
+    items.forEach(function(it,i){ if(answers[i] === 1){ s[it.d] += it.w; } });
+    var box = document.getElementById('dom-rows');
+    box.innerHTML = '';
+    doms.forEach(function(n,k){
+      var r = document.createElement('div'); r.className = 'sc-row';
+      var a = document.createElement('span'); a.textContent = n;
+      var b = document.createElement('b'); b.textContent = Math.min(100, Math.round(s[k]*10)/10).toFixed(1) + ' / 100';
+      r.appendChild(a); r.appendChild(b); box.appendChild(r);
+    });
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NHP — Indicateur de santé perceptuelle de Nottingham</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#8C2F4B 0%,#C9798F 55%,#4A1426 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,245,235,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#4A1426;background:#F6E3E9;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#8C2F4B;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#4A1426;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">NHP</span></div>
+
+  <h1 class="serif">Indicateur de santé perceptuelle de Nottingham (NHP / ISPN)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Nottingham Health Profile — Hunt, McEwen &amp; McKenna ; version française : Bucquet, Condon &amp; Ritchie (1990)</p>
+  <div class="meta-row">
+    <span class="pill">38 questions</span>
+    <span class="pill">10 minutes</span>
+    <span class="pill">Oui / Non</span>
+    <span class="pill">6 rubriques de 0 à 100</span>
+    <span class="pill">Français</span>
+    <span class="pill">Licence requise : oui</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="nhp.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le Nottingham Health Profile (NHP), dans sa version française l'Indicateur de santé perceptuelle de Nottingham (ISPN), est un autoquestionnaire de santé perçue : 38 affirmations à la première personne, à cocher Oui ou Non selon l'état actuel. Il quantifie la perception des problèmes de santé sur les plans physique, émotionnel et social, en général chez des adultes (16 ans et plus), malades ou non. Il a été conçu comme un profil : il n'y a pas de score unique.</p>
+    <p>La version française ne comporte que les 38 items de la première partie de la version originale ; la seconde partie (7 questions sur les domaines de la vie quotidienne affectés par la maladie) n'est pas reprise.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Six rubriques : mobilité physique (8 items), isolement social (5), douleur (8), réactions émotionnelles (9), énergie (3) et sommeil (5). Chaque réponse « Oui » compte 1 point, « Non » 0 point, et chaque item est affecté d'un coefficient de pondération (méthode de Thurstone, coefficients français) : le score d'une rubrique est la somme des coefficients des items cochés « Oui », de 0 à 100 (le total des coefficients de chaque rubrique est de 100). Plus le score est élevé, plus la personne perçoit de problèmes, et plus ils sont sévères, dans la rubrique.</p>
+    <p>Aucun seuil clinique n'est repris ici. Limites connues (fiche INRS) : effet plafond important, qui rend difficile la détection de faibles changements, et format de réponse binaire qui ne permet pas de nuancer.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p><strong>Licence requise : oui.</strong> Instrument protégé, version française référencée sur ePROVIDE (Mapi Research Trust) d'après la fiche INRS ; la source utilisée précise que l'outil validé « ne peut subir aucune modification de forme comme de formulation ». Instrument construit ici malgré la licence, conformément à la décision du 30/09/2026 ; la diffusion publique reste soumise à l'autorisation du détenteur des droits.</p>
+    <p class="source-note">Réserves de source : (1) le texte des 38 items et les coefficients proviennent de la fiche-questionnaire « Indicateur de santé perceptuelle de Nottingham » du Comité régional d'éducation pour la santé Nord-Pas-de-Calais (boîte à outils méthodologique, A. Liékens, septembre 2000), qui reproduit la version française ; l'article de référence de l'adaptation (Bucquet et al., 1990) n'a pas été consulté. (2) Cette fiche liste par erreur l'item 20 deux fois (rubriques isolement social et réactions émotionnelles) et n'attribue aucune rubrique à l'item 9 (« Je me sens seul(e) ») : l'item 9 a été rattaché à l'isolement social, seule affectation compatible avec le total de 38 items, et le coefficient de 20,43 de la ligne concernée lui a été attribué. (3) Les coefficients de la rubrique isolement social totalisent 99,91 dans la source (arrondis). Références : Hunt S.M., McKenna S.P., McEwen J., Backett E.M. et al. (1980), J Epidemiol Community Health, 34(4), 281-286 ; Bucquet D., Condon S. &amp; Ritchie K. (1990), « The French version of the Nottingham Health Profile. A comparison of items weights with those of the source version », Soc Sci Med, 30(7), 829-835 ; fiche INRS « Nottingham Health Profile (NHP) ou Indicateur de santé perceptuelle de Nottingham (ISPN) », Références en santé au travail n° 133, 2013.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

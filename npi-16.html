@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NPI-16 - Inventaire de personnalité narcissique, forme courte</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#6B4E8E;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:14.5px;color:#63695D;margin:0 0 16px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#6B4E8E;background:#EDE6F2;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#4A2E68;border-color:#E0D9C9;}
+  .btn-primary{background:#6B4E8E;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:36px;margin:0 0 4px;color:#4A2E68;}
+  .result-max{font-size:13px;color:#9A9E90;margin:0 0 20px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">NPI-16 — Personnalité narcissique (forme courte)</h1>
+    <p class="lead">Pour chaque paire d'affirmations, choisissez celle qui vous correspond le mieux. Si aucune des deux ne vous correspond vraiment, choisissez celle qui vous dérange le moins.</p>
+    <p class="lang-note">Questionnaire transcrit en anglais (version originale) : aucune traduction française officielle validée n'a été retrouvée lors du sourçage.</p>
+    <div class="pill-row">
+      <span class="pill">16 paires d'énoncés</span>
+      <span class="pill">3 minutes</span>
+      <span class="pill">Auto-administré</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text">Choisissez l'affirmation qui vous correspond le mieux :</p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-score" id="score-total"></p>
+    <p class="result-max" id="score-label">score NPI-16, sur 16</p>
+    <p class="lead">Aucun seuil clinique officiel n'est publié par les auteurs : le NPI-16 est un outil de recherche dimensionnel, pas un instrument diagnostique catégoriel. Ce résultat ne peut en aucun cas remplacer une évaluation clinique.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Ames, D. R., Rose, P., &amp; Anderson, C. P. (2006). The NPI-16 as a short measure of narcissism. Journal of Research in Personality, 40(4), 440-450. Forme courte indépendante du NPI-40, distincte de celui-ci. Ce résultat est un repère, il ne constitue pas un diagnostic.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var pairs = [
+    ["When people compliment me I sometimes get embarrassed", "I know that I am good because everybody keeps telling me so"],
+    ["I prefer to blend in with the crowd", "I like to be the center of attention"],
+    ["I am no better or worse than most people", "I think I am a special person"],
+    ["I don't mind following orders", "I like having authority over people"],
+    ["I don't like it when I find myself manipulating people", "I find it easy to manipulate people"],
+    ["I usually get the respect that I deserve", "I insist upon getting the respect that is due me"],
+    ["I try not to be a show off", "I am apt to show off if I get the chance"],
+    ["Sometimes I am not sure of what I am doing", "I always know what I am doing"],
+    ["Sometimes I tell good stories", "Everybody likes to hear my stories"],
+    ["I like to do things for other people", "I expect a great deal from other people"],
+    ["It makes me uncomfortable to be the center of attention", "I really like to be the center of attention"],
+    ["Being an authority doesn't mean that much to me", "People always seem to recognize my authority"],
+    ["I hope I am going to be successful", "I am going to be a great person"],
+    ["People sometimes believe what I tell them", "I can make anybody believe anything I want them to"],
+    ["There is a lot that I can learn from other people", "I am more capable than other people"],
+    ["I am much like everybody else", "I am an extraordinary person"]
+  ];
+
+  var answers = new Array(pairs.length).fill(null);
+  var idx = 0;
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + pairs.length;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    pairs[idx].forEach(function(label, v){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === v ? ' selected' : '');
+      d.textContent = label;
+      d.addEventListener('click', function(){
+        answers[idx] = v;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === pairs.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < pairs.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var total = answers.reduce(function(a,b){ return a + b; }, 0);
+    document.getElementById('score-total').textContent = total;
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(pairs.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NPI-16 - Inventaire de personnalité narcissique, forme courte</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#6B4E8E 0%,#9B7FBE 55%,#3F2C57 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(220,205,235,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#4A2E68;background:#EDE6F2;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#6B4E8E;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#4A2E68;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">NPI-16</span></div>
+
+  <h1 class="serif">Inventaire de personnalité narcissique, forme courte (NPI-16)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Narcissistic Personality Inventory-16 — Ames, Rose &amp; Anderson (2006)</p>
+  <div class="meta-row">
+    <span class="pill">16 paires d'énoncés</span>
+    <span class="pill">3 minutes</span>
+    <span class="pill">Score global</span>
+    <span class="pill">Anglais</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="npi-16.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le NPI-16 est une forme courte du NPI-40 (Raskin &amp; Terry, 1988), construite comme un instrument de recherche indépendant plutôt qu'un simple sous-ensemble d'items. Il mesure le narcissisme comme un trait dimensionnel en population générale, à travers 16 paires d'affirmations en choix forcé.</p>
+    <p class="source-note">Ne pas confondre avec le NPI-40 déjà présent dans ce catalogue (fichier <code>npi-narcissique.html</code>) : ce sont deux instruments distincts, publiés et validés séparément.</p>
+    <p class="source-note">Questionnaire transcrit en anglais (version originale) : aucune traduction française officielle validée n'a été retrouvée lors du sourçage.</p>
+    <p class="source-note">Droits : aucune licence commerciale ni distributeur payant identifié. L'échelle circule librement sur plusieurs répertoires académiques et cliniques. Usage clinique personnel raisonnable.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>16 paires d'affirmations en choix forcé. Pour chaque paire, l'option narcissique vaut 1 point, l'option non narcissique 0 point. Score total = somme des 16 items, sur 16. Le NPI-16 est traité par ses auteurs comme un score global unidimensionnel, sans sous-échelle ni seuil clinique officiel — outil de recherche dimensionnel en population générale, pas un instrument diagnostique catégoriel.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source</h2>
+    <p class="source-note">Ames, D. R., Rose, P., &amp; Anderson, C. P. (2006). The NPI-16 as a short measure of narcissism. <em>Journal of Research in Personality, 40</em>(4), 440-450.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

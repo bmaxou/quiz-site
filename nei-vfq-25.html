@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NEI VFQ-25 — Questionnaire sur la fonction visuelle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#1F7A74;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#1F7A74;background:#E2F1EF;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#1F7A74;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#1F7A74;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 20px;}
+  .subscores{list-style:none;margin:0 0 20px;padding:0;border-top:1px solid #E0D9C9;border-bottom:1px solid #E0D9C9;}
+  .subscores li{display:flex;justify-content:space-between;padding:8px 2px;font-size:13px;border-bottom:1px solid #F0ECE1;}
+  .subscores li:last-child{border-bottom:none;}
+  .subscores span.v{font-weight:700;color:#1F7A74;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">NEI VFQ-25 — Questionnaire sur la fonction visuelle</h1>
+    <p class="lead">Ce questionnaire explore comment votre vue affecte vos activités quotidiennes et votre bien-être. Répondez en pensant à votre vision habituelle (avec lunettes ou lentilles si vous en portez).</p>
+    <p class="lang-note">Aucune version française officiellement accessible n'a pu être retrouvée au moment de la construction : questionnaire proposé ici en anglais, traduction directe du texte officiel NEI/RAND (National Eye Institute Visual Functioning Questionnaire, forme administrée en entretien).</p>
+    <div class="pill-row">
+      <span class="pill">25 questions</span>
+      <span class="pill">8-10 minutes</span>
+      <span class="pill">Score 0 à 100</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-score" id="score-val"></p>
+    <p class="result-max">score composite de fonction visuelle, sur une échelle de 0 à 100 (plus le score est élevé, meilleure est la fonction visuelle perçue)</p>
+    <p class="result-text" id="level-text"></p>
+    <ul class="subscores" id="subscores"></ul>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">NEI VFQ-25 (National Eye Institute Visual Functioning Questionnaire — 25) — développé par RAND sous l'égide du National Eye Institute (Mangione et al., 1998, 2001). Outil de repérage du retentissement des troubles visuels sur la qualité de vie, ne remplace pas une évaluation ophtalmologique.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  // Groupes de recodage (Table 2 du manuel de cotation NEI VFQ-25, Mangione, août 2000)
+  function recodeA(v){ return [100,75,50,25,0][v-1]; }          // items 1,3,4,15c(via 15b=eyesight)
+  function recodeB(v){ return [100,80,60,40,20,0][v-1]; }       // item 2
+  function recodeC(v){ return v===6 ? null : [100,75,50,25,0][v-1]; } // items 5-14,16,16a (6=sans rapport avec la vue -> manquant)
+  function recodeC4(v){ return [100,75,50,25][v-1]; }           // item 15c (4 options, conduite actuelle)
+  function recodeD(v){ return [0,25,50,75,100][v-1]; }          // items 17-25,19
+
+  var OPT_A1 = [{l:"Excellent"},{l:"Very good"},{l:"Good"},{l:"Fair"},{l:"Poor"}];
+  var OPT_A3 = [{l:"None of the time"},{l:"A little of the time"},{l:"Some of the time"},{l:"Most of the time"},{l:"All of the time"}];
+  var OPT_A4 = [{l:"None"},{l:"Mild"},{l:"Moderate"},{l:"Severe"},{l:"Very severe"}];
+  var OPT_B = [{l:"Excellent"},{l:"Good"},{l:"Fair"},{l:"Poor"},{l:"Very poor"},{l:"Completely blind"}];
+  var OPT_C = [{l:"No difficulty at all"},{l:"A little difficulty"},{l:"Moderate difficulty"},{l:"Extreme difficulty"},{l:"Stopped doing this because of your eyesight"},{l:"Stopped doing this for other reasons or not interested in doing this"}];
+  var OPT_C4 = [{l:"No difficulty at all"},{l:"A little difficulty"},{l:"Moderate difficulty"},{l:"Extreme difficulty"}];
+  var OPT_D_TIME = [{l:"All of the time"},{l:"Most of the time"},{l:"Some of the time"},{l:"A little of the time"},{l:"None of the time"}];
+  var OPT_D_TRUE = [{l:"Definitely true"},{l:"Mostly true"},{l:"Not sure"},{l:"Mostly false"},{l:"Definitely false"}];
+  var OPT_YESNO = [{l:"Yes"},{l:"No"}];
+  var OPT_1517 = [{l:"Never drove a car"},{l:"Gave up driving"}];
+  var OPT_15b = [{l:"Mainly my eyesight"},{l:"Mainly other reasons"},{l:"Both my eyesight and other reasons"}];
+
+  // Définition des questions dans l'ordre du formulaire officiel (items 1-25 + branchement conduite 15/15a/15b/15c)
+  var Q = {
+    q1:  {t:"1. In general, would you say your overall health is:", opts:OPT_A1, next:function(){return 'q2';}},
+    q2:  {t:"2. At the present time, would you say your eyesight using both eyes (with glasses or contact lenses, if you wear them) is:", opts:OPT_B, next:function(){return 'q3';}},
+    q3:  {t:"3. How much of the time do you worry about your eyesight?", opts:OPT_A3, next:function(){return 'q4';}},
+    q4:  {t:"4. How much pain or discomfort have you had in and around your eyes (for example, burning, itching, or aching)?", opts:OPT_A4, next:function(){return 'q5';}},
+    q5:  {t:"5. How much difficulty do you have reading ordinary print in newspapers?", opts:OPT_C, next:function(){return 'q6';}},
+    q6:  {t:"6. How much difficulty do you have doing work or hobbies that require you to see well up close, such as cooking, sewing, fixing things around the house, or using hand tools?", opts:OPT_C, next:function(){return 'q7';}},
+    q7:  {t:"7. Because of your eyesight, how much difficulty do you have finding something on a crowded shelf?", opts:OPT_C, next:function(){return 'q8';}},
+    q8:  {t:"8. How much difficulty do you have reading street signs or the names of stores?", opts:OPT_C, next:function(){return 'q9';}},
+    q9:  {t:"9. Because of your eyesight, how much difficulty do you have going down steps, stairs, or curbs in dim light or at night?", opts:OPT_C, next:function(){return 'q10';}},
+    q10: {t:"10. Because of your eyesight, how much difficulty do you have noticing objects off to the side while you are walking along?", opts:OPT_C, next:function(){return 'q11';}},
+    q11: {t:"11. Because of your eyesight, how much difficulty do you have seeing how people react to things you say?", opts:OPT_C, next:function(){return 'q12';}},
+    q12: {t:"12. Because of your eyesight, how much difficulty do you have picking out and matching your own clothes?", opts:OPT_C, next:function(){return 'q13';}},
+    q13: {t:"13. Because of your eyesight, how much difficulty do you have visiting with people in their homes, at parties, or in restaurants?", opts:OPT_C, next:function(){return 'q14';}},
+    q14: {t:"14. Because of your eyesight, how much difficulty do you have going out to see movies, plays, or sports events?", opts:OPT_C, next:function(){return 'q15';}},
+    q15: {t:"15. Now, about driving a car: are you currently driving, at least once in a while?", opts:OPT_YESNO, next:function(v){ return v===0 ? 'q15c' : 'q15a'; }},
+    q15a:{t:"15a. Have you never driven a car, or have you given up driving?", opts:OPT_1517, next:function(v){ return v===0 ? 'q17' : 'q15b'; }},
+    q15b:{t:"15b. Was that mainly because of your eyesight, mainly for some other reason, or because of both your eyesight and other reasons?", opts:OPT_15b, next:function(){ return 'q17'; }},
+    q15c:{t:"15c. How much difficulty do you have driving during the daytime in familiar places?", opts:OPT_C4, next:function(){ return 'q16'; }},
+    q16: {t:"16. How much difficulty do you have driving at night?", opts:OPT_C, next:function(){ return 'q16a'; }},
+    q16a:{t:"16a. How much difficulty do you have driving in difficult conditions, such as in bad weather, during rush hour, on the freeway, or in city traffic?", opts:OPT_C, next:function(){ return 'q17'; }},
+    q17: {t:"17. Do you accomplish less than you would like because of your vision?", opts:OPT_D_TIME, next:function(){return 'q18';}},
+    q18: {t:"18. Are you limited in how long you can work or do other activities because of your vision?", opts:OPT_D_TIME, next:function(){return 'q19';}},
+    q19: {t:"19. How much does pain or discomfort in or around your eyes (for example, burning, itching, or aching) keep you from doing what you'd like to be doing?", opts:OPT_D_TIME, next:function(){return 'q20';}},
+    q20: {t:"20. I stay home most of the time because of my eyesight.", opts:OPT_D_TRUE, next:function(){return 'q21';}},
+    q21: {t:"21. I feel frustrated a lot of the time because of my eyesight.", opts:OPT_D_TRUE, next:function(){return 'q22';}},
+    q22: {t:"22. I have much less control over what I do, because of my eyesight.", opts:OPT_D_TRUE, next:function(){return 'q23';}},
+    q23: {t:"23. Because of my eyesight, I have to rely too much on what other people tell me.", opts:OPT_D_TRUE, next:function(){return 'q24';}},
+    q24: {t:"24. I need a lot of help from others because of my eyesight.", opts:OPT_D_TRUE, next:function(){return 'q25';}},
+    q25: {t:"25. I worry about doing things that will embarrass myself or others, because of my eyesight.", opts:OPT_D_TRUE, next:function(){return null;}}
+  };
+
+  var answers = {};
+  var history = ['q1'];
+  var pos = 0;
+
+  function currentId(){ return history[pos]; }
+
+  function renderQuestion(){
+    var id = currentId();
+    var q = Q[id];
+    var answeredCount = 0;
+    for (var k in answers){ if (answers.hasOwnProperty(k)) answeredCount++; }
+    document.getElementById('progress-text').textContent = 'Question ' + (pos+1);
+    document.getElementById('q-text').textContent = q.t;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    q.opts.forEach(function(o, v){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[id] === v ? ' selected' : '');
+      d.textContent = o.l;
+      d.addEventListener('click', function(){
+        answers[id] = v;
+        // si on revient en arrière puis change une réponse de branchement, on retronque l'historique suivant
+        if (history.length > pos + 1) history = history.slice(0, pos + 1);
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = pos === 0;
+    document.getElementById('btn-next').disabled = answers[id] === undefined;
+    document.getElementById('btn-next').textContent = (Q[id].next(answers[id]) === null) ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (pos > 0){ pos--; renderQuestion(); }
+  });
+
+  document.getElementById('btn-next').addEventListener('click', function(){
+    var id = currentId();
+    if (answers[id] === undefined) return;
+    var nextId = Q[id].next(answers[id]);
+    if (nextId === null){
+      showResult();
+      return;
+    }
+    if (history.length > pos + 1 && history[pos+1] === nextId){
+      pos++;
+    } else {
+      history = history.slice(0, pos + 1);
+      history.push(nextId);
+      pos++;
+    }
+    renderQuestion();
+  });
+
+  function val(id){ return answers[id] === undefined ? null : answers[id]; }
+
+  function computeScores(){
+    var generalHealth = val('q1') !== null ? recodeA(val('q1') + 1) : null;
+    var generalVision = val('q2') !== null ? recodeB(val('q2') + 1) : null;
+    var r4 = val('q4') !== null ? recodeA(val('q4') + 1) : null;
+    var r19 = val('q19') !== null ? recodeD(val('q19') + 1) : null;
+    var ocularPain = avg([r4, r19]);
+    var nearActivities = avg([val('q5'), val('q6'), val('q7')].map(function(v){ return v!==null ? recodeC(v+1) : null; }));
+    var distanceActivities = avg([val('q8'), val('q9'), val('q14')].map(function(v){ return v!==null ? recodeC(v+1) : null; }));
+    var socialFunctioning = avg([val('q11'), val('q13')].map(function(v){ return v!==null ? recodeC(v+1) : null; }));
+    var r3 = val('q3') !== null ? recodeA(val('q3') + 1) : null;
+    var mentalHealth = avg([r3].concat([val('q21'), val('q22'), val('q25')].map(function(v){ return v!==null ? recodeD(v+1) : null; })));
+    var roleDifficulties = avg([val('q17'), val('q18')].map(function(v){ return v!==null ? recodeD(v+1) : null; }));
+    var dependency = avg([val('q20'), val('q23'), val('q24')].map(function(v){ return v!==null ? recodeD(v+1) : null; }));
+
+    // Conduite : item 15c peut être répondu directement, déduit à 0 (abandon pour raison visuelle), ou manquant
+    var r15c = null;
+    if (val('q15c') !== null){ r15c = recodeC4(val('q15c') + 1); }
+    else if (val('q15a') === 1 && val('q15b') === 0){ r15c = 0; }
+    var r16 = val('q16') !== null ? recodeC(val('q16') + 1) : null;
+    var r16a = val('q16a') !== null ? recodeC(val('q16a') + 1) : null;
+    var driving = avg([r15c, r16, r16a]);
+
+    var colorVision = val('q12') !== null ? recodeC(val('q12') + 1) : null;
+    var peripheralVision = val('q10') !== null ? recodeC(val('q10') + 1) : null;
+
+    var subs = {
+      'Vision générale': generalVision,
+      'Douleur oculaire': ocularPain,
+      'Activités de près': nearActivities,
+      'Activités de loin': distanceActivities,
+      'Fonctionnement social': socialFunctioning,
+      'Santé mentale (liée à la vue)': mentalHealth,
+      'Limitations de rôle': roleDifficulties,
+      'Dépendance': dependency,
+      'Conduite automobile': driving,
+      'Vision des couleurs': colorVision,
+      'Vision périphérique': peripheralVision
+    };
+
+    var vals = [];
+    for (var k in subs){ if (subs[k] !== null) vals.push(subs[k]); }
+    var composite = avg(vals);
+
+    return {generalHealth: generalHealth, composite: composite, subs: subs};
+  }
+
+  function avg(arr){
+    var sum = 0, n = 0;
+    arr.forEach(function(v){ if (v !== null && v !== undefined && !isNaN(v)){ sum += v; n++; } });
+    return n > 0 ? (sum / n) : null;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var r = computeScores();
+    var comp = r.composite === null ? 0 : Math.round(r.composite * 10) / 10;
+    document.getElementById('score-val').textContent = String(comp);
+    var ghTxt = r.generalHealth === null ? '' : ' Santé générale perçue (hors composite) : ' + Math.round(r.generalHealth) + '/100.';
+    document.getElementById('level-text').textContent = "Score composite calculé sur les 11 sous-échelles de fonction visuelle (hors item de santé générale, reporté séparément). Plus le score est élevé, moins le retentissement de la vision sur la vie quotidienne est important. Ce score est un repère, non un diagnostic ophtalmologique." + ghTxt;
+    var ul = document.getElementById('subscores');
+    ul.innerHTML = '';
+    for (var k in r.subs){
+      var li = document.createElement('li');
+      var label = document.createElement('span');
+      label.textContent = k;
+      var value = document.createElement('span');
+      value.className = 'v';
+      value.textContent = r.subs[k] === null ? 'n/a' : (Math.round(r.subs[k] * 10) / 10) + '/100';
+      li.appendChild(label);
+      li.appendChild(value);
+      ul.appendChild(li);
+    }
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = {};
+    history = ['q1'];
+    pos = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NEI VFQ-25 — Questionnaire sur la fonction visuelle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#1E4E5C 0%,#6FB9C9 55%,#0D2B34 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(220,245,240,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#0F4A46;background:#E2F1EF;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#1F7A74;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#0F4A46;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">VFQ-25</span></div>
+
+  <h1 class="serif">Questionnaire sur la fonction visuelle</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">National Eye Institute Visual Functioning Questionnaire — 25 items (NEI VFQ-25), Mangione et al. (1998, 2001)</p>
+  <div class="meta-row">
+    <span class="pill">25 questions</span>
+    <span class="pill">8-10 minutes</span>
+    <span class="pill">Score 0 à 100</span>
+    <span class="pill">Anglais</span>
+    <span class="pill">Licence requise : non</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="nei-vfq-25.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le NEI VFQ-25 mesure le retentissement des troubles visuels sur la qualité de vie : difficultés dans les activités de près et de loin, douleur oculaire, vision des couleurs, vision périphérique, conduite automobile, fonctionnement social, limitations de rôle, dépendance et retentissement émotionnel. Il comprend 25 items vision-spécifiques répartis en 11 sous-échelles (plus un item isolé de santé générale, reporté séparément et exclu du score composite), ainsi qu'un item de branchement sur la conduite automobile (items 15/15a/15b/15c) adapté au statut de conducteur de la personne.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque item est recodé sur une échelle 0-100 selon la clé officielle (Table 2 du manuel de cotation), le sens étant toujours orienté de sorte qu'un score élevé indique une meilleure fonction visuelle perçue. Les items recodés sont ensuite moyennés par sous-échelle (Table 3), puis le score composite est la moyenne des 11 sous-échelles vision-spécifiques disposant d'au moins une réponse (l'item de santé générale n'entre pas dans le composite). Un item « sans rapport avec la vue » (option 6 de certains items de difficulté) est traité comme manquant et exclu du calcul de sa sous-échelle, conformément à l'algorithme officiel. Aucune tranche de sévérité n'est publiée par les auteurs : le score composite et le détail par sous-échelle se lisent comme un profil fonctionnel, à discuter avec un ophtalmologiste.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p><strong>Licence requise : non.</strong> Le NEI VFQ-25 est un document mis gracieusement à disposition de tous les chercheurs et cliniciens par RAND Health Care, sous l'égide du National Eye Institute : « The VFQ-25 is a public document available without charge to all researchers » (page officielle RAND). La version administrée en entretien (interviewer-administered, janvier 2000) précise qu'aucune autorisation écrite supplémentaire n'est nécessaire, sous réserve de la mention de la source RAND/NEI en cas de publication.</p>
+    <p class="source-note">Texte des items : National Eye Institute Visual Functioning Questionnaire – 25 (version administrée en entretien, janvier 2000), RAND Health Care, développé sous la direction du National Eye Institute. Algorithme de cotation : Mangione C.M., NEI VFQ-25 Scoring Algorithm, août 2000 (RAND/NEI). Référence de validation : Mangione C.M. et al. (1998), « Psychometric Properties of the National Eye Institute Visual Function Questionnaire (NEI-VFQ) », Archives of Ophthalmology, 116(11), 1496-1504 ; Mangione C.M. et al. (2001), « Development of the 25-item National Eye Institute Visual Function Questionnaire », Archives of Ophthalmology, 119(7), 1050-1058. Une version française validée existe dans la littérature (Nordmann J.-P., Viala M., Sullivan K., Arnould B. &amp; Berdeaux G. (2004), « Psychometric Validation of the National Eye Institute Visual Function Questionnaire – 25 (NEI VFQ-25) – French Version », Journal Français d'Ophtalmologie, 27(2), 169-177) mais le questionnaire traduit lui-même n'a pas pu être retrouvé en accès libre au moment de la construction ; le test est donc proposé en anglais, traduction directe du texte officiel RAND/NEI. Sources consultées : https://www.rand.org/health/surveys/vfq.html ; https://www.nei.nih.gov/ ; https://link.springer.com/article/10.2165/00019053-200422030-00005.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

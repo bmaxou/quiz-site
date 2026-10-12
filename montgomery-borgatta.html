@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Montgomery Borgatta — Fardeau des proches-aidants</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#3E6B5A;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .sec{font-size:12.5px;color:#63695D;background:#F4F1EA;border-radius:8px;padding:8px 12px;margin:0 0 16px;}
+  .q-text{font-size:16px;margin:0 0 6px;}
+  .q-desc{font-size:13px;color:#63695D;margin:0 0 18px;white-space:pre-line;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#3E6B5A;background:#E4EDE8;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#3E6B5A;border-color:#E0D9C9;}
+  .btn-primary{background:#3E6B5A;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;color:#3E6B5A;margin:0 0 4px;}
+  .result-max{font-size:13px;color:#9A9E90;margin:0 0 10px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 14px;}
+  .subscale-row{display:flex;justify-content:space-between;font-size:13.5px;border-top:1px solid #E0D9C9;padding:10px 0;}
+  .subscale-row b{color:#1E3A5F;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">Fardeau des proches-aidants (Montgomery Borgatta)</h1>
+    <p class="lead">14 aspects de la vie quotidienne de l'aidant (temps disponible, stress ressenti, demandes du proche aidé). Pour chacun, indiquez si vous avez remarqué un changement depuis que vous assumez ce rôle auprès de votre proche.</p>
+    <p class="lang-note">Version canadienne-française (Farley, Demers &amp; Swaine, 2008).</p>
+    <div class="pill-row">
+      <span class="pill">14 questions</span>
+      <span class="pill">5 minutes</span>
+      <span class="pill">Échelle 1-5</span>
+      <span class="pill">3 sous-échelles</span>
+      <span class="pill">Français</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="sec" id="sec-text" hidden></p>
+    <p class="q-text" id="q-text"></p>
+    <p class="q-desc" id="q-desc"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Montgomery R.J.V. &amp; Borgatta E.F. (1989) ; version canadienne-française : Farley N., Demers L. &amp; Swaine B. (2008), <em>Canadian Journal on Aging</em>, 27(2), 181-190. Outil de repérage, ne remplace pas un entretien clinique.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [
+    {"t":"… de temps pour vous ?","sec":"Fardeau objectif","sub":"obj"},
+    {"t":"… de stress dans votre relation avec votre proche ?","sec":"Fardeau subjectif lié au stress","sub":"stress"},
+    {"t":"… d'intimité, de vie privée ?","sec":"Fardeau objectif","sub":"obj"},
+    {"t":"… de tentatives de la part de votre proche, de vous manipuler ?","sec":"Fardeau subjectif lié aux demandes","sub":"dem"},
+    {"t":"… de temps pour des activités récréatives ?","sec":"Fardeau objectif","sub":"obj"},
+    {"t":"… de demandes non raisonnables de la part de votre proche ?","sec":"Fardeau subjectif lié aux demandes","sub":"dem"},
+    {"t":"… de tension dans votre vie ?","sec":"Fardeau subjectif lié au stress","sub":"stress"},
+    {"t":"… de vacances et de voyages ?","sec":"Fardeau objectif","sub":"obj"},
+    {"t":"… de nervosité et de dépression par rapport à votre relation avec votre proche ?","sec":"Fardeau subjectif lié au stress","sub":"stress"},
+    {"t":"… l'impression que votre proche profite de vous ?","sec":"Fardeau subjectif lié aux demandes","sub":"dem"},
+    {"t":"… de temps pour accomplir votre travail et vos tâches domestiques ?","sec":"Fardeau objectif","sub":"obj"},
+    {"t":"… de demandes de la part de votre proche qui dépassent ses besoins ?","sec":"Fardeau subjectif lié aux demandes","sub":"dem"},
+    {"t":"… d'anxiété ou d'inquiétude ?","sec":"Fardeau subjectif lié au stress","sub":"stress"},
+    {"t":"… de temps pour les amis et les proches ?","sec":"Fardeau objectif","sub":"obj"}
+  ];
+  var opts = [[1,"1 — Beaucoup moins"],[2,"2 — Un peu moins"],[3,"3 — Ni plus, ni moins"],[4,"4 — Un peu plus"],[5,"5 — Beaucoup plus"]];
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function renderQuestion(){
+    var it = items[idx];
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    var secEl = document.getElementById('sec-text');
+    secEl.textContent = it.sec; secEl.hidden = false;
+    document.getElementById('q-text').textContent = 'Depuis que vous assumez ce rôle auprès de votre proche, avez-vous remarqué un changement dans la quantité…';
+    document.getElementById('q-desc').textContent = it.t;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    opts.forEach(function(pair){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === pair[0] ? ' selected' : '');
+      d.textContent = pair[1];
+      d.addEventListener('click', function(){ answers[idx] = pair[0]; renderQuestion(); });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function computeResult(){
+    var obj = 0, str = 0, dem = 0;
+    items.forEach(function(it, i){
+      var raw = answers[i];
+      var scored = it.sub === 'obj' ? (6 - raw) : raw;
+      if (it.sub === 'obj') obj += scored;
+      else if (it.sub === 'stress') str += scored;
+      else dem += scored;
+    });
+    var html = '';
+    html += '<p class="result-text">Trois scores de sous-échelle, sans score global officiel (le formulaire original ne prévoit que ces trois scores). Pour chaque sous-échelle, un score plus élevé indique un fardeau perçu plus important.</p>';
+    html += '<div class="subscale-row"><span>Fardeau objectif <span style="color:#9A9E90">(perte de temps libre — items inversés)</span></span><b>' + obj + ' / 30</b></div>';
+    html += '<div class="subscale-row"><span>Fardeau subjectif lié au stress</span><b>' + str + ' / 20</b></div>';
+    html += '<div class="subscale-row"><span>Fardeau subjectif lié aux demandes</span><b>' + dem + ' / 20</b></div>';
+    html += '<p class="result-text" style="margin-top:18px">Aucun seuil clinique officiel n\'est publié pour cette échelle : ces scores se lisent de façon relative (suivi dans le temps, comparaison entre sous-échelles) plutôt que par un seuil absolu.</p>';
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Montgomery Borgatta — Fardeau des proches-aidants</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#3E6B5A 0%,#6FA08C 55%,#1E3A2E 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(230,250,240,.4),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:22px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#3E6B5A;background:#E4EDE8;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .section ul{font-size:14.5px;margin:0 0 10px;padding-left:20px;}
+  .section li{margin-bottom:4px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#3E6B5A;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#3E6B5A;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <div class="fiche-photo"><span class="acronym">Montgomery Borgatta</span></div>
+  <h1 class="serif">Échelle d'évaluation du fardeau des proches-aidants (Montgomery Borgatta Caregiver Burden Scale)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Montgomery R.J.V. &amp; Borgatta E.F. (1989) ; version canadienne-française : Farley N., Demers L. &amp; Swaine B. (2008)</p>
+  <div class="meta-row">
+    <span class="pill">14 questions</span>
+    <span class="pill">5 minutes</span>
+    <span class="pill">Échelle 1-5</span>
+    <span class="pill">3 sous-échelles</span>
+    <span class="pill">Aidant</span>
+    <span class="pill">Français</span>
+    <span class="pill">Licence requise : non</span>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" href="montgomery-borgatta.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Questionnaire auto-administré de 14 items qui mesure la perception du proche-aidant face aux activités accomplies et aux émotions vécues en lien avec les tâches à accomplir pour un proche âgé en perte d'autonomie. Complète le ZBI (échelle de Zarit, déjà disponible dans ce catalogue) sur un registre plus spécifique : trois dimensions distinctes du fardeau plutôt qu'un score global unique.</p>
+    <p>Trois sous-échelles : <strong>fardeau objectif</strong> (6 items — temps disponible pour soi, ses loisirs, son travail, ses proches, ses vacances, son intimité), <strong>fardeau subjectif lié au stress</strong> (4 items — stress, tension, nervosité/dépression, anxiété/inquiétude ressentis) et <strong>fardeau subjectif lié aux demandes</strong> (4 items — perception de manipulation, de demandes déraisonnables ou excessives, d'être « utilisé » par le proche aidé).</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque item se cote de 1 (Beaucoup moins) à 5 (Beaucoup plus). Les items du <strong>fardeau objectif</strong> sont des pertes de ressource (temps) : leur score est inversé avant la somme (1↔5, 2↔4, 3 inchangé), de sorte qu'une forte diminution du temps disponible donne un score élevé, comme pour les deux autres sous-échelles où une augmentation directe du vécu négatif donne un score élevé. Cette règle d'inversion, explicite sur le formulaire officiel pour un exemple de chaque type d'item (inversée pour « temps pour vous », directe pour « stress » et pour « tentatives de manipulation »), a été appliquée de façon uniforme à tous les items du même type.</p>
+    <p>Trois scores de sous-échelle, pas de score global officiel : fardeau objectif 6-30, fardeau subjectif lié au stress 4-20, fardeau subjectif lié aux demandes 4-20. Aucun seuil clinique officiel publié ; cohérence interne de la version canadienne-française (alpha de Cronbach) : 0,90 (fardeau objectif), 0,66 (stress) et 0,58 (demandes).</p>
+    <p class="source-note">⚠️ Le formulaire officiel disponible (« Formulaire de score ») reproduit l'intitulé exact des 14 items (sous forme elliptique, à la suite d'une question commune type « avez-vous remarqué un changement dans la quantité… ») mais pas la page de consigne complète avec la formulation exacte de cette question d'introduction ; la formulation reprise ici respecte le sens donné par le document officiel (CRIUGM) sans ajouter ni modifier aucun des 14 items eux-mêmes. Si tu as accès à l'article de Farley, Demers &amp; Swaine (2008, <em>Canadian Journal on Aging</em>) ou à une version imprimée complète du questionnaire, dépose-le dans le project pour vérifier/aligner la formulation exacte de cette phrase d'introduction.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p>Montgomery R.J.V., Borgatta E.F. &amp; Borgatta M.L. (2000), « Societal and Family change in the burden of care », in <em>Who should care for the elderly? An East-West value divide</em>, W.T. Liu &amp; H. Kendig (dir.), Singapore: The National University of Singapore Press. Version canadienne-française : Farley N., Demers L. &amp; Swaine B. (2008), <em>Canadian Journal on Aging</em>, 27(2), 181-190. Questionnaire et formulaire de score diffusés en accès direct par le Centre de recherche de l'Institut universitaire de gériatrie de Montréal (CRIUGM), seule condition affichée : « Cet outil est protégé par le droit d'auteur. Lors de son utilisation, la référence doit être citée. »</p>
+    <p class="source-note"><strong>Licence requise : non.</strong> Diffusion directe et libre du questionnaire et du formulaire de cotation, sans verrou ni compte ; seule obligation affichée, la citation des auteurs.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

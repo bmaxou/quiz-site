@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OBQ-44 - Questionnaire des croyances obsessionnelles</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#5B2E7A;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#5B2E7A;background:#F1E9F5;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#3A1A52;border-color:#E0D9C9;}
+  .btn-primary{background:#5B2E7A;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:36px;color:#5B2E7A;margin:0 0 4px;}
+  .result-max{font-size:13px;color:#9A9E90;margin:0 0 16px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">OBQ-44 - Questionnaire des croyances obsessionnelles</h1>
+    <p class="lead">Cet inventaire liste différentes attitudes ou croyances que les gens ont parfois. Lisez attentivement chaque affirmation et décidez à quel point vous êtes d'accord ou pas d'accord. En cotant, essayez d'éviter le point médian de l'échelle (4), et indiquez plutôt si vous êtes généralement en désaccord ou en accord avec les affirmations sur vos propres croyances et attitudes.</p>
+    <p class="lang-note">Traduction française de travail, non officielle ; texte original en anglais (Obsessive Compulsive Cognitions Working Group, 2005).</p>
+    <div class="pill-row">
+      <span class="pill">44 questions</span>
+      <span class="pill">10 minutes</span>
+      <span class="pill">Échelle 1-7</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-score" id="score-total"></p>
+    <p class="result-max">score total, sur 308 (44 items, échelle 1-7 chacun ; plus le score est élevé, plus les croyances obsessionnelles rapportées sont marquées)</p>
+    <p class="footnote" style="margin-top:0;border-top:none;padding-top:0;">La littérature distingue 3 domaines de croyances (Responsabilité/estimation de la menace, Perfectionnisme/Certitude, Importance/Contrôle des pensées), mais la répartition exacte des 44 items dans ces 3 domaines n'a pas pu être confirmée à partir d'une source primaire directement lisible lors du sourçage : seul le score total est donc calculé ici, pas de score par domaine.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Obsessive Compulsive Cognitions Working Group (OCCWG). (2005). Psychometric validation of the Obsessive Beliefs Questionnaire and the Interpretation of Intrusions Inventory: Part 2. Behaviour Research and Therapy, 43(11), 1527-1542. Aucun seuil clinique officiel publié dans les sources consultées : score continu, à lire en profil relatif. Outil de repérage, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [
+    "Je pense souvent que les choses autour de moi ne sont pas sûres.",
+    "Si je ne suis pas absolument sûr(e) de quelque chose, je suis certain(e) de faire une erreur.",
+    "Les choses devraient être parfaites selon mes propres normes.",
+    "Pour être quelqu'un de valable, je dois être parfait(e) dans tout ce que je fais.",
+    "Dès que j'en vois l'opportunité, je dois agir pour empêcher que de mauvaises choses arrivent.",
+    "Même si un dommage est très improbable, je devrais essayer de l'empêcher à tout prix.",
+    "Pour moi, avoir de mauvaises pulsions est aussi grave que de les mettre réellement à exécution.",
+    "Si je n'agis pas quand je prévois un danger, je suis responsable des conséquences.",
+    "Si je ne peux pas faire quelque chose parfaitement, je ne devrais pas le faire du tout.",
+    "Je dois travailler à mon plein potentiel en permanence.",
+    "Il est essentiel pour moi de considérer tous les résultats possibles d'une situation.",
+    "Même des erreurs mineures signifient qu'un travail n'est pas terminé.",
+    "Si j'ai des pensées ou pulsions agressives envers mes proches, cela signifie que je pourrais secrètement vouloir leur faire du mal.",
+    "Je dois être certain(e) de mes décisions.",
+    "Dans toutes sortes de situations quotidiennes, ne pas empêcher un dommage est aussi grave que le causer délibérément.",
+    "Éviter des problèmes graves (maladie, accidents) demande un effort constant de ma part.",
+    "Pour moi, ne pas empêcher un dommage est aussi grave que de le causer.",
+    "Je devrais être bouleversé(e) si je fais une erreur.",
+    "Je devrais m'assurer que les autres sont protégés de toute conséquence négative de mes décisions ou actions.",
+    "Pour moi, les choses ne vont pas si elles ne sont pas parfaites.",
+    "Avoir des pensées désagréables signifie que je suis une personne terrible.",
+    "Si je ne prends pas de précautions supplémentaires, je suis plus susceptible que les autres de provoquer un désastre.",
+    "Pour me sentir en sécurité, je dois être aussi préparé(e) que possible à tout ce qui pourrait mal tourner.",
+    "Je ne devrais pas avoir de pensées bizarres ou dégoûtantes.",
+    "Pour moi, faire une erreur est aussi grave qu'échouer complètement.",
+    "Il est essentiel que tout soit clairement défini, même dans les affaires mineures.",
+    "Avoir une pensée blasphématoire est aussi coupable que de commettre un acte sacrilège.",
+    "Je devrais pouvoir débarrasser mon esprit des pensées indésirables.",
+    "Je suis plus susceptible que les autres de causer accidentellement du tort à moi-même ou à autrui.",
+    "Avoir de mauvaises pensées signifie que je suis bizarre ou anormal(e).",
+    "Je dois être le/la meilleur(e) dans les choses importantes pour moi.",
+    "Avoir une pensée ou image sexuelle indésirable signifie que je veux vraiment le faire.",
+    "Si mes actions pouvaient avoir ne serait-ce qu'un petit effet sur un malheur potentiel, j'en suis responsable.",
+    "Même quand je suis prudent(e), je pense souvent que de mauvaises choses vont arriver.",
+    "Avoir des pensées intrusives signifie que je perds le contrôle.",
+    "Des événements néfastes se produiront si je ne suis pas très prudent(e).",
+    "Je dois continuer à travailler sur quelque chose jusqu'à ce que ce soit fait exactement comme il faut.",
+    "Avoir des pensées violentes signifie que je vais perdre le contrôle et devenir violent(e).",
+    "Pour moi, ne pas empêcher un désastre est aussi grave que de le causer.",
+    "Si je ne fais pas un travail parfaitement, les gens ne me respecteront pas.",
+    "Même les expériences ordinaires de ma vie sont pleines de risques.",
+    "Avoir une mauvaise pensée n'est moralement pas différent de commettre une mauvaise action.",
+    "Quoi que je fasse, ce ne sera jamais assez bien.",
+    "Si je ne contrôle pas mes pensées, je serai puni(e)."
+  ];
+  var opts = ["7 - Tout à fait d'accord","6 - D'accord modérément","5 - Un peu d'accord","4 - Ni d'accord ni en désaccord","3 - Un peu en désaccord","2 - En désaccord modéré","1 - En désaccord total"];
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    opts.forEach(function(label, v){
+      var value = 7 - v;
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === value ? ' selected' : '');
+      d.textContent = label;
+      d.addEventListener('click', function(){
+        answers[idx] = value;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var total = 0;
+    answers.forEach(function(v){ total += v; });
+    document.getElementById('score-total').textContent = total;
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OBQ-44 - Questionnaire des croyances obsessionnelles</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#6B5C8C 0%,#9B8CB8 55%,#453A5C 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(220,210,235,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#3A1A52;background:#F1E9F5;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;flex-wrap:wrap;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#5B2E7A;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#3A1A52;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <div class="fiche-photo"><span class="acronym small">OBQ-44</span></div>
+  <h1 class="serif">Questionnaire des croyances obsessionnelles</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Obsessive Beliefs Questionnaire-44 - Obsessive Compulsive Cognitions Working Group (2005)</p>
+  <div class="meta-row">
+    <span class="pill">44 questions</span>
+    <span class="pill">10 minutes</span>
+    <span class="pill">Échelle 1-7</span>
+    <span class="pill">Anglais</span>
+    <span class="pill">TOC</span>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" href="obq-44.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>L'OBQ-44 est un auto-questionnaire de 44 items élaboré par l'Obsessive Compulsive Cognitions Working Group (groupe international de chercheurs sur le TOC) pour évaluer les croyances et attitudes dysfonctionnelles associées au trouble obsessionnel-compulsif : responsabilité excessive et surestimation de la menace, perfectionnisme et intolérance à l'incertitude, importance excessive et besoin de contrôler ses pensées.</p>
+    <p class="source-note">Aucune traduction française officielle validée n'a été identifiée lors du sourçage : les items sont proposés ici dans une traduction de travail non officielle, réalisée à partir du texte original en anglais.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque item est coté de 1 (en désaccord total) à 7 (tout à fait d'accord). Le score total est la somme des 44 items (44 à 308) : plus il est élevé, plus les croyances obsessionnelles rapportées sont marquées.</p>
+    <p class="source-note">⚠️ La littérature identifie 3 domaines de croyances (Responsabilité/estimation de la menace, Perfectionnisme/Certitude, Importance/Contrôle des pensées), mais la répartition exacte de chaque item dans ces 3 domaines n'a pas pu être confirmée à partir d'une source primaire directement lisible lors du sourçage (clé de cotation par sous-échelle non accessible) : seul le score total est donc calculé sur cette page, aucun score par domaine.</p>
+    <p class="source-note">Aucun seuil clinique officiel n'a été publié dans les sources consultées : c'est une mesure dimensionnelle, à interpréter en profil relatif plutôt que par un seuil fixe.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Source</h2>
+    <p class="source-note">Obsessive Compulsive Cognitions Working Group (OCCWG). (2005). Psychometric validation of the Obsessive Beliefs Questionnaire and the Interpretation of Intrusions Inventory: Part 2. Factor analyses and testing of a brief version. Behaviour Research and Therapy, 43(11), 1527-1542. PDF officiel diffusé librement par l'International OCD Foundation (IOCDF), organisation à but non lucratif : iocdf.org/wp-content/uploads/2016/04/08-Obsessional-Beliefs-Questionnaire-OBQ-44.pdf. Outil de repérage, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

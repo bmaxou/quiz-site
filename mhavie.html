@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MHAVIE — Mesure des habitudes de vie (instrument général abrégé)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,h3,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:680px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  h3{font-size:17px;margin:18px 0 6px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#94620F;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12.5px;color:#63695D;font-style:italic;margin:0 0 20px;}
+  .defs{font-size:13.5px;color:#20241E;margin:0 0 18px;padding:14px 16px;background:#F7F2E6;border:1px solid #E0D9C9;border-radius:10px;}
+  .defs p{margin:0 0 8px;} .defs p:last-child{margin:0;}
+  .progress{font-size:12px;color:#63695D;margin:0 0 6px;}
+  .cat{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6E4A0E;margin:0 0 10px;}
+  .q-text{font-size:16.5px;margin:0 0 6px;font-weight:500;}
+  .q-note{font-size:12.5px;color:#63695D;font-style:italic;margin:0 0 6px;}
+  .blk-title{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#63695D;margin:20px 0 8px;}
+  .blk-title small{font-weight:500;text-transform:none;letter-spacing:0;color:#63695D;}
+  .opt-row{display:flex;flex-direction:column;gap:7px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:10px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;background:#fff;text-align:left;font-family:inherit;color:#20241E;width:100%;}
+  .opt:focus-visible{outline:2px solid #94620F;outline-offset:2px;}
+  .opt.selected{border-color:#94620F;background:#F6EBD3;}
+  .opt .box{width:16px;height:16px;border:1.5px solid #9A9E90;border-radius:50%;flex:none;}
+  .opt.chk .box{border-radius:4px;}
+  .opt.selected .box{border-color:#94620F;background:#94620F;box-shadow:inset 0 0 0 3px #F6EBD3;}
+  .sat-row{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;}
+  .sat-row .opt{flex-direction:column;justify-content:center;text-align:center;font-size:12px;padding:9px 4px;gap:5px;min-height:62px;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:26px;gap:10px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#6E4A0E;border-color:#E0D9C9;}
+  .btn-primary{background:#94620F;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:48px;color:#94620F;margin:0 0 4px;line-height:1.1;}
+  .result-max{font-size:14px;color:#63695D;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 16px;}
+  table.res{width:100%;border-collapse:collapse;font-size:13px;margin:6px 0 18px;}
+  table.res th{text-align:left;font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;color:#63695D;padding:6px 6px;border-bottom:1px solid #E0D9C9;}
+  table.res td{padding:7px 6px;border-bottom:1px solid #EFE9DA;vertical-align:middle;}
+  table.res td.num,table.res th.num{text-align:right;white-space:nowrap;}
+  .bar{height:8px;background:#EFE9DA;border-radius:4px;min-width:60px;overflow:hidden;}
+  .bar i{display:block;height:100%;background:#94620F;}
+  ul.list{margin:4px 0 14px;padding-left:20px;font-size:13.5px;} ul.list li{margin:0 0 4px;}
+  .footnote{margin-top:28px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media (max-width:520px){.card{padding:22px 18px;} .sat-row{grid-template-columns:1fr;} .sat-row .opt{flex-direction:row;min-height:0;text-align:left;justify-content:flex-start;}}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">MHAVIE — Mesure des habitudes de vie</h1>
+    <p class="lead">Instrument général abrégé (version 3.1, 14 ans et plus) : 77 habitudes de vie de la vie quotidienne et des rôles sociaux. Pour chacune, vous indiquez comment elle est réalisée habituellement, l'aide éventuellement requise et votre satisfaction.</p>
+    <div class="defs">
+      <p><strong>Niveau de réalisation (une seule réponse).</strong> <em>Sans difficulté</em> : réalisée facilement ou avec peu de difficulté, même avec un aménagement, une aide technique ou une aide humaine. <em>Avec difficulté</em> : réalisée difficilement (inconfort, beaucoup d'efforts…), même avec aménagement, aide technique ou aide humaine. <em>Réalisée par substitution</em> : la personne ne peut pas y participer activement ; elle est entièrement réalisée par une aide humaine. <em>Non réalisée</em> : non réalisée en raison de trop grandes incapacités, d'obstacles trop importants ou d'un manque d'aide. <em>Ne s'applique pas</em> : l'habitude de vie ne fait pas partie de la réalité quotidienne de la personne (pas encore présentée, âge ou sexe, environnement, choix personnel, familial ou socioculturel).</p>
+      <p><strong>Type d'aide requis (une réponse ou plus).</strong> <em>Sans aide</em> : réalisée seule, sans aide technique, sans aménagement et sans aide humaine (aucune autre case ne peut alors être cochée). <em>Aide technique</em> : tout soutien non humain (fauteuil roulant, aide visuelle, appareil auditif, siège de bain, médicaments, accessoire…). <em>Aménagement</em> : toute modification de l'environnement ou de la tâche (rampe d'accès, porte élargie, éclairage, plus de temps pour réaliser l'habitude de vie…). <em>Aide humaine</em> : toute personne qui aide en raison des incapacités ou des obstacles de l'environnement (aide physique, supervision, consignes verbales, encouragement).</p>
+      <p>Indiquez la façon <strong>habituelle</strong> de réaliser chaque habitude de vie. Il n'y a pas de bonne ou de mauvaise réponse.</p>
+    </div>
+    <p class="lang-note">Questionnaire à choix multiples : les items et la cotation sont ceux de l'instrument officiel du RIPPH. Les rubriques d'identification (nom, dates, mode de passation, répondant) ne sont pas reprises.</p>
+    <div class="pill-row">
+      <span class="pill">77 habitudes de vie</span>
+      <span class="pill">20 à 30 minutes</span>
+      <span class="pill">Score 0-9 par item</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="cat" id="cat-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <p class="q-note" id="q-note" hidden></p>
+    <p class="blk-title">A — Niveau de réalisation <small>(une seule réponse)</small></p>
+    <div class="opt-row" id="lvl-row"></div>
+    <div id="aid-blk" hidden>
+      <p class="blk-title">B — Type d'aide requis <small>(une réponse ou plus)</small></p>
+      <div class="opt-row" id="aid-row"></div>
+    </div>
+    <p class="blk-title">Niveau de satisfaction <small>(facultatif — non intégré au score)</small></p>
+    <div class="sat-row" id="sat-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-score" id="score-val"></p>
+    <p class="result-max" id="score-sub"></p>
+    <p class="result-text" id="level-text"></p>
+    <table class="res" id="res-table"></table>
+    <div id="res-lists"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">MHAVIE 3.1, instrument général abrégé — Fougeyrollas P., Noreau L., Beaulieu M., Dion S.-A., Lepage C., Sévigny M., St Michel G. et Tremblay J., RIPPH, Québec, édition juin 2003 (© RIPPH, tous droits réservés). Mesure la participation sociale (réalisation des habitudes de vie) ; ne pose aucun diagnostic et ne remplace pas une évaluation clinique.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var CATS = ["Nutrition", "Condition corporelle", "Soins personnels", "Communication", "Habitation", "Déplacements", "Responsabilités", "Relations interpersonnelles", "Vie communautaire", "Éducation", "Travail", "Loisirs"];
+  var ITEMS = [{"id": "1.1", "c": 0, "t": "Choisir les aliments appropriés pour vos repas, selon vos goûts et vos besoins particuliers (quantité, type d’aliments)", "n": ""}, {"id": "1.2", "c": 0, "t": "Préparer vos repas (incluant l’utilisation des appareils électroménagers)", "n": ""}, {"id": "1.3.1", "c": 0, "t": "Prendre vos repas (incluant l’utilisation de la vaisselle et des ustensiles, le respect des convenances…)", "n": ""}, {"id": "1.3.2", "c": 0, "t": "Utiliser les services de restauration (services aux tables et restauration rapide)", "n": ""}, {"id": "2.1", "c": 1, "t": "Vous mettre au lit et sortir de votre lit", "n": ""}, {"id": "2.2", "c": 1, "t": "Dormir (confort, durée, continuité…)", "n": ""}, {"id": "2.3", "c": 1, "t": "Pratiquer des activités physiques pour maintenir ou améliorer votre santé ou votre condition physique (marche, exercices individuels ou en groupe…)", "n": ""}, {"id": "2.4", "c": 1, "t": "Réaliser des activités relaxantes, de détente ou d’attention pour assurer votre bien-être psychologique ou mental (yoga, méditation, jeux d’échecs, mots croisés…)", "n": ""}, {"id": "3.1", "c": 2, "t": "Vous occuper de votre hygiène corporelle (vous laver, vous coiffer, prendre un bain ou une douche…)", "n": ""}, {"id": "3.2.1", "c": 2, "t": "Utiliser les équipements sanitaires de votre domicile (toilettes et tout autre matériel nécessaire à l’élimination)", "n": ""}, {"id": "3.2.2", "c": 2, "t": "Utiliser les équipements sanitaires autres que ceux de votre domicile (toilettes et tout autre matériel nécessaire à l’élimination)", "n": ""}, {"id": "3.3.1", "c": 2, "t": "Vous habiller et vous déshabiller le haut du corps (vêtements, accessoires, incluant le choix des vêtements)", "n": ""}, {"id": "3.3.2", "c": 2, "t": "Vous habiller et vous déshabiller le bas du corps (vêtements, accessoires, incluant le choix des vêtements)", "n": ""}, {"id": "3.3.3", "c": 2, "t": "Mettre, enlever et entretenir vos aides techniques (orthèses, prothèses, lentilles et lunettes…)", "n": ""}, {"id": "3.4.1", "c": 2, "t": "Prendre soin de votre santé (premiers soins, médication, consignes thérapeutiques…)", "n": ""}, {"id": "3.4.2", "c": 2, "t": "Utiliser les services dispensés par une clinique médicale, un centre hospitalier ou de réadaptation", "n": ""}, {"id": "4.1.1", "c": 3, "t": "Communiquer avec une autre personne à la maison ou dans la communauté (exprimer vos besoins, tenir une conversation…)", "n": ""}, {"id": "4.1.2", "c": 3, "t": "Communiquer avec un groupe de personnes à la maison ou dans la communauté (exprimer vos idées, tenir une conversation…)", "n": ""}, {"id": "4.2.1", "c": 3, "t": "Communiquer par écrit (écrire une lettre, un message…)", "n": ""}, {"id": "4.2.2", "c": 3, "t": "Lire et comprendre des informations écrites (journaux, livres, lettres, signalisation…)", "n": "Si vous lisez avec des lunettes, cochez « Aide technique »."}, {"id": "4.3.1", "c": 3, "t": "Utiliser un téléphone à votre domicile ou au travail", "n": ""}, {"id": "4.3.2", "c": 3, "t": "Utiliser un téléphone public (ou un téléphone cellulaire)", "n": ""}, {"id": "4.3.3", "c": 3, "t": "Utiliser un ordinateur", "n": ""}, {"id": "4.3.4", "c": 3, "t": "Utiliser une radio, un téléviseur ou un système de son", "n": ""}, {"id": "5.1", "c": 4, "t": "Choisir une résidence selon vos besoins (maison, appartement, centre d’hébergement…)", "n": ""}, {"id": "5.2.1", "c": 4, "t": "Entretenir votre résidence (ménage, lavage, réparations mineures…)", "n": ""}, {"id": "5.2.2", "c": 4, "t": "Entretenir l’extérieur de votre résidence (gazon, jardin, neige…)", "n": ""}, {"id": "5.2.3", "c": 4, "t": "Effectuer des travaux lourds (grand ménage, peinture, réparations majeures…)", "n": ""}, {"id": "5.3.1", "c": 4, "t": "Entrer et sortir de votre résidence", "n": ""}, {"id": "5.3.2", "c": 4, "t": "Vous déplacer à l’intérieur de votre résidence", "n": ""}, {"id": "5.3.3", "c": 4, "t": "Utiliser l’ameublement et les équipements de votre résidence (bureau, rangement, chauffage…)", "n": ""}, {"id": "5.3.4", "c": 4, "t": "Vous déplacer sur le terrain de votre résidence (cour, parterre…)", "n": ""}, {"id": "6.1.1", "c": 5, "t": "Vous déplacer dans la rue ou sur le trottoir (incluant traverser la rue)", "n": ""}, {"id": "6.1.2", "c": 5, "t": "Vous déplacer sur une surface glissante ou inégale (neige, glace, herbe, gravier…)", "n": ""}, {"id": "6.2.1", "c": 5, "t": "Utiliser des moyens de transport comme conducteur", "n": ""}, {"id": "6.2.2", "c": 5, "t": "Vous déplacer à bicyclette (pour vos transports, vos loisirs…)", "n": ""}, {"id": "6.2.3", "c": 5, "t": "Utiliser des moyens de transport comme passager (auto, autobus, taxi…)", "n": "Les transports adaptés sont des aménagements."}, {"id": "7.1.1", "c": 6, "t": "Reconnaître la valeur habituelle de l’argent et utiliser les différentes pièces et le papier monnaie", "n": ""}, {"id": "7.1.2", "c": 6, "t": "Utiliser les cartes bancaires et le guichet automatique", "n": ""}, {"id": "7.1.3", "c": 6, "t": "Faire des achats (choix de la marchandise, mode de paiement, achats par téléphone…)", "n": ""}, {"id": "7.1.4", "c": 6, "t": "Planifier votre budget et respecter vos obligations financières (répartition des dépenses et des économies, paiement des comptes)", "n": ""}, {"id": "7.2", "c": 6, "t": "Assumer vos responsabilités envers autrui et la société (respect des droits et biens d’autrui, vote, respect des lois et règlements)", "n": ""}, {"id": "7.3.1", "c": 6, "t": "Assumer vos responsabilités personnelles ou familiales", "n": ""}, {"id": "7.3.2", "c": 6, "t": "Assurer l’éducation de vos enfants", "n": ""}, {"id": "7.3.3", "c": 6, "t": "Prendre soin de vos enfants (santé, alimentation, habillement…)", "n": ""}, {"id": "8.1", "c": 7, "t": "Maintenir des relations affectives avec votre conjoint", "n": ""}, {"id": "8.2.1", "c": 7, "t": "Maintenir des relations affectives avec vos enfants", "n": ""}, {"id": "8.2.2", "c": 7, "t": "Maintenir des relations affectives avec vos parents", "n": ""}, {"id": "8.2.3", "c": 7, "t": "Maintenir des relations affectives ou sociales avec d’autres membres de votre famille (frère, sœur, oncle…)", "n": ""}, {"id": "8.2.4", "c": 7, "t": "Maintenir des liens avec des amis", "n": ""}, {"id": "8.2.5", "c": 7, "t": "Maintenir des liens sociaux avec votre entourage (voisins, collègues de travail, d’études ou de loisirs…)", "n": ""}, {"id": "8.3", "c": 7, "t": "Avoir des relations sexuelles", "n": ""}, {"id": "9.1", "c": 8, "t": "Vous rendre dans les établissements de services de votre milieu (gouvernementaux, bancaires, juridiques, postaux…)", "n": ""}, {"id": "9.1.2", "c": 8, "t": "Entrer et vous déplacer dans les établissements de services (gouvernementaux, bancaires, juridiques, postaux…)", "n": ""}, {"id": "9.1.3", "c": 8, "t": "Utiliser les services publics de votre milieu (gouvernementaux, bancaires, juridiques, postaux…)", "n": ""}, {"id": "9.1.4", "c": 8, "t": "Vous rendre dans les commerces de votre milieu (supermarché, centre commercial, dépanneur…)", "n": ""}, {"id": "9.1.5", "c": 8, "t": "Entrer et vous déplacer dans les commerces de votre milieu (supermarché, centre commercial, dépanneur…)", "n": ""}, {"id": "9.1.6", "c": 8, "t": "Utiliser les commerces de votre milieu (supermarché, centre commercial, nettoyeur…)", "n": ""}, {"id": "9.2.1", "c": 8, "t": "Participer à des organisations socio-communautaires (clubs sociaux, groupe d’entraide…)", "n": ""}, {"id": "9.2.2", "c": 8, "t": "Participer à des activités reliées à des pratiques religieuses ou spirituelles", "n": ""}, {"id": "10.1", "c": 9, "t": "Participer à des activités scolaires ou de formation professionnelle de niveau secondaire (cours, travaux, activités para-scolaires,…)", "n": ""}, {"id": "10.2", "c": 9, "t": "Réaliser des activités d’apprentissage liées à la formation professionnelle (école de métier, université, collège…)", "n": ""}, {"id": "11.1", "c": 10, "t": "Choisir un métier ou une profession", "n": ""}, {"id": "11.2", "c": 10, "t": "Rechercher un emploi", "n": ""}, {"id": "11.3.1", "c": 10, "t": "Occuper un travail rémunéré", "n": "Si vous ne travaillez pas actuellement et que vous désirez travailler, cochez « Non réalisée »."}, {"id": "11.3.2", "c": 10, "t": "Réaliser des activités non rémunérées (bénévolat)", "n": ""}, {"id": "11.4.1", "c": 10, "t": "Vous rendre à votre lieu d’occupation principale (travail, études, bénévolat…)", "n": ""}, {"id": "11.4.2", "c": 10, "t": "Entrer et vous déplacer dans votre lieu d’occupation principale (travail, études, bénévolat…)", "n": ""}, {"id": "11.4.3", "c": 10, "t": "Utiliser les services de votre milieu d’occupation principale (travail, études incluant cafétéria, services au personnel…)", "n": ""}, {"id": "11.4.4", "c": 10, "t": "Réaliser des tâches familiales ou domestiques comme occupation principale", "n": ""}, {"id": "12.1", "c": 11, "t": "Pratiquer des activités sportives ou récréatives (marche, sports et jeux)", "n": ""}, {"id": "12.2.1", "c": 11, "t": "Pratiquer des activités artistiques, culturelles ou artisanales (musique, danse, bricolage…)", "n": ""}, {"id": "12.2.2", "c": 11, "t": "Assister à des événements sportifs (hockey, baseball…)", "n": ""}, {"id": "12.2.3", "c": 11, "t": "Assister à des événements artistiques ou culturels (spectacles, cinéma, théâtre…)", "n": ""}, {"id": "12.2.4", "c": 11, "t": "Réaliser des activités de type touristique (voyages, visites de sites naturels ou historiques…)", "n": ""}, {"id": "12.2.5", "c": 11, "t": "Réaliser des activités de plein air (randonnée, camping…)", "n": ""}, {"id": "12.2.6", "c": 11, "t": "Utiliser les services de loisirs de votre milieu (bibliothèque, centre de loisirs municipal…)", "n": ""}];
+  var LVL = [["sd","Sans difficulté"],["ad","Avec difficulté"],["sub","Réalisée par substitution"],["nr","Non réalisée"],["na","Ne s'applique pas"]];
+  var AID = [["sa","Sans aide"],["tech","Aide technique"],["amen","Aménagement"],["hum","Aide humaine"]];
+  var SAT = [["Très insatisfait",1],["Insatisfait",2],["+/- satisfait",3],["Satisfait",4],["Très satisfait",5]];
+  var ans, idx = 0;
+
+  function fresh(){
+    ans = ITEMS.map(function(){ return {lvl:null, aid:{sa:false,tech:false,amen:false,hum:false}, sat:null}; });
+    idx = 0;
+  }
+  fresh();
+
+  function needAid(a){ return a.lvl === "sd" || a.lvl === "ad"; }
+  function aidOk(a){ var x=a.aid; return x.sa || x.tech || x.amen || x.hum; }
+  function complete(a){ return a.lvl !== null && (!needAid(a) || aidOk(a)); }
+
+  // Cotation officielle (guide d'application MHAVIE, tableau 5) : null = ne s'applique pas
+  function itemScore(a){
+    if (a.lvl === "na") return null;
+    if (a.lvl === "nr") return 0;
+    if (a.lvl === "sub") return 1;
+    var tech = a.aid.tech || a.aid.amen, hum = a.aid.hum;
+    if (a.lvl === "sd"){ return hum ? (tech ? 4 : 5) : (tech ? 8 : 9); }
+    return hum ? (tech ? 2 : 3) : (tech ? 6 : 7);
+  }
+
+  function el(tag, cls, txt){ var e = document.createElement(tag); if (cls) e.className = cls; if (txt !== undefined) e.textContent = txt; return e; }
+
+  function render(){
+    var it = ITEMS[idx], a = ans[idx];
+    document.getElementById('progress-text').textContent = 'Habitude de vie ' + (idx+1) + ' / ' + ITEMS.length + ' · n° ' + it.id;
+    document.getElementById('cat-text').textContent = CATS[it.c];
+    document.getElementById('q-text').textContent = it.t;
+    var nt = document.getElementById('q-note');
+    if (it.n){ nt.textContent = 'Note : ' + it.n; nt.hidden = false; } else { nt.hidden = true; }
+
+    var lr = document.getElementById('lvl-row'); lr.innerHTML = '';
+    LVL.forEach(function(p){
+      var b = el('button', 'opt' + (a.lvl === p[0] ? ' selected' : ''));
+      b.type = 'button'; b.appendChild(el('span','box')); b.appendChild(el('span','',p[1]));
+      b.addEventListener('click', function(){ a.lvl = p[0]; if (!needAid(a)) { a.aid = {sa:false,tech:false,amen:false,hum:false}; } render(); });
+      lr.appendChild(b);
+    });
+
+    var ab = document.getElementById('aid-blk');
+    ab.hidden = !needAid(a);
+    var ar = document.getElementById('aid-row'); ar.innerHTML = '';
+    AID.forEach(function(p){
+      var b = el('button', 'opt chk' + (a.aid[p[0]] ? ' selected' : ''));
+      b.type = 'button'; b.appendChild(el('span','box')); b.appendChild(el('span','',p[1]));
+      b.addEventListener('click', function(){
+        if (p[0] === 'sa'){ var on = !a.aid.sa; a.aid = {sa:on,tech:false,amen:false,hum:false}; }
+        else { a.aid.sa = false; a.aid[p[0]] = !a.aid[p[0]]; }
+        render();
+      });
+      ar.appendChild(b);
+    });
+
+    var sr = document.getElementById('sat-row'); sr.innerHTML = '';
+    SAT.forEach(function(p){
+      var b = el('button', 'opt' + (a.sat === p[1] ? ' selected' : ''));
+      b.type = 'button'; b.appendChild(el('span','box')); b.appendChild(el('span','',p[0]));
+      b.addEventListener('click', function(){ a.sat = (a.sat === p[1]) ? null : p[1]; render(); });
+      sr.appendChild(b);
+    });
+
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(a);
+    document.getElementById('btn-next').textContent = idx === ITEMS.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    render(); window.scrollTo(0,0);
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){ if (idx > 0){ idx--; render(); window.scrollTo(0,0); } });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(ans[idx])) return;
+    if (idx < ITEMS.length - 1){ idx++; render(); window.scrollTo(0,0); } else { showResult(); }
+  });
+
+  function fr(x, d){ return x.toFixed(d).replace('.', ','); }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    window.scrollTo(0,0);
+    var cat = CATS.map(function(){ return {n:0, sum:0}; });
+    var tot = {n:0, sum:0}, hi = 0, na = 0, low = [], unsat = [];
+    ITEMS.forEach(function(it, i){
+      var s = itemScore(ans[i]);
+      if (s === null){ na++; return; }
+      cat[it.c].n++; cat[it.c].sum += s; tot.n++; tot.sum += s;
+      if (s >= 8) hi++;
+      if (s <= 3) low.push(it.id + ' — ' + it.t.replace(/\s*\(.*$/, '') + ' (score ' + s + ')');
+      if (ans[i].sat !== null && ans[i].sat <= 2) unsat.push(it.id + ' — ' + it.t.replace(/\s*\(.*$/, ''));
+    });
+    var sv = document.getElementById('score-val'), ss = document.getElementById('score-sub'), lt = document.getElementById('level-text');
+    if (tot.n === 0){
+      sv.textContent = '—'; ss.textContent = 'score non calculable : aucune habitude de vie applicable';
+    } else {
+      sv.textContent = fr(tot.sum * 10 / (tot.n * 9), 1) + ' / 10';
+      ss.textContent = 'niveau de réalisation global normalisé (score brut ' + tot.sum + ' sur ' + (tot.n * 9) + ', ' + tot.n + ' habitude(s) de vie applicable(s) sur 77)';
+    }
+    lt.textContent = "Plus le score est élevé, mieux les habitudes de vie sont réalisées (10 = toutes réalisées sans difficulté ni aide ; 0 = aucune réalisée). Chaque habitude de vie est cotée de 0 à 9 selon le niveau de réalisation et le type d'aide ; les habitudes « ne s'applique pas » sont exclues du calcul. L'instrument officiel ne propose aucun seuil clinique de classement : le score se lit par catégorie, par item et en comparaison d'une passation à l'autre.";
+
+    var t = document.getElementById('res-table'); t.innerHTML = '';
+    var thead = el('tr'); ['Catégorie','Applicables','Brut','Normalisé /10',''].forEach(function(h, k){ var th = el('th', k>0&&k<4 ? 'num':'' , h); thead.appendChild(th); }); t.appendChild(thead);
+    CATS.forEach(function(cn, c){
+      var r = el('tr'); var o = cat[c];
+      r.appendChild(el('td','',cn));
+      r.appendChild(el('td','num', o.n + ' / ' + CATS_N[c]));
+      r.appendChild(el('td','num', o.n ? o.sum + ' / ' + (o.n*9) : '—'));
+      var nv = o.n ? o.sum * 10 / (o.n * 9) : null;
+      r.appendChild(el('td','num', nv === null ? '—' : fr(nv, 1)));
+      var td = el('td'); var bar = el('div','bar'); var i = el('i'); i.style.width = (nv === null ? 0 : nv * 10) + '%'; bar.appendChild(i); td.appendChild(bar); r.appendChild(td);
+      t.appendChild(r);
+    });
+
+    var L = document.getElementById('res-lists'); L.innerHTML = '';
+    var p = el('p','result-text', hi + ' habitude(s) de vie réalisée(s) sans difficulté (score 8 ou 9), ' + low.length + ' avec perturbation importante (score ≤ 3), ' + na + ' ne s’appliquant pas.');
+    L.appendChild(p);
+    if (low.length){ L.appendChild(el('h3','serif','Habitudes de vie cotées 3 ou moins')); var ul = el('ul','list'); low.forEach(function(x){ ul.appendChild(el('li','',x)); }); L.appendChild(ul); }
+    if (unsat.length){ L.appendChild(el('h3','serif','Habitudes de vie jugées insatisfaisantes ou très insatisfaisantes')); var u2 = el('ul','list'); unsat.forEach(function(x){ u2.appendChild(el('li','',x)); }); L.appendChild(u2);
+      L.appendChild(el('p','result-text','La satisfaction est un indicateur : elle n’est pas intégrée au score de réalisation (précision de l’instrument officiel).')); }
+  }
+  var CATS_N = CATS.map(function(cn, c){ return ITEMS.filter(function(x){ return x.c === c; }).length; });
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    fresh();
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+    window.scrollTo(0,0);
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__mhavie = {itemScore:itemScore, ans:function(){return ans;}};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MHAVIE — Mesure des habitudes de vie (instrument général abrégé)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#94620F 0%,#E2B968 55%,#5C3C08 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#5C3C08;background:#F6EBD3;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#63695D;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#94620F;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#5C3C08;border-color:#E0D9C9;}
+  table.sc{width:100%;border-collapse:collapse;font-size:13.5px;margin:6px 0 12px;background:#fff;border:1px solid #E0D9C9;border-radius:10px;overflow:hidden;}
+  table.sc th{text-align:left;font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;color:#63695D;padding:8px 10px;border-bottom:1px solid #E0D9C9;background:#F7F2E6;}
+  table.sc td{padding:7px 10px;border-bottom:1px solid #EFE9DA;}
+  table.sc td.n{text-align:center;font-weight:700;white-space:nowrap;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">MHAVIE</span></div>
+
+  <h1 class="serif">Mesure des habitudes de vie — instrument général abrégé</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">MHAVIE 3.1 (Life-H) — Fougeyrollas, Noreau et coll., RIPPH (Québec), édition 2003</p>
+  <div class="meta-row">
+    <span class="pill">77 habitudes de vie</span>
+    <span class="pill">20 à 30 minutes</span>
+    <span class="pill">Score 0-9 par item, normalisé /10</span>
+    <span class="pill">14 ans et plus</span>
+    <span class="pill">Français</span>
+    <span class="pill">Licence requise : oui</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="mhavie.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>La MHAVIE (Mesure des habitudes de vie, Life-H en anglais) mesure la qualité de la participation sociale d'une personne ayant des incapacités, dans le cadre du modèle du Processus de production du handicap (PPH) : la réalisation des habitudes de vie résulte de l'interaction entre les facteurs personnels (déficiences, incapacités) et l'environnement (facilitateurs, obstacles). L'instrument abrégé compte 77 habitudes de vie réparties en 12 catégories : 6 d'activités courantes (nutrition, condition corporelle, soins personnels, communication, habitation, déplacements) et 6 de rôles sociaux (responsabilités, relations interpersonnelles, vie communautaire, éducation, travail, loisirs). Il se remplit en auto-administration ou en entrevue, par la personne, un proche ou un intervenant. Pertinent pour les bilans d'incapacité et de participation (MDPH, réadaptation).</p>
+    <p class="source-note">Pour chaque habitude de vie : (A) niveau de réalisation, (B) type d'aide requis, puis niveau de satisfaction (facultatif, non intégré au score). Les rubriques d'identification du formulaire papier ne sont pas reprises dans la page.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque habitude de vie est cotée de 0 à 9 en combinant le niveau de réalisation et le type d'aide (l'aménagement est assimilé à l'aide technique pour la cotation) :</p>
+    <table class="sc">
+      <tr><th>Cote</th><th>Réalisation</th><th>Type d'aide</th></tr>
+      <tr><td class="n">9</td><td>Sans difficulté</td><td>Sans aide</td></tr>
+      <tr><td class="n">8</td><td>Sans difficulté</td><td>Aide technique (ou aménagement)</td></tr>
+      <tr><td class="n">7</td><td>Avec difficulté</td><td>Sans aide</td></tr>
+      <tr><td class="n">6</td><td>Avec difficulté</td><td>Aide technique (ou aménagement)</td></tr>
+      <tr><td class="n">5</td><td>Sans difficulté</td><td>Aide humaine</td></tr>
+      <tr><td class="n">4</td><td>Sans difficulté</td><td>Aide technique (ou aménagement) et aide humaine</td></tr>
+      <tr><td class="n">3</td><td>Avec difficulté</td><td>Aide humaine</td></tr>
+      <tr><td class="n">2</td><td>Avec difficulté</td><td>Aide technique (ou aménagement) et aide humaine</td></tr>
+      <tr><td class="n">1</td><td colspan="2">Réalisée par substitution</td></tr>
+      <tr><td class="n">0</td><td colspan="2">Non réalisée</td></tr>
+      <tr><td class="n">N/A</td><td colspan="2">Ne s'applique pas (exclue du calcul)</td></tr>
+    </table>
+    <p>Le score normalisé d'une catégorie (ou du total) est : somme des cotes des habitudes de vie applicables × 10 ÷ (nombre d'habitudes applicables × 9), soit un résultat de 0 à 10 (10 = toutes réalisées sans difficulté ni aide). Vérifié sur l'exemple chiffré de la fiche « Sommaire des résultats » de l'instrument (total : 443 pour 75 habitudes applicables, soit 6,6/10). La page affiche le score global, le score par catégorie, le nombre d'habitudes cotées 8-9 et celles cotées 3 ou moins, ainsi que les habitudes jugées insatisfaisantes. L'instrument officiel ne propose aucun seuil clinique de classement et précise que la satisfaction n'est pas intégrée au résultat de réalisation.</p>
+    <p class="source-note">Le formulaire papier ne signale aucune restriction de réponse par item (toutes les modalités y sont proposées) ; il en va de même dans la page. Si une aide est cochée pour une habitude réalisée par substitution ou non réalisée, elle ne modifie pas la cote (1 ou 0) : la page ne la demande donc pas.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p class="source-note"><strong>Licence requise : oui.</strong> © RIPPH (Réseau international sur le Processus de production du handicap, Québec), tous droits réservés. Le RIPPH vend le guide d'utilisation de la version actuelle (MHAVIE 4.0) et propose une formation payante ; les formulaires de la version 3.x sont toutefois consultables en PDF sur son site, avec la mention « spécimen » sur les grilles de réponse. Construit malgré tout sur décision du cabinet (30/09/2026) ; ne pas diffuser publiquement sans autorisation du RIPPH. Items : « La mesure des habitudes de vie (MHAVIE 3.1), instrument général abrégé », édition juin 2003, PDF du site du RIPPH (ripph.qc.ca) ; textes des 77 habitudes de vie transcrits à l'identique. Cotation : grille 0-9 et formule de normalisation du « Guide d'application » du RIPPH (tableaux 5 et 6) et fiche « Sommaire des résultats » de l'instrument (exemple chiffré vérifié). Versions plus récentes (4.0) non reproduites. Fougeyrollas P., Noreau L., Bergeron H., Cloutier R., Dion S.-A. &amp; St-Michel G. (1998), Social consequences of long-term impairments and disabilities: conceptual approach and assessment of handicap, <em>International Journal of Rehabilitation Research</em>, 21, 127-141.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>
