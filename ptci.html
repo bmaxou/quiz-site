@@ -1,0 +1,1527 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PTCI — Inventaire des cognitions post-traumatiques</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#5B4B8A;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .sec{font-size:12.5px;color:#63695D;background:#F4F1EA;border-radius:8px;padding:8px 12px;margin:0 0 16px;}
+  .q-text{font-size:16px;margin:0 0 6px;}
+  .q-desc{font-size:13px;color:#63695D;margin:0 0 18px;white-space:pre-line;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#5B4B8A;background:#E7E1F2;}
+  .num-row{display:flex;flex-wrap:wrap;gap:6px;}
+  .num{min-width:44px;text-align:center;padding:10px 0;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600;background:#fff;}
+  .num.selected{border-color:#5B4B8A;background:#E7E1F2;}
+  .num-ends{display:flex;justify-content:space-between;gap:12px;font-size:12px;color:#63695D;margin-top:8px;}
+  .vas-box{padding:8px 0;}
+  .vas-val{font-family:'Cormorant Garamond',Georgia,serif;font-size:40px;color:#5B4B8A;margin:0 0 6px;}
+  .vas-box input[type=range]{width:100%;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#5B4B8A;border-color:#E0D9C9;}
+  .btn-primary{background:#5B4B8A;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:40px;color:#5B4B8A;margin:0 0 4px;}
+  .result-max{font-size:13px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 14px;}
+  .result-list{font-size:14px;margin:0 0 16px;padding-left:20px;}
+  .result-list li{margin-bottom:4px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">PTCI — Inventaire des cognitions post-traumatiques</h1>
+    <p class="lead">Trente-six affirmations sur les pensées qui peuvent survenir après un événement traumatique (image de soi, vision du monde, auto-accusation), chacune notée de 1 (tout à fait en désaccord) à 7 (tout à fait d'accord).</p>
+    <p class="lang-note">Questionnaire transcrit en anglais (version originale de Foa et al., 1999) : une version française validée existe (2022) mais son texte n'a pas pu être récupéré lors du sourçage.</p>
+    <div class="pill-row">
+      <span class="pill">36 questions</span>
+      <span class="pill">8 minutes</span>
+      <span class="pill">Échelle 1-7</span>
+      <span class="pill">Anglais</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="sec" id="sec-text" hidden></p>
+    <p class="q-text" id="q-text"></p>
+    <p class="q-desc" id="q-desc"></p>
+    <div id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Foa, E. B., Ehlers, A., Clark, D. M., Tolin, D. F., &amp; Orsillo, S. M. (1999). The Posttraumatic Cognitions Inventory (PTCI): Development and validation. Psychological Assessment, 11(3), 303-314. Ce résultat est un repère, il ne constitue pas un diagnostic.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [
+ {
+  "t": "The event happened because of the way I acted.",
+  "d": "Indicate how much you AGREE or DISAGREE with this statement, thinking about the kind of thoughts you may have had after a traumatic experience. There are no right or wrong answers.",
+  "opts": [
+   [
+    1,
+    "1 — Totally disagree"
+   ],
+   [
+    2,
+    "2 — Disagree very much"
+   ],
+   [
+    3,
+    "3 — Disagree slightly"
+   ],
+   [
+    4,
+    "4 — Neutral"
+   ],
+   [
+    5,
+    "5 — Agree slightly"
+   ],
+   [
+    6,
+    "6 — Agree very much"
+   ],
+   [
+    7,
+    "7 — Totally agree"
+   ]
+  ]
+ },
+ {
+  "t": "I can't trust that I will do the right thing.",
+  "d": "Indicate how much you AGREE or DISAGREE with this statement, thinking about the kind of thoughts you may have had after a traumatic experience. There are no right or wrong answers.",
+  "opts": [
+   [
+    1,
+    "1 — Totally disagree"
+   ],
+   [
+    2,
+    "2 — Disagree very much"
+   ],
+   [
+    3,
+    "3 — Disagree slightly"
+   ],
+   [
+    4,
+    "4 — Neutral"
+   ],
+   [
+    5,
+    "5 — Agree slightly"
+   ],
+   [
+    6,
+    "6 — Agree very much"
+   ],
+   [
+    7,
+    "7 — Totally agree"
+   ]
+  ]
+ },
+ {
+  "t": "I am a weak person.",
+  "d": "Indicate how much you AGREE or DISAGREE with this statement, thinking about the kind of thoughts you may have had after a traumatic experience. There are no right or wrong answers.",
+  "opts": [
+   [
+    1,
+    "1 — Totally disagree"
+   ],
+   [
+    2,
+    "2 — Disagree very much"
+   ],
+   [
+    3,
+    "3 — Disagree slightly"
+   ],
+   [
+    4,
+    "4 — Neutral"
+   ],
+   [
+    5,
+    "5 — Agree slightly"
+   ],
+   [
+    6,
+    "6 — Agree very much"
+   ],
+   [
+    7,
+    "7 — Totally agree"
+   ]
+  ]
+ },
+ {
+  "t": "I will not be able to control my anger and will do something terrible.",
+  "d": "Indicate how much you AGREE or DISAGREE with this statement, thinking about the kind of thoughts you may have had after a traumatic experience. There are no right or wrong answers.",
+  "opts": [
+   [
+    1,
+    "1 — Totally disagree"
+   ],
+   [
+    2,
+    "2 — Disagree very much"
+   ],
+   [
+    3,
+    "3 — Disagree slightly"
+   ],
+   [
+    4,
+    "4 — Neutral"
+   ],
+   [
+    5,
+    "5 — Agree slightly"
+   ],
+   [
+    6,
+    "6 — Agree very much"
+   ],
+   [
+    7,
+    "7 — Totally agree"
+   ]
+  ]
+ },
+ {
+  "t": "I can't deal with even the slightest upset.",
+  "d": "Indicate how much you AGREE or DISAGREE with this statement, thinking about the kind of thoughts you may have had after a traumatic experience. There are no right or wrong answers.",
+  "opts": [
+   [
+    1,
+    "1 — Totally disagree"
+   ],
+   [
+    2,
+    "2 — Disagree very much"
+   ],
+   [
+    3,
+    "3 — Disagree slightly"
+   ],
+   [
+    4,
+    "4 — Neutral"
+   ],
+   [
+    5,
+    "5 — Agree slightly"
+   ],
+   [
+    6,
+    "6 — Agree very much"
+   ],
+   [
+    7,
+    "7 — Totally agree"
+   ]
+  ]
+ },
+ {
+  "t": "I used to be a happy person but now I am always miserable.",
+  "d": "Indicate how much you AGREE or DISAGREE with this statement, thinking about the kind of thoughts you may have had after a traumatic experience. There are no right or wrong answers.",
+  "opts": [
+   [
+    1,
+    "1 — Totally disagree"
+   ],
+   [
+    2,
+    "2 — Disagree very much"
+   ],
+   [
+    3,
+    "3 — Disagree slightly"
+   ],
+   [
+    4,
+    "4 — Neutral"
+   ],
+   [
+    5,
+    "5 — Agree slightly"
+   ],
+   [
+    6,
+    "6 — Agree very much"
+   ],
+   [
+    7,
+    "7 — Totally agree"
+   ]
+  ]
+ },
+ {
+  "t": "People can't be trusted.",
+  "d": "Indicate how much you AGREE or DISAGREE with this statement, thinking about the kind of thoughts you may have had after a traumatic experience. There are no right or wrong answers.",
+  "opts": [
+   [
+    1,
+    "1 — Totally disagree"
+   ],
+   [
+    2,
+    "2 — Disagree very much"
+   ],
+   [
+    3,
+    "3 — Disagree slightly"
+   ],
+   [
+    4,
+    "4 — Neutral"
+   ],
+   [
+    5,
+    "5 — Agree slightly"
+   ],
+   [
+    6,
+    "6 — Agree very much"
+   ],
+   [
+    7,
+    "7 — Totally agree"
+   ]
+  ]
+ },
+ {
+  "t": "I have to be on guard all the time.",
+  "d": "Indicate how much you AGREE or DISAGREE with this statement, thinking about the kind of thoughts you may have had after a traumatic experience. There are no right or wrong answers.",
+  "opts": [
+   [
+    1,
+    "1 — Totally disagree"
+   ],
+   [
+    2,
+    "2 — Disagree very much"
+   ],
+   [
+    3,
+    "3 — Disagree slightly"
+   ],
+   [
+    4,
+    "4 — Neutral"
+   ],
+   [
+    5,
+    "5 — Agree slightly"
+   ],
+   [
+    6,
+    "6 — Agree very much"
+   ],
+   [
+    7,
+    "7 — Totally agree"
+   ]
+  ]
+ },
+ {
+  "t": "I feel dead inside.",
+  "d": "Indicate how much you AGREE or DISAGREE with this statement, thinking about the kind of thoughts you may have had after a traumatic experience. There are no right or wrong answers.",
+  "opts": [
+   [
+    1,
+    "1 — Totally disagree"
+   ],
+   [
+    2,
+    "2 — Disagree very much"
+   ],
+   [
+    3,
+    "3 — Disagree slightly"
+   ],
+   [
+    4,
+    "4 — Neutral"
+   ],
+   [
+    5,
+    "5 — Agree slightly"
+   ],
+   [
+    6,
+    "6 — Agree very much"
+   ],
+   [
+    7,
+    "7 — Totally agree"
+   ]
+  ]
+ },
+ {
+  "t": "You can never know who will harm you.",
+  "d": "Indicate how much you AGREE or DISAGREE with this statement, thinking about the kind of thoughts you may have had after a traumatic experience. There are no right or wrong answers.",
+  "opts": [
+   [
+    1,
+    "1 — Totally disagree"
+   ],
+   [
+    2,
+    "2 — Disagree very much"
+   ],
+   [
+    3,
+    "3 — Disagree slightly"
+   ],
+   [
+    4,
+    "4 — Neutral"
+   ],
+   [
+    5,
+    "5 — Agree slightly"
+   ],
+   [
+    6,
+    "6 — Agree very much"
+   ],
+   [
+    7,
+    "7 — Totally agree"
+   ]
+  ]
+ },
+ {
+  "t": "I have to be especially careful because you never know what can happen next.",
+  "d": "Indicate how much you AGREE or DISAGREE with this statement, thinking about the kind of thoughts you may have had after a traumatic experience. There are no right or wrong answers.",
+  "opts": [
+   [
+    1,
+    "1 — Totally disagree"
+   ],
+   [
+    2,
+    "2 — Disagree very much"
+   ],
+   [
+    3,
+    "3 — Disagree slightly"
+   ],
+   [
+    4,
+    "4 — Neutral"
+   ],
+   [
+    5,
+    "5 — Agree slightly"
+   ],
+   [
+    6,
+    "6 — Agree very much"
+   ],
+   [
+    7,
+    "7 — Totally agree"
+   ]
+  ]
+ },
+ {
+  "t": "I am inadequate.",
+  "d": "Indicate how much you AGREE or DISAGREE with this statement, thinking about the kind of thoughts you may have had after a traumatic experience. There are no right or wrong answers.",
+  "opts": [
+   [
+    1,
+    "1 — Totally disagree"
+   ],
+   [
+    2,
+    "2 — Disagree very much"
+   ],
+   [
+    3,
+    "3 — Disagree slightly"
+   ],
+   [
+    4,
+    "4 — Neutral"
+   ],
+   [
+    5,
+    "5 — Agree slightly"
+   ],
+   [
+    6,
+    "6 — Agree very much"
+   ],
+   [
+    7,
+    "7 — Totally agree"
+   ]
+  ]
+ },
+ {
+  "t": "I will not be able to control my emotions, and something terrible will happen.",
+  "d": "Indicate how much you AGREE or DISAGREE with this statement, thinking about the kind of thoughts you may have had after a traumatic experience. There are no right or wrong answers.",
+  "opts": [
+   [
+    1,
+    "1 — Totally disagree"
+   ],
+   [
+    2,
+    "2 — Disagree very much"
+   ],
+   [
+    3,
+    "3 — Disagree slightly"
+   ],
+   [
+    4,
+    "4 — Neutral"
+   ],
+   [
+    5,
+    "5 — Agree slightly"
+   ],
+   [
+    6,
+    "6 — Agree very much"
+   ],
+   [
+    7,
+    "7 — Totally agree"
+   ]
+  ]
+ },
+ {
+  "t": "If I think about the event, I will not be able to handle it.",
+  "d": "Indicate how much you AGREE or DISAGREE with this statement, thinking about the kind of thoughts you may have had after a traumatic experience. There are no right or wrong answers.",
+  "opts": [
+   [
+    1,
+    "1 — Totally disagree"
+   ],
+   [
+    2,
+    "2 — Disagree very much"
+   ],
+   [
+    3,
+    "3 — Disagree slightly"
+   ],
+   [
+    4,
+    "4 — Neutral"
+   ],
+   [
+    5,
+    "5 — Agree slightly"
+   ],
+   [
+    6,
+    "6 — Agree very much"
+   ],
+   [
+    7,
+    "7 — Totally agree"
+   ]
+  ]
+ },
+ {
+  "t": "The event happened to me because of the sort of person I am.",
+  "d": "Indicate how much you AGREE or DISAGREE with this statement, thinking about the kind of thoughts you may have had after a traumatic experience. There are no right or wrong answers.",
+  "opts": [
+   [
+    1,
+    "1 — Totally disagree"
+   ],
+   [
+    2,
+    "2 — Disagree very much"
+   ],
+   [
+    3,
+    "3 — Disagree slightly"
+   ],
+   [
+    4,
+    "4 — Neutral"
+   ],
+   [
+    5,
+    "5 — Agree slightly"
+   ],
+   [
+    6,
+    "6 — Agree very much"
+   ],
+   [
+    7,
+    "7 — Totally agree"
+   ]
+  ]
+ },
+ {
+  "t": "My reactions since the event mean that I am going crazy.",
+  "d": "Indicate how much you AGREE or DISAGREE with this statement, thinking about the kind of thoughts you may have had after a traumatic experience. There are no right or wrong answers.",
+  "opts": [
+   [
+    1,
+    "1 — Totally disagree"
+   ],
+   [
+    2,
+    "2 — Disagree very much"
+   ],
+   [
+    3,
+    "3 — Disagree slightly"
+   ],
+   [
+    4,
+    "4 — Neutral"
+   ],
+   [
+    5,
+    "5 — Agree slightly"
+   ],
+   [
+    6,
+    "6 — Agree very much"
+   ],
+   [
+    7,
+    "7 — Totally agree"
+   ]
+  ]
+ },
+ {
+  "t": "I will never be able to feel normal emotions again.",
+  "d": "Indicate how much you AGREE or DISAGREE with this statement, thinking about the kind of thoughts you may have had after a traumatic experience. There are no right or wrong answers.",
+  "opts": [
+   [
+    1,
+    "1 — Totally disagree"
+   ],
+   [
+    2,
+    "2 — Disagree very much"
+   ],
+   [
+    3,
+    "3 — Disagree slightly"
+   ],
+   [
+    4,
+    "4 — Neutral"
+   ],
+   [
+    5,
+    "5 — Agree slightly"
+   ],
+   [
+    6,
+    "6 — Agree very much"
+   ],
+   [
+    7,
+    "7 — Totally agree"
+   ]
+  ]
+ },
+ {
+  "t": "The world is a dangerous place.",
+  "d": "Indicate how much you AGREE or DISAGREE with this statement, thinking about the kind of thoughts you may have had after a traumatic experience. There are no right or wrong answers.",
+  "opts": [
+   [
+    1,
+    "1 — Totally disagree"
+   ],
+   [
+    2,
+    "2 — Disagree very much"
+   ],
+   [
+    3,
+    "3 — Disagree slightly"
+   ],
+   [
+    4,
+    "4 — Neutral"
+   ],
+   [
+    5,
+    "5 — Agree slightly"
+   ],
+   [
+    6,
+    "6 — Agree very much"
+   ],
+   [
+    7,
+    "7 — Totally agree"
+   ]
+  ]
+ },
+ {
+  "t": "Somebody else would have stopped the event from happening.",
+  "d": "Indicate how much you AGREE or DISAGREE with this statement, thinking about the kind of thoughts you may have had after a traumatic experience. There are no right or wrong answers.",
+  "opts": [
+   [
+    1,
+    "1 — Totally disagree"
+   ],
+   [
+    2,
+    "2 — Disagree very much"
+   ],
+   [
+    3,
+    "3 — Disagree slightly"
+   ],
+   [
+    4,
+    "4 — Neutral"
+   ],
+   [
+    5,
+    "5 — Agree slightly"
+   ],
+   [
+    6,
+    "6 — Agree very much"
+   ],
+   [
+    7,
+    "7 — Totally agree"
+   ]
+  ]
+ },
+ {
+  "t": "I have permanently changed for the worse.",
+  "d": "Indicate how much you AGREE or DISAGREE with this statement, thinking about the kind of thoughts you may have had after a traumatic experience. There are no right or wrong answers.",
+  "opts": [
+   [
+    1,
+    "1 — Totally disagree"
+   ],
+   [
+    2,
+    "2 — Disagree very much"
+   ],
+   [
+    3,
+    "3 — Disagree slightly"
+   ],
+   [
+    4,
+    "4 — Neutral"
+   ],
+   [
+    5,
+    "5 — Agree slightly"
+   ],
+   [
+    6,
+    "6 — Agree very much"
+   ],
+   [
+    7,
+    "7 — Totally agree"
+   ]
+  ]
+ },
+ {
+  "t": "I feel like an object, not like a person.",
+  "d": "Indicate how much you AGREE or DISAGREE with this statement, thinking about the kind of thoughts you may have had after a traumatic experience. There are no right or wrong answers.",
+  "opts": [
+   [
+    1,
+    "1 — Totally disagree"
+   ],
+   [
+    2,
+    "2 — Disagree very much"
+   ],
+   [
+    3,
+    "3 — Disagree slightly"
+   ],
+   [
+    4,
+    "4 — Neutral"
+   ],
+   [
+    5,
+    "5 — Agree slightly"
+   ],
+   [
+    6,
+    "6 — Agree very much"
+   ],
+   [
+    7,
+    "7 — Totally agree"
+   ]
+  ]
+ },
+ {
+  "t": "Somebody else would not have gotten into this situation.",
+  "d": "Indicate how much you AGREE or DISAGREE with this statement, thinking about the kind of thoughts you may have had after a traumatic experience. There are no right or wrong answers.",
+  "opts": [
+   [
+    1,
+    "1 — Totally disagree"
+   ],
+   [
+    2,
+    "2 — Disagree very much"
+   ],
+   [
+    3,
+    "3 — Disagree slightly"
+   ],
+   [
+    4,
+    "4 — Neutral"
+   ],
+   [
+    5,
+    "5 — Agree slightly"
+   ],
+   [
+    6,
+    "6 — Agree very much"
+   ],
+   [
+    7,
+    "7 — Totally agree"
+   ]
+  ]
+ },
+ {
+  "t": "I can't rely on other people.",
+  "d": "Indicate how much you AGREE or DISAGREE with this statement, thinking about the kind of thoughts you may have had after a traumatic experience. There are no right or wrong answers.",
+  "opts": [
+   [
+    1,
+    "1 — Totally disagree"
+   ],
+   [
+    2,
+    "2 — Disagree very much"
+   ],
+   [
+    3,
+    "3 — Disagree slightly"
+   ],
+   [
+    4,
+    "4 — Neutral"
+   ],
+   [
+    5,
+    "5 — Agree slightly"
+   ],
+   [
+    6,
+    "6 — Agree very much"
+   ],
+   [
+    7,
+    "7 — Totally agree"
+   ]
+  ]
+ },
+ {
+  "t": "I feel isolated and set apart from others.",
+  "d": "Indicate how much you AGREE or DISAGREE with this statement, thinking about the kind of thoughts you may have had after a traumatic experience. There are no right or wrong answers.",
+  "opts": [
+   [
+    1,
+    "1 — Totally disagree"
+   ],
+   [
+    2,
+    "2 — Disagree very much"
+   ],
+   [
+    3,
+    "3 — Disagree slightly"
+   ],
+   [
+    4,
+    "4 — Neutral"
+   ],
+   [
+    5,
+    "5 — Agree slightly"
+   ],
+   [
+    6,
+    "6 — Agree very much"
+   ],
+   [
+    7,
+    "7 — Totally agree"
+   ]
+  ]
+ },
+ {
+  "t": "I have no future.",
+  "d": "Indicate how much you AGREE or DISAGREE with this statement, thinking about the kind of thoughts you may have had after a traumatic experience. There are no right or wrong answers.",
+  "opts": [
+   [
+    1,
+    "1 — Totally disagree"
+   ],
+   [
+    2,
+    "2 — Disagree very much"
+   ],
+   [
+    3,
+    "3 — Disagree slightly"
+   ],
+   [
+    4,
+    "4 — Neutral"
+   ],
+   [
+    5,
+    "5 — Agree slightly"
+   ],
+   [
+    6,
+    "6 — Agree very much"
+   ],
+   [
+    7,
+    "7 — Totally agree"
+   ]
+  ]
+ },
+ {
+  "t": "I can't stop bad things from happening to me.",
+  "d": "Indicate how much you AGREE or DISAGREE with this statement, thinking about the kind of thoughts you may have had after a traumatic experience. There are no right or wrong answers.",
+  "opts": [
+   [
+    1,
+    "1 — Totally disagree"
+   ],
+   [
+    2,
+    "2 — Disagree very much"
+   ],
+   [
+    3,
+    "3 — Disagree slightly"
+   ],
+   [
+    4,
+    "4 — Neutral"
+   ],
+   [
+    5,
+    "5 — Agree slightly"
+   ],
+   [
+    6,
+    "6 — Agree very much"
+   ],
+   [
+    7,
+    "7 — Totally agree"
+   ]
+  ]
+ },
+ {
+  "t": "People are not what they seem.",
+  "d": "Indicate how much you AGREE or DISAGREE with this statement, thinking about the kind of thoughts you may have had after a traumatic experience. There are no right or wrong answers.",
+  "opts": [
+   [
+    1,
+    "1 — Totally disagree"
+   ],
+   [
+    2,
+    "2 — Disagree very much"
+   ],
+   [
+    3,
+    "3 — Disagree slightly"
+   ],
+   [
+    4,
+    "4 — Neutral"
+   ],
+   [
+    5,
+    "5 — Agree slightly"
+   ],
+   [
+    6,
+    "6 — Agree very much"
+   ],
+   [
+    7,
+    "7 — Totally agree"
+   ]
+  ]
+ },
+ {
+  "t": "My life has been destroyed by the trauma.",
+  "d": "Indicate how much you AGREE or DISAGREE with this statement, thinking about the kind of thoughts you may have had after a traumatic experience. There are no right or wrong answers.",
+  "opts": [
+   [
+    1,
+    "1 — Totally disagree"
+   ],
+   [
+    2,
+    "2 — Disagree very much"
+   ],
+   [
+    3,
+    "3 — Disagree slightly"
+   ],
+   [
+    4,
+    "4 — Neutral"
+   ],
+   [
+    5,
+    "5 — Agree slightly"
+   ],
+   [
+    6,
+    "6 — Agree very much"
+   ],
+   [
+    7,
+    "7 — Totally agree"
+   ]
+  ]
+ },
+ {
+  "t": "There is something wrong with me as a person.",
+  "d": "Indicate how much you AGREE or DISAGREE with this statement, thinking about the kind of thoughts you may have had after a traumatic experience. There are no right or wrong answers.",
+  "opts": [
+   [
+    1,
+    "1 — Totally disagree"
+   ],
+   [
+    2,
+    "2 — Disagree very much"
+   ],
+   [
+    3,
+    "3 — Disagree slightly"
+   ],
+   [
+    4,
+    "4 — Neutral"
+   ],
+   [
+    5,
+    "5 — Agree slightly"
+   ],
+   [
+    6,
+    "6 — Agree very much"
+   ],
+   [
+    7,
+    "7 — Totally agree"
+   ]
+  ]
+ },
+ {
+  "t": "My reactions since the event show that I am a lousy coper.",
+  "d": "Indicate how much you AGREE or DISAGREE with this statement, thinking about the kind of thoughts you may have had after a traumatic experience. There are no right or wrong answers.",
+  "opts": [
+   [
+    1,
+    "1 — Totally disagree"
+   ],
+   [
+    2,
+    "2 — Disagree very much"
+   ],
+   [
+    3,
+    "3 — Disagree slightly"
+   ],
+   [
+    4,
+    "4 — Neutral"
+   ],
+   [
+    5,
+    "5 — Agree slightly"
+   ],
+   [
+    6,
+    "6 — Agree very much"
+   ],
+   [
+    7,
+    "7 — Totally agree"
+   ]
+  ]
+ },
+ {
+  "t": "There is something about me that made the event happen.",
+  "d": "Indicate how much you AGREE or DISAGREE with this statement, thinking about the kind of thoughts you may have had after a traumatic experience. There are no right or wrong answers.",
+  "opts": [
+   [
+    1,
+    "1 — Totally disagree"
+   ],
+   [
+    2,
+    "2 — Disagree very much"
+   ],
+   [
+    3,
+    "3 — Disagree slightly"
+   ],
+   [
+    4,
+    "4 — Neutral"
+   ],
+   [
+    5,
+    "5 — Agree slightly"
+   ],
+   [
+    6,
+    "6 — Agree very much"
+   ],
+   [
+    7,
+    "7 — Totally agree"
+   ]
+  ]
+ },
+ {
+  "t": "I will not be able to tolerate my thoughts about the event, and I will fall apart.",
+  "d": "Indicate how much you AGREE or DISAGREE with this statement, thinking about the kind of thoughts you may have had after a traumatic experience. There are no right or wrong answers.",
+  "opts": [
+   [
+    1,
+    "1 — Totally disagree"
+   ],
+   [
+    2,
+    "2 — Disagree very much"
+   ],
+   [
+    3,
+    "3 — Disagree slightly"
+   ],
+   [
+    4,
+    "4 — Neutral"
+   ],
+   [
+    5,
+    "5 — Agree slightly"
+   ],
+   [
+    6,
+    "6 — Agree very much"
+   ],
+   [
+    7,
+    "7 — Totally agree"
+   ]
+  ]
+ },
+ {
+  "t": "I feel like I don't know myself anymore.",
+  "d": "Indicate how much you AGREE or DISAGREE with this statement, thinking about the kind of thoughts you may have had after a traumatic experience. There are no right or wrong answers.",
+  "opts": [
+   [
+    1,
+    "1 — Totally disagree"
+   ],
+   [
+    2,
+    "2 — Disagree very much"
+   ],
+   [
+    3,
+    "3 — Disagree slightly"
+   ],
+   [
+    4,
+    "4 — Neutral"
+   ],
+   [
+    5,
+    "5 — Agree slightly"
+   ],
+   [
+    6,
+    "6 — Agree very much"
+   ],
+   [
+    7,
+    "7 — Totally agree"
+   ]
+  ]
+ },
+ {
+  "t": "You never know when something terrible will happen.",
+  "d": "Indicate how much you AGREE or DISAGREE with this statement, thinking about the kind of thoughts you may have had after a traumatic experience. There are no right or wrong answers.",
+  "opts": [
+   [
+    1,
+    "1 — Totally disagree"
+   ],
+   [
+    2,
+    "2 — Disagree very much"
+   ],
+   [
+    3,
+    "3 — Disagree slightly"
+   ],
+   [
+    4,
+    "4 — Neutral"
+   ],
+   [
+    5,
+    "5 — Agree slightly"
+   ],
+   [
+    6,
+    "6 — Agree very much"
+   ],
+   [
+    7,
+    "7 — Totally agree"
+   ]
+  ]
+ },
+ {
+  "t": "I can't rely on myself.",
+  "d": "Indicate how much you AGREE or DISAGREE with this statement, thinking about the kind of thoughts you may have had after a traumatic experience. There are no right or wrong answers.",
+  "opts": [
+   [
+    1,
+    "1 — Totally disagree"
+   ],
+   [
+    2,
+    "2 — Disagree very much"
+   ],
+   [
+    3,
+    "3 — Disagree slightly"
+   ],
+   [
+    4,
+    "4 — Neutral"
+   ],
+   [
+    5,
+    "5 — Agree slightly"
+   ],
+   [
+    6,
+    "6 — Agree very much"
+   ],
+   [
+    7,
+    "7 — Totally agree"
+   ]
+  ]
+ },
+ {
+  "t": "Nothing good can happen to me anymore.",
+  "d": "Indicate how much you AGREE or DISAGREE with this statement, thinking about the kind of thoughts you may have had after a traumatic experience. There are no right or wrong answers.",
+  "opts": [
+   [
+    1,
+    "1 — Totally disagree"
+   ],
+   [
+    2,
+    "2 — Disagree very much"
+   ],
+   [
+    3,
+    "3 — Disagree slightly"
+   ],
+   [
+    4,
+    "4 — Neutral"
+   ],
+   [
+    5,
+    "5 — Agree slightly"
+   ],
+   [
+    6,
+    "6 — Agree very much"
+   ],
+   [
+    7,
+    "7 — Totally agree"
+   ]
+  ]
+ }
+];
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+  var A = [2,3,4,5,6,9,12,14,16,17,20,21,24,25,26,28,29,30,33,35,36];
+  var B = [7,8,10,11,18,23,27];
+  var C = [1,15,19,22,31];
+  function sm(list, a){ var s = 0; list.forEach(function(n){ s += a[n-1]; }); return s; }
+  var RESULT = function(a){
+    var sa = sm(A, a), sb = sm(B, a), sc = sm(C, a), tot = sa + sb + sc;
+    return '<p class="result-score">' + tot + ' / 231</p>' +
+      '<p class="result-max">score total (somme des 33 items cotés, de 33 à 231 ; items 13, 32 et 34 expérimentaux, non comptés)</p>' +
+      '<ul class="result-list">' +
+      '<li>Cognitions négatives sur soi (21 items) : moyenne <strong>' + (sa/21).toFixed(2) + '</strong> (somme ' + sa + ')</li>' +
+      '<li>Cognitions négatives sur le monde (7 items) : moyenne <strong>' + (sb/7).toFixed(2) + '</strong> (somme ' + sb + ')</li>' +
+      '<li>Auto-accusation (5 items) : moyenne <strong>' + (sc/5).toFixed(2) + '</strong> (somme ' + sc + ')</li></ul>' +
+      '<p class="result-text">Plus le score est élevé, plus les cognitions post-traumatiques dysfonctionnelles sont marquées. Aucun seuil clinique officiel n\'est retenu ici : lecture dimensionnelle, dans le temps ou à titre indicatif. Ce résultat ne remplace pas une évaluation clinique du trauma.</p>';
+  };
+
+  function vis(i){
+    var c = items[i].cond;
+    return !c || answers[c[0]] === c[1];
+  }
+  function step(i, dir){
+    var j = i + dir;
+    while (j >= 0 && j < items.length && !vis(j)) j += dir;
+    return j;
+  }
+  function visCount(){ var n = 0; for (var i = 0; i < items.length; i++) if (vis(i)) n++; return n; }
+  function visRank(i){ var n = 0; for (var k = 0; k <= i; k++) if (vis(k)) n++; return n; }
+  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+
+  function renderQuestion(){
+    var it = items[idx];
+    document.getElementById('progress-text').textContent = 'Question ' + visRank(idx) + ' / ' + visCount();
+    var secEl = document.getElementById('sec-text');
+    if (it.sec){ secEl.textContent = it.sec; secEl.hidden = false; } else { secEl.hidden = true; }
+    document.getElementById('q-text').textContent = it.t;
+    document.getElementById('q-desc').textContent = it.d || '';
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    if (it.kind === 'num'){
+      var nr = document.createElement('div'); nr.className = 'num-row';
+      for (var v = it.min; v <= it.max; v++){
+        (function(v){
+          var b = document.createElement('div');
+          b.className = 'num' + (answers[idx] === v ? ' selected' : '');
+          b.textContent = v;
+          b.addEventListener('click', function(){ answers[idx] = v; renderQuestion(); });
+          nr.appendChild(b);
+        })(v);
+      }
+      row.appendChild(nr);
+      var ends = document.createElement('div'); ends.className = 'num-ends';
+      ends.innerHTML = '<span>' + esc(it.lo) + '</span><span style="text-align:right">' + esc(it.hi) + '</span>';
+      row.appendChild(ends);
+    } else if (it.kind === 'vas'){
+      var box = document.createElement('div'); box.className = 'vas-box';
+      var cur = answers[idx] === null ? 50 : answers[idx];
+      box.innerHTML = '<p class="vas-val" id="vas-val">' + (answers[idx] === null ? '—' : answers[idx]) + '</p>' +
+        '<input type="range" id="vas-range" min="' + it.min + '" max="' + it.max + '" step="1" value="' + cur + '" aria-label="Échelle visuelle analogique">' +
+        '<div class="num-ends"><span>' + esc(it.lo) + '</span><span style="text-align:right">' + esc(it.hi) + '</span></div>' +
+        '<p class="q-desc" style="margin-top:14px">Déplacez le curseur (ou utilisez les flèches du clavier) jusqu\'à la valeur qui correspond à votre état de santé aujourd\'hui.</p>';
+      row.appendChild(box);
+      var rg = document.getElementById('vas-range');
+      function setV(){
+        answers[idx] = parseInt(rg.value, 10);
+        document.getElementById('vas-val').textContent = answers[idx];
+        document.getElementById('btn-next').disabled = false;
+      }
+      rg.addEventListener('input', setV);
+      rg.addEventListener('change', setV);
+      rg.addEventListener('click', setV);
+    } else {
+      var list = document.createElement('div'); list.className = 'opt-row';
+      it.opts.forEach(function(pair){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx] === pair[0] ? ' selected' : '');
+        d.textContent = pair[1];
+        d.addEventListener('click', function(){ answers[idx] = pair[0]; renderQuestion(); });
+        list.appendChild(d);
+      });
+      row.appendChild(list);
+    }
+    document.getElementById('btn-prev').disabled = step(idx, -1) < 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = step(idx, 1) >= items.length ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    var j = step(idx, -1);
+    if (j >= 0){ idx = j; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    var j = step(idx, 1);
+    if (j < items.length){ idx = j; renderQuestion(); } else { showResult(); }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var a = answers.map(function(v, i){ return vis(i) ? v : null; });
+    document.getElementById('result-body').innerHTML = RESULT(a);
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PTCI — Inventaire des cognitions post-traumatiques</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#463873 0%,#7462A8 55%,#2B2247 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,210,.40),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#5B4B8A;background:#E7E1F2;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .section ul{font-size:14.5px;margin:0 0 10px;padding-left:20px;}
+  .section li{margin-bottom:4px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#5B4B8A;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#5B4B8A;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <div class="fiche-photo"><span class="acronym">PTCI</span></div>
+  <h1 class="serif">PTCI — Inventaire des cognitions post-traumatiques</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Posttraumatic Cognitions Inventory — Foa E.B., Ehlers A., Clark D.M., Tolin D.F. &amp; Orsillo S.M. (1999)</p>
+  <div class="meta-row">
+    <span class="pill">36 questions (33 cotées)</span>
+    <span class="pill">8 minutes</span>
+    <span class="pill">Échelle 1-7</span>
+    <span class="pill">Adulte</span>
+    <span class="pill">Anglais</span>
+    <span class="pill">Licence requise : oui</span>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" href="ptci.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le PTCI mesure les croyances dysfonctionnelles associées au trouble de stress post-traumatique. Le formulaire publié comporte 36 affirmations ; 33 sont cotées et réparties en trois sous-échelles : cognitions négatives sur soi (21 items), cognitions négatives sur le monde (7 items) et auto-accusation (5 items). Les items 13, 32 et 34 sont expérimentaux et ne sont intégrés à aucune sous-échelle.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque item est coté de 1 (« Totally disagree ») à 7 (« Totally agree »). Clé de cotation de l'annexe B de l'article princeps : sous-échelle <em>soi</em> = items 2, 3, 4, 5, 6, 9, 12, 14, 16, 17, 20, 21, 24, 25, 26, 28, 29, 30, 33, 35, 36 (somme ÷ 21) ; sous-échelle <em>monde</em> = items 7, 8, 10, 11, 18, 23, 27 (somme ÷ 7) ; sous-échelle <em>auto-accusation</em> = items 1, 15, 19, 22, 31 (somme ÷ 5) ; score total = somme des trois sous-échelles (33 items, de 33 à 231). Plus le score est élevé, plus les cognitions sont dysfonctionnelles. Aucun seuil clinique n'est publié dans l'article princeps ; la page n'en applique aucun.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p>Foa et al. (1999), <em>Psychological Assessment</em>, 11(3), 303-314 (formulaire en annexe A, clé de cotation en annexe B). Texte transcrit en anglais depuis l'article original ; l'adaptation française validée (2022) n'est pas reprise faute d'accès au texte. Les débuts de phrase des items 20, 21, 23, 24 et 25 (« I ») ont été restitués, l'extraction du PDF les ayant perdus.</p>
+    <p class="source-note"><strong>Licence requise : oui.</strong> La fiche de référence renvoie vers l'autrice détentrice des droits (Edna Foa) pour toute demande d'usage : autorisation nominative nécessaire, aucun tarif documenté. Construit malgré tout sur décision du cabinet (30/09/2026). Outil de repérage : ne remplace pas une évaluation clinique complète.</p>
+  </div>
+
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

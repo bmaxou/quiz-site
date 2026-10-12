@@ -1,0 +1,936 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EORTC QLQ-C30 — Qualité de vie en cancérologie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#8A4A26;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .sec{font-size:12.5px;color:#63695D;background:#F4F1EA;border-radius:8px;padding:8px 12px;margin:0 0 16px;}
+  .q-text{font-size:16px;margin:0 0 6px;}
+  .q-desc{font-size:13px;color:#63695D;margin:0 0 18px;white-space:pre-line;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#8A4A26;background:#F6E6DA;}
+  .num-row{display:flex;flex-wrap:wrap;gap:6px;}
+  .num{min-width:44px;text-align:center;padding:10px 0;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600;background:#fff;}
+  .num.selected{border-color:#8A4A26;background:#F6E6DA;}
+  .num-ends{display:flex;justify-content:space-between;gap:12px;font-size:12px;color:#63695D;margin-top:8px;}
+  .vas-box{padding:8px 0;}
+  .vas-val{font-family:'Cormorant Garamond',Georgia,serif;font-size:40px;color:#8A4A26;margin:0 0 6px;}
+  .vas-box input[type=range]{width:100%;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#8A4A26;border-color:#E0D9C9;}
+  .btn-primary{background:#8A4A26;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:40px;color:#8A4A26;margin:0 0 4px;}
+  .result-max{font-size:13px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 14px;}
+  .result-list{font-size:14px;margin:0 0 16px;padding-left:20px;}
+  .result-list li{margin-bottom:4px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">EORTC QLQ-C30 — Qualité de vie en cancérologie (version 3.0)</h1>
+    <p class="lead">Trente questions sur les difficultés physiques, les symptômes (fatigue, douleur, nausées, sommeil, appétit…), le retentissement émotionnel, cognitif, familial, social et financier, puis deux évaluations globales de l'état de santé et de la qualité de vie. Les questions 6 à 30 portent sur la semaine passée.</p>
+    <p class="lang-note">Version française neutre officielle de l'EORTC (version 3.0). Questionnaire d'auto-évaluation pour les personnes atteintes de cancer.</p>
+    <div class="pill-row">
+      <span class="pill">30 questions</span>
+      <span class="pill">5-8 minutes</span>
+      <span class="pill">Échelles 1-4 et 1-7</span>
+      <span class="pill">Français</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="sec" id="sec-text" hidden></p>
+    <p class="q-text" id="q-text"></p>
+    <p class="q-desc" id="q-desc"></p>
+    <div id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Aaronson N.K. et al. (1993). The European Organization for Research and Treatment of Cancer QLQ-C30, <em>Journal of the National Cancer Institute</em>, 85(5), 365-376. © Copyright 1995 EORTC Study Group on Quality of Life. Tous droits réservés. Version 3.0. Ce résultat est un repère, il ne constitue pas un diagnostic.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [
+ {
+  "t": "Avez-vous des difficultés à faire certains efforts physiques pénibles comme porter un sac à provisions chargé ou une valise ?",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Un peu"
+   ],
+   [
+    3,
+    "Assez"
+   ],
+   [
+    4,
+    "Beaucoup"
+   ]
+  ],
+  "d": "Nous nous intéressons à vous et à votre santé. Répondez vous-même à toutes les questions en choisissant la réponse qui correspond le mieux à votre situation. Il n'y a pas de « bonne » ou de « mauvaise » réponse. Ces informations sont strictement confidentielles."
+ },
+ {
+  "t": "Avez-vous des difficultés à faire une longue promenade ?",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Un peu"
+   ],
+   [
+    3,
+    "Assez"
+   ],
+   [
+    4,
+    "Beaucoup"
+   ]
+  ],
+  "d": "Nous nous intéressons à vous et à votre santé. Répondez vous-même à toutes les questions en choisissant la réponse qui correspond le mieux à votre situation. Il n'y a pas de « bonne » ou de « mauvaise » réponse. Ces informations sont strictement confidentielles."
+ },
+ {
+  "t": "Avez-vous des difficultés à faire un petit tour dehors ?",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Un peu"
+   ],
+   [
+    3,
+    "Assez"
+   ],
+   [
+    4,
+    "Beaucoup"
+   ]
+  ],
+  "d": "Nous nous intéressons à vous et à votre santé. Répondez vous-même à toutes les questions en choisissant la réponse qui correspond le mieux à votre situation. Il n'y a pas de « bonne » ou de « mauvaise » réponse. Ces informations sont strictement confidentielles."
+ },
+ {
+  "t": "Êtes-vous obligé(e) de rester au lit ou dans un fauteuil pendant la journée ?",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Un peu"
+   ],
+   [
+    3,
+    "Assez"
+   ],
+   [
+    4,
+    "Beaucoup"
+   ]
+  ],
+  "d": "Nous nous intéressons à vous et à votre santé. Répondez vous-même à toutes les questions en choisissant la réponse qui correspond le mieux à votre situation. Il n'y a pas de « bonne » ou de « mauvaise » réponse. Ces informations sont strictement confidentielles."
+ },
+ {
+  "t": "Avez-vous besoin d'aide pour manger, vous habiller, faire votre toilette ou aller aux toilettes ?",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Un peu"
+   ],
+   [
+    3,
+    "Assez"
+   ],
+   [
+    4,
+    "Beaucoup"
+   ]
+  ],
+  "d": "Nous nous intéressons à vous et à votre santé. Répondez vous-même à toutes les questions en choisissant la réponse qui correspond le mieux à votre situation. Il n'y a pas de « bonne » ou de « mauvaise » réponse. Ces informations sont strictement confidentielles."
+ },
+ {
+  "t": "Avez-vous été gêné(e) pour faire votre travail ou vos activités de tous les jours ?",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Un peu"
+   ],
+   [
+    3,
+    "Assez"
+   ],
+   [
+    4,
+    "Beaucoup"
+   ]
+  ],
+  "sec": "Au cours de la semaine passée"
+ },
+ {
+  "t": "Avez-vous été gêné(e) dans vos activités de loisirs ?",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Un peu"
+   ],
+   [
+    3,
+    "Assez"
+   ],
+   [
+    4,
+    "Beaucoup"
+   ]
+  ],
+  "sec": "Au cours de la semaine passée"
+ },
+ {
+  "t": "Avez-vous eu le souffle court ?",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Un peu"
+   ],
+   [
+    3,
+    "Assez"
+   ],
+   [
+    4,
+    "Beaucoup"
+   ]
+  ],
+  "sec": "Au cours de la semaine passée"
+ },
+ {
+  "t": "Avez-vous ressenti de la douleur ?",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Un peu"
+   ],
+   [
+    3,
+    "Assez"
+   ],
+   [
+    4,
+    "Beaucoup"
+   ]
+  ],
+  "sec": "Au cours de la semaine passée"
+ },
+ {
+  "t": "Avez-vous eu besoin de repos ?",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Un peu"
+   ],
+   [
+    3,
+    "Assez"
+   ],
+   [
+    4,
+    "Beaucoup"
+   ]
+  ],
+  "sec": "Au cours de la semaine passée"
+ },
+ {
+  "t": "Avez-vous eu des difficultés pour dormir ?",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Un peu"
+   ],
+   [
+    3,
+    "Assez"
+   ],
+   [
+    4,
+    "Beaucoup"
+   ]
+  ],
+  "sec": "Au cours de la semaine passée"
+ },
+ {
+  "t": "Vous êtes-vous senti(e) faible ?",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Un peu"
+   ],
+   [
+    3,
+    "Assez"
+   ],
+   [
+    4,
+    "Beaucoup"
+   ]
+  ],
+  "sec": "Au cours de la semaine passée"
+ },
+ {
+  "t": "Avez-vous manqué d'appétit ?",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Un peu"
+   ],
+   [
+    3,
+    "Assez"
+   ],
+   [
+    4,
+    "Beaucoup"
+   ]
+  ],
+  "sec": "Au cours de la semaine passée"
+ },
+ {
+  "t": "Avez-vous eu des nausées (mal au cœur) ?",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Un peu"
+   ],
+   [
+    3,
+    "Assez"
+   ],
+   [
+    4,
+    "Beaucoup"
+   ]
+  ],
+  "sec": "Au cours de la semaine passée"
+ },
+ {
+  "t": "Avez-vous vomi ?",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Un peu"
+   ],
+   [
+    3,
+    "Assez"
+   ],
+   [
+    4,
+    "Beaucoup"
+   ]
+  ],
+  "sec": "Au cours de la semaine passée"
+ },
+ {
+  "t": "Avez-vous été constipé(e) ?",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Un peu"
+   ],
+   [
+    3,
+    "Assez"
+   ],
+   [
+    4,
+    "Beaucoup"
+   ]
+  ],
+  "sec": "Au cours de la semaine passée"
+ },
+ {
+  "t": "Avez-vous eu de la diarrhée ?",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Un peu"
+   ],
+   [
+    3,
+    "Assez"
+   ],
+   [
+    4,
+    "Beaucoup"
+   ]
+  ],
+  "sec": "Au cours de la semaine passée"
+ },
+ {
+  "t": "Étiez-vous fatigué(e) ?",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Un peu"
+   ],
+   [
+    3,
+    "Assez"
+   ],
+   [
+    4,
+    "Beaucoup"
+   ]
+  ],
+  "sec": "Au cours de la semaine passée"
+ },
+ {
+  "t": "Des douleurs ont-elles perturbé vos activités quotidiennes ?",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Un peu"
+   ],
+   [
+    3,
+    "Assez"
+   ],
+   [
+    4,
+    "Beaucoup"
+   ]
+  ],
+  "sec": "Au cours de la semaine passée"
+ },
+ {
+  "t": "Avez-vous eu des difficultés à vous concentrer sur certaines choses, par exemple, pour lire le journal ou regarder la télévision ?",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Un peu"
+   ],
+   [
+    3,
+    "Assez"
+   ],
+   [
+    4,
+    "Beaucoup"
+   ]
+  ],
+  "sec": "Au cours de la semaine passée"
+ },
+ {
+  "t": "Vous êtes-vous senti(e) tendu(e) ?",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Un peu"
+   ],
+   [
+    3,
+    "Assez"
+   ],
+   [
+    4,
+    "Beaucoup"
+   ]
+  ],
+  "sec": "Au cours de la semaine passée"
+ },
+ {
+  "t": "Vous êtes-vous fait du souci ?",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Un peu"
+   ],
+   [
+    3,
+    "Assez"
+   ],
+   [
+    4,
+    "Beaucoup"
+   ]
+  ],
+  "sec": "Au cours de la semaine passée"
+ },
+ {
+  "t": "Vous êtes-vous senti(e) irritable ?",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Un peu"
+   ],
+   [
+    3,
+    "Assez"
+   ],
+   [
+    4,
+    "Beaucoup"
+   ]
+  ],
+  "sec": "Au cours de la semaine passée"
+ },
+ {
+  "t": "Vous êtes-vous senti(e) déprimé(e) ?",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Un peu"
+   ],
+   [
+    3,
+    "Assez"
+   ],
+   [
+    4,
+    "Beaucoup"
+   ]
+  ],
+  "sec": "Au cours de la semaine passée"
+ },
+ {
+  "t": "Avez-vous eu des difficultés pour vous souvenir de certaines choses ?",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Un peu"
+   ],
+   [
+    3,
+    "Assez"
+   ],
+   [
+    4,
+    "Beaucoup"
+   ]
+  ],
+  "sec": "Au cours de la semaine passée"
+ },
+ {
+  "t": "Votre état physique ou votre traitement médical vous ont-ils gêné(e) dans votre vie familiale ?",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Un peu"
+   ],
+   [
+    3,
+    "Assez"
+   ],
+   [
+    4,
+    "Beaucoup"
+   ]
+  ],
+  "sec": "Au cours de la semaine passée"
+ },
+ {
+  "t": "Votre état physique ou votre traitement médical vous ont-ils gêné(e) dans vos activités sociales (par exemple, sortir avec des amis, aller au cinéma...) ?",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Un peu"
+   ],
+   [
+    3,
+    "Assez"
+   ],
+   [
+    4,
+    "Beaucoup"
+   ]
+  ],
+  "sec": "Au cours de la semaine passée"
+ },
+ {
+  "t": "Votre état physique ou votre traitement médical vous ont-ils causé des problèmes financiers ?",
+  "opts": [
+   [
+    1,
+    "Pas du tout"
+   ],
+   [
+    2,
+    "Un peu"
+   ],
+   [
+    3,
+    "Assez"
+   ],
+   [
+    4,
+    "Beaucoup"
+   ]
+  ],
+  "sec": "Au cours de la semaine passée"
+ },
+ {
+  "t": "Comment évalueriez-vous votre état de santé au cours de la semaine passée ?",
+  "d": "Pour les questions suivantes, veuillez répondre en choisissant le chiffre entre 1 et 7 qui s'applique le mieux à votre situation.",
+  "kind": "num",
+  "min": 1,
+  "max": 7,
+  "lo": "Très mauvais",
+  "hi": "Excellent"
+ },
+ {
+  "t": "Comment évalueriez-vous l'ensemble de votre qualité de vie au cours de la semaine passée ?",
+  "d": "Pour les questions suivantes, veuillez répondre en choisissant le chiffre entre 1 et 7 qui s'applique le mieux à votre situation.",
+  "kind": "num",
+  "min": 1,
+  "max": 7,
+  "lo": "Très mauvaise",
+  "hi": "Excellente"
+ }
+];
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+  var RESULT = function(a){
+    function mean(ix){ var s = 0; ix.forEach(function(i){ s += a[i-1]; }); return s / ix.length; }
+    function fn(ix){ return (1 - (mean(ix) - 1) / 3) * 100; }
+    function sy(ix){ return (mean(ix) - 1) / 3 * 100; }
+    function f1(x){ return (Math.round(x * 10) / 10).toFixed(1); }
+    var ql = (mean([29,30]) - 1) / 6 * 100;
+    var F = [['Fonctionnement physique (PF2, items 1-5)', fn([1,2,3,4,5])], ['Fonctionnement dans les rôles (RF2, items 6-7)', fn([6,7])], ['Fonctionnement émotionnel (EF, items 21-24)', fn([21,22,23,24])], ['Fonctionnement cognitif (CF, items 20 et 25)', fn([20,25])], ['Fonctionnement social (SF, items 26-27)', fn([26,27])]];
+    var S = [['Fatigue (FA, items 10, 12, 18)', sy([10,12,18])], ['Nausées et vomissements (NV, items 14-15)', sy([14,15])], ['Douleur (PA, items 9 et 19)', sy([9,19])], ['Dyspnée (DY, item 8)', sy([8])], ['Insomnie (SL, item 11)', sy([11])], ['Perte d\'appétit (AP, item 13)', sy([13])], ['Constipation (CO, item 16)', sy([16])], ['Diarrhée (DI, item 17)', sy([17])], ['Difficultés financières (FI, item 28)', sy([28])]];
+    function li(arr){ return '<ul class="result-list">' + arr.map(function(r){ return '<li>' + r[0] + ' : <strong>' + f1(r[1]) + ' / 100</strong></li>'; }).join('') + '</ul>'; }
+    return '<p class="result-score">' + f1(ql) + ' / 100</p>' +
+      '<p class="result-max">état de santé global / qualité de vie (QL2, items 29 et 30) — plus le score est élevé, meilleure est la qualité de vie</p>' +
+      '<p class="result-text"><strong>Échelles fonctionnelles</strong> (un score élevé = un bon niveau de fonctionnement)</p>' + li(F) +
+      '<p class="result-text"><strong>Échelles et items de symptômes</strong> (un score élevé = un niveau élevé de symptômes ou de problèmes)</p>' + li(S) +
+      '<p class="result-text">Chaque échelle est cotée de 0 à 100 d\'après le manuel officiel de cotation de l\'EORTC (moyenne des items de l\'échelle, puis transformation linéaire). Il n\'existe pas de score total unique ni de seuil clinique retenu ici : lecture par échelle, dans le temps ou par rapport à des valeurs de référence. Ce résultat ne constitue pas un diagnostic.</p>';
+  };
+
+  function vis(i){
+    var c = items[i].cond;
+    return !c || answers[c[0]] === c[1];
+  }
+  function step(i, dir){
+    var j = i + dir;
+    while (j >= 0 && j < items.length && !vis(j)) j += dir;
+    return j;
+  }
+  function visCount(){ var n = 0; for (var i = 0; i < items.length; i++) if (vis(i)) n++; return n; }
+  function visRank(i){ var n = 0; for (var k = 0; k <= i; k++) if (vis(k)) n++; return n; }
+  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+
+  function renderQuestion(){
+    var it = items[idx];
+    document.getElementById('progress-text').textContent = 'Question ' + visRank(idx) + ' / ' + visCount();
+    var secEl = document.getElementById('sec-text');
+    if (it.sec){ secEl.textContent = it.sec; secEl.hidden = false; } else { secEl.hidden = true; }
+    document.getElementById('q-text').textContent = it.t;
+    document.getElementById('q-desc').textContent = it.d || '';
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    if (it.kind === 'num'){
+      var nr = document.createElement('div'); nr.className = 'num-row';
+      for (var v = it.min; v <= it.max; v++){
+        (function(v){
+          var b = document.createElement('div');
+          b.className = 'num' + (answers[idx] === v ? ' selected' : '');
+          b.textContent = v;
+          b.addEventListener('click', function(){ answers[idx] = v; renderQuestion(); });
+          nr.appendChild(b);
+        })(v);
+      }
+      row.appendChild(nr);
+      var ends = document.createElement('div'); ends.className = 'num-ends';
+      ends.innerHTML = '<span>' + esc(it.lo) + '</span><span style="text-align:right">' + esc(it.hi) + '</span>';
+      row.appendChild(ends);
+    } else if (it.kind === 'vas'){
+      var box = document.createElement('div'); box.className = 'vas-box';
+      var cur = answers[idx] === null ? 50 : answers[idx];
+      box.innerHTML = '<p class="vas-val" id="vas-val">' + (answers[idx] === null ? '—' : answers[idx]) + '</p>' +
+        '<input type="range" id="vas-range" min="' + it.min + '" max="' + it.max + '" step="1" value="' + cur + '" aria-label="Échelle visuelle analogique">' +
+        '<div class="num-ends"><span>' + esc(it.lo) + '</span><span style="text-align:right">' + esc(it.hi) + '</span></div>' +
+        '<p class="q-desc" style="margin-top:14px">Déplacez le curseur (ou utilisez les flèches du clavier) jusqu\'à la valeur qui correspond à votre état de santé aujourd\'hui.</p>';
+      row.appendChild(box);
+      var rg = document.getElementById('vas-range');
+      function setV(){
+        answers[idx] = parseInt(rg.value, 10);
+        document.getElementById('vas-val').textContent = answers[idx];
+        document.getElementById('btn-next').disabled = false;
+      }
+      rg.addEventListener('input', setV);
+      rg.addEventListener('change', setV);
+      rg.addEventListener('click', setV);
+    } else {
+      var list = document.createElement('div'); list.className = 'opt-row';
+      it.opts.forEach(function(pair){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx] === pair[0] ? ' selected' : '');
+        d.textContent = pair[1];
+        d.addEventListener('click', function(){ answers[idx] = pair[0]; renderQuestion(); });
+        list.appendChild(d);
+      });
+      row.appendChild(list);
+    }
+    document.getElementById('btn-prev').disabled = step(idx, -1) < 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = step(idx, 1) >= items.length ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    var j = step(idx, -1);
+    if (j >= 0){ idx = j; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    var j = step(idx, 1);
+    if (j < items.length){ idx = j; renderQuestion(); } else { showResult(); }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var a = answers.map(function(v, i){ return vis(i) ? v : null; });
+    document.getElementById('result-body').innerHTML = RESULT(a);
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EORTC QLQ-C30 — Qualité de vie en cancérologie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#6E3A1E 0%,#B06A3C 55%,#3E2010 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,210,.40),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#8A4A26;background:#F6E6DA;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .section ul{font-size:14.5px;margin:0 0 10px;padding-left:20px;}
+  .section li{margin-bottom:4px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#8A4A26;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#8A4A26;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <div class="fiche-photo"><span class="acronym">QLQ-C30</span></div>
+  <h1 class="serif">EORTC QLQ-C30 — Qualité de vie en cancérologie (version 3.0)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">European Organisation for Research and Treatment of Cancer Quality of Life Questionnaire — Core 30 — Aaronson N.K., Ahmedzai S., Bergman B. et al., EORTC Quality of Life Group (1993)</p>
+  <div class="meta-row">
+    <span class="pill">30 questions</span>
+    <span class="pill">5-8 minutes</span>
+    <span class="pill">Échelles 1-4 et 1-7</span>
+    <span class="pill">Adulte</span>
+    <span class="pill">Français</span>
+    <span class="pill">Licence requise : oui</span>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" href="qlq-c30.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le QLQ-C30 est le questionnaire générique de qualité de vie liée à la santé le plus utilisé en cancérologie. Il explore cinq dimensions fonctionnelles (physique, rôles, émotionnelle, cognitive, sociale), neuf échelles ou items de symptômes (fatigue, nausées et vomissements, douleur, dyspnée, insomnie, perte d'appétit, constipation, diarrhée, difficultés financières) et une échelle globale d'état de santé et de qualité de vie. Les questions 1 à 5 portent sur l'état courant, les questions 6 à 30 sur la semaine passée. Il se complète habituellement par des modules spécifiques selon la localisation du cancer (non inclus ici).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Cotation conforme au manuel officiel de l'EORTC (<em>EORTC QLQ-C30 Scoring Manual</em>, 3e édition, 2001) : pour chaque échelle, moyenne brute (RS) des items qui la composent, puis transformation linéaire sur 0-100. Échelles fonctionnelles : S = (1 − (RS − 1)/étendue) × 100 ; symptômes : S = ((RS − 1)/étendue) × 100 ; état de santé global / qualité de vie (items 29-30, étendue 6) : S = ((RS − 1)/6) × 100. Les items 1 à 28 sont cotés de 1 (« Pas du tout ») à 4 (« Beaucoup ») ; les items 29 et 30 de 1 à 7. Échelles : PF2 = items 1-5 ; RF2 = 6-7 ; EF = 21-24 ; CF = 20 et 25 ; SF = 26-27 ; QL2 = 29-30 ; FA = 10, 12, 18 ; NV = 14-15 ; PA = 9 et 19 ; DY = 8 ; SL = 11 ; AP = 13 ; CO = 16 ; DI = 17 ; FI = 28.</p><p>Un score élevé sur une échelle fonctionnelle ou sur l'état de santé global correspond à un bon niveau ; un score élevé sur une échelle de symptômes correspond à une symptomatologie importante. Le manuel ne définit ni score total, ni seuil de gravité ; ils ne sont donc pas inventés ici. Toutes les questions sont obligatoires dans cette version en ligne (le manuel autorise l'estimation d'un item manquant si au moins la moitié des items de l'échelle sont renseignés, cas non géré ici).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p>Aaronson N.K. et al. (1993), <em>Journal of the National Cancer Institute</em>, 85(5), 365-376. Texte transcrit depuis la version française neutre officielle (« FRENCH NEUTRAL », QLQ-C30 version 3.0) rediffusée par le groupe GETTEC (gettec.fr), © 1995 EORTC Study Group on Quality of Life. Cotation vérifiée sur le manuel officiel téléchargé sur le site de l'EORTC. Adaptation à l'écran : « en entourant le chiffre » remplacé par « en choisissant la réponse ».</p><p class="source-note"><strong>Licence requise : oui.</strong> Le consentement écrit préalable de l'EORTC Quality of Life Group est requis pour tout usage ; gratuit pour l'usage académique après signature d'un « Academic User Agreement » (sans modification ni reproduction libre du questionnaire) ; usage commercial soumis à une licence payante (qol.eortc.org). Construit malgré tout sur décision du cabinet (30/09/2026) ; à régulariser auprès de l'EORTC avant tout usage au-delà du cabinet. Outil de repérage, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>
