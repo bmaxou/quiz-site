@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DSQ-PEM — Malaise post-effort</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#EEF1F3;color:#1C262B;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#1C262B;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#5B6A70;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#5B6A70;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #D6DEE2;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:25px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#5B6A70;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#5B6A70;background:#EEF1F3;border:1px solid #D6DEE2;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#46637A;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .example-box{font-size:13px;color:#5B6A70;background:#F5F7F8;border:1px solid #D6DEE2;border-radius:10px;padding:12px 14px;margin:0 0 20px;}
+  .progress{font-size:12px;color:#93A3A9;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 18px;}
+  .group-label{font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#46637A;margin:0 0 8px;}
+  .opt-group{margin:0 0 18px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #D6DEE2;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#46637A;background:#E2EBEF;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#EEF1F3;color:#1C262B;border-color:#D6DEE2;}
+  .btn-primary{background:#46637A;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#46637A;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#93A3A9;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#1C262B;margin:0 0 14px;}
+  .result-detail{font-size:13px;color:#5B6A70;margin:0 0 8px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#5B6A70;border-top:1px solid #D6DEE2;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">DSQ-PEM — Malaise post-effort</h1>
+    <p class="lead">Ce questionnaire porte sur le malaise post-effort (aggravation des symptômes après un effort physique ou mental), au cours des deux dernières semaines. Pour les questions 1 à 5, vous répondrez deux fois : une fois pour la fréquence, une fois pour la gravité du symptôme.</p>
+    <p class="example-box">Fréquence : 0 = Jamais … 4 = Tout le temps. Gravité : 0 = Symptôme absent … 4 = Extrêmement.</p>
+    <div class="pill-row">
+      <span class="pill">10 questions</span>
+      <span class="pill">4 minutes</span>
+      <span class="pill">Dépistage du PEM</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="quiz-body"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-score" id="score-val"></p>
+    <p class="result-max" id="score-max"></p>
+    <p class="result-text" id="level-text"></p>
+    <p class="result-detail" id="detail-text"></p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">DSQ-PEM — DePaul Symptom Questionnaire, module malaise post-effort (Cotler, Holtzman, Dudun &amp; Jason, 2018). Outil de dépistage, ne remplace pas une évaluation clinique complète ni un diagnostic d'encéphalomyélite myalgique/syndrome de fatigue chronique.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [
+    {k:'freqsev', t:"1. Sensation d'épuisement après avoir commencé à faire de l'exercice physique"},
+    {k:'freqsev', t:"2. Courbatures ou fatigue le lendemain d'activités quotidiennes non intenses"},
+    {k:'freqsev', t:"3. Fatigue mentale au moindre effort"},
+    {k:'freqsev', t:"4. Le moindre exercice vous cause une fatigue physique"},
+    {k:'freqsev', t:"5. Physiquement épuisé(e) ou malade après une activité légère"},
+    {k:'yesno', t:"6. Si vous étiez épuisé(e) après avoir participé activement à des activités parascolaires ou sportives, ou à des sorties avec des ami(e)s, récupéreriez-vous dans l'heure ou les deux heures qui suivent la fin de l'activité ?"},
+    {k:'yesno', t:"7. Constatez-vous une aggravation de votre fatigue ou de votre perte d'énergie liée à votre maladie après un effort physique minime ?"},
+    {k:'yesno', t:"8. Constatez-vous une aggravation de votre fatigue ou de votre perte d'énergie liée à votre maladie après un effort mental ?"},
+    {k:'duration', t:"9. Si vous vous sentez moins bien après une activité, combien de temps cela dure-t-il ?"},
+    {k:'yesno', t:"10. Si vous ne faites pas d'exercice, est-ce parce que cela aggrave vos symptômes ?"}
+  ];
+  var freqLabels = ["Jamais","Parfois","Environ la moitié du temps","La plupart du temps","Tout le temps"];
+  var sevLabels = ["Symptôme absent","Légèrement","Modérément","Énormément","Extrêmement"];
+  var yesnoLabels = ["Oui","Non"];
+  var durationLabels = ["Moins d'une (1) heure","De 2 à 3 heures","De 4 à 10 heures","De 11 à 13 heures","De 14 à 23 heures","24 heures ou plus"];
+
+  var answers = items.map(function(it){ return it.k === 'freqsev' ? {f:null, s:null} : null; });
+  var idx = 0;
+
+  function isAnswered(i){
+    var it = items[i], a = answers[i];
+    if (it.k === 'freqsev') return a.f !== null && a.s !== null;
+    return a !== null;
+  }
+
+  function makeRow(labels, current, onPick){
+    var row = document.createElement('div');
+    row.className = 'opt-row';
+    labels.forEach(function(label, v){
+      var d = document.createElement('div');
+      d.className = 'opt' + (current === v ? ' selected' : '');
+      d.textContent = label;
+      d.addEventListener('click', function(){ onPick(v); renderQuestion(); });
+      row.appendChild(d);
+    });
+    return row;
+  }
+
+  function renderQuestion(){
+    var it = items[idx];
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = it.t;
+    var body = document.getElementById('quiz-body');
+    body.innerHTML = '';
+
+    if (it.k === 'freqsev'){
+      var g1 = document.createElement('div'); g1.className = 'opt-group';
+      var l1 = document.createElement('p'); l1.className = 'group-label'; l1.textContent = 'Fréquence (deux dernières semaines)';
+      g1.appendChild(l1);
+      g1.appendChild(makeRow(freqLabels, answers[idx].f, function(v){ answers[idx].f = v; }));
+      body.appendChild(g1);
+
+      var g2 = document.createElement('div'); g2.className = 'opt-group';
+      var l2 = document.createElement('p'); l2.className = 'group-label'; l2.textContent = 'Gravité';
+      g2.appendChild(l2);
+      g2.appendChild(makeRow(sevLabels, answers[idx].s, function(v){ answers[idx].s = v; }));
+      body.appendChild(g2);
+    } else if (it.k === 'yesno'){
+      body.appendChild(makeRow(yesnoLabels, answers[idx], function(v){ answers[idx] = v; }));
+    } else if (it.k === 'duration'){
+      body.appendChild(makeRow(durationLabels, answers[idx], function(v){ answers[idx] = v; }));
+    }
+
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !isAnswered(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!isAnswered(idx)) return;
+    if (idx < items.length - 1){
+      idx++; renderQuestion();
+    } else {
+      showResult();
+    }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+
+    var qualifying = [];
+    for (var i = 0; i < 5; i++){
+      var a = answers[i];
+      if (a.f >= 2 && a.s >= 2) qualifying.push(i+1);
+    }
+    var pemIndicated = qualifying.length >= 1;
+
+    var worseningPhysical = answers[6] === 0; // "Oui" = index 0
+    var worseningMental = answers[7] === 0;
+    var durationIdx = answers[8];
+    var longDuration = durationIdx >= 4; // "de 14 à 23 heures" ou "24 heures ou plus"
+    var noRecoverQuickly = answers[5] === 1; // "Non" à la question 6
+    var avoidsExercise = answers[9] === 0; // "Oui" à la question 10
+
+    document.getElementById('score-val').textContent = qualifying.length + ' / 5';
+    document.getElementById('score-max').textContent = "items (parmi les 5 premiers) avec fréquence ET gravité ≥ 2 sur 0-4";
+
+    document.getElementById('level-text').textContent = pemIndicated
+      ? "Au moins un symptôme présente une fréquence et une gravité toutes deux cotées 2 ou plus : ceci est, selon la règle de cotation publiée (Cotler, Holtzman, Dudun & Jason, 2018), évocateur d'un malaise post-effort (PEM)."
+      : "Aucun des cinq premiers symptômes ne présente à la fois une fréquence et une gravité cotées 2 ou plus : selon la règle de cotation publiée, ceci n'est pas évocateur d'un malaise post-effort (PEM) au sens de cet outil.";
+
+    var detailParts = [];
+    detailParts.push("Items concernés (1 à 5) : " + (qualifying.length ? qualifying.join(', ') : "aucun") + ".");
+    detailParts.push("Éléments complémentaires rapportés par la personne, sans valeur diagnostique isolée : aggravation après un effort physique minime (item 7) — " + (worseningPhysical ? "oui" : "non") + " ; aggravation après un effort mental (item 8) — " + (worseningMental ? "oui" : "non") + " ; durée du malaise de 14 heures ou plus (item 9) — " + (longDuration ? "oui" : "non") + ".");
+    detailParts.push("Informations descriptives (ne contribuent pas à la cotation) : récupération en 1-2 heures après un épuisement (item 6) — " + (noRecoverQuickly ? "non" : "oui") + " ; évitement de l'exercice parce qu'il aggrave les symptômes (item 10) — " + (avoidsExercise ? "oui" : "non") + ".");
+    document.getElementById('detail-text').textContent = detailParts.join(' ');
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(it){ return it.k === 'freqsev' ? {f:null, s:null} : null; });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DSQ-PEM — Malaise post-effort</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#EEF1F3;color:#1C262B;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#1C262B;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#5B6A70;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#5B6A70;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#46637A 0%,#9DB8C9 55%,#17242D 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(226,235,239,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#1F3A4A;background:#E2EBEF;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#5B6A70;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#5B6A70;background:#FFFFFF;border:1px solid #D6DEE2;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#93A3A9;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#46637A;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#1F3A4A;border-color:#D6DEE2;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">DSQ-PEM</span></div>
+
+  <h1 class="serif">Malaise post-effort (DSQ-PEM)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">DePaul Symptom Questionnaire — Post-Exertional Malaise Short Form — Cotler, Holtzman, Dudun &amp; Jason (2018), DePaul University Center for Community Research</p>
+  <div class="meta-row">
+    <span class="pill">10 questions</span>
+    <span class="pill">4 minutes</span>
+    <span class="pill">Rappel : 2 dernières semaines</span>
+    <span class="pill">Français officiel</span>
+    <span class="pill">Licence requise : non</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="dsq-pem.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le DSQ-PEM est un module court (10 items) dérivé du DePaul Symptom Questionnaire, destiné au dépistage du malaise post-effort (« post-exertional malaise », PEM) : l'aggravation disproportionnée et retardée des symptômes après un effort physique, cognitif ou émotionnel minime, symptôme cardinal de l'encéphalomyélite myalgique/syndrome de fatigue chronique (EM/SFC) et fréquemment rapporté dans le COVID long. Les questions 1 à 5 portent chacune sur une fréquence et une gravité (échelles 0-4, rappel des deux dernières semaines) ; les questions 6, 7, 8 et 10 sont des questions fermées oui/non ; la question 9 porte sur la durée du malaise après une activité.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Règle de cotation publiée (annexe B de l'article princeps) : pour les items 1 à 5, une fréquence ET une gravité toutes deux cotées 2 ou plus sur un même item est évocateur d'un malaise post-effort. Les items 7 et 8 (réponse « Oui ») et une durée de malaise de 14 heures ou plus à l'item 9 viennent appuyer, sans l'établir à eux seuls, un diagnostic d'EM/SFC ; les items 6 et 10 sont descriptifs et n'entrent pas dans la cotation. Cet outil est un instrument de dépistage et ne remplace pas une évaluation clinique complète ni les critères diagnostiques de l'EM/SFC (ex. critères consensuels canadiens ou critères IOM/NASEM).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p><strong>Licence requise : non.</strong> Le DePaul University Center for Community Research (Leonard A. Jason) diffuse l'ensemble de ses instruments gratuitement pour un usage clinique et de recherche (« All instruments are free to use »), une simple notification aux auteurs étant seulement suggérée en cas de traduction.</p>
+    <p class="source-note">Items et traduction française officielle (forme « 2 dernières semaines », version française du Canada, 17/01/2024) : DePaul University Center for Community Research, csh.depaul.edu/academics/centers-and-institutes/ccr/myalgic-encephalomyelitis-cfs/measures ; PDF téléchargé directement : leonardjason.com/wp-content/uploads/2024/12/MK4482-023_DSQ-Short-Form-PEM-Questionnaire_Past-2-Weeks_Canada-French_v1_17JAN2024.pdf. Règle de cotation et validation : Cotler J., Holtzman C., Dudun C. &amp; Jason L.A. (2018), « A Brief Questionnaire to Assess Post-Exertional Malaise », <em>Diagnostics</em>, 8(3), 66, DOI 10.3390/diagnostics8030066 (accès libre), annexe A (items, version 6 mois) et annexe B (règle de cotation).</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

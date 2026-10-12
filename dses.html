@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DSES — Échelle d'expérience spirituelle quotidienne (Daily Spiritual Experience Scale)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#A8661F;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#A8661F;background:#F6E7D2;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#A8661F;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#A8661F;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 20px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">DSES — Daily Spiritual Experience Scale</h1>
+    <p class="lead">Ce questionnaire explore la fréquence des expériences spirituelles ordinaires de la vie quotidienne (présence, paix intérieure, gratitude, compassion, lien avec le sacré) à travers 16 affirmations. Les 15 premières se cotent de « Jamais » à « Plusieurs fois par jour », la dernière sur la proximité ressentie avec le divin.</p>
+    <p class="lang-note">Questionnaire transcrit en anglais (version originale de l'autrice) : la traduction française existe mais n'est diffusée qu'après contact avec l'autrice. Si le mot « God » ne vous convient pas, remplacez-le par un mot qui évoque pour vous le divin ou le sacré.</p>
+    <div class="pill-row">
+      <span class="pill">16 questions</span>
+      <span class="pill">3 minutes</span>
+      <span class="pill">Échelle 1-6</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-score" id="score-val"></p>
+    <p class="result-max">score moyen par item, sur une échelle de 1 à 6</p>
+    <p class="result-text" id="sub-text"></p>
+    <p class="result-text" id="level-text"></p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">DSES (Daily Spiritual Experience Scale) — Underwood &amp; Teresi, 2002 ; Underwood, 2006. © Lynn G. Underwood, www.dsescale.org. Outil dimensionnel de recherche, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [
+  {
+    "t": "I feel God's presence."
+  },
+  {
+    "t": "I experience a connection to all of life."
+  },
+  {
+    "t": "During worship, or at other times when connecting with God, I feel joy which lifts me out of my daily concerns."
+  },
+  {
+    "t": "I find strength in my religion or spirituality."
+  },
+  {
+    "t": "I find comfort in my religion or spirituality."
+  },
+  {
+    "t": "I feel deep inner peace or harmony."
+  },
+  {
+    "t": "I ask for God's help in the midst of daily activities."
+  },
+  {
+    "t": "I feel guided by God in the midst of daily activities."
+  },
+  {
+    "t": "I feel God's love for me, directly."
+  },
+  {
+    "t": "I feel God's love for me, through others."
+  },
+  {
+    "t": "I am spiritually touched by the beauty of creation."
+  },
+  {
+    "t": "I feel thankful for my blessings."
+  },
+  {
+    "t": "I feel a selfless caring for others."
+  },
+  {
+    "t": "I accept others even when they do things I think are wrong."
+  },
+  {
+    "t": "I desire to be closer to God or in union with the divine."
+  },
+  {
+    "t": "In general, how close do you feel to God?",
+    "o": [
+      [
+        "1 — Not at all",
+        1
+      ],
+      [
+        "3 — Somewhat close",
+        3
+      ],
+      [
+        "5 — Very close",
+        5
+      ],
+      [
+        "6 — As close as possible",
+        6
+      ]
+    ]
+  }
+];
+  var defaultOpts = [["6 — Many times a day", 6], ["5 — Every day", 5], ["4 — Most days", 4], ["3 — Some days", 3], ["2 — Once in a while", 2], ["1 — Never", 1]];
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function optsFor(i){ return items[i].o || defaultOpts; }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx].t;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    optsFor(idx).forEach(function(o){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === o[1] ? ' selected' : '');
+      d.textContent = o[0];
+      d.addEventListener('click', function(){
+        answers[idx] = o[1];
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){
+      idx++; renderQuestion();
+    } else {
+      showResult();
+    }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var sum = 0;
+    items.forEach(function(item, i){ sum += answers[i]; });
+    var mean = sum / items.length;
+    document.getElementById('score-val').textContent = mean.toFixed(2);
+    document.getElementById('sub-text').textContent = "Score moyen des 16 items (somme " + sum + " / 16). Plus la moyenne est élevée, plus les expériences spirituelles ordinaires sont fréquentes.";
+    document.getElementById('level-text').textContent = "Il n'existe aucun seuil clinique (ni niveau « faible », « moyen » ou « élevé ») applicable à un individu : comparer le score de deux personnes n'est pas pertinent. L'usage recommandé est l'évolution du score d'une même personne dans le temps, ou la comparaison de moyennes de groupes.";
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DSES — Échelle d'expérience spirituelle quotidienne (Daily Spiritual Experience Scale)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#A8661F 0%,#E0A24F 55%,#5E3809 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#5E3809;background:#F6E7D2;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#A8661F;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#5E3809;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">DSES</span></div>
+
+  <h1 class="serif">Échelle d'expérience spirituelle quotidienne (DSES)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Daily Spiritual Experience Scale — Underwood &amp; Teresi (2002), Underwood (2006)</p>
+  <div class="meta-row">
+    <span class="pill">16 questions</span>
+    <span class="pill">3 minutes</span>
+    <span class="pill">Échelle 1-6</span>
+    <span class="pill">Adultes</span>
+    <span class="pill">Anglais</span>
+    <span class="pill">Licence requise : oui</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="dses.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>La DSES mesure la fréquence des expériences spirituelles ordinaires, vécues au quotidien : sentiment de présence et de lien avec le sacré, paix intérieure, gratitude, soutien perçu, compassion et acceptation d'autrui, désir de proximité avec le divin. Elle s'adresse à des personnes de traditions religieuses variées ou sans pratique religieuse (le mot « God » peut être remplacé par un terme plus adapté). Elle est utilisée en recherche en santé, en clinique, en addictologie et dans les organisations.</p>
+    <p class="source-note">Questionnaire transcrit en anglais : les 16 items sont ceux de la version originale officielle publiée par l'autrice (dsescale.org). Plus de 30 traductions dont le français existent, mais elles ne sont diffusées qu'après contact avec l'autrice ; aucune version française n'a pu être récupérée en texte intégral. Une forme abrégée française (6 items) a été validée chez des personnes âgées (Bailly &amp; Roussiau, 2010).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Les items 1 à 15 se cotent : Jamais = 1, De temps en temps = 2, Certains jours = 3, La plupart des jours = 4, Chaque jour = 5, Plusieurs fois par jour = 6. L'item 16 se cote : Pas du tout = 1, Assez proche = 3, Très proche = 5, Aussi proche que possible = 6. Le score est la <strong>moyenne</strong> des 16 items (de 1 à 6), ce qui permet de compenser les réponses manquantes et de comparer avec les études utilisant 6 ou 15 items. Cette page exige une réponse à chaque item.</p>
+    <p>Interprétation (consignes officielles, mise à jour janvier 2022) : il n'existe aucun seuil faible/moyen/élevé applicable à un individu, et comparer les scores de deux personnes peut être contre-productif. L'usage pertinent est l'évolution du score d'une même personne dans le temps (avant/après une intervention, suivi) et la comparaison de moyennes de groupes.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p class="source-note"><strong>Licence requise : oui.</strong> © Lynn G. Underwood, www.dsescale.org : « Do not copy without permission of the author » ; l'enregistrement auprès de l'autrice est requis pour utiliser l'échelle, gratuit pour un usage à but non lucratif. Construit malgré tout sur décision du cabinet (30/09/2026) ; l'enregistrement reste à effectuer avant toute diffusion publique. Références : Underwood, L. G. &amp; Teresi, J. A. (2002), Annals of Behavioral Medicine 24(1), 22-33 ; Underwood, L. G. (2006), Archive for the Psychology of Religion 28, 181-218 ; version française abrégée : Bailly, N. &amp; Roussiau, N. (2010), Canadian Journal on Aging 29(2), 223-231. Outil de repérage : ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

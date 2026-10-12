@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EQ-SQ - Quotient d'empathie / de systemisation (enfant)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#3D5A80;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#3D5A80;background:#E9EEF5;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#3D5A80;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:36px;color:#3D5A80;margin:0 0 4px;}
+  .result-max{font-size:13px;color:#9A9E90;margin:0 0 16px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">EQ-SQ (EQ-C / SQ-C) - Empathie et systemisation</h1>
+    <p class="lead">Questionnaire hetero-evaluatif : c'est le parent (ou l'accompagnant) qui repond, en pensant a son enfant (4 a 11 ans). Cochez la reponse qui decrit le mieux le comportement habituel de l'enfant, pour chacun des 55 items.</p>
+    <p class="lang-note">Items presentes en anglais : aucune traduction francaise officiellement validee n'a ete identifiee pour cette version. Les libelles de reponse sont conserves dans leur formulation d'origine.</p>
+    <div class="pill-row">
+      <span class="pill">55 questions</span>
+      <span class="pill">10-12 minutes</span>
+      <span class="pill">Echelle 4 points</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Precedent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Resultat</h1>
+    <p class="result-score" id="score-eqc"></p>
+    <p class="result-max">score EQ-C (empathie), sur 54</p>
+    <p class="result-score" id="score-sqc"></p>
+    <p class="result-max">score SQ-C (systemisation), sur 56</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Auyeung, B., Wheelwright, S., Allison, C., Atkinson, M., Samarawickrema, N., &amp; Baron-Cohen, S. (2009). The Children's Empathy Quotient and Systemizing Quotient: Sex Differences in Typical Development and in Autism Spectrum Conditions. Journal of Autism and Developmental Disorders, 39(10), 1509-1521. Diffusion officielle Autism Research Centre, Universite de Cambridge. Outil de reperage, ne remplace pas une evaluation clinique complete.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var A = [2,1,0,0];
+  var B = [0,0,1,2];
+  var raw = [
+    ["E","A","My child likes to look after other people."],
+    ["E","B","My child often doesn't understand why some things upset other people so much."],
+    ["S","B","My child doesn't mind if things in the house are not in their proper place."],
+    ["E","B","My child would not cry or get upset if a character in a film died."],
+    ["S","A","My child enjoys arranging things precisely (e.g. flowers, books, music collections)."],
+    ["E","A","My child is quick to notice when people are joking."],
+    ["E","B","My child enjoys cutting up worms, or pulling the legs off insects."],
+    ["S","A","My child is interested in the different members of a specific animal category (e.g. dinosaurs, insects, etc)."],
+    ["E","B","My child has stolen something they wanted from their sibling or friend."],
+    ["S","A","My child is interested in different types of vehicles (e.g. types of trains, cars, planes, etc)."],
+    ["S","B","My child does not spend large amounts of time lining things up in a particular order (e.g. toy soldiers, animals, cars)."],
+    ["S","A","If they had to build a Lego or Meccano model, my child would follow an instruction sheet rather than \"ploughing straight in\"."],
+    ["E","B","My child has trouble forming friendships."],
+    ["E","A","When playing with other children, my child spontaneously takes turns and shares toys."],
+    ["S","B","My child prefers to read or listen to fiction rather than non-fiction."],
+    ["S","B","My child's bedroom is usually messy rather than organised."],
+    ["E","B","My child can be blunt giving their opinions, even when these may upset someone."],
+    ["E","A","My child would enjoy looking after a pet."],
+    ["S","A","My child likes to collect things (e.g. stickers, trading cards, etc)."],
+    ["E","B","My child is often rude or impolite without realising it."],
+    ["S","A","My child knows how to mix paints to produce different colours."],
+    ["S","B","My child would not notice if something in the house had been moved or changed."],
+    ["E","B","My child has been in trouble for physical bullying."],
+    ["S","A","My child enjoys physical activities with set rules (e.g. martial arts, gymnastics, ballet, etc)."],
+    ["S","A","My child can easily figure out the controls of the video or DVD player."],
+    ["E","A","At school, when my child understands something they can easily explain it clearly to others."],
+    ["S","B","My child would find it difficult to list their top 5 songs or films in order."],
+    ["E","A","My child has one or two close friends, as well as several other friends."],
+    ["S","A","My child quickly grasps patterns in numbers in maths."],
+    ["E","A","My child listens to others' opinions, even when different from their own."],
+    ["E","A","My child shows concern when others are upset."],
+    ["S","B","My child is not interested in understanding the workings of machines (e.g. cameras, traffic lights, the TV, etc)."],
+    ["E","B","My child can seem so preoccupied with their own thoughts that they don't notice others getting bored."],
+    ["S","A","My child enjoys games that have strict rules (e.g. chess, dominos, etc)."],
+    ["S","A","My child gets annoyed when things aren't done on time."],
+    ["E","B","My child blames other children for things that they themselves have done."],
+    ["E","A","My child gets very upset if they see an animal in pain."],
+    ["S","A","My child knows the differences between the latest models of games-consoles (e.g. X-box, Playstation, etc.) or other gadgets."],
+    ["S","A","My child remembers large amounts of information about a topic that interests them (e.g. flags of the world, football teams, pop groups, etc)."],
+    ["E","B","My child sometimes pushes or pinches someone if they are annoying them."],
+    ["S","A","My child is interested in following the route on a map on a journey."],
+    ["E","A","My child can easily tell when another person wants to enter into conversation with them."],
+    ["E","A","My child is good at negotiating for what they want."],
+    ["S","A","My child likes to create lists of things (e.g. favourite toys, TV programmes, etc)."],
+    ["E","A","My child would worry about how another child would feel if they weren't invited to a party."],
+    ["S","A","My child likes to spend time mastering particular aspects of their favourite activities (e.g. skate-board or yo-yo tricks, football or ballet moves)."],
+    ["S","B","My child finds using computers difficult."],
+    ["E","A","My child gets upset at seeing others crying or in pain."],
+    ["S","A","If they had a sticker album, my child would not be satisfied until it was completed."],
+    ["S","A","My child enjoys events with organised routines (e.g. brownies, cubs, beavers, etc)."],
+    ["S","B","My child is not bothered about knowing the exact timings of the day's plans."],
+    ["E","A","My child likes to help new children integrate in class."],
+    ["E","B","My child has been in trouble for name-calling or teasing."],
+    ["S","B","My child would not enjoy working to complete a puzzle (e.g. crossword, jigsaw, word-search)."],
+    ["E","B","My child tends to resort to physical aggression to get what they want."]
+  ];
+  var items = raw.map(function(r){
+    return { sub: r[0], sc: (r[1] === "A" ? A : B), t: r[2] };
+  });
+  var opts = ["Definitely Agree","Slightly Agree","Slightly Disagree","Definitely Disagree"];
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx].t;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    opts.forEach(function(label, v){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === v ? ' selected' : '');
+      d.textContent = label;
+      d.addEventListener('click', function(){
+        answers[idx] = v;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le resultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var eqc = 0, sqc = 0;
+    items.forEach(function(it, i){
+      var pts = it.sc[answers[i]];
+      if (it.sub === 'E') eqc += pts; else sqc += pts;
+    });
+    document.getElementById('score-eqc').textContent = eqc;
+    document.getElementById('score-sqc').textContent = sqc;
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EQ-SQ - Quotient d'empathie / de systemisation (enfant)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#3D5A80 0%,#7B9BC4 55%,#22334D 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(200,215,235,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#22334D;background:#E9EEF5;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#3D5A80;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#22334D;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <div class="fiche-photo"><span class="acronym">EQ-SQ</span></div>
+  <h1 class="serif">Quotient d'empathie / de systemisation, version enfant</h1>
+  <span class="badge-standard">&#10003; Standardise</span>
+  <p class="lead">Children's Empathy Quotient / Systemizing Quotient (EQ-C / SQ-C) - Auyeung, Wheelwright, Allison, Atkinson, Samarawickrema &amp; Baron-Cohen (2009)</p>
+  <div class="meta-row">
+    <span class="pill">55 questions</span>
+    <span class="pill">10-12 minutes</span>
+    <span class="pill">Echelle 4 points</span>
+    <span class="pill">Anglais</span>
+    <span class="pill">TSA, Enfance</span>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" href="eq-sq.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+  <div class="section">
+    <h2 class="serif">Presentation de l'outil</h2>
+    <p>L'EQ-SQ (EQ-C / SQ-C) est un questionnaire hetero-evaluatif : c'est un parent ou un accompagnant qui le remplit en decrivant le comportement habituel d'un enfant de 4 a 11 ans. Il comporte 55 items repartis en deux dimensions independantes : l'empathie (EQ-C, 27 items, score maximal 54) et la systemisation (SQ-C, 28 items, score maximal 56). Chaque item est cote sur une echelle en 4 points (Definitely Agree / Slightly Agree / Slightly Disagree / Definitely Disagree), avec un barema propre a chaque item selon le sens de la formulation.</p>
+    <p>L'outil a ete developpe par l'equipe de l'Autism Research Centre (ARC) de l'Universite de Cambridge, dans le prolongement des versions adultes EQ et SQ, pour etudier les differences de developpement typique et les profils rencontres dans les troubles du spectre de l'autisme.</p>
+    <p class="source-note">Aucune traduction francaise officiellement validee n'a ete identifiee pour cette version enfant : les items sont presentes ici dans leur langue source (anglais), transcrits fidelement, sans traduction ajoutee par le cabinet.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Cotation et interpretation</h2>
+    <p>Score EQ-C = somme des points obtenus sur les 27 items d'empathie (0 a 54). Score SQ-C = somme des points obtenus sur les 28 items de systemisation (0 a 56). Pour chaque item, deux des quatre reponses possibles valent 0 point et les deux autres valent 1 ou 2 points, selon que l'item est formule dans le sens empathique/systemisant ou dans le sens inverse.</p>
+    <p class="source-note">Aucun seuil clinique n'est publie par les auteurs pour cette version enfant : les scores obtenus se lisent en profil (comparaison EQ-C / SQ-C) et non par rapport a un seuil diagnostique. Ne pas en deduire de seuil qui ne serait pas issu de la publication originale.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Source</h2>
+    <p class="source-note">Auyeung, B., Wheelwright, S., Allison, C., Atkinson, M., Samarawickrema, N., &amp; Baron-Cohen, S. (2009). The Children's Empathy Quotient and Systemizing Quotient: Sex Differences in Typical Development and in Autism Spectrum Conditions. Journal of Autism and Developmental Disorders, 39(10), 1509-1521. Diffusion officielle Autism Research Centre, Universite de Cambridge - usage clinique et de recherche libre.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

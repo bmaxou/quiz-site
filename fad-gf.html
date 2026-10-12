@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FAD-GF — Échelle de fonctionnement général de la famille (McMaster)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#9A4B2A;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .period{font-size:12.5px;font-weight:600;color:#9A4B2A;margin:0 0 8px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#9A4B2A;background:#F7E7DD;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#9A4B2A;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#9A4B2A;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 20px;}
+  .sc-title{font-size:13px;font-weight:700;color:#9A4B2A;margin:18px 0 6px;}
+  .sc-row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-top:1px solid #EFEBE1;font-size:14px;}
+  .sc-row b{font-variant-numeric:tabular-nums;white-space:nowrap;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">FAD-GF — Échelle de fonctionnement général de la famille (McMaster)</h1>
+    <p class="lead">Pour chaque affirmation, indiquez dans quelle mesure elle décrit votre famille : tout à fait d'accord, d'accord, pas d'accord ou pas du tout d'accord.</p>
+    <p class="lang-note">Items en anglais (version officielle ; texte français non récupéré en accès libre). Outil sous licence (permission nominative auprès des auteurs) : « Licence requise : oui ».</p>
+    <div class="pill-row">
+      <span class="pill">12 questions</span>
+      <span class="pill">3 minutes</span>
+      <span class="pill">Score moyen 1,00 à 4,00</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="period" id="period-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-score" id="score-val"></p>
+    <p class="result-max">score moyen, sur une échelle de 1,00 à 4,00 (plus il est élevé, plus le fonctionnement familial perçu est problématique)</p>
+    <div class="sc-row"><span>Somme des 12 items cotés</span><b id="sum-val"></b></div>
+    <div class="sc-row"><span>Repère de la source</span><b id="flag-val"></b></div>
+    <p class="result-text" style="margin-top:18px">Réponses codées de 1 (tout à fait d'accord) à 4 (pas du tout d'accord) ; les items 1, 3, 5, 7, 9 et 11 (formulés dans le sens négatif) sont inversés à la cotation (5 moins la réponse). Le score est la moyenne des 12 items. Selon la source officielle, un score de 2,00 ou plus indique un fonctionnement familial perçu comme problématique ; ce repère est une aide à la discussion, jamais un diagnostic.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Family Assessment Device — sous-échelle Fonctionnement général (General Functioning), 12 items — Epstein, Baldwin &amp; Bishop, 1983 ; Ryan, Epstein, Keitner, Miller &amp; Bishop. Outil de repérage, ne remplace pas une évaluation clinique de la famille.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [
+    {"t": "Planning family activities is difficult because we misunderstand each other.", "r": true},
+    {"t": "In times of crisis we can turn to each other for support.", "r": false},
+    {"t": "We cannot talk to each other about the sadness we feel.", "r": true},
+    {"t": "Individuals are accepted for what they are.", "r": false},
+    {"t": "We avoid discussing our fears and concerns.", "r": true},
+    {"t": "We can express feelings to each other.", "r": false},
+    {"t": "There are lots of bad feelings in the family.", "r": true},
+    {"t": "We feel accepted for what we are.", "r": false},
+    {"t": "Making decisions is a problem for our family.", "r": true},
+    {"t": "We are able to make decisions about how to solve problems.", "r": false},
+    {"t": "We don't get along well together.", "r": true},
+    {"t": "We confide in each other.", "r": false}
+  ];
+  var opts = ["Tout à fait d'accord (Strongly agree)","D'accord (Agree)","Pas d'accord (Disagree)","Pas du tout d'accord (Strongly disagree)"];
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('period-text').textContent = 'Cette affirmation décrit-elle votre famille ?';
+    document.getElementById('q-text').textContent = items[idx].t;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    opts.forEach(function(label, k){
+      var v = k + 1;
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === v ? ' selected' : '');
+      d.textContent = label;
+      d.addEventListener('click', function(){
+        answers[idx] = v;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function val(n){ var it = items[n]; return it.r ? 5 - answers[n] : answers[n]; }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var s = 0;
+    for (var n = 0; n < items.length; n++){ s += val(n); }
+    var mean = s / items.length;
+    document.getElementById('score-val').textContent = mean.toFixed(2).replace('.', ',');
+    document.getElementById('sum-val').textContent = s + ' / 48';
+    document.getElementById('flag-val').textContent = mean >= 2 ? 'Score ≥ 2,00' : 'Score < 2,00';
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FAD-GF — Échelle de fonctionnement général de la famille (McMaster)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#9A4B2A 0%,#E0A27C 55%,#4A2210 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,245,235,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#4A2210;background:#F7E7DD;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#9A4B2A;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#4A2210;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">FAD-GF</span></div>
+
+  <h1 class="serif">Échelle de fonctionnement général de la famille (FAD-GF)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">McMaster Family Assessment Device, sous-échelle Fonctionnement général (12 items) — Epstein, Baldwin &amp; Bishop ; validation française du FAD : Speranza et al.</p>
+  <div class="meta-row">
+    <span class="pill">12 questions</span>
+    <span class="pill">3 minutes</span>
+    <span class="pill">Score moyen 1,00 à 4,00</span>
+    <span class="pill">Items en anglais</span>
+    <span class="pill">Licence requise : oui</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="fad-gf.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le Family Assessment Device (FAD, Epstein, Baldwin &amp; Bishop, 1983) évalue le fonctionnement de la famille selon le modèle McMaster. Sa version complète compte 60 items répartis en sept sous-échelles (résolution de problèmes, communication, rôles, réponse affective, implication affective, contrôle des comportements, fonctionnement général). La sous-échelle Fonctionnement général (FAD-GF), de 12 items, est la plus utilisée seule : elle donne une vue d'ensemble de la santé globale de la famille telle que la perçoit le répondant (un membre de la famille). Chaque affirmation se cote de « tout à fait d'accord » à « pas du tout d'accord ».</p>
+    <p><strong>Portée de cette fiche.</strong> Seule la sous-échelle FAD-GF (12 items) est proposée : le texte intégral des 60 items du FAD complet n'a pas pu être vérifié dans une source libre fiable et n'est donc pas reproduit. <strong>Items en anglais</strong> : le texte français du FAD (Speranza et al., 2012) n'est pas disponible en accès libre ; aucune traduction n'a été improvisée. Seules les modalités de réponse sont libellées en français, avec l'original anglais entre parenthèses.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Réponses codées de 1 (tout à fait d'accord) à 4 (pas du tout d'accord). Les items 1, 3, 5, 7, 9 et 11, formulés dans le sens négatif, sont inversés (5 moins la réponse) ; les items 2, 4, 6, 8, 10 et 12 sont cotés tels quels. Le score est la moyenne des 12 items, de 1,00 à 4,00 : plus il est élevé, plus le fonctionnement familial perçu est problématique. La feuille de cotation officielle indique qu'un score de 2,00 ou plus correspond à un fonctionnement familial problématique ; certaines publications formulent ce repère comme « supérieur à 2,00 » (Miller et al., 1985, pour les seuils par sous-échelle). Ce repère est une aide à la discussion avec la famille, non un diagnostic ; il se lit avec l'entretien clinique et, idéalement, les réponses de plusieurs membres de la famille.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p><strong>Licence requise : oui.</strong> Le FAD est diffusé sur demande par ses auteurs (Family Research Program, Butler Hospital, Providence) ; une permission nominative est demandée avant usage, sans paiement systématique documenté. Aucune mention de copyright n'apparaît sur la base de données NCTSN, mais la démarche de permission est explicitement indiquée par une seconde source. Instrument construit ici malgré la licence, conformément à la décision du 30/09/2026 ; la diffusion publique reste soumise à l'autorisation du détenteur des droits.</p>
+    <p class="source-note">Texte des 12 items, ordre, items inversés et repère de 2,00 : feuille « FAD General Functioning Scale » et feuille de cotation (« Evaluating and Treating Families: The McMaster Approach », utilisée avec la permission de Ryan, Epstein, Keitner, Miller &amp; Bishop), recoupées avec le dictionnaire de données CHDWB (Georgia Tech/Emory), qui reproduit les mêmes items et la même règle de cotation. Instrument original : Epstein N.B., Baldwin L.M. &amp; Bishop D.S. (1983), « The McMaster Family Assessment Device », Journal of Marital and Family Therapy, 9(2), 171-180. Seuils : Miller I.W. et al. (1985). Version française du FAD : Speranza M., Guénolé F., Revah-Levy A., Egler P.J., Negadi F., Falissard B. &amp; Baleyte J.M. (2012), Revue canadienne de psychiatrie, 57(9), 570-577, DOI 10.1177/070674371205700908.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

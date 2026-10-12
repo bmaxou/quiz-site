@@ -1,0 +1,1023 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FACT-G — Qualité de vie en cancérologie (version 4)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#8A4A26;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .sec{font-size:12.5px;color:#63695D;background:#F4F1EA;border-radius:8px;padding:8px 12px;margin:0 0 16px;}
+  .q-text{font-size:16px;margin:0 0 6px;}
+  .q-desc{font-size:13px;color:#63695D;margin:0 0 18px;white-space:pre-line;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#8A4A26;background:#F6E6DA;}
+  .num-row{display:flex;flex-wrap:wrap;gap:6px;}
+  .num{min-width:44px;text-align:center;padding:10px 0;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600;background:#fff;}
+  .num.selected{border-color:#8A4A26;background:#F6E6DA;}
+  .num-ends{display:flex;justify-content:space-between;gap:12px;font-size:12px;color:#63695D;margin-top:8px;}
+  .vas-box{padding:8px 0;}
+  .vas-val{font-family:'Cormorant Garamond',Georgia,serif;font-size:40px;color:#8A4A26;margin:0 0 6px;}
+  .vas-box input[type=range]{width:100%;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#8A4A26;border-color:#E0D9C9;}
+  .btn-primary{background:#8A4A26;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:40px;color:#8A4A26;margin:0 0 4px;}
+  .result-max{font-size:13px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 14px;}
+  .result-list{font-size:14px;margin:0 0 16px;padding-left:20px;}
+  .result-list li{margin-bottom:4px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">FACT-G — Évaluation fonctionnelle de la thérapie du cancer, version générale</h1>
+    <p class="lead">Vingt-sept affirmations sur le bien-être physique, familial et social, émotionnel et fonctionnel au cours des 7 derniers jours. Chaque réponse va de « Pas du tout » à « Énormément ». Une question sur la vie sexuelle peut être laissée sans réponse.</p>
+    <p class="lang-note">Version française de la famille FACIT (Functional Assessment of Chronic Illness Therapy). Questionnaire d'auto-évaluation pour les personnes atteintes de cancer.</p>
+    <div class="pill-row">
+      <span class="pill">27 questions</span>
+      <span class="pill">5 minutes</span>
+      <span class="pill">Échelle 0-4</span>
+      <span class="pill">Français</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="sec" id="sec-text" hidden></p>
+    <p class="q-text" id="q-text"></p>
+    <p class="q-desc" id="q-desc"></p>
+    <div id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Cella D.F. et al. (1993). The Functional Assessment of Cancer Therapy scale: development and validation of the general measure, <em>Journal of Clinical Oncology</em>, 11(3), 570-579. Version française : Conroy T. et al. (2004), <em>European Journal of Cancer</em>, 40(15), 2243-2252. Copyright 1987, 1997 David Cella, Ph.D. — FACIT.org. Ce résultat est un repère, il ne constitue pas un diagnostic.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [
+ {
+  "t": "Je manque d'énergie",
+  "sec": "BIEN-ÊTRE PHYSIQUE",
+  "opts": [
+   [
+    0,
+    "Pas du tout"
+   ],
+   [
+    1,
+    "Un peu"
+   ],
+   [
+    2,
+    "Moyennement"
+   ],
+   [
+    3,
+    "Beaucoup"
+   ],
+   [
+    4,
+    "Énormément"
+   ]
+  ],
+  "d": "Vous trouverez ci-dessous une liste de commentaires que d'autres personnes atteintes de la même maladie que vous ont jugés importants. Veuillez indiquer votre réponse en choisissant une seule réponse par ligne et en tenant compte des 7 derniers jours."
+ },
+ {
+  "t": "J'ai des nausées",
+  "sec": "BIEN-ÊTRE PHYSIQUE",
+  "opts": [
+   [
+    0,
+    "Pas du tout"
+   ],
+   [
+    1,
+    "Un peu"
+   ],
+   [
+    2,
+    "Moyennement"
+   ],
+   [
+    3,
+    "Beaucoup"
+   ],
+   [
+    4,
+    "Énormément"
+   ]
+  ]
+ },
+ {
+  "t": "À cause de mon état physique, j'ai du mal à répondre aux besoins de ma famille",
+  "sec": "BIEN-ÊTRE PHYSIQUE",
+  "opts": [
+   [
+    0,
+    "Pas du tout"
+   ],
+   [
+    1,
+    "Un peu"
+   ],
+   [
+    2,
+    "Moyennement"
+   ],
+   [
+    3,
+    "Beaucoup"
+   ],
+   [
+    4,
+    "Énormément"
+   ]
+  ]
+ },
+ {
+  "t": "J'ai des douleurs",
+  "sec": "BIEN-ÊTRE PHYSIQUE",
+  "opts": [
+   [
+    0,
+    "Pas du tout"
+   ],
+   [
+    1,
+    "Un peu"
+   ],
+   [
+    2,
+    "Moyennement"
+   ],
+   [
+    3,
+    "Beaucoup"
+   ],
+   [
+    4,
+    "Énormément"
+   ]
+  ]
+ },
+ {
+  "t": "Je suis incommodé(e) par les effets secondaires du traitement",
+  "sec": "BIEN-ÊTRE PHYSIQUE",
+  "opts": [
+   [
+    0,
+    "Pas du tout"
+   ],
+   [
+    1,
+    "Un peu"
+   ],
+   [
+    2,
+    "Moyennement"
+   ],
+   [
+    3,
+    "Beaucoup"
+   ],
+   [
+    4,
+    "Énormément"
+   ]
+  ]
+ },
+ {
+  "t": "Je me sens malade",
+  "sec": "BIEN-ÊTRE PHYSIQUE",
+  "opts": [
+   [
+    0,
+    "Pas du tout"
+   ],
+   [
+    1,
+    "Un peu"
+   ],
+   [
+    2,
+    "Moyennement"
+   ],
+   [
+    3,
+    "Beaucoup"
+   ],
+   [
+    4,
+    "Énormément"
+   ]
+  ]
+ },
+ {
+  "t": "Je suis obligé(e) de passer du temps allongé(e)",
+  "sec": "BIEN-ÊTRE PHYSIQUE",
+  "opts": [
+   [
+    0,
+    "Pas du tout"
+   ],
+   [
+    1,
+    "Un peu"
+   ],
+   [
+    2,
+    "Moyennement"
+   ],
+   [
+    3,
+    "Beaucoup"
+   ],
+   [
+    4,
+    "Énormément"
+   ]
+  ]
+ },
+ {
+  "t": "Je me sens proche de mes amis",
+  "sec": "BIEN-ÊTRE FAMILIAL/SOCIAL",
+  "opts": [
+   [
+    0,
+    "Pas du tout"
+   ],
+   [
+    1,
+    "Un peu"
+   ],
+   [
+    2,
+    "Moyennement"
+   ],
+   [
+    3,
+    "Beaucoup"
+   ],
+   [
+    4,
+    "Énormément"
+   ]
+  ]
+ },
+ {
+  "t": "Ma famille me soutient moralement",
+  "sec": "BIEN-ÊTRE FAMILIAL/SOCIAL",
+  "opts": [
+   [
+    0,
+    "Pas du tout"
+   ],
+   [
+    1,
+    "Un peu"
+   ],
+   [
+    2,
+    "Moyennement"
+   ],
+   [
+    3,
+    "Beaucoup"
+   ],
+   [
+    4,
+    "Énormément"
+   ]
+  ]
+ },
+ {
+  "t": "Mes amis me soutiennent",
+  "sec": "BIEN-ÊTRE FAMILIAL/SOCIAL",
+  "opts": [
+   [
+    0,
+    "Pas du tout"
+   ],
+   [
+    1,
+    "Un peu"
+   ],
+   [
+    2,
+    "Moyennement"
+   ],
+   [
+    3,
+    "Beaucoup"
+   ],
+   [
+    4,
+    "Énormément"
+   ]
+  ]
+ },
+ {
+  "t": "Ma famille a accepté ma maladie",
+  "sec": "BIEN-ÊTRE FAMILIAL/SOCIAL",
+  "opts": [
+   [
+    0,
+    "Pas du tout"
+   ],
+   [
+    1,
+    "Un peu"
+   ],
+   [
+    2,
+    "Moyennement"
+   ],
+   [
+    3,
+    "Beaucoup"
+   ],
+   [
+    4,
+    "Énormément"
+   ]
+  ]
+ },
+ {
+  "t": "Je suis satisfait(e) de la communication avec ma famille au sujet de ma maladie",
+  "sec": "BIEN-ÊTRE FAMILIAL/SOCIAL",
+  "opts": [
+   [
+    0,
+    "Pas du tout"
+   ],
+   [
+    1,
+    "Un peu"
+   ],
+   [
+    2,
+    "Moyennement"
+   ],
+   [
+    3,
+    "Beaucoup"
+   ],
+   [
+    4,
+    "Énormément"
+   ]
+  ]
+ },
+ {
+  "t": "Je me sens proche de mon (ma) partenaire (ou de la personne qui est mon principal soutien)",
+  "sec": "BIEN-ÊTRE FAMILIAL/SOCIAL",
+  "opts": [
+   [
+    0,
+    "Pas du tout"
+   ],
+   [
+    1,
+    "Un peu"
+   ],
+   [
+    2,
+    "Moyennement"
+   ],
+   [
+    3,
+    "Beaucoup"
+   ],
+   [
+    4,
+    "Énormément"
+   ]
+  ]
+ },
+ {
+  "t": "Je suis satisfait(e) de ma vie sexuelle",
+  "sec": "BIEN-ÊTRE FAMILIAL/SOCIAL",
+  "opts": [
+   [
+    0,
+    "Pas du tout"
+   ],
+   [
+    1,
+    "Un peu"
+   ],
+   [
+    2,
+    "Moyennement"
+   ],
+   [
+    3,
+    "Beaucoup"
+   ],
+   [
+    4,
+    "Énormément"
+   ],
+   [
+    9,
+    "Je préfère ne pas répondre"
+   ]
+  ],
+  "d": "Quel que soit votre degré d'activité sexuelle en ce moment, veuillez répondre à la question suivante. Si vous préférez ne pas y répondre, choisissez la dernière réponse proposée."
+ },
+ {
+  "t": "Je me sens triste",
+  "sec": "BIEN-ÊTRE ÉMOTIONNEL",
+  "opts": [
+   [
+    0,
+    "Pas du tout"
+   ],
+   [
+    1,
+    "Un peu"
+   ],
+   [
+    2,
+    "Moyennement"
+   ],
+   [
+    3,
+    "Beaucoup"
+   ],
+   [
+    4,
+    "Énormément"
+   ]
+  ]
+ },
+ {
+  "t": "Je suis satisfait(e) de la façon dont je fais face à ma maladie",
+  "sec": "BIEN-ÊTRE ÉMOTIONNEL",
+  "opts": [
+   [
+    0,
+    "Pas du tout"
+   ],
+   [
+    1,
+    "Un peu"
+   ],
+   [
+    2,
+    "Moyennement"
+   ],
+   [
+    3,
+    "Beaucoup"
+   ],
+   [
+    4,
+    "Énormément"
+   ]
+  ]
+ },
+ {
+  "t": "Je perds espoir dans le combat contre ma maladie",
+  "sec": "BIEN-ÊTRE ÉMOTIONNEL",
+  "opts": [
+   [
+    0,
+    "Pas du tout"
+   ],
+   [
+    1,
+    "Un peu"
+   ],
+   [
+    2,
+    "Moyennement"
+   ],
+   [
+    3,
+    "Beaucoup"
+   ],
+   [
+    4,
+    "Énormément"
+   ]
+  ]
+ },
+ {
+  "t": "Je me sens nerveux (nerveuse)",
+  "sec": "BIEN-ÊTRE ÉMOTIONNEL",
+  "opts": [
+   [
+    0,
+    "Pas du tout"
+   ],
+   [
+    1,
+    "Un peu"
+   ],
+   [
+    2,
+    "Moyennement"
+   ],
+   [
+    3,
+    "Beaucoup"
+   ],
+   [
+    4,
+    "Énormément"
+   ]
+  ]
+ },
+ {
+  "t": "Je suis préoccupé(e) par l'idée de mourir",
+  "sec": "BIEN-ÊTRE ÉMOTIONNEL",
+  "opts": [
+   [
+    0,
+    "Pas du tout"
+   ],
+   [
+    1,
+    "Un peu"
+   ],
+   [
+    2,
+    "Moyennement"
+   ],
+   [
+    3,
+    "Beaucoup"
+   ],
+   [
+    4,
+    "Énormément"
+   ]
+  ]
+ },
+ {
+  "t": "Je suis préoccupé(e) à l'idée que mon état de santé puisse s'aggraver",
+  "sec": "BIEN-ÊTRE ÉMOTIONNEL",
+  "opts": [
+   [
+    0,
+    "Pas du tout"
+   ],
+   [
+    1,
+    "Un peu"
+   ],
+   [
+    2,
+    "Moyennement"
+   ],
+   [
+    3,
+    "Beaucoup"
+   ],
+   [
+    4,
+    "Énormément"
+   ]
+  ]
+ },
+ {
+  "t": "Je suis capable de travailler (y compris le travail à la maison)",
+  "sec": "BIEN-ÊTRE FONCTIONNEL",
+  "opts": [
+   [
+    0,
+    "Pas du tout"
+   ],
+   [
+    1,
+    "Un peu"
+   ],
+   [
+    2,
+    "Moyennement"
+   ],
+   [
+    3,
+    "Beaucoup"
+   ],
+   [
+    4,
+    "Énormément"
+   ]
+  ]
+ },
+ {
+  "t": "Mon travail (y compris le travail à la maison) me donne de la satisfaction",
+  "sec": "BIEN-ÊTRE FONCTIONNEL",
+  "opts": [
+   [
+    0,
+    "Pas du tout"
+   ],
+   [
+    1,
+    "Un peu"
+   ],
+   [
+    2,
+    "Moyennement"
+   ],
+   [
+    3,
+    "Beaucoup"
+   ],
+   [
+    4,
+    "Énormément"
+   ]
+  ]
+ },
+ {
+  "t": "Je suis capable de profiter de la vie",
+  "sec": "BIEN-ÊTRE FONCTIONNEL",
+  "opts": [
+   [
+    0,
+    "Pas du tout"
+   ],
+   [
+    1,
+    "Un peu"
+   ],
+   [
+    2,
+    "Moyennement"
+   ],
+   [
+    3,
+    "Beaucoup"
+   ],
+   [
+    4,
+    "Énormément"
+   ]
+  ]
+ },
+ {
+  "t": "J'ai accepté ma maladie",
+  "sec": "BIEN-ÊTRE FONCTIONNEL",
+  "opts": [
+   [
+    0,
+    "Pas du tout"
+   ],
+   [
+    1,
+    "Un peu"
+   ],
+   [
+    2,
+    "Moyennement"
+   ],
+   [
+    3,
+    "Beaucoup"
+   ],
+   [
+    4,
+    "Énormément"
+   ]
+  ]
+ },
+ {
+  "t": "Je dors bien",
+  "sec": "BIEN-ÊTRE FONCTIONNEL",
+  "opts": [
+   [
+    0,
+    "Pas du tout"
+   ],
+   [
+    1,
+    "Un peu"
+   ],
+   [
+    2,
+    "Moyennement"
+   ],
+   [
+    3,
+    "Beaucoup"
+   ],
+   [
+    4,
+    "Énormément"
+   ]
+  ]
+ },
+ {
+  "t": "J'apprécie mes loisirs habituels",
+  "sec": "BIEN-ÊTRE FONCTIONNEL",
+  "opts": [
+   [
+    0,
+    "Pas du tout"
+   ],
+   [
+    1,
+    "Un peu"
+   ],
+   [
+    2,
+    "Moyennement"
+   ],
+   [
+    3,
+    "Beaucoup"
+   ],
+   [
+    4,
+    "Énormément"
+   ]
+  ]
+ },
+ {
+  "t": "Je suis satisfait(e) de ma qualité de vie actuelle",
+  "sec": "BIEN-ÊTRE FONCTIONNEL",
+  "opts": [
+   [
+    0,
+    "Pas du tout"
+   ],
+   [
+    1,
+    "Un peu"
+   ],
+   [
+    2,
+    "Moyennement"
+   ],
+   [
+    3,
+    "Beaucoup"
+   ],
+   [
+    4,
+    "Énormément"
+   ]
+  ]
+ }
+];
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+  var RESULT = function(a){
+    // a[0..26] : GP1-7 (0-6), GS1-7 (7-13), GE1-6 (14-19), GF1-7 (20-26) ; 9 = non répondu (GS7 seulement)
+    var REV = [0,1,2,3,4,5,6,14,16,17,18,19];
+    var subs = [['Bien-être physique (PWB)', 0, 7], ['Bien-être social/familial (SWB)', 7, 7], ['Bien-être émotionnel (EWB)', 14, 6], ['Bien-être fonctionnel (FWB)', 20, 7]];
+    var out = [], total = 0, ok = true, answered = 0, notes = [];
+    subs.forEach(function(s){
+      var sum = 0, n = 0;
+      for (var i = s[1]; i < s[1] + s[2]; i++){
+        var v = a[i];
+        if (v === 9 || v === null || v === undefined) continue;
+        if (REV.indexOf(i) >= 0) v = 4 - v;
+        sum += v; n++;
+      }
+      answered += n;
+      if (n / s[2] <= 0.5){ ok = false; out.push([s[0], null, s[2] * 4]); return; }
+      var sc = sum * s[2] / n;
+      if (n < s[2]) notes.push(s[0] + ' : ' + n + ' item(s) sur ' + s[2] + ' renseigné(s), score proratisé');
+      total += sc;
+      out.push([s[0], sc, s[2] * 4]);
+    });
+    if (answered / 27 <= 0.8) ok = false;
+    function f1(x){ return (Math.round(x * 10) / 10).toFixed(1).replace(/\.0$/, ''); }
+    var h = ok ? '<p class="result-score">' + f1(total) + ' / 108</p><p class="result-max">score total FACT-G (somme des quatre sous-échelles, 0 à 108) — plus le score est élevé, meilleure est la qualité de vie</p>' : '<p class="result-score">—</p><p class="result-max">score total non calculable (trop d\'items manquants)</p>';
+    h += '<ul class="result-list">' + out.map(function(r){ return '<li>' + r[0] + ' : <strong>' + (r[1] === null ? 'non calculable' : f1(r[1]) + ' / ' + r[2]) + '</strong></li>'; }).join('') + '</ul>';
+    if (notes.length) h += '<p class="result-text">' + notes.join('. ') + '.</p>';
+    h += '<p class="result-text">Cotation selon le guide officiel FACIT : les items formulés négativement sont inversés (4 − réponse), puis sommés par sous-échelle ; une sous-échelle est proratisée si plus de la moitié de ses items sont renseignés. Aucun seuil clinique officiel n\'est retenu ici : lecture dimensionnelle ou dans le temps. Ce résultat ne constitue pas un diagnostic.</p>';
+    return h;
+  };
+
+  function vis(i){
+    var c = items[i].cond;
+    return !c || answers[c[0]] === c[1];
+  }
+  function step(i, dir){
+    var j = i + dir;
+    while (j >= 0 && j < items.length && !vis(j)) j += dir;
+    return j;
+  }
+  function visCount(){ var n = 0; for (var i = 0; i < items.length; i++) if (vis(i)) n++; return n; }
+  function visRank(i){ var n = 0; for (var k = 0; k <= i; k++) if (vis(k)) n++; return n; }
+  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+
+  function renderQuestion(){
+    var it = items[idx];
+    document.getElementById('progress-text').textContent = 'Question ' + visRank(idx) + ' / ' + visCount();
+    var secEl = document.getElementById('sec-text');
+    if (it.sec){ secEl.textContent = it.sec; secEl.hidden = false; } else { secEl.hidden = true; }
+    document.getElementById('q-text').textContent = it.t;
+    document.getElementById('q-desc').textContent = it.d || '';
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    if (it.kind === 'num'){
+      var nr = document.createElement('div'); nr.className = 'num-row';
+      for (var v = it.min; v <= it.max; v++){
+        (function(v){
+          var b = document.createElement('div');
+          b.className = 'num' + (answers[idx] === v ? ' selected' : '');
+          b.textContent = v;
+          b.addEventListener('click', function(){ answers[idx] = v; renderQuestion(); });
+          nr.appendChild(b);
+        })(v);
+      }
+      row.appendChild(nr);
+      var ends = document.createElement('div'); ends.className = 'num-ends';
+      ends.innerHTML = '<span>' + esc(it.lo) + '</span><span style="text-align:right">' + esc(it.hi) + '</span>';
+      row.appendChild(ends);
+    } else if (it.kind === 'vas'){
+      var box = document.createElement('div'); box.className = 'vas-box';
+      var cur = answers[idx] === null ? 50 : answers[idx];
+      box.innerHTML = '<p class="vas-val" id="vas-val">' + (answers[idx] === null ? '—' : answers[idx]) + '</p>' +
+        '<input type="range" id="vas-range" min="' + it.min + '" max="' + it.max + '" step="1" value="' + cur + '" aria-label="Échelle visuelle analogique">' +
+        '<div class="num-ends"><span>' + esc(it.lo) + '</span><span style="text-align:right">' + esc(it.hi) + '</span></div>' +
+        '<p class="q-desc" style="margin-top:14px">Déplacez le curseur (ou utilisez les flèches du clavier) jusqu\'à la valeur qui correspond à votre état de santé aujourd\'hui.</p>';
+      row.appendChild(box);
+      var rg = document.getElementById('vas-range');
+      function setV(){
+        answers[idx] = parseInt(rg.value, 10);
+        document.getElementById('vas-val').textContent = answers[idx];
+        document.getElementById('btn-next').disabled = false;
+      }
+      rg.addEventListener('input', setV);
+      rg.addEventListener('change', setV);
+      rg.addEventListener('click', setV);
+    } else {
+      var list = document.createElement('div'); list.className = 'opt-row';
+      it.opts.forEach(function(pair){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx] === pair[0] ? ' selected' : '');
+        d.textContent = pair[1];
+        d.addEventListener('click', function(){ answers[idx] = pair[0]; renderQuestion(); });
+        list.appendChild(d);
+      });
+      row.appendChild(list);
+    }
+    document.getElementById('btn-prev').disabled = step(idx, -1) < 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = step(idx, 1) >= items.length ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    var j = step(idx, -1);
+    if (j >= 0){ idx = j; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    var j = step(idx, 1);
+    if (j < items.length){ idx = j; renderQuestion(); } else { showResult(); }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var a = answers.map(function(v, i){ return vis(i) ? v : null; });
+    document.getElementById('result-body').innerHTML = RESULT(a);
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FACT-G — Qualité de vie en cancérologie (version 4)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#6E3A1E 0%,#B06A3C 55%,#3E2010 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,210,.40),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#8A4A26;background:#F6E6DA;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .section ul{font-size:14.5px;margin:0 0 10px;padding-left:20px;}
+  .section li{margin-bottom:4px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#8A4A26;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#8A4A26;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <div class="fiche-photo"><span class="acronym">FACT-G</span></div>
+  <h1 class="serif">FACT-G — Évaluation fonctionnelle de la thérapie du cancer, version générale</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Functional Assessment of Cancer Therapy — General (version 4) — Cella D.F. et al. (1993), famille FACIT</p>
+  <div class="meta-row">
+    <span class="pill">27 questions</span>
+    <span class="pill">5 minutes</span>
+    <span class="pill">Échelle 0-4</span>
+    <span class="pill">Adulte</span>
+    <span class="pill">Français</span>
+    <span class="pill">Licence requise : oui</span>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" href="fact-g.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le FACT-G est le tronc commun de la famille FACIT de mesure de la qualité de vie en cancérologie. Il comprend quatre sous-échelles : bien-être physique (7 items), bien-être familial/social (7 items), bien-être émotionnel (6 items) et bien-être fonctionnel (7 items), toutes rapportées aux 7 derniers jours. L'item sur la vie sexuelle peut être laissé sans réponse, comme dans le formulaire papier.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Cotation conforme au guide officiel FACIT (facit.org/scoring) : chaque item est coté de 0 (« Pas du tout ») à 4 (« Énormément ») ; les items formulés négativement sont inversés (4 − réponse) : bien-être physique, tous les items (GP1 à GP7) ; bien-être émotionnel, tous sauf GE2 (GE1, GE3, GE4, GE5, GE6) ; aucun item inversé pour le bien-être familial/social ni fonctionnel. Les scores des sous-échelles sont les sommes des items (physique 0-28, familial/social 0-28, émotionnel 0-24, fonctionnel 0-28), proratisées par la moyenne des items renseignés lorsque plus de la moitié des items de la sous-échelle sont renseignés. Le score total FACT-G est la somme des quatre sous-échelles (0-108), calculé uniquement si toutes les sous-échelles sont valides et si au moins 80 % des items (22 sur 27) sont renseignés. Plus le score est élevé, meilleure est la qualité de vie.</p><p>Implémentation vérifiée par recoupement avec le code de cotation du paquet R FACTscorer (mêmes items inversés, mêmes règles de proratisation). Aucun seuil clinique officiel n'est retenu ici : lecture dimensionnelle ou dans le temps.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p>Cella D.F., Tulsky D.S., Gray G. et al. (1993), <em>Journal of Clinical Oncology</em>, 11(3), 570-579 ; version française validée : Conroy T. et al. (2004), <em>European Journal of Cancer</em>, 40(15), 2243-2252. Copyright 1987, 1997 David Cella, Ph.D. — FACIT.org. Texte des items en français transcrit depuis la reproduction de la version française FACIT dans une annexe de mémoire de médecine (Université de Lausanne, n° 5792, annexe « FACT-L », sections bien-être physique, familial/social, émotionnel et fonctionnel) ; chaque item a été rapproché de l'item anglais du formulaire officiel FACT-G version 4 (27 items, mêmes codes GP1-GF7) et la consigne et les modalités de réponse concordent avec le formulaire français officiel FACIT Fatigue Scale (version 4). Le PDF français officiel du FACT-G n'a pas pu être téléchargé directement : à comparer avec la version de la licence FACIT avant tout usage formel.</p><p class="source-note"><strong>Licence requise : oui.</strong> Enregistrement et licence auprès de FACIT.org obligatoires pour tout usage, y compris académique ou clinique non commercial (traductions accessibles sans frais pour les organisations à but non lucratif ; toute utilisation commerciale interdite sans accord séparé). Construit malgré tout sur décision du cabinet (30/09/2026) ; à régulariser auprès de FACIT.org. Outil de repérage, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

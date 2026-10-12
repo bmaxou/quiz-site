@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Évaluation du danger — Danger Assessment</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#8C2E3F;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 10px;}
+  .q-hint{font-size:12.5px;color:#9A9E90;margin:0 0 20px;font-style:italic;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#8C2E3F;background:#F3E3E6;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#8C2E3F;border-color:#E0D9C9;}
+  .btn-primary{background:#8C2E3F;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#8C2E3F;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 14px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">Évaluation du danger — Danger Assessment</h1>
+    <p class="lead">Vingt questions par Oui/Non destinées à repérer des facteurs associés à un risque accru de violence grave, voire létale, dans une relation de couple actuelle ou passée. « Il » désigne le conjoint, l'ex-conjoint ou toute autre personne qui exerce ou a exercé cette violence.</p>
+    <p class="lang-note">Avant de répondre, l'outil original invite aussi à reporter sur un calendrier les dates approximatives des incidents de l'année passée avec leur gravité (1. gifles/bousculade sans blessure durable ; 2. coups de poing/pied, bleus, coupures ; 3. « raclée », contusions graves, brûlures, fractures, fausse-couche ; 4. menace ou usage d'une arme, blessure à la tête ou interne ; 5. usage d'une arme, blessure par arme). Ce calendrier papier complète les 20 questions ci-dessous mais n'est pas reproduit dans cette adaptation numérique.</p>
+    <div class="pill-row">
+      <span class="pill">20 questions</span>
+      <span class="pill">5 minutes</span>
+      <span class="pill">Oui / Non</span>
+      <span class="pill">Français (Canada)</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <p class="q-hint" id="q-hint"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-score" id="score-val"></p>
+    <p class="result-max">total de « oui », de 0 à 20</p>
+    <p class="result-text" id="level-text"></p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Campbell J.C. (2004), <em>Danger Assessment</em>, École des sciences infirmières de l'Université Johns Hopkins. Traduction canadienne-française officielle, www.dangerassessment.org. Outil de dépistage, ne remplace pas une évaluation clinique du risque ni une formation certifiée d'évaluateur.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [
+    ["La gravité ou la fréquence de la violence physique a-t-elle augmenté au cours de la dernière année ?", ""],
+    ["Possède-t-il une arme à feu (un pistolet ou un fusil) ?", ""],
+    ["L'avez-vous quitté après avoir habité ensemble au cours de la dernière année ?", "Si vous n'avez jamais habité avec lui, répondez Non."],
+    ["Est-il sans emploi ?", ""],
+    ["Vous a-t-il déjà menacée avec une arme ou utilisé une arme meurtrière contre vous ?", ""],
+    ["Menace-t-il de vous tuer ?", ""],
+    ["Est-ce qu'il a évité l'arrestation pour violence conjugale ?", ""],
+    ["Avez-vous un enfant qui n'est pas le sien ?", ""],
+    ["Est-ce qu'il vous a déjà forcée à avoir des rapports sexuels quand vous ne le souhaitiez pas ?", ""],
+    ["Essaie-t-il parfois de vous étrangler ?", ""],
+    ["Consomme-t-il de la drogue, par exemple des stimulants, des amphétamines, « speed », « meth », poussière d'ange (PCP), cocaïne, « crack », drogues de la rue ou mélanges ?", ""],
+    ["Est-ce qu'il est alcoolique, ou a-t-il un problème d'alcool ?", ""],
+    ["Contrôle-t-il la plupart de vos activités quotidiennes ou toutes vos activités (p. ex. avec qui vous pouvez être amie, quand vous pouvez voir votre famille, combien d'argent vous pouvez dépenser, quand vous pouvez prendre la voiture) ?", "S'il essaie mais que vous l'en empêchez, répondez Non."],
+    ["Est-il violemment et constamment jaloux de vous (p. ex. dit-il « Si je ne peux pas t'avoir, personne d'autre ne le peut » ?) ?", ""],
+    ["Vous a-t-il déjà battue quand vous étiez enceinte ?", "Si vous n'avez jamais été enceinte de lui, répondez Non."],
+    ["A-t-il déjà menacé ou essayé de se suicider ?", ""],
+    ["Menace-t-il de faire mal à vos enfants ?", ""],
+    ["Croyez-vous qu'il serait capable de vous tuer ?", ""],
+    ["Est-ce qu'il vous suit ou vous espionne, vous laisse des notes ou des messages téléphoniques menaçants, détruit vos biens, ou vous téléphone même quand vous ne voulez pas lui parler ?", ""],
+    ["Avez-vous déjà menacé ou essayé de vous suicider ?", ""]
+  ];
+  var opts = ["Non","Oui"];
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = (idx+1) + '. ' + items[idx][0];
+    document.getElementById('q-hint').textContent = items[idx][1];
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    opts.forEach(function(label, v){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === v ? ' selected' : '');
+      d.textContent = label;
+      d.addEventListener('click', function(){
+        answers[idx] = v;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var sum = answers.reduce(function(a,b){ return a+b; }, 0);
+    document.getElementById('score-val').textContent = sum;
+    document.getElementById('level-text').textContent = "Total de " + sum + " réponse(s) « oui » sur 20. L'outil original ne fournit pas de barème de gravité sur ce document : il invite à discuter ce résultat, avec le calendrier de dangerosité rempli en parallèle, avec une infirmière, un avocat ou un conseiller. Une cotation pondérée experte existe mais n'est communiquée qu'après une formation officielle d'évaluateur certifié (Jacquelyn Campbell, Johns Hopkins).";
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Évaluation du danger — Danger Assessment</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#8C2E3F 0%,#B8707D 55%,#4D1721 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(245,215,220,.45),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:22px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#8C2E3F;background:#F3E3E6;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#8C2E3F;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#8C2E3F;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <div class="fiche-photo"><span class="acronym">Danger Assessment</span></div>
+  <h1 class="serif">Évaluation du danger — Danger Assessment (DA)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Campbell J.C. (2004), École des sciences infirmières de l'Université Johns Hopkins. Traduction canadienne-française officielle.</p>
+  <div class="meta-row">
+    <span class="pill">20 questions</span>
+    <span class="pill">5 minutes</span>
+    <span class="pill">Oui / Non</span>
+    <span class="pill">Violence conjugale</span>
+    <span class="pill">Français (Canada)</span>
+    <span class="pill">Licence requise : non</span>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" href="danger-assessment.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le Danger Assessment repère, par 20 questions Oui/Non, des facteurs associés à un risque accru de violence grave ou létale chez les femmes vivant ou ayant vécu une relation violente (« il » désigne le conjoint, l'ex-conjoint ou toute autre personne exerçant cette violence). L'outil papier complet associe ces 20 questions à un calendrier sur lequel la personne reporte, pour l'année écoulée, les dates approximatives des incidents et leur gravité sur une échelle en 5 points (de la gifle sans blessure durable à l'usage d'une arme) : ce calendrier n'est pas reproduit dans cette adaptation numérique, qui se limite aux 20 questions.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Le document source transcrit ici affiche un simple « total de oui » (0 à 20), sans barème de gravité imprimé sur cette page, et invite à discuter le résultat — avec le calendrier rempli en parallèle — avec une infirmière, un avocat ou un conseiller. Une cotation pondérée experte (algorithme de risque validé par la recherche de Jacquelyn Campbell) existe mais n'est transmise par le site officiel qu'après une formation certifiante d'« évaluateur certifié » ; elle n'est donc pas reproduite ici afin de ne jamais inventer de clé de cotation non vérifiée. Le total de oui simple reste un indicateur de dépistage, pas un score de risque validé.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p>Campbell J.C. (2004). <em>Danger Assessment</em>. École des sciences infirmières de l'Université Johns Hopkins. www.dangerassessment.org</p>
+    <p class="source-note"><strong>Licence requise : non.</strong> Page officielle : « It is free and available to the public. » Traduction canadienne-française officielle diffusée directement par le site de l'auteure (dangerassessment.org/uploads/pdf/DAfrenchcanadian.pdf), © École des sciences infirmières de l'Université Johns Hopkins, 2004. Les 20 questions et le principe du calendrier de dangerosité sont repris tels que publiés sur ce document ; aucun item n'a été inventé. La cotation pondérée experte et son interprétation du niveau de danger ne sont fournies par l'auteure qu'après une formation officielle de « Certified Assessor » : outil de dépistage, ne remplace pas une évaluation clinique du risque par un professionnel formé.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>CSI-32 - Cabinet Bouche &amp; Chmura</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#1E3A5F;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:13.5px;}
+  .opt .sc{font-weight:700;color:#1E3A5F;flex-shrink:0;}
+  .opt.selected{border-color:#1E3A5F;background:#E1E7EC;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#1E3A5F;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:36px;color:#1E3A5F;margin:0 0 4px;}
+  .result-max{font-size:13px;color:#9A9E90;margin:0 0 20px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print"><a href="index.html" style="color:inherit;text-decoration:none;">&larr; Tous les tests</a></div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">CSI-32 - Indice de satisfaction conjugale</h1>
+    <p class="lead">Couples Satisfaction Index. Questionnaire auto-administré, en anglais (aucune traduction française validée retrouvée). 32 items, formats de réponse variables selon les blocs.</p>
+    <div class="pill-row">
+      <span class="pill">32 questions</span>
+      <span class="pill">6-8 minutes</span>
+      <span class="pill">Auto-administré</span>
+      <span class="pill">Anglais</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-score" id="score-total"></p>
+    <p class="result-max">score total CSI-32, sur 161</p>
+    <p class="lead" id="interpret-text"></p>
+    <p class="lead">Un score inférieur à 104,5 suggère une insatisfaction conjugale notable (Funk &amp; Rogge, 2007). Ce résultat ne peut en aucun cas remplacer une évaluation clinique.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Funk, J.L., &amp; Rogge, R.D. (2007). Testing the Ruler with Item Response Theory: Increasing Precision of Measurement for Relationship Satisfaction with the Couples Satisfaction Index. Journal of Family Psychology, 21, 572-583. Les auteurs précisent : "We developed the CSI scales to be freely available for research and clinical use. No further permission is required beyond this form." Ce résultat est un repère, il ne constitue pas un diagnostic.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [{"t": "1. Please indicate the degree of happiness, all things considered, of your relationship.", "opts": [{"label": "Extremely Unhappy", "pts": 0}, {"label": "Fairly Unhappy", "pts": 1}, {"label": "A Little Unhappy", "pts": 2}, {"label": "Happy", "pts": 3}, {"label": "Very Happy", "pts": 4}, {"label": "Extremely Happy", "pts": 5}, {"label": "Perfect", "pts": 6}]}, {"t": "2. Amount of time spent together", "opts": [{"label": "Always Agree", "pts": 5}, {"label": "Almost Always Agree", "pts": 4}, {"label": "Occasionally Disagree", "pts": 3}, {"label": "Frequently Disagree", "pts": 2}, {"label": "Almost Always Disagree", "pts": 1}, {"label": "Always Disagree", "pts": 0}]}, {"t": "3. Making major decisions", "opts": [{"label": "Always Agree", "pts": 5}, {"label": "Almost Always Agree", "pts": 4}, {"label": "Occasionally Disagree", "pts": 3}, {"label": "Frequently Disagree", "pts": 2}, {"label": "Almost Always Disagree", "pts": 1}, {"label": "Always Disagree", "pts": 0}]}, {"t": "4. Demonstrations of affection", "opts": [{"label": "Always Agree", "pts": 5}, {"label": "Almost Always Agree", "pts": 4}, {"label": "Occasionally Disagree", "pts": 3}, {"label": "Frequently Disagree", "pts": 2}, {"label": "Almost Always Disagree", "pts": 1}, {"label": "Always Disagree", "pts": 0}]}, {"t": "5. In general, how often do you think that things between you and your partner are going well?", "opts": [{"label": "All the time", "pts": 5}, {"label": "Most of the time", "pts": 4}, {"label": "More often than not", "pts": 3}, {"label": "Occasionally", "pts": 2}, {"label": "Rarely", "pts": 1}, {"label": "Never", "pts": 0}]}, {"t": "6. How often do you wish you hadn't gotten into this relationship?", "opts": [{"label": "All the time", "pts": 0}, {"label": "Most of the time", "pts": 1}, {"label": "More often than not", "pts": 2}, {"label": "Occasionally", "pts": 3}, {"label": "Rarely", "pts": 4}, {"label": "Never", "pts": 5}]}, {"t": "7. I still feel a strong connection with my partner", "opts": [{"label": "Not at all TRUE", "pts": 0}, {"label": "1", "pts": 1}, {"label": "2", "pts": 2}, {"label": "3", "pts": 3}, {"label": "4", "pts": 4}, {"label": "Completely TRUE", "pts": 5}]}, {"t": "8. If I had my life to live over, I would marry (or live with / date) the same person", "opts": [{"label": "Not at all TRUE", "pts": 0}, {"label": "1", "pts": 1}, {"label": "2", "pts": 2}, {"label": "3", "pts": 3}, {"label": "4", "pts": 4}, {"label": "Completely TRUE", "pts": 5}]}, {"t": "9. Our relationship is strong", "opts": [{"label": "Not at all TRUE", "pts": 0}, {"label": "1", "pts": 1}, {"label": "2", "pts": 2}, {"label": "3", "pts": 3}, {"label": "4", "pts": 4}, {"label": "Completely TRUE", "pts": 5}]}, {"t": "10. I sometimes wonder if there is someone else out there for me", "opts": [{"label": "Not at all TRUE", "pts": 5}, {"label": "1", "pts": 4}, {"label": "2", "pts": 3}, {"label": "3", "pts": 2}, {"label": "4", "pts": 1}, {"label": "Completely TRUE", "pts": 0}]}, {"t": "11. My relationship with my partner makes me happy", "opts": [{"label": "Not at all TRUE", "pts": 0}, {"label": "1", "pts": 1}, {"label": "2", "pts": 2}, {"label": "3", "pts": 3}, {"label": "4", "pts": 4}, {"label": "Completely TRUE", "pts": 5}]}, {"t": "12. I have a warm and comfortable relationship with my partner", "opts": [{"label": "Not at all TRUE", "pts": 0}, {"label": "1", "pts": 1}, {"label": "2", "pts": 2}, {"label": "3", "pts": 3}, {"label": "4", "pts": 4}, {"label": "Completely TRUE", "pts": 5}]}, {"t": "13. I can't imagine ending my relationship with my partner", "opts": [{"label": "Not at all TRUE", "pts": 0}, {"label": "1", "pts": 1}, {"label": "2", "pts": 2}, {"label": "3", "pts": 3}, {"label": "4", "pts": 4}, {"label": "Completely TRUE", "pts": 5}]}, {"t": "14. I feel that I can confide in my partner about virtually anything", "opts": [{"label": "Not at all TRUE", "pts": 0}, {"label": "1", "pts": 1}, {"label": "2", "pts": 2}, {"label": "3", "pts": 3}, {"label": "4", "pts": 4}, {"label": "Completely TRUE", "pts": 5}]}, {"t": "15. I have had second thoughts about this relationship recently", "opts": [{"label": "Not at all TRUE", "pts": 5}, {"label": "1", "pts": 4}, {"label": "2", "pts": 3}, {"label": "3", "pts": 2}, {"label": "4", "pts": 1}, {"label": "Completely TRUE", "pts": 0}]}, {"t": "16. For me, my partner is the perfect romantic partner", "opts": [{"label": "Not at all TRUE", "pts": 0}, {"label": "1", "pts": 1}, {"label": "2", "pts": 2}, {"label": "3", "pts": 3}, {"label": "4", "pts": 4}, {"label": "Completely TRUE", "pts": 5}]}, {"t": "17. I really feel like part of a team with my partner", "opts": [{"label": "Not at all TRUE", "pts": 0}, {"label": "1", "pts": 1}, {"label": "2", "pts": 2}, {"label": "3", "pts": 3}, {"label": "4", "pts": 4}, {"label": "Completely TRUE", "pts": 5}]}, {"t": "18. I cannot imagine another person making me as happy as my partner does", "opts": [{"label": "Not at all TRUE", "pts": 0}, {"label": "1", "pts": 1}, {"label": "2", "pts": 2}, {"label": "3", "pts": 3}, {"label": "4", "pts": 4}, {"label": "Completely TRUE", "pts": 5}]}, {"t": "19. How rewarding is your relationship with your partner?", "opts": [{"label": "Not at all", "pts": 0}, {"label": "A little", "pts": 1}, {"label": "Somewhat", "pts": 2}, {"label": "Mostly", "pts": 3}, {"label": "Almost completely", "pts": 4}, {"label": "Completely", "pts": 5}]}, {"t": "20. How well does your partner meet your needs?", "opts": [{"label": "Not at all", "pts": 0}, {"label": "A little", "pts": 1}, {"label": "Somewhat", "pts": 2}, {"label": "Mostly", "pts": 3}, {"label": "Almost completely", "pts": 4}, {"label": "Completely", "pts": 5}]}, {"t": "21. To what extent has your relationship met your original expectations?", "opts": [{"label": "Not at all", "pts": 0}, {"label": "A little", "pts": 1}, {"label": "Somewhat", "pts": 2}, {"label": "Mostly", "pts": 3}, {"label": "Almost completely", "pts": 4}, {"label": "Completely", "pts": 5}]}, {"t": "22. In general, how satisfied are you with your relationship?", "opts": [{"label": "Not at all", "pts": 0}, {"label": "A little", "pts": 1}, {"label": "Somewhat", "pts": 2}, {"label": "Mostly", "pts": 3}, {"label": "Almost completely", "pts": 4}, {"label": "Completely", "pts": 5}]}, {"t": "23. How good is your relationship compared to most?", "opts": [{"label": "Worse than all others (Extremely bad)", "pts": 0}, {"label": "1", "pts": 1}, {"label": "2", "pts": 2}, {"label": "3", "pts": 3}, {"label": "4", "pts": 4}, {"label": "Better than all others (Extremely good)", "pts": 5}]}, {"t": "24. Do you enjoy your partner's company?", "opts": [{"label": "Never", "pts": 0}, {"label": "Less than once a month", "pts": 1}, {"label": "Once or twice a month", "pts": 2}, {"label": "Once or twice a week", "pts": 3}, {"label": "Once a day", "pts": 4}, {"label": "More often", "pts": 5}]}, {"t": "25. How often do you and your partner have fun together?", "opts": [{"label": "Never", "pts": 0}, {"label": "Less than once a month", "pts": 1}, {"label": "Once or twice a month", "pts": 2}, {"label": "Once or twice a week", "pts": 3}, {"label": "Once a day", "pts": 4}, {"label": "More often", "pts": 5}]}, {"t": "26. INTERESTING — BORING", "opts": [{"label": "Boring", "pts": 0}, {"label": "1", "pts": 1}, {"label": "2", "pts": 2}, {"label": "3", "pts": 3}, {"label": "4", "pts": 4}, {"label": "Interesting", "pts": 5}]}, {"t": "27. BAD — GOOD", "opts": [{"label": "Bad", "pts": 0}, {"label": "1", "pts": 1}, {"label": "2", "pts": 2}, {"label": "3", "pts": 3}, {"label": "4", "pts": 4}, {"label": "Good", "pts": 5}]}, {"t": "28. FULL — EMPTY", "opts": [{"label": "Empty", "pts": 0}, {"label": "1", "pts": 1}, {"label": "2", "pts": 2}, {"label": "3", "pts": 3}, {"label": "4", "pts": 4}, {"label": "Full", "pts": 5}]}, {"t": "29. LONELY — FRIENDLY", "opts": [{"label": "Lonely", "pts": 0}, {"label": "1", "pts": 1}, {"label": "2", "pts": 2}, {"label": "3", "pts": 3}, {"label": "4", "pts": 4}, {"label": "Friendly", "pts": 5}]}, {"t": "30. STURDY — FRAGILE", "opts": [{"label": "Sturdy", "pts": 5}, {"label": "1", "pts": 4}, {"label": "2", "pts": 3}, {"label": "3", "pts": 2}, {"label": "4", "pts": 1}, {"label": "Fragile", "pts": 0}]}, {"t": "31. DISCOURAGING — HOPEFUL", "opts": [{"label": "Discouraging", "pts": 0}, {"label": "1", "pts": 1}, {"label": "2", "pts": 2}, {"label": "3", "pts": 3}, {"label": "4", "pts": 4}, {"label": "Hopeful", "pts": 5}]}, {"t": "32. ENJOYABLE — MISERABLE", "opts": [{"label": "Enjoyable", "pts": 5}, {"label": "1", "pts": 4}, {"label": "2", "pts": 3}, {"label": "3", "pts": 2}, {"label": "4", "pts": 1}, {"label": "Miserable", "pts": 0}]}];
+
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx].t;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    items[idx].opts.forEach(function(o, i){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === i ? ' selected' : '');
+      d.innerHTML = '<span class="sc">(' + o.pts + ')</span> <span>' + o.label + '</span>';
+      d.addEventListener('click', function(){
+        answers[idx] = i;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var total = answers.reduce(function(sum, ansIdx, i){ return sum + items[i].opts[ansIdx].pts; }, 0);
+    document.getElementById('score-total').textContent = total;
+
+    var level = total < 104.5 ? "insatisfaction conjugale notable (sous le seuil indicatif de 104,5)" : "au-dessus du seuil indicatif de 104,5, satisfaction conjugale globale";
+    document.getElementById('interpret-text').textContent = "Repère : " + level + ".";
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>CSI-32 — Fiche — Cabinet Bouche &amp; Chmura</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  img{max-width:100%}
+  [hidden]{display:none!important}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:920px;margin:0 auto;padding:32px 24px 80px;}
+  .crumb{font-size:12.5px;color:#9A9E90;margin:0 0 22px;}
+  .crumb a{color:#63695D;text-decoration:none;}
+  .crumb a:hover{text-decoration:underline;}
+
+  .layout{display:flex;gap:28px;align-items:flex-start;}
+  .main-col{flex:1;min-width:0;}
+
+  .fiche-head{display:flex;gap:22px;align-items:flex-start;margin-bottom:26px;flex-wrap:wrap;}
+  .fiche-photo{position:relative;width:112px;height:112px;flex-shrink:0;border-radius:14px;overflow:hidden;
+    background:linear-gradient(135deg,#0F3D6E 0%,#1E6FBF 55%,#081D38 100%);}
+  .fiche-photo::before{content:"";position:absolute;width:150px;height:150px;border-radius:50%;
+    background:radial-gradient(circle,rgba(224,196,138,.55),transparent 70%);top:-50px;right:-40px;}
+  .fiche-photo .acronym{position:absolute;left:12px;bottom:10px;font-family:'Cormorant Garamond',Georgia,serif;
+    font-weight:600;font-size:19px;color:#fff;}
+  .fiche-title{flex:1;min-width:220px;}
+  .fiche-title h1{font-size:24px;margin:0 0 14px;}
+  .fiche-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;}
+  .round-btn{width:38px;height:38px;border-radius:50%;background:#F4F1EA;border:1px solid #E0D9C9;
+    display:flex;align-items:center;justify-content:center;cursor:pointer;color:#63695D;font-size:15px;padding:0;}
+  .round-btn.saved{color:#A0824C;}
+
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;transition:opacity .15s ease,background .15s ease,color .15s ease;}
+  .btn:hover{opacity:.85;}
+  .btn-primary{background:#1E3A5F;color:#fff;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-added{background:#E4EEE8;color:#3D6B4F;border-color:#C9DED2;}
+  .btn-added:hover{opacity:1;}
+  .btn[disabled]{cursor:not-allowed;opacity:.55;}
+
+  .desc-text{font-size:15px;color:#3A3E33;margin:0 0 26px;max-width:640px;}
+
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#3D6B4F;
+    background:#E4EEE8;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+
+  .meta-list{list-style:none;margin:0 0 32px;padding:0;display:flex;flex-direction:column;gap:9px;max-width:520px;}
+  .meta-list li{display:flex;align-items:center;gap:10px;font-size:13.5px;color:#63695D;}
+  .meta-list .ico{width:18px;text-align:center;flex-shrink:0;}
+  .meta-list a{color:#1E3A5F;font-weight:600;text-decoration:none;}
+  .meta-list a:hover{text-decoration:underline;}
+
+  h2.section{font-size:19px;margin:0 0 14px;padding-top:26px;border-top:1px solid #E0D9C9;}
+  h2.section:first-of-type{border-top:none;padding-top:0;}
+
+  .preview-card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:14px;padding:20px 22px;margin-bottom:14px;}
+  .preview-card .stem{font-size:12.5px;color:#9A9E90;margin:0 0 6px;}
+  .preview-card .item{font-family:'Cormorant Garamond',Georgia,serif;font-size:18px;margin:0 0 16px;}
+  .preview-opts{display:flex;flex-wrap:wrap;gap:8px;}
+  .preview-opts span{font-size:12.5px;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:6px 13px;}
+  .reveal-link{appearance:none;background:none;border:none;font:inherit;color:#1E3A5F;font-weight:700;font-size:13.5px;cursor:pointer;padding:0;}
+  .reveal-link:hover{text-decoration:underline;}
+  .all-questions{list-style:decimal;margin:14px 0 0;padding-left:20px;font-size:13.5px;color:#3A3E33;display:flex;flex-direction:column;gap:8px;}
+
+  .cotation-text{font-size:14px;color:#3A3E33;margin:0 0 16px;max-width:640px;}
+  .source-note{font-size:11.5px;color:#9A9E90;margin:0 0 30px;}
+
+  .sendbox{width:296px;flex-shrink:0;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:22px;position:sticky;top:24px;}
+  .sendbox h2.serif{font-size:17px;margin:0 0 16px;padding-top:0;border-top:none;}
+  .sendbox-empty{text-align:center;padding:20px 4px 8px;}
+  .sendbox-empty .mark{width:52px;height:52px;margin:0 auto 14px;border-radius:50%;background:#F4F1EA;display:flex;align-items:center;justify-content:center;font-size:22px;color:#9A9E90;}
+  .sendbox-empty p{font-size:13px;color:#9A9E90;margin:0;}
+  .sendbox-item{display:flex;align-items:center;justify-content:space-between;gap:8px;background:#F4F1EA;border-radius:8px;padding:8px 10px;font-size:13px;font-weight:600;margin-bottom:8px;}
+  .sendbox-item button{appearance:none;border:none;background:none;color:#9A9E90;cursor:pointer;font-size:14px;line-height:1;padding:2px;}
+  .sendbox-item button:hover{color:#B4483C;}
+  .field-label{display:block;font-size:12.5px;font-weight:600;color:#63695D;margin:16px 0 6px;}
+  .field-input{width:100%;font-family:'Inter',sans-serif;font-size:14px;color:#20241E;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:8px;padding:9px 12px;}
+  .field-hint{font-size:11.5px;color:#9A9E90;margin:6px 0 0;}
+  .sendbox .btn-primary{width:100%;justify-content:center;margin-top:14px;}
+  .msg-box{width:100%;font-family:'Inter',sans-serif;font-size:13px;color:#20241E;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:10px;padding:12px;resize:vertical;min-height:132px;margin-top:14px;}
+  .confirm{font-size:12.5px;color:#3D6B4F;margin-top:8px;}
+
+  @media (max-width:760px){
+    .layout{flex-direction:column;}
+    .sendbox{width:100%;position:static;order:-1;}
+  }
+
+  .modal-overlay{position:fixed;inset:0;background:rgba(32,36,30,.5);display:flex;align-items:center;justify-content:center;padding:24px;z-index:20;}
+  .modal-box{background:#fff;border-radius:18px;max-width:360px;width:100%;max-height:88vh;overflow:auto;padding:20px;}
+  .modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+  .modal-head span{font-family:'Cormorant Garamond',Georgia,serif;font-size:18px;}
+  .modal-head button{appearance:none;border:none;background:#F4F1EA;width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:16px;color:#63695D;}
+  .phone-frame{border:8px solid #20241E;border-radius:32px;overflow:hidden;background:#fff;box-shadow:0 20px 40px -18px rgba(20,26,32,.4);}
+  .phone-frame iframe{display:block;width:100%;height:540px;border:none;}
+</style>
+<div class="wrap">
+  <p class="crumb"><a href="index.html">Accueil</a> &rsaquo; <a href="index.html">Questionnaires</a> &rsaquo; CSI-32</p>
+
+  <div class="layout">
+    <div class="main-col">
+
+      <div class="fiche-head">
+        <div class="fiche-photo"><span class="acronym">CSI-32</span></div>
+        <div class="fiche-title">
+          <h1 class="serif">Indice de satisfaction conjugale (CSI-32)</h1>
+          <div class="fiche-actions">
+            <button class="btn btn-primary" type="button" data-add>Ajouter à la boîte d'envoi</button>
+            <button class="btn btn-secondary" type="button" data-open-demo>Mode démo</button>
+            <button class="round-btn" type="button" data-bookmark aria-label="Enregistrer dans mes favoris">&#9734;</button>
+          </div>
+        </div>
+      </div>
+
+      <span class="badge-standard">&#10003; Standardisé</span>
+      <p class="desc-text">Ce questionnaire mesure la satisfaction dans la relation de couple à travers 32 items en anglais, avec plusieurs formats de réponse (accord/désaccord, fréquence, différentiel sémantique). Il donne un score total sur 161, avec un seuil indicatif de satisfaction à 104,5.</p>
+
+      <ul class="meta-list">
+        <li><span class="ico">&#10003;</span> 32 questions</li>
+        <li><span class="ico">&#9201;</span> 6-8 minutes</li>
+        <li><span class="ico">&#127760;</span> Anglais (aucune traduction française validée retrouvée)</li>
+        <li><span class="ico">&#128214;</span> Couples Satisfaction Index (CSI-32)</li>
+        <li><span class="ico">&#128100;</span> Adulte, en couple</li>
+        <li><span class="ico">&#9997;</span> Funk, J.L., &amp; Rogge, R.D. (2007)</li>
+        <li><span class="ico">&#127991;</span> <a href="index.html">Problème de couple</a></li>
+      </ul>
+
+      <h2 class="serif section">Aperçu des questions</h2>
+      <div class="preview-card">
+        <p class="stem">Merci d'indiquer votre degré d'accord ou de désaccord.</p>
+        <p class="item">2. Amount of time spent together</p>
+        <div class="preview-opts">
+          <span>Always Agree (5)</span>
+          <span>Almost Always Agree (4)</span>
+          <span>Occasionally Disagree (3)</span>
+          <span>Frequently Disagree (2)</span>
+          <span>Almost Always Disagree (1)</span>
+          <span>Always Disagree (0)</span>
+        </div>
+      </div>
+      <button class="reveal-link" type="button" data-reveal-questions>Voir toutes les questions &rsaquo;</button>
+      <ol class="all-questions" data-all-questions hidden>
+        <li>2. Amount of time spent together</li>
+        <li>3. Making major decisions</li>
+        <li>4. Demonstrations of affection</li>
+        <li>5. In general, how often do you think that things between you and your partner are going well?</li>
+        <li>6. How often do you wish you hadn't gotten into this relationship?</li>
+        <li>7. I still feel a strong connection with my partner</li>
+        <li>8. If I had my life to live over, I would marry (or live with / date) the same person</li>
+        <li>9. Our relationship is strong</li>
+        <li>10. I sometimes wonder if there is someone else out there for me</li>
+        <li>11. My relationship with my partner makes me happy</li>
+        <li>12. I have a warm and comfortable relationship with my partner</li>
+        <li>13. I can't imagine ending my relationship with my partner</li>
+        <li>14. I feel that I can confide in my partner about virtually anything</li>
+        <li>15. I have had second thoughts about this relationship recently</li>
+        <li>16. For me, my partner is the perfect romantic partner</li>
+        <li>17. I really feel like part of a team with my partner</li>
+        <li>18. I cannot imagine another person making me as happy as my partner does</li>
+        <li>19. How rewarding is your relationship with your partner?</li>
+        <li>20. How well does your partner meet your needs?</li>
+        <li>21. To what extent has your relationship met your original expectations?</li>
+        <li>22. In general, how satisfied are you with your relationship?</li>
+        <li>23. How good is your relationship compared to most?</li>
+        <li>24. Do you enjoy your partner's company?</li>
+        <li>25. How often do you and your partner have fun together?</li>
+        <li>26. INTERESTING — BORING</li>
+        <li>27. BAD — GOOD</li>
+        <li>28. FULL — EMPTY</li>
+        <li>29. LONELY — FRIENDLY</li>
+        <li>30. STURDY — FRAGILE</li>
+        <li>31. DISCOURAGING — HOPEFUL</li>
+        <li>32. ENJOYABLE — MISERABLE</li>
+      </ol>
+
+      <h2 class="serif section">Cotations &amp; interprétations</h2>
+      <p class="cotation-text">Le score total (0-161) est la simple somme des points de chaque item, déjà intégrée dans le barème de chaque bloc de réponse (certains items sont inversés directement dans les valeurs proposées). Citation exacte du formulaire officiel : « To score the CSI-32, you simply sum the responses across all of the items. » Un score inférieur à 104,5 suggère une insatisfaction conjugale notable.</p>
+      <p class="cotation-text">Le questionnaire comporte 7 formats de réponse différents selon les blocs de questions (accord/désaccord, fréquence, échelle « vrai/pas vrai », différentiel sémantique). Il reste en anglais, langue d'origine, faute de traduction française validée retrouvée.</p>
+      <p class="source-note">Source : Funk, J.L., &amp; Rogge, R.D. (2007). Testing the Ruler with Item Response Theory: Increasing Precision of Measurement for Relationship Satisfaction with the Couples Satisfaction Index. <em>Journal of Family Psychology</em>, 21, 572-583. Formulaire officiel de passation clinique : « We developed the CSI scales to be freely available for research and clinical use. No further permission is required beyond this form. »</p>
+
+    </div>
+
+    <aside class="sendbox">
+      <h2 class="serif">Boîte d'envoi</h2>
+      <div data-sendbox-body>
+        <div class="sendbox-empty">
+          <div class="mark">＋</div>
+          <p>Ajoutez des questionnaires pour créer un lien à transmettre à un patient.</p>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<div class="modal-overlay" id="demoModal" hidden>
+  <div class="modal-box">
+    <div class="modal-head"><span class="serif">Aperçu du questionnaire</span><button type="button" data-close-demo aria-label="Fermer">&times;</button></div>
+    <div class="phone-frame"><iframe id="demoFrame" title="Aperçu CSI-32"></iframe></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var STORAGE_KEY = 'mentaal_envois_apercu';
+  var TEST_NAME = 'CSI-32';
+  var TEST_LINK = 'csi-32.html';
+  var selected = [];
+
+  function loadEnvois(){
+    try{
+      var raw = window.localStorage.getItem(STORAGE_KEY);
+      var list = raw ? JSON.parse(raw) : [];
+      return list.map(function(e){
+        if (e.tests) return e;
+        return { label: e.label, tests: e.test ? [e.test] : [], date: e.date };
+      });
+    }catch(e){ return []; }
+  }
+  function saveEnvois(list){
+    try{ window.localStorage.setItem(STORAGE_KEY, JSON.stringify(list)); }catch(e){}
+  }
+  function escapeHtml(s){
+    return String(s).replace(/[&<>"']/g, function(c){
+      return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];
+    });
+  }
+
+  document.querySelectorAll('[data-bookmark]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      btn.classList.toggle('saved');
+      btn.innerHTML = btn.classList.contains('saved') ? '&#9733;' : '&#9734;';
+    });
+  });
+
+  var revealBtn = document.querySelector('[data-reveal-questions]');
+  var allQuestions = document.querySelector('[data-all-questions]');
+  revealBtn.addEventListener('click', function(){
+    allQuestions.hidden = !allQuestions.hidden;
+    revealBtn.textContent = allQuestions.hidden ? 'Voir toutes les questions ›' : 'Masquer les questions';
+  });
+
+  var demoModal = document.getElementById('demoModal');
+  var demoFrame = document.getElementById('demoFrame');
+  document.querySelector('[data-open-demo]').addEventListener('click', function(){
+    demoFrame.src = TEST_LINK;
+    demoModal.hidden = false;
+  });
+  document.querySelector('[data-close-demo]').addEventListener('click', function(){
+    demoModal.hidden = true;
+    demoFrame.src = '';
+  });
+  demoModal.addEventListener('click', function(e){
+    if (e.target === demoModal){ demoModal.hidden = true; demoFrame.src = ''; }
+  });
+
+  var addBtn = document.querySelector('.fiche-actions [data-add]');
+  addBtn.addEventListener('click', function(){
+    var idx = selected.findIndex(function(s){ return s.test === TEST_NAME; });
+    if (idx === -1){
+      selected.push({ test: TEST_NAME, link: TEST_LINK });
+      addBtn.textContent = 'Ajouté ✓';
+      addBtn.classList.remove('btn-primary'); addBtn.classList.add('btn-added');
+    } else {
+      selected.splice(idx, 1);
+      addBtn.textContent = "Ajouter à la boîte d'envoi";
+      addBtn.classList.remove('btn-added'); addBtn.classList.add('btn-primary');
+    }
+    renderSendbox();
+  });
+
+  function renderSendbox(){
+    var body = document.querySelector('[data-sendbox-body]');
+    if (selected.length === 0){
+      body.innerHTML = '<div class="sendbox-empty"><div class="mark">＋</div>' +
+        '<p>Ajoutez des questionnaires pour créer un lien à transmettre à un patient.</p></div>';
+      return;
+    }
+    var html = '';
+    selected.forEach(function(s, i){
+      html += '<div class="sendbox-item"><span>' + escapeHtml(s.test) + '</span>' +
+        '<button type="button" data-remove-selected="' + i + '" aria-label="Retirer">&times;</button></div>';
+    });
+    html += '<label class="field-label">Repère patient</label>' +
+      '<input class="field-input" data-patient-label type="text" placeholder="Prénom ou initiales">' +
+      '<p class="field-hint">Reste uniquement dans ce navigateur. Le lien envoyé ne contient aucune information sur le patient.</p>' +
+      '<button class="btn btn-primary" type="button" data-generate>Créer le message</button>' +
+      '<textarea class="msg-box" data-message hidden readonly></textarea>' +
+      '<p class="confirm" data-confirm hidden>Enregistré dans « Mes patients ».</p>' +
+      '<button class="btn btn-secondary" type="button" data-reset hidden>Nouvel envoi</button>';
+    body.innerHTML = html;
+
+    body.querySelectorAll('[data-remove-selected]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var i = parseInt(btn.getAttribute('data-remove-selected'), 10);
+        selected.splice(i, 1);
+        addBtn.textContent = "Ajouter à la boîte d'envoi";
+        addBtn.classList.remove('btn-added'); addBtn.classList.add('btn-primary');
+        renderSendbox();
+      });
+    });
+
+    body.querySelector('[data-generate]').addEventListener('click', function(){
+      var input = body.querySelector('[data-patient-label]');
+      var label = (input.value || '').trim();
+      if (!label){ input.focus(); return; }
+
+      var lines = selected.map(function(s){ return '- ' + s.test + ' : ' + s.link; });
+      var message = 'Bonjour,\n\n' +
+        'Comme convenu, voici le' + (selected.length > 1 ? 's liens' : ' lien') + ' pour compléter, à votre rythme :\n' +
+        lines.join('\n') + '\n\n' +
+        'Cela prend quelques minutes. Une fois terminé, vous pourrez télécharger votre fiche de résultat directement.\n\n' +
+        'À bientôt,\n' +
+        'Cabinet Bouche & Chmura';
+
+      var box = body.querySelector('[data-message]');
+      box.value = message;
+      box.hidden = false;
+
+      var list = loadEnvois();
+      list.push({ label: label, tests: selected.map(function(s){ return s.test; }), date: new Date().toISOString() });
+      saveEnvois(list);
+
+      body.querySelector('[data-confirm]').hidden = false;
+      input.setAttribute('disabled', 'disabled');
+      body.querySelector('[data-generate]').hidden = true;
+      body.querySelectorAll('[data-remove-selected]').forEach(function(btn){ btn.setAttribute('disabled', 'disabled'); });
+      var resetBtn = body.querySelector('[data-reset]');
+      resetBtn.hidden = false;
+      resetBtn.addEventListener('click', function(){ renderSendbox(); });
+
+      addBtn.textContent = "Ajouter à la boîte d'envoi";
+      addBtn.classList.remove('btn-added'); addBtn.classList.add('btn-primary');
+      selected = [];
+    });
+  }
+})();
+</script>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

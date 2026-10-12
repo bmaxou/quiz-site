@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ESAS-r — Échelle d'évaluation des symptômes d'Edmonton</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#EEF3F1;color:#1E2B26;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#1E2B26;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#5B6B63;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#5B6B63;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #D7E2DC;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:25px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#5B6B63;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#5B6B63;background:#EEF3F1;border:1px solid #D7E2DC;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#2F7A64;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#8A9A92;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#8A9A92;margin:0 0 14px;}
+  .q-text{font-size:17px;margin:0 0 4px;}
+  .q-note{font-size:12.5px;color:#5B6B63;font-style:italic;margin:0 0 18px;}
+  .anchor-row{display:flex;justify-content:space-between;font-size:11.5px;color:#5B6B63;margin:0 0 8px;gap:10px;}
+  .anchor-row span{max-width:46%;}
+  .anchor-row span:last-child{text-align:right;}
+  .num-row{display:flex;gap:6px;flex-wrap:wrap;}
+  .num-opt{flex:1 1 auto;min-width:36px;text-align:center;padding:10px 0;border:1px solid #D7E2DC;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600;color:#1E2B26;}
+  .num-opt.selected{border-color:#2F7A64;background:#E6F2EC;color:#1E5F4C;}
+  .yn-row{display:flex;gap:10px;}
+  .yn-opt{flex:1;text-align:center;padding:14px 0;border:1px solid #D7E2DC;border-radius:10px;cursor:pointer;font-size:14.5px;font-weight:600;}
+  .yn-opt.selected{border-color:#2F7A64;background:#E6F2EC;color:#1E5F4C;}
+  .text-field{width:100%;padding:12px 14px;border:1px solid #D7E2DC;border-radius:10px;font-family:'Inter',sans-serif;font-size:14.5px;margin:0 0 18px;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#EEF3F1;color:#1E5F4C;border-color:#D7E2DC;}
+  .btn-primary{background:#2F7A64;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .profile-row{display:flex;justify-content:space-between;align-items:baseline;padding:9px 0;border-bottom:1px solid #EEF3F1;font-size:14px;}
+  .profile-row:last-child{border-bottom:none;}
+  .profile-val{font-family:'Cormorant Garamond',Georgia,serif;font-size:20px;color:#2F7A64;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#2F7A64;margin:28px 0 4px;}
+  .result-max{font-size:14px;color:#8A9A92;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#1E2B26;margin:0 0 20px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#5B6B63;border-top:1px solid #D7E2DC;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">ESAS-r — Échelle d'évaluation des symptômes d'Edmonton (version révisée)</h1>
+    <p class="lead">Ce questionnaire évalue l'intensité actuelle de 9 symptômes courants (douleur, fatigue, somnolence, nausée, manque d'appétit, essoufflement, dépression, anxiété, bien-être), chacun noté de 0 (absent) à 10 (pire intensité possible). Une 10e ligne facultative permet de signaler un autre problème.</p>
+    <div class="pill-row">
+      <span class="pill">9 symptômes + 1 facultatif</span>
+      <span class="pill">3 minutes</span>
+      <span class="pill">Échelle 0-10</span>
+      <span class="pill">Domaine public</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <div id="q-area"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-score" id="score-val"></p>
+    <p class="result-max">score de détresse symptomatique total (somme des 9 symptômes, sur 90)</p>
+    <p class="result-text">Il n'existe pas de seuil clinique officiel unique et vérifié pour ce score global : il se lit surtout dans son évolution dans le temps chez un même patient. Profil détaillé par symptôme :</p>
+    <div id="profile-list"></div>
+    <div id="other-row" hidden class="profile-row"><span id="other-label"></span><span class="profile-val" id="other-val"></span></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">ESAS-r (Edmonton Symptom Assessment System-Revised) — Watanabe, Nekolaichuk &amp; Beaumont, 2011 ; instrument dans le domaine public. Outil de dépistage/suivi symptomatique, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var core = [
+    {key:"douleur", label:"Douleur", left:"Aucune douleur", right:"Pire douleur possible", note:null},
+    {key:"fatigue", label:"Fatigue", left:"Aucune fatigue", right:"Pire fatigue possible", note:"Fatigue = manque d'énergie"},
+    {key:"somnolence", label:"Somnolence", left:"Aucune somnolence", right:"Pire somnolence possible", note:"Somnolence = se sentir endormi"},
+    {key:"nausee", label:"Nausée", left:"Aucune nausée", right:"Pire nausée possible", note:null},
+    {key:"appetit", label:"Manque d'appétit", left:"Aucun manque d'appétit", right:"Aucun appétit", note:null},
+    {key:"essoufflement", label:"Essoufflement", left:"Aucun essoufflement", right:"Pire essoufflement possible", note:null},
+    {key:"depression", label:"Dépression", left:"Aucune dépression", right:"Pire dépression possible", note:"Dépression = se sentir triste"},
+    {key:"anxiete", label:"Anxiété", left:"Pas d'anxiété", right:"Pire anxiété possible", note:"Anxiété = se sentir nerveux"},
+    {key:"bienetre", label:"Bien-être", left:"Meilleure sensation de bien-être", right:"Pire sensation de malaise", note:"Bien-être = comment vous vous sentez en général"}
+  ];
+  // Étape 0 : écran facultatif "autre problème" (10e ligne ESAS-r, hors score de détresse total)
+  var steps = [{type:"other-ask"}];
+  core.forEach(function(it){ steps.push({type:"item", item:it}); });
+  // l'étape "other-rate" est insérée dynamiquement si l'utilisateur répond "oui" à other-ask
+
+  var answers = {}; // key -> 0..10
+  var otherWanted = null; // true/false
+  var otherLabel = "";
+  var otherVal = null;
+  var idx = 0;
+
+  function currentSteps(){
+    var s = [{type:"other-ask"}];
+    core.forEach(function(it){ s.push({type:"item", item:it}); });
+    if (otherWanted === true){ s.push({type:"other-label"}); s.push({type:"other-rate"}); }
+    return s;
+  }
+
+  function numRow(container, value, onPick){
+    container.innerHTML = '';
+    var row = document.createElement('div');
+    row.className = 'num-row';
+    for (var v = 0; v <= 10; v++){
+      (function(v){
+        var d = document.createElement('div');
+        d.className = 'num-opt' + (value === v ? ' selected' : '');
+        d.textContent = v;
+        d.addEventListener('click', function(){ onPick(v); });
+        row.appendChild(d);
+      })(v);
+    }
+    container.appendChild(row);
+  }
+
+  function renderStep(){
+    var s = currentSteps();
+    if (idx >= s.length){ showResult(); return; }
+    var step = s[idx];
+    document.getElementById('progress-text').textContent = 'Étape ' + (idx+1) + ' / ' + s.length;
+    var area = document.getElementById('q-area');
+    area.innerHTML = '';
+    var nextBtn = document.getElementById('btn-next');
+
+    if (step.type === 'other-ask'){
+      var p = document.createElement('p');
+      p.className = 'q-text';
+      p.textContent = "Souhaitez-vous signaler un autre problème non listé ci-après (par exemple la constipation) ?";
+      area.appendChild(p);
+      var yn = document.createElement('div');
+      yn.className = 'yn-row';
+      ['Oui','Non'].forEach(function(label){
+        var d = document.createElement('div');
+        d.className = 'yn-opt' + (otherWanted === (label==='Oui') ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ otherWanted = (label==='Oui'); if(!otherWanted){otherLabel='';otherVal=null;} renderStep(); });
+        yn.appendChild(d);
+      });
+      area.appendChild(yn);
+      nextBtn.disabled = (otherWanted === null);
+    }
+    else if (step.type === 'item'){
+      var it = step.item;
+      var q = document.createElement('p');
+      q.className = 'q-text';
+      q.textContent = it.label;
+      area.appendChild(q);
+      if (it.note){
+        var n = document.createElement('p');
+        n.className = 'q-note';
+        n.textContent = '(' + it.note + ')';
+        area.appendChild(n);
+      }
+      var ar = document.createElement('div');
+      ar.className = 'anchor-row';
+      ar.innerHTML = '<span>0 — ' + it.left + '</span><span>10 — ' + it.right + '</span>';
+      area.appendChild(ar);
+      var holder = document.createElement('div');
+      area.appendChild(holder);
+      numRow(holder, answers[it.key], function(v){ answers[it.key] = v; renderStep(); });
+      nextBtn.disabled = (answers[it.key] === undefined);
+    }
+    else if (step.type === 'other-label'){
+      var p2 = document.createElement('p');
+      p2.className = 'q-text';
+      p2.textContent = "Comment nommez-vous ce problème ?";
+      area.appendChild(p2);
+      var inp = document.createElement('input');
+      inp.className = 'text-field';
+      inp.type = 'text';
+      inp.placeholder = 'Ex. constipation';
+      inp.value = otherLabel;
+      inp.addEventListener('input', function(){ otherLabel = inp.value; nextBtn.disabled = (otherLabel.trim()===''); });
+      area.appendChild(inp);
+      nextBtn.disabled = (otherLabel.trim()==='');
+    }
+    else if (step.type === 'other-rate'){
+      var q3 = document.createElement('p');
+      q3.className = 'q-text';
+      q3.textContent = otherLabel || 'Autre problème';
+      area.appendChild(q3);
+      var ar2 = document.createElement('div');
+      ar2.className = 'anchor-row';
+      ar2.innerHTML = '<span>0 — Aucun(e)</span><span>10 — Pire possible</span>';
+      area.appendChild(ar2);
+      var holder2 = document.createElement('div');
+      area.appendChild(holder2);
+      numRow(holder2, otherVal, function(v){ otherVal = v; renderStep(); });
+      nextBtn.disabled = (otherVal === null || otherVal === undefined);
+    }
+
+    document.getElementById('btn-prev').disabled = idx === 0;
+    nextBtn.textContent = (idx === s.length - 1) ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    idx = 0;
+    renderStep();
+  });
+
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderStep(); }
+  });
+
+  document.getElementById('btn-next').addEventListener('click', function(){
+    var s = currentSteps();
+    var step = s[idx];
+    if (step.type === 'other-ask' && otherWanted === null) return;
+    if (step.type === 'item' && answers[step.item.key] === undefined) return;
+    if (step.type === 'other-label' && otherLabel.trim()==='') return;
+    if (step.type === 'other-rate' && (otherVal === null || otherVal === undefined)) return;
+    if (idx < s.length - 1){ idx++; renderStep(); }
+    else { showResult(); }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var total = 0;
+    var list = document.getElementById('profile-list');
+    list.innerHTML = '';
+    core.forEach(function(it){
+      total += answers[it.key];
+      var row = document.createElement('div');
+      row.className = 'profile-row';
+      row.innerHTML = '<span>' + it.label + '</span><span class="profile-val">' + answers[it.key] + ' / 10</span>';
+      list.appendChild(row);
+    });
+    document.getElementById('score-val').textContent = total + ' / 90';
+    if (otherWanted && otherLabel && (otherVal !== null)){
+      document.getElementById('other-row').hidden = false;
+      document.getElementById('other-label').textContent = otherLabel + ' (hors score total)';
+      document.getElementById('other-val').textContent = otherVal + ' / 10';
+    }
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = {}; otherWanted = null; otherLabel = ''; otherVal = null; idx = 0;
+    document.getElementById('other-row').hidden = true;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ESAS-r — Échelle d'évaluation des symptômes d'Edmonton</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#EEF3F1;color:#1E2B26;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#1E2B26;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#5B6B63;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#5B6B63;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#2F7A64 0%,#6FB79C 55%,#123A2E 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(220,245,235,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:26px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#1E5F4C;background:#E6F2EC;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#5B6B63;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#5B6B63;background:#FFFFFF;border:1px solid #D7E2DC;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .section ul{font-size:14.5px;margin:0 0 10px;padding-left:20px;}
+  .source-note{font-size:12.5px;color:#8A9A92;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#2F7A64;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#1E5F4C;border-color:#D7E2DC;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">ESAS-r</span></div>
+
+  <h1 class="serif">Échelle d'évaluation des symptômes d'Edmonton — version révisée</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Edmonton Symptom Assessment System-Revised (ESAS-r) — Watanabe, Nekolaichuk &amp; Beaumont (2011), d'après Bruera et al. (1991)</p>
+  <div class="meta-row">
+    <span class="pill">9 symptômes + 1 facultatif</span>
+    <span class="pill">3 minutes</span>
+    <span class="pill">Échelle 0-10</span>
+    <span class="pill">Soins palliatifs / oncologie</span>
+    <span class="pill">Licence requise : non</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="esas-r.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>L'ESAS-r mesure l'intensité actuelle de 9 symptômes courants en oncologie et en soins palliatifs — douleur, fatigue, somnolence, nausée, manque d'appétit, essoufflement, dépression, anxiété et bien-être global — chacun noté par le patient de 0 (absent) à 10 (pire intensité possible). Une 10e ligne facultative permet de signaler et de noter un symptôme supplémentaire non listé (par exemple la constipation) ; elle n'entre pas dans le score de détresse symptomatique total. La version révisée (ESAS-r, 2011) reprend les 9 mêmes symptômes que l'ESAS original (1991) avec un ordre de présentation modifié et de courtes clarifications entre parenthèses pour chaque symptôme (ex. fatigue = manque d'énergie).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque symptôme est noté individuellement de 0 à 10 : il n'y a pas d'item à inverser. Le score de détresse symptomatique total (« Total Symptom Distress Score »), largement utilisé dans la littérature de suivi palliatif, est la somme des 9 symptômes principaux (hors la 10e ligne facultative), sur un total de 0 à 90. Il n'existe pas de seuil clinique officiel unique et vérifié pour ce score global ou pour chaque item pris isolément : l'ESAS-r est conçu comme un outil de suivi dans le temps chez un même patient (profil symptomatique répété), pas comme un instrument à seuil diagnostique. Aucun seuil de sévérité par item n'est présenté ici, en l'absence de confirmation suffisante d'une référence unique et vérifiée.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p class="source-note">Watanabe S.M., Nekolaichuk C.L. &amp; Beaumont C. (2011), « The Edmonton Symptom Assessment System, a proposed tool for distress screening in cancer patients: development and refinement », <em>Psycho-Oncology</em>, 21(9), 977-985 ; d'après Bruera E., Kuehn N., Miller M.J., Selmser P. &amp; Macmillan K. (1991), <em>Journal of Palliative Care</em>, 7(2), 6-9. Le manuel officiel de l'instrument (Alberta Health Services) précise : « The ESAS-r is in the public domain and freely available for use with appropriate acknowledgement of its source » — domaine public confirmé. Texte français utilisé : formulaire officiel bilingue d'Alberta Health Services (code de formulaire 07903(Rev2015-08)), traduction française republiée sans modification par un organisme de santé publique canadien (Yukon, Direction de la santé et des affaires sociales) sous le titre « Échelle d'évaluation des symptômes d'Edmonton — Version révisée (EESE-r) ». Deux validations psychométriques francophones distinctes existent par ailleurs : Nekolaichuk C., Huot A., Gratton V., Bush S.H., Tarumi Y. &amp; Watanabe S.M. (2017), <em>Journal of Palliative Medicine</em>, étude pilote de la version ESAS-r elle-même ; et Tricou C. et al. (2019), <em>Journal of Palliative Medicine</em>, validation transculturelle de la forme modifiée à 12 items (ESAS12-F), qui n'est pas celle construite ici. Le manuel officiel précise par ailleurs que les traductions tierces diffusées par Cancer Care Ontario, y compris une version française distincte, « have not been validated by AHS, nor the principal investigators » — non utilisées ici.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

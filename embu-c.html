@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EMBU-C - Styles éducatifs parentaux perçus par l'enfant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#3D5A80;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#3D5A80;background:#E9EEF5;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#3D5A80;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:36px;color:#3D5A80;margin:0 0 4px;}
+  .result-max{font-size:13px;color:#9A9E90;margin:0 0 16px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">EMBU-C - Styles éducatifs parentaux</h1>
+    <p class="lead">Forme abrégée (s-EMBU) remplie par l'enfant ou l'adolescent, décrivant la façon dont il perçoit le comportement éducatif de ses parents.</p>
+    <p class="lang-note">Items originaux en anglais, traduction française de travail non officielle.</p>
+    <div class="pill-row">
+      <span class="pill">23 questions</span>
+      <span class="pill">5 minutes</span>
+      <span class="pill">Échelle 1-4</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="result-score" id="score-total"></p>
+    <p class="result-max">score total EMBU-C, sur 92 (23 items, de 23 à 92)</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">Arrindell, W. A., Sanavio, E., Aguilar, G., Sica, C., Hatzichristou, C., Eisemann, M., Recinos, L. A., Gaszner, P., Peter, M., Battagliese, G., Kállai, J., &amp; van der Ende, J. (1999). The development of a short form of the EMBU. Personality and Individual Differences, 27(4), 613-628. Outil de repérage, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [
+    { t: "1. My parents get angry with me without letting me know the reason. (Mes parents se mettent en colère contre moi sans me dire pourquoi.)" },
+    { t: "2. My parents praise me. (Mes parents me félicitent.)" },
+    { t: "3. I wish my parents would worry less about what I am doing. (J'aimerais que mes parents s'inquiètent moins de ce que je fais.)" },
+    { t: "4. My parents use physical punishment to discipline me. (Mes parents utilisent des punitions physiques pour me discipliner.)" },
+    { t: "5. When I come home, I have to account for what I had been doing to my parents. (Quand je rentre à la maison, je dois rendre compte à mes parents de ce que j'ai fait.)" },
+    { t: "6. My parents try to make my adolescence stimulating, interesting and instructive (ex. giving me good books, arranging for me to go to camps, taking me to sports/club activities). (Mes parents essaient de rendre mon adolescence stimulante, intéressante et instructive.)" },
+    { t: "7. My parents criticize me and tell me how lazy and useless I am in front of others. (Mes parents me critiquent et disent devant les autres que je suis paresseux(se) et bon(ne) à rien.)" },
+    { t: "8. My parents forbid me to do things other adolescents are allowed to do because they are afraid that something might happen to me. (Mes parents m'interdisent de faire des choses que les autres adolescents ont le droit de faire, parce qu'ils ont peur qu'il m'arrive quelque chose.)" },
+    { t: "9. My parents try to encourage me to become the best. (Mes parents essaient de m'encourager à être le/la meilleur(e).)" },
+    { t: "10. When I behave badly, my parents try to make me feel guilty (for instance by looking sad). (Quand je me conduis mal, mes parents essaient de me culpabiliser, par exemple en ayant l'air triste.)" },
+    { t: "11. My parents get overly anxious that something might happen to me. (Mes parents sont excessivement anxieux à l'idée qu'il puisse m'arriver quelque chose.)" },
+    { t: "12. My parents try to comfort and encourage me if things go badly for me. (Mes parents essaient de me réconforter et de m'encourager quand les choses vont mal pour moi.)" },
+    { t: "13. I am treated as the 'black sheep' or 'scapegoat' of the family. (Je suis traité(e) comme le « mouton noir » ou le « bouc émissaire » de la famille.)" },
+    { t: "14. My parents use words and gestures to show that they like me. (Mes parents utilisent des mots et des gestes pour montrer qu'ils m'aiment bien.)" },
+    { t: "15. My parents like my brother(s) and/or sister(s) more than they like me. (Mes parents aiment mieux mon/mes frère(s) et/ou ma/mes sœur(s) que moi.)" },
+    { t: "16. My parents treat me in such a way that I feel ashamed. (Mes parents me traitent d'une manière qui me fait ressentir de la honte.)" },
+    { t: "17. I am allowed to go wherever I like without my parents caring too much. (J'ai le droit d'aller où je veux sans que mes parents s'en soucient trop.)" },
+    { t: "18. My parents interfere with everything I do. (Mes parents s'ingèrent dans tout ce que je fais.)" },
+    { t: "19. Warmth and tenderness exist between my parents and me. (De la chaleur et de la tendresse existent entre mes parents et moi.)" },
+    { t: "20. My parents put strict limits for what I am and am not allowed to do, to which they then adhere rigorously. (Mes parents fixent des limites strictes à ce que j'ai le droit de faire ou non, et s'y tiennent rigoureusement.)" },
+    { t: "21. My parents punish me hard, even for small offenses. (Mes parents me punissent sévèrement, même pour de petites fautes.)" },
+    { t: "22. My parents want to decide how I should dress or how I should look. (Mes parents veulent décider comment je dois m'habiller ou à quoi je dois ressembler.)" },
+    { t: "23. My parents are proud when I succeed in something I have undertaken. (Mes parents sont fiers quand je réussis quelque chose que j'ai entrepris.)" }
+  ];
+  var opts = ["1 - Non, jamais","2 - Oui, mais rarement","3 - Oui, souvent","4 - Oui, la plupart du temps"];
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx].t;
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    opts.forEach(function(label, v){
+      var d = document.createElement('div');
+      d.className = 'opt' + (answers[idx] === v+1 ? ' selected' : '');
+      d.textContent = label;
+      d.addEventListener('click', function(){
+        answers[idx] = v+1;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var total = answers.reduce(function(a,b){ return a + b; }, 0);
+    document.getElementById('score-total').textContent = total;
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EMBU-C - Styles éducatifs parentaux perçus par l'enfant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#3D5A80 0%,#7B9BC4 55%,#22334D 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(200,215,235,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#22334D;background:#E9EEF5;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .caveat{background:#FBF3E7;border:1px solid #E7D9BC;border-radius:12px;padding:14px 16px;font-size:13.5px;color:#5A4A2A;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#3D5A80;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#22334D;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+  <div class="fiche-photo"><span class="acronym">EMBU-C</span></div>
+  <h1 class="serif">EMBU-C - Styles éducatifs parentaux perçus par l'enfant</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">s-EMBU (forme abrégée) - Arrindell, Sanavio, Aguilar et al. (1999), forme longue d'origine Perris et al. (1980)</p>
+  <div class="meta-row">
+    <span class="pill">23 questions</span>
+    <span class="pill">5 minutes</span>
+    <span class="pill">Échelle 1-4</span>
+    <span class="pill">Anglais</span>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" href="embu-c.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>L'EMBU (acronyme suédois pour « mes souvenirs d'éducation ») est un instrument d'auto-évaluation portant sur la façon dont un enfant ou un adolescent perçoit le comportement éducatif de ses parents. La forme abrégée s-EMBU utilisée ici comporte 23 items cotés sur une échelle en 4 points, de « non, jamais » à « oui, la plupart du temps ».</p>
+    <p>Sur le plan théorique, l'instrument distingue trois dimensions du style éducatif perçu : le rejet, la chaleur émotionnelle et la surprotection.</p>
+    <p class="lead">⚠️ Réserve de sourçage</p>
+    <p class="caveat">Trois dimensions théoriques sont bien confirmées dans la littérature (Rejet : 7 items ; Chaleur émotionnelle : 6 items ; Surprotection : 9 items, plus 1 item non coté), mais la répartition exacte, item par item, entre ces trois dimensions n'a pas pu être confirmée avec une fiabilité suffisante lors du sourçage de cette page (source illisible ou contradictoire selon les versions consultées). Par prudence, aucun score par dimension n'est calculé ici : seul un score total (somme des 23 items) est proposé.</p>
+    <p class="source-note">Items originaux en anglais. La traduction française affichée entre parenthèses est une traduction de travail non officielle réalisée pour cette page.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Score total = somme des 23 items, chacun coté de 1 à 4 (étendue possible : 23 à 92). Un score plus élevé traduit une perception globalement plus marquée du style éducatif parental interrogé par les items (mélange de rejet, chaleur et surprotection non séparés).</p>
+    <p>Aucun seuil clinique standardisé publié n'a été retrouvé pour ce score total ; la répartition exacte des items dans les 3 dimensions théoriques (Rejet, Chaleur émotionnelle, Surprotection) n'a pas pu être confirmée avec une fiabilité suffisante lors du sourçage, un score par dimension n'est donc pas proposé ici.</p>
+  </div>
+  <div class="section">
+    <h2 class="serif">Source</h2>
+    <p class="source-note">Arrindell, W. A., Sanavio, E., Aguilar, G., Sica, C., Hatzichristou, C., Eisemann, M., Recinos, L. A., Gaszner, P., Peter, M., Battagliese, G., Kállai, J., &amp; van der Ende, J. (1999). The development of a short form of the EMBU. Personality and Individual Differences, 27(4), 613-628. Instrument diffusé librement via la bibliothèque de mesures académiques « El Centro » de l'Université de Miami. Outil de repérage, ne remplace pas une évaluation clinique complète.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

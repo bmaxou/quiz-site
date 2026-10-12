@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CTS2 — Échelles révisées des tactiques de conflit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#5E6B3A;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-intro{font-size:12.5px;color:#63695D;margin:0 0 18px;}
+  .q-block{margin:0 0 20px;}
+  .q-who{font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#5E6B3A;margin:0 0 4px;}
+  .q-text{font-size:16px;margin:0 0 10px;}
+  .opt-row{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+  .opt{display:flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:12.5px;line-height:1.35;}
+  .opt.selected{border-color:#5E6B3A;background:#E9EDDC;}
+  .opt.wide{grid-column:1 / -1;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#5E6B3A;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .res-table{width:100%;border-collapse:collapse;font-size:13px;margin:0 0 16px;}
+  .res-table th,.res-table td{padding:8px 6px;border-bottom:1px solid #E0D9C9;text-align:center;}
+  .res-table th:first-child,.res-table td:first-child{text-align:left;}
+  .res-table th{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#63695D;}
+  .res-table td.yes{color:#2E3719;font-weight:700;background:#E9EDDC;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 16px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media (max-width:520px){.opt-row{grid-template-columns:1fr;}}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">CTS2 — Échelles révisées des tactiques de conflit</h1>
+    <p class="lead">Ce questionnaire décrit ce qui se passe dans un couple quand les partenaires sont en désaccord : 39 comportements, chacun évalué deux fois (ce que vous avez fait, ce que votre partenaire a fait), selon leur fréquence au cours de l'année écoulée. Certaines questions portent sur des violences ; répondez seul(e), en un lieu où vous vous sentez en sécurité.</p>
+    <p class="lang-note">Questionnaire transcrit en anglais (version originale) : la traduction française de Lussier (1997) n'est pas diffusée en accès libre sous sa forme officielle.</p>
+    <div class="pill-row">
+      <span class="pill">39 comportements (78 réponses)</span>
+      <span class="pill">10 minutes</span>
+      <span class="pill">Fréquence 0-7</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-intro">No matter how well a couple gets along, there are times when they disagree. How often did this happen in the past year?</p>
+    <div class="q-block">
+      <p class="q-who">You</p>
+      <p class="q-text" id="q-self"></p>
+      <div class="opt-row" id="opt-self"></div>
+    </div>
+    <div class="q-block">
+      <p class="q-who">Your partner</p>
+      <p class="q-text" id="q-part"></p>
+      <div class="opt-row" id="opt-part"></div>
+    </div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <p class="lead">Pour chaque échelle : présence d'au moins un acte au cours de l'année écoulée (oui/non) et fréquence annuelle estimée (somme des valeurs médianes des catégories de réponse).</p>
+    <table class="res-table" id="res-table"></table>
+    <p class="result-text" id="level-text"></p>
+    <p class="result-text" id="prior-text"></p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">CTS2 (Revised Conflict Tactics Scales) — Straus, Hamby, Boney-McCoy &amp; Sugarman, 1996. Mesure des actes déclarés, pas du contexte (peur, contrôle, rapport de force, légitime défense) : ne remplace pas une évaluation clinique complète. Les sous-échelles « mineur / sévère » du manuel officiel ne sont pas reproduites. © Western Psychological Services (licence requise).</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = [{"s": "I showed my partner I cared even though we disagreed.", "p": "My partner showed care for me even though we disagreed."}, {"s": "I explained my side of a disagreement to my partner.", "p": "My partner explained his or her side of a disagreement to me."}, {"s": "I insulted or swore at my partner.", "p": "My partner did this to me."}, {"s": "I threw something at my partner that could hurt.", "p": "My partner did this to me."}, {"s": "I twisted my partner’s arm or hair.", "p": "My partner did this to me."}, {"s": "I had a sprain, bruise, or small cut because of a fight with my partner.", "p": "My partner had a sprain, bruise, or small cut because of a fight with me."}, {"s": "I showed respect for my partner’s feelings about an issue.", "p": "My partner showed respect for my feelings about an issue."}, {"s": "I made my partner have sex without a condom.", "p": "My partner did this to me."}, {"s": "I pushed or shoved my partner.", "p": "My partner did this to me."}, {"s": "I used force (like hitting, holding down, or using a weapon) to make my partner have oral or anal sex.", "p": "My partner did this to me."}, {"s": "I used a knife or gun on my partner.", "p": "My partner did this to me."}, {"s": "I passed out from being hit on the head by my partner in a fight.", "p": "My partner passed out from being hit on the head in a fight with me."}, {"s": "I called my partner fat or ugly.", "p": "My partner called me fat or ugly."}, {"s": "I punched or hit my partner with something that could hurt.", "p": "My partner did this to me."}, {"s": "I destroyed something belonging to my partner.", "p": "My partner did this to me."}, {"s": "I went to a doctor because of a fight with my partner.", "p": "My partner went to a doctor because of a fight with me."}, {"s": "I choked my partner.", "p": "My partner did this to me."}, {"s": "I shouted or yelled at my partner.", "p": "My partner did this to me."}, {"s": "I slammed my partner against a wall.", "p": "My partner did this to me."}, {"s": "I said I was sure we could work out a problem.", "p": "My partner was sure we could work it out."}, {"s": "I needed to see a doctor because of a fight with my partner, but I didn’t.", "p": "My partner needed to see a doctor because of a fight with me, but didn’t."}, {"s": "I beat up my partner.", "p": "My partner did this to me."}, {"s": "I grabbed my partner.", "p": "My partner did this to me."}, {"s": "I used force (like hitting, holding down, or using a weapon) to make my partner have sex.", "p": "My partner did this to me."}, {"s": "I stomped out of the room or house or yard during a disagreement.", "p": "My partner did this to me."}, {"s": "I insisted on sex when my partner did not want to (but did not use physical force).", "p": "My partner did this to me."}, {"s": "I slapped my partner.", "p": "My partner did this to me."}, {"s": "I had a broken bone from a fight with my partner.", "p": "My partner had a broken bone from a fight with me."}, {"s": "I used threats to make my partner have oral or anal sex.", "p": "My partner did this to me."}, {"s": "I suggested a compromise to a disagreement.", "p": "My partner did this to me."}, {"s": "I burned or scalded my partner on purpose.", "p": "My partner did this to me."}, {"s": "I insisted my partner have oral or anal sex (but did not use physical force).", "p": "My partner did this to me."}, {"s": "I accused my partner of being a lousy lover.", "p": "My partner accused me of this."}, {"s": "I did something to spite my partner.", "p": "My partner did this to me."}, {"s": "I threatened to hit or throw something at my partner.", "p": "My partner did this to me."}, {"s": "I felt physical pain that still hurt the next day because of a fight with my partner.", "p": "My partner still felt physical pain the next day because of a fight we had."}, {"s": "I kicked my partner.", "p": "My partner did this to me."}, {"s": "I used threats to make my partner have sex.", "p": "My partner did this to me."}, {"s": "I agreed to try a solution to a disagreement my partner suggested.", "p": "My partner agreed to try a solution I suggested."}];
+  var scales = [{"k": "neg", "n": "Négociation", "i": [1, 2, 7, 20, 30, 39]}, {"k": "psy", "n": "Agression psychologique", "i": [3, 13, 15, 18, 25, 33, 34, 35]}, {"k": "phy", "n": "Agression physique", "i": [4, 5, 9, 11, 14, 17, 19, 22, 23, 27, 31, 37]}, {"k": "sex", "n": "Coercition sexuelle", "i": [8, 10, 24, 26, 29, 32, 38]}, {"k": "inj", "n": "Blessures", "i": [6, 12, 16, 21, 28, 36]}];
+  var opts = ["0 — This has never happened", "1 — Once in the past year", "2 — Twice in the past year", "3 — 3-5 times in the past year", "4 — 6-10 times in the past year", "5 — 11-20 times in the past year", "6 — More than 20 times in the past year", "7 — Not in the past year, but it did happen before"];
+  var CODE = [0,1,2,4,8,15,25,0];
+  var ans = items.map(function(){ return {s:null, p:null}; });
+  var idx = 0;
+
+  function group(containerId, who){
+    var row = document.getElementById(containerId);
+    row.innerHTML = '';
+    opts.forEach(function(label, v){
+      var d = document.createElement('div');
+      d.className = 'opt' + (v === 7 ? ' wide' : '') + (ans[idx][who] === v ? ' selected' : '');
+      d.textContent = label;
+      d.addEventListener('click', function(){
+        ans[idx][who] = v;
+        renderQuestion();
+      });
+      row.appendChild(d);
+    });
+  }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Comportement ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-self').textContent = items[idx].s;
+    document.getElementById('q-part').textContent = items[idx].p;
+    group('opt-self','s');
+    group('opt-part','p');
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = (ans[idx].s === null || ans[idx].p === null);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (ans[idx].s === null || ans[idx].p === null) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); window.scrollTo(0,0); }
+    else { showResult(); }
+  });
+
+  function compute(){
+    var out = {};
+    scales.forEach(function(sc){
+      var r = {self:{prev:0,chron:0,prior:0}, part:{prev:0,chron:0,prior:0}};
+      sc.i.forEach(function(n){
+        var a = ans[n-1];
+        [['self','s'],['part','p']].forEach(function(w){
+          var v = a[w[1]];
+          var c = CODE[v];
+          if (c > 0){ r[w[0]].prev = 1; r[w[0]].chron += c; }
+          if (v === 7){ r[w[0]].prior += 1; }
+        });
+      });
+      out[sc.k] = r;
+    });
+    return out;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var res = compute();
+    window.__cts2 = res;
+    var html = '<tr><th>Échelle</th><th>Vous : présence</th><th>Vous : fréquence</th><th>Partenaire : présence</th><th>Partenaire : fréquence</th></tr>';
+    var aggr = false;
+    scales.forEach(function(sc){
+      var r = res[sc.k];
+      var isNeg = sc.k === 'neg';
+      function cell(w){
+        var prevTxt = isNeg ? '—' : (w.prev ? 'Oui' : 'Non');
+        var cls = (!isNeg && w.prev) ? ' class="yes"' : '';
+        return '<td' + cls + '>' + prevTxt + '</td><td>' + w.chron + '</td>';
+      }
+      html += '<tr><td>' + sc.n + ' (' + sc.i.length + ' items)</td>' + cell(r.self) + cell(r.part) + '</tr>';
+      if (!isNeg && (r.self.prev || r.part.prev)) aggr = true;
+    });
+    document.getElementById('res-table').innerHTML = html;
+    var t;
+    if (aggr){
+      t = "Au moins un acte d'agression, de coercition sexuelle ou de blessure est rapporté pour l'année écoulée (cases surlignées). Ce résultat n'établit ni un diagnostic ni un niveau de danger : il appelle une exploration clinique du contexte (peur, contrôle, escalade, sécurité des personnes) et, si besoin, une évaluation du risque.";
+    } else {
+      t = "Aucun acte d'agression psychologique, physique, de coercition sexuelle ou de blessure n'est rapporté pour l'année écoulée. Ce constat dépend de la franchise de la réponse et ne dit rien du contrôle ou de la peur qui ne passeraient pas par ces actes.";
+    }
+    document.getElementById('level-text').textContent = t;
+    var prior = 0;
+    scales.forEach(function(sc){ if (sc.k !== 'neg'){ prior += res[sc.k].self.prior + res[sc.k].part.prior; } });
+    document.getElementById('prior-text').textContent = prior > 0
+      ? "Réponse « 7 » (déjà arrivé, mais pas dans l'année écoulée) donnée " + prior + " fois sur les échelles d'agression, de coercition et de blessures : indice d'antécédents à explorer, non compté dans les scores de l'année."
+      : "Aucune réponse « 7 » (antécédent hors de l'année écoulée) sur les échelles d'agression, de coercition et de blessures.";
+    window.scrollTo(0,0);
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    ans = items.map(function(){ return {s:null, p:null}; });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CTS2 — Échelles révisées des tactiques de conflit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#5E6B3A 0%,#A9B67A 55%,#2E3719 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#2E3719;background:#E9EDDC;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#5E6B3A;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#2E3719;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">CTS2</span></div>
+
+  <h1 class="serif">Échelles révisées des tactiques de conflit</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Revised Conflict Tactics Scales — Straus, Hamby, Boney-McCoy &amp; Sugarman (1996)</p>
+  <div class="meta-row">
+    <span class="pill">39 comportements (78 réponses)</span>
+    <span class="pill">10 minutes</span>
+    <span class="pill">Fréquence 0-7</span>
+    <span class="pill">Adulte, couple</span>
+    <span class="pill">Anglais</span>
+    <span class="pill">Licence requise : oui</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="cts2.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le CTS2 décrit les tactiques utilisées par les deux membres d'un couple lors d'un désaccord. Chacun des 39 comportements est évalué deux fois, pour le répondant et pour son partenaire, selon une fréquence sur l'année écoulée. Il couvre cinq échelles : négociation (6 items), agression psychologique (8), agression physique (12), coercition sexuelle (7) et blessures (6). Il est utilisé en recherche comme en clinique pour objectiver les violences dans le couple.</p>
+    <p class="source-note">Questionnaire transcrit en anglais (version originale) : la traduction française de Lussier (1997) et la version abrégée de Hébert et Parent (2000) ne sont pas diffusées en accès libre sous leur forme officielle. Les traductions françaises non officielles qui circulent n'ont pas été reprises.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque réponse est codée selon la procédure publiée : 0 (jamais), 1 et 2 (une ou deux fois dans l'année), puis la valeur médiane de la catégorie pour les fréquences plus élevées (3-5 fois = 4, 6-10 = 8, 11-20 = 15, plus de 20 = 25). La réponse 7 (« pas dans l'année écoulée, mais déjà arrivé ») compte 0 pour l'année et est signalée à part comme indice d'antécédents. La page affiche, séparément pour le répondant et pour son partenaire, la présence d'au moins un acte (prévalence, oui/non) et la fréquence annuelle (somme des valeurs) pour chacune des cinq échelles. Pour la négociation, seule la fréquence est pertinente.</p>
+    <p>L'affectation des 39 items aux cinq échelles repose sur leur contenu et sur les effectifs publiés (6, 8, 12, 7, 6). Les sous-échelles « mineur / sévère » du manuel officiel ne sont pas reproduites : leur clé exacte est dans le manuel du détenteur des droits et n'a pas pu être vérifiée en accès libre. Aucun seuil clinique n'existe : les scores servent à décrire des actes déclarés, pas à poser un diagnostic.</p>
+    <p>Précautions cliniques : l'outil mesure des actes, pas le contexte (peur, contrôle coercitif, rapport de force, légitime défense) et est critiqué pour sa lecture symétrique des violences. Un résultat positif appelle une évaluation approfondie de la sécurité, par exemple avec le Danger Assessment pour le risque létal, et une passation hors de la présence du partenaire.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p class="source-note"><strong>Licence requise : oui.</strong> Instrument commercial : © Western Psychological Services (2003), autorisation écrite requise pour toute reproduction, manuel de cotation vendu par l'éditeur. Construit malgré tout sur décision du cabinet (30/09/2026). Les 78 énoncés et le schéma de réponse sont transcrits de la fiche de l'instrument publiée par EMERGE (Université de Californie à San Diego), qui reproduit la procédure de codage ; les effectifs par échelle sont recoupés sur la description publique de l'instrument. Straus M.A., Hamby S.L., Boney-McCoy S. &amp; Sugarman D.B. (1996), The Revised Conflict Tactics Scales (CTS2): development and preliminary psychometric data, Journal of Family Issues, 17(3), 283-316. Forme brève à 20 items : Straus M.A. &amp; Douglas E.M. (2004), Violence and Victims, 19(5), 507-520. Traduction française : Lussier Y. (1997, 1998, manuscrits non publiés, UQTR) ; forme abrégée : Hébert M. &amp; Parent N. (2000, UQAM).</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>
