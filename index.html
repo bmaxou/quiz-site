@@ -7744,13 +7744,37 @@
   Object.keys(domains).sort(function(a,b){ return a.localeCompare(b,'fr'); }).forEach(function(d){
     var o = document.createElement('option'); o.value = d; o.textContent = d; sel.appendChild(o);
   });
+  var listEl = cards.length ? cards[0].parentNode : null;
+  cards.forEach(function(c, i){
+    c._i = i;
+    var a = norm(c.getAttribute('data-test') || '');
+    var nm = c.querySelector('.name'); nm = norm(nm ? nm.textContent : '');
+    function sp(x){ return ' ' + x.replace(/[^a-z0-9]+/g, ' ').trim(); }
+    c._ka = sp(a); c._kn = sp(nm);
+  });
   function applySearch(){
     var q = norm(input.value).trim(), dom = sel.value, n = 0;
     var words = q ? q.split(/\s+/) : [];
+    var rk = {};
+    if (words.length){
+      cards.forEach(function(c){
+        var all = words.every(function(w){ return (c._ka + c._kn).indexOf(' ' + w) !== -1; });
+        if (all) rk[c._i] = (c._ka.indexOf(' ' + words[0]) === 0 ? 0 : (c._kn.indexOf(' ' + words[0]) === 0 ? 1 : 2));
+      });
+    }
+    var usePrefix = Object.keys(rk).length > 0;
     cards.forEach(function(c){
-      var ok = (!dom || c._dom === dom) && words.every(function(w){ return c._txt.indexOf(w) !== -1; });
+      var hit = (rk[c._i] !== undefined) || words.every(function(w){ return c._txt.indexOf(w) !== -1; });
+      var ok = (!dom || c._dom === dom) && hit;
       c.hidden = !ok; if (ok) n++;
     });
+    if (listEl){
+      var order = cards.slice().sort(function(a, b){
+        var ra = usePrefix && rk[a._i] !== undefined ? rk[a._i] : 9, rb = usePrefix && rk[b._i] !== undefined ? rk[b._i] : 9;
+        return ra - rb || a._i - b._i;
+      });
+      order.forEach(function(c){ listEl.appendChild(c); });
+    }
     noRes.hidden = n !== 0;
     countEl.textContent = (q || dom) ? (n + ' questionnaire' + (n > 1 ? 's' : '') + ' sur ' + cards.length) : (cards.length + ' questionnaires disponibles');
   }
