@@ -47,7 +47,7 @@
   <div id="screen-start" class="card">
     <h1 class="serif">WURS-25 — Échelle de Wender Utah</h1>
     <p class="lead">Ce questionnaire évalue rétrospectivement des symptômes évocateurs d'un TDAH dans l'enfance. Il comprend 25 affirmations à noter selon leur intensité à cette époque.</p>
-    <p class="lang-note">Questionnaire transcrit en anglais (version originale) : aucune traduction française validée n'a été retrouvée lors du sourçage.</p>
+    <p class="lang-note">Version française du questionnaire ; l'auteur de la traduction n'est pas identifié.</p>
     <div class="pill-row">
       <span class="pill">25 questions</span>
       <span class="pill">5 minutes</span>
@@ -74,40 +74,38 @@
       <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
       <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
     </div>
-    <p class="footnote">WURS-25 (Wender Utah Rating Scale, version courte) — Ward, Wender &amp; Reimherr, 1993. Outil de repérage clinique, ne remplace pas une évaluation complète.</p>
+    <p class="footnote">WURS-25 (Wender Utah Rating Scale, version courte) — Ward, Wender &amp; Reimherr, 1993. Version française d'auteur non identifié. Outil de repérage clinique, ne remplace pas une évaluation complète.</p>
   </div>
 </div>
 
 <script>
 (function(){
-  var items = [
-    "Concentration problems, easily distracted",
-    "Anxious, worrying",
-    "Nervous, fidgety",
-    "Inattentive, daydreaming",
-    "Hot- or short-tempered, low boiling point",
-    "Temper outbursts, tantrums",
-    "Trouble with stick-to-it-tiveness, not following through, failing to finish things started",
-    "Stubborn, strong-willed",
-    "Sad or blue, depressed, unhappy",
-    "Disobedient with parents, rebellious, sassy",
-    "Low opinion of myself",
-    "Irritable",
-    "Moody, ups and downs",
-    "Angry",
-    "Acting without thinking, impulsive",
-    "Tendency to be immature",
-    "Guilty feelings, regretful",
-    "Losing control of myself",
-    "Tendency to be or act irrational",
-    "Unpopular with other children, didn't keep friends for long, didn't get along with other children",
-    "Trouble seeing things from someone else's point of view",
-    "Trouble with authorities, trouble with school, visits to principal's office",
-    "Overall a poor student, slow learner",
-    "Trouble with mathematics or numbers",
-    "Not achieving up to potential"
-  ];
-  var opts5 = [["Not at all or very slightly",0],["Mildly",1],["Moderately",2],["Quite a bit",3],["Very much",4]];
+  var items = ["Enfant, j'avais… Des problèmes de concentration, facilement distrait(e)",
+    "Enfant, j'étais… Anxieux(se), se faisant du souci",
+    "Enfant, j'étais… Nerveux(se), ne tenant pas en place",
+    "Enfant, j'étais… Inattentif(ve), rêveur(se)",
+    "Enfant, j'étais… Facilement en colère, « soupe au lait »",
+    "Enfant, j'avais… Des éclats d'humeur, des accès de colère",
+    "Enfant, j'avais… Des difficultés à me tenir aux choses, à mener mes projets jusqu'à la fin, à finir les choses commencées",
+    "Enfant, j'étais… Têtu(e), obstiné(e)",
+    "Enfant, j'étais… Triste ou cafardeux(se), déprimé(e), malheureux(se)",
+    "Enfant, j'étais… Désobéissant(e) à mes parents, rebelle, effronté(e)",
+    "Enfant, j'avais… Une mauvaise opinion de moi-même",
+    "Enfant, j'étais… Irritable",
+    "Enfant, j'étais… D'humeur changeante, avec des hauts et des bas",
+    "Enfant, j'étais… En colère",
+    "Enfant, j'étais… Impulsif(ve), agissant sans réfléchir",
+    "Enfant, j'avais… Tendance à être immature",
+    "Enfant, j'étais… Culpabilisé(e), plein(e) de regrets",
+    "Enfant, j'avais… Une perte du contrôle de moi-même",
+    "Enfant, j'avais… Tendance à être ou à agir de façon irrationnelle",
+    "Enfant, j'étais… Impopulaire auprès des autres enfants, ne gardant pas longtemps mes amis, ne m'entendant pas avec les autres enfants",
+    "Enfant, j'avais… Du mal à voir les choses du point de vue de quelqu'un d'autre",
+    "Enfant, j'avais… Des ennuis avec les autorités, l'école, convoqué(e) au bureau du directeur",
+    "À l'école, j'étais… Dans l'ensemble un(e) mauvais(e) élève, apprenant lentement",
+    "À l'école, j'avais… Des difficultés en mathématiques ou avec les chiffres",
+    "À l'école, j'étais… En dessous de mon potentiel"];
+  var opts5 = [["Pas du tout ou très légèrement",0],["Légèrement",1],["Modérément",2],["Assez",3],["Beaucoup",4]];
   var answers = new Array(items.length).fill(null);
   var current = 0;
 
@@ -127,7 +125,7 @@
   function renderQuestion(){
     var i = current;
     qnum.textContent = 'Question ' + (i+1) + ' / ' + items.length;
-    qtext.textContent = 'As a child I was / had: ' + items[i];
+    qtext.textContent = items[i];
     progressFill.style.width = Math.round((i / items.length) * 100) + '%';
     btnBack.disabled = (i === 0);
     opts.innerHTML = '';
