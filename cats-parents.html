@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CATS-2 : version parents</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #857532;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#857532;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#413816;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#857532;background:#F4F1E6;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#413816;border-color:#E0D9C9;}
+  .btn-primary{background:#857532;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#857532;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#413816;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">CATS-2 : Child and Adolescent Trauma Screen 2 (version parents, 7-17 ans)</h1>
+    <p class="lead">45 questions en anglais : événements stressants (15), symptômes des quatre dernières semaines (25 réponses, échelle de 0 à 3) et retentissement (5, YES/NO). Version à remplir par un parent ou un aidant, à propos de l’enfant de 7 à 17 ans (évaluation par un tiers, et non par l’enfant lui-même).</p>
+    <p class="consigne">Stressful or scary events happen to many children. Below is a list of stressful and scary events that sometimes happen. Mark YES if it happened to the child to the best of your knowledge. Mark NO of it didn’t happen to the child.
+Mark 0, 1, 2 or 3 for how often the child has had the following thoughts, feelings, or problems in the last four weeks: 0 = Never / 1 = Sometimes / 2 = Often / 3 = Almost always
+Please mark YES or NO if the problems you marked interfered with:</p>
+    <p class="lang-note">Questions et réponses en anglais (version originale ; aucune version française publiée trouvée ; non traduit). Licence requise : non (outil « license-free »).</p>
+    <div class="pill-row">
+      <span class="pill">45 questions</span>
+      <span class="pill">Anglais</span>
+      <span class="pill">Symptômes : 0 à 3 sur 4 semaines</span>
+      <span class="pill">Événements et retentissement : YES / NO</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Sachser C et al., Eur J Psychotraumatol 2022;13(2):2105580 ; CATS 7-17 version 2.0. Outil de dépistage en anglais, non traduit : ne remplace pas une évaluation clinique du trauma. Seuils issus d’échantillons non français.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["Stressful or scary events happen to many children. Below is a list of stressful and scary events that sometimes happen. Mark YES if it happened to the child to the best of your knowledge. Mark NO of it didn’t happen to the child.\nSerious natural disaster like a flood, tornado, hurricane, earthquake, or fire.", "Stressful or scary events happen to many children. Below is a list of stressful and scary events that sometimes happen. Mark YES if it happened to the child to the best of your knowledge. Mark NO of it didn’t happen to the child.\nSerious accident or injury like a car/bike crash, dog bite, or sports injury.", "Stressful or scary events happen to many children. Below is a list of stressful and scary events that sometimes happen. Mark YES if it happened to the child to the best of your knowledge. Mark NO of it didn’t happen to the child.\nThreatened, hit or hurt badly within the family.", "Stressful or scary events happen to many children. Below is a list of stressful and scary events that sometimes happen. Mark YES if it happened to the child to the best of your knowledge. Mark NO of it didn’t happen to the child.\nThreatened, hit or hurt badly in school or the community.", "Stressful or scary events happen to many children. Below is a list of stressful and scary events that sometimes happen. Mark YES if it happened to the child to the best of your knowledge. Mark NO of it didn’t happen to the child.\nAttacked, stabbed, shot at or robbed by threat.", "Stressful or scary events happen to many children. Below is a list of stressful and scary events that sometimes happen. Mark YES if it happened to the child to the best of your knowledge. Mark NO of it didn’t happen to the child.\nSeeing someone in the family threatened, hit or hurt badly.", "Stressful or scary events happen to many children. Below is a list of stressful and scary events that sometimes happen. Mark YES if it happened to the child to the best of your knowledge. Mark NO of it didn’t happen to the child.\nSeeing someone in school or the community threatened, hit or hurt badly.", "Stressful or scary events happen to many children. Below is a list of stressful and scary events that sometimes happen. Mark YES if it happened to the child to the best of your knowledge. Mark NO of it didn’t happen to the child.\nSomeone doing sexual things to the child or making the child do sexual things to them when he/she couldn’t say no. Or when the child was forced or pressured.", "Stressful or scary events happen to many children. Below is a list of stressful and scary events that sometimes happen. Mark YES if it happened to the child to the best of your knowledge. Mark NO of it didn’t happen to the child.\nOn line or in social media, someone asking or pressuring the child to do something sexual. Like take or send pictures.", "Stressful or scary events happen to many children. Below is a list of stressful and scary events that sometimes happen. Mark YES if it happened to the child to the best of your knowledge. Mark NO of it didn’t happen to the child.\nSomeone bullying the child in person. Saying very mean things that scare him/her.", "Stressful or scary events happen to many children. Below is a list of stressful and scary events that sometimes happen. Mark YES if it happened to the child to the best of your knowledge. Mark NO of it didn’t happen to the child.\nSomeone bullying the child online. Saying very mean things that scare him/her.", "Stressful or scary events happen to many children. Below is a list of stressful and scary events that sometimes happen. Mark YES if it happened to the child to the best of your knowledge. Mark NO of it didn’t happen to the child.\nSomeone close to the child dying suddenly or violently.", "Stressful or scary events happen to many children. Below is a list of stressful and scary events that sometimes happen. Mark YES if it happened to the child to the best of your knowledge. Mark NO of it didn’t happen to the child.\nStressful or scary medical procedure.", "Stressful or scary events happen to many children. Below is a list of stressful and scary events that sometimes happen. Mark YES if it happened to the child to the best of your knowledge. Mark NO of it didn’t happen to the child.\nBeing around war.", "Stressful or scary events happen to many children. Below is a list of stressful and scary events that sometimes happen. Mark YES if it happened to the child to the best of your knowledge. Mark NO of it didn’t happen to the child.\nOther stressful or scary event? Describe:", "Mark 0, 1, 2 or 3 for how often the child has had the following thoughts, feelings, or problems in the last four weeks: 0 = Never / 1 = Sometimes / 2 = Often / 3 = Almost always\nUpsetting thoughts or memories about what happened pop into the child’s head. Or the child re-enacting what happened in play.", "Mark 0, 1, 2 or 3 for how often the child has had the following thoughts, feelings, or problems in the last four weeks: 0 = Never / 1 = Sometimes / 2 = Often / 3 = Almost always\nBad dreams related to what happened.", "Mark 0, 1, 2 or 3 for how often the child has had the following thoughts, feelings, or problems in the last four weeks: 0 = Never / 1 = Sometimes / 2 = Often / 3 = Almost always\nActing, playing, or feeling as if what happened is happening right now.", "Mark 0, 1, 2 or 3 for how often the child has had the following thoughts, feelings, or problems in the last four weeks: 0 = Never / 1 = Sometimes / 2 = Often / 3 = Almost always\nFeeling very upset when reminded of what happened.", "Mark 0, 1, 2 or 3 for how often the child has had the following thoughts, feelings, or problems in the last four weeks: 0 = Never / 1 = Sometimes / 2 = Often / 3 = Almost always\nStrong physical reactions when reminded of what happened (sweating, heart beating fast, upset stomach).", "Mark 0, 1, 2 or 3 for how often the child has had the following thoughts, feelings, or problems in the last four weeks: 0 = Never / 1 = Sometimes / 2 = Often / 3 = Almost always\nTrying not to think about or have feelings about what happened.", "Mark 0, 1, 2 or 3 for how often the child has had the following thoughts, feelings, or problems in the last four weeks: 0 = Never / 1 = Sometimes / 2 = Often / 3 = Almost always\nAvoiding anything that is a reminder of what happened (people, places, things, situations, talks).", "Mark 0, 1, 2 or 3 for how often the child has had the following thoughts, feelings, or problems in the last four weeks: 0 = Never / 1 = Sometimes / 2 = Often / 3 = Almost always\nNot being able to remember an important part of what happened.", "Mark 0, 1, 2 or 3 for how often the child has had the following thoughts, feelings, or problems in the last four weeks: 0 = Never / 1 = Sometimes / 2 = Often / 3 = Almost always\nHaving negative thoughts, such as:\nI won’t have a good life.", "Mark 0, 1, 2 or 3 for how often the child has had the following thoughts, feelings, or problems in the last four weeks: 0 = Never / 1 = Sometimes / 2 = Often / 3 = Almost always\nHaving negative thoughts, such as:\nI can’t trust other people.", "Mark 0, 1, 2 or 3 for how often the child has had the following thoughts, feelings, or problems in the last four weeks: 0 = Never / 1 = Sometimes / 2 = Often / 3 = Almost always\nHaving negative thoughts, such as:\nThe world is unsafe.", "Mark 0, 1, 2 or 3 for how often the child has had the following thoughts, feelings, or problems in the last four weeks: 0 = Never / 1 = Sometimes / 2 = Often / 3 = Almost always\nHaving negative thoughts, such as:\nI am not good enough.", "Mark 0, 1, 2 or 3 for how often the child has had the following thoughts, feelings, or problems in the last four weeks: 0 = Never / 1 = Sometimes / 2 = Often / 3 = Almost always\nBlame for the event(s)\nBlaming self for what happened.", "Mark 0, 1, 2 or 3 for how often the child has had the following thoughts, feelings, or problems in the last four weeks: 0 = Never / 1 = Sometimes / 2 = Often / 3 = Almost always\nBlame for the event(s)\nBlaming others for what happened even though it wasn’t their fault.", "Mark 0, 1, 2 or 3 for how often the child has had the following thoughts, feelings, or problems in the last four weeks: 0 = Never / 1 = Sometimes / 2 = Often / 3 = Almost always\nUpsetting feelings (afraid, angry, guilty, ashamed) a lot of the time.", "Mark 0, 1, 2 or 3 for how often the child has had the following thoughts, feelings, or problems in the last four weeks: 0 = Never / 1 = Sometimes / 2 = Often / 3 = Almost always\nNot wanting to do things he/she used to do. Losing interest in activities he/she used to enjoy.", "Mark 0, 1, 2 or 3 for how often the child has had the following thoughts, feelings, or problems in the last four weeks: 0 = Never / 1 = Sometimes / 2 = Often / 3 = Almost always\nNot feeling close to people.", "Mark 0, 1, 2 or 3 for how often the child has had the following thoughts, feelings, or problems in the last four weeks: 0 = Never / 1 = Sometimes / 2 = Often / 3 = Almost always\nShowing or having less happy feelings.", "Mark 0, 1, 2 or 3 for how often the child has had the following thoughts, feelings, or problems in the last four weeks: 0 = Never / 1 = Sometimes / 2 = Often / 3 = Almost always\nManaging strong feelings\nHaving a hard time calming down when upset.", "Mark 0, 1, 2 or 3 for how often the child has had the following thoughts, feelings, or problems in the last four weeks: 0 = Never / 1 = Sometimes / 2 = Often / 3 = Almost always\nManaging strong feelings\nBeing irritable. Or having angry outbursts and taking it out on others.", "Mark 0, 1, 2 or 3 for how often the child has had the following thoughts, feelings, or problems in the last four weeks: 0 = Never / 1 = Sometimes / 2 = Often / 3 = Almost always\nRisky behavior or behavior that could be harmful. Doing unsafe things.", "Mark 0, 1, 2 or 3 for how often the child has had the following thoughts, feelings, or problems in the last four weeks: 0 = Never / 1 = Sometimes / 2 = Often / 3 = Almost always\nBeing overly alert or on guard.", "Mark 0, 1, 2 or 3 for how often the child has had the following thoughts, feelings, or problems in the last four weeks: 0 = Never / 1 = Sometimes / 2 = Often / 3 = Almost always\nBeing jumpy or easily startled.", "Mark 0, 1, 2 or 3 for how often the child has had the following thoughts, feelings, or problems in the last four weeks: 0 = Never / 1 = Sometimes / 2 = Often / 3 = Almost always\nProblems with concentration.", "Mark 0, 1, 2 or 3 for how often the child has had the following thoughts, feelings, or problems in the last four weeks: 0 = Never / 1 = Sometimes / 2 = Often / 3 = Almost always\nTrouble falling or staying asleep.", "Please mark YES or NO if the problems you marked interfered with:\nGetting along with others", "Please mark YES or NO if the problems you marked interfered with:\nHobbies/Fun", "Please mark YES or NO if the problems you marked interfered with:\nSchool or work", "Please mark YES or NO if the problems you marked interfered with:\nFamily relationships", "Please mark YES or NO if the problems you marked interfered with:\nGeneral happiness"];
+  var G = [];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = [[{"label": "", "opts": ["YES", "NO"], "vals": [1, 0]}], [{"label": "", "opts": ["YES", "NO"], "vals": [1, 0]}], [{"label": "", "opts": ["YES", "NO"], "vals": [1, 0]}], [{"label": "", "opts": ["YES", "NO"], "vals": [1, 0]}], [{"label": "", "opts": ["YES", "NO"], "vals": [1, 0]}], [{"label": "", "opts": ["YES", "NO"], "vals": [1, 0]}], [{"label": "", "opts": ["YES", "NO"], "vals": [1, 0]}], [{"label": "", "opts": ["YES", "NO"], "vals": [1, 0]}], [{"label": "", "opts": ["YES", "NO"], "vals": [1, 0]}], [{"label": "", "opts": ["YES", "NO"], "vals": [1, 0]}], [{"label": "", "opts": ["YES", "NO"], "vals": [1, 0]}], [{"label": "", "opts": ["YES", "NO"], "vals": [1, 0]}], [{"label": "", "opts": ["YES", "NO"], "vals": [1, 0]}], [{"label": "", "opts": ["YES", "NO"], "vals": [1, 0]}], [{"label": "", "opts": ["YES", "NO"], "vals": [1, 0]}], [{"label": "", "opts": ["0 = Never", "1 = Sometimes", "2 = Often", "3 = Almost always"], "vals": [0, 1, 2, 3]}], [{"label": "", "opts": ["0 = Never", "1 = Sometimes", "2 = Often", "3 = Almost always"], "vals": [0, 1, 2, 3]}], [{"label": "", "opts": ["0 = Never", "1 = Sometimes", "2 = Often", "3 = Almost always"], "vals": [0, 1, 2, 3]}], [{"label": "", "opts": ["0 = Never", "1 = Sometimes", "2 = Often", "3 = Almost always"], "vals": [0, 1, 2, 3]}], [{"label": "", "opts": ["0 = Never", "1 = Sometimes", "2 = Often", "3 = Almost always"], "vals": [0, 1, 2, 3]}], [{"label": "", "opts": ["0 = Never", "1 = Sometimes", "2 = Often", "3 = Almost always"], "vals": [0, 1, 2, 3]}], [{"label": "", "opts": ["0 = Never", "1 = Sometimes", "2 = Often", "3 = Almost always"], "vals": [0, 1, 2, 3]}], [{"label": "", "opts": ["0 = Never", "1 = Sometimes", "2 = Often", "3 = Almost always"], "vals": [0, 1, 2, 3]}], [{"label": "", "opts": ["0 = Never", "1 = Sometimes", "2 = Often", "3 = Almost always"], "vals": [0, 1, 2, 3]}], [{"label": "", "opts": ["0 = Never", "1 = Sometimes", "2 = Often", "3 = Almost always"], "vals": [0, 1, 2, 3]}], [{"label": "", "opts": ["0 = Never", "1 = Sometimes", "2 = Often", "3 = Almost always"], "vals": [0, 1, 2, 3]}], [{"label": "", "opts": ["0 = Never", "1 = Sometimes", "2 = Often", "3 = Almost always"], "vals": [0, 1, 2, 3]}], [{"label": "", "opts": ["0 = Never", "1 = Sometimes", "2 = Often", "3 = Almost always"], "vals": [0, 1, 2, 3]}], [{"label": "", "opts": ["0 = Never", "1 = Sometimes", "2 = Often", "3 = Almost always"], "vals": [0, 1, 2, 3]}], [{"label": "", "opts": ["0 = Never", "1 = Sometimes", "2 = Often", "3 = Almost always"], "vals": [0, 1, 2, 3]}], [{"label": "", "opts": ["0 = Never", "1 = Sometimes", "2 = Often", "3 = Almost always"], "vals": [0, 1, 2, 3]}], [{"label": "", "opts": ["0 = Never", "1 = Sometimes", "2 = Often", "3 = Almost always"], "vals": [0, 1, 2, 3]}], [{"label": "", "opts": ["0 = Never", "1 = Sometimes", "2 = Often", "3 = Almost always"], "vals": [0, 1, 2, 3]}], [{"label": "", "opts": ["0 = Never", "1 = Sometimes", "2 = Often", "3 = Almost always"], "vals": [0, 1, 2, 3]}], [{"label": "", "opts": ["0 = Never", "1 = Sometimes", "2 = Often", "3 = Almost always"], "vals": [0, 1, 2, 3]}], [{"label": "", "opts": ["0 = Never", "1 = Sometimes", "2 = Often", "3 = Almost always"], "vals": [0, 1, 2, 3]}], [{"label": "", "opts": ["0 = Never", "1 = Sometimes", "2 = Often", "3 = Almost always"], "vals": [0, 1, 2, 3]}], [{"label": "", "opts": ["0 = Never", "1 = Sometimes", "2 = Often", "3 = Almost always"], "vals": [0, 1, 2, 3]}], [{"label": "", "opts": ["0 = Never", "1 = Sometimes", "2 = Often", "3 = Almost always"], "vals": [0, 1, 2, 3]}], [{"label": "", "opts": ["0 = Never", "1 = Sometimes", "2 = Often", "3 = Almost always"], "vals": [0, 1, 2, 3]}], [{"label": "", "opts": ["YES", "NO"], "vals": [1, 0]}], [{"label": "", "opts": ["YES", "NO"], "vals": [1, 0]}], [{"label": "", "opts": ["YES", "NO"], "vals": [1, 0]}], [{"label": "", "opts": ["YES", "NO"], "vals": [1, 0]}], [{"label": "", "opts": ["YES", "NO"], "vals": [1, 0]}]];              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var REFS = ["1", "2", "3", "4", "5", "6", "7", "8", "9a", "9b", "9c", "9d", "10a", "10b", "11", "12", "13", "14", "15a", "15b", "16", "17", "18", "19", "20"], OFF = 15;
+    function sv(ref){ return answers[OFF + REFS.indexOf(ref)][0]; }
+    function sm(l){ var s = 0; l.forEach(function(r){ s += sv(r); }); return s; }
+    function mx(l){ var m = 0; l.forEach(function(r){ if (sv(r) > m) m = sv(r); }); return m; }
+    var dsm = sm(['1','2','3','4','5','6','7','8','11','12','13','14','16','17','18','19','20']) + mx(['9a','9b','9c','9d']) + mx(['10a','10b']) + mx(['15a','15b']);
+    var pt = sm(['2','3','6','7','17','18']);
+    var cp = sm(['2','3','6','7','9b','9d','10a','13','14','15a','17','18']);
+    var imp = 0, ev = 0, j;
+    for (j = 0; j < 5; j++){ imp += answers[OFF + 25 + j][0]; }
+    for (j = 0; j < 15; j++){ ev += answers[j][0]; }
+    var rows = row('Score DSM-5 PTSD, dimensionnel (0 à 60)', dsm)
+             + row('Score ICD-11 PTSD (0 à 18)', pt)
+             + row('Score ICD-11 CPTSD, TSPT complexe (0 à 36)', cp)
+             + row('Retentissement : réponses YES (partie C)', imp + ' / 5')
+             + row('Événements cochés YES (partie A, non coté)', ev + ' / 15');
+    html += '<table class="result-table">' + rows + '</table>';
+    function P(t){ html += '<p class="result-text">' + t + '</p>'; }
+    var d;
+    if (dsm < 15) d = 'inférieur à 15 : « Normal. Not clinically elevated. »';
+    else if (dsm <= 20) d = '15 à 20 : « Moderate trauma-related distress. »';
+    else if (dsm <= 24) d = '21 à 24 : « Elevated distress. Positive Screening threshold. » (seuil de dépistage ≥ 21)';
+    else d = '25 ou plus : « High trauma-related distress. Probable PTSD. » (seuil ≥ 25)';
+    P('<strong>DSM-5 PTSD</strong>, grille imprimée sur le formulaire : ' + d + '.');
+    if (pt < 5) d = 'inférieur à 5 : « Normal. Not clinically elevated. »';
+    else if (pt <= 6) d = '5 à 6 : « Moderate trauma-related distress. »';
+    else if (pt <= 8) d = '7 à 8 : « Elevated distress. Positive Screening threshold. » (seuil de dépistage ≥ 7)';
+    else d = '9 ou plus : « High trauma-related distress. Probable PTSD. » (seuil ≥ 9)';
+    P('<strong>ICD-11 PTSD</strong>, grille imprimée : ' + d + '.');
+    if (cp < 9) d = 'inférieur à 9 : « Normal. Not clinically elevated. »';
+    else if (cp === 9) d = 'le score 9 ne figure dans aucune des classes imprimées (inférieur à 9 ; 10 à 12 ; 13 ou plus ; 16 ou plus)';
+    else if (cp <= 12) d = '10 à 12 : « Moderate trauma-related distress. »';
+    else if (cp <= 15) d = '13 à 15 : « Elevated distress. Positive Screening threshold. »';
+    else d = '16 ou plus : « High trauma-related distress. Probable CPTSD. »';
+    P('<strong>ICD-11 CPTSD</strong>, grille imprimée (approximation clinique, validation des seuils en attente) : ' + d + '.');
+    P('Le formulaire précise que la CATS-2 est un outil de dépistage : un score élevé peut suggérer une prise en charge centrée sur le trauma, mais ne constitue pas un diagnostic. Les 5 items de retentissement et la partie A ne sont pas inclus dans le score dimensionnel.');
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CATS-2 : version parents</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#8D7B35 0%,#E3DAB5 55%,#413816 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#413816;background:#F4F1E6;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #857532;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#857532;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#413816;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">CATS-2 parents</span></div>
+
+  <h1 class="serif">Child and Adolescent Trauma Screen 2 (CATS-2), 7-17 ans : version parents/aidants</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">CATS-2 : Sachser et al. (2022), version 2.0, en anglais ; dépistage du PTSD (DSM-5) et du PTSD / TSPT complexe (ICD-11) chez l’enfant et l’adolescent. Version remplie par un parent ou un aidant (hétéro-évaluation).</p>
+  <div class="meta-row">
+    <span class="pill">45 questions</span>
+    <span class="pill">Anglais</span>
+    <span class="pill">Symptômes : 0 à 3 sur 4 semaines</span>
+    <span class="pill">Événements et retentissement : YES / NO</span>
+    <span class="pill">Enfants et adolescents 7-17 ans</span>
+    <span class="pill">Rempli par un parent ou un aidant</span>
+    <span class="pill">Licence requise : non</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="cats-parents.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>La CATS-2 (Child and Adolescent Trauma Screen 2, version 2.0, Sachser et al., 2022) est un outil de dépistage des symptômes de stress post-traumatique chez l’enfant et l’adolescent de 7 à 17 ans, selon le DSM-5 (PTSD) et la CIM-11 (ICD-11 : PTSD et TSPT complexe, CPTSD). Cette page propose la version : questionnaire rempli par un parent ou un aidant à propos de l’enfant (7-17 ans).</p>
+    <p>Version parents/aidants (caregiver report) : évaluation hétéro-administrée, remplie par un tiers à propos de l’enfant. Les libellés diffèrent de l’auto-questionnaire (par exemple « the child », « he/she ») ; les sous-items 9a à 9d restent formulés à la première personne comme dans le formulaire.</p>
+    <p>Elle comprend trois parties : A, 16 événements stressants à cocher YES/NO ; B, 20 symptômes (25 réponses avec les sous-items) cotés de 0 (Never) à 3 (Almost always) sur les quatre dernières semaines ; C, cinq domaines de retentissement à cocher YES/NO.</p>
+    <p class="reserve">Langue : questionnaire en ANGLAIS uniquement. Aucune version française publiée n’a été trouvée (une validation française, French-CATS, a été conduite aux Hospices Civils de Lyon mais n’est pas publiée). Les questions ne sont volontairement pas traduites.</p>
+    <p class="reserve">Adaptations de cette page : la partie A est reprise sous forme de questions YES/NO non cotées ; la question 15 (« Other stressful or scary event? Describe: ») ne comporte ici que la réponse YES/NO, sans zone de description ; la question 16 (« Which event(s) … ? », question ouverte) est omise, faute de saisie de texte.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Score dimensionnel DSM-5 PTSD : somme des symptômes 1 à 20 en ne comptant, pour les questions 9 (a à d), 10 (a et b) et 15 (a et b), que le score le plus élevé parmi les sous-items ; maximum 60. Grille imprimée : inférieur à 15 normal ; 15 à 20 détresse modérée ; 21 ou plus seuil de dépistage positif ; 25 ou plus détresse élevée, PTSD probable.</p>
+    <p>Score ICD-11 PTSD : somme des items 2, 3, 6, 7, 17 et 18 ; maximum 18. Grille imprimée : inférieur à 5 ; 5 à 6 ; 7 ou plus (dépistage) ; 9 ou plus (PTSD probable).</p>
+    <p>Score ICD-11 CPTSD : somme des items 2, 3, 6, 7, 9b, 9d, 10a, 13, 14, 15a, 17 et 18 ; maximum 36. Grille imprimée : inférieur à 9 ; 10 à 12 ; 13 ou plus ; 16 ou plus. Le score 9 n’appartient à aucune classe imprimée.</p>
+    <p class="reserve">Les seuils imprimés sur le formulaire parents sont identiques à ceux de l’auto-questionnaire ; dans l’article de validation lu, ils ont été déterminés dans l’échantillon d’auto-questionnaires. Leur validité propre pour la version parents n’a pas été vérifiée dans ce qui a pu être lu.</p>
+    <p class="reserve">Les seuils DSM-5 (21 et 25) et ICD-11 PTSD (7 et 9) viennent de l’étude de validation de Sachser et al. (2022), établis par analyses ROC dans l’échantillon d’auto-questionnaires (échantillon clinique, Allemagne, Norvège, États-Unis ; n = 121 pour l’étalon CAPS-CA-5), et non sur un échantillon français. Les seuils CPTSD sont une « clinical approximation, cut-off validation pending » (approximation clinique, validation en attente).</p>
+    <p class="reserve">La cotation catégorielle du formulaire (symptôme présent si coté 2 ou 3, critères DSM-5 et ICD-11 par groupes de symptômes, retentissement fonctionnel avec au moins un YES) n’est pas calculée par cette page. Le formulaire précise : « CATS-2 is constructed as a screening instrument. Elevated scores may be sufficient to suggest a trauma focused treatment, but because it relies on self-report, clinicians should be cautious to use it as a diagnostic tool. »</p>
+    <p class="reserve">Aucune norme française publiée n’a été trouvée : étalonnage français non disponible.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Licence : non requise. Phrase de la source : « The CATS-2 is a license-free instrument and is freely accessible. » (Sachser et al., 2022, résumé, article en accès libre). Les fichiers PDF eux-mêmes ne portent aucune mention de droits.</p>
+    <p class="reserve">Items, consignes, libellés de réponses et grilles de cotation lus dans le formulaire « CATS 7-17 VERSION 2.0 (SACHSER ET AL., 2022) » en anglais (version caregiver report, exemplaire diffusé par le centre norvégien NKVTS). La consigne de la partie A conserve la coquille d’origine « Mark NO of it didn’t happen ».</p>
+    <p class="source-note">Sachser C, Berliner L, Risch E, Rosner R, Birkeland MS, Eilers R, Hafstad GS, Pfeiffer E, Plener PL, Jensen TK. The Child and Adolescent Trauma Screen 2 (CATS-2) : validation of an instrument to measure DSM-5 and ICD-11 PTSD and complex PTSD in children and adolescents. Eur J Psychotraumatol 2022;13(2):2105580. : Sachser C et al. International development and psychometric properties of the Child and Adolescent Trauma Screen (CATS). J Affect Disord 2017;210:189-195.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

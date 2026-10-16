@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BIS/BAS : Inhibition et activation comportementales</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #857032;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#857032;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#413616;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#857032;background:#F4F1E6;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#413616;border-color:#E0D9C9;}
+  .btn-primary{background:#857032;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#857032;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#413616;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">Échelles BIS/BAS de Carver et White</h1>
+    <p class="lead">24 affirmations sur vos réactions face à la récompense et à la punition, à évaluer de « Totalement Vrai » à « Totalement Faux ». Autoquestionnaire.</p>
+    <p class="consigne">Chaque item de ce questionnaire est une affirmation sur laquelle vous pouvez être d’accord ou pas. Indiquez pour chaque item votre degré d’accord ou de désaccord en cochant une seule case. Répondez à toutes les questions, sans en oublier aucune. Répondez le plus spontanément possible.</p>
+    <p class="lang-note">Questions en français (version dont l’auteur de la traduction n’est pas précisé). Licence : incertaine.</p>
+    <div class="pill-row">
+      <span class="pill">24 questions</span>
+      <span class="pill">5 minutes</span>
+      <span class="pill">4 niveaux : vrai / faux</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Carver et White (1994) ; version française : thèse de Shemelova (2017) ; cotation : Campbell-Sills et al. (2004). Outil de recherche : il ne pose pas de diagnostic.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["La famille est la chose la plus importante dans la vie.", "Je suis rarement nerveux ou apeuré, même lorsque quelque chose de désagréable est sur le point de m’arriver.", "Pour obtenir ce que je veux, je suis capable de faire des choses qui ne me ressemblent pas.", "J'aime faire quelque chose pour laquelle je suis performant.", "Je suis toujours prêt à essayer quelque chose de nouveau si je pense que ce sera amusant.", "Ma façon de m'habiller est importante à mes yeux.", "Lorsque j'obtiens ce que je veux, je suis tout excité et plein d’énergie.", "Je suis contrarié par les moqueries et les réprimandes.", "Lorsque je veux quelque chose je me donne tous les moyens de l'obtenir.", "Je décide souvent de faire des choses juste parce que cela pourrait être amusant", "Je trouve difficilement le temps de faire des choses telles qu'aller chez le coiffeur", "Si je vois une chance d'avoir ce que je veux, je l’exige tout de suite", "Je suis tracassé ou énervé de penser ou de savoir que quelqu'un est en colère contre moi.", "Je suis très excité lorsque j’ai l’occasion de faire quelque chose que j’aime.", "J'agis souvent sur un coup de tête", "Je suis habituellement contrarié par l'idée que quelque chose de désagréable va m'arriver.", "Je me demande souvent pourquoi les gens agissent comme ils le font.", "Je suis fortement ému lorsque quelque chose de bien m’arrive.", "Je suis tracassé par l'idée de n'avoir pas bien réussi quelque chose d'important à mes yeux.", "Je recherche des excitations et de sensations nouvelles.", "Lorsque je cours après quelque chose je considère que tous les coups sont permis", "J’ai très peu de peurs en comparaison à mes amis.", "Je serais très excité par la victoire à une compétition.", "J’ai peur de faire des erreurs"];
+  var G = [{"label": "", "opts": ["Totalement Vrai", "Plutôt Vrai", "Plutôt Faux", "Totalement Faux"], "vals": [4, 3, 2, 1]}];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = null;              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var INV = [2, 22], LO = 1, HI = 4;
+    function val(k){ var v = answers[k-1][0]; if (v === 'NA') return null; return INV.indexOf(k) >= 0 ? (LO + HI - v) : v; }
+    function agg(list, m){ var s = 0, n = 0; list.forEach(function(k){ var v = val(k); if (v !== null){ s += v; n++; } }); if (n === 0) return null; return m === 'mean' ? s / n : s; }
+    var BL = [{"l": "Inhibition comportementale (BIS)", "it": [2, 8, 13, 16, 19, 22, 24], "m": "sum", "d": 0, "r": "7 à 28", "x": 1}, {"l": "BAS : Reward Responsiveness (réceptivité à la récompense)", "it": [4, 7, 14, 18, 23], "m": "sum", "d": 0, "r": "5 à 20", "x": 1}, {"l": "BAS : Drive (poursuite des buts)", "it": [3, 9, 12, 21], "m": "sum", "d": 0, "r": "4 à 16", "x": 1}, {"l": "BAS : Fun Seeking (recherche de nouvelles récompenses)", "it": [5, 10, 15, 20], "m": "sum", "d": 0, "r": "4 à 16", "x": 1}];
+    var res = [], rows = '';
+    BL.forEach(function(b){ var v = agg(b.it, b.m); if (v !== null) v = v * b.x; res.push(v); rows += row(b.l + (b.r ? ' (' + b.r + ')' : ''), v === null ? '-' : v.toFixed(b.d).replace('.', ',')); });
+    html += '<table class=\"result-table\">' + rows + '</table>';
+    html += '<p class=\"result-text\">' + "Plus un score est élevé, plus la sensibilité correspondante est forte. Chaque score se lit séparément ; aucune norme ni aucun seuil n’est fourni par la source de cette version. Quatre des 24 questions ne sont pas cotées." + '</p>';
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BIS/BAS : Inhibition et activation comportementales</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#8D7735 0%,#E3D7B5 55%,#413616 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#413616;background:#F4F1E6;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #857032;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#857032;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#413616;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">BIS/BAS</span></div>
+
+  <h1 class="serif">Échelles BIS/BAS (Carver et White, 1994), version française à 24 items</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">BIS/BAS : Carver et White (1994) ; version française reproduite dans la thèse de Shemelova (2017). Sensibilité à la punition (BIS) et à la récompense (BAS).</p>
+  <div class="meta-row">
+    <span class="pill">24 questions</span>
+    <span class="pill">5 minutes</span>
+    <span class="pill">4 niveaux : vrai / faux</span>
+    <span class="pill">Français</span>
+    <span class="pill">Personnalité</span>
+    <span class="pill">4 scores</span>
+    <span class="pill">Licence : incertaine</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="bis-bas.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>Les échelles BIS/BAS évaluent deux systèmes de motivation : le système d’inhibition comportementale (BIS), sensible à l’anticipation d’événements désagréables ou de punition, et le système d’activation comportementale (BAS), sensible à la récompense. Le BAS comprend trois sous-échelles : réceptivité à la récompense (Reward Responsiveness), poursuite des buts (Drive) et recherche de nouvelles récompenses (Fun Seeking). Le questionnaire compte 24 affirmations, dont 4 ne sont pas cotées. On répond sur quatre niveaux, de « Totalement Vrai » à « Totalement Faux ».</p>
+    <p class="source-note">Les items viennent de la thèse de Shemelova (2017), qui parle de « la version française des échelles BIS/BAS à 24 items » sans en citer le traducteur. La version française de Caci, Deschaux et Baylé n’a pas pu être lue : l’identité des deux textes n’est pas vérifiée.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Selon la description de l’échelle originale (Campbell-Sills et al., 2004), chaque réponse est cotée de 1 à 4 (4 = tout à fait vrai pour soi : ici « Totalement Vrai » = 4, « Plutôt Vrai » = 3, « Plutôt Faux » = 2, « Totalement Faux » = 1), deux items du BIS sont inversés (ici n° 2 et 22, formulés à l’envers : peu de peur), et chaque sous-échelle est la somme de ses items : BIS (7 items : 2, 8, 13, 16, 19, 22, 24 ; 7 à 28), Reward Responsiveness (5 items : 4, 7, 14, 18, 23 ; 5 à 20), Drive (4 items : 3, 9, 12, 21 ; 4 à 16) et Fun Seeking (4 items : 5, 10, 15, 20 ; 4 à 16). Les items 1, 6, 11 et 17 ne sont pas cotés. Il n’y a pas de score total. Un score élevé signifie une sensibilité plus forte du système concerné.</p>
+    <p class="reserve">Aucune norme ni aucun seuil français n’a été trouvé dans les sources lues : un score ne peut se lire que sur son propre niveau ou en comparaison avec la littérature, sans classement.</p>
+    <p class="reserve">Cotation déduite : l’attribution de chaque item français à une sous-échelle et les deux items inversés ne sont écrits dans aucune source française lue. Ils ont été reconstitués par le sens des items, en accord avec les effectifs publiés (7, 5, 4 et 4 items) et avec les deux items inversés formulés par l’absence de peur (Campbell-Sills et al., 2004).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Consigne, légende des réponses et items : annexe 1 de la thèse de E. Shemelova (Université Grenoble Alpes, 2017). La consigne ne mentionne pas la période de référence ni l’échelle de cotation.</p>
+    <p class="reserve">Licence : incertaine. Aucune phrase de licence n’a été lue ; la permission des auteurs de l’échelle et de son traducteur n’a pas été retrouvée.</p>
+    <p class="source-note">Carver, C. S., & White, T. L. (1994). Behavioral inhibition, behavioral activation, and affective responses to impending reward and punishment: The BIS/BAS scales. Journal of Personality and Social Psychology, 67(2), 319-333 (non lu). : Shemelova, E. (2017). Facteurs influençant la prise de décision sur la vaccination contre le HPV. Thèse, Université Grenoble Alpes (HAL tel-01691595). : Campbell-Sills, L., Liverant, G. I., & Brown, T. A. (2004). Psychometric evaluation of the Behavioral Inhibition/Behavioral Activation Scales in a large sample of outpatients with anxiety disorders. Psychological Assessment, 16(3), 244-254. : Caci, H., Deschaux, O., & Baylé, F. J. (2007). Personality and Individual Differences, 42, 987-998 (non lu).</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

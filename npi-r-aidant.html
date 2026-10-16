@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NPI-R : troubles du comportement (aidant)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #854332;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#854332;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#411E16;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#854332;background:#F4E9E6;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#411E16;border-color:#E0D9C9;}
+  .btn-primary{background:#854332;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#854332;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#411E16;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">NPI-R : troubles du comportement et psychologiques (rempli par l&#x27;aidant)</h1>
+    <p class="lead">12 domaines de troubles du comportement et symptômes psychologiques chez une personne atteinte d'une maladie d'Alzheimer ou d'un autre trouble neurocognitif. Ce questionnaire est à remplir par le proche aidant (de préférence en l'absence du patient) : présence, gravité pour le patient et répercussion sur l'aidant.</p>
+    <p class="consigne">La présence de chaque trouble du comportement est évaluée par une question. Les questions se rapportent aux changements de comportement du patient qui sont apparus depuis le début de la maladie, depuis la dernière évaluation ou depuis le début ou l’ajustement d’un traitement.
+Si le sujet (votre épouse, votre mari ou la personne que vous aidez) ne présente pas ce trouble, entourez la réponse NON et passez à la question suivante.
+Si le sujet présente ce trouble, entourez la réponse OUI et évaluez la gravité du trouble du comportement avec l’échelle suivante (à quel point il est perturbant ou handicapant pour le patient) :
+1. Léger : changement peu perturbant pour le patient
+2. Moyen : changement plus perturbant pour le patient
+3. Important : changement très perturbant pour le patient
+Pour chaque trouble du comportement observé, il vous est aussi demandé d’évaluer la répercussion, c’est-à-dire à quel point ce comportement est éprouvant pour vous, selon l’échelle suivante (sur les plans émotionnel et psycho-logique) :
+0. Pas du tout          2. Légèrement          4. Sévèrement
+1. Minimum          3. Modérément          5. Très sévèrement, extrêmement
+Veuillez encercler l’énoncé qui correspond le mieux à votre situation et à celle du patient.</p>
+    <p class="lang-note">Questions en français (Robert et coll., 1998 ; formulaire de la fiche outil INESSS). Licence : non requise (« libre d’utilisation pour un usage clinique », © JL Cummings, 1994).</p>
+    <div class="pill-row">
+      <span class="pill">12 domaines</span>
+      <span class="pill">5 à 10 minutes</span>
+      <span class="pill">Rempli par le proche aidant</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Cummings et coll., Neurology 1994 ; Kaufer et coll., J Neuropsychiatry Clin Neurosci 2000 ; Robert et coll., L'Année Gérontologique 1998 ; INESSS, 2015. Outil de dépistage : ne remplace pas un entretien clinique ni un bilan.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["1. Idées délirantes\nLe patient croit-il des choses dont vous savez qu’elles ne sont pas vraies (par exemple, il insiste sur le fait que des gens essaient de lui faire du mal ou de le voler)? A-t-il dit que des membres de sa famille ne sont pas les personnes qu’ils prétendent être ou qu’ils ne sont pas chez eux dans sa maison ? Est-il vraiment convaincu de la réalité de ces choses?", "2. Hallucinations\nLe patient a-t-il des hallucinations? Par exemple, a-t-il des visions ou entend-il des voix? Semble-t-il voir, entendre ou percevoir des choses qui n’existent pas?", "3. Agitation/agressivité\nY a-t-il des périodes pendant lesquelles le patient refuse de coopérer ou ne laisse pas les gens l’aider? Est-il difficile de l’amener à faire ce qu’on lui demande?", "4. Dépression/dysphorie\nLe patient semble-t-il triste ou déprimé? Dit-il qu’il se sent triste ou déprimé?", "5. Anxiété\nLe patient est-il très nerveux, inquiet ou effrayé sans raison apparente? Semble-t-il très tendu ou a-t-il du mal à rester en place? A-t-il peur d’être séparé de vous?", "6. Exaltation de l’humeur\nLe patient semble-t-il trop joyeux ou heureux sans aucune raison? Il ne s’agit pas de la joie tout à fait normale que l’on éprouve lorsque l’on voit des amis, reçoit des cadeaux ou passe du temps en famille. Il s’agit plutôt de savoir si le patient présente une bonne humeur anormale et constante ou s’il trouve drôle ce qui ne fait pas rire les autres.", "7. Apathie/indifférence\nLe patient semble-t-il montrer moins d’intérêt pour ses activités ou pour son entourage? N’a-t-il plus envie de faire des choses ou manque-t-il de motivation pour entreprendre de nouvelles activités?", "8. Désinhibition\nLe patient semble-t-il agir de manière impulsive, sans réfléchir? Dit-il ou fait-il des choses qui, en général, ne se font pas ou ne se disent pas en public?", "9. Irritabilité/instabilité\nLe patient est-il irritable? Faut-il peu de choses pour le perturber? Est-il d’humeur très changeante? Se montre-t-il anormalement impatient?", "10. Comportement moteur aberrant\nLe patient fait-il les cent pas, refait-il sans cesse les mêmes choses, par exemple ouvrir les placards et les tiroirs ou manipuler sans arrêt des objets?", "11. Troubles du sommeil\nEst-ce que le patient a des problèmes de sommeil (ne pas tenir compte du fait qu’il se lève uniquement une fois ou deux par nuit seulement pour se rendre aux toilettes et se rendort ensuite immédiatement)? Est-il debout la nuit ? Est-ce qu’il erre la nuit, s’habille ou dérange votre sommeil?", "12. Troubles de l’appétit\nEst-ce qu’il y a eu des changements dans son appétit, son poids ou ses habitudes alimentaires (coter S.O. si le patient est incapable d’avoir un comportement alimentaire autonome et doit se faire nourrir)? Est-ce qu’il y a eu des changements dans le type de nourriture qu’il préfère?"];
+  var G = [];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = [[{"label": "Présence et gravité (à quel point le changement est perturbant ou handicapant pour le patient)", "opts": ["S.O. (question inadaptée, sans objet)", "Absent (NON, score = 0)", "1. Léger : changement peu perturbant pour le patient", "2. Moyen : changement plus perturbant pour le patient", "3. Important : changement très perturbant pour le patient"], "vals": ["NA", 0, 1, 2, 3]}, {"label": "Répercussion sur vous (à quel point ce comportement est éprouvant pour vous, sur les plans émotionnel et psychologique). À indiquer seulement si le trouble est présent.", "opts": ["Trouble absent ou question sans objet : pas de répercussion à indiquer (libellé de création)", "0. Pas du tout", "1. Minimum", "2. Légèrement", "3. Modérément", "4. Sévèrement", "5. Très sévèrement, extrêmement"], "vals": ["NA", 0, 1, 2, 3, 4, 5]}], [{"label": "Présence et gravité (à quel point le changement est perturbant ou handicapant pour le patient)", "opts": ["S.O. (question inadaptée, sans objet)", "Absent (NON, score = 0)", "1. Léger : changement peu perturbant pour le patient", "2. Moyen : changement plus perturbant pour le patient", "3. Important : changement très perturbant pour le patient"], "vals": ["NA", 0, 1, 2, 3]}, {"label": "Répercussion sur vous (à quel point ce comportement est éprouvant pour vous, sur les plans émotionnel et psychologique). À indiquer seulement si le trouble est présent.", "opts": ["Trouble absent ou question sans objet : pas de répercussion à indiquer (libellé de création)", "0. Pas du tout", "1. Minimum", "2. Légèrement", "3. Modérément", "4. Sévèrement", "5. Très sévèrement, extrêmement"], "vals": ["NA", 0, 1, 2, 3, 4, 5]}], [{"label": "Présence et gravité (à quel point le changement est perturbant ou handicapant pour le patient)", "opts": ["S.O. (question inadaptée, sans objet)", "Absent (NON, score = 0)", "1. Léger : changement peu perturbant pour le patient", "2. Moyen : changement plus perturbant pour le patient", "3. Important : changement très perturbant pour le patient"], "vals": ["NA", 0, 1, 2, 3]}, {"label": "Répercussion sur vous (à quel point ce comportement est éprouvant pour vous, sur les plans émotionnel et psychologique). À indiquer seulement si le trouble est présent.", "opts": ["Trouble absent ou question sans objet : pas de répercussion à indiquer (libellé de création)", "0. Pas du tout", "1. Minimum", "2. Légèrement", "3. Modérément", "4. Sévèrement", "5. Très sévèrement, extrêmement"], "vals": ["NA", 0, 1, 2, 3, 4, 5]}], [{"label": "Présence et gravité (à quel point le changement est perturbant ou handicapant pour le patient)", "opts": ["S.O. (question inadaptée, sans objet)", "Absent (NON, score = 0)", "1. Léger : changement peu perturbant pour le patient", "2. Moyen : changement plus perturbant pour le patient", "3. Important : changement très perturbant pour le patient"], "vals": ["NA", 0, 1, 2, 3]}, {"label": "Répercussion sur vous (à quel point ce comportement est éprouvant pour vous, sur les plans émotionnel et psychologique). À indiquer seulement si le trouble est présent.", "opts": ["Trouble absent ou question sans objet : pas de répercussion à indiquer (libellé de création)", "0. Pas du tout", "1. Minimum", "2. Légèrement", "3. Modérément", "4. Sévèrement", "5. Très sévèrement, extrêmement"], "vals": ["NA", 0, 1, 2, 3, 4, 5]}], [{"label": "Présence et gravité (à quel point le changement est perturbant ou handicapant pour le patient)", "opts": ["S.O. (question inadaptée, sans objet)", "Absent (NON, score = 0)", "1. Léger : changement peu perturbant pour le patient", "2. Moyen : changement plus perturbant pour le patient", "3. Important : changement très perturbant pour le patient"], "vals": ["NA", 0, 1, 2, 3]}, {"label": "Répercussion sur vous (à quel point ce comportement est éprouvant pour vous, sur les plans émotionnel et psychologique). À indiquer seulement si le trouble est présent.", "opts": ["Trouble absent ou question sans objet : pas de répercussion à indiquer (libellé de création)", "0. Pas du tout", "1. Minimum", "2. Légèrement", "3. Modérément", "4. Sévèrement", "5. Très sévèrement, extrêmement"], "vals": ["NA", 0, 1, 2, 3, 4, 5]}], [{"label": "Présence et gravité (à quel point le changement est perturbant ou handicapant pour le patient)", "opts": ["S.O. (question inadaptée, sans objet)", "Absent (NON, score = 0)", "1. Léger : changement peu perturbant pour le patient", "2. Moyen : changement plus perturbant pour le patient", "3. Important : changement très perturbant pour le patient"], "vals": ["NA", 0, 1, 2, 3]}, {"label": "Répercussion sur vous (à quel point ce comportement est éprouvant pour vous, sur les plans émotionnel et psychologique). À indiquer seulement si le trouble est présent.", "opts": ["Trouble absent ou question sans objet : pas de répercussion à indiquer (libellé de création)", "0. Pas du tout", "1. Minimum", "2. Légèrement", "3. Modérément", "4. Sévèrement", "5. Très sévèrement, extrêmement"], "vals": ["NA", 0, 1, 2, 3, 4, 5]}], [{"label": "Présence et gravité (à quel point le changement est perturbant ou handicapant pour le patient)", "opts": ["S.O. (question inadaptée, sans objet)", "Absent (NON, score = 0)", "1. Léger : changement peu perturbant pour le patient", "2. Moyen : changement plus perturbant pour le patient", "3. Important : changement très perturbant pour le patient"], "vals": ["NA", 0, 1, 2, 3]}, {"label": "Répercussion sur vous (à quel point ce comportement est éprouvant pour vous, sur les plans émotionnel et psychologique). À indiquer seulement si le trouble est présent.", "opts": ["Trouble absent ou question sans objet : pas de répercussion à indiquer (libellé de création)", "0. Pas du tout", "1. Minimum", "2. Légèrement", "3. Modérément", "4. Sévèrement", "5. Très sévèrement, extrêmement"], "vals": ["NA", 0, 1, 2, 3, 4, 5]}], [{"label": "Présence et gravité (à quel point le changement est perturbant ou handicapant pour le patient)", "opts": ["S.O. (question inadaptée, sans objet)", "Absent (NON, score = 0)", "1. Léger : changement peu perturbant pour le patient", "2. Moyen : changement plus perturbant pour le patient", "3. Important : changement très perturbant pour le patient"], "vals": ["NA", 0, 1, 2, 3]}, {"label": "Répercussion sur vous (à quel point ce comportement est éprouvant pour vous, sur les plans émotionnel et psychologique). À indiquer seulement si le trouble est présent.", "opts": ["Trouble absent ou question sans objet : pas de répercussion à indiquer (libellé de création)", "0. Pas du tout", "1. Minimum", "2. Légèrement", "3. Modérément", "4. Sévèrement", "5. Très sévèrement, extrêmement"], "vals": ["NA", 0, 1, 2, 3, 4, 5]}], [{"label": "Présence et gravité (à quel point le changement est perturbant ou handicapant pour le patient)", "opts": ["S.O. (question inadaptée, sans objet)", "Absent (NON, score = 0)", "1. Léger : changement peu perturbant pour le patient", "2. Moyen : changement plus perturbant pour le patient", "3. Important : changement très perturbant pour le patient"], "vals": ["NA", 0, 1, 2, 3]}, {"label": "Répercussion sur vous (à quel point ce comportement est éprouvant pour vous, sur les plans émotionnel et psychologique). À indiquer seulement si le trouble est présent.", "opts": ["Trouble absent ou question sans objet : pas de répercussion à indiquer (libellé de création)", "0. Pas du tout", "1. Minimum", "2. Légèrement", "3. Modérément", "4. Sévèrement", "5. Très sévèrement, extrêmement"], "vals": ["NA", 0, 1, 2, 3, 4, 5]}], [{"label": "Présence et gravité (à quel point le changement est perturbant ou handicapant pour le patient)", "opts": ["S.O. (question inadaptée, sans objet)", "Absent (NON, score = 0)", "1. Léger : changement peu perturbant pour le patient", "2. Moyen : changement plus perturbant pour le patient", "3. Important : changement très perturbant pour le patient"], "vals": ["NA", 0, 1, 2, 3]}, {"label": "Répercussion sur vous (à quel point ce comportement est éprouvant pour vous, sur les plans émotionnel et psychologique). À indiquer seulement si le trouble est présent.", "opts": ["Trouble absent ou question sans objet : pas de répercussion à indiquer (libellé de création)", "0. Pas du tout", "1. Minimum", "2. Légèrement", "3. Modérément", "4. Sévèrement", "5. Très sévèrement, extrêmement"], "vals": ["NA", 0, 1, 2, 3, 4, 5]}], [{"label": "Présence et gravité (à quel point le changement est perturbant ou handicapant pour le patient)", "opts": ["S.O. (question inadaptée, sans objet)", "Absent (NON, score = 0)", "1. Léger : changement peu perturbant pour le patient", "2. Moyen : changement plus perturbant pour le patient", "3. Important : changement très perturbant pour le patient"], "vals": ["NA", 0, 1, 2, 3]}, {"label": "Répercussion sur vous (à quel point ce comportement est éprouvant pour vous, sur les plans émotionnel et psychologique). À indiquer seulement si le trouble est présent.", "opts": ["Trouble absent ou question sans objet : pas de répercussion à indiquer (libellé de création)", "0. Pas du tout", "1. Minimum", "2. Légèrement", "3. Modérément", "4. Sévèrement", "5. Très sévèrement, extrêmement"], "vals": ["NA", 0, 1, 2, 3, 4, 5]}], [{"label": "Présence et gravité (à quel point le changement est perturbant ou handicapant pour le patient)", "opts": ["S.O. (question inadaptée, sans objet)", "Absent (NON, score = 0)", "1. Léger : changement peu perturbant pour le patient", "2. Moyen : changement plus perturbant pour le patient", "3. Important : changement très perturbant pour le patient"], "vals": ["NA", 0, 1, 2, 3]}, {"label": "Répercussion sur vous (à quel point ce comportement est éprouvant pour vous, sur les plans émotionnel et psychologique). À indiquer seulement si le trouble est présent.", "opts": ["Trouble absent ou question sans objet : pas de répercussion à indiquer (libellé de création)", "0. Pas du tout", "1. Minimum", "2. Légèrement", "3. Modérément", "4. Sévèrement", "5. Très sévèrement, extrêmement"], "vals": ["NA", 0, 1, 2, 3, 4, 5]}]];              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+
+    var G = 0, Rp = 0, pres = 0, so = 0, nonRep = 0;
+    for (var k = 0; k < 12; k++){
+      var g = answers[k][0], r = answers[k][1];
+      if (g === 'NA'){ so++; continue; }
+      G += g;
+      if (g >= 1){ pres++; if (r === 'NA'){ nonRep++; } else { Rp += r; } }
+    }
+    html += '<table class="result-table">' + row('Score de gravité (0 à 36)', String(G)) + row('Score de répercussion sur le proche aidant (0 à 60)', String(Rp)) + row('Troubles présents (sur 12 domaines)', String(pres)) + row('Questions sans objet (S.O.)', String(so)) + row('Troubles présents sans répercussion indiquée', String(nonRep)) + '</table>';
+    html += '<p class="result-text">La version réduite du NPI n’utilise ni score total interprété ni seuil diagnostique : un score plus élevé indique des problèmes plus graves. Ces résultats servent avant tout à guider la discussion entre le professionnel, le patient et le proche aidant (fiche outil INESSS, 2015).</p>';
+    html += '<p class="result-text">Les questions cotées S.O. ne sont pas comptées dans les totaux ; la répercussion n’est comptée que pour les troubles présents.</p>';
+
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NPI-R : troubles du comportement (aidant)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#8D4735 0%,#E3BEB5 55%,#411E16 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#411E16;background:#F4E9E6;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #854332;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#854332;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#411E16;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">NPI-R</span></div>
+
+  <h1 class="serif">Inventaire neuropsychiatrique réduit (NPI-R / NPI-Q), version à remplir par le proche aidant</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">NPI-R : d'après Cummings et coll. (1994) et la forme brève NPI-Q (Kaufer et coll., 2000) ; traduction française de la version réduite par Robert et coll. (1998) ; formulaire reproduit dans la fiche outil de l'INESSS (Québec), octobre 2015.</p>
+  <div class="meta-row">
+    <span class="pill">12 domaines</span>
+    <span class="pill">5 à 10 minutes</span>
+    <span class="pill">Rempli par le proche aidant</span>
+    <span class="pill">Français</span>
+    <span class="pill">Troubles du comportement</span>
+    <span class="pill">Maladie d&#x27;Alzheimer</span>
+    <span class="pill">Licence requise : non</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="npi-r-aidant.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>Le NPI-R (version réduite de l'inventaire neuropsychiatrique) recueille des renseignements sur la présence, la gravité et les répercussions des troubles du comportement chez des patients souffrant de la maladie d'Alzheimer ou d'un autre trouble neurocognitif. Il permet d'apprécier 12 types de troubles : idées délirantes, hallucinations, agitation/agressivité, dépression/dysphorie, anxiété, exaltation de l'humeur, apathie/indifférence, désinhibition, irritabilité/instabilité, comportement moteur aberrant, troubles du sommeil, troubles de l'appétit.</p>
+    <p>Contrairement à la version standard (entretien de 30 à 45 minutes entre le professionnel et le proche aidant, avec trois échelles), la version réduite est un questionnaire autoadministré directement aux proches aidants, avec des instructions écrites, en 5 à 10 minutes ; l'évaluation repose sur deux échelles : la gravité des symptômes et la répercussion sur le proche aidant (fiche outil INESSS).</p>
+    <p class="source-note">Ce n'est pas un test passé par la personne elle-même : les réponses sont données par le proche aidant. Le questionnaire se rapporte aux changements de comportement apparus depuis le début de la maladie, depuis la dernière évaluation ou depuis le début ou l'ajustement d'un traitement.</p>
+    <p class="source-note">Cette page reprend la forme réduite à remplir par l'aidant ; elle ne remplace pas l'entretien complet (NPI standard).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Pour chaque domaine : présence (NON = 0 ; S.O. si la question est inadaptée), gravité de 1 (léger) à 3 (important), puis répercussion sur le proche aidant de 0 (pas du tout) à 5 (très sévèrement, extrêmement). Le score maximal de gravité est 36 ; le score maximal de répercussion est 60. Des scores plus élevés indiquent des problèmes plus graves.</p>
+    <p>D'après la fiche outil INESSS, la version réduite n'utilise pas de scores totaux interprétés ni de seuils diagnostiques : elle est conseillée avant tout pour guider la discussion entre le professionnel, le patient et le proche aidant, sans établir de diagnostic, et ne devrait pas être utilisée isolément pour établir un diagnostic précis des troubles du comportement.</p>
+    <p class="reserve">Totaux de la page : somme des gravités des domaines présents et somme des répercussions pour les troubles présents. Les domaines cotés S.O. sont exclus des totaux. Le libellé « Trouble absent ou question sans objet » proposé pour la répercussion est un libellé de création de cette page (le formulaire papier laisse simplement la case vide).</p>
+    <p class="reserve">Qualités métrologiques citées par la fiche INESSS pour la version réduite (Kaufer et coll., 2000) : fidélité test-retest élevée pour la gravité et excellente pour la répercussion ; validité de convergence élevée. Aucune norme française (moyennes, percentiles) n'a été trouvée.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Texte des 12 domaines, consignes et échelles : formulaire en français reproduit dans la fiche outil de l'INESSS (octobre 2015), traduction de la version réduite réalisée par Robert et coll. en 1998. Version anglaise : consignes disponibles sur le site npitest.net (non consulté).</p>
+    <p class="reserve">Licence : non requise. Mention de la source : « Copyrights © JL Cummings, 1994, tous droits réservés. Ce test est libre d’utilisation pour un usage clinique. »</p>
+    <p class="source-note">Références : Cummings JL, Mega M, Gray K, Rosenberg-Thompson S, Carusi DA, Gornbein J. The Neuropsychiatric Inventory: Comprehensive assessment of psychopathology in dementia. Neurology 1994;44(12):2308-14. Robert PH, Médecin I, Vincent S, Staccini P, Cattelin F, Goni S. L'inventaire neuropsychiatrique : validation de la version française d'un instrument destiné à évaluer les troubles du comportement chez les sujets déments. L'Année Gérontologique 1998;5:63-87. Kaufer DI, Cummings JL, Ketchel P, Smith V, MacMillan A, Shelley T, et al. Validation of the NPI-Q, a brief clinical form of the Neuropsychiatric Inventory. J Neuropsychiatry Clin Neurosci 2000;12(2):233-9. INESSS. Fiche outil : Inventaire neuropsychiatrique réduit, NPI-R. Octobre 2015.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PNI : Narcissisme pathologique (ENP)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #853275;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#853275;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#411638;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#853275;background:#F4E6F1;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#411638;border-color:#E0D9C9;}
+  .btn-primary{background:#853275;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#853275;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#411638;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">PNI : Échelle de narcissisme pathologique (ENP)</h1>
+    <p class="lead">52 énoncés sur la façon dont vous vous reconnaissez ; réponse de 1 (je ne suis vraiment pas comme cela) à 6 (je suis vraiment comme cela).</p>
+    <p class="consigne">Veuillez évaluer dans quelle mesure vous vous reconnaissez dans chacun des énoncés suivants.</p>
+    <p class="lang-note">Questions en français (version québécoise de l'Université Laval ; texte lu dans une thèse). Licence requise : incertaine.</p>
+    <div class="pill-row">
+      <span class="pill">52 questions</span>
+      <span class="pill">1 → 6</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Pincus et al. (2009), Psychological Assessment, 21, 365-379 ; Turmel (2014), mémoire doctoral, Université Laval. Outil d'auto-évaluation : ne remplace pas un entretien clinique ni un bilan.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["Il m'arrive souvent d'imaginer qu'on m'admire et qu'on me respecte.", "Mon estime de soi varie beaucoup", "J'ai parfois honte d'avoir cru en des personnes qui finissent par me décevoir.", "En discutant, je peux me sortir de toutes les situations.", "Quand je suis seul, j’ai de la difficulté à m'apprécier et à être content de moi.", "Je me sens bien lorsque je m’occupe des autres.", "Je déteste demander de l'aide.", "Je ne me sens pas bien lorsque les autres ne me prêtent pas attention.", "Je cache souvent mes besoins par peur que les autres pensent que je suis dépendant et dans le besoin.", "Je peux faire croire n'importe quoi à n'importe qui.", "Je deviens furieux lorsque les autres ne remarquent pas tout ce que je fais pour eux.", "Cela me fâche quand les gens ne sont pas intéressés par ce que je dis ou ce que je fais.", "Je ne dévoilerais pas mes sentiments ou mes pensées intimes à quelqu'un que je n'admire pas.", "Je m'imagine souvent avoir une très grande influence sur le monde qui m’entoure.", "Je trouve qu’il est facile de manipuler les gens.", "Lorsque les autres ne me remarquent pas, je me sens sans valeur.", "Je mets parfois des personnes de côté quand j'ai peur qu'elles me déçoivent.", "Je deviens habituellement très en colère lorsque je n'obtiens pas ce que je veux des autres.", "Souvent, afin de me rassurer sur ma valeur personnelle, je m'entoure de personnes importantes.", "Quand je rends service aux autres, je m’attends à ce qu’ils me rendent service en retour.", "Quand les autres n'arrivent pas à satisfaire mes attentes, j’ai souvent honte d'avoir eu ces attentes.", "Je me sens important lorsque les autres comptent sur moi.", "Je peux lire dans les gens comme dans un livre.", "Lorsque les autres me déçoivent, je me fâche souvent contre moi-même.", "Je suis le meilleur car je me sacrifie pour les autres.", "Je rêve souvent d’accomplir des choses qui sont probablement au-delà de mes capacités ou de mes moyens.", "Je mets parfois des personnes de côté parce que je crains qu'elles ne fassent pas ce que je veux qu'elles fassent.", "Il est difficile de montrer aux autres les faiblesses que je ressens l’intérieur de moi.", "Je me fâche lorsqu'on me critique.", "Je trouve difficile de m'apprécier à moins de savoir que les autres m'admirent.", "Je me plais souvent à m'imaginer que je suis récompensé pour mes efforts.", "Je m'en fais parfois à l’idée que la plupart des gens ne s'intéressent pas à moi.", "J'aime avoir des amis qui comptent sur moi, car cela me fait me sentir important.", "Parfois j’évite certaines personnes parce que je crains qu'elles ne se rendent pas compte de tout ce que je fais pour elles.", "Tout le monde aime entendre mes histoires.", "Je trouve difficile de m'apprécier à moins de me sentir apprécié par les autres.", "Cela m’irrite lorsque les gens ne remarquent pas à quel point je suis une bonne personne.", "Je ne serai jamais satisfait tant que je n'obtiendrai pas tout ce que je mérite.", "À travers mes sacrifices, j’essaie de montrer à quel point je suis une bonne personne.", "Cela me déçoit lorsque les autres ne me remarquent pas.", "J'envie souvent les réussites des autres.", "Je m'imagine souvent accomplir des actes héroïques.", "J’aide les autres afin de prouver que je suis une bonne personne.", "Il est important de montrer aux autres que je peux me débrouiller tout seul, même s'il m'arrive parfois de douter de moi.", "J'imagine souvent des scénarios où je suis reconnu pour mes réalisations.", "Je ne peux supporter l'idée d'avoir à compter sur les autres, parce que cela me fait me sentir faible.", "J'ai de la difficulté à être satisfait de moi lorsque les autres ne réagissent pas comme je le souhaiterais.", "J'ai besoin de la reconnaissance des autres.", "J'aspire à être quelqu'un aux yeux du monde entier.", "Lorsque les autres perçoivent mes besoins, j'ai honte et je me sens anxieux.", "Parfois, j'aime mieux être seul que de ne pas obtenir tout ce que je veux des autres.", "Je peux devenir vraiment fâché lorsque les autres sont en désaccord avec moi."];
+  var G = [{"label": "", "opts": ["1 : Je ne suis vraiment pas comme cela", "2 : Je ne suis pas comme cela", "3 : Je ne suis pas vraiment comme cela", "4 : Je suis un peu comme cela", "5 : Je suis comme cela", "6 : Je suis vraiment comme cela"], "vals": [1, 2, 3, 4, 5, 6]}];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = null;              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var INV = [], LO = 1, HI = 6;
+    function val(k){ var v = answers[k-1][0]; if (v === 'NA') return null; return INV.indexOf(k) >= 0 ? (LO + HI - v) : v; }
+    function agg(list, m){ var s = 0, n = 0; list.forEach(function(k){ var v = val(k); if (v !== null){ s += v; n++; } }); if (n === 0) return null; return m === 'mean' ? s / n : s; }
+    var BL = [{"l": "Score total (moyenne des 52 items)", "it": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52], "m": "mean", "d": 2, "r": "1 à 6", "x": 1}, {"l": "Estime de soi contingente", "it": [2, 5, 8, 16, 19, 30, 32, 36, 40, 41, 47, 48], "m": "mean", "d": 2, "r": "1 à 6", "x": 1}, {"l": "Exploitation d'autrui", "it": [4, 10, 15, 23, 35], "m": "mean", "d": 2, "r": "1 à 6", "x": 1}, {"l": "Autovalorisation par sacrifice de soi", "it": [6, 22, 25, 33, 39, 43], "m": "mean", "d": 2, "r": "1 à 6", "x": 1}, {"l": "Dissimulation de soi", "it": [7, 9, 13, 28, 44, 46, 50], "m": "mean", "d": 2, "r": "1 à 6", "x": 1}, {"l": "Grandiosité", "it": [1, 14, 26, 31, 42, 45, 49], "m": "mean", "d": 2, "r": "1 à 6", "x": 1}, {"l": "Dévalorisation", "it": [3, 17, 21, 24, 27, 34, 51], "m": "mean", "d": 2, "r": "1 à 6", "x": 1}, {"l": "Colère/Supériorité de droit", "it": [11, 12, 18, 20, 29, 37, 38, 52], "m": "mean", "d": 2, "r": "1 à 6", "x": 1}];
+    var res = [], rows = '';
+    BL.forEach(function(b){ var v = agg(b.it, b.m); if (v !== null) v = v * b.x; res.push(v); rows += row(b.l + (b.r ? ' (' + b.r + ')' : ''), v === null ? '-' : v.toFixed(b.d).replace('.', ',')); });
+    html += '<table class=\"result-table\">' + rows + '</table>';
+    html += '<p class=\"result-text\">' + "Chaque score est la moyenne des réponses (de 1 à 6) ; un score plus élevé indique davantage de traits de narcissisme pathologique. Il n'existe pas de seuil publié pour cet outil : l'interprétation relève du clinicien. À titre purement descriptif, dans l'étude québécoise de validation (étudiants et membres du personnel d'une université), le score total moyen était de 3,10 (écart-type 0,67) chez les hommes et de 3,02 (0,63) chez les femmes ; il ne s'agit pas de normes." + '</p>';
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PNI : Narcissisme pathologique (ENP)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#8D357B 0%,#E3B5DA 55%,#411638 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#411638;background:#F4E6F1;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #853275;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#853275;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#411638;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">PNI</span></div>
+
+  <h1 class="serif">Échelle de narcissisme pathologique (ENP) : version française du Pathological Narcissism Inventory (PNI)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">PNI : Pincus, Ansell, Pimentel, Cain, Wright et Levy (2009) ; version française (ENP) de l'équipe de Louis Diguer, Université Laval (2010).</p>
+  <div class="meta-row">
+    <span class="pill">52 questions</span>
+    <span class="pill">1 → 6</span>
+    <span class="pill">Français</span>
+    <span class="pill">Narcissisme</span>
+    <span class="pill">Licence requise : incertaine</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="pni-enp.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>Le Pathological Narcissism Inventory (PNI) évalue le narcissisme pathologique, dans ses versions grandiose et vulnérable, à l'aide de 52 énoncés répartis en 7 facteurs : estime de soi contingente, exploitation d'autrui, autovalorisation par sacrifice de soi, dissimulation de soi, grandiosité, dévalorisation, colère/supériorité de droit. Trois de ces facteurs relèvent de la vulnérabilité (estime de soi contingente, dissimulation de soi, dévalorisation) et quatre de la grandiosité.</p>
+    <p class="source-note">La version française (Échelle de narcissisme pathologique, ENP) a été traduite en 2010 par l'équipe de Louis Diguer (Université Laval) selon une méthode de traduction inversée parallèle, puis testée sur 1 172 étudiants et membres du personnel de l'Université Laval (Turmel, 2014).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Aucun item n'est inversé. Chaque énoncé est coté de 1 à 6. La page calcule la moyenne des 52 énoncés (score total) et la moyenne des énoncés de chacun des 7 facteurs (1 à 6). L'appartenance des énoncés aux facteurs suit la structure du PNI d'origine reproduite dans la thèse (12 énoncés pour l'estime de soi contingente, 5 pour l'exploitation, 6 pour l'autovalorisation par sacrifice de soi, 7 pour la dissimulation de soi, 7 pour la grandiosité, 7 pour la dévalorisation, 8 pour la colère/supériorité de droit).</p>
+    <p>À titre descriptif, la thèse rapporte, pour l'échelle totale, une moyenne de 3,10 (écart-type 0,67) chez 303 hommes et de 3,02 (0,63) chez 865 femmes de l'Université Laval, une cohérence interne de 0,95 et une fidélité test-retest de 0,86.</p>
+    <p class="reserve">Cotation déduite : la formule (moyenne des énoncés) est déduite des tableaux de résultats de la thèse et l'attribution des énoncés aux facteurs est lue dans un tableau comparatif, non dans un manuel de cotation. Aucun seuil clinique ni norme française n'a été trouvé ; les moyennes citées viennent d'échantillons québécois de convenance. Les deux grandes dimensions (grandiosité, vulnérabilité) ne sont pas calculées ici faute de formule publiée dans les sources lues.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Énoncés, consigne et libellés de réponse lus dans l'annexe D du mémoire doctoral de V. Turmel (2014, Université Laval) et recoupés avec l'annexe C du mémoire de R. Da Silva Luis (2014). Seul l'énoncé 4 diffère entre les deux annexes (« En discutant, je peux me sortir de toutes les situations. » retenu ; « Je peux me sortir de toute situation en discutant avec les autres. » dans l'autre). L'énoncé 28 contient dans la source la coquille « les faiblesses que je ressens l'intérieur de moi » (sans « à »), conservée telle quelle. Le texte d'une version plus récente (Diguer et collègues, 2020), citée dans un autre mémoire, n'a pas pu être lu.</p>
+    <p class="reserve">Licence : incertaine. Aucune mention de permission n'a été trouvée pour la version française ni pour le PNI d'origine dans les documents lus (les mémoires sont © de leurs auteures, 2014).</p>
+    <p class="source-note">Références : Pincus AL, Ansell EB, Pimentel CA, Cain NM, Wright AGC, Levy KN (2009). Initial construction and validation of the Pathological Narcissism Inventory. Psychological Assessment, 21(3), 365-379. https://doi.org/10.1037/a0016530. Turmel V (2014). Validation de la structure interne d'une version francophone du Pathological Narcissism Inventory (PNI). Mémoire doctoral (D.Psy.), Université Laval. Da Silva Luis R (2014). Adaptation et validation du Pathological Narcissism Inventory (PNI). Mémoire doctoral (D.Psy.), Université Laval.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

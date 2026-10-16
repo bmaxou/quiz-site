@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TMMS-30 : Trait Meta-Mood Scale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #593285;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#593285;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#2A1641;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#593285;background:#EDE6F4;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#2A1641;border-color:#E0D9C9;}
+  .btn-primary{background:#593285;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#593285;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#2A1641;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">TMMS-30 : Échelle de méta-humeur (Trait Meta-Mood Scale)</h1>
+    <p class="lead">30 affirmations sur la façon dont vous percevez et gérez vos émotions, à évaluer de « Pas d’accord du tout » à « Entièrement d’accord ». Autoquestionnaire.</p>
+
+    <p class="lang-note">Questions en français (traduction diffusée par le laboratoire de J. D. Mayer). Aucune consigne française n’accompagne cette version : répondez selon votre accord avec chaque affirmation. Licence : incertaine.</p>
+    <div class="pill-row">
+      <span class="pill">30 questions</span>
+      <span class="pill">5 à 8 minutes</span>
+      <span class="pill">5 niveaux d’accord</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Salovey, Mayer, Goldman, Turvey et Palfai (1995) ; traduction française de Rodrigue et Clamageran ; repères français : Maria (2014). Outil d’auto-évaluation : il ne pose pas de diagnostic et ne remplace pas un entretien clinique.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["J’essaie d’avoir des pensées positives, peu importe ce que je ressens.", "Les gens feraient mieux de réfléchir davantage et de moins se fier à ce qu’ils ressentent.", "Je ne pense pas que ce soit utile d’être à l’écoute de nos émotions et de nos humeurs.", "Je ne me préoccupe pas beaucoup de ce que je ressens.", "Parfois, je ne peux pas dire ce que je ressens.", "Il est rare que je ne comprenne pas ce que je ressens.", "Les sentiments que l’on ressent nous guident dans la vie.", "Bien que je sois parfois triste, je suis généralement une personne optimiste.", "Lorsque je suis contrarié(e), je me rends compte que les « bonnes choses de la vie » ne sont que des illusions.", "Je crois que nos actions doivent être dictées par notre cœur.", "Je n’arrive jamais très bien à déterminer ce que je ressens.", "Je trouve qu’il est mieux pour moi de ressentir pleinement mes sentiments plutôt que de les contrôler.", "Lorsque je deviens contrarié(e), je pense à tous les plaisirs qu’offre la vie.", "Mes croyances et opinions semblent varier selon la façon dont je me sens.", "J’ai souvent conscience de ce que je ressens par rapport à une question.", "Mes sentiments sont souvent une source de confusion pour moi.", "On ne devrait jamais se laisser guider par ses émotions.", "Je ne laisse jamais mes émotions prendre le dessus.", "Je suis parfois heureux/heureuse, mais je suis surtout de nature pessimiste.", "Je suis en accord avec mes émotions.", "J’accorde beaucoup d’attention à mes sentiments.", "Je n’arrive pas à comprendre mes sentiments.", "Je n’accorde pas beaucoup d’attention à mes sentiments.", "Je pense souvent à mes sentiments.", "En général, je sais très bien ce que je ressens.", "Même quand je me sens malheureux/malheureuse, j’essaie de penser à des choses agréables.", "Les sentiments sont une faiblesse des êtres humains.", "Je sais généralement ce que je ressens par rapport à une question.", "Penser à nos émotions est le plus souvent une perte de temps.", "Je peux presque toujours dire exactement ce que je ressens."];
+  var G = [{"label": "", "opts": ["Entièrement d’accord", "Modérément d’accord", "Neutre", "Plutôt en désaccord", "Pas d’accord du tout"], "vals": [5, 4, 3, 2, 1]}];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = null;              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var INV = [2, 3, 4, 5, 9, 11, 14, 16, 17, 18, 19, 22, 23, 27, 29], LO = 1, HI = 5;
+    function val(k){ var v = answers[k-1][0]; if (v === 'NA') return null; return INV.indexOf(k) >= 0 ? (LO + HI - v) : v; }
+    function agg(list, m){ var s = 0, n = 0; list.forEach(function(k){ var v = val(k); if (v !== null){ s += v; n++; } }); if (n === 0) return null; return m === 'mean' ? s / n : s; }
+    var BL = [{"l": "Attention aux émotions", "it": [2, 3, 4, 7, 10, 12, 17, 18, 21, 23, 24, 27, 29], "m": "sum", "d": 0, "r": "13 à 65", "x": 1}, {"l": "Clarté des émotions", "it": [5, 6, 11, 14, 15, 16, 20, 22, 25, 28, 30], "m": "sum", "d": 0, "r": "11 à 55", "x": 1}, {"l": "Réparation émotionnelle", "it": [1, 8, 9, 13, 19, 26], "m": "sum", "d": 0, "r": "6 à 30", "x": 1}];
+    var res = [], rows = '';
+    BL.forEach(function(b){ var v = agg(b.it, b.m); if (v !== null) v = v * b.x; res.push(v); rows += row(b.l + (b.r ? ' (' + b.r + ')' : ''), v === null ? '-' : v.toFixed(b.d).replace('.', ',')); });
+    html += '<table class=\"result-table\">' + rows + '</table>';
+    html += '<p class=\"result-text\">' + "Un score élevé indique une attention, une clarté ou une réparation émotionnelle perçues plus élevées. La grille ne comporte aucun seuil : les trois scores se lisent séparément. Repère (moyenne, écart-type) chez 824 jeunes adultes français, étudiants (Maria, 2014) : attention 46,4 (8,3) ; clarté 36,3 (6,9) ; réparation 21,6 (4,5). Les moyennes diffèrent selon le sexe (voir la fiche)." + '</p>';
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TMMS-30 : Trait Meta-Mood Scale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#5E358D 0%,#CAB5E3 55%,#2A1641 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#2A1641;background:#EDE6F4;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #593285;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#593285;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#2A1641;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">TMMS-30</span></div>
+
+  <h1 class="serif">Trait Meta-Mood Scale, forme à 30 items (TMMS-30)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">TMMS-30 : Salovey, Mayer, Goldman, Turvey et Palfai (1995) ; traduction française de Rodrigue et Clamageran, approuvée par l’équipe de Mayer. Intelligence émotionnelle perçue : attention, clarté, réparation.</p>
+  <div class="meta-row">
+    <span class="pill">30 questions</span>
+    <span class="pill">5 à 8 minutes</span>
+    <span class="pill">5 niveaux d’accord</span>
+    <span class="pill">Français</span>
+    <span class="pill">Intelligence émotionnelle perçue</span>
+    <span class="pill">3 sous-échelles</span>
+    <span class="pill">Licence : incertaine</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="tmms-30.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>La Trait Meta-Mood Scale évalue la façon dont la personne croit percevoir et gérer ses émotions, ce que les auteurs rattachent à l’intelligence émotionnelle perçue. La forme à 30 items comprend trois dimensions : l’attention portée aux émotions (13 items), la clarté dans la perception des émotions (11 items) et la réparation émotionnelle, c’est-à-dire la capacité perçue à réguler les états pénibles et à prolonger les états agréables (6 items). Les réponses se donnent sur cinq niveaux, de « Pas d’accord du tout » à « Entièrement d’accord ». La moitié des items (15) sont formulés dans le sens inverse.</p>
+    <p class="source-note">Le fichier français ne contient ni consigne ni clé de cotation : la page n’affiche donc pas de consigne propre à cette version.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque réponse vaut de 1 (« Pas d’accord du tout ») à 5 (« Entièrement d’accord »). Les 15 items inversés (n° 2, 3, 4, 5, 9, 11, 14, 16, 17, 18, 19, 22, 23, 27 et 29) sont recodés (6 moins la réponse). Les trois scores sont des sommes : attention (items 2, 3, 4, 7, 10, 12, 17, 18, 21, 23, 24, 27, 29 ; 13 à 65), clarté (items 5, 6, 11, 14, 15, 16, 20, 22, 25, 28, 30 ; 11 à 55), réparation (items 1, 8, 9, 13, 19, 26 ; 6 à 30). Un score élevé signifie une dimension perçue comme plus développée ; il n’existe pas de score total.</p>
+    <p>Repères français (Maria, 2014) : 824 jeunes adultes français recrutés dans l’enseignement supérieur (456 femmes, 368 hommes ; âge moyen 20,7 ans). Moyenne (écart-type) pour l’ensemble : attention 46,44 (8,33) ; clarté 36,30 (6,89) ; réparation 21,55 (4,54). Femmes : 44,03 (8,61) ; 35,78 (6,82) ; 21,68 (4,29). Hommes : 48,38 (7,58) ; 36,95 (6,93) ; 21,44 (4,74). Les hommes ont un score d’attention plus élevé que les femmes et un score de clarté un peu plus élevé ; la réparation ne diffère pas.</p>
+    <p class="reserve">Ces repères portent sur des étudiants de 20 ans environ ; il n’existe ni percentiles ni seuils cliniques dans les sources lues. Ils ne permettent pas de classer une personne d’un autre âge ou d’un autre milieu.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Les 30 items et les libellés de réponse français proviennent du fichier « TTSM » diffusé par le laboratoire de J. D. Mayer (traduction de Rodrigue et Clamageran). La clé de cotation (sous-échelles et inversions) n’est écrite en français dans aucune source lue : elle provient de l’annexe anglaise de Salovey et al. (1995), reportée item par item sur la version française par appariement manuel du sens (cotation déduite). Les effectifs obtenus (13, 11 et 6 items ; 15 inversés) concordent avec la description de la thèse de Maria (2014). L’annexe contenant la version française dans la thèse n’était pas jointe au document lu.</p>
+    <p class="reserve">Licence : incertaine. Aucune phrase de licence ne figure sur le fichier français ni sur la page du laboratoire (mention générale : « Copyright © 2026 Personality Laboratory at UNH »). La permission d’usage n’a pas été retrouvée.</p>
+    <p class="source-note">Salovey, P., Mayer, J. D., Goldman, S. L., Turvey, C., & Palfai, T. P. (1995). Emotional attention, clarity, and repair: Exploring emotional intelligence using the Trait Meta-Mood Scale. In J. W. Pennebaker (Ed.), Emotion, disclosure, and health (pp. 125-154). American Psychological Association. : Maria, A.-S., Bourdier, L., Duclos, J., Ringuenet, D., & Berthoz, S. (2016). Psychometric properties of the French version of a scale measuring perceived emotional intelligence: The Trait Meta-Mood Scale (TMMS). Canadian Journal of Psychiatry, 61(10), 652-662. : Maria, A.-S. (2014). Caractérisation et remédiation des difficultés cognitives et émotionnelles dans l’anorexie mentale. Thèse, Université Paris Descartes (HAL tel-01127483).</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

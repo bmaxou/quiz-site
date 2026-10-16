@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WEMWBS : Échelle de bien-être mental de Warwick-Edinburgh</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #478532;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#478532;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#214116;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#478532;background:#EAF4E6;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#214116;border-color:#E0D9C9;}
+  .btn-primary{background:#478532;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#478532;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#214116;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">WEMWBS : Échelle de bien-être mental de Warwick-Edinburgh (14 questions)</h1>
+    <p class="lead">14 affirmations sur vos sensations et vos pensées durant les deux dernières semaines (5 niveaux, de « Jamais » à « Tout le temps »). Le score de la forme courte SWEMWBS (7 items) est aussi calculé.</p>
+    <p class="consigne">Les affirmations ci-dessous concernent vos sensations et vos pensées. Cochez la case qui correspond le mieux à votre vécu durant les deux dernières semaines.</p>
+    <p class="lang-note">Questions en français (traduction de Nicolas Franck, 2013). Licence requise : oui (licence Warwick obligatoire avant toute mise en ligne publique).</p>
+    <div class="pill-row">
+      <span class="pill">14 questions</span>
+      <span class="pill">5 niveaux de réponse</span>
+      <span class="pill">Score de 14 à 70 (+ SWEMWBS)</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">© NHS Health Scotland, University of Warwick and University of Edinburgh (2006) et Nicolas Franck (2013) pour la traduction, tous droits réservés.<br>Tennant R, Hiller L, Fishwick R, Platt S, Joseph S, Weich S, Parkinson J, Secker J, Stewart-Brown S. The Warwick-Edinburgh Mental Well-being Scale (WEMWBS): development and UK validation. Health Qual Life Outcomes 2007;5:63. doi:10.1186/1477-7525-5-63 (CC-BY 2.0)<br>Stewart-Brown S, Tennant A, Tennant R, Platt S, Parkinson J, Weich S. Internal construct validity of the Warwick-Edinburgh Mental Well-being Scale (WEMWBS): a Rasch analysis using data from the Scottish Health Education Population Survey. Health Qual Life Outcomes 2009;7:15.<br>Trousselard M, Steiler D, Dutheil F, Claverie D, Canini F, Fenouillet F, Naughton G, Stewart-Brown S, Franck N. Validation of the Warwick-Edinburgh Mental Well-Being Scale (WEMWBS) in French psychiatric and general populations. Psychiatry Res 2016;245:282-290. doi:10.1016/j.psychres.2016.08.050<br>Outil de dépistage / d'auto-évaluation : ne remplace pas un bilan clinique.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["Je me suis senti(e) optimiste quant à l’avenir", "Je me suis senti(e) utile", "Je me suis senti(e) détendu(e)", "Je me suis senti(e) intéressé(e) par les autres", "J’ai eu de l’énergie à dépenser", "J’ai bien résolu les problèmes auxquels j’ai été confronté", "Ma pensée était claire", "J’ai eu une bonne image de moi", "Je me suis senti(e) proche des autres", "Je me suis senti(e) confiant(e)", "J’ai été capable de prendre mes propres décisions", "Je me suis senti(e) aimé(e)", "Je me suis senti(e) intéressé(e) par de nouvelles choses", "Je me suis senti(e) joyeux(se)"];
+  var G = [{"label": "", "opts": ["Jamais", "Rarement", "Parfois", "Souvent", "Tout le temps"], "vals": [1, 2, 3, 4, 5]}];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = null;              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var SW = [1, 2, 3, 6, 7, 9, 11];
+    var TAB = {"7": "7,00", "8": "9,51", "9": "11,25", "10": "12,40", "11": "13,33", "12": "14,08", "13": "14,75", "14": "15,32", "15": "15,84", "16": "16,36", "17": "16,88", "18": "17,43", "19": "17,98", "20": "18,59", "21": "19,25", "22": "19,98", "23": "20,73", "24": "21,54", "25": "22,35", "26": "23,21", "27": "24,11", "28": "25,03", "29": "26,02", "30": "27,03", "31": "28,13", "32": "29,31", "33": "30,70", "34": "32,55", "35": "35,00"};
+    var w = 0, sw = 0, k;
+    for (k = 1; k <= 14; k++) w += answers[k-1][0];
+    SW.forEach(function(k){ sw += answers[k-1][0]; });
+    var rows = row('Score WEMWBS (14 à 70)', String(w));
+    rows += row('SWEMWBS, score brut (7 à 35)', String(sw));
+    rows += row('SWEMWBS, score métrique (7,00 à 35,00)', TAB[sw]);
+    html += '<table class=\"result-table\">' + rows + '</table>';
+    html += '<p class=\"result-text\">Un score élevé indique un meilleur bien-être mental. L’échelle n’a pas de seuil spécifique : les scores se comparent à des normes de population, sans valeur diagnostique.</p>';
+    html += '<p class=\"result-text\">Repères de comparaison, non diagnostiques : étudiants français, moyenne 51,88 (Trousselard et al., 2016, valeur citée par Health Place, 2020) ; enquête nationale en ligne en France pendant le confinement de 2020, volontaires, n = 11 391, moyenne pondérée 50,51 (écart-type 8,17) (Health Place, 2020) : contexte particulier, pas une norme de référence.</p>';
+    html += '<p class=\"result-text\">Le score métrique du SWEMWBS provient de la table de conversion de Stewart-Brown et al. (2009), établie sur un échantillon écossais ; aucune norme française du SWEMWBS n’a été retrouvée.</p>';
+
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WEMWBS : Échelle de bien-être mental de Warwick-Edinburgh</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#4B8D35 0%,#C1E3B5 55%,#214116 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#214116;background:#EAF4E6;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #478532;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#478532;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#214116;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">WEMWBS</span></div>
+
+  <h1 class="serif">Échelle de bien-être mental de Warwick-Edinburgh (WEMWBS)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">WEMWBS : NHS Health Scotland, University of Warwick et University of Edinburgh (2006) ; Tennant et al. (2007) ; forme courte SWEMWBS : Stewart-Brown et al. (2009) ; traduction française : Nicolas Franck (2013) ; validation française : Trousselard et al. (2016).</p>
+  <div class="meta-row">
+    <span class="pill">14 questions</span>
+    <span class="pill">5 niveaux de réponse</span>
+    <span class="pill">Score de 14 à 70 (+ SWEMWBS)</span>
+    <span class="pill">Français</span>
+    <span class="pill">Bien-être mental</span>
+    <span class="pill">Licence requise : oui</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="wemwbs.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>Le WEMWBS mesure le bien-être mental (aspects positifs de la santé mentale) à l’aide de 14 affirmations formulées positivement, portant sur les deux dernières semaines, cotées de 1 (« Jamais ») à 5 (« Tout le temps »). Sa forme courte, le SWEMWBS, reprend 7 de ces 14 items (items 1, 2, 3, 6, 7, 9, 11).</p>
+    <p>Validation française : Trousselard et al. (2016), Psychiatry Research 245 : 282-290, sur des populations françaises générale et psychiatrique (319 travailleurs, 75 étudiants et 121 patients atteints de schizophrénie chronique en rémission, d’après le résumé ; l’article complet n’a pas pu être lu).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>WEMWBS : somme des 14 items (de 1 à 5 chacun) avec poids égaux, de 14 à 70 ; aucun item inversé ; un score élevé indique un meilleur bien-être mental (Tennant et al., 2007).</p>
+    <p>SWEMWBS : somme brute des 7 items (de 7 à 35), à convertir en score métrique (Rasch) avec la table 3 de Stewart-Brown et al. (2009) : 7 = 7,00, 8 = 9,51, 9 = 11,25, 10 = 12,40, 11 = 13,33, 12 = 14,08, 13 = 14,75, 14 = 15,32, 15 = 15,84, 16 = 16,36, 17 = 16,88, 18 = 17,43, 19 = 17,98, 20 = 18,59, 21 = 19,25, 22 = 19,98, 23 = 20,73, 24 = 21,54, 25 = 22,35, 26 = 23,21, 27 = 24,11, 28 = 25,03, 29 = 26,02, 30 = 27,03, 31 = 28,13, 32 = 29,31, 33 = 30,70, 34 = 32,55, 35 = 35,00.</p>
+    <p>Interprétation : l’échelle n’a pas de seuil clinique spécifique ; les scores se comparent à des normes de population (Health Place, 2020). Repères de comparaison, non diagnostiques : étudiants français, moyenne 51,88 (Trousselard et al., 2016, valeur citée par Health Place, 2020) ; enquête nationale en ligne en France pendant le confinement de 2020 (n = 11 391, pondérée selon l’âge et le sexe d’après le recensement 2020), moyenne 50,51 (écart-type 8,17).</p>
+    <p class="reserve">Aucune table de normes de population générale française n’a été trouvée dans les sources lues. L’enquête de 2020 porte sur des volontaires en contexte de confinement : ce n’est pas une norme de référence. Aucune norme française du SWEMWBS n’a été lue ; la table de conversion vient d’un échantillon écossais.</p>
+    <p class="reserve">Valeurs manquantes : règle non précisée dans les sources lues ; la page exige toutes les réponses.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Droits : le document français porte « © NHS Health Scotland, University of Warwick and University of Edinburgh (2006) et Nicolas Franck (2013) pour la traduction, tous droits réservés ». La page Warwick indique qu’il faut choisir une licence avant d’utiliser le WEMWBS (licences NHS, commerciale, non commerciale, avec tarifs) et que la licence non commerciale ne donne pas le droit de partager publiquement le WEMWBS ni de le fournir à d’autres. La publication en ligne gratuite des items n’est donc pas autorisée sans licence Warwick. Licence requise : oui.</p>
+    <p class="reserve">Les items français proviennent du document du Centre ressource de réhabilitation psychosociale (traduction de Nicolas Franck, 2013, coauteur de Trousselard et al., 2016) ; leur identité exacte avec le texte publié dans Psychiatry Research n’est pas vérifiée. D’autres reproductions françaises présentent de légères variantes (item 11 : « J’ai été capable de me faire ma propre opinion des choses » ; item 3 sans « (e) » ; item 6 « confronté(e) ») : le libellé retenu est celui du document signé Franck 2013.</p>
+    <p class="reserve">Aucun document français de la forme courte SWEMWBS n’a été lu : les 7 items sont identifiés par leur numéro dans le WEMWBS (items 1, 2, 3, 6, 7, 9, 11 d’après Stewart-Brown et al., 2009) et pris dans la traduction française des 14 items, par correspondance de position.</p>
+    <p class="source-note">Items, consigne et échelle : document « Échelle de bien-être mental de Warwick-Edinburgh (WEMWBS) » du Centre ressource de réhabilitation psychosociale ; cotation : Tennant et al. (2007) et Stewart-Brown et al. (2009).</p>
+    <p class="source-note">Tennant R, Hiller L, Fishwick R, Platt S, Joseph S, Weich S, Parkinson J, Secker J, Stewart-Brown S. The Warwick-Edinburgh Mental Well-being Scale (WEMWBS): development and UK validation. Health Qual Life Outcomes 2007;5:63. doi:10.1186/1477-7525-5-63 (CC-BY 2.0)<br>Stewart-Brown S, Tennant A, Tennant R, Platt S, Parkinson J, Weich S. Internal construct validity of the Warwick-Edinburgh Mental Well-being Scale (WEMWBS): a Rasch analysis using data from the Scottish Health Education Population Survey. Health Qual Life Outcomes 2009;7:15.<br>Trousselard M, Steiler D, Dutheil F, Claverie D, Canini F, Fenouillet F, Naughton G, Stewart-Brown S, Franck N. Validation of the Warwick-Edinburgh Mental Well-Being Scale (WEMWBS) in French psychiatric and general populations. Psychiatry Res 2016;245:282-290. doi:10.1016/j.psychres.2016.08.050</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

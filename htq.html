@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HTQ : Symptômes post-traumatiques (anglais)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #324E85;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#324E85;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#162441;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#324E85;background:#E6EBF4;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#162441;border-color:#E0D9C9;}
+  .btn-primary{background:#324E85;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#324E85;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#162441;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">HTQ : Harvard Trauma Questionnaire, symptômes (16 items, en anglais)</h1>
+    <p class="lead">16 symptômes en anglais, à évaluer selon la gêne ressentie durant la semaine écoulée. Réponse en 4 niveaux, de « Not at all » (1) à « Extremely » (4).</p>
+    <p class="consigne">The following are symptoms that people sometimes have after experiencing hurtful or terrifying events in their lives. Please read each one carefully and decide how much the symptoms bothered you in the past week.</p>
+    <p class="lang-note">Questions en anglais : aucune version française lisible n'a été retrouvée ; items jamais traduits. Version : HTQ-R, version cambodgienne (texte anglais), 16 items de symptômes de la partie IV. Licence requise : incertaine.</p>
+    <div class="pill-row">
+      <span class="pill">16 questions</span>
+      <span class="pill">4 niveaux de réponse</span>
+      <span class="pill">Semaine écoulée</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Mollica RF, Caspi-Yavin Y, Bollini P, Truong T, Tor S, Lavelle J. The Harvard Trauma Questionnaire: validating a cross-cultural instrument for measuring torture, trauma, and posttraumatic stress disorder in Indochinese refugees. J Nerv Ment Dis. 1992;180(2):111-116. Mollica RF, McDonald LS, Massagli MP, Silove DM. Measuring Trauma, Measuring Torture. Harvard Program in Refugee Trauma, 2004. de Fouchier C, Blanchet A, Hopkins W, Bui E, Ait-Aoudia M, Jehel L. Validation of a French adaptation of the Harvard Trauma Questionnaire among torture survivors from sub-Saharan African countries. Eur J Psychotraumatol. 2012;3:19225. doi:10.3402/ejpt.v3i0.19225 (CC-BY). Outil de dépistage / d'auto-évaluation : ne remplace pas un bilan clinique.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["Recurrent thoughts or memories of the most hurtful or terrifying events", "Feeling as though the event is happening again", "Recurrent nightmares", "Feeling detached or withdrawn from people", "Unable to feel emotions", "Feeling jumpy, easily startled", "Difficulty concentrating", "Trouble sleeping", "Feeling on guard", "Feeling irritable or having outbursts of anger", "Avoiding activities that remind you of the traumatic or hurtful event", "Inability to remember parts of the most hurtful or traumatic events", "Less interest in daily activities", "Feeling as if you don’t have a future", "Avoiding thoughts or feelings associated with the traumatic or hurtful events", "Sudden emotional or physical reaction when reminded of the most hurtful or traumatic events"];
+  var G = [{"label": "", "opts": ["Not at all", "A little", "Quite a bit", "Extremely"], "vals": [1, 2, 3, 4]}];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = null;              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var n = 0, s = 0;
+    answers.forEach(function(a){ if (a[0] !== 'NA' && a[0] !== null){ s += a[0]; n++; } });
+    var c = Math.floor((200 * s + n) / (2 * n));   /* moyenne x 100, arrondi half-up (entiers) */
+    var txt = Math.floor(c / 100) + ',' + ('0' + (c % 100)).slice(-2);
+    html += '<table class="result-table">' + row('Score DSM-IV (moyenne des 16 items, 1,00 à 4,00)', txt) + '</table>';
+    html += '<p class="result-text">' + (2 * s > 5 * n
+        ? 'Moyenne supérieure à 2,5 : seuil au-delà duquel le document du Harvard Program in Refugee Trauma considère la personne comme symptomatique d’un PTSD (validation française de Fouchier et al., 2012 : 52 survivants de torture francophones d’Afrique subsaharienne ; sensibilité 0,87, spécificité 0,73). Repère, non diagnostique.'
+        : 'Moyenne de 2,5 ou moins : en dessous du seuil de 2,5 au-delà duquel le document du Harvard Program in Refugee Trauma considère la personne comme symptomatique d’un PTSD (validation française de Fouchier et al., 2012 : 52 survivants de torture francophones d’Afrique subsaharienne). Repère, non diagnostique.') + '</p>';
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HTQ : Symptômes post-traumatiques (anglais)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#35528D 0%,#B5C4E3 55%,#162441 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#162441;background:#E6EBF4;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #324E85;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#324E85;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#162441;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">HTQ</span></div>
+
+  <h1 class="serif">Harvard Trauma Questionnaire, partie IV : symptômes de stress post-traumatique, items 1 à 16 (HTQ)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">HTQ : Harvard Program in Refugee Trauma (Mollica et al.), Massachusetts General Hospital / Harvard Medical School, 1998. Version révisée (HTQ-R), version cambodgienne, texte anglais.</p>
+  <div class="meta-row">
+    <span class="pill">16 questions</span>
+    <span class="pill">4 niveaux de réponse</span>
+    <span class="pill">Semaine écoulée</span>
+    <span class="pill">Anglais</span>
+    <span class="pill">Trauma · stress post-traumatique</span>
+    <span class="pill">Licence requise : incertaine</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="htq.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>Harvard Trauma Questionnaire (HTQ) : outil d'évaluation des événements traumatiques et des symptômes de stress post-traumatique chez des personnes exposées à des violences ou à des persécutions. Cette page reprend uniquement les 16 premiers items de la partie IV (symptômes du PTSD selon le DSM-IV), cotés de 1 (Not at all) à 4 (Extremely) pour la semaine écoulée.</p>
+    <p>Ne sont pas reproduits : la partie I (41 événements traumatiques à cocher YES / NO) et les items 17 à 40 de la partie IV (24 items de symptômes dits « refugee-specific » et de fonctionnement).</p>
+    <p class="reserve">Questions en anglais : aucune version française lisible n'a été retrouvée ; items jamais traduits. Une adaptation française validée existe (de Fouchier, Blanchet, Hopkins, Bui, Ait-Aoudia &amp; Jehel, 2012, Eur J Psychotraumatol 3:19225), mais son texte français n'a pas pu être obtenu : l'article en accès libre ne publie que les libellés anglais. Les 16 items affichés coïncident mot pour mot avec ceux de ce tableau de l'article.</p>
+    <p class="reserve">Source cambodgienne : le texte lu est celui de la version révisée cambodgienne (HTQ-R, Cambodian version, English only), publiée avec la mention « 1998 Harvard Program in Refugee Trauma ». L'instrument décrit dans la validation française (41 événements, 40 items) a la même structure.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Score DSM-IV = somme des items 1 à 16 divisée par le nombre d'items auxquels il a été répondu ; plage de 1,00 à 4,00. Aucun item inversé. Cette page exige les 16 réponses.</p>
+    <p>Repère : selon le document du Harvard Program in Refugee Trauma, les personnes dont le score DSM-IV (et/ou le score total des 40 items) est supérieur à 2,5 sont considérées comme symptomatiques d'un PTSD. Validation française (de Fouchier et al., 2012 ; N = 52 survivants de torture francophones originaires d'Afrique subsaharienne, dont 22 suivis en Angleterre et 30 en France) : seuil de 2,5, sensibilité 0,87, spécificité 0,73, AUC 0,83 par rapport au SCID PTSD. Version originale : sensibilité 0,78, spécificité 0,65 (Mollica et al., 1992, échantillon indochinois, 91 patients). Repères, non diagnostiques.</p>
+    <p class="reserve">Aucune norme en population générale française. Dans l'échantillon de la validation française (N = 52, petit échantillon clinique non représentatif), la moyenne de la partie IV – PTSD était de 2,84 (écart-type 0,66, alpha 0,90) : ce n'est pas une norme.</p>
+    <p class="reserve">Le score total sur 40 items n'est pas calculé (items 17 à 40 non repris). La partie I (événements) n'est pas cotée : le document lu ne donne pas de règle de cotation pour cette partie.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Licence requise : incertaine. Aucune licence libre ni phrase d'autorisation de reproduction ou de traduction n'a été lue ; le document porte la mention « 1998 Harvard Program in Refugee Trauma » et le manuel « Measuring Trauma, Measuring Torture » est vendu par le Harvard Program in Refugee Trauma. Droits à clarifier avant publication.</p>
+    <p class="reserve">Sources : document HPRT « HTQ-R and HSCL-25, English translation of Cambodian version with Torture History » (partie 4 et cotation) ; article de de Fouchier et al. (2012, accès libre CC-BY) pour la vérification des libellés.</p>
+    <p class="source-note">Mollica RF, Caspi-Yavin Y, Bollini P, Truong T, Tor S, Lavelle J. The Harvard Trauma Questionnaire: validating a cross-cultural instrument for measuring torture, trauma, and posttraumatic stress disorder in Indochinese refugees. J Nerv Ment Dis. 1992;180(2):111-116. Mollica RF, McDonald LS, Massagli MP, Silove DM. Measuring Trauma, Measuring Torture. Harvard Program in Refugee Trauma, 2004. de Fouchier C, Blanchet A, Hopkins W, Bui E, Ait-Aoudia M, Jehel L. Validation of a French adaptation of the Harvard Trauma Questionnaire among torture survivors from sub-Saharan African countries. Eur J Psychotraumatol. 2012;3:19225. doi:10.3402/ejpt.v3i0.19225 (CC-BY).</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

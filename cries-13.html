@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CRIES-13 : Impact d&#x27;un événement chez l&#x27;enfant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #85325C;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#85325C;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#41162B;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#85325C;background:#F4E6ED;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#41162B;border-color:#E0D9C9;}
+  .btn-primary{background:#85325C;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#85325C;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#41162B;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">CRIES-13 : Échelle révisée d&#x27;impact d&#x27;un événement (enfants)</h1>
+    <p class="lead">13 questions, à partir de 8 ans : fréquence de réactions après un événement stressant pendant les sept derniers jours. Auto-questionnaire à remplir par l'enfant, qui sait quel événement est visé.</p>
+    <p class="consigne">Ci-dessous se trouvent des commentaires émis par des gens après avoir vécu des événements stressants. Veuillez répondre à chaque question en montrant la fréquence de ces réactions pendant ces sept derniers jours.</p>
+    <p class="lang-note">Questions en français. La traduction française n’a pas été entièrement validée (Cn2r, INSPQ). Licence : non requise (domaine public, source à citer).</p>
+    <div class="pill-row">
+      <span class="pill">13 questions</span>
+      <span class="pill">5 à 10 minutes</span>
+      <span class="pill">Pas du tout / Rarement / Quelques fois / Souvent</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Smith P, Perrin S, Dyregrov A, Yule W (2003) ; Perrin S, Meiser-Stedman R, Smith P (2005). Outil de dépistage : ne remplace pas un entretien clinique ni un bilan.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["Y penses-tu même quand tu ne le veux pas ?", "Essaies-tu de chasser l’événement de ta mémoire ?", "As-tu des difficultés à être attentif ou à te concentrer ?", "Ressens-tu soudainement des vagues de sentiments intenses à ce sujet ?", "T’effraies-tu plus souvent ou te sens-tu plus nerveux qu’avant l’incident ?", "Essaies-tu de t’éloigner de ce qui peut te rappeler l’événement ? (p. ex. des endroits ou situations)", "Essaies-tu de ne pas en parler ?", "T’arrive-t-il d’avoir des images de l’événement à l’esprit ?", "Est ce qu’il y a d’autres choses qui t’y font penser ?", "Essaies-tu de ne pas penser à l’événement ?", "T’irrites-tu facilement ?", "Es-tu alerte et vigilant même s’il n’y a apparemment pas lieu de l’être ?", "As-tu des problèmes de sommeil ?"];
+  var G = [{"label": "", "opts": ["Pas du tout", "Rarement", "Quelques fois", "Souvent"], "vals": [0, 1, 3, 5]}];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = null;              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var INV = [], LO = 0, HI = 5;
+    function val(k){ var v = answers[k-1][0]; if (v === 'NA') return null; return INV.indexOf(k) >= 0 ? (LO + HI - v) : v; }
+    function agg(list, m){ var s = 0, n = 0; list.forEach(function(k){ var v = val(k); if (v !== null){ s += v; n++; } }); if (n === 0) return null; return m === 'mean' ? s / n : s; }
+    var BL = [{"l": "Score total CRIES-13", "it": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13], "m": "sum", "d": 0, "r": "0 à 65", "x": 1}, {"l": "Intrusion (questions 1, 4, 8, 9)", "it": [1, 4, 8, 9], "m": "sum", "d": 0, "r": "0 à 20", "x": 1}, {"l": "Évitement (questions 2, 6, 7, 10)", "it": [2, 6, 7, 10], "m": "sum", "d": 0, "r": "0 à 20", "x": 1}, {"l": "Hyperréactivité (questions 3, 5, 11, 12, 13)", "it": [3, 5, 11, 12, 13], "m": "sum", "d": 0, "r": "0 à 25", "x": 1}, {"l": "Intrusion + évitement (CRIES-8)", "it": [1, 4, 8, 9, 2, 6, 7, 10], "m": "sum", "d": 0, "r": "0 à 40", "x": 1}];
+    var res = [], rows = '';
+    BL.forEach(function(b){ var v = agg(b.it, b.m); if (v !== null) v = v * b.x; res.push(v); rows += row(b.l + (b.r ? ' (' + b.r + ')' : ''), v === null ? '-' : v.toFixed(b.d).replace('.', ',')); });
+    html += '<table class=\"result-table\">' + rows + '</table>';
+    html += '<p class="result-text">' + (res[0] >= 30 ? 'Score total de 30 ou plus : seuil de dépistage du trouble de stress post-traumatique atteint (Cn2r).' : 'Score total inférieur à 30 : seuil de dépistage du trouble de stress post-traumatique non atteint (Cn2r).') + '</p>';
+    html += '<p class="result-text">' + (res[4] >= 17 ? 'Intrusion + évitement de 17 ou plus : seuil de la notice de la Children and War Foundation atteint.' : 'Intrusion + évitement inférieur à 17 : seuil de la notice de la Children and War Foundation non atteint.') + '</p>';
+    html += '<p class="result-text">Ces seuils orientent un dépistage ; ils ne posent pas de diagnostic.</p>';
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CRIES-13 : Impact d&#x27;un événement chez l&#x27;enfant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#8D3561 0%,#E3B5CC 55%,#41162B 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#41162B;background:#F4E6ED;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #85325C;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#85325C;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#41162B;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">CRIES-13</span></div>
+
+  <h1 class="serif">Échelle révisée pour mesurer l&#x27;impact des événements sur les enfants (CRIES-13)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">CRIES-13 : Smith, Perrin, Dyregrov et Yule (2003) ; Children and War Foundation ; version française mise en page par le Cn2r.</p>
+  <div class="meta-row">
+    <span class="pill">13 questions</span>
+    <span class="pill">5 à 10 minutes</span>
+    <span class="pill">Pas du tout / Rarement / Quelques fois / Souvent</span>
+    <span class="pill">Français</span>
+    <span class="pill">Enfants à partir de 8 ans</span>
+    <span class="pill">Stress post-traumatique</span>
+    <span class="pill">Licence : non requise</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="cries-13.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>Le CRIES-13 est un auto-questionnaire de 13 questions adapté de l'Impact of Event Scale (Horowitz) pour des enfants de 8 ans et plus qui savent lire seuls. Il explore trois dimensions : intrusion (4 questions), évitement (4 questions) et hyperréactivité (5 questions). Il porte sur les sept derniers jours et se réfère à un événement stressant que l'enfant a vécu. Durée indiquée : 5 à 10 minutes (Cn2r).</p>
+    <p class="source-note">Le questionnaire ne nomme pas l'événement : c'est au praticien de le préciser à l'enfant avant la passation.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque question est cotée 0 (pas du tout), 1 (rarement), 3 (quelques fois) ou 5 (souvent). Le score total est la somme des 13 questions (0 à 65). Intrusion = questions 1, 4, 8, 9 ; évitement = 2, 6, 7, 10 ; hyperréactivité = 3, 5, 11, 12, 13. La somme intrusion + évitement correspond à la version courte à 8 questions (CRIES-8).</p>
+    <p>Deux seuils sont rapportés : un score total de 30 ou plus permet le dépistage d'un trouble de stress post-traumatique (fiche du Cn2r, reprise par l'INSPQ) ; pour le CRIES-8, la notice de la Children and War Foundation indique qu'à 17 ou plus la probabilité d'un diagnostic de TSPT est très élevée.</p>
+    <p class="reserve">La notice de la Children and War Foundation précise qu'aucune étude n'avait validé le CRIES-13 contre un diagnostic clinique indépendant au moment de la rédaction, et recommande pour le dépistage de s'appuyer sur intrusion + évitement. Un diagnostic ne peut pas reposer sur un auto-questionnaire seul.</p>
+    <p class="reserve">Aucune norme française (moyennes, percentiles) n'a été trouvée : étalonnage français non disponible.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Les questions et les libellés de réponse sont ceux de la version française du Cn2r (Centre national de ressources et de résilience), identiques à la version française de la Children and War Foundation (© 1998) et à celle de l'INSPQ. Le Cn2r et l'INSPQ indiquent que la traduction française n'a pas été entièrement validée.</p>
+    <p class="reserve">Licence : « Domaine public. Il faut mentionner la source (Smith, P. et al., 2003). » (INSPQ, fiche 7). La Children and War Foundation précise : « These instruments are provided free of costs thanks to the generosity of our donors. » Statut : licence non requise, source à citer.</p>
+    <p class="source-note">Références : Smith P, Perrin S, Dyregrov A, Yule W (2003). Principal components analysis of the Impact of Event Scale with children in war. Personality and Individual Differences, 34(2), 315-322. Perrin S, Meiser-Stedman R, Smith P (2005). The Children's Revised Impact of Event Scale (CRIES): validity as a screening instrument for PTSD. Behavioural and Cognitive Psychotherapy, 33(4), 487-498.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

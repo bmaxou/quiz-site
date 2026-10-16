@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CIA : Retentissement des troubles alimentaires</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #327085;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#327085;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#163641;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#327085;background:#E6F1F4;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#163641;border-color:#E0D9C9;}
+  .btn-primary{background:#327085;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#327085;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#163641;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">CIA : Clinical Impairment Assessment (version 3.0, en anglais)</h1>
+    <p class="lead">16 questions en anglais sur le retentissement, au cours des 28 derniers jours, de l'alimentation, de l'activité physique ou du ressenti à l'égard de l'alimentation, de la forme du corps ou du poids. Réponse en 4 niveaux, de « Not at all » (0) à « A lot » (3).</p>
+    <p class="consigne">Please place an &#x27;X&#x27; in the column which best describes how your eating habits, exercising or feelings about your eating, shape or weight have affected your life over the past four weeks (28 days). Thank you.
+
+Over the past 28 days, to what extent have your … eating habits … exercising … or your feelings about your eating, shape or weight …..</p>
+    <p class="lang-note">Questions en anglais : aucune version française lisible n'a été retrouvée ; items jamais traduits. Version : CIA 3.0 (Bohn &amp; Fairburn, 2008). Licence requise : incertaine.</p>
+    <div class="pill-row">
+      <span class="pill">16 questions</span>
+      <span class="pill">4 niveaux de réponse</span>
+      <span class="pill">Score 0 à 48</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Bohn K, Doll HA, Cooper Z, O&#x27;Connor ME, Palmer RL, Fairburn CG. The measurement of impairment due to eating disorder psychopathology. Behaviour Research and Therapy 2008 ; 46 : 1105-1110. Bohn K, Fairburn CG. Clinical Impairment Assessment Questionnaire (CIA 3.0). In Fairburn CG. Cognitive Behavior Therapy and Eating Disorders. New York: Guilford Press, 2008. Fairburn CG, Beglin SJ. Eating Disorder Examination Questionnaire (6.0). In Fairburn CG. Cognitive Behavior Therapy and Eating Disorders. Guilford Press, 2008 (le CIA est conçu pour être rempli juste après l’EDE-Q). Outil de dépistage / d'auto-évaluation : ne remplace pas un bilan clinique.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["... made it difficult to concentrate?", "... made you feel critical of yourself?", "... stopped you going out with others?", "... affected your work performance (if applicable)?", "... made you forgetful?", "... affected your ability to make everyday decisions?", "... interfered with meals with family or friends?", "... made you upset?", "... made you feel ashamed of yourself?", "... made it difficult to eat out with others?", "... made you feel guilty?", "... interfered with you doing things you used to enjoy?", "... made you absent-minded?", "... made you feel a failure?", "... interfered with your relationships with others?", "... made you worry?"];
+  var G = [{"label": "", "opts": ["Not at all", "A little", "Quite a bit", "A lot"], "vals": [0, 1, 2, 3]}];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = null;              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var INV = [], LO = 0, HI = 3;
+    function val(k){ var v = answers[k-1][0]; if (v === 'NA') return null; return INV.indexOf(k) >= 0 ? (LO + HI - v) : v; }
+    function agg(list, m){ var s = 0, n = 0; list.forEach(function(k){ var v = val(k); if (v !== null){ s += v; n++; } }); if (n === 0) return null; return m === 'mean' ? s / n : s; }
+    var BL = [{"l": "Score global CIA", "it": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16], "m": "sum", "d": 0, "r": "0 à 48", "x": 1}];
+    var res = [], rows = '';
+    BL.forEach(function(b){ var v = agg(b.it, b.m); if (v !== null) v = v * b.x; res.push(v); rows += row(b.l + (b.r ? ' (' + b.r + ')' : ''), v === null ? '-' : v.toFixed(b.d).replace('.', ',')); });
+    html += '<table class=\"result-table\">' + rows + '</table>';
+    html += '<p class="result-text">' + (res[0] >= 16
+        ? 'Score au niveau ou au-dessus du point de coupure de 16 (Bohn et al., 2008 : 123 patients adultes, deux cliniques britanniques ; sensibilité 76 %, spécificité 86 % pour prédire le statut de cas de trouble des conduites alimentaires). Repère, non diagnostique.'
+        : 'Score inférieur au point de coupure de 16 (Bohn et al., 2008 : 123 patients adultes, deux cliniques britanniques). Repère, non diagnostique.') + '</p>';
+    html += '<p class="result-text">Un score plus élevé indique un retentissement plus important.</p>';
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CIA : Retentissement des troubles alimentaires</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#35778D 0%,#B5D7E3 55%,#163641 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#163641;background:#E6F1F4;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #327085;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#327085;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#163641;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">CIA</span></div>
+
+  <h1 class="serif">Clinical Impairment Assessment questionnaire, CIA 3.0 (CIA)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">CIA : Bohn &amp; Fairburn (2008) ; validation initiale : Bohn, Doll, Cooper, O'Connor, Palmer &amp; Fairburn (2008). Version 3.0, anglais.</p>
+  <div class="meta-row">
+    <span class="pill">16 questions</span>
+    <span class="pill">4 niveaux de réponse</span>
+    <span class="pill">Score 0 à 48</span>
+    <span class="pill">Anglais</span>
+    <span class="pill">Troubles des conduites alimentaires</span>
+    <span class="pill">Licence requise : incertaine</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="cia.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>Questionnaire d'auto-évaluation de 16 items mesurant le retentissement psychosocial des troubles des conduites alimentaires. Chaque item est précédé d'une amorce commune (« Over the past 28 days, to what extent have your … eating habits … exercising … or your feelings about your eating, shape or weight … »), affichée sur l'écran de départ. Réponses : Not at all (0), A little (1), Quite a bit (2), A lot (3).</p>
+    <p>Le questionnaire est conçu pour être rempli juste après l'EDE-Q (Eating Disorder Examination Questionnaire).</p>
+    <p class="reserve">Questions en anglais : aucune version française lisible n'a été retrouvée (aucune validation française publiée repérée) ; les items sont l'anglais de la version officielle, jamais traduits. Ne pas traduire sans autorisation de CREDO (Oxford).</p>
+    <p class="source-note">Les libellés d'items commencent par « … » parce que l'amorce commune est affichée en en-tête.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque item est coté de 0 à 3 ; le score global est la somme des 16 items (0 à 48). Un score plus élevé indique un retentissement plus important. Aucun item n'est inversé.</p>
+    <p>Repère : un score global de 16 correspond au meilleur point de coupure pour prédire le statut de cas de trouble des conduites alimentaires (Bohn et al., 2008, Behaviour Research and Therapy 46:1105-1110 ; 123 patients adultes, deux cliniques britanniques à Oxford et Leicester, essai de TCC transdiagnostique ; sensibilité 76 %, spécificité 86 %, AUC 0,88 ; repris dans la notice CIA 3.0, Bohn &amp; Fairburn, 2013). Repères, non diagnostiques.</p>
+    <p>Dans cet échantillon clinique britannique (n = 123), le score global moyen était de 20,1 (écart-type 13,4).</p>
+    <p class="reserve">Valeurs manquantes : selon la notice, le score global reste calculable avec proratisation si au moins 12 items sur 16 sont renseignés. La formule exacte n'est pas écrite dans la notice ; la formule usuelle (moyenne des items répondus × 16, arrondie) est une déduction non sourcée. Cette page exige les 16 réponses et n'applique donc pas de proratisation.</p>
+    <p class="reserve">Le sens du seuil (16 inclus ou non) n'est pas précisé dans les sources lues ; la page considère un score de 16 comme atteignant le repère.</p>
+    <p class="reserve">Trois domaines (personnel : items 2, 8, 9, 11, 14, 16 ; social : items 3, 7, 10, 12, 15 ; cognitif : items 1, 4, 5, 6, 13) sont issus de l'analyse factorielle de Bohn et al. (2008), rattachement déduit du libellé des items. Les consignes officielles ne demandent qu'un score global, et une étude ultérieure (Raykos et al., 2019, titre lu seulement) déconseille de coter les sous-échelles : elles ne sont pas calculées ici.</p>
+    <p class="reserve">Aucune norme ni validation françaises trouvées ; les seules données lues proviennent de l'échantillon clinique britannique ci-dessus, qui ne constitue pas une norme.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Version choisie : CIA 3.0 officiel (anglais, site CREDO Oxford). Le libellé de l'article de 2008 diffère légèrement (ex. « performance at work » au lieu de « work performance » ; « past month » au lieu de « past 28 days »).</p>
+    <p class="reserve">Licence requise : incertaine. Notice CIA 3.0 : « Investigators are welcome to use the CIA free of charge on three conditions: 1. It is understood that it is under copyright. 2. In any publication the following two citations are used for the instrument » (Bohn et al., 2008 ; Bohn &amp; Fairburn, 2008). La troisième condition annoncée n'apparaît pas dans le texte lu. Questionnaire : « Copyright Bohn and Fairburn, 2008 ». Gratuit sous copyright avec citation obligatoire ; traduction en français : permission à confirmer auprès de CREDO.</p>
+    <p class="source-note">Bohn K, Doll HA, Cooper Z, O&#x27;Connor ME, Palmer RL, Fairburn CG. The measurement of impairment due to eating disorder psychopathology. Behaviour Research and Therapy 2008 ; 46 : 1105-1110. Bohn K, Fairburn CG. Clinical Impairment Assessment Questionnaire (CIA 3.0). In Fairburn CG. Cognitive Behavior Therapy and Eating Disorders. New York: Guilford Press, 2008. Fairburn CG, Beglin SJ. Eating Disorder Examination Questionnaire (6.0). In Fairburn CG. Cognitive Behavior Therapy and Eating Disorders. Guilford Press, 2008 (le CIA est conçu pour être rempli juste après l’EDE-Q).</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>
