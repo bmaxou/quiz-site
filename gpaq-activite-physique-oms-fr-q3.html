@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GPAQ : Activité physique (OMS)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #32857E;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#32857E;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#16413D;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#32857E;background:#E6F4F3;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#16413D;border-color:#E0D9C9;}
+  .btn-primary{background:#32857E;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#32857E;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#16413D;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">GPAQ : Questionnaire mondial sur la pratique d&#x27;activités physiques</h1>
+    <p class="lead">16 questions sur vos activités physiques d'une semaine typique (travail, déplacements, loisirs) et sur le temps passé assis. Résultat : MET-minutes par semaine et recommandations de l'OMS.</p>
+    <p class="consigne">Je vais maintenant vous poser quelques questions sur le temps que vous consacrez à différents types d’activité physique lors d’une semaine typique. Veuillez répondre à ces questions même si vous ne vous considérez pas comme quelqu’un d’actif. Pensez tout d’abord au temps que vous y consacrez lors de vos études ou au travail, qu’il s’agisse d’un travail rémunéré ou non, de tâches ménagères, de cueillir ou récolter des aliments, de pêcher ou chasser, de chercher un emploi […]. Dans les questions suivantes, les activités physiques de forte intensité sont des activités nécessitant un effort physique important et causant une augmentation conséquente de la respiration ou du rythme cardiaque, et les activités physiques d’intensité modérée sont des activités qui demandent un effort physique modéré et causant une petite augmentation de la respiration ou du rythme cardiaque.</p>
+    <p class="lang-note">Questions en français (annexe d'une thèse d'université française). Toutes les questions sont posées : pour une activité non pratiquée, saisissez 0 aux questions de jours et de durée. Licence : incertaine.</p>
+    <div class="pill-row">
+      <span class="pill">16 questions</span>
+      <span class="pill">Oui/Non, jours, durées</span>
+      <span class="pill">Résultat en MET-minutes</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Organisation mondiale de la santé (2012), guide d'analyse du GPAQ ; Rivière et al. (2018), J Sport Health Sci, 7(3), 339-345. Outil d'auto-évaluation : ne remplace pas un avis médical.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["Partie 1 : Activités au travail ou lors de vos études\n\nEst-ce que votre travail ou vos études impliquent des activités physiques de forte intensité qui nécessitent une augmentation conséquente de la respiration ou du rythme cardiaque pendant au moins 10 minutes d’affilée ?", "Habituellement, combien de jours par semaine effectuez-vous des activités de forte intensité dans le cadre de votre travail ou de vos études ?", "Lors d’une journée habituelle durant laquelle vous effectuez des activités physiques de forte intensité, combien de temps consacrez-vous à ces activités ?", "Est-ce que votre travail ou vos études impliquent des activités physiques d’intensité modérée, comme une marche rapide durant au moins 10 minutes ?", "Habituellement, combien de jours par semaine effectuez-vous des activités physiques d’intensité modérée dans le cadre de votre travail ou de vos études ?", "Lors d’une journée habituelle durant laquelle vous effectuez des activités physiques d’intensité modérée, combien de temps consacrez-vous à ces activités ?", "Partie 2 : Se déplacer d’un endroit à l’autre\n\nLes questions suivantes excluent les activités physiques dans le cadre de votre travail ou de vos études, que vous avez déjà mentionnées. Maintenant, je voudrais connaître votre façon habituelle de vous déplacer d’un endroit à l’autre ; par exemple pour aller au travail, sur votre lieu d’études, faire des courses, aller au marché, aller à votre lieu consacré au culte.\n\nEst-ce que vous effectuez des trajets d’au moins 10 minutes à pied ou à vélo ?", "Habituellement, combien de jours par semaine effectuez-vous des trajets d’au moins 10 minutes à pied ou à vélo ?", "Lors d’une journée habituelle, combien de temps consacrez-vous à vos déplacements à pied ou à vélo ?", "Partie 3 : Activités de loisirs\n\nLes questions suivantes excluent les activités liées au travail ou à vos études et aux déplacements que vous avez déjà mentionnées. Maintenant, je souhaiterais vous poser des questions sur le sport, le fitness et les activités de loisirs.\n\nEst-ce que vous pratiquez des sports, du fitness ou des activités de loisirs de forte intensité qui nécessitent une augmentation importante de la respiration ou du rythme cardiaque comme pendant au moins 10 minutes d’affilée ?", "Habituellement, combien de jours par semaine pratiquez-vous une activité sportive, du fitness ou d’autres activités de loisirs de forte intensité ?", "Lors d’une journée habituelle, combien de temps y consacrez-vous ?", "Est-ce que vous pratiquez des sports du fitness ou des activités de loisirs d’intensité modérée qui nécessitent une petite augmentation de la respiration ou du rythme cardiaque pendant au moins 10 minutes d’affilée ?", "Habituellement, combien de jours par semaine pratiquez-vous une activité sportive, du fitness ou d’autres activités de loisirs d’intensité modérée ?", "Lors d’une journée habituelle, combien de temps y consacrez-vous ?", "Partie 4 : Comportement sédentaire\n\nLa question suivante concerne le temps passé en position assise ou couchée, au travail, à la maison, en déplacement, à rendre visite à des amis, et inclut le temps passé mais n’inclut pas le temps passé à dormir.\n\nCombien de temps passez-vous en position assise ou couchée lors d’une journée habituelle ?"];
+  var G = [];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = [[{"label": "", "opts": ["Oui", "Non"], "vals": [1, 0]}], [{"label": "Nombre de jours", "type": "num", "min": 0, "max": 7}], [{"label": "Heures", "type": "num", "min": 0, "max": 16}, {"label": "Minutes", "type": "num", "min": 0, "max": 59}], [{"label": "", "opts": ["Oui", "Non"], "vals": [1, 0]}], [{"label": "Nombre de jours", "type": "num", "min": 0, "max": 7}], [{"label": "Heures", "type": "num", "min": 0, "max": 16}, {"label": "Minutes", "type": "num", "min": 0, "max": 59}], [{"label": "", "opts": ["Oui", "Non"], "vals": [1, 0]}], [{"label": "Nombre de jours", "type": "num", "min": 0, "max": 7}], [{"label": "Heures", "type": "num", "min": 0, "max": 16}, {"label": "Minutes", "type": "num", "min": 0, "max": 59}], [{"label": "", "opts": ["Oui", "Non"], "vals": [1, 0]}], [{"label": "Nombre de jours", "type": "num", "min": 0, "max": 7}], [{"label": "Heures", "type": "num", "min": 0, "max": 16}, {"label": "Minutes", "type": "num", "min": 0, "max": 59}], [{"label": "", "opts": ["Oui", "Non"], "vals": [1, 0]}], [{"label": "Nombre de jours", "type": "num", "min": 0, "max": 7}], [{"label": "Heures", "type": "num", "min": 0, "max": 16}, {"label": "Minutes", "type": "num", "min": 0, "max": 59}], [{"label": "Heures", "type": "num", "min": 0, "max": 23}, {"label": "Minutes", "type": "num", "min": 0, "max": 59}]];              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    function fmt(x, d){ var f = Math.pow(10, d); return (Math.floor(x * f + 0.5 + 1e-9) / f).toFixed(d).replace('.', ','); }
+    var DOM = [{"l": "Travail ou études, activités intenses", "y": 1, "d": 2, "t": 3, "met": 8}, {"l": "Travail ou études, activités modérées", "y": 4, "d": 5, "t": 6, "met": 4}, {"l": "Déplacements à pied ou à vélo", "y": 7, "d": 8, "t": 9, "met": 4}, {"l": "Loisirs, activités intenses", "y": 10, "d": 11, "t": 12, "met": 8}, {"l": "Loisirs, activités modérées", "y": 13, "d": 14, "t": 15, "met": 4}];
+    function dm(k){ return answers[k-1][0] * 60 + answers[k-1][1]; }
+    var tot = 0, mins = 0, rows = '';
+    var parts = [];
+    DOM.forEach(function(D){
+      var m = answers[D.y-1][0] === 1 ? answers[D.d-1][0] * dm(D.t) : 0;
+      mins += m; tot += m * D.met; parts.push(m * D.met);
+    });
+    rows += row('Activité physique totale (MET-minutes par semaine)', String(tot));
+    DOM.forEach(function(D, i){ rows += row(D.l + ' (MET-minutes par semaine)', String(parts[i])); });
+    rows += row('Durée totale d\u2019activité physique (minutes par semaine)', String(mins));
+    rows += row('Activité physique moyenne par jour (minutes)', fmt(mins / 7, 1));
+    rows += row('Temps assis ou couché par jour habituel (minutes)', String(dm(16)));
+    rows += row('Recommandations de l\u2019OMS (au moins 600 MET-minutes par semaine)', tot >= 600 ? 'Atteintes' : 'Non atteintes');
+    html += '<table class="result-table">' + rows + '</table>';
+    html += '<p class="result-text">Les durées d\u2019activité sont comptées pour zéro quand la réponse à la question oui/non est « Non ». Les MET-minutes sont obtenues en multipliant jours par minutes par la valeur MET (8 pour une activité intense, 4 pour une activité modérée ou un déplacement). Le seuil de 600 MET-minutes est la recommandation de l\u2019OMS pour les adultes ; ce résultat ne remplace pas un avis médical.</p>';
+
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GPAQ : Activité physique (OMS)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#358D85 0%,#B5E3DF 55%,#16413D 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#16413D;background:#E6F4F3;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #32857E;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#32857E;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#16413D;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">GPAQ</span></div>
+
+  <h1 class="serif">Global Physical Activity Questionnaire (GPAQ), version française</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">GPAQ : Organisation mondiale de la santé (version 2) ; version française : Rivière, Widad, Speyer, Erpelding, Escalon et Vuillemin (2018).</p>
+  <div class="meta-row">
+    <span class="pill">16 questions</span>
+    <span class="pill">Oui/Non, jours, durées</span>
+    <span class="pill">Résultat en MET-minutes</span>
+    <span class="pill">Français</span>
+    <span class="pill">Activité physique · Sédentarité</span>
+    <span class="pill">Licence : incertaine</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="gpaq-activite-physique-oms-fr-q3.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>Le GPAQ comprend 16 questions sur la fréquence et la durée de l'activité physique dans trois domaines (au travail ou aux études, dans les déplacements, pendant les loisirs) et sur le temps passé en position assise ou couchée lors d'une semaine habituelle. Il distingue les activités de forte intensité et d'intensité modérée.</p>
+    <p>La version française est celle de Rivière et al. (2018), dont le texte est reproduit dans l'annexe d'une thèse d'université française. Elle a été évaluée dans cet article auprès de 92 participants (étudiants et personnel de l'université de Lorraine).</p>
+    <p class="source-note">Dans le questionnaire papier, une réponse « Non » aux questions oui/non renvoie directement à la partie suivante. Cette page pose toutes les questions ; les durées sont comptées pour zéro quand la réponse oui/non est « Non ».</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Selon le guide d'analyse de l'OMS : MET-minutes par semaine = jours × durée en minutes × MET, pour chacun des cinq domaines (travail intense × 8, travail modéré × 4, déplacements × 4, loisirs intenses × 8, loisirs modérés × 4), puis somme. L'activité moyenne par jour est la durée hebdomadaire totale divisée par 7. Le temps assis ou couché est la réponse à la question 16, en minutes (sommeil exclu).</p>
+    <p>Recommandation de l'OMS pour les adultes : au moins 150 minutes d'activité d'intensité modérée par semaine, ou 75 minutes d'activité intense, ou une combinaison équivalente atteignant au moins 600 MET-minutes. Un total inférieur à 600 correspond à « ne répond pas aux recommandations ».</p>
+    <p class="reserve">Le guide de l'OMS écarte les réponses hors plage (jours de 1 à 7, durée d'au moins 10 minutes et d'au plus 960 minutes par jour d'activité, 1 440 minutes au plus pour le temps assis). La page limite les saisies à des valeurs possibles mais ne retire pas les durées de moins de 10 minutes. Aucun seuil n'est donné pour le temps assis.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Questions lues en français dans l'annexe 4 de la thèse HAL tel-04775422 ; formules et seuil lus dans le guide d'analyse de l'OMS (document anglais) ; description de la validation lue dans l'article de Rivière et al. (2018), en libre accès (licence CC BY-NC-ND).</p>
+    <p class="reserve">Licence incertaine pour l'outil : aucune mention de licence dans le guide d'analyse ni dans l'annexe lus.</p>
+    <p class="reserve">Étalonnage : le seuil de 600 MET-minutes est une recommandation internationale ; l'article français ne donne que des moyennes, écarts-types et médianes d'un petit échantillon (92 personnes), sans centiles ni classes.</p>
+    <p class="source-note">World Health Organization (2012). Global Physical Activity Questionnaire (GPAQ) Analysis Guide. Geneva. Rivière F, Widad FZ, Speyer E, Erpelding M-L, Escalon H, Vuillemin A. Reliability and validity of the French version of the global physical activity questionnaire. J Sport Health Sci. 2018;7(3):339-345. https://doi.org/10.1016/j.jshs.2016.08.004</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CRSS-Fr : rumination et distraction face à la tristesse</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #327E85;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#327E85;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#163D41;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#327E85;background:#E6F3F4;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#163D41;border-color:#E0D9C9;}
+  .btn-primary{background:#327E85;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#327E85;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#163D41;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">CRSS-Fr : styles de réponse face à la tristesse (enfants)</h1>
+    <p class="lead">20 phrases sur ce que l'on fait ou pense quand on se sent triste. Réponses de 0 (« Jamais ») à 10 (« Toujours »). Version validée auprès d'enfants de 8 à 11 ans.</p>
+    <p class="consigne">Pour chaque phrase, indiquez de 0 (« Jamais ») à 10 (« Toujours ») à quelle fréquence cela correspond à ce qui se passe quand vous vous sentez triste.</p>
+    <p class="lang-note">Questions en français (traduction puis rétro-traduction), avec graphies inclusives conservées. Licence : incertaine.</p>
+    <div class="pill-row">
+      <span class="pill">20 questions</span>
+      <span class="pill">4 minutes</span>
+      <span class="pill">0 à 10</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Le Van et coll. (2021, Neuropsychiatrie de l'Enfance et de l'Adolescence, 69(2), 105-111, HAL hal-04200800). Outil d'auto-évaluation : ne remplace pas un entretien clinique ni un bilan.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["Quand je me sens triste, je repense aux autres moments où je me suis déjà senti.e comme ça", "Quand je me sens triste, je pense à ce que j’aurais dû faire différemment", "Quand je me sens triste, je pense à quelque chose que j’ai fait il n’y a pas longtemps et qui était très amusant", "Quand je me sens triste, je reste seul.e, je m’isole et je réfléchis à la raison pour laquelle je me sens comme ça", "Quand je me sens triste, je fais quelque chose que j’aime beaucoup faire", "Quand je me sens triste, je pense « je vais me concentrer sur autre chose que sur ce que je ressens »", "Quand je me sens triste, je vais quelque part seul,e pour penser à mes sentiments, à ce que je ressens", "Quand je me sens triste, je pense « pourquoi je ne peux pas m’arrêter de me sentir comme ça ? »", "Quand je me sens triste, je pense « je vais faire quelque chose pour me sentir mieux »", "Quand je me sens triste, je fais quelque chose qui m’a fait me sentir mieux dans le passé", "Quand je me sens triste, je pense aux autres fois où les choses ne se sont pas passées comme je le voulais", "Quand je me sens triste, je pense à des choses amusantes", "Quand je me sens triste, je pense à ce qui m’a fait me sentir comme ça", "Quand je me sens triste, je me concentre sur quelque chose d’autre qui me rend plus heureu.x.se", "Quand je me sens triste, j’essaye de me changer les idées en faisant quelque chose que j’aime", "Quand je me sens triste, je refais dans ma tête ce qu’il s‘est passé", "Quand je me sens triste, je pense « je vais sortir et m’amuser »", "Quand je me sens triste, je pense à un moment où je me sentais beaucoup plus heureu.x.se", "Quand je me sens triste, je pense à mes sentiments, à ce que je ressens", "Quand je me sens triste, je pense à quelque chose qui vient de se passer, en regrettant que ça ne se soit pas mieux passé"];
+  var G = [{"label": "", "opts": ["0 : Jamais", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10 : Toujours"], "vals": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = null;              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var INV = [], LO = 0, HI = 10;
+    function val(k){ var v = answers[k-1][0]; if (v === 'NA') return null; return INV.indexOf(k) >= 0 ? (LO + HI - v) : v; }
+    function agg(list, m){ var s = 0, n = 0; list.forEach(function(k){ var v = val(k); if (v !== null){ s += v; n++; } }); if (n === 0) return null; return m === 'mean' ? s / n : s; }
+    var BL = [{"l": "Rumination (10 phrases)", "it": [1, 2, 4, 7, 8, 11, 13, 16, 19, 20], "m": "mean", "d": 2, "r": "0 à 10", "x": 1}, {"l": "Distraction (10 phrases)", "it": [3, 5, 6, 9, 10, 12, 14, 15, 17, 18], "m": "mean", "d": 2, "r": "0 à 10", "x": 1}];
+    var res = [], rows = '';
+    BL.forEach(function(b){ var v = agg(b.it, b.m); if (v !== null) v = v * b.x; res.push(v); rows += row(b.l + (b.r ? ' (' + b.r + ')' : ''), v === null ? '-' : v.toFixed(b.d).replace('.', ',')); });
+    html += '<table class=\"result-table\">' + rows + '</table>';
+    html += '<p class=\"result-text\">' + "Chaque score est la moyenne des 10 phrases de la sous-échelle : plus il est élevé, plus la façon de réagir décrite (ressasser ou se distraire) est fréquente quand l'enfant se sent triste. Aucun seuil n'est publié." + '</p>';
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CRSS-Fr : rumination et distraction face à la tristesse</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#35858D 0%,#B5DFE3 55%,#163D41 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#163D41;background:#E6F3F4;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #327E85;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#327E85;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#163D41;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">CRSS-Fr</span></div>
+
+  <h1 class="serif">Échelle des styles de réponses chez les enfants (Children&#x27;s Response Styles Scale, version française)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">CRSS-Fr : Ziegert et Kistner (2002), adaptation française de Le Van et collaborateurs (2021) auprès d'enfants de 8 à 11 ans.</p>
+  <div class="meta-row">
+    <span class="pill">20 questions</span>
+    <span class="pill">4 minutes</span>
+    <span class="pill">0 à 10</span>
+    <span class="pill">Français</span>
+    <span class="pill">Rumination · tristesse</span>
+    <span class="pill">Licence : incertaine</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="crss-fr-styles-de-reponse-tristesse-enfants-q2.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>La Children's Response Styles Scale (Ziegert & Kistner, 2002) évalue la manière dont un enfant réagit à la tristesse : par la rumination (ressasser ce qui s'est passé et ce que l'on ressent) ou par la distraction (penser à autre chose, faire une activité agréable). La version française de 20 phrases a été validée auprès d'enfants de 8 à 11 ans scolarisés en France.</p>
+    <p class="source-note">Chaque phrase commence par « Quand je me sens triste » : le contexte de tristesse fait partie du texte de chaque item. Les graphies inclusives de la source (« senti.e », « heureu.x.se », « seul.e ») sont conservées telles quelles.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque phrase est cotée de 0 (« Jamais ») à 10 (« Toujours »), sans inversion. La page affiche la moyenne des 10 phrases de rumination et celle des 10 phrases de distraction (0 à 10). Plus un score est élevé, plus la façon de réagir correspondante est fréquente.</p>
+    <p class="reserve">Cotation déduite : l'article rapporte des scores moyens de sous-échelle de 0 à 10 mais n'écrit pas la formule ; la moyenne est une déduction. Seuls les extrêmes de la réponse sont libellés dans la source ; les valeurs 1 à 9 sont affichées sans libellé. Aucun seuil publié.</p>
+    <p class="reserve">Repères publiés (échantillon de 144 enfants, sans centiles ni seuils) : rumination, filles 5,83 ± 1,98 et garçons 5,01 ± 2,12 ; distraction, filles 4,49 ± 2,42 et garçons 4,81 ± 2,26 (moyennes ± écarts-types). Ce ne sont pas des normes.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Licence : incertaine. Le manuscrit de l'article déposé sur HAL est placé sous licence CC BY-NC 4.0, ce qui ne vaut pas pour l'échelle elle-même ; aucune permission propre à l'échelle n'a été retrouvée.</p>
+    <p class="reserve">L'annexe de l'article ne reproduit pas de consigne : celle qui est affichée est un libellé de création fondé sur la description de la source. La version française a été validée auprès d'enfants de 8 à 11 ans ; aucune validation chez l'adulte n'a été lue.</p>
+    <p class="source-note">Le Van, F., Zebdi, R., Burgy, S., Souillot, R., Julien-Sweerts, S., & Fouques, D. (2021). Le processus de rumination mentale chez les enfants de 8 à 11 ans : adaptation et validation française de la Children's Response Styles Scale. Neuropsychiatrie de l'Enfance et de l'Adolescence, 69(2), 105-111. Ziegert, D. I., & Kistner, J. A. (2002). Response Styles Theory: Downward Extension to Children. Journal of Clinical Child & Adolescent Psychology, 31(3), 325-334.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

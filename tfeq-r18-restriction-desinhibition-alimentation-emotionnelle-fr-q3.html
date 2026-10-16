@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TFEQ-R18 : Comportement alimentaire</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #855432;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#855432;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#412716;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#855432;background:#F4ECE6;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#412716;border-color:#E0D9C9;}
+  .btn-primary{background:#855432;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#855432;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#412716;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">TFEQ-R18 : Restriction, alimentation incontrôlée, alimentation émotionnelle</h1>
+    <p class="lead">18 questions sur la façon dont vous mangez (contrôle volontaire, perte de contrôle, manger sous l'effet des émotions). Résultat : trois dimensions.</p>
+    <p class="consigne">Pour répondre à ce questionnaire, lisez attentivement chaque question et entourez la réponse que vous considérez comme la plus adaptée à votre situation ; il n&#x27;y a pas de bonne ou de mauvaise réponse. Votre première impression est souvent la meilleure, ne vous attardez pas donc pas trop longtemps sur chaque question.</p>
+    <p class="lang-note">Questions en français (annexe d'une thèse d'université française). Licence : incertaine. Une question (la dix-huitième) se répond sur une échelle de 1 à 8.</p>
+    <div class="pill-row">
+      <span class="pill">18 questions</span>
+      <span class="pill">Réponses de 1 à 4 (une échelle de 1 à 8)</span>
+      <span class="pill">3 dimensions</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Karlsson et al. (2000), Int J Obes, 24(12), 1715-1725 ; de Lauzon et al. (2004), J Nutr, 134(9), 2372-2380. Outil d'auto-évaluation : ne remplace pas un entretien clinique ni un bilan.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["Quand je sens une odeur de grillade ou que je vois un morceau de viande juteux, je trouve très difficile de me retenir de manger, même si je viens de terminer un repas.", "A table, je prends délibérément de petites parts comme moyen de contrôler mon poids.", "Quand je me sens anxieux(se), je me surprends à manger.", "Parfois lorsque je commence à manger, j’ai l’impression que je ne vais pas pouvoir m’arrêter.", "Lorsque je suis avec quelqu’un qui mange, cela me donne souvent assez faim pour manger aussi.", "Quand j’ai le cafard, il m’arrive souvent de manger trop.", "La vue d’un aliment appétissant me donne souvent tellement faim que je suis obligé(e) de manger tout de suite.", "J’ai si faim que j’ai souvent l’impression que mon estomac est un puits sans fond.", "Comme j’ai toujours faim, il m’est difficile d’arrêter de manger avant d’avoir terminé mon assiette.", "Lorsque je me sens seul(e), je me console en mangeant.", "A table, je me retiens volontairement de manger pour ne pas prendre de poids.", "J’évite de manger certains aliments car ils me font grossir.", "J’ai toujours assez faim pour manger à n’importe quelle heure.", "A quels moments avez-vous une sensation de faim ?", "Vous arrive-t-il d’éviter de « faire des provisions » d’aliments qui vous tentent ?", "Avez-vous tendance à manger volontairement moins que vous n’en avez envie ?", "Vous arrive-t-il de vous « empiffrer » bien que vous n’ayez pas faim ?", "Sur une échelle allant de 1 à 8, où 1 signifie « pas de restriction du tout » sur l’alimentation (vous mangez tout ce que vous voulez, quand vous voulez) et 8 signifie « une restriction importante » (vous limitez en permanence la prise alimentaire sans jamais craquer), quel chiffre donnez-vous ?"];
+  var G = [];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = [[{"label": "", "opts": ["Entièrement vrai", "Assez vrai", "Assez faux", "Complètement faux"], "vals": [4, 3, 2, 1]}], [{"label": "", "opts": ["Entièrement vrai", "Assez vrai", "Assez faux", "Complètement faux"], "vals": [4, 3, 2, 1]}], [{"label": "", "opts": ["Entièrement vrai", "Assez vrai", "Assez faux", "Complètement faux"], "vals": [4, 3, 2, 1]}], [{"label": "", "opts": ["Entièrement vrai", "Assez vrai", "Assez faux", "Complètement faux"], "vals": [4, 3, 2, 1]}], [{"label": "", "opts": ["Entièrement vrai", "Assez vrai", "Assez faux", "Complètement faux"], "vals": [4, 3, 2, 1]}], [{"label": "", "opts": ["Entièrement vrai", "Assez vrai", "Assez faux", "Complètement faux"], "vals": [4, 3, 2, 1]}], [{"label": "", "opts": ["Entièrement vrai", "Assez vrai", "Assez faux", "Complètement faux"], "vals": [4, 3, 2, 1]}], [{"label": "", "opts": ["Entièrement vrai", "Assez vrai", "Assez faux", "Complètement faux"], "vals": [4, 3, 2, 1]}], [{"label": "", "opts": ["Entièrement vrai", "Assez vrai", "Assez faux", "Complètement faux"], "vals": [4, 3, 2, 1]}], [{"label": "", "opts": ["Entièrement vrai", "Assez vrai", "Assez faux", "Complètement faux"], "vals": [4, 3, 2, 1]}], [{"label": "", "opts": ["Entièrement vrai", "Assez vrai", "Assez faux", "Complètement faux"], "vals": [4, 3, 2, 1]}], [{"label": "", "opts": ["Entièrement vrai", "Assez vrai", "Assez faux", "Complètement faux"], "vals": [4, 3, 2, 1]}], [{"label": "", "opts": ["Entièrement vrai", "Assez vrai", "Assez faux", "Complètement faux"], "vals": [4, 3, 2, 1]}], [{"label": "", "opts": ["Uniquement à l’heure des repas", "Parfois entre les repas", "Souvent entre les repas", "Presque tout le temps"], "vals": [1, 2, 3, 4]}], [{"label": "", "opts": ["Presque jamais", "Rarement", "Souvent", "Presque toujours"], "vals": [1, 2, 3, 4]}], [{"label": "", "opts": ["Pas du tout", "Un peu", "Modérément", "Fortement"], "vals": [1, 2, 3, 4]}], [{"label": "", "opts": ["Jamais", "Rarement", "Parfois", "Souvent"], "vals": [1, 2, 3, 4]}], [{"label": "", "opts": ["1", "2", "3", "4", "5", "6", "7", "8"], "vals": [1, 2, 3, 4, 5, 6, 7, 8]}]];              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    function fmt(x, d){ var f = Math.pow(10, d); return (Math.floor(x * f + 0.5 + 1e-9) / f).toFixed(d).replace('.', ','); }
+    var RI = 18;
+    function v(k){ var a = answers[k-1][0]; return k === RI ? Math.ceil(a / 2) : a; }
+    var S = [{"l": "Restriction cognitive", "it": [2, 11, 12, 15, 16, 18]}, {"l": "Alimentation incontrôlée", "it": [1, 4, 5, 7, 8, 9, 13, 14, 17]}, {"l": "Alimentation émotionnelle", "it": [3, 6, 10]}];
+    var rows = '';
+    S.forEach(function(s){
+      var sum = 0; s.it.forEach(function(k){ sum += v(k); }); var n = s.it.length;
+      rows += row(s.l + ' : score brut (' + n + ' à ' + (4 * n) + ')', String(sum));
+      rows += row(s.l + ' : score moyen (1 à 4)', fmt(sum / n, 2));
+      rows += row(s.l + ' : note de 0 à 100', fmt((sum - n) / (3 * n) * 100, 1));
+    });
+    html += '<table class="result-table">' + rows + '</table>';
+    html += '<p class="result-text">Plus le score est élevé dans une dimension, plus la tendance correspondante est marquée. Aucun seuil d\u2019interprétation n\u2019est donné dans les sources : ces scores décrivent des manières de manger et n\u2019indiquent pas un trouble.</p>';
+
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TFEQ-R18 : Comportement alimentaire</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#8D5835 0%,#E3C7B5 55%,#412716 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#412716;background:#F4ECE6;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #855432;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#855432;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#412716;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">TFEQ-R18</span></div>
+
+  <h1 class="serif">Three-Factor Eating Questionnaire, forme révisée à 18 items (TFEQ-R18)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">TFEQ-R18 : Karlsson, Persson, Sjöström et Sullivan (2000) ; version française : de Lauzon, Romon, Deschamps, Lafay, Borys, Karlsson, Ducimetière et Charles (2004).</p>
+  <div class="meta-row">
+    <span class="pill">18 questions</span>
+    <span class="pill">Réponses de 1 à 4 (une échelle de 1 à 8)</span>
+    <span class="pill">3 dimensions</span>
+    <span class="pill">Français</span>
+    <span class="pill">Alimentation · Comportement alimentaire</span>
+    <span class="pill">Licence : incertaine</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="tfeq-r18-restriction-desinhibition-alimentation-emotionnelle-fr-q3.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>Le TFEQ-R18 est la forme révisée à 18 items du Three-Factor Eating Questionnaire de Stunkard et Messick (1985). Il décrit trois aspects du comportement alimentaire : la <b>restriction cognitive</b> (6 items : contrôle volontaire de la prise alimentaire), l'<b>alimentation incontrôlée</b> ou désinhibition (9 items) et l'<b>alimentation émotionnelle</b> (3 items).</p>
+    <p>La version française est celle de de Lauzon et al. (2004), établie dans l'étude Fleurbaix-Laventie Ville Santé II auprès d'une population générale du nord de la France. Treize questions se répondent de « Entièrement vrai » à « Complètement faux » ; quatre ont des réponses propres ; la dernière est une note de 1 à 8.</p>
+    <p class="source-note">Le texte reproduit ici est celui de l'annexe d'une thèse d'université française (2023) qui utilise ce questionnaire.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Items 1 à 13 : « Entièrement vrai » = 4, « Assez vrai » = 3, « Assez faux » = 2, « Complètement faux » = 1 ; items 14 à 17 : de 1 à 4 selon la position de la réponse (dans l'ordre affiché) ; item 18 (échelle de 1 à 8) : recodé 1-2 = 1, 3-4 = 2, 5-6 = 3, 7-8 = 4. Restriction cognitive : items 2, 11, 12, 15, 16, 18 (6 à 24). Alimentation incontrôlée : items 1, 4, 5, 7, 8, 9, 13, 14, 17 (9 à 36). Alimentation émotionnelle : items 3, 6, 10 (3 à 12).</p>
+    <p>La page affiche, pour chaque dimension, le score brut (somme), le score moyen (somme divisée par le nombre d'items) et une note de 0 à 100 : restriction (RC − 6)/18 × 100 ; alimentation incontrôlée (UE − 9)/27 × 100 ; alimentation émotionnelle (EE − 3)/9 × 100. Plus le score est élevé, plus la tendance est marquée.</p>
+    <p class="reserve">Aucun seuil d'interprétation n'est donné dans les sources lues. Pour l'item 18, l'annexe de la thèse dit d'attribuer la note choisie (1 à 8), mais le score de restriction dépasserait alors son maximum : la page applique le recodage de l'article de de Lauzon et al. (2004).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Énoncés, réponses et cotation lus dans l'annexe 4 de la thèse HAL tel-04775422 et recoupés avec la thèse tel-02533709 (15 premiers items) et avec l'article de de Lauzon et al. (2004) reproduit dans la thèse tel-04666254. Les libellés de réponse des items 16 et 17 ne sont pas la traduction littérale des options anglaises de l'article : les libellés français lus sont conservés.</p>
+    <p class="reserve">Licence incertaine : aucune mention de permission d'utilisation n'a été retrouvée dans les documents lus.</p>
+    <p class="reserve">Étalonnage : aucune norme avec centiles ou seuils n'a été trouvée. Dans l'article de de Lauzon et al. (2004), les notes moyennes de 0 à 100 d'adultes de la population générale du nord de la France sont, pour les femmes (n = 284), de 39 (restriction), 27 (incontrôlée) et 43 (émotionnelle) et, pour les hommes (n = 236), de 22, 26 et 22.</p>
+    <p class="source-note">Karlsson J, Persson LO, Sjöström L, Sullivan M. Int J Obes Relat Metab Disord. 2000;24(12):1715-1725. de Lauzon B, et al. J Nutr. 2004;134(9):2372-2380. Stunkard AJ, Messick S. J Psychosom Res. 1985;29(1):71-83.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

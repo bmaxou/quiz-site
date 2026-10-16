@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VVIQ-F : Vivacité de l&#x27;imagerie visuelle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #857532;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#857532;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#413816;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#857532;background:#F4F1E6;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#413816;border-color:#E0D9C9;}
+  .btn-primary{background:#857532;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#857532;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#413816;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">VVIQ-F : Questionnaire sur la vivacité de l&#x27;imagerie visuelle</h1>
+    <p class="lead">16 images mentales à évoquer, d'abord les yeux ouverts, puis les yeux fermés (32 réponses). Pour chacune, choisissez le niveau de netteté de l'image, de « Aucune image n’est visible » à « parfaitement nette ».</p>
+    <p class="consigne">Grâce au tableau ci-dessous, vous allez explorer le niveau de vivacité de l’image mentale évoquée par chaque proposition au moyen d’une échelle en 5 points. Vous allez explorer les images mentales obtenues selon deux modalités : yeux ouverts (YO) et yeux fermés (YF). Exécutez bien toutes les propositions. Essayez de faire chaque item du questionnaire sans être influencé par l’item précédent.</p>
+    <p class="lang-note">Questions en français (traduction de 2007 reproduite dans un mémoire). Licence : incertaine.</p>
+    <div class="pill-row">
+      <span class="pill">32 réponses</span>
+      <span class="pill">Quelques minutes</span>
+      <span class="pill">5 niveaux de réponse</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Marks (1973), Br J Psychol ; Santarpia et Poinsot (2007) ; Bendani (2026), mémoire. Outil d'auto-évaluation : il ne remplace pas un bilan.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["Yeux ouverts : Imaginez attentivement un(e) ami(e) que vous voyez fréquemment (qui n’est pas présent(e) en ce moment) :\n\nLe contour exact de son visage, de sa tête, de ses épaules et de son corps :", "Yeux ouverts : Imaginez attentivement un(e) ami(e) que vous voyez fréquemment (qui n’est pas présent(e) en ce moment) :\n\nLes positions de sa tête, les postures de son corps, etc. :", "Yeux ouverts : Imaginez attentivement un(e) ami(e) que vous voyez fréquemment (qui n’est pas présent(e) en ce moment) :\n\nSa démarche précise, la longueur de ses pas, etc. lorsqu’il (elle) marche :", "Yeux ouverts : Imaginez attentivement un(e) ami(e) que vous voyez fréquemment (qui n’est pas présent(e) en ce moment) :\n\nLes différentes couleurs de certains de ses vêtements habituels :", "Yeux ouverts : Imaginez le lever du soleil. Analysez attentivement l’image qui apparaît :\n\nLe soleil se lève à l’horizon dans un ciel brumeux :", "Yeux ouverts : Imaginez le lever du soleil. Analysez attentivement l’image qui apparaît :\n\nLe ciel s’éclaircit et entoure le soleil de bleu :", "Yeux ouverts : Imaginez le lever du soleil. Analysez attentivement l’image qui apparaît :\n\nNuages. Une tempête éclate avec des éclairs:", "Yeux ouverts : Imaginez le lever du soleil. Analysez attentivement l’image qui apparaît :\n\nUn arc-en-ciel apparaît:", "Yeux ouverts : Imaginez un magasin dans lequel vous allez souvent. Analysez en détail l’image qui vous vient à l’esprit :\n\nLa devanture du magasin qui se trouve de l’autre côté de la rue :", "Yeux ouverts : Imaginez un magasin dans lequel vous allez souvent. Analysez en détail l’image qui vous vient à l’esprit :\n\nUne vitrine avec les couleurs, la forme et les détails des articles en vente :", "Yeux ouverts : Imaginez un magasin dans lequel vous allez souvent. Analysez en détail l’image qui vous vient à l’esprit :\n\nVous êtes proche de l’entrée. La couleur, la forme et les détails de la porte :", "Yeux ouverts : Imaginez un magasin dans lequel vous allez souvent. Analysez en détail l’image qui vous vient à l’esprit :\n\nVous entrez dans le magasin et vous allez vers la caisse. Le commerçant vous sert. Vous lui donnez l’argent qu’il prend :", "Yeux ouverts : Imaginez une scène de campagne avec des arbres, des montagnes, un lac. Analysez, en détail, les images que vous visualisez en esprit :\n\nLes contours du paysage :", "Yeux ouverts : Imaginez une scène de campagne avec des arbres, des montagnes, un lac. Analysez, en détail, les images que vous visualisez en esprit :\n\nLa couleur et la forme des arbres:", "Yeux ouverts : Imaginez une scène de campagne avec des arbres, des montagnes, un lac. Analysez, en détail, les images que vous visualisez en esprit :\n\nLa couleur et la forme du lac :", "Yeux ouverts : Imaginez une scène de campagne avec des arbres, des montagnes, un lac. Analysez, en détail, les images que vous visualisez en esprit :\n\nUn vent fort s’abat sur les arbres et sur le lac en produisant des vagues:", "Yeux fermés : Imaginez attentivement l’image d’un(e) ami(e) que vous voyez fréquemment (qui n’est pas présent(e) en ce moment) :\n\nLe contour exact de son visage, de sa tête, de ses épaules et de son corps :", "Yeux fermés : Imaginez attentivement l’image d’un(e) ami(e) que vous voyez fréquemment (qui n’est pas présent(e) en ce moment) :\n\nLes positions de sa tête, les postures de son corps, etc. :", "Yeux fermés : Imaginez attentivement l’image d’un(e) ami(e) que vous voyez fréquemment (qui n’est pas présent(e) en ce moment) :\n\nSa démarche précise, la longueur de ses pas, etc. lorsqu’il (elle) marche :", "Yeux fermés : Imaginez attentivement l’image d’un(e) ami(e) que vous voyez fréquemment (qui n’est pas présent(e) en ce moment) :\n\nLes différentes couleurs de certains de ses vêtements habituels :", "Yeux fermés : Imaginez le lever du soleil. Analysez attentivement l’image qui apparaît :\n\nLe soleil se lève à l’horizon dans un ciel brumeux :", "Yeux fermés : Imaginez le lever du soleil. Analysez attentivement l’image qui apparaît :\n\nLe ciel s’éclaircit et entoure le soleil de bleu :", "Yeux fermés : Imaginez le lever du soleil. Analysez attentivement l’image qui apparaît :\n\nNuages. Une tempête éclate avec des éclairs:", "Yeux fermés : Imaginez le lever du soleil. Analysez attentivement l’image qui apparaît :\n\nUn arc-en-ciel apparaît:", "Yeux fermés : Imaginez un magasin dans lequel vous allez souvent. Analysez en détail l’image qui vous vient à l’esprit :\n\nLa devanture du magasin qui se trouve de l’autre côté de la rue :", "Yeux fermés : Imaginez un magasin dans lequel vous allez souvent. Analysez en détail l’image qui vous vient à l’esprit :\n\nUne vitrine avec les couleurs, la forme et les détails des articles en vente :", "Yeux fermés : Imaginez un magasin dans lequel vous allez souvent. Analysez en détail l’image qui vous vient à l’esprit :\n\nVous êtes proche de l’entrée. La couleur, la forme et les détails de la porte :", "Yeux fermés : Imaginez un magasin dans lequel vous allez souvent. Analysez en détail l’image qui vous vient à l’esprit :\n\nVous entrez dans le magasin et vous allez vers la caisse. Le commerçant vous sert. Vous lui donnez l’argent qu’il prend :", "Yeux fermés : Imaginez une scène de campagne avec des arbres, des montagnes, un lac. Analysez, en détail, les images que vous visualisez en esprit :\n\nLes contours du paysage :", "Yeux fermés : Imaginez une scène de campagne avec des arbres, des montagnes, un lac. Analysez, en détail, les images que vous visualisez en esprit :\n\nLa couleur et la forme des arbres:", "Yeux fermés : Imaginez une scène de campagne avec des arbres, des montagnes, un lac. Analysez, en détail, les images que vous visualisez en esprit :\n\nLa couleur et la forme du lac :", "Yeux fermés : Imaginez une scène de campagne avec des arbres, des montagnes, un lac. Analysez, en détail, les images que vous visualisez en esprit :\n\nUn vent fort s’abat sur les arbres et sur le lac en produisant des vagues:"];
+  var G = [{"label": "", "opts": ["Aucune image n’est visible.", "L’image est vague et imprécise.", "L’image est moyennement nette et vive.", "L’image est relativement nette, presque aussi précise et vive qu’une perception.", "L’image est parfaitement nette, aussi précise et vive qu’une véritable perception."], "vals": [1, 2, 3, 4, 5]}];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = null;              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var INV = [], LO = 1, HI = 5;
+    function val(k){ var v = answers[k-1][0]; if (v === 'NA') return null; return INV.indexOf(k) >= 0 ? (LO + HI - v) : v; }
+    function agg(list, m){ var s = 0, n = 0; list.forEach(function(k){ var v = val(k); if (v !== null){ s += v; n++; } }); if (n === 0) return null; return m === 'mean' ? s / n : s; }
+    var BL = [{"l": "Total yeux ouverts (items 1 à 16)", "it": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16], "m": "sum", "d": 0, "r": "16 à 80", "x": 1}, {"l": "Total yeux fermés (items 17 à 32)", "it": [17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32], "m": "sum", "d": 0, "r": "16 à 80", "x": 1}, {"l": "Total des deux passations", "it": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32], "m": "sum", "d": 0, "r": "32 à 160", "x": 1}];
+    var res = [], rows = '';
+    BL.forEach(function(b){ var v = agg(b.it, b.m); if (v !== null) v = v * b.x; res.push(v); rows += row(b.l + (b.r ? ' (' + b.r + ')' : ''), v === null ? '-' : v.toFixed(b.d).replace('.', ',')); });
+    html += '<table class=\"result-table\">' + rows + '</table>';
+    html += '<p class=\"result-text\">' + "Un total plus élevé correspond à des images mentales évaluées comme plus vives. Ces totaux ne sont pas un diagnostic ; ils ne sont pas comparés à des seuils." + '</p>';
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VVIQ-F : Vivacité de l&#x27;imagerie visuelle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#8D7B35 0%,#E3DAB5 55%,#413816 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#413816;background:#F4F1E6;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #857532;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#857532;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#413816;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">VVIQ-F</span></div>
+
+  <h1 class="serif">Vividness of Visual Imagery Questionnaire, version française (VVIQ-F)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">VVIQ-F : Marks (1973) ; traduction française de Santarpia et Poinsot (2007), reproduite en annexe du mémoire de Bendani (2026).</p>
+  <div class="meta-row">
+    <span class="pill">32 réponses</span>
+    <span class="pill">Quelques minutes</span>
+    <span class="pill">5 niveaux de réponse</span>
+    <span class="pill">Français</span>
+    <span class="pill">Imagerie mentale</span>
+    <span class="pill">Licence : incertaine</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="vviq-f-vivacite-imagerie-visuelle-q5.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>Le Vividness of Visual Imagery Questionnaire (VVIQ) a été élaboré en 1973 par David F. Marks. Il comprend 16 items invitant à visualiser quatre aspects de quatre représentations (un proche, un lever de soleil, la devanture d'un magasin, un paysage de campagne), et à estimer la vivacité de l'image mentale par rapport à une vision réelle, sur cinq niveaux. Il est passé une première fois les yeux ouverts, puis les yeux fermés.</p>
+    <p class="source-note">Sur cette page, chaque proposition est précédée de la modalité (yeux ouverts ou fermés) et de l'amorce de son bloc, afin d'être compréhensible isolément.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque réponse vaut de 1 (aucune image n'est visible) à 5 (image parfaitement nette, aussi vive qu'une véritable perception). Le total de chaque passation (16 items) va de 16 à 80 ; un total plus élevé correspond à une image évaluée comme plus vive. Le total des deux passations (32 à 160) est également affiché.</p>
+    <p class="reserve">Le VVIQ n'a pas été conçu comme un test diagnostique, d'après le mémoire dont provient le texte. Ce mémoire rapporte plusieurs repères de la littérature pour l'aphantasie (absence d'image : score minimal de 16 ; imagerie minimale ou faible : de 17 à 30 ou 32 ; autre étude : aphantasie de 16 à 23 sur 80, vivacité moyenne de 55 à 60 sur 80, hyperphantasie de 75 à 80 sur 80) et souligne l'absence de consensus entre les critères. Ces repères sont cités à titre d'information et ne sont pas appliqués ici ; aucune norme française n'a été trouvée.</p>
+    <p class="reserve">Le total des deux passations est un cumul proposé par cette page, sans source de cotation lue.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Les items sont transcrits depuis des pages numérisées de l'annexe 2 du mémoire d'orthophonie d'Alia Bendani (2026), relues deux fois. Un artefact de numérisation (« commerc,ant ») a été corrigé et une mention parasite de l'annexe (item 7, yeux fermés) retirée.</p>
+    <p class="reserve">Licence : incertaine. Le mémoire est diffusé sous licence CC BY 4.0, mais la traduction de Santarpia et Poinsot (Université Paris 8, 2007) et le questionnaire de Marks sont des œuvres distinctes ; aucune permission d'auteur n'a été retrouvée.</p>
+    <p class="source-note">Marks DF (1973). Visual imagery differences in the recall of pictures. British Journal of Psychology, 64(1), 17-24. Bendani A (2026). Aphantasie : implications cliniques dans le champ orthophonique. Mémoire, DUMAS dumas-05681872.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

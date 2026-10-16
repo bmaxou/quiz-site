@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SDSCA : Auto-soins du diabète</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #548532;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#548532;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#274116;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#548532;background:#ECF4E6;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#274116;border-color:#E0D9C9;}
+  .btn-primary{background:#548532;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#548532;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#274116;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">SDSCA : Activités d’auto-soins du diabète (7 derniers jours)</h1>
+    <p class="lead">15 questions : le nombre de jours, sur les 7 derniers jours, où vous avez fait chaque geste d’auto-soins (alimentation, activité physique, glycémie, pieds, médicaments). Résultat : un score par domaine.</p>
+
+    <p class="lang-note">Questions en français (version suisse, annexe d’une thèse française). Licence : incertaine. Étalonnage français : aucune norme trouvée.</p>
+    <div class="pill-row">
+      <span class="pill">15 questions</span>
+      <span class="pill">Nombre de jours (0 à 7)</span>
+      <span class="pill">Un score par domaine</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Toobert DJ, Hampson SE, Glasgow RE. Diabetes Care. 2000;23(7):943-950. Outil d’auto-évaluation : ne remplace pas un entretien avec l’équipe soignante.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["Au cours des 7 DERNIERS JOURS, indiquez le nombre de jours où vous avez eu une alimentation saine et équilibrée.", "En moyenne, dans le dernier mois, indiquez le nombre de JOURS PAR SEMAINE où vous avez eu une alimentation saine et équilibrée.", "Au cours des 7 DERNIERS JOURS, indiquez le nombre de jours où vous avez mangé au moins cinq portions de fruits et/ou de légumes.", "Au cours des 7 DERNIERS JOURS, indiquez le nombre de jours où vous avez mangé des produits riches en matières grasses, comme de la viande rouge ou des produits laitiers riches en matières grasses. **", "Au cours des 7 DERNIERS JOURS, indiquez le nombre de jours où vous avez réparti votre apport glucidique également durant la journée.", "Au cours des 7 DERNIERS JOURS, indiquez le nombre de jours où vous avez pratiqué une activité physique pendant au moins 30 minutes (nombre total de minutes d'activité physique continue, incluant la marche).", "Au cours des 7 DERNIERS JOURS, indiquez le nombre de jours où vous avez participé à une session d'exercice déterminée (comme la natation, la marche, la bicyclette) autre que l'exercice pratiqué dans le cadre de vos activités quotidiennes à la maison ou au travail.", "Au cours des 7 DERNIERS JOURS, indiquez le nombre de jours où vous avez testé votre glycémie", "Au cours des 7 DERNIERS JOURS, indiquez le nombre de jours où vous avez testé votre glycémie le nombre de fois recommandé par un professionnel de la santé.", "Au cours des 7 DERNIERS JOURS, indiquez le nombre de jours où vous avez examiné vos pieds.", "Au cours des 7 DERNIERS JOURS, indiquez le nombre de jours où vous avez examiné l'intérieur de vos souliers.", "Au cours des 7 DERNIERS JOURS, indiquez le nombre de jours où vous avez lavé vos pieds.", "Au cours des 7 DERNIERS JOURS, indiquez le nombre de jours où vous avez fait un bain de pieds. **", "Au cours des 7 DERNIERS JOURS, indiquez le nombre de jours où vous avez essuyé vos pieds entre les orteils après les avoir lavés.", "Au cours des 7 DERNIERS JOURS, indiquez le nombre de jours où vous avez pris les médicaments recommandés pour le traitement de votre diabète (comprimés et/ou insuline et/ou autre injection)."];
+  var G = [{"label": "", "opts": ["0", "1", "2", "3", "4", "5", "6", "7"], "vals": [0, 1, 2, 3, 4, 5, 6, 7]}];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = null;              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+
+    function rh(sum, n, d){ var p = Math.pow(10, d); return Math.floor((2 * p * sum + n) / (2 * n)); }
+    function fx(r, d){ var p = Math.pow(10, d); var a = String(Math.floor(r / p)); if (d === 0) return a; var f = String(r % p); while (f.length < d) f = '0' + f; return a + ',' + f; }
+    function esc(s){ return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
+
+    function v(k){ var a = answers[k - 1][0]; return (k === 4 || k === 13) ? 7 - a : a; }
+    function mean(list){ var s = 0; list.forEach(function(k){ s += v(k); }); return fx(rh(s, list.length, 1), 1); }
+    var rows = '';
+    rows += row('Alimentation générale : moyenne des items 1 et 2 (de 0 à 7)', mean([1, 2]));
+    rows += row('Alimentation spécifique : moyenne des items 3 et 4, item 4 inversé (de 0 à 7)', mean([3, 4]));
+    rows += row('Alimentation, item 5 : nombre de jours', String(v(5)));
+    rows += row('Activité physique, item 6 : nombre de jours', String(v(6)));
+    rows += row('Activité physique, item 7 : nombre de jours', String(v(7)));
+    rows += row('Test du taux de glycémie : moyenne des items 8 et 9 (de 0 à 7)', mean([8, 9]));
+    rows += row('Soins des pieds de base : moyenne des items 10 et 11 (de 0 à 7)', mean([10, 11]));
+    rows += row('Soins des pieds : moyenne des items 10 à 14, item 13 inversé (de 0 à 7)', mean([10, 11, 12, 13, 14]));
+    rows += row('Médication, item 15 : nombre de jours', String(v(15)));
+    html += '<table class="result-table">' + rows + '</table>';
+    html += '<p class="result-text">' + "Chaque score va de 0 à 7 : il correspond au nombre de jours (ou à la moyenne des nombres de jours) où les gestes décrits ont été faits. Il n’y a pas de score global. Pour les items 4 (aliments riches en matières grasses) et 13 (bain de pieds), le score est inversé (7 moins le nombre de jours), car faire cela est négatif pour une personne diabétique selon la source. Aucun seuil n’est utilisé." + '</p>';
+
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SDSCA : Auto-soins du diabète</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#588D35 0%,#C7E3B5 55%,#274116 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#274116;background:#ECF4E6;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #548532;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#548532;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#274116;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">SDSCA</span></div>
+
+  <h1 class="serif">Summary of Diabetes Self-Care Activities (SDSCA, version de 15 questions)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">SDSCA : Toobert, Hampson et Glasgow (2000) ; version française (Suisse, cohorte CoDiab-VD) reproduite en annexe d’une thèse (Aubert, 2022).</p>
+  <div class="meta-row">
+    <span class="pill">15 questions</span>
+    <span class="pill">Nombre de jours (0 à 7)</span>
+    <span class="pill">Un score par domaine</span>
+    <span class="pill">Français (Suisse)</span>
+    <span class="pill">Diabète · Auto-soins</span>
+    <span class="pill">Licence : incertaine</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="sdsca-autosoins-du-diabete-15-questions-fr-q4.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>Le Summary of Diabetes Self-Care Activities (SDSCA) demande, pour chaque geste d’auto-soins, le nombre de jours où il a été fait : alimentation saine et équilibrée, consommation de fruits et légumes, produits riches en matières grasses, répartition des glucides, activité physique, test de la glycémie, soins des pieds, prise des médicaments. L’échelle d’origine est celle de Toobert, Hampson et Glasgow (2000).</p>
+    <p>Le texte français reproduit ici figure dans l’annexe B de la thèse d’Aubert (Université Paris-Saclay, 2022), qui l’attribue au rapport de la cohorte suisse CoDiab-VD (Zuercher et coll., 2014). Il s’agit d’une formulation suisse en 15 questions, lue dans des tableaux en image.</p>
+    <p class="source-note">Le texte de la thèse parle de « 11 items » alors que l’annexe en affiche 15 : ce sont les 15 questions de l’annexe qui sont reproduites.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Les réponses vont de 0 à 7 (nombre de jours). Selon les notes de l’annexe, il n’y a pas de score global mais un score par dimension : alimentation générale (moyenne des questions 1 et 2), alimentation spécifique (moyenne des questions 3 et 4), test du taux de glycémie (moyenne des questions 8 et 9 de la page), soins des pieds de base (moyenne des deux premières questions des pieds) et soins des pieds (moyenne des cinq questions des pieds). Le score est inversé (7 moins la réponse) pour les questions marquées d’une double astérisque : l’item 4 (aliments gras) et l’item 13 (bain de pieds).</p>
+    <p class="reserve">Aucun score n’est écrit dans la source pour l’activité physique (items 6 et 7) ni pour l’item 5 de l’alimentation : la page les affiche séparément, en nombre de jours. L’item de médication est un score à lui seul. Aucun seuil n’a été lu.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Énoncés lus dans des tableaux en image de l’annexe B de la thèse d’Aubert (2022), HAL tel-03872468, transcrits en deux passes de lecture (110 puis 170 dpi) et relus sur un agrandissement ; cotation lue dans les notes du tableau. L’article de Toobert et coll. (2000) est cité dans la bibliographie de la thèse mais n’a pas été lu.</p>
+    <p class="reserve">Licence incertaine : aucune mention de droits ni de permission d’utilisation n’a été retrouvée dans les documents lus.</p>
+    <p class="reserve">Étalonnage : aucune norme française à centiles ou seuils trouvée. Le rapport suisse cité donne des moyennes par domaine (alimentation générale 5,3 ; spécifique 4,0 ; test de glycémie 4,2 ; soins des pieds 4,6 ; médication 6,9) pour environ 330 personnes ; ce ne sont pas des normes françaises.</p>
+    <p class="source-note">Aubert M. Thèse, Université Paris-Saclay, 2022. HAL tel-03872468. Toobert DJ, Hampson SE, Glasgow RE. Diabetes Care. 2000;23(7):943-950.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

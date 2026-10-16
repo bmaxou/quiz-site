@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PVQ-40 : Valeurs par portrait</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #553285;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#553285;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#281641;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#553285;background:#ECE6F4;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#281641;border-color:#E0D9C9;}
+  .btn-primary{background:#553285;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#553285;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#281641;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">PVQ-40 : Questionnaire des valeurs par portrait</h1>
+    <p class="lead">40 portraits de personnes : dites jusqu'à quel point chacune vous ressemble (de 1 à 6). Résultat : dix valeurs.</p>
+    <p class="consigne">Voici une série de portraits de personnes. Pouvez-vous lire chaque description et dire, pour chacun d&#x27;eux, jusqu&#x27;à quel point cette personne est comme vous ou différente de vous ? Les positions intermédiaires servent à nuancer votre opinion.</p>
+    <p class="lang-note">Questions en français (annexe d'une thèse). Licence : incertaine. Cotation déduite pour un item.</p>
+    <div class="pill-row">
+      <span class="pill">40 portraits</span>
+      <span class="pill">Réponses de 1 à 6</span>
+      <span class="pill">10 valeurs</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Schwartz et al. (2001), Journal of Cross-Cultural Psychology, 32(5) ; Mpouki (2018), thèse, CNAM (HAL tel-04343679). Outil d'auto-évaluation : ne remplace pas un entretien clinique ni un bilan.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["C'est important pour cette personne d'avoir des idées nouvelles et d'être créative. Il/Elle aime faire des choses à sa façon, de manière originale.", "C'est important pour cette personne d'être riche. Il/Elle veut avoir beaucoup d'argent et posséder des choses qui coûtent cher.", "Il/Elle pense que c'est important que tous les hommes du monde soient traités de manière égale. Il/Elle croit que tout le monde devrait avoir les mêmes chances dans la vie.", "Il est très important pour cette personne de montrer ses capacités. Il/Elle veut que les gens admirent ce qu’il/elle fait.", "C'est important pour cette personne de vivre dans un endroit où il/elle se sent en sécurité. Il/Elle évite tout ce qui pourrait le/la mettre en danger.", "Cette personne pense qu'il est important de faire une foule de choses différentes dans sa vie. Il/Elle est toujours à la recherche de nouvelles choses à essayer.", "Il/Elle croit que les gens devraient faire ce qu'on leur dit de faire. Il/elle pense que l’on doit toujours suivre les règles, même si personne ne vous surveille.", "C'est important pour cette personne d'écouter des gens différents de lui/elle. Même si il/elle n'est pas d'accord avec eux, il/elle veut malgré tout les comprendre.", "Cette personne pense qu'il ne faut pas demander plus que ce que l'on a. Il/Elle croit que les gens devraient se contenter de ce qu'ils ont.", "Cette personne recherche toutes les occasions de s'amuser. C'est important pour lui/elle de faire des choses qui lui procurent du plaisir.", "C’est important pour cette personne de décider lui/elle-même de ce qu'elle fait. Il/Elle aime être libre de planifier et de choisir lui/elle-même ses activités.", "C'est très important pour cette personne d'aider les gens qui l’entourent. Il/Elle veut prendre soin de leur bien-être.", "Réussir brillamment est important pour lui/elle. Il/Elle aime impressionner les autres.", "C’est très important pour cette personne que son pays soit en sécurité. Il/Elle pense que l’état doit prendre garde aux menaces venant de l’intérieur comme de l’extérieur.", "Cette personne aime prendre des risques. Il/Elle recherche toujours l'aventure.", "C'est important pour lui/elle de se comporter comme il faut. Il/Elle veut éviter de faire quoi que ce soit que les autres jugeraient incorrect.", "Cette personne aime les responsabilités et dire aux autres ce qu'ils doivent faire. Il/Elle veut que les autres fassent ce qu'il/elle dit.", "C’est important pour cette personne d’être loyal(e) envers ses amis. Il/Elle veut se dévouer à ceux qui sont proches de lui/d’elle.", "Il/Elle est tout à fait convaincue que les gens devraient protéger la nature. Préserver l'environnement est important pour cette personne.", "Etre religieux est important pour lui/elle. Il/Elle fait tout pour être en accord avec ses croyances religieuses.", "C'est important pour cette personne que tout soit propre et organisé. Il/Elle n'aime vraiment pas le désordre.", "Cette personne pense qu'il est important de s'intéresser aux choses. Il/Elle aime être curieux et essaie de comprendre toutes sortes de choses", "Cette personne croit que tous les gens du monde devraient vivre en harmonie. Promouvoir la paix partout dans le monde est importante pour lui/elle.", "Cette personne pense qu'il est important d'être ambitieux/se. Il/elle veut montrer à quel point il/elle est compétent/e.", "Il/Elle pense que c'est mieux de faire les choses de façon traditionnelle. C’est important pour lui/elle de se conformer aux coutumes qu’elle a apprises.", "Profiter des plaisirs de la vie est important pour lui/elle. Il/Elle aime se donner du bon temps.", "C'est important pour cette personne de répondre aux besoins des autres. Il/Elle essaie de soutenir ceux et celles qu'il/elle connaît.", "Il/Elle croit qu'il lui faut toujours montrer du respect à ses parents et aux personnes plus âgées. C'est important pour cette personne d'être obéissante", "Il/Elle veut que tout le monde soit traité de manière juste, même les gens qu'il/elle ne connaît pas. C'est important pour cette personne de protéger les plus faibles dans la société.", "Il/Elle aime les surprises. C'est important pour lui/elle d'avoir une vie passionnante.", "Il/Elle fait tout ce qu’elle peut pour éviter de tomber malade. Rester en bonne santé est très important pour cette personne.", "Progresser dans la vie est très important pour lui/elle. Il/Elle s'efforce de faire mieux que les autres", "Pardonner à ceux qui l'ont blessée est important pour lui/elle. Il/Elle essaie de voir ce qui est bon chez eux et de ne pas avoir de rancune.", "C’est important pour cette personne d’être indépendant(e). Il/Elle aime ne compter que sur lui-même/elle-même.", "C'est important pour lui/elle d'avoir un gouvernement stable. Il/Elle s’inquiète du maintien de l'ordre social.", "C'est important pour cette personne d'être toujours poli(e) avec les autres. Il/Elle essaie de ne jamais déranger ou irriter les autres.", "Il/Elle veut vraiment profiter de la vie. C’est très important pour cette personne de s’amuser.", "C'est important pour lui/elle d'être humble et modeste. Il/Elle essaie de ne pas attirer l'attention sur lui/elle.", "Cette personne veut toujours être celui/celle qui prend les décisions. Il/Elle aime être celui/celle qui dirige.", "C’est important pour cette personne de s'adapter à la nature et de s'y intégrer. Il/Elle croit qu'on ne devrait pas modifier la nature."];
+  var G = [{"label": "Jusqu’à quel point cette personne est-elle comme vous ?", "opts": ["Pas du tout comme moi", "Pas comme moi", "Un petit peu comme moi", "Un peu comme moi", "Comme moi", "Tout à fait comme moi"], "vals": [1, 2, 3, 4, 5, 6]}];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = null;              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var INV = [], LO = 1, HI = 6;
+    function val(k){ var v = answers[k-1][0]; if (v === 'NA') return null; return INV.indexOf(k) >= 0 ? (LO + HI - v) : v; }
+    function agg(list, m){ var s = 0, n = 0; list.forEach(function(k){ var v = val(k); if (v !== null){ s += v; n++; } }); if (n === 0) return null; return m === 'mean' ? s / n : s; }
+    var BL = [{"l": "Universalisme", "it": [3, 8, 19, 23, 29, 40], "m": "mean", "d": 2, "r": "1 à 6", "x": 1}, {"l": "Autonomie", "it": [1, 11, 22, 34], "m": "mean", "d": 2, "r": "1 à 6", "x": 1}, {"l": "Stimulation", "it": [6, 15, 30], "m": "mean", "d": 2, "r": "1 à 6", "x": 1}, {"l": "Hédonisme", "it": [10, 26, 37], "m": "mean", "d": 2, "r": "1 à 6", "x": 1}, {"l": "Accomplissement", "it": [4, 13, 24, 32], "m": "mean", "d": 2, "r": "1 à 6", "x": 1}, {"l": "Pouvoir", "it": [2, 17, 39], "m": "mean", "d": 2, "r": "1 à 6", "x": 1}, {"l": "Sécurité", "it": [5, 14, 21, 31, 35], "m": "mean", "d": 2, "r": "1 à 6", "x": 1}, {"l": "Tradition", "it": [9, 20, 25, 38], "m": "mean", "d": 2, "r": "1 à 6", "x": 1}, {"l": "Conformité", "it": [7, 16, 28, 36], "m": "mean", "d": 2, "r": "1 à 6", "x": 1}, {"l": "Bienveillance", "it": [12, 18, 27, 33], "m": "mean", "d": 2, "r": "1 à 6", "x": 1}];
+    var res = [], rows = '';
+    BL.forEach(function(b){ var v = agg(b.it, b.m); if (v !== null) v = v * b.x; res.push(v); rows += row(b.l + (b.r ? ' (' + b.r + ')' : ''), v === null ? '-' : v.toFixed(b.d).replace('.', ',')); });
+    html += '<table class=\"result-table\">' + rows + '</table>';
+    html += '<p class=\"result-text\">' + "Chaque score est la moyenne des réponses aux portraits de la valeur. Aucun seuil d'interprétation n'est publié ; ces scores décrivent l'importance relative que vous accordez à chaque valeur." + '</p>';
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PVQ-40 : Valeurs par portrait</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#5A358D 0%,#C8B5E3 55%,#281641 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#281641;background:#ECE6F4;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #553285;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#553285;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#281641;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">PVQ-40</span></div>
+
+  <h1 class="serif">Questionnaire des valeurs par portrait de Schwartz, version française (PVQ-40)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">PVQ-40 : Schwartz, Melech, Lehmann, Burgess, Harris et Owens (2001) ; version française reproduite dans la thèse de B. Mpouki (2018).</p>
+  <div class="meta-row">
+    <span class="pill">40 portraits</span>
+    <span class="pill">Réponses de 1 à 6</span>
+    <span class="pill">10 valeurs</span>
+    <span class="pill">Français</span>
+    <span class="pill">Valeurs · Personnalité</span>
+    <span class="pill">Licence : incertaine</span>
+    <span class="pill">Cotation déduite</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="pvq-40-valeurs-par-portrait-schwartz-q6.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>Le questionnaire décrit 40 portraits de personnes dont les aspirations renvoient implicitement à une valeur de base. Pour chaque portrait, la personne indique jusqu'à quel point il lui ressemble, de 1 (« Pas du tout comme moi ») à 6 (« Tout à fait comme moi »). Il mesure dix valeurs : universalisme, bienveillance, tradition, conformité, sécurité, pouvoir, accomplissement, hédonisme, stimulation, autonomie.</p>
+    <p>La thèse précise qu'il convient aux personnes de 11 ans et plus et qu'il a été utilisé dans plusieurs recherches auprès de la population française ; elle l'a administré à des élèves de collège.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>L'importance de chaque valeur est mesurée par la moyenne des réponses aux portraits correspondants. Clé : universalisme = 3, 8, 19, 23, 29, 40 ; bienveillance = 12, 18, 27, 33 ; tradition = 9, 20, 25, 38 ; conformité = 7, 16, 28, 36 ; sécurité = 5, 14, 21, 31, 35 ; pouvoir = 2, 17, 39 ; accomplissement = 4, 13, 24, 32 ; hédonisme = 10, 26, 37 ; stimulation = 6, 15, 30 ; autonomie = 1, 11, 22, 34. Aucun énoncé n'est inversé.</p>
+    <p class="reserve">La clé de l'annexe de la thèse laisse l'énoncé 29 sans valeur et ne cite que cinq énoncés pour l'universalisme ; la thèse indique six énoncés pour cette valeur : l'énoncé 29 est rattaché à l'universalisme par déduction. Dans ses analyses, la thèse retire les énoncés 33, 37, 30 et 31 pour améliorer la fiabilité ; la page garde les 40 énoncés.</p>
+    <p class="reserve">Aucun seuil ni correction des scores (centrage) n'est mentionné dans le texte lu. Les fiabilités sont modestes (alpha moyen de 0,60 par valeur), surtout pour la tradition et l'autonomie.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Les portraits proviennent de l'annexe 3 (questionnaire de Schwartz) et de l'annexe 5 (questionnaire administré) de la thèse, déposée sur HAL. Aucune mention de licence ni de permission d'utilisation n'a été retrouvée : <b>licence incertaine</b>.</p>
+    <p class="reserve">Étalonnage : moyennes et écarts-types de 108 élèves de collège seulement (par exemple 5,14 pour l'hédonisme et 2,82 pour le pouvoir), sans centiles ni seuils.</p>
+    <p class="source-note">Mpouki, B. (2018). Valeurs et choix vocationnel chez les jeunes : déterminants de l’évolution des valeurs chez des élèves du collège et lycée (thèse, Conservatoire national des arts et métiers). HAL tel-04343679. Schwartz, S. H., Melech, G., Lehmann, A., Burgess, S., Harris, M., & Owens, V. (2001). Journal of Cross-Cultural Psychology, 32(5), 519-542.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mind-Eat : Alimentation consciente</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #4E8532;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#4E8532;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#244116;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#4E8532;background:#EBF4E6;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#244116;border-color:#E0D9C9;}
+  .btn-primary{background:#4E8532;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#4E8532;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#244116;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">Mind-Eat : Échelle d&#x27;alimentation consciente</h1>
+    <p class="lead">24 énoncés sur votre manière de choisir, préparer et manger vos aliments, de « Jamais ou presque » à « Toujours ou presque ». Résultat : un score total et six dimensions.</p>
+    <p class="consigne">Ce questionnaire s’intéresse à l’attention que vous portez sur vos actions, vos sensations, et à l’environnement en lien avec votre alimentation. Veuillez choisir la réponse qui caractérise le mieux vos attitudes et vos comportements habituels lorsque vous choisissez, préparez ou mangez vos aliments (repas, grignotage)</p>
+    <p class="lang-note">Questions en français (annexe d'une thèse d'université française). Licence : incertaine.</p>
+    <div class="pill-row">
+      <span class="pill">24 questions</span>
+      <span class="pill">Réponses de 1 à 5</span>
+      <span class="pill">6 dimensions</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Van Beekum et al. (2024), Appetite, 199, 107398. Outil d'auto-évaluation : ne remplace pas un entretien clinique ni un bilan.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["Quand je mange, je prends le temps de savourer les aliments.", "Quand je vois des aliments que j’aime, j’ai du mal à m’empêcher de les manger.", "J’éprouve de la gratitude pour les personnes qui ont préparé la nourriture que je mange.", "Je m’en veux si j’ai mangé plus que ce dont mon corps a besoin.", "Si j’ai envie d’un aliment, je ne peux pas m’empêcher de le manger.", "Je goûte de nouveaux aliments, même si j’ai un a priori négatif.", "Je fais confiance à mon corps pour savoir quelle quantité manger.", "Quand je sens l’odeur agréable d’un aliment, j’ai du mal à m’empêcher de le manger.", "J’aime choisir des aliments que je ne connais pas (repas à la maison ou à l’extérieur).", "Je me critique sur ma façon de manger.", "Quand je mange, j’éprouve de la gratitude pour les personnes qui ont permis à la nourriture d’arriver jusqu’à mon assiette.", "Je fais confiance à mon corps pour savoir à quel moment arrêter de manger.", "Je goûte de nouveaux aliments sans réticence.", "Quand je mange, je prends le temps d’apprécier le goût des aliments.", "J’arrête de manger quand je n’ai plus faim, même quand c’est un aliment que j’aime.", "Quand je mange, j’éprouve de la gratitude pour la planète qui m'a fourni les aliments.", "Je m’en veux quand je sens que j’ai trop mangé.", "Quand je mange, je prends le temps de ressentir le goût de chaque aliment.", "Je fais confiance à mon corps pour savoir quels aliments manger.", "Quand je vois un aliment qui me fait envie, je ne peux pas m’empêcher de le manger.", "J’aime découvrir de nouveaux aliments.", "Je me sens coupable quand je mange des aliments que je considère mauvais pour ma santé.", "Je savoure l’aliment que je suis en train de manger, même si c’est un aliment que je mange souvent.", "Quand je mange, je pense aux personnes ou aux éléments qui ont produit ma nourriture (agriculteur.rices, pluie, animaux, etc.)."];
+  var G = [{"label": "", "opts": ["Jamais ou presque", "Rarement", "Parfois", "Souvent", "Toujours ou presque"], "vals": [1, 2, 3, 4, 5]}];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = null;              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    function fmt(x, d){ var f = Math.pow(10, d); return (Math.floor(x * f + 0.5 + 1e-9) / f).toFixed(d).replace('.', ','); }
+    var INV = [2, 4, 5, 8, 10, 17, 20, 22];
+    var SUB = [{"l": "Attention", "it": [1, 14, 18, 23]}, {"l": "Non-réactivité", "it": [2, 5, 8, 20]}, {"l": "Ouverture", "it": [6, 9, 13, 21]}, {"l": "Gratitude", "it": [3, 11, 16, 24]}, {"l": "Non-jugement", "it": [4, 10, 17, 22]}, {"l": "Faim/satiété", "it": [7, 12, 15, 19]}];
+    function v(k){ var a = answers[k-1][0]; return INV.indexOf(k) >= 0 ? 6 - a : a; }
+    function mean(list){ var s = 0; list.forEach(function(k){ s += v(k); }); return s / list.length; }
+    var all = []; for (var i = 1; i <= 24; i++) all.push(i);
+    var rows = row('Score total d\u2019alimentation consciente (1 à 5)', fmt(mean(all), 2));
+    SUB.forEach(function(s){ rows += row(s.l + ' (1 à 5)', fmt(mean(s.it), 2)); });
+    html += '<table class="result-table">' + rows + '</table>';
+    html += '<p class="result-text">Chaque score est la moyenne des réponses (après inversion des énoncés signalés) : un score élevé correspond à un niveau élevé d\u2019alimentation consciente. Aucun seuil d\u2019interprétation n\u2019est publié dans la source.</p>';
+
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mind-Eat : Alimentation consciente</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#528D35 0%,#C4E3B5 55%,#244116 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#244116;background:#EBF4E6;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #4E8532;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#4E8532;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#244116;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">Mind-Eat</span></div>
+
+  <h1 class="serif">Mind-Eat, échelle d&#x27;alimentation consciente à 24 items (version française)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Mind-Eat : Van Beekum, Shankland, Rodhain, Robert, Marchand, Herry, Prioux, Touvier, Barday, Turgon, Avignon, Leys et Péneau (2024) ; version française utilisée dans l'étude NutriNet-Santé.</p>
+  <div class="meta-row">
+    <span class="pill">24 questions</span>
+    <span class="pill">Réponses de 1 à 5</span>
+    <span class="pill">6 dimensions</span>
+    <span class="pill">Français</span>
+    <span class="pill">Alimentation · Pleine conscience</span>
+    <span class="pill">Licence : incertaine</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="mind-eat-alimentation-consciente-24-items-fr-q3.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>L'échelle Mind-Eat évalue l'alimentation consciente de façon globale (score total) et selon six dimensions de quatre énoncés chacune : <b>attention</b>, <b>non-réactivité</b>, <b>ouverture</b>, <b>gratitude</b>, <b>non-jugement</b> et <b>faim/satiété</b>. Elle a montré une bonne cohérence interne (alpha de Cronbach de 0,75 à 0,91 selon le score) dans la thèse qui l'utilise.</p>
+    <p>Les réponses vont de 1 (« Jamais ou presque ») à 5 (« Toujours ou presque »). Les énoncés sont présentés dans l'ordre de l'annexe de la thèse.</p>
+    <p class="source-note">L'annexe de la thèse est une image : la consigne et l'ordre des questions ont été relus sur cette image ; les énoncés sont ceux du tableau de la thèse. Le texte de la thèse nomme les réponses extrêmes « jamais ou presque jamais » et « toujours ou presque toujours » ; la page reprend les libellés de l'annexe.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque énoncé est coté de 1 à 5. Les énoncés des dimensions <b>non-réactivité</b> (2, 5, 8, 20) et <b>non-jugement</b> (4, 10, 17, 22) sont inversés (6 − réponse). Le score total et celui de chaque dimension sont la moyenne des réponses après inversion : de 1 (niveau faible d'alimentation consciente) à 5 (niveau élevé).</p>
+    <p>Dimensions : attention (1, 14, 18, 23) ; non-réactivité (2, 5, 8, 20) ; ouverture (6, 9, 13, 21) ; gratitude (3, 11, 16, 24) ; non-jugement (4, 10, 17, 22) ; faim/satiété (7, 12, 15, 19).</p>
+    <p class="reserve">Aucun seuil d'interprétation n'est publié dans la source lue. À titre de repère descriptif seulement, dans l'étude NutriNet-Santé (13 759 participants en France), les moyennes (écarts-types) sont de 3,36 (0,52) pour le score total, 3,79 (0,79) pour l'attention, 3,16 (0,78) pour la non-réactivité, 3,39 (0,89) pour l'ouverture, 3,16 (0,99) pour la gratitude, 3,13 (0,83) pour le non-jugement et 3,53 (0,90) pour la faim/satiété.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Énoncés, ordre, réponses et cotation lus dans une thèse d'université française (HAL tel-05775624, section Méthodes, tableau 5 et annexe 1). L'article d'origine (Appetite, 2024) n'a pas été utilisé pour les libellés.</p>
+    <p class="reserve">Licence incertaine : aucune mention de permission d'utilisation dans la thèse lue ; la licence de l'article n'a pas été lue.</p>
+    <p class="reserve">Étalonnage : des moyennes et écarts-types d'une cohorte de volontaires, sans centiles ni classes : pas de norme.</p>
+    <p class="source-note">Van Beekum M, Shankland R, Rodhain A, Robert M, Marchand C, Herry A, Prioux C, Touvier M, Barday M, Turgon R, Avignon A, Leys C, Péneau S. Development and validation of the mindful eating scale (mind-eat scale) in a general population. Appetite. 2024;199:107398.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>
