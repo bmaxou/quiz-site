@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FACES III : fonctionnement familial</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #553285;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#553285;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#281641;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#553285;background:#ECE6F4;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#281641;border-color:#E0D9C9;}
+  .btn-primary{background:#553285;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#553285;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#281641;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">FACES III : cohésion et flexibilité de la famille</h1>
+    <p class="lead">20 affirmations pour décrire votre famille (ceux qui vivent avec vous sous le même toit) ; réponses de « presque jamais » à « presque toujours ».</p>
+    <p class="consigne">Décrivez votre famille (ceux qui vivent avec vous sous le même toit).</p>
+    <p class="lang-note">Questions en français (annexe d'une thèse de Lyon 2). Licence : requise (échelle protégée).</p>
+    <div class="pill-row">
+      <span class="pill">20 questions</span>
+      <span class="pill">5 minutes</span>
+      <span class="pill">Presque jamais à presque toujours</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Olson, Portner et Lavee (1985) ; Tubiana-Rufi et coll. (1991) ; Griot (2012). Outil d'auto-évaluation : ne remplace pas un entretien clinique ni un bilan.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["Les membres de la famille demandent de l’aide les uns aux autres.", "Quand on doit résoudre des problèmes, les suggestions des enfants sont suivies.", "Nous apprécions les amis de chacun d’entre nous.", "Les enfants ont leur mot à dire dans les questions de discipline qui les concernent.", "Nous n’aimons faire des choses qu’avec notre famille directe.", "Dans notre famille, différents membres jouent un rôle de chef.", "Les membres de notre famille se sentent plus proches les uns des autres que des personnes étrangères à la famille.", "Notre famille change sa façon de s’occuper des tâches.", "Les membres de notre famille aiment passer des moments de loisir ensemble.", "Les punitions se discutent entre parents et enfants.", "Les membres de notre famille se sentent très proches les uns des autres.", "Dans notre famille, les enfants prennent des décisions.", "Quand notre famille se réunit pour faire quelque chose, tout le monde est là.", "Les règles de vie en commun changent dans notre famille.", "Il nous est facile de trouver des choses à faire ensemble en famille.", "Nous faisons passer les responsabilités ménagèrent de l’un à l’autre.", "Les membres de notre famille demandent l’avis des autres membres au sujet de leurs décisions.", "Il est difficile de déterminer qui dirige dans notre famille.", "L’unité familiale est très importante.", "Il est difficile de savoir qui fait tel ou tel travail ménager."];
+  var G = [{"label": "", "opts": ["presque jamais", "rarement", "parfois", "fréquemment", "presque toujours"], "vals": [1, 2, 3, 4, 5]}];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = null;              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var coh = 0, fl = 0;
+    answers.forEach(function(a, i){ if ((i + 1) % 2 === 1) coh += a[0]; else fl += a[0]; });
+    function lev(s, tab){ for (var k = 0; k < tab.length; k++){ if (s >= tab[k][0]) return tab[k][1]; } return 1; }
+    var lc = lev(coh, [[48,8],[46,7],[43,6],[41,5],[38,4],[35,3],[25,2],[10,1]]);
+    var lf = lev(fl, [[41,8],[30,7],[27,6],[25,5],[23,4],[20,3],[15,2],[10,1]]);
+    var tc = lc >= 7 ? 'enchevêtrée' : (lc >= 5 ? 'reliée' : (lc >= 3 ? 'séparée' : 'désengagée'));
+    var tf = lf >= 7 ? 'chaotique' : (lf >= 5 ? 'flexible' : (lf >= 3 ? 'structurée' : 'rigide'));
+    var ec = (lc <= 2 || lc >= 7), ef = (lf <= 2 || lf >= 7);
+    var typ = (ec && ef) ? 'extrême' : ((ec || ef) ? 'moyennement équilibrée' : 'équilibrée');
+    html += '<table class="result-table">' + row('Cohésion (items impairs, 10 à 50)', coh) + row('Cohésion : niveau et type', lc + ' : ' + tc) + row('Flexibilité (items pairs, 10 à 50)', fl) + row('Flexibilité : niveau et type', lf + ' : ' + tf) + row('Typologie familiale', typ) + '</table>';
+    html += '<p class="result-text">Niveaux et types lus dans le tableau d\'interprétation de la thèse source ; la typologie est « extrême » si les deux dimensions sont dans un type extrême, « moyennement équilibrée » si une seule l\'est, « équilibrée » sinon. Cette lecture décrit la perception de la personne qui répond ; elle ne juge pas la famille.</p>';
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FACES III : fonctionnement familial</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#5A358D 0%,#C8B5E3 55%,#281641 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#281641;background:#ECE6F4;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #553285;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#553285;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#281641;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">FACES III</span></div>
+
+  <h1 class="serif">Échelle d&#x27;adaptabilité et de cohésion familiales (FACES III), version française à 20 items</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">FACES III : Olson, Portner et Lavee (1985) ; validation française : Tubiana-Rufi et coll. (1991) ; items reproduits par Griot (2012).</p>
+  <div class="meta-row">
+    <span class="pill">20 questions</span>
+    <span class="pill">5 minutes</span>
+    <span class="pill">Presque jamais à presque toujours</span>
+    <span class="pill">Français</span>
+    <span class="pill">Famille</span>
+    <span class="pill">Licence : requise</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="faces-iii-fonctionnement-familial.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>La FACES III décrit la perception qu'a la personne qui répond du fonctionnement de sa famille selon le modèle circomplexe d'Olson : 10 items portent sur la cohésion (items impairs) et 10 sur la flexibilité, ou adaptabilité (items pairs). Dans la thèse source, l'échelle était remplie par des mères.</p>
+    <p>Cette page reprend les 20 items et les cinq réponses de l'annexe 9 de la thèse de Griot (2012, Université Lyon 2). La consigne de l'annexe (« …en indiquant en marge le numéro de celles des cinq réponses qui vous paraît la plus adéquate ») renvoie à une feuille papier : seule sa première phrase est reprise. Le mot de la réponse 2 est « rarement » dans l'annexe et « de temps en temps » dans le texte de la thèse ; l'annexe est suivie.</p>
+    <p class="source-note">Faute de la source conservée à l'item 16 (« ménagèrent »).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Réponses de 1 à 5. Cohésion = somme des items impairs (10 à 50) ; flexibilité = somme des items pairs (10 à 50) ; la source ne mentionne aucune inversion d'item. Le tableau d'interprétation de l'annexe 12 transforme chaque score en niveau de 1 à 8 : cohésion, 48 à 50 = 8, 46-47 = 7, 43 à 45 = 6, 41-42 = 5, 38 à 40 = 4, 35 à 37 = 3, 25 à 34 = 2, 10 à 24 = 1 ; flexibilité, 41 à 50 = 8, 30 à 40 = 7, 27 à 29 = 6, 25-26 = 5, 23-24 = 4, 20 à 22 = 3, 15 à 19 = 2, 10 à 14 = 1. Types de cohésion : enchevêtrée (niveaux 7-8), reliée (5-6), séparée (3-4), désengagée (1-2) ; types de flexibilité : chaotique (7-8), flexible (5-6), structurée (3-4), rigide (1-2).</p>
+    <p>Typologie (texte de la thèse et grille de l'annexe 12) : « extrême » si les deux dimensions sont dans un type extrême (enchevêtrée ou désengagée ; chaotique ou rigide), « moyennement équilibrée » si une seule l'est, « équilibrée » si les deux sont dans un type moyen.</p>
+    <p class="reserve">La thèse ne dit pas de quelle population viennent les classes du tableau de l'annexe 12 ; elles ont été lues sur l'image de la page. Une typologie « extrême » n'est pas un diagnostic : elle décrit une perception.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Licence : requise. La FACES III est protégée (Olson, Portner et Lavee, 1985 ; version française de Tubiana-Rufi et coll., 1991) ; aucune phrase de licence n'a été retrouvée dans la source.</p>
+    <p class="reserve">Étalonnage : la validation française (976 sujets sains de 457 familles) est citée par la thèse et par un article de 2024 (adaptabilité moyenne de la population générale : 24,69), mais l'article de 1991 et ses tableaux n'ont pas été lus : aucune norme française n'est reprise sur cette page.</p>
+    <p class="source-note">Références : Olson DH, Portner J, Lavee Y (1985). FACES III. St Paul : University of Minnesota. Tubiana-Rufi N, Moret L, Bean K, Mesbah M, Feard S, Deschamps JP (1991). Validation en langue française d'une échelle d'évaluation du fonctionnement familial (FACES III). Griot M (2012). Frère ou soeur d'un enfant différent, et moi alors ? Thèse, Université Lumière Lyon 2 (HAL tel-05727298). Kirakosyan V, Arnoult M (2024). Psycho-Oncologie 18:337-347 (HAL hal-05609225).</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

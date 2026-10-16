@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>JVQ-SSV : Victimisation de l’enfant (version parent)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #853E32;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#853E32;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#411B16;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#853E32;background:#F4E8E6;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#411B16;border-color:#E0D9C9;}
+  .btn-primary{background:#853E32;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#853E32;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#411B16;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">JVQ-SSV : Questionnaire de victimisation des jeunes, version parent</h1>
+    <p class="lead">34 questions posées à un parent sur les événements de victimisation que son enfant a pu vivre (criminalité, mauvais traitements, violences entre pairs, violences sexuelles, exposition à la violence). Hétéro-questionnaire : réponse « Oui » ou « Non », avec la période (12 derniers mois ou avant). Certaines questions portent sur des violences sexuelles.</p>
+    <p class="consigne">Je vais maintenant vous poser des questions sur des événements ayant pu se produire dans la vie de votre enfant (si la réponse est affirmative, demander si l’événement a eu lieu au cours des 12 derniers mois ou avant).
+
+Avant la question 9 : « Maintenant, je vais vous poser des questions sur les adultes qui s’occupent de votre enfant, c’est-à-dire ses parents, ses nourrices ou baby-sitters, des adultes qui vivent avec vous ou d’autres adultes qui s’occupent de lui/elle. »</p>
+    <p class="lang-note">Questions en français (traducteur non indiqué ; non validé en France selon la thèse). Passation en entretien : un clinicien pose les questions à un parent ; le parent répond pour son enfant. Licence : incertaine.</p>
+    <div class="pill-row">
+      <span class="pill">34 questions</span>
+      <span class="pill">Entretien avec un parent</span>
+      <span class="pill">Oui / Non</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Hamby, Finkelhor, Ormrod et Turner (2004) ; thèse d’A. Paul (Bordeaux, 2015). Outil de dépistage/d’auto-évaluation : ne remplace pas un entretien clinique ni un bilan.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["Au cours de sa vie, est-ce que votre enfant a déjà été racketté(e) par quelqu’un ? Par racket, on entend que quelqu’un a eu recours à la force pour lui enlever quelque chose qu’il/elle portait ou transportait ?", "Au cours de sa vie, est-ce que quelqu’un a déjà volé quelque chose à votre enfant sans le lui redonner ? Voici quelques exemples : un sac à dos, de l’argent, une montre, des vêtements, un vélo, un lecteur CD, un Ipod®, ou autre chose.", "Au cours de sa vie, est-ce que quelqu’un a déjà brisé ou détruit intentionnellement un effet personnel appartenant à votre enfant ?", "Il arrive que des personnes soient agressées AVEC des bâtons, des pierres, des armes à feu, des couteaux ou d’autres objets qui peuvent blesser. Au cours de sa vie, est-ce que quelqu’un a déjà intentionnellement frappé ou attaqué votre enfant AVEC un objet ou une arme ? Il se peut que cela se soit produit dans un endroit comme à la maison, à l’école, au magasin, dans une voiture, dans la rue ou ailleurs.", "Au cours de sa vie, est-ce que quelqu’un a déjà frappé ou attaqué votre enfant SANS utiliser d’objet ou d’arme ?", "Au cours de sa vie, est-ce que quelqu’un a déjà commencé à attaquer votre enfant, mais pour une raison quelconque, n’a pas continué à le faire ? Par exemple, quelqu’un pourrait être venu à son aide ou bien votre enfant aurait réussi à s’échapper ?", "On dit qu’une personne a été kidnappée lorsqu’elle est emmenée quelque part contre son gré par quelqu’un qui, d’après elle, pourrait la blesser (par exemple, dans une voiture). Au cours de sa vie, quelqu’un a-t-il déjà tenté de kidnapper votre enfant ?", "Au cours de sa vie, est-ce que votre enfant a déjà été frappé(e) ou agressé(e) en raison de la couleur de sa peau, de sa religion ou de l’endroit d’où vient sa famille ? En raison d’un problème physique ou mental ? Ou parce que quelqu’un a dit que votre enfant était homosexuel(le) ?", "En excluant les fessées, au cours de la vie de votre enfant, est-ce qu’un adulte de son entourage l’a déjà frappé(e), battu(e), lui a donné des coups de pied ou l’a blessé(e) physiquement ?", "Au cours de sa vie, est-ce qu’il est déjà arrivé à votre enfant d’avoir peur ou de se sentir vraiment mal parce que des adultes présents dans sa vie lui ont crié des injures, lui ont dit des choses méchantes ou ont affirmé qu’ils ne voulaient plus de lui/elle ?", "On dit d’un enfant qu’il est victime de négligence lorsque les adultes présents dans sa vie ne s’occupent pas de lui comme ils devraient le faire. Ces adultes peuvent ne pas lui donner suffisamment à manger, ne pas l’emmener chez le médecin lorsqu’il est malade, ni s’assurer que l’enfant a un endroit sûr où rester. Au cours de sa vie, votre enfant a-t-il/elle déjà été victime de négligence ?", "Il arrive qu’une famille se dispute sur l’endroit où devrait vivre un enfant. Au cours de sa vie, est-ce qu’un parent a déjà enlevé, gardé ou caché votre enfant afin qu’il/elle ne puisse pas être avec vous ou son autre parent ?", "Parfois des groupes de jeunes ou des bandes attaquent les gens. Au cours de sa vie, est-ce qu’un groupe de jeunes ou une bande a déjà frappé, a sauté dessus, ou a attaqué votre enfant ?", "(Outre ce dont vous venez tout juste de me parler…) Au cours de sa vie, est-ce qu’un jeune, incluant un frère ou une sœur, a déjà frappé votre enfant ? Cela aurait pu se produire à la maison, à l’école, dehors en jouant, dans un magasin ou ailleurs.", "Est-ce qu’un jeune a déjà tenté intentionnellement de blesser les parties intimes de votre enfant en le/la frappant ou en lui donnant des coups de pied ?", "Au cours de sa vie, est-ce qu’un jeune, même un frère ou une sœur, s’en est déjà pris à votre enfant en le/la poursuivant ou en le/la prenant par les cheveux ou les vêtements ou en lui faisant faire des choses qu’il/elle ne voulait pas faire ?", "Au cours de sa vie, est-ce que votre enfant a déjà été effrayé(e) ou s’est senti(e) vraiment mal parce que des jeunes l’ont insulté(e), lui ont dit des choses méchantes ou ont affirmé qu’ils ne voulaient plus le/la voir ?", "Au cours de sa vie, est-ce que votre enfant a été giflé(e) ou frappé(e) par son petit ami ou sa petite amie ou quelqu’un avec qui il/elle est sorti(e) ?", "Au cours de sa vie, est-ce qu’un adulte QUE VOTRE ENFANT CONNAIT a déjà touché aux parties intimes de votre enfant contre sa volonté ou l’a forcé(e) à toucher ses parties intimes ? Ou est-ce qu’un adulte QUE VOTRE ENFANT CONNAIT l’a forcé(e) à avoir une relation sexuelle ?", "Au cours de sa vie, est-ce qu’un adulte QUE VOTRE ENFANT NE CONNAISSAIT PAS a déjà touché ses parties intimes alors qu’il n’aurait pas dû le faire ou a forcé votre enfant à toucher ses parties intimes ou à avoir des relations sexuelles ?", "Maintenant, pensez à des jeunes ayant approximativement le même âge que votre enfant, comme ceux qui fréquentent son école, un petit ami, une petite amie ou même un frère ou une sœur. Au cours de sa vie, est-ce qu’un enfant ou un adolescent a déjà forcé votre enfant à avoir des rapports sexuels ?", "Au cours de sa vie, est-ce qu’une personne a déjà TENTÉ de forcer votre enfant à avoir une relation sexuelle avec pénétration sans réussir à obtenir ce qu’elle voulait (vaginale, anale ou orale) ?", "Au cours de sa vie, est-ce que quelqu’un s’est déjà exhibé devant votre enfant ou lui a montré ses parties intimes en ayant recours à la force ou à la surprise ?", "Au cours de sa vie, est-ce que quelqu’un a déjà fait de la peine à votre enfant en lui disant ou en écrivant quelque chose de sexuel à son sujet ou au sujet de son corps?", "Au cours de sa vie, est ce que votre enfant a eu des expériences sexuelles avec une personne de 18 ans ou plus, même si tous les deux y consentaient ?", "Au cours de sa vie, est-ce que votre enfant a déjà VU un de ses parents être frappé par son autre parent ou par le conjoint ou la conjointe de ce parent. Son parent a-t-il été giflé, a-t-il reçu un coup de poing ou a-t-il été battu ?", "Au cours de sa vie, est-ce que votre enfant a déjà VU un de ses parents frapper, battre, donner des coups de pied ou blesser physiquement un de ses frères et sœurs, en excluant les fessées ?", "Dans la vie réelle, est-ce que votre enfant a déjà VU, au cours de sa vie, quelqu’un être attaqué volontairement AVEC un bâton, une pierre, une arme à feu, un couteau ou tout autre objet destiné à blesser ? Cela aurait pu survenir à la maison, à l’école, dans un magasin, dans une voiture, dans la rue ou ailleurs.", "Dans la vie réelle, est-ce que votre enfant a déjà VU, au cours de sa vie, quelqu’un être attaqué ou frappé volontairement SANS qu’un bâton, une pierre, une arme à feu, un couteau ou n’importe quel autre objet destiné à blesser soit utilisé ?", "Au cours de la vie de votre enfant, quelqu’un a-t-il déjà volé dans la maison un objet qui appartenait à votre famille ou à quelqu’un qui habite avec votre enfant ? Nous pensons ici à des objets comme un téléviseur, un Ipod®, une voiture ou autre chose.", "Au cours de sa vie, est-ce que quelqu’un dans l’entourage de votre enfant, comme un ami, un voisin ou quelqu’un de la famille, a déjà été assassiné ?", "Au cours de sa vie, est-ce que votre enfant a déjà VU quelqu’un se faire assassiner dans la vie réelle ? Nous entendons par là qu’il/elle n’a pas vu cela à la télévision, dans un jeu vidéo ou dans un film.", "Au cours de sa vie, est-ce que votre enfant s’est déjà trouvé(e), dans la vie réelle, dans un endroit où il/elle pouvait voir ou entendre des personnes se faire tirer dessus et où il y avait des explosions de bombes ou des émeutes de rue ?", "Au cours de sa vie, est-ce votre enfant s’est trouvé(e) au milieu d’une guerre ou il/elle pouvait entendre des combats réels avec des armes à feu ou des bombes ?"];
+  var G = [{"label": "", "opts": ["Non", "Oui, au cours des 12 derniers mois", "Oui, mais seulement avant les 12 derniers mois"], "vals": [0, 2, 1]}];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = null;              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var life = 0, last = 0;
+    answers.forEach(function(a){ if (a[0] >= 1) life++; if (a[0] === 2) last++; });
+    function dom(lo, hi){ var n = 0; for (var k = lo; k <= hi; k++){ if (answers[k-1][0] >= 1) n++; } return n; }
+    var c12 = last <= 4 ? 'Pas de poly-victimisation (4 ou moins)' : (last <= 7 ? 'Poly-victimisation modérée (5 à 7)' : 'Poly-victimisation sévère (8 ou plus)');
+    var cv = life >= 11 ? 'Poly-victimisation (11 ou plus)' : 'Seuil de 11 non atteint';
+    var rows = row('Événements vécus au cours de la vie (0 à 34)', life) + row('Événements vécus au cours des 12 derniers mois (0 à 34)', last)
+        + row('Poly-victimisation sur les 12 derniers mois', c12) + row('Poly-victimisation sur la vie entière', cv)
+        + row('Criminalité classique, vie entière (questions 1 à 8)', dom(1, 8))
+        + row('Mauvais traitements à l’égard des enfants, vie entière (9 à 12)', dom(9, 12))
+        + row('Victimisation par les pairs ou la fratrie, vie entière (13 à 18)', dom(13, 18))
+        + row('Victimisation sexuelle, vie entière (19 à 25)', dom(19, 25))
+        + row('Victimisation indirecte et exposition à la violence, vie entière (26 à 34)', dom(26, 34));
+    html += '<table class="result-table">' + rows + '</table>';
+    html += '<p class="result-text">Chaque réponse « Oui » compte 1 point. Les réponses positives sont à explorer en entretien : la thèse source propose alors un questionnaire complémentaire sur le retentissement clinique.</p>';
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>JVQ-SSV : Victimisation de l’enfant (version parent)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#8D4135 0%,#E3BBB5 55%,#411B16 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#411B16;background:#F4E8E6;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #853E32;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#853E32;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#411B16;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">JVQ-SSV</span></div>
+
+  <h1 class="serif">Questionnaire de victimisation des jeunes, version de dépistage par addition (JVQ-SSV), version parent</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">JVQ-SSV, version parent : Hamby, Finkelhor, Ormrod et Turner (2004) ; version française reproduite en annexe d’une thèse de médecine (Bordeaux, 2015).</p>
+  <div class="meta-row">
+    <span class="pill">34 questions</span>
+    <span class="pill">Entretien avec un parent</span>
+    <span class="pill">Oui / Non</span>
+    <span class="pill">Français</span>
+    <span class="pill">Victimisation · Enfant et adolescent</span>
+    <span class="pill">Licence : incertaine</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="jvq-ssv-parent.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>Le JVQ est un questionnaire structuré qui fait l’inventaire des victimisations de l’enfance. Sa version de dépistage par addition (Screener Sum Version, JVQ-SSV) ne comporte pas les questions subsidiaires de la version complète. Elle compte 34 questions en cinq domaines : criminalité classique (1 à 8), mauvais traitements à l’égard des enfants (9 à 12), victimisation par les pairs ou la fratrie (13 à 18), victimisation sexuelle (19 à 25), victimisation indirecte et exposition à la violence (26 à 34).</p>
+    <p>La thèse décrit une passation en entretien physique ou téléphonique à un ou aux deux parents (10 à 15 minutes pour le questionnaire, 20 à 30 minutes avec le questionnaire complémentaire). La source note « Oui = 1 » et « Non = 0 » et demande, pour toute réponse affirmative, si l’événement a eu lieu au cours des 12 derniers mois ou avant.</p>
+    <p class="source-note">Libellés de création : la page transforme cette consigne en trois réponses (« Non », « Oui, au cours des 12 derniers mois », « Oui, mais seulement avant les 12 derniers mois »). Elle ne reprend pas le questionnaire complémentaire sur le retentissement clinique (annexe 3 de la thèse).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque « Oui » vaut 1 ; le score est le nombre d’événements, calculé sur la vie entière et sur les 12 derniers mois. Seuils de l’annexe 2 : sur les 12 derniers mois, 4 ou moins = pas de poly-victimisation, 5 à 7 = poly-victimisation modérée, 8 ou plus = poly-victimisation sévère ; sur la vie entière, 11 ou plus = poly-victimisation. La page ajoute les sous-totaux (vie entière) par domaine.</p>
+    <p class="reserve">La thèse précise que la cotation du JVQ-SSV n’est pas la même que celle de la version complète (Finkelhor et coll., 2005). Son chapitre sur le concept donne une autre définition par l’auteur du concept (au moins 4 victimisations dans l’année ; 4 à 6 modérée, 7 ou plus sévère ; sur la vie entière, les 10 % les plus élevés par tranche d’âge) : la page affiche les seuils de l’annexe.</p>
+    <p class="reserve">Groupe témoin de la thèse (53 enfants de 7 à 18 ans, un établissement scolaire de Châteauroux) : score moyen de 3,89 (écart-type 3,23) sur la vie entière et de 1,66 (2,05) sur les 12 derniers mois ; ce n’est pas une norme. La thèse écrit que le questionnaire « n’a cependant pas été validé en France ».</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Les 34 questions, la consigne, la phrase de transition entre les questions 8 et 9 et les seuils sont lus dans l’annexe 2 de la thèse d’Andy Paul (médecine, Bordeaux, 2015). La liste récapitulative de l’annexe comporte une erreur de numérotation (30 et 31 répétés) ; la page suit les 34 questions détaillées. Les questions 34 (« est-ce votre enfant s’est trouvé(e) ») et 25 (« est ce que ») reproduisent les fautes de la source.</p>
+    <p class="reserve">Licence : incertaine. Aucune mention de droits dans l’annexe ni dans la thèse ; l’instrument est cité d’après le manuel d’administration et de cotation de Hamby et coll. (2004, Crimes Against Children Research Center), dont aucune clause de réutilisation n’a été retrouvée.</p>
+    <p class="source-note">Références : Hamby SL, Finkelhor D, Ormrod RK, Turner HA. The juvenile victimization questionnaire (JVQ): Administration and scoring manual. Durham, NH: Crimes Against Children Research Center; 2004. Finkelhor D, Hamby SL, Ormrod R, Turner H. The Juvenile Victimization Questionnaire: reliability, validity, and national norms. Child Abuse &amp; Neglect. 2005;29(4):383-412. Finkelhor D, Ormrod RK, Turner HA, Hamby SL. Measuring poly-victimization using the Juvenile Victimization Questionnaire. Child Abuse &amp; Neglect. 2005;29(11):1297-1312. Paul A. Phénomènes de victimisation chez les enfants et adolescents avec trouble du spectre de l’autisme. Thèse de médecine, Université de Bordeaux, 2015 (dumas-01208258), annexe 2.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

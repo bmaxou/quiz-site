@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ERBS : Échelle de croyances sur les émotions et leur régulation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #708532;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#708532;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#364116;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#708532;background:#F1F4E6;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#364116;border-color:#E0D9C9;}
+  .btn-primary{background:#708532;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#708532;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#364116;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">ERBS : Croyances sur les émotions et leur régulation</h1>
+    <p class="lead">Ce questionnaire comporte 21 affirmations sur les émotions et leur régulation. Pour chacune, indiquez votre niveau d'accord ou de désaccord.</p>
+    <p class="consigne">Par chaque affirmation qui suit merci d’indiquer votre niveau d’accord ou de désaccord, de 1 (fortement en désaccord) à 5 (fortement en accord).</p>
+    <p class="lang-note">Énoncés et consigne en français (PDF de A. Vancappel, Université de Lille). Licence : CC BY-NC-ND 4.0 (usage non commercial, sans modification).</p>
+    <div class="pill-row">
+      <span class="pill">21 affirmations</span>
+      <span class="pill">4 minutes</span>
+      <span class="pill">Échelle 1-5</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Veilleux, J. C., et al. (2015). Multidimensional assessment of beliefs about emotion: Development and validation of the Emotion and Regulation Beliefs Scale. <em>Assessment, 22</em>(1), 86-100. Vancappel, A., et al. (2023). <em>Behavioural and Cognitive Psychotherapy, 51</em>(4), 335-348. Ne constitue pas un diagnostic.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["Les émotions opèrent comme des vannes qui sont soit ouvertes soit fermées. En d’autres termes, les émotions sont soit « on » soit « off ».", "Les émotions peuvent être exprimées entièrement ou cachées des autres – il n’est pas possible de partager seulement une partie d’une réponse émotionnelle.", "Les personnes peuvent apprendre à contrôler/réguler leurs émotions.", "Les personnes sont régies par leurs émotions.", "Faire des efforts pour changer son expérience émotionnelle est profitable.", "Lorsqu’une personne a une réaction émotionnelle forte face à une autre personne, elle se sentira toujours de cette manière à propos de cette autre personne.", "Lorsque les personnes se sentent déprimés, ils doivent attendre qu’une meilleure humeur arrive avant d’être productifs.", "Les personnes seraient mieux s’ils prenaient le temps de comprendre d’où viennent leurs émotions.", "Lorsque des émotions fortes sont présentes, elles dictent ce qu’une personne dit ou fait.", "Lorsqu’une émotion survient, elle va durer à moins qu’il n’y ait un changement dans l’environnement.", "Lorsque les personnes reconnaissent leurs émotions, les émotions vont complètement les contrôler.", "Apprendre comment modifier ses émotions fortes est une quête utile.", "Il est possible, avec des efforts, de modifier ses sentiments forts dans n’importe quelle situation.", "Lorsqu’une personne se sent vraiment en colère, il est pratiquement impossible de ne pas passer la colère sur quelqu’un ou sur un objet à proximité.", "Les personnes sont esclaves de leurs émotions.", "Les personnes seraient mieux si elles passaient plus de temps à apprendre comment contrôler leurs émotions.", "Des émotions fortes poussent les personnes à faire des choses qu’ils ne feraient pas normalement.", "Quand des sentiments de tristesse prennent le dessus, la personne ne peut pas vraiment faire quoi que ce soit à part s’apitoyer sur sa misère.", "Les personnes tirent profit d’apprendre comment réguler leurs sentiments.", "Il est pratiquement impossible aux personnes d’agir à l’opposé de leur ressenti.", "Les émotions font perdre leur contrôle aux personnes."];
+  var G = [{"label": "", "opts": ["1 : Fortement en désaccord", "2 : En désaccord", "3 : Ni en accord, ni en désaccord", "4 : En accord", "5 : Fortement en accord"], "vals": [1, 2, 3, 4, 5]}];           /* groupes de réponses par item : [{label, opts:[...], vals:[...]}] */
+  var answers = items.map(function(){ return G.map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    G.forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var INV = [], LO = 1, HI = 5;
+    function val(k){ var v = answers[k-1][0]; if (v === 'NA') return null; return INV.indexOf(k) >= 0 ? (LO + HI - v) : v; }
+    function agg(list, m){ var s = 0, n = 0; list.forEach(function(k){ var v = val(k); if (v !== null){ s += v; n++; } }); if (n === 0) return null; return m === 'mean' ? s / n : s; }
+    var BL = [{"l": "Émotions contraignantes (1, 2, 6, 7, 10, 11, 14, 18, 20)", "it": [1, 2, 6, 7, 10, 11, 14, 18, 20], "m": "sum", "d": 0, "r": "9 à 45", "x": 1}, {"l": "Utilité de la régulation (3, 5, 8, 12, 13, 16, 19)", "it": [3, 5, 8, 12, 13, 16, 19], "m": "sum", "d": 0, "r": "7 à 35", "x": 1}, {"l": "Esclaves de ses émotions (4, 9, 15, 17, 21)", "it": [4, 9, 15, 17, 21], "m": "sum", "d": 0, "r": "5 à 25", "x": 1}];
+    var res = [], rows = '';
+    BL.forEach(function(b){ var v = agg(b.it, b.m); if (v !== null) v = v * b.x; res.push(v); rows += row(b.l + (b.r ? ' (' + b.r + ')' : ''), v === null ? '-' : v.toFixed(b.d).replace('.', ',')); });
+    html += '<table class="result-table">' + rows + '</table>';
+    var TH = [36, 28, 20], NM = ['émotions contraignantes', 'utilité de la régulation', 'esclaves de ses émotions'], pres = [];
+    for (var i = 0; i < 3; i++){ if (res[i] >= TH[i]) pres.push(NM[i]); }
+    html += '<p class="result-text">' + (pres.length ? 'Au seuil de la version française, la croyance peut être considérée comme présente pour : ' + pres.join(' ; ') + '.' : 'Aucune sous-échelle n\'atteint le seuil de la version française.') + '</p>';
+    html += '<p class="result-text">' + "Seuils de la version française (36 / 28 / 20, soit une moyenne ≥ 4) : donnés par le PDF de Vancappel sans justification dans l'article de validation. Pas de score total." + '</p>';
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(){ return G.map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ERBS : Échelle de croyances sur les émotions et leur régulation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#778D35 0%,#D7E3B5 55%,#364116 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#364116;background:#F1F4E6;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #708532;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#708532;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#364116;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">ERBS</span></div>
+
+  <h1 class="serif">Emotion and Regulation Beliefs Scale, version française (ERBS)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">ERBS : Veilleux, Salomaa, Shaver, Zielinski &amp; Pollert (2015) ; version française Vancappel, Kerbage, Réveillère &amp; El Hage (2023)</p>
+  <div class="meta-row">
+    <span class="pill">21 affirmations</span>
+    <span class="pill">4 minutes</span>
+    <span class="pill">Échelle 1-5</span>
+    <span class="pill">Français</span>
+    <span class="pill">Régulation des émotions</span>
+    <span class="pill">3 sous-échelles</span>
+    <span class="pill">Licence requise : non (CC BY-NC-ND 4.0)</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="erbs.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>L'ERBS explore les croyances sur les émotions selon trois dimensions : la croyance que les émotions sont contraignantes (tout ou rien, incontrôlables), celle qu'apprendre à réguler ses émotions est utile et celle que les gens sont esclaves de leurs émotions.</p>
+    <p class="source-note">La version française valide aussi la Dissociation Belief Scale (DBS), qui n'est pas reprise ici (absente du PDF lu).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Échelle de 1 (Fortement en désaccord) à 5 (Fortement en accord) ; aucun énoncé inversé. Sous-échelles : émotions contraignantes (énoncés 1, 2, 6, 7, 10, 11, 14, 18, 20, 9 à 45) ; utilité de la régulation (3, 5, 8, 12, 13, 16, 19, 7 à 35) ; esclaves de ses émotions (4, 9, 15, 17, 21, 5 à 25). Pas de score total. La version française somme les énoncés ; la version anglaise officielle fait des moyennes (1 à 5).</p>
+    <p class="reserve">Seuils de la version française : ≥ 36, ≥ 28 et ≥ 20 (« on peut considérer la croyance comme présente »), donnés par le PDF de Vancappel sans justification dans l'article de validation lu. La version anglaise ne définit aucun seuil.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Énoncés, consigne, options et cotation extraits par script du PDF de Vancappel (Université de Lille), recoupés avec le document anglais de tempt.uark.edu et l'article de Cambridge (21 énoncés, Likert 1-5, 3 facteurs) ; sous-échelles identiques dans les deux sources. Le document anglais comporte une coquille au tableau récapitulatif (énoncé 16 copié de l'énoncé 6).</p>
+    <p class="reserve">Licence : « « Cette oeuvre est diffusée sous licence CC BY NC ND 4.0 dont les termes sont disponibles via le lien suivant : https://creativecommons.org/licenses/by-nc-nd/4.0/deed.fr ». ». Cette licence exclut les adaptations : les énoncés sont reproduits sans modification.</p>
+    <p class="source-note">Vancappel, A., Kerbage, H., Réveillère, C., &amp; El Hage, W. (2023). Validation of the French version of the Emotion and Regulation Beliefs Scale (ERBS) and Dissociation Belief Scale (DBS). <em>Behavioural and Cognitive Psychotherapy, 51</em>(4), 335-348. DOI 10.1017/S1352465823000097.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

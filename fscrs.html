@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FSCRS : Forms of Self-Criticising/Attacking and Self-Reassuring Scale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #853232;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#853232;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#411616;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#853232;background:#F4E6E6;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#411616;border-color:#E0D9C9;}
+  .btn-primary{background:#853232;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#853232;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#411616;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">FSCRS : Autocritique et auto-réassurance</h1>
+    <p class="lead">Ce questionnaire comporte 22 pensées et sentiments que les gens ont parfois. Pour chacun, indiquez à quel point il est vrai pour vous.</p>
+    <p class="consigne">When things go wrong in our lives or don’t work out as we hoped, and we feel we could have done better, we sometimes have negative and self-critical thoughts and feelings. These may take the form of feeling worthless, useless or inferior etc. However, people can also try to be supportive of them selves. Below are a series of thoughts and feelings that people sometimes have. Read each statement carefully and circle the number that best describes how much each statement is true for you.</p>
+    <p class="lang-note">Énoncés et consigne en anglais (PDF anglais officiel de la Compassionate Mind Foundation) : le PDF français officiel présente à l'énoncé 5 un libellé de sens opposé à l'original (voir la fiche). Licence requise : incertaine.</p>
+    <div class="pill-row">
+      <span class="pill">22 énoncés</span>
+      <span class="pill">5 minutes</span>
+      <span class="pill">Échelle 0-4</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Gilbert, P., Clarke, M., Hempel, S., Miles, J. N. V., &amp; Irons, C. (2004). Criticising and reassuring oneself: An exploration of forms, styles and reasons in female students. <em>British Journal of Clinical Psychology, 43</em>, 31-50. Ne constitue pas un diagnostic.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["I am easily disappointed with myself.", "There is a part of me that puts me down.", "I am able to remind myself of positive things about myself.", "I find it difficult to control my anger and frustration at myself.", "I find it easy to forgive myself.", "There is a part of me that feels I am not good enough.", "I feel beaten down by my own self-critical thoughts.", "I still like being me.", "I have become so angry with myself that I want to hurt or injure myself.", "I have a sense of disgust with myself.", "I can still feel lovable and acceptable.", "I stop caring about myself.", "I find it easy to like myself.", "I remember and dwell on my failings.", "I call myself names.", "I am gentle and supportive with myself.", "I can’t accept failures and setbacks without feeling inadequate.", "I think I deserve my self-criticism.", "I am able to care and look after myself.", "There is a part of me that wants to get rid of the bits I don’t like.", "I encourage myself for the future.", "I do not like being me."];
+  var G = [{"label": "", "opts": ["0 : Not at all like me", "1 : A little bit like me", "2 : Moderately like me", "3 : Quite a bit like me", "4 : Extremely like me"], "vals": [0, 1, 2, 3, 4]}];           /* groupes de réponses par item : [{label, opts:[...], vals:[...]}] */
+  var answers = items.map(function(){ return G.map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    G.forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var INV = [], LO = 0, HI = 4;
+    function val(k){ var v = answers[k-1][0]; if (v === 'NA') return null; return INV.indexOf(k) >= 0 ? (LO + HI - v) : v; }
+    function agg(list, m){ var s = 0, n = 0; list.forEach(function(k){ var v = val(k); if (v !== null){ s += v; n++; } }); if (n === 0) return null; return m === 'mean' ? s / n : s; }
+    var BL = [{"l": "Inadequate self : soi inadéquat (1, 2, 4, 6, 7, 14, 17, 18, 20)", "it": [1, 2, 4, 6, 7, 14, 17, 18, 20], "m": "sum", "d": 0, "r": "0 à 36", "x": 1}, {"l": "Hated self : soi haï (9, 10, 12, 15, 22)", "it": [9, 10, 12, 15, 22], "m": "sum", "d": 0, "r": "0 à 20", "x": 1}, {"l": "Reassured self : soi rassurant (3, 5, 8, 11, 13, 16, 19, 21)", "it": [3, 5, 8, 11, 13, 16, 19, 21], "m": "sum", "d": 0, "r": "0 à 32", "x": 1}];
+    var res = [], rows = '';
+    BL.forEach(function(b){ var v = agg(b.it, b.m); if (v !== null) v = v * b.x; res.push(v); rows += row(b.l + (b.r ? ' (' + b.r + ')' : ''), v === null ? '-' : v.toFixed(b.d).replace('.', ',')); });
+    html += '<table class="result-table">' + rows + '</table>';
+    if (answers[8][0] >= 2){ html += '<p class="result-text">Repère du cabinet (non issu de la source) : l\'énoncé 9 (colère envers soi au point de vouloir se blesser) est coté 2 ou plus ; à explorer en entretien.</p>'; }
+    html += '<p class="result-text">' + "Chaque sous-échelle est la somme de ses énoncés, sans inversion ; aucun score total n'est défini par la source. Un score plus élevé indique plus d'autocritique (soi inadéquat, soi haï) ou plus de capacité d'auto-réassurance (soi rassurant). Aucun seuil n'est publié." + '</p>';
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(){ return G.map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FSCRS : Forms of Self-Criticising/Attacking and Self-Reassuring Scale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#8D3535 0%,#E3B5B5 55%,#411616 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#411616;background:#F4E6E6;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #853232;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#853232;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#411616;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">FSCRS</span></div>
+
+  <h1 class="serif">Forms of Self-Criticising/Attacking and Self-Reassuring Scale (FSCRS)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">FSCRS : Gilbert, Clarke, Hempel, Miles &amp; Irons (2004)</p>
+  <div class="meta-row">
+    <span class="pill">22 énoncés</span>
+    <span class="pill">5 minutes</span>
+    <span class="pill">Échelle 0-4</span>
+    <span class="pill">Anglais</span>
+    <span class="pill">Autocritique</span>
+    <span class="pill">3 sous-échelles</span>
+    <span class="pill">Licence requise : incertaine</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="fscrs.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>La FSCRS explore la manière dont on se critique et dont on se rassure quand les choses vont mal. Elle comprend trois sous-échelles : le soi inadéquat (sentiment de ne pas être à la hauteur, déception envers soi), le soi haï (dégoût, hostilité, désir de se blesser) et le soi rassurant (capacité de bienveillance et de soutien envers soi-même). Elle est largement utilisée en thérapie centrée sur la compassion.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Échelle de 0 (Not at all like me) à 4 (Extremely like me) ; aucun énoncé inversé. Inadequate self : énoncés 1, 2, 4, 6, 7, 14, 17, 18, 20 (0 à 36) ; Hated self : 9, 10, 12, 15, 22 (0 à 20) ; Reassured self : 3, 5, 8, 11, 13, 16, 19, 21 (0 à 32). Les énoncés du soi rassurant, formulés positivement, ne sont pas inversés. Aucun score total ni aucun seuil dans le document officiel de cotation.</p>
+    <p class="reserve">Alerte sur la traduction française : l'énoncé 5 s'écrit en français « Je trouve cela difficile de me pardonner », alors que l'anglais officiel est « I find it easy to forgive myself » (sens opposé, énoncé comptant dans Reassured self). Les énoncés sont donc présentés en anglais ; la version française du PDF officiel, telle quelle, fausserait la cotation. L'attribution des énoncés aux sous-échelles vient du PDF anglais officiel ; le PDF français ne la donne pas.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Énoncés, consigne et modalités : PDF anglais officiel de la Compassionate Mind Foundation ; version française : PDF officiel de la même fondation, lu en comparaison (22 énoncés) ; validation française : Leboeuf, Mahanga, Rusinek, Delamillieure, Gheysen, Andreotti &amp; Antoine (2020), <em>Stress and Health, 36</em>(1), 31-36 (non lue).</p>
+    <p class="reserve">Licence incertaine : la page de la fondation indique que ces échelles « are available for research use » et demande de la contacter avant toute traduction ou adaptation.</p>
+    <p class="source-note">Gilbert, P., et al. (2004). DOI 10.1348/014466504772812959.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

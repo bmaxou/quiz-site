@@ -1,0 +1,919 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Questionnaire des prodromes en 16 items (PQ-16 / QP-16)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 14px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#5B7F3A;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .period{font-size:12.5px;font-weight:600;color:#5B7F3A;margin:0 0 8px;}
+  .q-text{font-size:16px;margin:0 0 6px;}
+  .q-ex{font-size:13px;color:#63695D;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;margin-top:14px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#5B7F3A;background:#EAF1E0;}
+  .num-in{width:140px;font-family:'Inter',sans-serif;font-size:16px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;background:#F4F1EA;color:#20241E;}
+  .num-lab{font-size:13px;color:#63695D;margin-left:8px;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#5B7F3A;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 16px;}
+  .sc-title{font-size:13px;font-weight:700;color:#5B7F3A;margin:18px 0 6px;}
+  .sc-row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-top:1px solid #EFEBE1;font-size:14px;}
+  .sc-row b{font-variant-numeric:tabular-nums;text-align:right;}
+  .sc-read{font-size:13px;color:#63695D;margin:0 0 6px;padding-left:2px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">Questionnaire des prodromes en 16 items (PQ-16 / QP-16)</h1>
+    <p class="lead">Ce questionnaire pose un certain nombre de questions sur vos pensées, vos sentiments et vos expériences. Veuillez, s’il vous plaît, lire chaque question attentivement et indiquer si vous êtes d’accord ou non avec l’item en cochant vrai ou faux dans la marge de droite à côté de l’item. Essayez de répondre à chaque question. Si vous répondez VRAI, veuillez évaluer votre niveau d’angoisse (inquiétude) dans la dernière colonne (à droite). Veuillez, s’il vous plaît, répondre à toutes les questions.</p>
+    <p class="lang-note">Version française du CHUV (Urben, Mann, Conus &amp; Holzer, 2013), destinée aux 12-35 ans. Licence requise : incertaine.</p>
+    <div class="pill-row">
+    <span class="pill">16 questions</span><span class="pill">vrai / faux (+ détresse)</span><span class="pill">cotation de 0 à 16</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="period" id="period-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <p class="q-ex" id="q-ex"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="rows-all"></div>
+    <p class="result-text">Score de dépistage = nombre d&#x27;items cochés « Vrai » (0-16) ; la détresse (0-3 par item) n&#x27;intervient pas dans ce score. Seuil : ≥ 6 (Ising et al., 2012 : sensibilité 87 %, spécificité 87 %). Outil de dépistage uniquement : un score ≥ 6 indique un entretien clinique spécialisé, pas un diagnostic.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">PQ-16 : Ising, H. K., Veling, W., Loewy, R. L., et al. (2012). The validity of the 16-item version of the Prodromal Questionnaire (PQ-16) to screen for ultra high risk of developing psychosis in the general help-seeking population. Schizophrenia Bulletin, 38(6), 1288-1296. Version française : Urben, S., Mann, A., Conus, P., &amp; Holzer, L. (2013), CHUV Lausanne. Outil de dépistage, ne remplace pas une évaluation clinique.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var CFG = {
+ "items": [
+  {
+   "n": "1",
+   "t": "Je me sens indifférent face aux choses que j’appréciais habituellement"
+  },
+  {
+   "n": "1 – détresse",
+   "t": "Si VRAI, à quel point avez-vous ressenti de l’angoisse ou de l’inquiétude ? (item 1)",
+   "o": [
+    [
+     "Absence de stress",
+     0
+    ],
+    [
+     "Stress léger",
+     1
+    ],
+    [
+     "Stress modéré",
+     2
+    ],
+    [
+     "Stress sévère",
+     3
+    ]
+   ],
+   "c": {
+    "anyOf": [
+     0
+    ],
+    "gt": 0
+   }
+  },
+  {
+   "n": "2",
+   "t": "J’ai souvent l’impression de vivre les événements exactement comme il se sont produits auparavant (déjà vu)."
+  },
+  {
+   "n": "2 – détresse",
+   "t": "Si VRAI, à quel point avez-vous ressenti de l’angoisse ou de l’inquiétude ? (item 2)",
+   "o": [
+    [
+     "Absence de stress",
+     0
+    ],
+    [
+     "Stress léger",
+     1
+    ],
+    [
+     "Stress modéré",
+     2
+    ],
+    [
+     "Stress sévère",
+     3
+    ]
+   ],
+   "c": {
+    "anyOf": [
+     2
+    ],
+    "gt": 0
+   }
+  },
+  {
+   "n": "3",
+   "t": "Je sens parfois des odeurs ou des goûts que les autres personnes ne peuvent pas sentir."
+  },
+  {
+   "n": "3 – détresse",
+   "t": "Si VRAI, à quel point avez-vous ressenti de l’angoisse ou de l’inquiétude ? (item 3)",
+   "o": [
+    [
+     "Absence de stress",
+     0
+    ],
+    [
+     "Stress léger",
+     1
+    ],
+    [
+     "Stress modéré",
+     2
+    ],
+    [
+     "Stress sévère",
+     3
+    ]
+   ],
+   "c": {
+    "anyOf": [
+     4
+    ],
+    "gt": 0
+   }
+  },
+  {
+   "n": "4",
+   "t": "J’entends souvent des sons inhabituels comme des tapes, des clics, des sifflements, des claquements ou des tintements dans mes oreilles."
+  },
+  {
+   "n": "4 – détresse",
+   "t": "Si VRAI, à quel point avez-vous ressenti de l’angoisse ou de l’inquiétude ? (item 4)",
+   "o": [
+    [
+     "Absence de stress",
+     0
+    ],
+    [
+     "Stress léger",
+     1
+    ],
+    [
+     "Stress modéré",
+     2
+    ],
+    [
+     "Stress sévère",
+     3
+    ]
+   ],
+   "c": {
+    "anyOf": [
+     6
+    ],
+    "gt": 0
+   }
+  },
+  {
+   "n": "5",
+   "t": "Je suis parfois confus parce que je ne sais pas si une expérience était réelle ou imaginaire"
+  },
+  {
+   "n": "5 – détresse",
+   "t": "Si VRAI, à quel point avez-vous ressenti de l’angoisse ou de l’inquiétude ? (item 5)",
+   "o": [
+    [
+     "Absence de stress",
+     0
+    ],
+    [
+     "Stress léger",
+     1
+    ],
+    [
+     "Stress modéré",
+     2
+    ],
+    [
+     "Stress sévère",
+     3
+    ]
+   ],
+   "c": {
+    "anyOf": [
+     8
+    ],
+    "gt": 0
+   }
+  },
+  {
+   "n": "6",
+   "t": "Quand je regarde quelqu’un, ou que je me regarde dans le miroir, je vois ce visage se modifier juste sous mes yeux"
+  },
+  {
+   "n": "6 – détresse",
+   "t": "Si VRAI, à quel point avez-vous ressenti de l’angoisse ou de l’inquiétude ? (item 6)",
+   "o": [
+    [
+     "Absence de stress",
+     0
+    ],
+    [
+     "Stress léger",
+     1
+    ],
+    [
+     "Stress modéré",
+     2
+    ],
+    [
+     "Stress sévère",
+     3
+    ]
+   ],
+   "c": {
+    "anyOf": [
+     10
+    ],
+    "gt": 0
+   }
+  },
+  {
+   "n": "7",
+   "t": "Je me sens très anxieux quand je rencontre des gens pour la première fois"
+  },
+  {
+   "n": "7 – détresse",
+   "t": "Si VRAI, à quel point avez-vous ressenti de l’angoisse ou de l’inquiétude ? (item 7)",
+   "o": [
+    [
+     "Absence de stress",
+     0
+    ],
+    [
+     "Stress léger",
+     1
+    ],
+    [
+     "Stress modéré",
+     2
+    ],
+    [
+     "Stress sévère",
+     3
+    ]
+   ],
+   "c": {
+    "anyOf": [
+     12
+    ],
+    "gt": 0
+   }
+  },
+  {
+   "n": "8",
+   "t": "J’ai déjà vu des choses qu’apparemment d’autres personnes ne peuvent pas voir"
+  },
+  {
+   "n": "8 – détresse",
+   "t": "Si VRAI, à quel point avez-vous ressenti de l’angoisse ou de l’inquiétude ? (item 8)",
+   "o": [
+    [
+     "Absence de stress",
+     0
+    ],
+    [
+     "Stress léger",
+     1
+    ],
+    [
+     "Stress modéré",
+     2
+    ],
+    [
+     "Stress sévère",
+     3
+    ]
+   ],
+   "c": {
+    "anyOf": [
+     14
+    ],
+    "gt": 0
+   }
+  },
+  {
+   "n": "9",
+   "t": "Mes pensées sont parfois tellement fortes que je peux presque les entendre"
+  },
+  {
+   "n": "9 – détresse",
+   "t": "Si VRAI, à quel point avez-vous ressenti de l’angoisse ou de l’inquiétude ? (item 9)",
+   "o": [
+    [
+     "Absence de stress",
+     0
+    ],
+    [
+     "Stress léger",
+     1
+    ],
+    [
+     "Stress modéré",
+     2
+    ],
+    [
+     "Stress sévère",
+     3
+    ]
+   ],
+   "c": {
+    "anyOf": [
+     16
+    ],
+    "gt": 0
+   }
+  },
+  {
+   "n": "10",
+   "t": "Je vois, parfois, des significations particulières dans les publicités, les vitrines de magasins ou dans la manière dont les choses sont organisées autour de moi"
+  },
+  {
+   "n": "10 – détresse",
+   "t": "Si VRAI, à quel point avez-vous ressenti de l’angoisse ou de l’inquiétude ? (item 10)",
+   "o": [
+    [
+     "Absence de stress",
+     0
+    ],
+    [
+     "Stress léger",
+     1
+    ],
+    [
+     "Stress modéré",
+     2
+    ],
+    [
+     "Stress sévère",
+     3
+    ]
+   ],
+   "c": {
+    "anyOf": [
+     18
+    ],
+    "gt": 0
+   }
+  },
+  {
+   "n": "11",
+   "t": "Parfois, je me sens soudainement distrait par des sons éloignés dont je ne suis habituellement pas conscient"
+  },
+  {
+   "n": "11 – détresse",
+   "t": "Si VRAI, à quel point avez-vous ressenti de l’angoisse ou de l’inquiétude ? (item 11)",
+   "o": [
+    [
+     "Absence de stress",
+     0
+    ],
+    [
+     "Stress léger",
+     1
+    ],
+    [
+     "Stress modéré",
+     2
+    ],
+    [
+     "Stress sévère",
+     3
+    ]
+   ],
+   "c": {
+    "anyOf": [
+     20
+    ],
+    "gt": 0
+   }
+  },
+  {
+   "n": "12",
+   "t": "Parfois, j’ai senti que je n’ai pas le contrôle sur mes propres idées ou pensées."
+  },
+  {
+   "n": "12 – détresse",
+   "t": "Si VRAI, à quel point avez-vous ressenti de l’angoisse ou de l’inquiétude ? (item 12)",
+   "o": [
+    [
+     "Absence de stress",
+     0
+    ],
+    [
+     "Stress léger",
+     1
+    ],
+    [
+     "Stress modéré",
+     2
+    ],
+    [
+     "Stress sévère",
+     3
+    ]
+   ],
+   "c": {
+    "anyOf": [
+     22
+    ],
+    "gt": 0
+   }
+  },
+  {
+   "n": "13",
+   "t": "J’ai entendu des choses que les autres ne peuvent pas entendre comme des voix de personnes qui chuchotent ou qui parlent"
+  },
+  {
+   "n": "13 – détresse",
+   "t": "Si VRAI, à quel point avez-vous ressenti de l’angoisse ou de l’inquiétude ? (item 13)",
+   "o": [
+    [
+     "Absence de stress",
+     0
+    ],
+    [
+     "Stress léger",
+     1
+    ],
+    [
+     "Stress modéré",
+     2
+    ],
+    [
+     "Stress sévère",
+     3
+    ]
+   ],
+   "c": {
+    "anyOf": [
+     24
+    ],
+    "gt": 0
+   }
+  },
+  {
+   "n": "14",
+   "t": "J’ai souvent l’impression que les autres sont contre moi"
+  },
+  {
+   "n": "14 – détresse",
+   "t": "Si VRAI, à quel point avez-vous ressenti de l’angoisse ou de l’inquiétude ? (item 14)",
+   "o": [
+    [
+     "Absence de stress",
+     0
+    ],
+    [
+     "Stress léger",
+     1
+    ],
+    [
+     "Stress modéré",
+     2
+    ],
+    [
+     "Stress sévère",
+     3
+    ]
+   ],
+   "c": {
+    "anyOf": [
+     26
+    ],
+    "gt": 0
+   }
+  },
+  {
+   "n": "15",
+   "t": "J’ai eu le sentiment que des personnes ou des forces m’entourent bien que je ne puisse voir personne"
+  },
+  {
+   "n": "15 – détresse",
+   "t": "Si VRAI, à quel point avez-vous ressenti de l’angoisse ou de l’inquiétude ? (item 15)",
+   "o": [
+    [
+     "Absence de stress",
+     0
+    ],
+    [
+     "Stress léger",
+     1
+    ],
+    [
+     "Stress modéré",
+     2
+    ],
+    [
+     "Stress sévère",
+     3
+    ]
+   ],
+   "c": {
+    "anyOf": [
+     28
+    ],
+    "gt": 0
+   }
+  },
+  {
+   "n": "16",
+   "t": "J’ai l’impression que des parties de mon corps ont changé d’une certaine manière ou que certaines parties de mon corps fonctionnent différemment d’avant."
+  },
+  {
+   "n": "16 – détresse",
+   "t": "Si VRAI, à quel point avez-vous ressenti de l’angoisse ou de l’inquiétude ? (item 16)",
+   "o": [
+    [
+     "Absence de stress",
+     0
+    ],
+    [
+     "Stress léger",
+     1
+    ],
+    [
+     "Stress modéré",
+     2
+    ],
+    [
+     "Stress sévère",
+     3
+    ]
+   ],
+   "c": {
+    "anyOf": [
+     30
+    ],
+    "gt": 0
+   }
+  }
+ ],
+ "opts": [
+  [
+   "Vrai",
+   1
+  ],
+  [
+   "Faux",
+   0
+  ]
+ ],
+ "scores": [
+  {
+   "label": "Score de dépistage PQ-16 (nombre de « Vrai »)",
+   "items": [
+    0,
+    2,
+    4,
+    6,
+    8,
+    10,
+    12,
+    14,
+    16,
+    18,
+    20,
+    22,
+    24,
+    26,
+    28,
+    30
+   ],
+   "method": "sum",
+   "max": 16,
+   "bands": [
+    [
+     0,
+     5,
+     "Sous le seuil de 6 (Ising et al., 2012 ; CHUV)."
+    ],
+    [
+     6,
+     16,
+     "Score ≥ 6 : indication à une évaluation spécialisée (CAARMS / SIPS) selon Ising et al. (2012) et le CHUV. À formuler comme un approfondissement clinique, sans évoquer d'emblée un « risque de psychose » (recommandation du CHUV)."
+    ]
+   ]
+  },
+  {
+   "label": "Détresse associée",
+   "items": [
+    1,
+    3,
+    5,
+    7,
+    9,
+    11,
+    13,
+    15,
+    17,
+    19,
+    21,
+    23,
+    25,
+    27,
+    29,
+    31
+   ],
+   "flagOnly": true,
+   "flag": true,
+   "flagLabel": "Items « Vrai » avec détresse déclarée :",
+   "note": "La détresse n'intervient pas dans le score de dépistage ; elle permet une évaluation subjective du stress ressenti (CHUV)."
+  }
+ ],
+ "qword": "Question",
+ "next": "Suivant",
+ "seeResult": "Voir le résultat"
+};
+  var items = CFG.items;
+  var VAR = null;
+  function rep(s){ if(!VAR || !s) return s; Object.keys(VAR.rep).forEach(function(k){ s = s.split(k).join(VAR.rep[k]); }); return s; }
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function active(i){
+    var c = items[i].c;
+    if(!c) return true;
+    return c.anyOf.some(function(j){ return answers[j] !== null && answers[j] > (c.gt || 0); });
+  }
+  function nextIdx(i){ var j = i + 1; while(j < items.length && !active(j)) j++; return j; }
+  function prevIdx(i){ var j = i - 1; while(j >= 0 && !active(j)) j--; return j; }
+  function position(i){
+    var k = 0, tot = 0;
+    for(var j = 0; j < items.length; j++){ if(active(j)){ tot++; if(j <= i) k++; } }
+    return [k, tot];
+  }
+  function optsOf(i){ return items[i].o || CFG.opts; }
+
+  function renderQuestion(){
+    var pos = position(idx);
+    var it = items[idx];
+    document.getElementById('progress-text').textContent = (it.n ? CFG.qword + ' ' + it.n + ' : ' : '') + pos[0] + ' / ' + pos[1];
+    document.getElementById('period-text').textContent = it.p || '';
+    document.getElementById('q-text').textContent = rep(it.t);
+    document.getElementById('q-ex').textContent = it.x || '';
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    if(it.num){
+      var inp = document.createElement('input');
+      inp.type = 'number'; inp.min = 0; inp.max = 365; inp.step = 1; inp.className = 'num-in';
+      inp.value = answers[idx] === null ? '' : answers[idx];
+      inp.addEventListener('input', function(){
+        var v = inp.value.trim();
+        if(v === '' || !/^\d+$/.test(v) || +v > 365){ answers[idx] = null; } else { answers[idx] = +v; }
+        document.getElementById('btn-next').disabled = answers[idx] === null;
+      });
+      row.appendChild(inp);
+      var lab = document.createElement('span'); lab.className = 'num-lab'; lab.textContent = it.num; row.appendChild(lab);
+    } else {
+      optsOf(idx).forEach(function(o){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx] === o[1] ? ' selected' : '');
+        d.textContent = rep(o[0]);
+        d.addEventListener('click', function(){ answers[idx] = o[1]; renderQuestion(); });
+        row.appendChild(d);
+      });
+    }
+    document.getElementById('btn-prev').disabled = prevIdx(idx) < 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = nextIdx(idx) >= items.length ? CFG.seeResult : CFG.next;
+  }
+
+  if(CFG.variants){
+    var vb = document.getElementById('variants');
+    var sb = document.getElementById('btn-start');
+    sb.disabled = true; sb.style.opacity = '.4';
+    CFG.variants.forEach(function(v){
+      var d = document.createElement('div'); d.className = 'opt'; d.textContent = v.label;
+      d.addEventListener('click', function(){
+        VAR = v; sb.disabled = false; sb.style.opacity = '1';
+        Array.prototype.forEach.call(vb.children, function(c){ c.className = 'opt'; });
+        d.className = 'opt selected';
+      });
+      vb.appendChild(d);
+    });
+  }
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    var p = prevIdx(idx);
+    if (p >= 0){ idx = p; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    var n = nextIdx(idx);
+    if (n < items.length){ idx = n; renderQuestion(); } else { showResult(); }
+  });
+
+  function compute(def){
+    var s = 0, k = 0, flagged = [];
+    def.items.forEach(function(i){
+      if(!active(i) || answers[i] === null) return;
+      var v = answers[i];
+      if(def.rev && def.rev.indexOf(i) >= 0) v = def.revSum - v;
+      if(def.thr != null){ s += (v >= def.thr ? 1 : 0); } else { s += v; }
+      k++;
+      if(def.flag && v >= 1) flagged.push(items[i].n);
+    });
+    return {sum: s, n: k, flagged: flagged};
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var box = document.getElementById('rows-all');
+    box.innerHTML = '';
+    function row(a, b){
+      var d = document.createElement('div'); d.className = 'sc-row';
+      var x = document.createElement('span'); x.textContent = a;
+      var y = document.createElement('b'); y.textContent = b;
+      d.appendChild(x); d.appendChild(y); box.appendChild(d);
+    }
+    function read(t){
+      var p = document.createElement('p'); p.className = 'sc-read'; p.textContent = t; box.appendChild(p);
+    }
+    CFG.scores.forEach(function(def){
+      if(def.title){
+        var t = document.createElement('p'); t.className = 'sc-title'; t.textContent = def.title; box.appendChild(t);
+      }
+      var r = compute(def);
+      if(def.flagOnly){ row(def.label, r.flagged.length + ' item(s)'); if(r.flagged.length){ read(def.flagLabel + ' ' + r.flagged.map(function(x){ return String(x).replace(' – détresse',''); }).join(', ') + '.'); } if(def.note){ read(def.note); } return; }
+      if(!r.n){ row(def.label, '-'); return; }
+      var val, txt;
+      if(def.method === 'mean'){
+        val = r.sum / r.n; txt = val.toFixed(2).replace('.', ',') + ' (moyenne, ' + def.range + ')';
+      } else {
+        val = r.sum; var mx = def.maxItem ? r.n * def.maxItem : def.max; txt = val + ' / ' + mx;
+        if(def.norm){
+          var nv = Math.round((val - def.norm.min) / (def.norm.max - def.norm.min) * 100);
+          txt = val + ' / ' + def.max + ' : transformé 0-100 : ' + nv;
+        }
+      }
+      if(def.raw){ txt = val + (def.unit || ''); }
+      row(def.label, txt);
+      if(def.flag && r.flagged.length){ read(def.flagLabel + ' ' + r.flagged.join(', ') + '.'); }
+      if(def.bands){
+        def.bands.forEach(function(b){ if(val >= b[0] && val <= b[1]){ read(b[2]); } });
+      }
+      if(def.note){ read(def.note); }
+    });
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Questionnaire des prodromes en 16 items (PQ-16 / QP-16)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#5B7F3A 0%,#CFE0B5 55%,#2E4318 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,245,235,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#2E4318;background:#EAF1E0;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#5B7F3A;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#2E4318;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">PQ-16</span></div>
+
+  <h1 class="serif">Questionnaire des prodromes en 16 items (PQ-16 / QP-16)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Prodromal Questionnaire 16 items (Ising et al., 2012) : dépistage des états mentaux à risque, version française du CHUV</p>
+  <div class="meta-row">
+    <span class="pill">16 questions</span>
+    <span class="pill">vrai / faux</span>
+    <span class="pill">cotation de 0 à 16</span>
+    <span class="pill">Français</span>
+    <span class="pill">Licence requise : incertaine</span>
+    
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="pq-16.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>Le PQ-16 est une version brève (16 items, réponses vrai/faux) du Prodromal Questionnaire, destinée à repérer, chez les personnes consultantes, celles qui justifient une évaluation spécialisée du risque de psychose. Pour chaque item répondu « Vrai », la personne évalue sa détresse (absence de stress, léger, modéré, sévère).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Score de dépistage = nombre de « Vrai » (0 à 16). Seuil ≥ 6 (Ising et al., 2012 : sensibilité 87 %, spécificité 87 %, VPP 44 %, VPN 98 %). La détresse n&#x27;entre pas dans le score. Un score ≥ 6 indique une évaluation spécialisée (CAARMS, SIPS) ; le CHUV recommande de le présenter comme un approfondissement clinique et non comme un « risque de psychose ». Outil de dépistage, pas un diagnostic.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p>Licence requise : incertaine. Version française : « © 2013, Sébastien Urben, Alison Mann, Philippe Conus &amp; Laurent Holzer » ; aucune mention de licence libre trouvée pour le PQ-16. Instrument construit ici conformément à la décision du 30/09/2026 ; la diffusion publique reste soumise à vérification des droits.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Sources</h2>
+    <p class="source-note">Texte français et instructions : PDF du CHUV (service de psychiatrie générale, programme TIPP) ; texte anglais et seuil : Ising et al. (2012), appendice, relu item par item. L&#x27;item 2 du document CHUV contient la formulation « comme il se sont produits », conservée telle quelle. Les libellés de détresse viennent de la page d&#x27;instructions du CHUV. La version « fPQ16 » (L&#x27;Encéphale, 2024) n&#x27;a pas été consultée.</p>
+  </div>
+
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

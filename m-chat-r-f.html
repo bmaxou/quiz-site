@@ -1,0 +1,659 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Liste de contrôle modifiée pour l&#x27;autisme chez les tout-petits, révisée (M-CHAT-R/F)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 14px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#2F6F8F;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .period{font-size:12.5px;font-weight:600;color:#2F6F8F;margin:0 0 8px;}
+  .q-text{font-size:16px;margin:0 0 6px;}
+  .q-ex{font-size:13px;color:#63695D;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;margin-top:14px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#2F6F8F;background:#E3F0F6;}
+  .num-in{width:140px;font-family:'Inter',sans-serif;font-size:16px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;background:#F4F1EA;color:#20241E;}
+  .num-lab{font-size:13px;color:#63695D;margin-left:8px;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#2F6F8F;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 16px;}
+  .sc-title{font-size:13px;font-weight:700;color:#2F6F8F;margin:18px 0 6px;}
+  .sc-row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-top:1px solid #EFEBE1;font-size:14px;}
+  .sc-row b{font-variant-numeric:tabular-nums;text-align:right;}
+  .sc-read{font-size:13px;color:#63695D;margin:0 0 6px;padding-left:2px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">Liste de contrôle modifiée pour l&#x27;autisme chez les tout-petits, révisée (M-CHAT-R/F)</h1>
+    <p class="lead">S’il vous plaît, répondez aux questions suivantes au sujet de votre enfant. Rappelez-vous comment votre enfant se comporte habituellement. Si vous avez vu votre enfant le faire quelques fois, mais qu’il/elle ne le fait pas habituellement, répondez non. Veuillez encercler oui ou non pour chaque question. Merci.</p>
+    <p class="lang-note">Version canadienne française officielle (Beaulne, Jaworski, Luu et Simard). Cette page reprend l’étape 1 (M-CHAT-R, 20 questions) ; l’entrevue de suivi (organigrammes par question) se fait avec le PDF officiel. Outil protégé par des droits d’auteur : « Licence requise : oui ».</p>
+    <div class="pill-row">
+    <span class="pill">20 questions</span>
+    <span class="pill">enfants de 16 à 30 mois</span>
+    <span class="pill">cotation en moins de 2 minutes</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="period" id="period-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <p class="q-ex" id="q-ex"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="rows-all"></div>
+    <p class="result-text">Cotation officielle : pour toutes les questions sauf 2, 5 et 12, la réponse « non » indique un risque de TSA ; pour les questions 2, 5 et 12, la réponse « oui » indique un risque. Le M-CHAT-R est un outil de dépistage à haute sensibilité (risque élevé de faux positifs) : un score de risque ne pose pas un diagnostic. Si un professionnel de santé ou un parent s’inquiète d’un TSA, l’enfant devrait être référé pour évaluation quel que soit le score.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">© 2009 Robins, Fein, &amp; Barton. M-CHAT-R/F, version canadienne française (traduction et adaptation : Beaulne, Jaworski, Luu, Simard). Aucune modification des questions, des instructions ou de leur ordre n’est permise sans l’accord des auteurs. Outil de dépistage : ne remplace pas une évaluation clinique.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var CFG = {
+ "items": [
+  {
+   "n": "1",
+   "t": "Si vous pointez quelque chose de l’autre côté de la pièce, est-ce que votre enfant le regardera?",
+   "o": [
+    [
+     "Oui",
+     0
+    ],
+    [
+     "Non",
+     1
+    ]
+   ],
+   "x": "(PAR EXEMPLE, si vous pointez un jouet ou un animal, est-ce que votre enfant regardera ce jouet ou cet animal?)"
+  },
+  {
+   "n": "2",
+   "t": "Vous êtes-vous déjà demandé si votre enfant était sourd?",
+   "o": [
+    [
+     "Oui",
+     1
+    ],
+    [
+     "Non",
+     0
+    ]
+   ]
+  },
+  {
+   "n": "3",
+   "t": "Est-ce que votre enfant joue à faire semblant?",
+   "o": [
+    [
+     "Oui",
+     0
+    ],
+    [
+     "Non",
+     1
+    ]
+   ],
+   "x": "(PAR EXEMPLE, fait semblant de boire avec un verre vide, de parler au téléphone ou de nourrir une poupée ou un toutou)"
+  },
+  {
+   "n": "4",
+   "t": "Est-ce que votre enfant aime grimper sur les choses?",
+   "o": [
+    [
+     "Oui",
+     0
+    ],
+    [
+     "Non",
+     1
+    ]
+   ],
+   "x": "(PAR EXEMPLE, les meubles, les modules de jeux au parc, les escaliers)"
+  },
+  {
+   "n": "5",
+   "t": "Est-ce que votre enfant fait des mouvements inhabituels avec les doigts près de ses yeux?",
+   "o": [
+    [
+     "Oui",
+     1
+    ],
+    [
+     "Non",
+     0
+    ]
+   ],
+   "x": "(PAR EXEMPLE, agite ses doigts près de ses yeux)"
+  },
+  {
+   "n": "6",
+   "t": "Est-ce que votre enfant pointe avec un doigt pour demander quelque chose ou demander de l’aide?",
+   "o": [
+    [
+     "Oui",
+     0
+    ],
+    [
+     "Non",
+     1
+    ]
+   ],
+   "x": "(PAR EXEMPLE, pointe vers une collation ou un jouet hors de sa portée)"
+  },
+  {
+   "n": "7",
+   "t": "Est-ce que votre enfant pointe avec un doigt pour montrer quelque chose qui l’intéresse?",
+   "o": [
+    [
+     "Oui",
+     0
+    ],
+    [
+     "Non",
+     1
+    ]
+   ],
+   "x": "(PAR EXEMPLE, un avion dans le ciel ou un camion sur la route)"
+  },
+  {
+   "n": "8",
+   "t": "Est-ce que votre enfant est intéressé par les autres enfants?",
+   "o": [
+    [
+     "Oui",
+     0
+    ],
+    [
+     "Non",
+     1
+    ]
+   ],
+   "x": "(PAR EXEMPLE, est-ce que votre enfant regarde les autres enfants, leur sourit, ou va vers eux?)"
+  },
+  {
+   "n": "9",
+   "t": "Est-ce que votre enfant vous montre des choses en vous les apportant ou en vous les tendant pour que vous les regardiez? Non pas seulement pour demander de l’aide, mais aussi pour les partager?",
+   "o": [
+    [
+     "Oui",
+     0
+    ],
+    [
+     "Non",
+     1
+    ]
+   ],
+   "x": "(PAR EXEMPLE, vous montrer une fleur, un toutou, un camion en jouet)"
+  },
+  {
+   "n": "10",
+   "t": "Est-ce que votre enfant répond lorsque vous l’appelez par son prénom?",
+   "o": [
+    [
+     "Oui",
+     0
+    ],
+    [
+     "Non",
+     1
+    ]
+   ],
+   "x": "(PAR EXEMPLE, est-ce qu’il/elle lève les yeux, parle ou gazouille, arrête ce qu’il/elle est en train de faire lorsque vous l’appelez par son prénom)"
+  },
+  {
+   "n": "11",
+   "t": "Lorsque vous souriez à votre enfant, est-ce qu’il/elle vous sourit en retour?",
+   "o": [
+    [
+     "Oui",
+     0
+    ],
+    [
+     "Non",
+     1
+    ]
+   ]
+  },
+  {
+   "n": "12",
+   "t": "Est-ce que votre enfant est dérangé par les bruits du quotidien?",
+   "o": [
+    [
+     "Oui",
+     1
+    ],
+    [
+     "Non",
+     0
+    ]
+   ],
+   "x": "(PAR EXEMPLE, est-ce qu’il/elle crie ou pleure en entendant l’aspirateur ou une musique forte?)"
+  },
+  {
+   "n": "13",
+   "t": "Votre enfant est-il/elle capable de marcher?",
+   "o": [
+    [
+     "Oui",
+     0
+    ],
+    [
+     "Non",
+     1
+    ]
+   ]
+  },
+  {
+   "n": "14",
+   "t": "Est-ce que votre enfant vous regarde dans les yeux lorsque vous lui parlez, quand vous jouez avec lui/elle ou lorsque vous l’habillez?",
+   "o": [
+    [
+     "Oui",
+     0
+    ],
+    [
+     "Non",
+     1
+    ]
+   ]
+  },
+  {
+   "n": "15",
+   "t": "Est-ce que votre enfant essaie de vous imiter?",
+   "o": [
+    [
+     "Oui",
+     0
+    ],
+    [
+     "Non",
+     1
+    ]
+   ],
+   "x": "(PAR EXEMPLE, faire « bye-bye » de la main, applaudir, faire un son drôle lorsque vous en faites un)"
+  },
+  {
+   "n": "16",
+   "t": "Si vous tournez la tête pour regarder quelque chose, est-ce que votre enfant tourne la tête pour voir ce que vous regardez?",
+   "o": [
+    [
+     "Oui",
+     0
+    ],
+    [
+     "Non",
+     1
+    ]
+   ]
+  },
+  {
+   "n": "17",
+   "t": "Est-ce que votre enfant essaie d’attirer votre attention pour que vous le regardiez?",
+   "o": [
+    [
+     "Oui",
+     0
+    ],
+    [
+     "Non",
+     1
+    ]
+   ],
+   "x": "(PAR EXEMPLE, est-ce que votre enfant vous regarde dans l’espoir d’être félicité, ou dit « regarde » ou « regarde-moi » ?)"
+  },
+  {
+   "n": "18",
+   "t": "Est-ce que votre enfant comprend lorsque vous lui dites de faire quelque chose?",
+   "o": [
+    [
+     "Oui",
+     0
+    ],
+    [
+     "Non",
+     1
+    ]
+   ],
+   "x": "(PAR EXEMPLE, si vous ne pointez pas l’objet, est-ce que votre enfant comprend « mets le livre sur la chaise » ou « apporte-moi la couverture » ?)"
+  },
+  {
+   "n": "19",
+   "t": "Si quelque chose de nouveau arrive, est-ce que votre enfant regarde votre visage pour voir comment vous y réagissez?",
+   "o": [
+    [
+     "Oui",
+     0
+    ],
+    [
+     "Non",
+     1
+    ]
+   ],
+   "x": "(PAR EXEMPLE, s’il/elle entend un son bizarre ou drôle, ou voit un nouveau jouet, est-ce qu’il/elle vous regardera?)"
+  },
+  {
+   "n": "20",
+   "t": "Est-ce que votre enfant aime les activités qui le font bouger?",
+   "o": [
+    [
+     "Oui",
+     0
+    ],
+    [
+     "Non",
+     1
+    ]
+   ],
+   "x": "(PAR EXEMPLE, lorsque vous le faites balancer ou sautiller?)"
+  }
+ ],
+ "opts": [],
+ "scores": [
+  {
+   "label": "Nombre de réponses indiquant un risque",
+   "items": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19
+   ],
+   "method": "sum",
+   "max": 20,
+   "flag": true,
+   "flagLabel": "Questions à reprendre dans l’entrevue de suivi (organigrammes du PDF officiel) :",
+   "bands": [
+    [
+     0,
+     2,
+     "Risque faible (score 0-2) : si l’enfant a moins de 24 mois, refaire le dépistage après son 2e anniversaire ; aucune autre intervention requise, sauf si un risque de TSA reste observé lors du suivi."
+    ],
+    [
+     3,
+     7,
+     "Risque moyen (score 3-7) : administrer l’entrevue de suivi (M-CHAT-R/F) sur les questions échouées. Si le score au suivi est de 2 ou plus, l’enfant est à risque de TSA (évaluation diagnostique et admissibilité à l’intervention précoce) ; s’il est de 0-1, l’enfant n’est pas à risque, avec nouveau dépistage aux prochaines visites."
+    ],
+    [
+     8,
+     20,
+     "Risque élevé (score 8-20) : l’entrevue de suivi peut être omise ; il est conseillé de référer immédiatement l’enfant pour une évaluation diagnostique et pour déterminer son admissibilité à des services de stimulation et/ou d’intervention précoce."
+    ]
+   ]
+  }
+ ],
+ "qword": "Question",
+ "next": "Suivant",
+ "seeResult": "Voir le résultat"
+};
+  var items = CFG.items;
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function active(i){
+    var c = items[i].c;
+    if(!c) return true;
+    return c.anyOf.some(function(j){ return answers[j] !== null && answers[j] > (c.gt || 0); });
+  }
+  function nextIdx(i){ var j = i + 1; while(j < items.length && !active(j)) j++; return j; }
+  function prevIdx(i){ var j = i - 1; while(j >= 0 && !active(j)) j--; return j; }
+  function position(i){
+    var k = 0, tot = 0;
+    for(var j = 0; j < items.length; j++){ if(active(j)){ tot++; if(j <= i) k++; } }
+    return [k, tot];
+  }
+  function optsOf(i){ return items[i].o || CFG.opts; }
+
+  function renderQuestion(){
+    var pos = position(idx);
+    var it = items[idx];
+    document.getElementById('progress-text').textContent = (it.n ? CFG.qword + ' ' + it.n + ' : ' : '') + pos[0] + ' / ' + pos[1];
+    document.getElementById('period-text').textContent = it.p || '';
+    document.getElementById('q-text').textContent = it.t;
+    document.getElementById('q-ex').textContent = it.x || '';
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    if(it.num){
+      var inp = document.createElement('input');
+      inp.type = 'number'; inp.min = 0; inp.max = 365; inp.step = 1; inp.className = 'num-in';
+      inp.value = answers[idx] === null ? '' : answers[idx];
+      inp.addEventListener('input', function(){
+        var v = inp.value.trim();
+        if(v === '' || !/^\d+$/.test(v) || +v > 365){ answers[idx] = null; } else { answers[idx] = +v; }
+        document.getElementById('btn-next').disabled = answers[idx] === null;
+      });
+      row.appendChild(inp);
+      var lab = document.createElement('span'); lab.className = 'num-lab'; lab.textContent = it.num; row.appendChild(lab);
+    } else {
+      optsOf(idx).forEach(function(o){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx] === o[1] ? ' selected' : '');
+        d.textContent = o[0];
+        d.addEventListener('click', function(){ answers[idx] = o[1]; renderQuestion(); });
+        row.appendChild(d);
+      });
+    }
+    document.getElementById('btn-prev').disabled = prevIdx(idx) < 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = nextIdx(idx) >= items.length ? CFG.seeResult : CFG.next;
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    var p = prevIdx(idx);
+    if (p >= 0){ idx = p; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    var n = nextIdx(idx);
+    if (n < items.length){ idx = n; renderQuestion(); } else { showResult(); }
+  });
+
+  function compute(def){
+    var s = 0, k = 0, flagged = [];
+    def.items.forEach(function(i){
+      if(!active(i) || answers[i] === null) return;
+      var v = answers[i];
+      if(def.rev && def.rev.indexOf(i) >= 0) v = def.revSum - v;
+      s += v; k++;
+      if(def.flag && v >= 1) flagged.push(items[i].n);
+    });
+    return {sum: s, n: k, flagged: flagged};
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var box = document.getElementById('rows-all');
+    box.innerHTML = '';
+    function row(a, b){
+      var d = document.createElement('div'); d.className = 'sc-row';
+      var x = document.createElement('span'); x.textContent = a;
+      var y = document.createElement('b'); y.textContent = b;
+      d.appendChild(x); d.appendChild(y); box.appendChild(d);
+    }
+    function read(t){
+      var p = document.createElement('p'); p.className = 'sc-read'; p.textContent = t; box.appendChild(p);
+    }
+    CFG.scores.forEach(function(def){
+      if(def.title){
+        var t = document.createElement('p'); t.className = 'sc-title'; t.textContent = def.title; box.appendChild(t);
+      }
+      var r = compute(def);
+      if(!r.n){ row(def.label, '-'); return; }
+      var val, txt;
+      if(def.method === 'mean'){
+        val = r.sum / r.n; txt = val.toFixed(2).replace('.', ',') + ' (moyenne, ' + def.range + ')';
+      } else {
+        val = r.sum; txt = val + ' / ' + def.max;
+        if(def.norm){
+          var nv = Math.round((val - def.norm.min) / (def.norm.max - def.norm.min) * 100);
+          txt = val + ' / ' + def.max + ' : transformé 0-100 : ' + nv;
+        }
+      }
+      if(def.raw){ txt = val + (def.unit || ''); }
+      row(def.label, txt);
+      if(def.flag && r.flagged.length){ read(def.flagLabel + ' ' + r.flagged.join(', ') + '.'); }
+      if(def.bands){
+        def.bands.forEach(function(b){ if(val >= b[0] && val <= b[1]){ read(b[2]); } });
+      }
+      if(def.note){ read(def.note); }
+    });
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Liste de contrôle modifiée pour l&#x27;autisme chez les tout-petits, révisée (M-CHAT-R/F)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#3F7F5A 0%,#BFE0C8 55%,#1B4030 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,245,235,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#123B4F;background:#E3F0F6;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#2F6F8F;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#123B4F;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">M-CHAT-R/F</span></div>
+
+  <h1 class="serif">Liste de contrôle modifiée pour l&#x27;autisme chez les tout-petits, révisée (M-CHAT-R/F)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">M-CHAT-R/F (Robins, Fein &amp; Barton, 2009), version canadienne française : dépistage parental du risque de trouble du spectre de l’autisme (TSA)</p>
+  <div class="meta-row">
+    <span class="pill">20 questions</span>
+    <span class="pill">enfants de 16 à 30 mois</span>
+    <span class="pill">cotation en moins de 2 minutes</span>
+    <span class="pill">Français (Canada)</span>
+    <span class="pill">Licence requise : oui</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="m-chat-r-f.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>Le M-CHAT-R (Modified Checklist for Autism in Toddlers, Revised) est un questionnaire de dépistage de 20 questions rempli par les parents (oui/non), valide pour les enfants de 16 à 30 mois. Son but premier est de maximiser la sensibilité du dépistage ; il y a donc un risque élevé de faux positifs. Le complément d’entrevue (Follow-Up, M-CHAT-R/F) se limite aux questions échouées et suit des organigrammes jusqu’à un résultat « succès » ou « échec ».</p>
+    <p>Cette page reprend l’étape 1 (les 20 questions, cotation automatique, liste des questions échouées). L’entrevue de suivi n’est pas reproduite ici : ses organigrammes figurent dans le PDF officiel (mchatscreen.com).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Pour toutes les questions sauf 2, 5 et 12, la réponse « non » indique un risque de TSA ; pour les questions 2, 5 et 12, la réponse « oui » indique un risque. Algorithme officiel : score 0-2 = risque faible ; 3-7 = risque moyen (administrer l’entrevue de suivi ; un score de suivi de 2 ou plus = à risque, 0-1 = pas à risque) ; 8-20 = risque élevé (référer pour évaluation diagnostique, l’entrevue de suivi peut être omise).</p>
+    <p>L’outil doit être utilisé dans son entièreté ; les sous-ensembles de questions n’ont pas les propriétés psychométriques adéquates (consigne des auteurs).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p><strong>Licence requise : oui.</strong> © 2009 Robins, Fein &amp; Barton. Outil disponible gratuitement pour la clinique, la recherche et l’enseignement ; matériel protégé par des droits d’auteur (non open source). Toute reproduction doit porter la mention de droits d’auteur sur chaque page, et toute utilisation commerciale ou électronique exige l’autorisation de Diana L. Robins (mchatscreen2009@gmail.com). Instrument construit ici malgré la licence, conformément à la décision du 30/09/2026 ; la diffusion publique reste soumise à l’autorisation du détenteur des droits.</p>
+    <p class="source-note">Texte des 20 questions et algorithme de cotation : PDF officiel « M-CHAT-R/F, version canadienne française » (mchatscreen.com, traduction et adaptation Beaulne, Jaworski, Luu et Simard), lu en entier ; questions vérifiées par script contre le texte du PDF. Entrevue de suivi (organigrammes) non reprise.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

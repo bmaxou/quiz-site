@@ -1,0 +1,659 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Young Mania Rating Scale : version parent (P-YMRS)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 14px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#D2547A;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .period{font-size:12.5px;font-weight:600;color:#D2547A;margin:0 0 8px;}
+  .q-text{font-size:16px;margin:0 0 6px;}
+  .q-ex{font-size:13px;color:#63695D;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;margin-top:14px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#D2547A;background:#F9E3EA;}
+  .num-in{width:140px;font-family:'Inter',sans-serif;font-size:16px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;background:#F4F1EA;color:#20241E;}
+  .num-lab{font-size:13px;color:#63695D;margin-left:8px;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#D2547A;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 16px;}
+  .sc-title{font-size:13px;font-weight:700;color:#D2547A;margin:18px 0 6px;}
+  .sc-row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-top:1px solid #EFEBE1;font-size:14px;}
+  .sc-row b{font-variant-numeric:tabular-nums;text-align:right;}
+  .sc-read{font-size:13px;color:#63695D;margin:0 0 6px;padding-left:2px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">Young Mania Rating Scale : version parent (P-YMRS)</h1>
+    <p class="lead">Directions: Please read each question below and circle the answer number which most closely describes your child.</p>
+    <p class="lang-note">Questionnaire rempli par le parent, à propos de son enfant. Items en anglais (Gracious et al., 2002) : version française non retrouvée. Licence requise : incertaine.</p>
+    <div class="pill-row">
+    <span class="pill">11 questions</span><span class="pill">rempli par le parent</span><span class="pill">cotation de 0 à 60</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="period" id="period-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <p class="q-ex" id="q-ex"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="rows-all"></div>
+    <p class="result-text">Le score est la somme de la réponse choisie à chaque question (0 à 60) : les questions 5, 6, 8 et 9 vont de 0 à 8 (par pas de 2), les autres de 0 à 4 ; aucun item inversé. Repères (Project TEACH, d&#x27;après Gracious et al., 2002) : au-dessus de 13, cas potentiel de manie ou d&#x27;hypomanie ; au-dessus de 21, cas probable. Outil de repérage : il ne diagnostique pas un trouble bipolaire.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">P-YMRS : Gracious, B. L., Youngstrom, E. A., Findling, R. L., &amp; Calabrese, J. R. (2002). Discriminative validity of a parent version of the Young Mania Rating Scale. Journal of the American Academy of Child and Adolescent Psychiatry, 41(11), 1350-1359 (adapté de Young et al., 1978). Reproduit avec la permission de Barbara Gracious. Outil de repérage, ne remplace pas une évaluation clinique.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var CFG = {
+ "items": [
+  {
+   "n": "1",
+   "t": "Mood - Is your child’s mood higher (better) than usual?",
+   "o": [
+    [
+     "0. No",
+     0
+    ],
+    [
+     "1. Mildly or possibly increased",
+     1
+    ],
+    [
+     "2. Definite elevation- more optimistic, self-confident; cheerful; appropriate to their conversation",
+     2
+    ],
+    [
+     "3. Elevated but inappropriate to content; joking, mildly silly",
+     3
+    ],
+    [
+     "4. Euphoric; inappropriate laughter; singing/making noises; very silly",
+     4
+    ]
+   ]
+  },
+  {
+   "n": "2",
+   "t": "Motor Activity/Energy - Does your child’s energy level or motor activity appear to be greater than usual?",
+   "o": [
+    [
+     "0. No",
+     0
+    ],
+    [
+     "1. Mildly or possibly increased",
+     1
+    ],
+    [
+     "2. More animated; increased gesturing",
+     2
+    ],
+    [
+     "3. Energy is excessive; hyperactive at times; restless but can be calmed",
+     3
+    ],
+    [
+     "4. Very excited; continuous hyperactivity; cannot be calmed",
+     4
+    ]
+   ]
+  },
+  {
+   "n": "3",
+   "t": "Sexual Interest - Is your child showing more than usual interest in sexual matters?",
+   "o": [
+    [
+     "0. No",
+     0
+    ],
+    [
+     "1. Mildly or possibly increased",
+     1
+    ],
+    [
+     "2. Definite increase when the topic arises",
+     2
+    ],
+    [
+     "3. Talks spontaneously about sexual matters; gives more detail than usual; more interested in girls/boys than usual",
+     3
+    ],
+    [
+     "4. Has shown open sexual behavior- touching others or self inappropriately",
+     4
+    ]
+   ]
+  },
+  {
+   "n": "4",
+   "t": "Sleep - Has your child’s sleep decreased lately?",
+   "o": [
+    [
+     "0. No",
+     0
+    ],
+    [
+     "1. Sleeping less than normal amount by up to one hour",
+     1
+    ],
+    [
+     "2. Sleeping less than normal amount by more than one hour",
+     2
+    ],
+    [
+     "3. Need for sleep appears decreased; less than four hours",
+     3
+    ],
+    [
+     "4. Denies need for sleep; has stayed up one night or more",
+     4
+    ]
+   ]
+  },
+  {
+   "n": "5",
+   "t": "Irritability - Has your child appeared irritable?",
+   "o": [
+    [
+     "0. No more than usual",
+     0
+    ],
+    [
+     "2. More grouchy or crabby",
+     2
+    ],
+    [
+     "4. Irritable openly several times throughout the day; recent episodes of anger with family, at school, or with friends",
+     4
+    ],
+    [
+     "6. Frequently irritable to point of being rude or withdrawn",
+     6
+    ],
+    [
+     "8. Hostile and uncooperative about all the time",
+     8
+    ]
+   ]
+  },
+  {
+   "n": "6",
+   "t": "Speech (rate and amount) - Is your child talking more quickly or more than usual?",
+   "o": [
+    [
+     "0. No change",
+     0
+    ],
+    [
+     "2. Seems more talkative",
+     2
+    ],
+    [
+     "4. Talking faster or more to say at times",
+     4
+    ],
+    [
+     "6. Talking more or faster to point he/she is difficult to interrupt",
+     6
+    ],
+    [
+     "8. Continuous speech; unable to interrupt",
+     8
+    ]
+   ]
+  },
+  {
+   "n": "7",
+   "t": "Thoughts - Has your child shown changes in his/her thought patterns?",
+   "o": [
+    [
+     "0. No",
+     0
+    ],
+    [
+     "1. Thinking faster; some decrease in concentration; talking “around the issue”",
+     1
+    ],
+    [
+     "2. Distractible; loses track of the point; changes topics frequently; thoughts racing",
+     2
+    ],
+    [
+     "3. Difficult to follow; goes from one idea to the next; topics do not relate; makes rhymes or repeats words",
+     3
+    ],
+    [
+     "4. Not understandable; he/she doesn’t seem to make any sense",
+     4
+    ]
+   ]
+  },
+  {
+   "n": "8",
+   "t": "Content - Is your child talking about different things than usual?",
+   "o": [
+    [
+     "0. No",
+     0
+    ],
+    [
+     "2. He/she has new interests and is making more plans",
+     2
+    ],
+    [
+     "4. Making special projects; more religious or interested in God",
+     4
+    ],
+    [
+     "6. Thinks more of him/herself; believes he/she has special powers; believes he/she is receiving special messages",
+     6
+    ],
+    [
+     "8. Is hearing unreal noises/voices; detects odors no one else smells; feels unusual sensations; has unreal beliefs",
+     8
+    ]
+   ]
+  },
+  {
+   "n": "9",
+   "t": "Disruptive-Aggressive Behavior - Has your child been more disruptive or aggressive?",
+   "o": [
+    [
+     "0. No; he/she is cooperative",
+     0
+    ],
+    [
+     "2. Sarcastic; loud; defensive",
+     2
+    ],
+    [
+     "4. More demanding; making threats",
+     4
+    ],
+    [
+     "6. Has threatened a family member or teacher; shouting; knocking over possessions/furniture or hitting a wall",
+     6
+    ],
+    [
+     "8. Has attacked family member, teacher, or peer; destroyed property; cannot be spoken to without violence",
+     8
+    ]
+   ]
+  },
+  {
+   "n": "10",
+   "t": "Appearance - Has your child’s interest in his/her appearance changed recently?",
+   "o": [
+    [
+     "0. No",
+     0
+    ],
+    [
+     "1. A little less or more interest in grooming than usual",
+     1
+    ],
+    [
+     "2. Doesn’t care about washing or changing clothes, or is changing clothes more than three time a day",
+     2
+    ],
+    [
+     "3. Very messy; needs to be supervised to finish dressing; applying makeup in overly-done or poor fashion",
+     3
+    ],
+    [
+     "4. Refuses to dress appropriately; wearing bizarre styles",
+     4
+    ]
+   ]
+  },
+  {
+   "n": "11",
+   "t": "Insight - Does your child think he/she needs help at this time?",
+   "o": [
+    [
+     "0. Yes; admits difficulties and wants treatment",
+     0
+    ],
+    [
+     "1. Believes there might be something wrong",
+     1
+    ],
+    [
+     "2. Admits to change in behavior but denies he/she needs help",
+     2
+    ],
+    [
+     "3. Admits behavior might have changed but denies need for help",
+     3
+    ],
+    [
+     "4. Denies there have been any changes in his/her behavior/thinking",
+     4
+    ]
+   ]
+  }
+ ],
+ "opts": [],
+ "scores": [
+  {
+   "label": "Score total P-YMRS",
+   "items": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "method": "sum",
+   "max": 60,
+   "bands": [
+    [
+     0,
+     13,
+     "En deçà de « above 13 » : sous le seuil de cas potentiel (Project TEACH, d'après Gracious et al., 2002)."
+    ],
+    [
+     14,
+     21,
+     "Au-dessus de 13 : cas potentiel de manie ou d'hypomanie (Project TEACH)."
+    ],
+    [
+     22,
+     60,
+     "Au-dessus de 21 : cas probable (Project TEACH). Ne pas utiliser comme substitut d'une évaluation."
+    ]
+   ]
+  }
+ ],
+ "qword": "Question",
+ "next": "Suivant",
+ "seeResult": "Voir le résultat"
+};
+  var items = CFG.items;
+  var VAR = null;
+  function rep(s){ if(!VAR || !s) return s; Object.keys(VAR.rep).forEach(function(k){ s = s.split(k).join(VAR.rep[k]); }); return s; }
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function active(i){
+    var c = items[i].c;
+    if(!c) return true;
+    return c.anyOf.some(function(j){ return answers[j] !== null && answers[j] > (c.gt || 0); });
+  }
+  function nextIdx(i){ var j = i + 1; while(j < items.length && !active(j)) j++; return j; }
+  function prevIdx(i){ var j = i - 1; while(j >= 0 && !active(j)) j--; return j; }
+  function position(i){
+    var k = 0, tot = 0;
+    for(var j = 0; j < items.length; j++){ if(active(j)){ tot++; if(j <= i) k++; } }
+    return [k, tot];
+  }
+  function optsOf(i){ return items[i].o || CFG.opts; }
+
+  function renderQuestion(){
+    var pos = position(idx);
+    var it = items[idx];
+    document.getElementById('progress-text').textContent = (it.n ? CFG.qword + ' ' + it.n + ' : ' : '') + pos[0] + ' / ' + pos[1];
+    document.getElementById('period-text').textContent = it.p || '';
+    document.getElementById('q-text').textContent = rep(it.t);
+    document.getElementById('q-ex').textContent = it.x || '';
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    if(it.num){
+      var inp = document.createElement('input');
+      inp.type = 'number'; inp.min = 0; inp.max = 365; inp.step = 1; inp.className = 'num-in';
+      inp.value = answers[idx] === null ? '' : answers[idx];
+      inp.addEventListener('input', function(){
+        var v = inp.value.trim();
+        if(v === '' || !/^\d+$/.test(v) || +v > 365){ answers[idx] = null; } else { answers[idx] = +v; }
+        document.getElementById('btn-next').disabled = answers[idx] === null;
+      });
+      row.appendChild(inp);
+      var lab = document.createElement('span'); lab.className = 'num-lab'; lab.textContent = it.num; row.appendChild(lab);
+    } else {
+      optsOf(idx).forEach(function(o){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx] === o[1] ? ' selected' : '');
+        d.textContent = rep(o[0]);
+        d.addEventListener('click', function(){ answers[idx] = o[1]; renderQuestion(); });
+        row.appendChild(d);
+      });
+    }
+    document.getElementById('btn-prev').disabled = prevIdx(idx) < 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = nextIdx(idx) >= items.length ? CFG.seeResult : CFG.next;
+  }
+
+  if(CFG.variants){
+    var vb = document.getElementById('variants');
+    var sb = document.getElementById('btn-start');
+    sb.disabled = true; sb.style.opacity = '.4';
+    CFG.variants.forEach(function(v){
+      var d = document.createElement('div'); d.className = 'opt'; d.textContent = v.label;
+      d.addEventListener('click', function(){
+        VAR = v; sb.disabled = false; sb.style.opacity = '1';
+        Array.prototype.forEach.call(vb.children, function(c){ c.className = 'opt'; });
+        d.className = 'opt selected';
+      });
+      vb.appendChild(d);
+    });
+  }
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    var p = prevIdx(idx);
+    if (p >= 0){ idx = p; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    var n = nextIdx(idx);
+    if (n < items.length){ idx = n; renderQuestion(); } else { showResult(); }
+  });
+
+  function compute(def){
+    var s = 0, k = 0, flagged = [];
+    def.items.forEach(function(i){
+      if(!active(i) || answers[i] === null) return;
+      var v = answers[i];
+      if(def.rev && def.rev.indexOf(i) >= 0) v = def.revSum - v;
+      if(def.thr != null){ s += (v >= def.thr ? 1 : 0); } else { s += v; }
+      k++;
+      if(def.flag && v >= 1) flagged.push(items[i].n);
+    });
+    return {sum: s, n: k, flagged: flagged};
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var box = document.getElementById('rows-all');
+    box.innerHTML = '';
+    function row(a, b){
+      var d = document.createElement('div'); d.className = 'sc-row';
+      var x = document.createElement('span'); x.textContent = a;
+      var y = document.createElement('b'); y.textContent = b;
+      d.appendChild(x); d.appendChild(y); box.appendChild(d);
+    }
+    function read(t){
+      var p = document.createElement('p'); p.className = 'sc-read'; p.textContent = t; box.appendChild(p);
+    }
+    CFG.scores.forEach(function(def){
+      if(def.title){
+        var t = document.createElement('p'); t.className = 'sc-title'; t.textContent = def.title; box.appendChild(t);
+      }
+      var r = compute(def);
+      if(def.flagOnly){ row(def.label, r.flagged.length + ' item(s)'); if(r.flagged.length){ read(def.flagLabel + ' ' + r.flagged.map(function(x){ return String(x).replace(' – détresse',''); }).join(', ') + '.'); } if(def.note){ read(def.note); } return; }
+      if(!r.n){ row(def.label, '-'); return; }
+      var val, txt;
+      if(def.method === 'mean'){
+        val = r.sum / r.n; txt = val.toFixed(2).replace('.', ',') + ' (moyenne, ' + def.range + ')';
+      } else {
+        val = r.sum; var mx = def.maxItem ? r.n * def.maxItem : def.max; txt = val + ' / ' + mx;
+        if(def.norm){
+          var nv = Math.round((val - def.norm.min) / (def.norm.max - def.norm.min) * 100);
+          txt = val + ' / ' + def.max + ' : transformé 0-100 : ' + nv;
+        }
+      }
+      if(def.raw){ txt = val + (def.unit || ''); }
+      row(def.label, txt);
+      if(def.flag && r.flagged.length){ read(def.flagLabel + ' ' + r.flagged.join(', ') + '.'); }
+      if(def.bands){
+        def.bands.forEach(function(b){ if(val >= b[0] && val <= b[1]){ read(b[2]); } });
+      }
+      if(def.note){ read(def.note); }
+    });
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Young Mania Rating Scale : version parent (P-YMRS)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#D2547A 0%,#F0BBCB 55%,#6E1F38 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,245,235,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#6E1F38;background:#F9E3EA;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#D2547A;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#6E1F38;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">P-YMRS</span></div>
+
+  <h1 class="serif">Young Mania Rating Scale : version parent (P-YMRS)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Parent Version of the Young Mania Rating Scale (Gracious et al., 2002) : repérage des symptômes maniaques de l&#x27;enfant et de l&#x27;adolescent par le parent</p>
+  <div class="meta-row">
+    <span class="pill">11 questions</span>
+    <span class="pill">rempli par le parent</span>
+    <span class="pill">cotation de 0 à 60</span>
+    <span class="pill">Anglais</span>
+    <span class="pill">Licence requise : incertaine</span>
+    
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="p-ymrs.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>La P-YMRS est une adaptation de la Young Mania Rating Scale destinée aux parents : onze questions (humeur, activité motrice, intérêt sexuel, sommeil, irritabilité, langage, pensée, contenu, comportement perturbateur-agressif, apparence, insight) avec des ancrages décrivant chaque niveau.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Le score est la somme du numéro le plus élevé entouré à chaque question (0 à 60) : questions 1, 2, 3, 4, 7, 10, 11 de 0 à 4 ; questions 5, 6, 8, 9 de 0 à 8 par pas de 2 ; aucun item inversé. Le formulaire ne donne aucun seuil ; les repères viennent de la fiche de Project TEACH (New York), d&#x27;après Gracious et al. (2002) : au-dessus de 13, cas potentiel de manie ou d&#x27;hypomanie ; au-dessus de 21, cas probable. Un score élevé augmente le risque, un score bas le diminue ; l&#x27;outil ne remplace pas une évaluation et ne diagnostique pas un trouble bipolaire.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p>Licence requise : incertaine. Formulaire : « Reprinted with permission from Barbara Gracious, MD, June 2007 » ; la Y-MRS d&#x27;origine est © 1978 The Royal College of Psychiatrists. Project TEACH : fourni « for educational purposes only ». Construit conformément à la décision du 30/09/2026.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Sources</h2>
+    <p class="source-note">Items et ancrages complets : PDF du formulaire (mc3michigan.org, reproduit avec permission), copiés tels quels. Seuils : fiche de cotation de Project TEACH. Aucune version française trouvée.</p>
+  </div>
+
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

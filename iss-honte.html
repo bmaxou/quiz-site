@@ -1,0 +1,583 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Échelle de honte internalisée de Cook (ISS)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 14px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#2F6F8F;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .period{font-size:12.5px;font-weight:600;color:#2F6F8F;margin:0 0 8px;}
+  .q-text{font-size:16px;margin:0 0 6px;}
+  .q-ex{font-size:13px;color:#63695D;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;margin-top:14px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#2F6F8F;background:#E3F0F6;}
+  .num-in{width:140px;font-family:'Inter',sans-serif;font-size:16px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;background:#F4F1EA;color:#20241E;}
+  .num-lab{font-size:13px;color:#63695D;margin-left:8px;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#2F6F8F;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 16px;}
+  .sc-title{font-size:13px;font-weight:700;color:#2F6F8F;margin:18px 0 6px;}
+  .sc-row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-top:1px solid #EFEBE1;font-size:14px;}
+  .sc-row b{font-variant-numeric:tabular-nums;text-align:right;}
+  .sc-read{font-size:13px;color:#63695D;margin:0 0 6px;padding-left:2px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">Échelle de honte internalisée de Cook (ISS)</h1>
+    <p class="lead">DIRECTIONS: Below is a list of statements describing feelings or experiences that you may have from time to time or that are familiar to you because you have had these feelings and experiences for a long time. Most of these statements describe feelings and experiences that are generally painful or negative in some way. Some people will seldom or never have had many of these feelings. Everyone has had some of these feelings at some time, but if you find that these statements describe the way you feel a good deal of the time, it can be painful just reading them. Try to be as honest as you can in responding.</p>
+    <p class="lead">Read each statement carefully and circle the number to the left of the item that indicates the frequency with which you find yourself feeling or experiencing what is described in the statement. Use the scale below. DO NOT OMIT ANY ITEM.</p>
+    <p class="lang-note">Items en anglais (formulaire de Cook, 1990) : version française non retrouvée. Ne pas confondre avec l&#x27;Index of Sexual Satisfaction. Licence requise : oui (CC BY 4.0 pour le formulaire déposé).</p>
+    <div class="pill-row">
+    <span class="pill">30 questions</span>
+    <span class="pill">5 choix de réponse</span>
+    <span class="pill">honte de 0 à 96</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="period" id="period-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <p class="q-ex" id="q-ex"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="rows-all"></div>
+    <p class="result-text">Chaque réponse vaut de 0 (« Never ») à 4 (« Almost always »). Le score de honte est la somme des 24 items négatifs (0 à 96) ; les six items positifs (4, 9, 14, 18, 21 et 28), qui ne sont pas inversés, forment à part un score d&#x27;estime de soi (0 à 24). Outil de repérage : il ne pose pas un diagnostic et ne remplace pas une évaluation clinique.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">ISS : Cook, D. R. (1990). Internalized Shame Scale ; Cook, D. R. (1994/2001). Internalized Shame Scale: Technical Manual. Multi-Health Systems. Outil de repérage, ne remplace pas une évaluation clinique.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var CFG = {
+ "items": [
+  {
+   "n": "1",
+   "t": "I feel like I am never quite good enough."
+  },
+  {
+   "n": "2",
+   "t": "I feel somehow left out."
+  },
+  {
+   "n": "3",
+   "t": "I think that people look down on me."
+  },
+  {
+   "n": "4",
+   "t": "All in all, I am inclined to feel that I am a success."
+  },
+  {
+   "n": "5",
+   "t": "I scold myself and put myself down."
+  },
+  {
+   "n": "6",
+   "t": "I feel insecure about others opinions of me."
+  },
+  {
+   "n": "7",
+   "t": "Compared to other people, I feel like I somehow never measure up."
+  },
+  {
+   "n": "8",
+   "t": "I see myself as being very small and insignificant."
+  },
+  {
+   "n": "9",
+   "t": "I feel I have much to be proud of."
+  },
+  {
+   "n": "10",
+   "t": "I feel intensely inadequate and full of self doubt."
+  },
+  {
+   "n": "11",
+   "t": "I feel as if I am somehow defective as a person, like there is something basically wrong with me."
+  },
+  {
+   "n": "12",
+   "t": "When I compare myself to others I am just not as important."
+  },
+  {
+   "n": "13",
+   "t": "I have an overpowering dread that my faults will be revealed in front of others."
+  },
+  {
+   "n": "14",
+   "t": "I feel I have a number of good qualities."
+  },
+  {
+   "n": "15",
+   "t": "I see myself striving for perfection only to continually fall short."
+  },
+  {
+   "n": "16",
+   "t": "I think others are able to see my defects."
+  },
+  {
+   "n": "17",
+   "t": "I could beat myself over the head with a club when I make a mistake."
+  },
+  {
+   "n": "18",
+   "t": "On the whole, I am satisfied with myself."
+  },
+  {
+   "n": "19",
+   "t": "I would like to shrink away when I make a mistake."
+  },
+  {
+   "n": "20",
+   "t": "I replay painful events over and over in my mind until I am overwhelmed."
+  },
+  {
+   "n": "21",
+   "t": "I feel I am a person of worth at least on an equal plane with others."
+  },
+  {
+   "n": "22",
+   "t": "At times I feel like I will break into a thousand pieces."
+  },
+  {
+   "n": "23",
+   "t": "I feel as if I have lost control over my body functions and my feelings."
+  },
+  {
+   "n": "24",
+   "t": "Sometimes I feel no bigger than a pea."
+  },
+  {
+   "n": "25",
+   "t": "At times I feel so exposed that I wish the earth would open up and swallow me."
+  },
+  {
+   "n": "26",
+   "t": "I have this painful gap within me that I have not been able to fill."
+  },
+  {
+   "n": "27",
+   "t": "I feel empty and unfulfilled."
+  },
+  {
+   "n": "28",
+   "t": "I take a positive attitude toward myself."
+  },
+  {
+   "n": "29",
+   "t": "My loneliness is more like emptiness."
+  },
+  {
+   "n": "30",
+   "t": "I feel like there is something missing."
+  }
+ ],
+ "opts": [
+  [
+   "NEVER",
+   0
+  ],
+  [
+   "SELDOM",
+   1
+  ],
+  [
+   "SOMETIMES",
+   2
+  ],
+  [
+   "OFTEN",
+   3
+  ],
+  [
+   "ALMOST ALWAYS",
+   4
+  ]
+ ],
+ "scores": [
+  {
+   "label": "Score de honte (24 items)",
+   "items": [
+    0,
+    1,
+    2,
+    4,
+    5,
+    6,
+    7,
+    9,
+    10,
+    11,
+    12,
+    14,
+    15,
+    16,
+    18,
+    19,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    28,
+    29
+   ],
+   "method": "sum",
+   "max": 96,
+   "bands": [
+    [
+     0,
+     49,
+     "Sous le repère de 50 du manuel."
+    ],
+    [
+     50,
+     59,
+     "50 et plus : niveau douloureux, possiblement problématique, de honte internalisée (manuel de Cook)."
+    ],
+    [
+     60,
+     96,
+     "60 et plus : niveau très élevé, plus souvent associé à une dépression et/ou une anxiété (manuel de Cook)."
+    ]
+   ]
+  },
+  {
+   "label": "Score d'estime de soi (6 items : 4, 9, 14, 18, 21, 28)",
+   "items": [
+    3,
+    8,
+    13,
+    17,
+    20,
+    27
+   ],
+   "method": "sum",
+   "max": 24,
+   "bands": [
+    [
+     0,
+     17,
+     "Moins de 18 : orientation vers une estime de soi plus basse (manuel de Cook)."
+    ],
+    [
+     18,
+     24,
+     "18 et plus : estime de soi plutôt positive (manuel de Cook)."
+    ]
+   ]
+  },
+  {
+   "label": "explorer",
+   "items": [
+    0,
+    1,
+    2,
+    4,
+    5,
+    6,
+    7,
+    9,
+    10,
+    11,
+    12,
+    14,
+    15,
+    16,
+    18,
+    19,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    28,
+    29
+   ],
+   "method": "sum",
+   "max": 96,
+   "flag": true,
+   "flagMin": 3,
+   "flagOnly": true,
+   "flagLabel": "Le manuel recommande d'explorer cliniquement les items cotés « Often » ou « Almost always » :"
+  }
+ ],
+ "qword": "Question",
+ "next": "Suivant",
+ "seeResult": "Voir le résultat"
+};
+  var items = CFG.items;
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function active(i){
+    var c = items[i].c;
+    if(!c) return true;
+    return c.anyOf.some(function(j){ return answers[j] !== null && answers[j] > (c.gt || 0); });
+  }
+  function nextIdx(i){ var j = i + 1; while(j < items.length && !active(j)) j++; return j; }
+  function prevIdx(i){ var j = i - 1; while(j >= 0 && !active(j)) j--; return j; }
+  function position(i){
+    var k = 0, tot = 0;
+    for(var j = 0; j < items.length; j++){ if(active(j)){ tot++; if(j <= i) k++; } }
+    return [k, tot];
+  }
+  function optsOf(i){ return items[i].o || CFG.opts; }
+
+  function renderQuestion(){
+    var pos = position(idx);
+    var it = items[idx];
+    document.getElementById('progress-text').textContent = (it.n ? CFG.qword + ' ' + it.n + ' : ' : '') + pos[0] + ' / ' + pos[1];
+    document.getElementById('period-text').textContent = it.p || '';
+    document.getElementById('q-text').textContent = it.t;
+    document.getElementById('q-ex').textContent = it.x || '';
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    if(it.num){
+      var inp = document.createElement('input');
+      inp.type = 'number'; inp.min = 0; inp.max = 365; inp.step = 1; inp.className = 'num-in';
+      inp.value = answers[idx] === null ? '' : answers[idx];
+      inp.addEventListener('input', function(){
+        var v = inp.value.trim();
+        if(v === '' || !/^\d+$/.test(v) || +v > 365){ answers[idx] = null; } else { answers[idx] = +v; }
+        document.getElementById('btn-next').disabled = answers[idx] === null;
+      });
+      row.appendChild(inp);
+      var lab = document.createElement('span'); lab.className = 'num-lab'; lab.textContent = it.num; row.appendChild(lab);
+    } else {
+      optsOf(idx).forEach(function(o){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx] === o[1] ? ' selected' : '');
+        d.textContent = o[0];
+        d.addEventListener('click', function(){ answers[idx] = o[1]; renderQuestion(); });
+        row.appendChild(d);
+      });
+    }
+    document.getElementById('btn-prev').disabled = prevIdx(idx) < 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = nextIdx(idx) >= items.length ? CFG.seeResult : CFG.next;
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    var p = prevIdx(idx);
+    if (p >= 0){ idx = p; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    var n = nextIdx(idx);
+    if (n < items.length){ idx = n; renderQuestion(); } else { showResult(); }
+  });
+
+  function fmt(v, d){ return v.toFixed(d).replace('.', ','); }
+  function compute(def){
+    var s = 0, k = 0, flagged = [];
+    def.items.forEach(function(i, pos){
+      if(!active(i)){ if(def.inactiveVal !== undefined){ s += def.inactiveVal; k++; } return; }
+      if(answers[i] === null || answers[i] === -1) return;
+      var v = answers[i];
+      if(def.rev && def.rev.indexOf(i) >= 0) v = def.revSum - v;
+      if(def.weights) v = v * def.weights[pos];
+      s += v; k++;
+      if(def.flag && v >= (def.flagMin || 1)) flagged.push(items[i].n);
+    });
+    return {sum: s, n: k, flagged: flagged};
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var box = document.getElementById('rows-all');
+    box.innerHTML = '';
+    function row(a, b){
+      var d = document.createElement('div'); d.className = 'sc-row';
+      var x = document.createElement('span'); x.textContent = a;
+      var y = document.createElement('b'); y.textContent = b;
+      d.appendChild(x); d.appendChild(y); box.appendChild(d);
+    }
+    function read(t){
+      var p = document.createElement('p'); p.className = 'sc-read'; p.textContent = t; box.appendChild(p);
+    }
+    var results = [];
+    CFG.scores.forEach(function(def, di){
+      if(def.title){
+        var t = document.createElement('p'); t.className = 'sc-title'; t.textContent = def.title; box.appendChild(t);
+      }
+      var val = null, txt = '';
+      if(def.combine){
+        var okc = def.combine.every(function(c){ return results[c] !== null && results[c] !== undefined; });
+        if(!okc){ row(def.label, '-'); results[di] = null; return; }
+        val = 0; def.combine.forEach(function(c){ val += results[c]; });
+        txt = fmt(val, def.dec || 0) + ' / ' + def.max;
+      } else {
+        var r = compute(def);
+        if(def.flagOnly){ if(r.flagged.length){ read(def.flagLabel + ' ' + r.flagged.join(', ') + '.'); } results[di] = null; return; }
+        if(def.flag && !def.flagOnly && r.flagged.length){ /* affichage plus bas */ }
+        if(!r.n || (def.minN && r.n < def.minN)){ row(def.label, '-'); results[di] = null; return; }
+        if(def.impute !== undefined){
+          var tot = def.items.length;
+          if(tot - r.n > def.impute){ row(def.label, ': (trop de réponses « ne sait pas »)'); results[di] = null; return; }
+          r.sum = r.sum * tot / r.n; r.n = tot;
+        }
+        if(def.method === 'mean'){
+          val = r.sum / r.n * (def.factor || 1);
+          txt = fmt(val, def.dec === undefined ? 2 : def.dec) + (def.suffix || (' (moyenne, ' + def.range + ')'));
+        } else {
+          val = r.sum / (def.div || 1);
+          txt = fmt(val, def.dec || 0) + ' / ' + def.max;
+        }
+        if(def.flag && r.flagged.length){ /* conservé pour compat */ }
+      }
+      results[di] = val;
+      row(def.label, txt);
+      if(def.bands){
+        def.bands.forEach(function(b){ if(val >= b[0] && val <= b[1]){ read(b[2]); } });
+      }
+      if(def.note){ read(def.note); }
+    });
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Échelle de honte internalisée de Cook (ISS)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#3A5A9C 0%,#B8C9EC 55%,#1B2E5E 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,245,235,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#123B4F;background:#E3F0F6;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#2F6F8F;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#123B4F;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">ISS (Cook)</span></div>
+
+  <h1 class="serif">Échelle de honte internalisée de Cook (ISS)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Internalized Shame Scale (Cook, 1987/1990) : mesure de la honte internalisée et de l&#x27;estime de soi</p>
+  <div class="meta-row">
+    <span class="pill">30 questions</span>
+    <span class="pill">5 choix de réponse</span>
+    <span class="pill">honte de 0 à 96</span>
+    <span class="pill">Anglais</span>
+    <span class="pill">Licence requise : oui</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="iss-honte.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>L&#x27;ISS de David R. Cook compte 30 items, dont 24 décrivent des sentiments de honte internalisée (insuffisance, infériorité, défaut, vide, peur d&#x27;être exposé) et 6 des sentiments d&#x27;estime de soi positive. Chaque énoncé est coté selon la fréquence, de « Never » à « Almost always ».</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Réponses de 0 à 4. Score de honte = somme des 24 items négatifs (tous sauf 4, 9, 14, 18, 21 et 28), de 0 à 96. Score d&#x27;estime de soi = somme brute des items 4, 9, 14, 18, 21 et 28 (0 à 24), sans inversion. Repères du manuel professionnel (révision de 1994) : honte à partir de 50 = niveaux douloureux, possiblement problématiques ; à partir de 60 = très élevé ; estime de soi à partir de 18 = positive. Le manuel recommande d&#x27;explorer cliniquement les items cotés 3 ou 4. Des tables de normes figurent à l&#x27;annexe A du manuel, non lue ici.</p>
+    <p>Attention : certains sites recodent l&#x27;échelle de 1 à 5 ; la source primaire est de 0 à 4, utilisée ici.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p><strong>Licence requise : oui.</strong> Le formulaire porte « Copyright 1990 David R. Cook » et le manuel est publié par Multi-Health Systems. Le formulaire et le manuel ont été déposés par la famille de l&#x27;auteur sur MINDS@UW Stout (Archives de l&#x27;Université du Wisconsin-Stout) sous licence Creative Commons CC BY 4.0 (arrangement de 2024). Instrument construit conformément à la décision de Max du 12/10/2026 (tests à licence inclus) ; la diffusion publique reste soumise à vérification des droits.</p>
+    <p class="source-note">Consigne, 30 items et échelle lus sur le formulaire original de 1990 (PDF scanné, lu par reconnaissance de caractères ; consigne et item 6 contrôlés visuellement). Version française non retrouvée.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>
