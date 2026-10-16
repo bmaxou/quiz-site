@@ -17558,7 +17558,8 @@
     <div class="liste-tools">
       <input id="liste-search" class="liste-search" type="search" placeholder="Filtrer la liste (nom, sigle, sujet)" aria-label="Filtrer la liste" autocomplete="off">
     </div>
-    <p class="liste-meta" id="liste-meta" aria-live="polite"></p>
+    <button type="button" id="btn-tri-public" style="margin:0 0 10px 0;padding:10px 16px;border-radius:999px;border:1.5px solid #1E3A5F;background:#fff;color:#1E3A5F;font:600 15px inherit;cursor:pointer">Trier par public : Psy, puis Mixte, puis Autre</button>
+<p class="liste-meta" id="liste-meta" aria-live="polite"></p>
     <div class="table-wrap">
       <table class="liste">
         <thead><tr>
@@ -17973,9 +17974,10 @@
     meta.textContent = rows.length ? (rows.length === TESTS.length ? rows.length + ' tests' : rows.length + ' test' + (rows.length > 1 ? 's' : '') + ' affich\u00e9' + (rows.length > 1 ? 's' : '') + ' sur ' + TESTS.length + ' (num\u00e9rotation de 1 \u00e0 ' + rows.length + ')') : '0 test';
     ['name','status','public'].forEach(function(k){
       var a = document.querySelector('[data-arrow="' + k + '"]');
-      if (a) a.textContent = sortKey === k ? (sortDir === 1 ? '\u2191' : '\u2193') : '';
+      if (a) a.textContent = sortKey === k ? (sortDir === 1 ? '\u2191' : '\u2193') : '\u21c5';
     });
   }
+  var bt=document.getElementById('btn-tri-public'); if(bt) bt.addEventListener('click',function(){var h=document.querySelector('[data-sort="public"]'); if(h) h.click(); bt.textContent=(sortKey==='public'?(sortDir===1?'Trié : Psy, Mixte, Autre (cliquer pour inverser)':'Trié : Autre, Mixte, Psy (cliquer pour inverser)'):'Trier par public : Psy, puis Mixte, puis Autre');});
   renderListe();
 })();
 </script>
