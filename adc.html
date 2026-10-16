@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ADC : Dyspraxie de l&#x27;adulte</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #326385;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#326385;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#162F41;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#326385;background:#E6EEF4;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#162F41;border-color:#E0D9C9;}
+  .btn-primary{background:#326385;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#326385;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#162F41;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">ADC : Adult Developmental Co-ordination Disorders / Dyspraxia Checklist</h1>
+    <p class="lead">40 questions en anglais sur la coordination motrice et l'organisation, dans l'enfance puis aujourd'hui (parties A, B et C) ; 4 réponses possibles.</p>
+
+    <p class="lang-note">Questions en anglais (version française validée non lisible ; aucune traduction maison). Aucune consigne n'est imprimée dans la source en dehors des intitulés des parties A, B et C, affichés au-dessus des réponses. Licence requise : incertaine (« The tool can be administered by licensed occupational therapists. »).</p>
+    <div class="pill-row">
+      <span class="pill">40 questions</span>
+      <span class="pill">Never / Sometimes / Frequently / Always</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Kirby A, Edwards L, Sugden D, Rosenblum S. Res Dev Disabil 2010;31(1):131-139. Outil de dépistage : ne remplace pas un bilan clinique.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["Have difficulties with self-care tasks such as tying shoelaces, fastening buttons and zips", "Have difficulty with eating without getting dirty", "Have difficulties learning to ride a bike compared to peers?", "Have difficulties playing team games such as football, netball, catching or throwing balls accurately?", "Have difficulties writing neatly (so others could read it)", "Have difficulties writing as fast as your peers", "Bump into objects or people, trip over things more than others?", "Have difficulty playing a musical instrument e.g. violin, recorder?", "Have difficulties organizing /finding your things in your room", "Have others comment about your lack of co-ordination or call you clumsy?", "Self-care tasks, such as shaving or make-up?", "Eating with knife and fork/spoon?", "Hobbies that require good coordination?", "Writing neatly when having to write fast?", "Writing as fast as your peers?", "Reading your own writing?", "Copying things down without mistakes?", "Organizing/finding your things in your room?", "Finding your way around new buildings or places?", "Have others called you disorganized?", "Do you have difficulties sitting still or appear fidgety?", "Do you lose or leave behind possessions?", "Would you say you bump into things, spill or break things?", "Are you slower than others getting up in the morning and getting to work or college?", "Did it take you longer than others to learning to drive? (If you have not driven, please indicate it in the attached paper and describe why you chose not to drive?)", "Do others find it difficult to read your writing?", "Do you avoid hobbies that require good coordination?", "Do you choose to spend leisure time more on your own than others", "Do you avoid team games/sports", "Sports- if you do a sport is this more likely to be on your own e.g. going to a gym than with others", "Did you tend in your teens/twenties or currently to avoid going to clubs /dancing", "If you are a driver: Do you have difficulties with parking a car", "Do you have difficulty in preparing a meal from scratch", "Do you have difficulty packing a case to go away", "Do you have difficulty folding clothes to put them away neatly", "Do you have difficulty with managing money", "Do you have difficulty to perform two things at the same time (e.g., driving and listening)", "Do you have difficulties with distance estimation ( e.g. with regard to parking , passing through objects)", "Do you have difficulties planning ahead", "Do you feel you are losing your attention in several situations"];
+  var G = [];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = [[{"label": "A. As a child, did you:", "opts": ["Never", "Sometimes", "Frequently", "Always"], "vals": [1, 2, 3, 4]}], [{"label": "A. As a child, did you:", "opts": ["Never", "Sometimes", "Frequently", "Always"], "vals": [1, 2, 3, 4]}], [{"label": "A. As a child, did you:", "opts": ["Never", "Sometimes", "Frequently", "Always"], "vals": [1, 2, 3, 4]}], [{"label": "A. As a child, did you:", "opts": ["Never", "Sometimes", "Frequently", "Always"], "vals": [1, 2, 3, 4]}], [{"label": "A. As a child, did you:", "opts": ["Never", "Sometimes", "Frequently", "Always"], "vals": [1, 2, 3, 4]}], [{"label": "A. As a child, did you:", "opts": ["Never", "Sometimes", "Frequently", "Always"], "vals": [1, 2, 3, 4]}], [{"label": "A. As a child, did you:", "opts": ["Never", "Sometimes", "Frequently", "Always"], "vals": [1, 2, 3, 4]}], [{"label": "A. As a child, did you:", "opts": ["Never", "Sometimes", "Frequently", "Always"], "vals": [1, 2, 3, 4]}], [{"label": "A. As a child, did you:", "opts": ["Never", "Sometimes", "Frequently", "Always"], "vals": [1, 2, 3, 4]}], [{"label": "A. As a child, did you:", "opts": ["Never", "Sometimes", "Frequently", "Always"], "vals": [1, 2, 3, 4]}], [{"label": "B. Currently: Do you have difficulties currently with the following 10 items?", "opts": ["Never", "Sometimes", "Frequently", "Always"], "vals": [1, 2, 3, 4]}], [{"label": "B. Currently: Do you have difficulties currently with the following 10 items?", "opts": ["Never", "Sometimes", "Frequently", "Always"], "vals": [1, 2, 3, 4]}], [{"label": "B. Currently: Do you have difficulties currently with the following 10 items?", "opts": ["Never", "Sometimes", "Frequently", "Always"], "vals": [1, 2, 3, 4]}], [{"label": "B. Currently: Do you have difficulties currently with the following 10 items?", "opts": ["Never", "Sometimes", "Frequently", "Always"], "vals": [1, 2, 3, 4]}], [{"label": "B. Currently: Do you have difficulties currently with the following 10 items?", "opts": ["Never", "Sometimes", "Frequently", "Always"], "vals": [1, 2, 3, 4]}], [{"label": "B. Currently: Do you have difficulties currently with the following 10 items?", "opts": ["Never", "Sometimes", "Frequently", "Always"], "vals": [1, 2, 3, 4]}], [{"label": "B. Currently: Do you have difficulties currently with the following 10 items?", "opts": ["Never", "Sometimes", "Frequently", "Always"], "vals": [1, 2, 3, 4]}], [{"label": "B. Currently: Do you have difficulties currently with the following 10 items?", "opts": ["Never", "Sometimes", "Frequently", "Always"], "vals": [1, 2, 3, 4]}], [{"label": "B. Currently: Do you have difficulties currently with the following 10 items?", "opts": ["Never", "Sometimes", "Frequently", "Always"], "vals": [1, 2, 3, 4]}], [{"label": "B. Currently: Do you have difficulties currently with the following 10 items?", "opts": ["Never", "Sometimes", "Frequently", "Always"], "vals": [1, 2, 3, 4]}], [{"label": "C. Currently: please mark the suitable option and describe at the attached paper", "opts": ["Never", "Sometimes", "Frequently", "Always"], "vals": [1, 2, 3, 4]}], [{"label": "C. Currently: please mark the suitable option and describe at the attached paper", "opts": ["Never", "Sometimes", "Frequently", "Always"], "vals": [1, 2, 3, 4]}], [{"label": "C. Currently: please mark the suitable option and describe at the attached paper", "opts": ["Never", "Sometimes", "Frequently", "Always"], "vals": [1, 2, 3, 4]}], [{"label": "C. Currently: please mark the suitable option and describe at the attached paper", "opts": ["Never", "Sometimes", "Frequently", "Always"], "vals": [1, 2, 3, 4]}], [{"label": "C. Currently: please mark the suitable option and describe at the attached paper", "opts": ["Never", "Sometimes", "Frequently", "Always"], "vals": [1, 2, 3, 4]}], [{"label": "C. Currently: please mark the suitable option and describe at the attached paper", "opts": ["Never", "Sometimes", "Frequently", "Always"], "vals": [1, 2, 3, 4]}], [{"label": "C. Currently: please mark the suitable option and describe at the attached paper", "opts": ["Never", "Sometimes", "Frequently", "Always"], "vals": [1, 2, 3, 4]}], [{"label": "C. Currently: please mark the suitable option and describe at the attached paper", "opts": ["Never", "Sometimes", "Frequently", "Always"], "vals": [1, 2, 3, 4]}], [{"label": "C. Currently: please mark the suitable option and describe at the attached paper", "opts": ["Never", "Sometimes", "Frequently", "Always"], "vals": [1, 2, 3, 4]}], [{"label": "C. Currently: please mark the suitable option and describe at the attached paper", "opts": ["Never", "Sometimes", "Frequently", "Always"], "vals": [1, 2, 3, 4]}], [{"label": "C. Currently: please mark the suitable option and describe at the attached paper", "opts": ["Never", "Sometimes", "Frequently", "Always"], "vals": [1, 2, 3, 4]}], [{"label": "C. Currently: please mark the suitable option and describe at the attached paper", "opts": ["Never", "Sometimes", "Frequently", "Always"], "vals": [1, 2, 3, 4]}], [{"label": "C. Currently: please mark the suitable option and describe at the attached paper", "opts": ["Never", "Sometimes", "Frequently", "Always"], "vals": [1, 2, 3, 4]}], [{"label": "C. Currently: please mark the suitable option and describe at the attached paper", "opts": ["Never", "Sometimes", "Frequently", "Always"], "vals": [1, 2, 3, 4]}], [{"label": "C. Currently: please mark the suitable option and describe at the attached paper", "opts": ["Never", "Sometimes", "Frequently", "Always"], "vals": [1, 2, 3, 4]}], [{"label": "C. Currently: please mark the suitable option and describe at the attached paper", "opts": ["Never", "Sometimes", "Frequently", "Always"], "vals": [1, 2, 3, 4]}], [{"label": "C. Currently: please mark the suitable option and describe at the attached paper", "opts": ["Never", "Sometimes", "Frequently", "Always"], "vals": [1, 2, 3, 4]}], [{"label": "C. Currently: please mark the suitable option and describe at the attached paper", "opts": ["Never", "Sometimes", "Frequently", "Always"], "vals": [1, 2, 3, 4]}], [{"label": "C. Currently: please mark the suitable option and describe at the attached paper", "opts": ["Never", "Sometimes", "Frequently", "Always"], "vals": [1, 2, 3, 4]}], [{"label": "C. Currently: please mark the suitable option and describe at the attached paper", "opts": ["Never", "Sometimes", "Frequently", "Always"], "vals": [1, 2, 3, 4]}]];              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var INV = [], LO = 1, HI = 4;
+    function val(k){ var v = answers[k-1][0]; if (v === 'NA') return null; return INV.indexOf(k) >= 0 ? (LO + HI - v) : v; }
+    function agg(list, m){ var s = 0, n = 0; list.forEach(function(k){ var v = val(k); if (v !== null){ s += v; n++; } }); if (n === 0) return null; return m === 'mean' ? s / n : s; }
+    var BL = [{"l": "Partie A (enfance)", "it": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], "m": "sum", "d": 0, "r": "10 à 40", "x": 1}, {"l": "Partie B (actuel)", "it": [11, 12, 13, 14, 15, 16, 17, 18, 19, 20], "m": "sum", "d": 0, "r": "10 à 40", "x": 1}, {"l": "Partie C (actuel)", "it": [21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40], "m": "sum", "d": 0, "r": "20 à 80", "x": 1}, {"l": "Total", "it": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40], "m": "sum", "d": 0, "r": "40 à 160", "x": 1}];
+    var res = [], rows = '';
+    BL.forEach(function(b){ var v = agg(b.it, b.m); if (v !== null) v = v * b.x; res.push(v); rows += row(b.l + (b.r ? ' (' + b.r + ')' : ''), v === null ? '-' : v.toFixed(b.d).replace('.', ',')); });
+    html += '<table class=\"result-table\">' + rows + '</table>';
+    html += '<p class=\"result-text\">' + "Somme des 40 items codés Never = 1, Sometimes = 2, Frequently = 3, Always = 4 ; plus le score est bas, meilleure est la performance (fiche d'identité de l'Université de Haïfa)." + '</p>';
+    html += '<p class=\"result-text\">' + "Les seuils d'interprétation publiés ne sont pas appliqués ici : ils figurent dans la fiche de l'outil, avec leurs réserves (deux codages et deux jeux de seuils qui ne se convertissent pas l'un dans l'autre)." + '</p>';
+    html += '<p class=\"result-text\">' + "Items 25 et 32 (conduite, stationnement) : aucun traitement des personnes qui ne conduisent pas n'est défini dans la fiche officielle ; le total est à interpréter avec prudence pour un non-conducteur." + '</p>';
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ADC : Dyspraxie de l&#x27;adulte</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#35688D 0%,#B5D0E3 55%,#162F41 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#162F41;background:#E6EEF4;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #326385;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#326385;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#162F41;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">ADC</span></div>
+
+  <h1 class="serif">Adult Developmental Co-ordination Disorders/Dyspraxia Checklist (ADC)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">ADC : Kirby A., Edwards L., Sugden D., Rosenblum S. (2010) ; version anglaise diffusée par l'Université de Haïfa (fiche mise à jour en octobre 2024).</p>
+  <div class="meta-row">
+    <span class="pill">40 questions</span>
+    <span class="pill">Never / Sometimes / Frequently / Always</span>
+    <span class="pill">Anglais</span>
+    <span class="pill">Coordination motrice · Dyspraxie adulte</span>
+    <span class="pill">Licence requise : incertaine</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="adc.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>Adult Developmental Co-ordination Disorders/Dyspraxia Checklist (ADC). Auteurs : Kirby A., Edwards L., Sugden D., Rosenblum S., 2010 (Res Dev Disabil 31(1):131-139 ; PMID 19819107). Version anglaise diffusée par le laboratoire CHAP, département d'ergothérapie de l'Université de Haïfa (fiche mise à jour en octobre 2024).</p>
+    <p>But : repérer des difficultés évocatrices d'un trouble développemental de la coordination (TDC / dyspraxie) chez l'adulte. 40 items en trois parties : A, enfance (items 1 à 10) ; B, actuel (items 11 à 20) ; C, actuel (items 21 à 40). Version utilisée : anglaise (Haïfa, 2024).</p>
+    <p class="source-note">Aucune consigne n'est imprimée au-delà des intitulés de parties (consigne = aucune) ; ces intitulés sont reproduits tels quels. Plusieurs items sont des fragments de phrase à lire avec l'intitulé de la partie. La version Haïfa comporte aussi des colonnes de commentaires libres (« Please describe / Comments »), non reprises dans cette page.</p>
+    <p class="source-note">Version française : une version validée à 28 items existe (Seiwert, Tisseyre, Tallet, Res Dev Disabil 2026, doi:10.1016/j.ridd.2026.105339) mais elle est en accès fermé et ses items n'ont pas pu être lus. Aucune traduction maison n'a été faite.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Cotation : Never = 1, Sometimes = 2, Frequently = 3 (« often » dans la fiche), Always = 4 ; aucun item inversé. Somme par partie (A : 10 à 40 ; B : 10 à 40 ; C : 20 à 80) puis total (40 à 160). Plus le score est bas, meilleure est la performance.</p>
+    <p>Seuils de la fiche d'identité de l'Université de Haïfa (codage 1 à 4 ; https://chap.haifa.ac.il/wp-content/uploads/2024/12/ADC_EnID2024.pdf) : total jusqu'à 80 = pas de TDC (« Up to a total of 80, it is not a question of DCD ») ; 80 à 89 = risque de diagnostic de TDC ; 90 et plus = diagnostic de TDC « apparemment » (« apparently a diagnosis of DCD »). Les bornes de la fiche se chevauchent à 80.</p>
+    <p>Seuils révisés de Kirby (2011), en codage 0 à 3 (0 à 120 au total) : total ≥ 56 = à risque de TDC ; ≥ 65 = TDC probable ; partie A ≥ 17 = difficultés dans l'enfance. Rapportés par la thèse de Toulouse tel-05120443 (https://theses.hal.science/tel-05120443/document, p. 77, citant Kirby 2011) : lecture indirecte, source primaire non lue.</p>
+    <p class="reserve">Ces deux jeux de seuils ne se convertissent pas l'un dans l'autre : la conversion exacte du codage 0-3 au codage 1-4 serait +40 points (soit 96 et 105), alors que la fiche de Haïfa donne 80 et 90 et qu'un article ouzbek convertit proportionnellement en 75 et 87. Les sources sont incohérentes ; ne pas appliquer un seuil d'un codage à un score de l'autre. L'article ouzbek attribue les seuils 80 (« probable ») et 90 (« likely ») à Kirby 2010. Environ 20 % des adultes avec TDC se situent sous le seuil « à risque » (Meachon 2022).</p>
+    <p class="reserve">Items 25 (« Did it take you longer than others to learning to drive? ») et 32 (« If you are a driver: Do you have difficulties with parking a car ») : ils concernent les conducteurs ; la fiche officielle ne définit aucun traitement pour les non-conducteurs (la page oblige à répondre à chaque item). À interpréter avec prudence pour une personne qui ne conduit pas.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Origine du texte : questionnaire anglais complet de l'Université de Haïfa (https://chap.haifa.ac.il/wp-content/uploads/2024/12/ADC_NewEnglish2024.pdf, 3 pages, texte natif du PDF, lu en entier). La version antérieure (2023) a été comparée mot à mot ; seule différence : « diving » au lieu de « driving » à l'item 37. Items recoupés avec les listes anglaises des versions ouzbèke (PMC10383954) et italienne (PMC9859597). Libellés de réponses lus sur le formulaire, valeurs 1 à 4 lues sur la fiche d'identité.</p>
+    <p class="reserve">Les items sont conservés avec leurs coquilles d'origine (par exemple « to learning to drive », espaces avant les barres obliques, ponctuation inégale).</p>
+    <p class="reserve">Licence : statut incertain, permission des auteurs non retrouvée. La fiche de Haïfa limite l'administration : « The tool can be administered by licensed occupational therapists. » (fiche d'identité Haïfa ; page de téléchargement : « Download the ADC questionnaire »). À clarifier avant tout usage en ligne par un psychothérapeute ; aucune phrase de licence libre explicite n'a été trouvée. Une autorisation est à obtenir avant usage hors cabinet. URL : https://chap.haifa.ac.il/en/2022/01/12/adult-developmental-coordination-disorder-checklist-adc/</p>
+    <p class="source-note">Références : Kirby A, Edwards L, Sugden D, Rosenblum S. The development and standardization of the Adult Developmental Co-ordination Disorders/Dyspraxia Checklist (ADC). Res Dev Disabil 2010;31(1):131-139. PMID 19819107. : Kirby A, Edwards L, Sugden D. Emerging adulthood in developmental co-ordination disorder: parent and young adult perspectives. Res Dev Disabil 2011;32(4):1351-1360 (seuils révisés, non relu). : Seiwert S, Tisseyre J, Tallet J. Translation and assessment of psychometric properties of the French version of the Adult Developmental Coordination Disorder/Dyspraxia Checklist (ADC). Res Dev Disabil 2026. doi:10.1016/j.ridd.2026.105339. PMID 42468410.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

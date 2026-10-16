@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OCDS : Obsessive Compulsive Drinking Scale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #85324E;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#85324E;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#411624;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#85324E;background:#F4E6EB;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#411624;border-color:#E0D9C9;}
+  .btn-primary{background:#85324E;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#85324E;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#411624;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">OCDS : échelle obsessionnelle compulsive de consommation d&#x27;alcool</h1>
+    <p class="lead">14 questions sur la consommation d'alcool et le désir de la contrôler au cours des 7 derniers jours, chacune avec 5 énoncés cotés de 0 à 4. Le résultat donne deux sous-scores (0 à 20) et un total (0 à 40) selon la formule de l'article de validation français.</p>
+    <p class="consigne">Instructions : Les questions suivantes concernent votre consommation d’alcool et votre désir de contrôler cette consommation dans les 7 derniers jours. Veuillez entourer le chiffre en face de la réponse qui s’applique le mieux à votre état.</p>
+    <p class="lang-note">Questions en français (traduction française validée de 2000). Licence requise : oui (échelle protégée, autorisation à demander avant toute diffusion publique).</p>
+    <div class="pill-row">
+      <span class="pill">14 questions</span>
+      <span class="pill">5 énoncés par question</span>
+      <span class="pill">7 derniers jours</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Références : Anton RF, Moak DH, Latham P. Alcohol Clin Exp Res 1995;19(1):92-99 ; Ansseau M et al. Eur Addict Res 2000;6(2):51-56. Outil de mesure du craving : il ne remplace ni un entretien clinique ni un avis médical.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["Lorsque vous ne buvez pas d’alcool, combien de votre temps est occupé par des idées, pensées, impulsions ou images liées à la consommation d’alcool ?", "A quelle fréquence ces pensées surviennent-elles ?", "A quel point ces idées, pensées, impulsions ou images liées à la consommation d’alcool interfèrent-elles avec votre activité sociale ou professionnelle (ou votre fonction) ? Y a-t-il quelque chose que vous ne faites pas ou ne pouvez pas faire à cause d’elles ? (Si vous ne travaillez pas actuellement, à quel point vos capacités seraient-elles atteintes si vous travailliez ?)", "Quelle est l’importance de la détresse ou de la perturbation que ces idées, pensées, impulsions ou images liées à la consommation d’alcool génèrent lorsque vous ne buvez pas ?", "Lorsque vous ne buvez pas, à quel point faites-vous des efforts pour résister à ces pensées ou essayer de les repousser ou de les détourner de votre attention quand elles entrent dans votre esprit ? (Evaluez vos efforts faits pour résister à ces pensées, et non votre succès ou votre échec à les contrôler réellement)", "Lorsque vous ne buvez pas, à quel point arrivez-vous à arrêter ces pensées ou à vous en détourner ?", "Combien de verres de boissons alcooliques buvez-vous par jour ?", "Combien de jours par semaine buvez-vous de l’alcool ?", "A quel point votre consommation d’alcool interfère-t-elle avec votre activité professionnelle ? Existe-t-il des choses que vous ne faites pas ou ne pouvez pas faire à cause de cette consommation ? (Si vous ne travaillez pas actuellement, à quel point vos capacités professionnelles seraient-elles affectées si vous travailliez ?)", "A quel point votre consommation d’alcool interfère-t-elle avec votre activité sociale ? Existe-t-il des choses que vous ne faites pas ou ne pouvez pas faire à cause de cette consommation ?", "Si l’on vous empêchait de boire de l’alcool quand vous désirez prendre un verre, à quel point seriez-vous anxieux ou énervé ?", "A quel point faites-vous des efforts pour résister à la consommation de boissons alcooliques ? (Evaluez uniquement vos efforts pour y résister et non votre succès ou votre échec à réellement contrôler cette consommation)", "A quel point vous sentez-vous poussé à consommer des boissons alcooliques ?", "Quel contrôle avez-vous sur votre consommation d’alcool ?"];
+  var G = [];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = [[{"label": "", "opts": ["A aucun moment", "Moins d’une heure par jour", "De 1 à 3 heures par jour", "De 4 à 8 heures par jour", "Plus de 8 heures par jour"], "vals": [0, 1, 2, 3, 4]}], [{"label": "", "opts": ["Jamais", "Pas plus de 8 fois par jour", "Plus de 8 fois par jour, mais pendant la plus grande partie de la journée je n’y pense pas", "Plus de 8 fois par jour et pendant la plus grande partie de la journée", "Ces pensées sont trop nombreuses pour être comptées et il ne se passe que rarement une heure sans que plusieurs de ces idées ne surviennent"], "vals": [0, 1, 2, 3, 4]}], [{"label": "", "opts": ["Les pensées relatives à la consommation d’alcool n’interfèrent jamais. Je peux fonctionner normalement", "Les pensées relatives à la consommation d’alcool interfèrent légèrement avec mes activités sociales ou professionnelles, mais mes performances globales n’en sont pas affectées", "Les pensées relatives à la consommation d’alcool interfèrent réellement avec mes activités sociales ou professionnelles, mais je peux encore m’en arranger", "Les pensées relatives à la consommation d’alcool affectent de façon importante mes activités sociales ou professionnelles", "Les pensées relatives à la consommation d’alcool bloquent mes activités sociales ou professionnelles"], "vals": [0, 1, 2, 3, 4]}], [{"label": "", "opts": ["Aucune", "Légère, peu fréquente et pas trop dérangeante", "Modérée, fréquente et dérangeante mais encore gérable", "Sévère, très fréquente et très dérangeante", "Extrême, presque constante et bloquant les capacités"], "vals": [0, 1, 2, 3, 4]}], [{"label": "", "opts": ["Mes pensées sont si minimes que je n’ai pas besoin de faire d’effort pour y résister. Si j’ai de telles pensées, je fais toujours l’effort d’y résister", "J’essaie d’y résister la plupart du temps", "Je fais quelques efforts pour y résister", "Je me laisse aller à toutes ces pensées sans essayer de les contrôler, mais je le fais avec quelque hésitation", "Je me laisse aller complètement et volontairement à toutes ces pensées"], "vals": [0, 1, 2, 3, 4]}], [{"label": "", "opts": ["Je réussis complètement à arrêter ou à me détourner de telles pensées", "Je suis d’habitude capable d’arrêter ces pensées ou de me détourner d’elles avec quelques efforts et de la concentration", "Je suis parfois capable d’arrêter de telles pensées ou de m’en détourner", "Je n’arrive que rarement à arrêter de telles pensées et ne peux m’en détourner qu’avec difficulté", "Je n’arrive que rarement à me détourner de telles pensées même momentanément"], "vals": [0, 1, 2, 3, 4]}], [{"label": "", "opts": ["Aucun", "Moins d’un verre par jour", "De 1 à 2 verres par jour", "De 3 à 7 verres par jour", "8 verres ou plus par jour"], "vals": [0, 1, 2, 3, 4]}], [{"label": "", "opts": ["Aucun", "Pas plus d’un jour par semaine", "De 2 à 3 jours par semaine", "De 4 à 5 jours par semaine", "De 6 à 7 jours par semaine"], "vals": [0, 1, 2, 3, 4]}], [{"label": "", "opts": ["Le fait de boire n’interfère jamais – je peux fonctionner normalement", "Le fait de boire interfère légèrement avec mon activité professionnelle mais l’ensemble de mes capacités n’en est pas affecté", "Le fait de boire interfère de manière certaine avec mon activité professionnelle, mais je peux m’en arranger", "Le fait de boire affecte de façon importante mon activité professionnelle", "Les problèmes d’alcool bloquent mes capacités de travail"], "vals": [0, 1, 2, 3, 4]}], [{"label": "", "opts": ["Le fait de boire n’interfère jamais – je peux fonctionner normalement", "Le fait de boire interfère légèrement avec mes activités sociales, mais l’ensemble de mes capacités n’est pas affecté", "Le fait de boire interfère de manière certaine avec mes activités sociales, mais je peux encore m’en arranger", "Le fait de boire affecte de façon importante mes activités sociales", "Les problèmes d’alcool bloquent mes activités sociales"], "vals": [0, 1, 2, 3, 4]}], [{"label": "", "opts": ["Je n’éprouverais ni anxiété ni irritation", "Je ne deviendrais que légèrement anxieux ou irrité", "L’anxiété ou l’irritation augmenterait mais resterait contrôlable", "J’éprouverais une augmentation d’anxiété ou d’irritation très importante et dérangeante", "J’éprouverais une anxiété ou une irritation très invalidante"], "vals": [0, 1, 2, 3, 4]}], [{"label": "", "opts": ["Ma consommation est si minime que je n’ai pas besoin d’y résister – si je bois, je fais l’effort de toujours y résister", "J’essaie d’y résister la plupart du temps", "Je fais quelques efforts pour y résister", "Je me laisse aller presque à chaque fois sans essayer de contrôler ma consommation d’alcool, mais je le fais avec un peu d’hésitation", "Je me laisse aller complètement et volontairement à la boisson"], "vals": [0, 1, 2, 3, 4]}], [{"label": "", "opts": ["Je ne me sens pas poussé de tout", "Je me sens faiblement poussé à boire", "Je me sens fortement poussé à boire", "Je me sens très fortement poussé à boire", "Le désir de boire est entièrement involontaire et me dépasse"], "vals": [0, 1, 2, 3, 4]}], [{"label": "", "opts": ["J’ai un contrôle total", "Je suis habituellement capable d’exercer un contrôle volontaire sur elle", "Je ne peux la contrôler qu’avec difficulté", "Je dois boire et je ne peux attendre de boire qu’avec difficulté", "Je suis rarement capable d’attendre de boire même momentanément"], "vals": [0, 1, 2, 3, 4]}]];              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    function a(k){ return answers[k-1][0]; }
+    var ob = Math.max(a(1), a(2)) + a(3) + a(4) + a(5) + a(6);
+    var cp = Math.max(a(7), a(8)) + Math.max(a(9), a(10)) + a(11) + a(12) + Math.max(a(13), a(14));
+    html += '<table class="result-table">' + row("Sous-échelle obsessionnelle OB (0 à 20)", ob) + row("Sous-échelle compulsive CP (0 à 20)", cp) + row("Score total OCDS (0 à 40)", ob + cp) + '</table>';
+    html += '<p class="result-text">' + ("Formule de l'article de validation de la traduction française (Ansseau et al. 2000) : OB = max(items 1 et 2) + items 3 à 6 ; CP = max(items 7 et 8) + max(items 9 et 10) + items 11 et 12 + max(items 13 et 14). La page de l'Addiction Research Center (université du Wisconsin) décrit une autre cotation, par simple somme (items 1 à 6, puis 7 à 14) ; cette divergence n'est pas tranchée (voir la fiche).") + '</p>';
+    html += '<p class="result-text">' + ("Aucun seuil clinique ni catégorie d'interprétation n'a été trouvé dans les sources consultées : le score est une mesure continue du craving. Ce résultat est une indication : il ne remplace pas un entretien clinique.") + '</p>';
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OCDS : Obsessive Compulsive Drinking Scale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#8D3552 0%,#E3B5C4 55%,#411624 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#411624;background:#F4E6EB;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #85324E;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#85324E;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#411624;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">OCDS</span></div>
+
+  <h1 class="serif">Obsessive Compulsive Drinking Scale (OCDS), traduction française</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">OCDS : échelle originale d'Anton RF, Moak DH et Latham P (1995) ; traduction française validée par Ansseau M, Besson J, Lejoyeux M, Pinto E, Landry U, Cornes M, Deckers F, Potgieter A et Adès J (2000).</p>
+  <div class="meta-row">
+    <span class="pill">14 questions</span>
+    <span class="pill">5 énoncés par question</span>
+    <span class="pill">7 derniers jours</span>
+    <span class="pill">Français</span>
+    <span class="pill">Addictions · Alcool</span>
+    <span class="pill">Licence requise : oui</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="ocds.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>Domaine : craving (pensées obsédantes et comportement de consommation) chez les personnes dépendantes à l'alcool. Échelle originale : Anton RF, Moak DH, Latham P (1995, Alcohol Clin Exp Res 19:92-99). Traduction française : Ansseau M et al. (2000, Eur Addict Res 6(2):51-56), validation multicentrique de patients francophones de Belgique, de France et de Suisse, traduction aller-retour par 4 traducteurs.</p>
+    <p>14 questions (6 obsessionnelles et 8 compulsives), chacune avec 5 énoncés cotés de 0 à 4 ; auto-questionnaire. Période de référence : les 7 derniers jours.</p>
+    <p class="source-note">Validation française : 50 patients dépendants à l'alcool francophones (10 en Belgique, 20 en France, 20 en Suisse), abstinents depuis au plus 2 semaines.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque question est cotée de 0 à 4 (la valeur est celle imprimée devant l'énoncé choisi). Formule de l'article français : OB (obsessionnel) = max(questions 1 et 2) + question 3 + question 4 + question 5 + question 6 ; CP (compulsif) = max(questions 7 et 8) + max(questions 9 et 10) + question 11 + question 12 + max(questions 13 et 14). Maximum de chaque sous-échelle : 20 ; score total = OB + CP, maximum 40. Aucune inversion.</p>
+    <p class="reserve">Divergence de cotation : la page de l'Addiction Research Center (université du Wisconsin) indique « Obsessive subscale is the summation of items 1-6. Compulsive subscale is the summation of items 7-14 », soit une simple somme (plages 0 à 24 et 0 à 32, total 0 à 56). La page applique la formule de l'article de validation français (maximum sur les paires de questions 1-2, 7-8, 9-10 et 13-14). La divergence n'est pas tranchée : à confirmer sur l'article d'Anton 1995, non lu.</p>
+    <p class="reserve">Aucun seuil clinique ni catégorie d'interprétation n'a été trouvé dans les sources consultées. Valeur manquante : non précisée, la page exige une réponse à chaque question. Le score est une mesure continue de craving (aspects cognitifs).</p>
+    <p>Repère de l'article français (50 patients, table 2) : total 11,3 (écart-type 7,6) ; OB 5,9 (4,2) ; CP 5,5 (4,1) ; alpha de Cronbach 0,88 (total), 0,82 (OB), 0,79 (CP). Échantillon clinique multi-pays : pas une norme de population française.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Les questions, la consigne et les énoncés viennent de l'appendice de l'article de validation de la traduction française (postprint de l'Université de Liège, publié dans Eur Addict Res). Coquille probable conservée telle quelle à la question 13, premier énoncé : « Je ne me sens pas poussé de tout » (pour « du tout »).</p>
+    <p class="reserve">Incohérence interne de l'article, sans effet sur la cotation : le résumé reprend pour les corrélations les valeurs de l'OCDS original (0,62 ; 0,86 ; 0,92) au lieu de celles de la table 2 pour la version française (0,68 ; 0,92 ; 0,91).</p>
+    <p class="reserve">Licence : « We do not have copyright authority over these measures and cannot grant permission for use. [...] Please contact the author of the questionnaire for use permissions. » (Addiction Research Center, UW-Madison, page OCDS) ; article français : Postprint (Author's version), Université de Liège (ORBi), publié dans Eur Addict Res (Karger).</p>
+    <p class="reserve">Licence requise : oui. Échelle protégée (Anton, MUSC) et traduction publiée par Karger ; aucune licence libre. Demander l'autorisation à R. F. Anton et à l'éditeur ou aux auteurs de la traduction (Ansseau, Liège) avant diffusion publique.</p>
+    <p class="source-note">Anton RF, Moak DH, Latham P. The Obsessive Compulsive Drinking Scale: a self-rated instrument for the quantification of thoughts about alcohol and drinking behavior. Alcohol Clin Exp Res 1995;19(1):92-99.</p>
+    <p class="source-note">Anton RF, Moak DH, Latham PK. The Obsessive Compulsive Drinking Scale: a new method of assessing outcome in alcoholism treatment studies. Arch Gen Psychiatry 1996;53:225-231.</p>
+    <p class="source-note">Ansseau M, Besson J, Lejoyeux M, Pinto E, Landry U, Cornes M, Deckers F, Potgieter A, Adès J. A French translation of the obsessive-compulsive drinking scale for craving in alcohol-dependent patients: a validation study in Belgium, France, and Switzerland. Eur Addict Res 2000;6(2):51-56. DOI 10.1159/000019010</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

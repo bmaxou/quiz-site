@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EDE-QS : Eating Disorder Examination Questionnaire Short</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #85324E;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#85324E;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#411624;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#85324E;background:#F4E6EB;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#411624;border-color:#E0D9C9;}
+  .btn-primary{background:#85324E;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#85324E;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#411624;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">EDE-QS : Symptômes des troubles des conduites alimentaires</h1>
+    <p class="lead">Ce questionnaire comporte 12 questions sur les 7 derniers jours ; les réponses indiquent un nombre de jours (questions 1 à 10) ou une intensité (questions 11 et 12).</p>
+
+    <p class="lang-note">Questions en anglais (version originale) : aucune version française libre n'a pu être lue. L'énoncé qui précède les réponses (« ON HOW MANY OF THE PAST 7 DAYS…. » pour les questions 1 à 10 ; « OVER THE PAST 7 DAYS … » pour les questions 11 et 12) est celui du formulaire. Licence requise : incertaine.</p>
+    <div class="pill-row">
+      <span class="pill">12 questions</span>
+      <span class="pill">7 derniers jours</span>
+      <span class="pill">Réponses de 0 à 3</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Gideon N et coll. PLoS ONE 2016;11(5):e0152744. Prnjak K et coll. BMC Psychiatry 2020;20:150. Derived from the EDE-Q, © Fairburn and Beglin, 2008. Outil de dépistage / d'auto-évaluation : ne remplace pas une évaluation clinique.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["Have you been deliberately trying to limit the amount of food you eat to influence your weight or shape (whether or not you have succeeded)?", "Have you gone for long periods of time (e.g., 8 or more waking hours) without eating anything at all in order to influence your weight or shape?", "Has thinking about food, eating or calories made it very difficult to concentrate on things you are interested in (such as working, following a conversation or reading)?", "Has thinking about your weight or shape made it very difficult to concentrate on things you are interested in (such as working, following a conversation or reading)?", "Have you had a definite fear that you might gain weight?", "Have you had a strong desire to lose weight?", "Have you tried to control your weight or shape by making yourself sick (vomit) or taking laxatives?", "Have you exercised in a driven or compulsive way as a means of controlling your weight, shape or body fat, or to burn off calories?", "Have you had a sense of having lost control over your eating (at the time that you were eating)?", "On how many of these days ( i.e. days on which you had a sense of having lost control over your eating) did you eat what other people would regard as an unusually large amount of food in one go?", "Has your weight or shape influenced how you think about (judge) yourself as a person?", "How dissatisfied have you been with your weight or shape?"];
+  var G = [];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = [[{"label": "ON HOW MANY OF THE PAST 7 DAYS….", "opts": ["0 days", "1-2 days", "3-5 days", "6-7 days"], "vals": [0, 1, 2, 3]}], [{"label": "ON HOW MANY OF THE PAST 7 DAYS….", "opts": ["0 days", "1-2 days", "3-5 days", "6-7 days"], "vals": [0, 1, 2, 3]}], [{"label": "ON HOW MANY OF THE PAST 7 DAYS….", "opts": ["0 days", "1-2 days", "3-5 days", "6-7 days"], "vals": [0, 1, 2, 3]}], [{"label": "ON HOW MANY OF THE PAST 7 DAYS….", "opts": ["0 days", "1-2 days", "3-5 days", "6-7 days"], "vals": [0, 1, 2, 3]}], [{"label": "ON HOW MANY OF THE PAST 7 DAYS….", "opts": ["0 days", "1-2 days", "3-5 days", "6-7 days"], "vals": [0, 1, 2, 3]}], [{"label": "ON HOW MANY OF THE PAST 7 DAYS….", "opts": ["0 days", "1-2 days", "3-5 days", "6-7 days"], "vals": [0, 1, 2, 3]}], [{"label": "ON HOW MANY OF THE PAST 7 DAYS….", "opts": ["0 days", "1-2 days", "3-5 days", "6-7 days"], "vals": [0, 1, 2, 3]}], [{"label": "ON HOW MANY OF THE PAST 7 DAYS….", "opts": ["0 days", "1-2 days", "3-5 days", "6-7 days"], "vals": [0, 1, 2, 3]}], [{"label": "ON HOW MANY OF THE PAST 7 DAYS….", "opts": ["0 days", "1-2 days", "3-5 days", "6-7 days"], "vals": [0, 1, 2, 3]}], [{"label": "ON HOW MANY OF THE PAST 7 DAYS….", "opts": ["0 days", "1-2 days", "3-5 days", "6-7 days"], "vals": [0, 1, 2, 3]}], [{"label": "OVER THE PAST 7 DAYS …", "opts": ["Not at all", "Slightly", "Moderately", "Markedly"], "vals": [0, 1, 2, 3]}], [{"label": "OVER THE PAST 7 DAYS …", "opts": ["Not at all", "Slightly", "Moderately", "Markedly"], "vals": [0, 1, 2, 3]}]];              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var INV = [], LO = 0, HI = 3;
+    function val(k){ var v = answers[k-1][0]; if (v === 'NA') return null; return INV.indexOf(k) >= 0 ? (LO + HI - v) : v; }
+    function agg(list, m){ var s = 0, n = 0; list.forEach(function(k){ var v = val(k); if (v !== null){ s += v; n++; } }); if (n === 0) return null; return m === 'mean' ? s / n : s; }
+    var BL = [{"l": "Score total EDE-QS", "it": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], "m": "sum", "d": 0, "r": "0 à 36", "x": 1}, {"l": "Moyenne des items (total / 12)", "it": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], "m": "mean", "d": 2, "r": "0 à 3", "x": 1}];
+    var res = [], rows = '';
+    BL.forEach(function(b){ var v = agg(b.it, b.m); if (v !== null) v = v * b.x; res.push(v); rows += row(b.l + (b.r ? ' (' + b.r + ')' : ''), v === null ? '-' : v.toFixed(b.d).replace('.', ',')); });
+    html += '<table class=\"result-table\">' + rows + '</table>';
+    var tot = res[0], msg;
+    if (tot >= 15) msg = "Total supérieur ou égal à 15 : au-dessus du seuil de dépistage d'un trouble des conduites alimentaires probable en population communautaire (Prnjak 2020 : sensibilité 0,83, spécificité 0,85, valeur prédictive positive 0,37). Dépistage, non diagnostic."; else msg = "Total inférieur à 15 : en dessous du seuil de dépistage de 15 proposé par Prnjak 2020 en population communautaire (sensibilité 0,83, spécificité 0,85). Dépistage, non diagnostic.";
+    html += '<p class="result-text">' + msg + '</p>';
+    html += '<p class="result-text">' + "Plus élevé = symptômes plus importants. Outil de dépistage / d'auto-évaluation : ne remplace pas une évaluation clinique." + '</p>';
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EDE-QS : Eating Disorder Examination Questionnaire Short</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#8D3552 0%,#E3B5C4 55%,#411624 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#411624;background:#F4E6EB;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #85324E;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#85324E;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#411624;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">EDE-QS</span></div>
+
+  <h1 class="serif">Eating Disorder Examination Questionnaire - Short (EDE-QS)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">EDE-QS : Gideon, Hawkes, Mond, Saunders, Tchanturia & Serpell (2016), dérivé de l'EDE-Q de Fairburn & Beglin</p>
+  <div class="meta-row">
+    <span class="pill">12 questions</span>
+    <span class="pill">7 derniers jours</span>
+    <span class="pill">Réponses de 0 à 3</span>
+    <span class="pill">Anglais</span>
+    <span class="pill">Troubles des conduites alimentaires</span>
+    <span class="pill">Total de 0 à 36</span>
+    <span class="pill">Licence requise : incertaine</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="ede-qs.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>L'EDE-QS est la forme courte à 12 items de l'EDE-Q (Fairburn & Beglin) : il évalue sur les 7 derniers jours des symptômes de troubles des conduites alimentaires (anorexie, boulimie, hyperphagie), pour le dépistage et le suivi. Les items 1 à 10 se répondent en nombre de jours (« 0 days », « 1-2 days », « 3-5 days », « 6-7 days »), les items 11 et 12 en intensité (« Not at all », « Slightly », « Moderately », « Markedly »), cotés de 0 à 3.</p>
+    <p class="source-note">Le formulaire original porte en en-tête « EATING DISORDER EXAMINATION QUESTIONNAIRE - SHORT (EDE-QS) » avec des champs nom, date, poids et taille, non repris dans la page. Pas de consigne générale : seuls les énoncés « ON HOW MANY OF THE PAST 7 DAYS…. » (items 1 à 10) et « OVER THE PAST 7 DAYS … » (items 11 et 12) sont donnés, et sont affichés sous chaque question ; la phrase d'introduction de la page est du cabinet.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Score total = somme des 12 items (0 à 3 chacun), de 0 à 36 ; plus élevé = symptômes plus importants. Aucun item inversé ; pas de sous-échelles (échelle unique, Gideon 2016). Prnjak 2020 donne aussi une moyenne globale (somme / 12), affichée ici avec deux décimales.</p>
+    <p class="reserve">Seuil de dépistage : total supérieur ou égal à 15 (moyenne d'environ 1,2 ou plus) pour un trouble des conduites alimentaires probable en population communautaire (Prnjak et coll. 2020, BMC Psychiatry 20:150, Tableau 2) : sensibilité 0,83, spécificité 0,85, valeur prédictive positive 0,37, valeur prédictive négative 0,98 (AUC supérieure à 0,90). Seuils voisins testés : 13 (sensibilité 0,87 / spécificité 0,80), 14 (0,83 / 0,83), 16 (0,81 / 0,87).</p>
+    <p class="reserve">Le seuil de 15 vient d'une ré-analyse des données de Gideon 2016 par Prnjak 2020, avec l'auto-déclaration d'un diagnostic comme critère ; il n'est pas de Gideon 2016, qui n'établissait pas de seuil. À ne pas présenter comme diagnostique.</p>
+    <p class="reserve">Gideon 2016 ne décrit aucune procédure en cas de données manquantes : la page exige une réponse à chaque question.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Items lus dans l'annexe S2 de Gideon et coll. 2016 (PLoS ONE) et recoupés mot pour mot avec le PDF diffusé par CORC (UK). Aucune version française publiée avec ses items n'a été trouvée : les questions sont en anglais, non traduites. Item 10 : la source écrit « ( i.e. days on which… » avec une espace après la parenthèse, conservé tel quel.</p>
+    <p class="reserve">Un erratum de PLoS ONE 2018 (e0207256) est référencé dans les métadonnées de l'article ; il n'a pas été lu. Les items de l'annexe S2 et du PDF CORC sont néanmoins identiques entre eux.</p>
+    <p class="reserve">Licence incertaine : « Derived from the EDE-Q, © Fairburn and Beglin, 2008 » (pied de page de l'annexe S2 et du PDF CORC). L'article de Gideon 2016 est sous licence Creative Commons Attribution (« This is an open access article distributed under the terms of the Creative Commons Attribution License, which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited. ») : cette licence CC BY ne couvre que l'article ; la mention © Fairburn & Beglin 2008 sur le questionnaire n'est pas levée. Le hub australien des troubles des conduites alimentaires indique « Free access: Yes ».</p>
+    <p class="source-note">Gideon N, Hawkes N, Mond J, Saunders R, Tchanturia K, Serpell L. Development and psychometric validation of the EDE-QS, a 12 item short form of the Eating Disorder Examination Questionnaire (EDE-Q). PLoS ONE 2016;11(5):e0152744. doi 10.1371/journal.pone.0152744, PMID 27138364. : Prnjak K, Mitchison D, Griffiths S, Mond J, Gideon N, Serpell L, Hay P. BMC Psychiatry 2020;20:150. doi 10.1186/s12888-020-02565-5. : Fairburn CG, Beglin SJ. Int J Eat Disord 1994 (EDE-Q d'origine).</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

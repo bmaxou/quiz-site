@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>S-QoL 18 : qualité de vie dans la schizophrénie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #703285;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#703285;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#361641;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#703285;background:#F1E6F4;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#361641;border-color:#E0D9C9;}
+  .btn-primary{background:#703285;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#703285;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#361641;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">S-QoL 18 : Qualité de vie (forme courte)</h1>
+    <p class="lead">18 questions sur votre vie actuelle. Pour chaque question, choisissez la réponse qui convient (cinq possibilités).</p>
+
+    <p class="lang-note">Questions en français. Aucune consigne propre n’a pu être reprise (le formulaire source n’en comporte pas). Licence requise : Mapi Research Trust (ePROVIDE) ; ne pas diffuser sans autorisation.</p>
+    <div class="pill-row">
+      <span class="pill">18 questions</span>
+      <span class="pill">5 modalités de réponse</span>
+      <span class="pill">Scores de 0 à 100</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Boyer L. et al. (2010), Schizophr Res 121(1-3):241-250. Outil d’auto-évaluation : ne remplace pas un bilan clinique.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["Actuellement, j'ai confiance en la vie", "Actuellement, je me bats pour réussir dans la vie", "Actuellement, je fais des projets professionnels et/ou personnels pour l'avenir", "Actuellement, je suis bien dans ma tête", "Actuellement, je suis libre de prendre des décisions", "Actuellement, je suis libre d'agir", "Actuellement, je fais des efforts pour travailler", "Actuellement, je suis en bonne forme physique", "Actuellement, je suis plein(e) d'énergie", "Actuellement, je suis aidé(e) par ma famille", "Actuellement, je suis écouté(e) par ma famille", "Actuellement, je suis aidé(e) par mes amis (proches)", "Actuellement, j'ai des amis", "Actuellement, j'ai une vie sentimentale satisfaisante", "Actuellement, je réalise mes projets familiaux, sentimentaux", "Actuellement, j'ai des difficultés à me concentrer, à réfléchir", "Actuellement, je suis coupé(e) du monde extérieur", "Actuellement, j'ai du mal à exprimer ce que je ressens"];
+  var G = [];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = [[{"label": "... que souhaité", "opts": ["Beaucoup Moins", "Moins", "Un peu moins", "Autant", "Plus"], "vals": [1, 2, 3, 4, 5]}], [{"label": "... que souhaité", "opts": ["Beaucoup Moins", "Moins", "Un peu moins", "Autant", "Plus"], "vals": [1, 2, 3, 4, 5]}], [{"label": "... que souhaité", "opts": ["Beaucoup Moins", "Moins", "Un peu moins", "Autant", "Plus"], "vals": [1, 2, 3, 4, 5]}], [{"label": "... que souhaité", "opts": ["Beaucoup Moins", "Moins", "Un peu moins", "Autant", "Plus"], "vals": [1, 2, 3, 4, 5]}], [{"label": "... que souhaité", "opts": ["Beaucoup Moins", "Moins", "Un peu moins", "Autant", "Plus"], "vals": [1, 2, 3, 4, 5]}], [{"label": "... que souhaité", "opts": ["Beaucoup Moins", "Moins", "Un peu moins", "Autant", "Plus"], "vals": [1, 2, 3, 4, 5]}], [{"label": "... que souhaité", "opts": ["Beaucoup Moins", "Moins", "Un peu moins", "Autant", "Plus"], "vals": [1, 2, 3, 4, 5]}], [{"label": "... que souhaité", "opts": ["Beaucoup Moins", "Moins", "Un peu moins", "Autant", "Plus"], "vals": [1, 2, 3, 4, 5]}], [{"label": "... que souhaité", "opts": ["Beaucoup Moins", "Moins", "Un peu moins", "Autant", "Plus"], "vals": [1, 2, 3, 4, 5]}], [{"label": "... que souhaité", "opts": ["Beaucoup Moins", "Moins", "Un peu moins", "Autant", "Plus"], "vals": [1, 2, 3, 4, 5]}], [{"label": "... que souhaité", "opts": ["Beaucoup Moins", "Moins", "Un peu moins", "Autant", "Plus"], "vals": [1, 2, 3, 4, 5]}], [{"label": "... que souhaité", "opts": ["Beaucoup Moins", "Moins", "Un peu moins", "Autant", "Plus"], "vals": [1, 2, 3, 4, 5]}], [{"label": "... que souhaité", "opts": ["Beaucoup Moins", "Moins", "Un peu moins", "Autant", "Plus"], "vals": [1, 2, 3, 4, 5]}], [{"label": "... que souhaité", "opts": ["Beaucoup Moins", "Moins", "Un peu moins", "Autant", "Plus"], "vals": [1, 2, 3, 4, 5]}], [{"label": "... que souhaité", "opts": ["Beaucoup Moins", "Moins", "Un peu moins", "Autant", "Plus"], "vals": [1, 2, 3, 4, 5]}], [{"label": "... que prévu", "opts": ["Beaucoup Plus", "Plus", "Un peu plus", "Autant", "Moins"], "vals": [1, 2, 3, 4, 5]}], [{"label": "... que prévu", "opts": ["Beaucoup Plus", "Plus", "Un peu plus", "Autant", "Moins"], "vals": [1, 2, 3, 4, 5]}], [{"label": "... que prévu", "opts": ["Beaucoup Plus", "Plus", "Un peu plus", "Autant", "Moins"], "vals": [1, 2, 3, 4, 5]}]];              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var BL = [{"l": "Bien-être psychologique (PsW)", "it": [16, 17, 18]}, {"l": "Estime de soi (SE)", "it": [1, 4]}, {"l": "Relations avec la famille (RFa)", "it": [10, 11]}, {"l": "Relations avec les amis (RFr)", "it": [12, 13]}, {"l": "Résilience (RE)", "it": [2, 3, 7]}, {"l": "Bien-être physique (PhW)", "it": [8, 9]}, {"l": "Autonomie (AU)", "it": [5, 6]}, {"l": "Vie sentimentale (SL)", "it": [14, 15]}, {"l": "Index (total des 18 items)", "it": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]}];
+    var res = [], rows = '';
+    BL.forEach(function(b){
+      var s = 0, n = b.it.length;
+      b.it.forEach(function(k){ s += answers[k-1][0]; });
+      var v = (s - n) / (4 * n) * 100;
+      res.push(v);
+      rows += row(b.l + ' (0 à 100)', v.toFixed(1).replace('.', ','));
+    });
+    html += '<table class=\"result-table\">' + rows + '</table>';
+    html += '<p class=\"result-text\">Chaque dimension et l’Index sont exprimés de 0 à 100 ; plus le score est élevé, meilleure est la qualité de vie.</p>';
+    html += '<p class=\"result-text\"><em>Réserve : la transformation 0-100, calculée ici par (somme − n) / (4 × n) × 100 (n = nombre d’items), est une déduction du sourçage et n’est pas confirmée par le manuel de cotation officiel (Mapi). Le sens de cotation 1 à 5 (de gauche à droite) est lui aussi déduit de la mise en page du formulaire. L’Index est calculé ici sur les 18 items. Aucun seuil clinique n’est publié.</em></p>';
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>S-QoL 18 : qualité de vie dans la schizophrénie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#77358D 0%,#D7B5E3 55%,#361641 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#361641;background:#F1E6F4;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #703285;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#703285;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#361641;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">S-QoL 18</span></div>
+
+  <h1 class="serif">Schizophrenia Quality of Life Questionnaire Short Form – Clinical Practice (S-QoL 18)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">S-QoL 18 : Auquier P., Boyer L., Lançon C. (2010) ; forme courte de la qualité de vie en cas de schizophrénie, 18 items, 8 dimensions et un Index global.</p>
+  <div class="meta-row">
+    <span class="pill">18 questions</span>
+    <span class="pill">5 modalités de réponse</span>
+    <span class="pill">Scores de 0 à 100</span>
+    <span class="pill">Français</span>
+    <span class="pill">Qualité de vie · Schizophrénie</span>
+    <span class="pill">Licence requise : oui</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="sqol-18.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>Auteurs : Auquier P., Boyer L., Lançon C. (2010) pour le formulaire ; développement et validation : Boyer L., Simeoni M.C., Loundou A., D'Amato T., Reine G., Lançon C., Auquier P. (2010), Schizophr Res 121(1-3):241-250. Forme courte du S-QoL 41 (Auquier et al., 2003). Instrument conçu en français (Marseille, AP-HM / Aix-Marseille Université), distribué par Mapi Research Trust.</p>
+    <p>But : évaluer la qualité de vie subjective de personnes souffrant de schizophrénie, en pratique clinique. 18 items, 8 dimensions (bien-être psychologique, estime de soi, relations avec la famille, relations avec les amis, résilience, bien-être physique, autonomie, vie sentimentale) et un Index global.</p>
+    <p>Présentation des réponses : les items 1 à 15 se terminent par « ... que souhaité » (Beaucoup Moins, Moins, Un peu moins, Autant, Plus) ; les items 16 à 18 se terminent par « ... que prévu » (Beaucoup Plus, Plus, Un peu plus, Autant, Moins), dans l'ordre inverse, de sorte que la colonne de droite correspond toujours à la meilleure qualité de vie. Chaque question est précédée de l'amorce « Actuellement, ».</p>
+    <p class="source-note">Version utilisée : formulaire français reproduit en annexe d'une thèse de médecine (2021).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Valeurs 1 à 5 de gauche à droite, comme sur le formulaire ; aucun item n'est à inverser numériquement. Dimensions : bien-être psychologique (items 16, 17, 18) ; estime de soi (1, 4) ; relations avec la famille (10, 11) ; relations avec les amis (12, 13) ; résilience (2, 3, 7) ; bien-être physique (8, 9) ; autonomie (5, 6) ; vie sentimentale (14, 15). Index : score total sur les 18 items.</p>
+    <p>Chaque dimension et l'Index sont transformés linéairement sur une échelle de 0 à 100 (100 = meilleure qualité de vie). Formule appliquée ici : score = (somme − n) / (4 × n) × 100, n étant le nombre d'items de la dimension (n = 18 pour l'Index).</p>
+    <p class="reserve">Réserve de cotation : la formule ci-dessus est une DÉDUCTION du sourçage (transformation linéaire standard). Les textes lus indiquent seulement « transferring them linearly onto a scale of 0–100 » ; aucun manuel de cotation Mapi n'a pu être consulté. La gestion des données manquantes n'est pas documentée.</p>
+    <p class="reserve">Le sens 1 à 5 de gauche à droite est lui aussi déduit de la mise en page du formulaire et du principe « plus le score est élevé, meilleure est la qualité de vie » ; aucun texte lu ne l'écrit explicitement.</p>
+    <p class="reserve">Aucun seuil clinique publié n'a été lu pour le S-QoL 18 : aucun seuil n'est affiché.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Source des items : annexe d'une thèse de médecine (HAL DUMAS dumas-05225962, 2021, pp. 60-61), formulaire français intégral lu par extraction de texte et vérifié visuellement sur l'image de la page ; ce n'est pas le document Mapi (risque de transcription mineure, mais concordance avec la traduction anglaise de Boyer 2022).</p>
+    <p class="reserve">Consigne : le formulaire reproduit ne contient aucune phrase de consigne ; la consigne officielle figure dans le formulaire Mapi (non lisible). Rien n'a été inventé : la page n'affiche pas de consigne propre.</p>
+    <p class="reserve">Index : décrit comme le total des items 1 à 18 (Cambodge, PMC7055908) ; certaines publications le définissent peut-être comme la moyenne des 8 dimensions (non vérifié), d'où un écart possible de pondération. La casse des libellés « Beaucoup Moins » / « Beaucoup Plus » est conservée telle que lue.</p>
+    <p class="reserve">Licence requise : autorisation/licence à obtenir (Mapi Research Trust / équipe de Marseille) avant tout usage hors cabinet. Phrase source : « The S-QoL 18 is a French questionnaire available in English and Spanish after a forward-backward translation process, available on request from Mapi Trust Research ( https://eprovide.mapi-trust.org/instruments/schizophrenia-quality-of-life-questionnaire-short-form-clinical-practice ) » (https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8836740/). Des études publiées mentionnent une licence académique Mapi.</p>
+    <p class="source-note">Boyer L., Simeoni M.C., Loundou A., D'Amato T., Reine G., Lançon C., Auquier P. (2010). The development of the S-QoL 18: a shortened quality of life questionnaire for patients with schizophrenia. Schizophr Res 121(1-3):241-250. DOI 10.1016/j.schres.2010.05.019.</p>
+    <p class="source-note">Boyer L., Fernandes S., Faugère M., Richieri R., Auquier P., Fond G., Lançon C. (2022). The validity of the SQoL-18 in patients with bipolar and depressive disorders: a psychometric study from the PREMIUM project. J Clin Med 11(3):743. DOI 10.3390/jcm11030743.</p>
+    <p class="source-note">Caqueo-Urízar A., Boyer L., Boucekine M., Auquier P. (2014). Spanish cross-cultural adaptation and psychometric properties of the SQoL18 in Bolivia, Chile and Peru. Schizophr Res 159(1):136-143. DOI 10.1016/j.schres.2014.08.013.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CORE-OM, évaluation des résultats en routine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #32855C;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#32855C;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#16412B;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#32855C;background:#E6F4ED;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#16412B;border-color:#E0D9C9;}
+  .btn-primary{background:#32855C;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#32855C;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#16412B;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">CORE-OM : bien-être, problèmes, fonctionnement, risque</h1>
+    <p class="lead">34 énoncés sur votre état général au cours des sept derniers jours, avec cinq réponses possibles, de « Pas du tout » à « Tout le temps ou presque ».</p>
+    <p class="consigne">MERCI DE LIRE ATTENTIVEMENT AVANT DE COMMENCER
+Ce questionnaire comporte 34 énoncés concernant votre état général au cours des sept derniers jours. Veuillez lire chaque proposition et cocher la case correspondant le mieux à ce que vous avez ressenti au cours des sept derniers jours.</p>
+    <p class="lang-note">Questions en français (traduction approuvée par CORE System Trust). © CORE System Trust : https://www.coresystemtrust.org.uk/copyright.pdf. Licence requise : non (CC BY-NC-ND 4.0, sous conditions).</p>
+    <div class="pill-row">
+      <span class="pill">34 questions</span>
+      <span class="pill">7 derniers jours</span>
+      <span class="pill">5 réponses possibles</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">© CORE System Trust : https://www.coresystemtrust.org.uk/copyright.pdf. Evans C, Connell J, Barkham M, Margison F, McGrath G, Mellor-Clark J, Audin K. Towards a standardised brief outcome measure: psychometric properties and utility of the CORE-OM. Br J Psychiatry. 2002;180:51-60. doi:10.1192/bjp.180.1.51 (PMID 11772852) Ce résultat est une indication : il ne remplace pas un entretien clinique ni un avis médical.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["Je me suis senti(e) terriblement seul(e) et isolé(e)", "Je me suis senti(e) tendu(e), anxieux(se) ou nerveux(se)", "J’ai eu le sentiment d’avoir quelqu’un vers qui me tourner en cas de besoin", "Je me suis senti(e) bien dans ma peau", "J’ai vraiment manqué d’énergie et d’enthousiasme", "J’ai été physiquement violent(e) envers les autres", "Je me suis senti(e) capable de faire face en cas de difficultés", "J’ai été gêné(e) par des douleurs ou d’autres problèmes physiques", "J’ai pensé à me faire du mal", "Parler aux autres m’a paru trop difficile", "La nervosité et l’anxiété m’ont empêché(e) de faire des choses importantes", "J’ai été satisfait(e) de ce que j’ai fait", "J’ai été perturbé(e) par des pensées et des sentiments non désirés", "J’ai eu envie de pleurer", "J’ai été paniqué(e) ou terrifié(e)", "J’ai pensé à un plan précis pour mettre fin à mes jours", "Je me suis senti(e) dépassé(e) par mes problèmes", "J’ai eu des difficultés à m’endormir ou à rester endormi(e)", "J’ai ressenti de la tendresse ou de l’affection pour quelqu’un", "Il m’a été impossible de mettre mes problèmes de côté", "J’ai pu faire la plupart des choses que je devais faire", "J’ai menacé/intimidé quelqu’un", "Je me suis senti(e) désespéré(e) ou inutile", "J’ai pensé que ce serait mieux si j’étais mort(e)", "J’ai eu l’impression d’être critiqué(e) par d’autres personnes", "J’ai eu l’impression de ne pas avoir d’ami", "Je me suis senti(e) malheureux(se)", "J’ai été perturbé(e) par des images mentals ou des souvenirs", "J’ai été irritable en compagnie d’autres personnes", "J’ai pensé que je ne pouvais m’en prendre qu’à moi-même pour mes problèmes et mes difficultés", "J’ai envisagé mon avenir avec confiance", "J’ai accompli ce que je voulais faire", "Je me suis senti(e) humilié(e) par les autres", "Je me suis fait du mal physiquement ou j’ai mis ma santé en danger"];
+  var G = [{"label": "Au cours des sept derniers jours", "opts": ["Pas du tout", "Rarement", "De temps en temps", "Souvent", "Tout le temps ou presque"], "vals": [0, 1, 2, 3, 4]}];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = null;              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var INV = [3, 4, 7, 12, 19, 21, 31, 32], LO = 0, HI = 4;
+    function val(k){ var v = answers[k-1][0]; if (v === 'NA') return null; return INV.indexOf(k) >= 0 ? (LO + HI - v) : v; }
+    function agg(list, m){ var s = 0, n = 0; list.forEach(function(k){ var v = val(k); if (v !== null){ s += v; n++; } }); if (n === 0) return null; return m === 'mean' ? s / n : s; }
+    var BL = [{"l": "Tous les items (34), score moyen", "it": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34], "m": "mean", "d": 2, "r": "0 à 4", "x": 1}, {"l": "Tous les items (34), score clinique", "it": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34], "m": "mean", "d": 1, "r": "0 à 40", "x": 10}, {"l": "Sans le risque (28 items), score moyen", "it": [1, 2, 3, 4, 5, 7, 8, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 21, 23, 25, 26, 27, 28, 29, 30, 31, 32, 33], "m": "mean", "d": 2, "r": "0 à 4", "x": 1}, {"l": "Sans le risque (28 items), score clinique", "it": [1, 2, 3, 4, 5, 7, 8, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 21, 23, 25, 26, 27, 28, 29, 30, 31, 32, 33], "m": "mean", "d": 1, "r": "0 à 40", "x": 10}, {"l": "Bien-être subjectif (W), total de 4 items", "it": [4, 14, 17, 31], "m": "sum", "d": 0, "r": "0 à 16", "x": 1}, {"l": "Problèmes / symptômes (P), total de 12 items", "it": [2, 5, 8, 11, 13, 15, 18, 20, 23, 27, 28, 30], "m": "sum", "d": 0, "r": "0 à 48", "x": 1}, {"l": "Fonctionnement (F), total de 12 items", "it": [1, 3, 7, 10, 12, 19, 21, 25, 26, 29, 32, 33], "m": "sum", "d": 0, "r": "0 à 48", "x": 1}, {"l": "Risque (R), total de 6 items", "it": [6, 9, 16, 22, 24, 34], "m": "sum", "d": 0, "r": "0 à 24", "x": 1}];
+    var res = [], rows = '';
+    BL.forEach(function(b){ var v = agg(b.it, b.m); if (v !== null) v = v * b.x; res.push(v); rows += row(b.l + (b.r ? ' (' + b.r + ')' : ''), v === null ? '-' : v.toFixed(b.d).replace('.', ',')); });
+    html += '<table class=\"result-table\">' + rows + '</table>';
+    html += '<p class=\"result-text\">' + "Repère publié (Connell et al. 2007, population générale britannique, non française) : seuil de 9,9 sur l’échelle de 0 à 40, arrondi à 10 ; les auteurs précisent que ces seuils doivent être utilisés avec réflexion et adaptés au contexte et à l’objectif." + '</p>';
+    html += '<p class=\"result-text\">' + "Le score clinique est la moyenne multipliée par 10. Les domaines ne forment pas des facteurs distincts. Ce résultat est une indication : il ne remplace pas un entretien clinique ni un avis médical." + '</p>';
+    html += '<p class=\"result-text\">' + "© CORE System Trust : https://www.coresystemtrust.org.uk/copyright.pdf" + '</p>';
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CORE-OM, évaluation des résultats en routine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#358D61 0%,#B5E3CC 55%,#16412B 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#16412B;background:#E6F4ED;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #32855C;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#32855C;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#16412B;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">CORE-OM</span></div>
+
+  <h1 class="serif">Clinical Outcomes in Routine Evaluation, Outcome Measure (CORE-OM, 34 items)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">CORE-OM : Evans, Mellor-Clark, Margison, Barkham, Audin, Connell et McGrath (2000) ; Evans et al. (2002). © CORE System Trust. Traduction française approuvée par CORE System Trust.</p>
+  <div class="meta-row">
+    <span class="pill">34 questions</span>
+    <span class="pill">7 derniers jours</span>
+    <span class="pill">5 réponses possibles</span>
+    <span class="pill">Français</span>
+    <span class="pill">Santé mentale · Évaluation des résultats</span>
+    <span class="pill">Licence requise : non (CC BY-NC-ND 4.0)</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="core-om.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l’outil</h2>
+    <p>Le CORE-OM (Clinical Outcomes in Routine Evaluation, Outcome Measure) est un questionnaire d’auto-évaluation de 34 énoncés portant sur l’état général de la personne au cours des sept derniers jours. Auteurs : Evans, Mellor-Clark, Margison, Barkham, Audin, Connell et McGrath (2000) ; Evans et al. (2002). Il explore quatre domaines : bien-être subjectif (W, 4 items), problèmes / symptômes (P, 12 items), fonctionnement (F, 12 items) et risque (R, 6 items).</p>
+    <p>Traduction française approuvée par CORE System Trust, co-dirigée par Stacey Callahan (CERPPS, Université de Toulouse Jean Jaurès) ; selon CST, retours informels favorables en Suisse romande et au Canada français.</p>
+    <p class="source-note">Durée de passation : non indiquée dans les sources lues.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Réponses cotées de 0 à 4 (Pas du tout = 0, Rarement = 1, De temps en temps = 2, Souvent = 3, Tout le temps ou presque = 4). Huit items formulés positivement sont cotés à l’envers (4 à 0) : les items 3, 4, 7, 12, 19, 21, 31 et 32. La page applique cette inversion avant de calculer les scores.</p>
+    <p>Domaines : W (bien-être) items 4, 14, 17, 31 ; P (problèmes / symptômes) items 2, 5, 8, 11, 13, 15, 18, 20, 23, 27, 28, 30 ; F (fonctionnement) items 1, 3, 7, 10, 12, 19, 21, 25, 26, 29, 32, 33 ; R (risque) items 6, 9, 16, 22, 24, 34. La page affiche le total de chaque domaine.</p>
+    <p>Score moyen = total divisé par le nombre d’items complétés (de 0 à 4). Score clinique = moyenne multipliée par 10 (de 0 à 40). « Tous les items » regroupe les 34 items ; « Sans le risque » regroupe les 28 items hors domaine R. La somme brute (0 à 136) n’est pas conforme aux recommandations de CST ; elle n’est pas affichée.</p>
+    <p>Valeurs manquantes (règles de CST, non appliquées par la page, qui exige toutes les réponses) : bien-être (W) et risque (R), aucun score si un item manque ; P et F, proratisation si un seul item manque, pas de score au-delà ; score global (34) et hors risque (28), division par le nombre d’items complétés jusqu’à 3 manquants, sinon pas de score.</p>
+    <p>Seuil publié : Connell et al. 2007 (résumé lu) : « a cut-off score of 9.9 on the 0-40 scale of the CORE-OM… We recommend rounding the CORE-OM cut-off score to 10. However, cut-off scores must be used thoughtfully and adjusted to fit context and purpose. » (échantillon général britannique n = 535 contre échantillon clinique agrégé n = 10 761). Aucune autre bande de sévérité n’a été lue dans une source.</p>
+    <p class="reserve">Étalonnage : aucune norme française, suisse ou québécoise lue ; le seuil de 10 vient d’une population générale britannique. La page CST indique qu’aucune exploration psychométrique de la version française n’a encore été menée.</p>
+    <p class="reserve">La page CST mentionne 4 items de risque envers soi et 2 envers autrui sans les lister ; l’attribution (soi : 9, 16, 24, 34 ; autrui : 6, 22) est déduite du libellé des items, non lue : elle n’est pas utilisée pour des sous-scores. Les quatre domaines ne forment pas des facteurs distincts (page CST).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p>Les items, la consigne et les libellés de réponse viennent des formulaires français officiels de CORE System Trust (version épicène [FM]), relus sur le document rendu. Les trois variantes de genre officielles ([F], [M], [FM]) existent ; seule la variante [FM] est reproduite, les deux autres n’ont pas été comparées ligne à ligne.</p>
+    <p class="reserve">Coquille d’origine conservée telle quelle : « images mentals » (item 28). Item 22 : « J’ai menacé/intimidé quelqu’un » (barre oblique du texte officiel).</p>
+    <p class="reserve">Licence : « The instruments have always been free to reproduce on paper provided that they were not changed, that the reproduction was not for profit and copyright was acknowledged. » ; « In line with this we placed all the measures into the Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0) licence. » ; « The conditions are that the use is non-commercial that the content of the measures may not be changed in any way, that attribution to the ownership and creation of the instruments by CST be given (ensured by retaining the copyright line at the bottom of each page of all instruments) » ; et « any translations must be from the approved translations and that you cannot create your own translation » (https://www.coresystemtrust.org.uk/home/copyright-licensing/). Pied de page des PDF : « © CORE System Trust: https://www.coresystemtrust.org.uk/copyright.pdf ».</p>
+    <p class="reserve">Licence libre explicite (CC BY-NC-ND 4.0) mais sous conditions : usage non commercial, contenu inchangé (pas de reformulation, ni de réorganisation du contenu), ligne de copyright CST conservée sur chaque page/écran ; traductions : uniquement les traductions approuvées (la française l'est). Si le site de Max est monétisé ou vend l'accès, demander la confirmation écrite de CST (cf. procédure de la page). Reproduction en logiciel explicitement admise dans ces conditions.</p>
+    <p>Licence requise : non (licence CC BY-NC-ND 4.0 sous conditions : usage non commercial, contenu inchangé, mention du copyright de CORE System Trust).</p>
+    <p class="source-note">Evans C, Mellor-Clark J, Margison F, Barkham M, Audin K, Connell J, McGrath G. CORE: Clinical Outcomes in Routine Evaluation. J Ment Health. 2000;9(3):247-255. doi:10.1080/jmh.9.3.247.255</p>
+    <p class="source-note">Evans C, Connell J, Barkham M, Margison F, McGrath G, Mellor-Clark J, Audin K. Towards a standardised brief outcome measure: psychometric properties and utility of the CORE-OM. Br J Psychiatry. 2002;180:51-60. doi:10.1192/bjp.180.1.51 (PMID 11772852)</p>
+    <p class="source-note">Connell J, Barkham M, Stiles WB, Twigg E, Singleton N, Evans O, Miles JNV. Distribution of CORE-OM scores in a general population, clinical cut-off points and comparison with the CIS-R. Br J Psychiatry. 2007;190:69-74. doi:10.1192/bjp.bp.105.017657 (PMID 17197659)</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

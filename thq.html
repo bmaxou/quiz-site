@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>THQ, histoire des événements traumatiques</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #703285;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#703285;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#361641;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#703285;background:#F1E6F4;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#361641;border-color:#E0D9C9;}
+  .btn-primary{background:#703285;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#703285;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#361641;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">THQ : histoire des événements traumatiques</h1>
+    <p class="lead">24 questions Oui / Non sur des événements graves ou traumatiques que vous avez pu vivre (criminalité, catastrophes, violences physiques et sexuelles). Certaines questions abordent des sujets difficiles ; vous pouvez vous arrêter à tout moment. Cette page ne recueille que les réponses Oui / Non.</p>
+    <p class="consigne">Ce qui suit est une série de questions à propos d’évènements graves ou traumatiques dans la vie de quelqu’un. En réalité, ces types d’évènements se produisent régulièrement, bien que nous aimerions croire qu’ils sont rares. Par conséquent, ils affectent la manière dont les personnes peuvent ressentir certaines choses, réagir ou encore réfléchir. Etre conscient du fait que de tels faits surviennent et connaître les diverses réactions des individus face à cela nous aidera à élaborer des programmes de préventions, d’éducations et autres services. Le questionnaire est divisé en questions couvrant les expériences criminelles, les catastrophes en général, les questions de traumatisme et enfin, des interrogations à propos d’expériences physiques et sexuelles. Pour chaque évènement, veuillez indiquer (en encerclant la ou les réponses appropriées), si cela s’est produit, et si oui, le nombre de fois et votre âge approximatif quand cela s’est produit (donner la meilleure estimation de votre âge si vous n’êtes pas sûr). Notez également la nature de votre relation avec la personne en cause et la nature spécifique de l’événement le cas échéant.</p>
+    <p class="lang-note">Questions en français (traduction de Saint-Lèbes, Bordas et Schmitt, 2008). Licence requise : incertaine.</p>
+    <div class="pill-row">
+      <span class="pill">24 questions</span>
+      <span class="pill">Oui / Non</span>
+      <span class="pill">4 sections</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Green BL. Trauma History Questionnaire. In : Stamm BH, ed. Measurement of stress, trauma, and adaptation. Sidran Press ; 1996:366-369. Traduction française : Saint-Lèbes J, Bordas R, Schmitt L (2008). Ce résultat est une indication : il ne remplace pas un entretien clinique ni un avis médical.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["Quelqu’un a-t-il déjà tenté de vous prendre quelque chose directement en utilisant la force ou la menace de la force, comme une agression ou un braquage?", "Quelqu’un a-t-il déjà tenté de vous voler ou vous a effectivement volé (vos effets personnels par exemple) ?", "Quelqu’un a-t-il déjà tenté ou réussi à rentrer par effraction dans votre maison lorsque vous n’étiez pas là ?", "Quelqu’un a-t-il déjà tenté ou réussi à rentrer par effraction dans votre maison alors que vous étiez là ?", "Avez-vous déjà eu un grave accident au travail, en voiture ou dans un autre endroit ?", "Avez-vous déjà expérimenté une catastrophe naturelle telle qu’une tornade, un ouragan, une inondation, un tremblement de terre majeur, etc., et où vous avez senti que vous ou vos proches étiez en danger de mort ou blessés ?", "Avez-vous déjà vécu une catastrophe provoquée par l’homme tel qu’un accident de train, l’effondrement d’un bâtiment, le braquage d’une banque, un incendie, etc., et où vous avez senti que vous ou vos proches étiez en danger de mort ou blessés ?", "Avez-vous déjà été exposé à des produits chimiques dangereux ou à de la radioactivité qui auraient pu menacer votre santé ?", "Avez-vous déjà été dans toute autre situation dans laquelle vous avez été grièvement blessé ?", "Avez-vous déjà été dans toute autre situation dans laquelle vous avez craint d’être tué ou gravement blessé ?", "Avez-vous déjà vu quelqu’un gravement blessé ou se faire tuer ?", "Avez-vous déjà vu des cadavres (autre part qu’à des funérailles) ou avez-vous eu à manipuler des cadavres pour une raison quelconque ?", "Avez-vous déjà eu un ami proche ou un membre de votre famille assassiné ou tué par un conducteur en état d’ébriété ?", "Avez-vous déjà eu un époux ou partenaire, ou un enfant qui est mort ?", "Avez-vous déjà eu une maladie grave ou extrêmement grave (mettant votre vie en danger) ?", "Avez-vous déjà appris que l’un de vos proches était grièvement blessé, avait une maladie mettant sa vie en danger ou était décédé de façon inattendue ?", "Avez-vous déjà eu à combattre, pendant le service militaire, dans une guerre officielle ou non officielle ?", "Quelqu’un vous a-t-il déjà forcé à avoir des rapports sexuels, ou encore des rapports de type oral, anal?", "Quelqu’un a-t-il déjà touché des parties intimes de votre corps, ou vous a-t-il fait toucher les siennes par la force ou la menace ?", "Y a-t-il d’autres situations, autres que les incidents mentionnés aux questions 18 et 19, où une personne a tenté de vous forcer à avoir des contacts sexuels non désirés ?", "Est-ce quelqu’un, y compris des membres de votre famille ou des amis, vous a déjà attaqué avec une arme à feu, un couteau ou une autre arme ?", "Est-ce que quelqu’un, y compris des membres de votre famille ou des amis vous a déjà attaqué sans arme et vous a grièvement blessé ?", "Est-ce qu’une personne de votre famille vous a déjà battu, giflé ou poussé assez fort pour vous blesser ?", "Avez-vous déjà vécu toute autre situation ou événement extrêmement stressant qui ne soit pas mentionné ci-dessus ?"];
+  var G = [];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = [[{"label": "Evènements liés à la criminalité", "opts": ["Non", "Oui"], "vals": [0, 1]}], [{"label": "Evènements liés à la criminalité", "opts": ["Non", "Oui"], "vals": [0, 1]}], [{"label": "Evènements liés à la criminalité", "opts": ["Non", "Oui"], "vals": [0, 1]}], [{"label": "Evènements liés à la criminalité", "opts": ["Non", "Oui"], "vals": [0, 1]}], [{"label": "Catastrophes générales et traumatismes", "opts": ["Non", "Oui"], "vals": [0, 1]}], [{"label": "Catastrophes générales et traumatismes", "opts": ["Non", "Oui"], "vals": [0, 1]}], [{"label": "Catastrophes générales et traumatismes", "opts": ["Non", "Oui"], "vals": [0, 1]}], [{"label": "Catastrophes générales et traumatismes", "opts": ["Non", "Oui"], "vals": [0, 1]}], [{"label": "Catastrophes générales et traumatismes", "opts": ["Non", "Oui"], "vals": [0, 1]}], [{"label": "Catastrophes générales et traumatismes", "opts": ["Non", "Oui"], "vals": [0, 1]}], [{"label": "Catastrophes générales et traumatismes", "opts": ["Non", "Oui"], "vals": [0, 1]}], [{"label": "Catastrophes générales et traumatismes", "opts": ["Non", "Oui"], "vals": [0, 1]}], [{"label": "Catastrophes générales et traumatismes", "opts": ["Non", "Oui"], "vals": [0, 1]}], [{"label": "Catastrophes générales et traumatismes", "opts": ["Non", "Oui"], "vals": [0, 1]}], [{"label": "Catastrophes générales et traumatismes", "opts": ["Non", "Oui"], "vals": [0, 1]}], [{"label": "Catastrophes générales et traumatismes", "opts": ["Non", "Oui"], "vals": [0, 1]}], [{"label": "Catastrophes générales et traumatismes", "opts": ["Non", "Oui"], "vals": [0, 1]}], [{"label": "Expériences physiques et sexuelles", "opts": ["Non", "Oui"], "vals": [0, 1]}], [{"label": "Expériences physiques et sexuelles", "opts": ["Non", "Oui"], "vals": [0, 1]}], [{"label": "Expériences physiques et sexuelles", "opts": ["Non", "Oui"], "vals": [0, 1]}], [{"label": "Expériences physiques et sexuelles", "opts": ["Non", "Oui"], "vals": [0, 1]}], [{"label": "Expériences physiques et sexuelles", "opts": ["Non", "Oui"], "vals": [0, 1]}], [{"label": "Expériences physiques et sexuelles", "opts": ["Non", "Oui"], "vals": [0, 1]}], [{"label": "Autres évènements", "opts": ["Non", "Oui"], "vals": [0, 1]}]];              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var INV = [], LO = 0, HI = 1;
+    function val(k){ var v = answers[k-1][0]; if (v === 'NA') return null; return INV.indexOf(k) >= 0 ? (LO + HI - v) : v; }
+    function agg(list, m){ var s = 0, n = 0; list.forEach(function(k){ var v = val(k); if (v !== null){ s += v; n++; } }); if (n === 0) return null; return m === 'mean' ? s / n : s; }
+    var BL = [{"l": "Total des types d’événements cochés (Oui)", "it": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24], "m": "sum", "d": 0, "r": "0 à 24", "x": 1}, {"l": "Evènements liés à la criminalité (items 1 à 4)", "it": [1, 2, 3, 4], "m": "sum", "d": 0, "r": "0 à 4", "x": 1}, {"l": "Catastrophes générales et traumatismes (items 5 à 17)", "it": [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17], "m": "sum", "d": 0, "r": "0 à 13", "x": 1}, {"l": "Expériences physiques et sexuelles (items 18 à 23)", "it": [18, 19, 20, 21, 22, 23], "m": "sum", "d": 0, "r": "0 à 6", "x": 1}, {"l": "Autres évènements (item 24)", "it": [24], "m": "sum", "d": 0, "r": "0 à 1", "x": 1}];
+    var res = [], rows = '';
+    BL.forEach(function(b){ var v = agg(b.it, b.m); if (v !== null) v = v * b.x; res.push(v); rows += row(b.l + (b.r ? ' (' + b.r + ')' : ''), v === null ? '-' : v.toFixed(b.d).replace('.', ',')); });
+    html += '<table class=\"result-table\">' + rows + '</table>';
+    html += '<p class=\"result-text\">' + "Le THQ est une liste de contrôle d’expositions à des événements potentiellement traumatiques, pas une échelle de symptômes : il n’existe pas de score standard ni de seuil clinique dans les sources lues. Le comptage des événements cochés est une convention de source secondaire." + '</p>';
+    html += '<p class=\"result-text\">' + "Le nombre de fois, l’âge approximatif et les précisions demandés sur le formulaire papier ne sont pas recueillis par cette page. Ce résultat est une indication : il ne remplace pas un entretien clinique ni un avis médical." + '</p>';
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>THQ, histoire des événements traumatiques</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#77358D 0%,#D7B5E3 55%,#361641 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#361641;background:#F1E6F4;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #703285;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#703285;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#361641;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">THQ</span></div>
+
+  <h1 class="serif">Trauma History Questionnaire (THQ), version française de Georgetown</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">THQ : Green (1996), Georgetown University Psychiatry Department. 24 items Oui / Non ; traduction française de Saint-Lèbes, Bordas et Schmitt (2008), non validée dans les sources lues.</p>
+  <div class="meta-row">
+    <span class="pill">24 questions</span>
+    <span class="pill">Oui / Non</span>
+    <span class="pill">4 sections</span>
+    <span class="pill">Français</span>
+    <span class="pill">Traumatisme · Liste d’événements</span>
+    <span class="pill">Licence requise : incertaine</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="thq.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l’outil</h2>
+    <p>Le Trauma History Questionnaire (THQ) est une liste de 24 événements graves ou potentiellement traumatiques (criminalité, catastrophes générales et traumatismes, expériences physiques et sexuelles, autres événements). Auteure : Bonnie L. Green (1996), Georgetown University Psychiatry Department / Center for Trauma and the Community. Propriétés psychométriques : Hooper, Stockton, Krupnick et Green (2011).</p>
+    <p>Pour chaque événement, la personne indique s’il s’est produit (Oui / Non) et, sur le formulaire papier, le nombre de fois et son âge approximatif, ainsi qu’une précision selon l’item. Cette page ne recueille que la réponse Oui / Non.</p>
+    <p class="source-note">Durée de passation : non indiquée dans les sources lues.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Le THQ est une liste de pointage d’expositions, pas une échelle de symptômes : aucun score standard ni seuil clinique n’a été lu. Convention de comptage citée (source secondaire) : « the most common scoring convention is to count the number of types of events endorsed and/or subscale scores breaking down the counts by event type » (PMC12632130, citant Hooper et al. 2011).</p>
+    <p>La page affiche donc le nombre d’items « Oui » (0 à 24) et des sous-totaux par section : criminalité (items 1 à 4), catastrophes générales et traumatismes (items 5 à 17, 13 items), expériences physiques et sexuelles (items 18 à 23, 6 items), autres événements (item 24). Cette répartition 4 / 13 / 6 / 1 est confirmée par la source secondaire et par une thèse (Epipsy). Le nombre de fois et l’âge ne sont pas cotés dans les sources lues. Aucun item inversé ; valeur manquante non précisée.</p>
+    <p class="reserve">Cotation de source secondaire : la source primaire (Hooper et al. 2011) n’a pas pu être lue. Une thèse française indique que l’outil « ne comprend pas de score standard » et a compté 1 point par réponse Oui. Une autre thèse mentionne cinq catégories (Green 1996) non retrouvées ailleurs : non tranché.</p>
+    <p class="reserve">Étalonnage : aucune norme française lue ; les thèses françaises lues décrivent des échantillons cliniques, pas des normes.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p>Le texte français est la traduction de Saint-Lèbes, Bordas et Schmitt (2008) publiée dans le dossier d’outils du Georgetown University Psychiatry Department (fichier « THQ - French »), lue en texte brut. Elle est préférée à deux autres versions françaises pour sa provenance (éditeur du THQ).</p>
+    <p class="reserve">Trois versions françaises lues avec des libellés différents (Saint-Lèbes 2008 retenue ; version Epipsy 2015 ; version Jehel et Ménager 2000). Exemple : l’item 18 précise « des rapports de type oral, anal » dans la version retenue, alors que les deux autres disent « une relation sexuelle contre votre gré ». La validation de la traduction retenue n’a pas été lue.</p>
+    <p class="reserve">Fautes d’origine conservées telles quelles : item 17 « indiquez ou : » (sans accent) ; item 21 « Est-ce quelqu’un… » (formulation fautive) ; orthographe « évènement / événement » variable. La note de bas de page du formulaire cite « Green, L.-B. (1996) » (l’auteure est Bonnie L. Green).</p>
+    <p class="reserve">Le 24e item est ouvert (« toute autre situation… ») ; il est traité ici comme une réponse Oui / Non, comme dans les trois versions.</p>
+    <p class="reserve">Licence : aucune mention trouvée (la page Georgetown « THQ Available in English, Spanish, Danish, French, Portuguese, Urdu, Icelandic, Turkish » met les fichiers en téléchargement libre ; la page VA indique « All language versions are available for download at https://psychiatry.georgetown.edu/toolkit/ » et « These measures are intended for use by qualified mental health professionals and researchers »)</p>
+    <p class="reserve">Téléchargement public par les auteurs, aucune licence ni autorisation de reproduction lue dans le PDF ni sur la page. À confirmer auprès de Georgetown (Center for Trauma and the Community) et des traducteurs (Saint-Lèbes, Bordas, Schmitt) avant publication ou modification.</p>
+    <p>Licence requise : incertaine.</p>
+    <p class="source-note">Green BL. Trauma History Questionnaire. In: Stamm BH, ed. Measurement of stress, trauma, and adaptation. Lutherville, MD: Sidran Press; 1996:366-369 (cité par PMC12632130 ; non lu).</p>
+    <p class="source-note">Hooper LM, Stockton P, Krupnick JL, Green BL. Development, use, and psychometric properties of the Trauma History Questionnaire. J Loss Trauma. 2011;16(3):258-283. doi:10.1080/15325024.2011.572035 (non lu).</p>
+    <p class="source-note">Saint-Lèbes J, Bordas R, Schmitt L (2008). Traduction française du Trauma History Questionnaire. Georgetown University Psychiatry Department toolkit (PDF).</p>
+    <p class="source-note">Jehel L, Ménager (2000) : version française du THQ citée par la thèse tel-05405251 (non lue directement ; texte de la thèse lu).</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

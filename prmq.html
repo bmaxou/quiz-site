@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PRMQ : Questionnaire de mémoire prospective et rétrospective</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #858532;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#858532;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#414116;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#858532;background:#F4F4E6;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#414116;border-color:#E0D9C9;}
+  .btn-primary{background:#858532;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#858532;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#414116;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">PRMQ : « Se rappeler de faire des choses »</h1>
+    <p class="lead">16 questions sur la fréquence des oublis dans la vie quotidienne. Pour chacune, choisissez la réponse de « Très souvent » à « Jamais ».</p>
+    <p class="consigne">Afin de comprendre pourquoi les gens ont des oublis, nous devons connaître les types d’erreurs que les gens commettent, et à quelle fréquence elles surviennent dans la vie de tous les jours. Nous aimerions que vous nous disiez à quelle fréquence il vous arrive de commettre ces types d’erreurs. Merci de répondre en cochant la case correspondante. Merci de veiller à répondre à toutes les questions présentent sur les deux faces même si elles ne vous semblent pas correspondre entièrement à votre situation.</p>
+    <p class="lang-note">Questions en français (feuille de l’Université d’Édimbourg, traduction non vérifiée indépendamment). Licence requise : incertaine. Les questions démographiques de la feuille ne sont pas reprises.</p>
+    <div class="pill-row">
+      <span class="pill">16 questions</span>
+      <span class="pill">5 réponses</span>
+      <span class="pill">Jamais → Très souvent</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Source : PRMQ, Smith G, Della Sala S, Logie RH, Maylor EA (2000), Memory 8:311-321 ; feuille française de l’Université d’Édimbourg. Outil d’auto-évaluation : ne remplace pas un bilan neuropsychologique.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["Vous arrive-t-il de décider de faire quelque chose dans quelques minutes et ensuite d’oublier de le faire ?", "Vous arrive-t-il de ne pas reconnaître un lieu que vous avez visité auparavant ?", "Vous arrive-t-il de ne pas faire quelque chose que vous deviez faire dans quelques minutes même si ce que vous avez à faire se trouve en face de vous, comme par exemple prendre un médicament ou éteindre la bouilloire ?", "Vous arrive-t-il d’oublier de faire quelque chose qu’on vous a demandé quelques minutes auparavant ?", "Vous arrive-t-il d’oublier des rendez-vous s’il n’y a pas quelqu’un qui vous les rappelle ou si vous ne les inscrivez pas sur un calendrier ou dans un agenda ?", "Vous arrive-t-il de ne pas reconnaître un personnage dans une émission radio ou dans une émission de télévision, d’une scène à l’autre ?", "Vous arrive-t-il d’oublier d’acheter quelque chose que vous aviez prévu d’acheter, comme par exemple une carte d’anniversaire, même si vous voyez le magasin ?", "Vous arrive-t-il de ne pas vous rappeler de choses qui vous sont arrivées les quelques jours précédents ?", "Vous arrive-t-il de répéter la même histoire à la même personne à différentes occasions ?", "Vous arrive-t-il de prévoir d’emporter quelque chose avec vous, avant de quitter une pièce ou avant de sortir de chez vous, mais de le laisser là quelques minutes plus tard, même si cette chose se trouve devant vous ?", "Vous arrive-t-il de ne pas retrouver un objet que vous venez juste de déposer, comme un magazine ou des lunettes ?", "Vous arrive-t-il d’oublier de transmettre un message ou de remettre un objet à un visiteur alors qu’on vous a demandé de le faire ?", "Vous arrive-t-il de chercher quelque chose sans réaliser que vous l’avez vue quelques instants auparavant ?", "Si vous essayez de contacter un ami ou un proche et qu’il n’est pas là, vous arrive-t-il d’oublier de l’appeler à nouveau ?", "Vous arrive-t-il d’oublier ce que vous avez regardé à la télévision la veille ?", "Vous arrive-t-il d’oublier de dire quelque chose à quelqu’un alors que vous aviez prévu de le lui dire quelques minutes auparavant ?"];
+  var G = [{"label": "", "opts": ["Très souvent", "Assez souvent", "Parfois", "Rarement", "Jamais"], "vals": [5, 4, 3, 2, 1]}];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = null;              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var INV = [], LO = 1, HI = 5;
+    function val(k){ var v = answers[k-1][0]; if (v === 'NA') return null; return INV.indexOf(k) >= 0 ? (LO + HI - v) : v; }
+    function agg(list, m){ var s = 0, n = 0; list.forEach(function(k){ var v = val(k); if (v !== null){ s += v; n++; } }); if (n === 0) return null; return m === 'mean' ? s / n : s; }
+    var BL = [{"l": "Mémoire prospective (PM)", "it": [1, 3, 5, 7, 10, 12, 14, 16], "m": "sum", "d": 0, "r": "8 à 40", "x": 1}, {"l": "Mémoire rétrospective (RM)", "it": [2, 4, 6, 8, 9, 11, 13, 15], "m": "sum", "d": 0, "r": "8 à 40", "x": 1}, {"l": "Score total", "it": [1, 3, 5, 7, 10, 12, 14, 16, 2, 4, 6, 8, 9, 11, 13, 15], "m": "sum", "d": 0, "r": "16 à 80", "x": 1}];
+    var res = [], rows = '';
+    BL.forEach(function(b){ var v = agg(b.it, b.m); if (v !== null) v = v * b.x; res.push(v); rows += row(b.l + (b.r ? ' (' + b.r + ')' : ''), v === null ? '-' : v.toFixed(b.d).replace('.', ',')); });
+    html += '<table class=\"result-table\">' + rows + '</table>';
+    html += '<p class=\"result-text\">' + "Un score plus élevé correspond à plus d’oublis rapportés. Aucun seuil ni norme n’est affiché : aucun seuil clinique n’est publié dans les sources lues. L’attribution des items aux deux sous-échelles provient d’un article secondaire (voir fiche)." + '</p>';
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PRMQ : Questionnaire de mémoire prospective et rétrospective</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#8D8D35 0%,#E3E3B5 55%,#414116 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#414116;background:#F4F4E6;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #858532;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#858532;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#414116;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">PRMQ</span></div>
+
+  <h1 class="serif">Prospective and Retrospective Memory Questionnaire (PRMQ), feuille française</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">PRMQ : Smith, Della Sala, Logie et Maylor (2000) ; traduction française mise en ligne par l’Université d’Édimbourg (traducteur non indiqué).</p>
+  <div class="meta-row">
+    <span class="pill">16 questions</span>
+    <span class="pill">5 réponses</span>
+    <span class="pill">Jamais → Très souvent</span>
+    <span class="pill">Français</span>
+    <span class="pill">Mémoire (oublis rapportés)</span>
+    <span class="pill">Licence requise : incertaine</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="prmq.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>Domaine : mémoire de la vie quotidienne telle que la personne la rapporte, avec deux sous-échelles, mémoire prospective (PM) et mémoire rétrospective (RM). Auteurs : Smith G, Della Sala S, Logie RH, Maylor EA (2000). Version française : traduction mise en ligne par l'Université d'Édimbourg (School of PPLS), auteur de la traduction non indiqué sur la feuille ; titre de la feuille : « Se rappeler de faire des choses ».</p>
+    <p>16 items, 5 modalités de réponse (Très souvent, Assez souvent, Parfois, Rarement, Jamais). Délai de passation : non indiqué dans les sources lues.</p>
+    <p class="source-note">La consigne est reproduite telle quelle, avec la coquille de la source (« toutes les questions présentent sur les deux faces »). Les questions démographiques de la feuille (âge, sexe, années d'études, traumatisme crânien) ne sont pas cotées et ne sont pas reprises ici.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque item est coté de 1 (Jamais) à 5 (Très souvent) ; aucun item n'est inversé. Mémoire prospective (PM) = somme des items 1, 3, 5, 7, 10, 12, 14, 16 (8 à 40) ; mémoire rétrospective (RM) = somme des items 2, 4, 6, 8, 9, 11, 13, 15 (8 à 40) ; total = somme des 16 items (16 à 80). Un score élevé correspond à plus d'oublis rapportés.</p>
+    <p>Aucun seuil clinique n'est publié dans les sources lues, donc aucune interprétation n'est affichée. Des scores T normés existent (Crawford et coll. 2003, Memory 11:261-275, N = 551) mais n'ont pas été lus.</p>
+    <p class="reserve">Codage 1-5 : la feuille française ne donne pas les valeurs numériques ; le codage (Jamais = 1 … Très souvent = 5) vient de sources lues sur la version anglaise et la version portugaise (PMC6194516, PMC13564939). La feuille présente les colonnes dans l'ordre Très souvent → Jamais.</p>
+    <p class="reserve">Sous-échelles PM / RM : l'affectation des items provient d'un article secondaire (PMC13564939, données de Pilotti) et non du manuscrit de Smith 2000 ni de Crawford 2003 (non lus) ; elle est cohérente avec le contenu des items et avec la numérotation de la version anglaise lue.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Licence requise : incertaine. Conditions de téléchargement de la source : « The Prospective and Retrospective Memory Questionnaire (PRMQ) is available in a range of languages for free download from this site on the understanding that: the questionnaire will only be used for non-profit research and, any published reports that arise from using a version of the PRMQ will cite the original source article: Smith, G., Della Sala, S., Logie, R.H. &amp; Maylor, E.A. (2000). Prospective and Retrospective Memory in Normal Aging and Dementia: A Questionnaire Study. Memory, 8, 311-321. and will also cite any additional source articles listed with specific translations that are chosen. [...] Please note that the PRMQ was developed for the purposes of research on self report and proxy report of healthy and impaired human memory. If it is used for clinical assessment, we offer no guarantees that it will be of clinical value and do not accept any responsibility for clinical decisions that are based on the results of using the self-report or proxy versions of the PRMQ. [...] Note that each of the versions listed below was translated by a fluent speaker of the language who used the PRMQ in their own research. These translations have not been checked independently, and the original authors of the English language version can only confirm the accuracy of their original version. »</p>
+    <p class="reserve">D'après ce texte, le PRMQ est mis à disposition « for non-profit research » avec citation obligatoire de l'article source ; l'usage en cabinet n'est pas explicitement visé : à vérifier. Le texte précise aussi que les traductions « have not been checked independently » et que la valeur clinique n'est pas garantie.</p>
+    <p class="source-note">Divergences relevées : (1) La feuille française ne donne pas les valeurs numériques : le codage 1-5 (Jamais = 1 ... Très souvent = 5) vient de sources lues sur la version originale/portugaise (PMC6194516, PMC13564939) ; la feuille française présente les colonnes dans l&#x27;ordre Très souvent, Assez souvent, Parfois, Rarement, Jamais. (2) L&#x27;affectation des items aux sous-échelles PM/RM provient d&#x27;un article secondaire (PMC13564939, données de Pilotti) et non du manuscrit Smith 2000 / Crawford 2003 (non lus) ; elle est cohérente avec le contenu des items (PM : &#x27;oublier de faire quelque chose prévu&#x27;) et avec la numérotation de la version anglaise lue. (3) La feuille d&#x27;Edimbourg indique que la traduction française n&#x27;a pas été vérifiée de façon indépendante. (4) Coquille conservée dans la consigne : &#x27;toutes les questions présentent sur les deux faces&#x27;. (5) Le texte du PDF contenait des tirets insécables/ traits d&#x27;union conditionnels dupliqués (&#x27;arrive--t--il&#x27;) normalisés en &#x27;arrive-t-il&#x27; ; &#x27;311--321&#x27; non repris. (6) La mise en page des deux colonnes d&#x27;options est répétée sur chaque page ; l&#x27;item 14 (« Si vous essayez de contacter un ami... ») ne commence pas par « Vous arrive-t-il » comme dans la version anglaise (« If you tried to contact... »).</p>
+    <p class="source-note">Références : Smith G, Della Sala S, Logie RH, Maylor EA. Prospective and retrospective memory in normal ageing and dementia: a questionnaire study. Memory 2000;8(5):311-321. Crawford JR, Smith GV, Maylor EAM, Della Sala S, Logie RH. The Prospective and Retrospective Memory Questionnaire (PRMQ): normative data and latent structure in a large non-clinical sample. Memory 2003;11(3):261-275. Pereira DR, Albuquerque PB. Subjective memory complaints in Portuguese young adults: contributions from the adaptation of the Prospective and Retrospective Memory Questionnaire. Psychol Belg 2018;58(1):91-104 (doi 10.5334/pb.387, PMC6194516). Pilotti M, Julaia MB, Waked A, El-Moussa O. Data From the File Drawer: Bridging the Data Gap About Female First-Year Learners&#x27; Performance and Psychological Well-Being in a Bilingual Context. J Open Psychol Data (doi 10.5334/jopd.141, PMC13564939).</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

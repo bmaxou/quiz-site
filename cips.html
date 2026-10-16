@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CIPS : Clance Impostor Phenomenon Scale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #633285;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#633285;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#2F1641;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#633285;background:#EEE6F4;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#2F1641;border-color:#E0D9C9;}
+  .btn-primary{background:#633285;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#633285;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#2F1641;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">CIPS : Clance Impostor Phenomenon Scale</h1>
+    <p class="lead">20 énoncés (en anglais) sur le sentiment d'imposture. Réponses de 1 (Not at all true) à 5 (Very true).</p>
+
+    <p class="lang-note">Questions et réponses en anglais : aucune version française lisible n'a été trouvée. Items repris d'articles de recherche reproduisant l'échelle (pas la feuille originale de Clance) ; cotation déduite de ces articles. Licence requise : incertaine.</p>
+    <div class="pill-row">
+      <span class="pill">20 questions</span>
+      <span class="pill">5 réponses (1 à 5)</span>
+      <span class="pill">Anglais</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Cotation déduite d'articles de recherche reproduisant l'échelle (feuille originale de Clance non lue). Repères indicatifs, non diagnostiques. Ne remplace pas un entretien clinique.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["I have often succeeded on a test or task even though I was afraid that I would not do well before I undertook the task.", "I can give the impression that I'm more competent than I really am.", "I avoid evaluations if possible and have a dread of others evaluating me.", "When people praise me for something I've accomplished, I'm afraid I won't be able to live up to their expectations of me in the future.", "I sometimes think I obtained my present position or gained my present success because I happened to be in the right place at the right time or knew the right people.", "I'm afraid people important to me may find out that I'm not as capable as they think I am.", "I tend to remember the incidents in which I have not done my best more than those times I have done my best.", "I rarely do a project or task as well as I'd like to do it.", "Sometimes I feel or believe that my success in my life or in my job has been the result of some kind of error.", "It's hard for me to accept compliments or praise about my intelligence or accomplishments.", "At times, I feel my success has been due to some kind of luck.", "I'm disappointed at times in my present accomplishments and think I should have accomplished much more.", "Sometimes I'm afraid others will discover how much knowledge or ability I really lack.", "I'm often afraid that I may fail at a new assignment or undertaking even though I generally do well at what I attempt.", "When I've succeeded at something and received recognition for my accomplishments, I have doubts that I can keep repeating that success.", "If I receive a great deal of praise and recognition for something I've accomplished, I tend to discount the importance of what I've done.", "I often compare my ability to those around me and think they may be more intelligent than I am.", "I often worry about not succeeding with a project or examination, even though others around me have considerable confidence that I will do well.", "If I'm going to receive a promotion or gain recognition of some kind, I hesitate to tell others until it is an accomplished fact.", "I feel bad and discouraged if I'm not “the best” or at least “very special” in situations that involve achievement."];
+  var G = [{"label": "", "opts": ["Not at all true", "Rarely", "Sometimes", "Often", "Very true"], "vals": [1, 2, 3, 4, 5]}];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = null;              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var INV = [], LO = 1, HI = 5;
+    function val(k){ var v = answers[k-1][0]; if (v === 'NA') return null; return INV.indexOf(k) >= 0 ? (LO + HI - v) : v; }
+    function agg(list, m){ var s = 0, n = 0; list.forEach(function(k){ var v = val(k); if (v !== null){ s += v; n++; } }); if (n === 0) return null; return m === 'mean' ? s / n : s; }
+    var BL = [{"l": "Score total CIPS", "it": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20], "m": "sum", "d": 0, "r": "20 à 100", "x": 1}];
+    var res = [], rows = '';
+    BL.forEach(function(b){ var v = agg(b.it, b.m); if (v !== null) v = v * b.x; res.push(v); rows += row(b.l + (b.r ? ' (' + b.r + ')' : ''), v === null ? '-' : v.toFixed(b.d).replace('.', ',')); });
+    html += '<table class=\"result-table\">' + rows + '</table>';
+    html += '<p class="result-text">' + (res[0] <= 40 ? 'Catégorie rapportée dans les articles lus : 40 ou moins (few impostor characteristics).' : res[0] <= 60 ? 'Catégorie rapportée dans les articles lus : 41 à 60 (moderate).' : res[0] <= 80 ? 'Catégorie rapportée dans les articles lus : 61 à 80 (frequent).' : 'Catégorie rapportée dans les articles lus : plus de 80 (intense).') + '</p>';
+    html += '<p class="result-text">Repère indicatif, non diagnostique. Un autre article lu distingue seulement 61 ou plus (niveau élevé d\'imposture) et 60 ou moins. Cotation déduite d\'articles de recherche, non vérifiée sur la feuille originale de Clance.</p>';
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CIPS : Clance Impostor Phenomenon Scale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#68358D 0%,#D0B5E3 55%,#2F1641 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#2F1641;background:#EEE6F4;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #633285;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#633285;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#2F1641;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">CIPS</span></div>
+
+  <h1 class="serif">Clance Impostor Phenomenon Scale (CIPS)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">CIPS : échelle de Clance PR (date non lue dans les sources) ; concept : Clance PR & Imes SA (1978).</p>
+  <div class="meta-row">
+    <span class="pill">20 questions</span>
+    <span class="pill">5 réponses (1 à 5)</span>
+    <span class="pill">Anglais</span>
+    <span class="pill">Anglais (aucune version française lisible)</span>
+    <span class="pill">Sentiment d&#x27;imposture</span>
+    <span class="pill">Licence requise : incertaine</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="cips.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>Domaine : sentiment d'imposture (phénomène d'imposteur). Échelle de Clance PR (date non lue dans les sources) ; concept : Clance PR & Imes SA (1978). 20 items, 5 réponses : Not at all true (1), Rarely (2), Sometimes (3), Often (4), Very true (5). Délai de passation : non indiqué dans les sources lues.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Somme des 20 items (valeurs 1 à 5), plage 20 à 100, sans transformation. Aucun item inversé n'est mentionné dans les sources lues.</p>
+    <p>Catégories rapportées par deux articles de recherche citant Clance (PMC12451328, J Taibah Univ Med Sci 2025 ; PMC13401700, Health Sci Rep 2026) : 40 ou moins = few impostor characteristics ; 41 à 60 = moderate ; 61 à 80 = frequent ; plus de 80 = intense. PMC13401700 : « Scores of 61 or higher indicate high levels of impostorism, while scores of 60 or below indicate non-impostors ».</p>
+    <p class="reserve">Réserve (cotation déduite) : la cotation (échelle 1-5, somme, catégories) est écrite dans la méthode de deux articles de recherche et non dans la feuille originale de Clance, qui n'a pas été lue (son site renvoie une erreur de certificat). L'absence d'item inversé est celle des sources lues, non confirmée à la source. Les catégories sont indicatives et non diagnostiques.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Items en anglais : aucune version française lisible n'a été trouvée. Source secondaire uniquement : annexe de PMC12451328 (items IS01 à IS20), confirmée mot à mot (20 sur 20) par le tableau de PMC8892706. Consigne non lue : la page n'affiche donc aucune consigne de passation.</p>
+    <p class="reserve">Divergences : PMC9958076 reproduit quatre items avec de légères variantes (item 7 « incident » au lieu de « incidents » ; item 10 « take compliments » au lieu de « accept compliments » ; items 2 et 5 non retrouvés à l'identique) : la version de PMC12451328 est retenue. Libellé de l'option 2 : « Rarely » (PMC13401700) ou « rarely true » (PMC9958076). Les apostrophes droites (« I'm », « It's ») sont celles de l'annexe de PMC12451328.</p>
+    <p class="reserve">Licence requise : incertaine. aucune mention trouvée dans les sources lues (la feuille originale de Clance n&#x27;a pas été lue ; son site renvoie une erreur de certificat)</p>
+    <p class="source-note">Références : Clance PR, Imes SA. The imposter phenomenon in high achieving women: dynamics and therapeutic intervention. Psychother Theor Res Pract 1978;3:241-247 (référence telle que citée dans PMC12451328). Measuring impostor phenomenon in healthcare simulation educators: a validation of the Clance impostor phenomenon scale. BMC Med Educ 2022 (PMC8892706) : 20 items. Imposter phenomenon; prevalence and associated factors among family medicine residents in Riyadh city. J Taibah Univ Med Sci 2025 (PMC12451328), annexe : 20 items.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

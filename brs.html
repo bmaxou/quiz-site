@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BRS : Brief Resilience Scale (anglais)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #326F85;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#326F85;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#163541;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#326F85;background:#E6F0F4;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#163541;border-color:#E0D9C9;}
+  .btn-primary{background:#326F85;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#326F85;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#163541;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">BRS : Brief Resilience Scale (questions en anglais)</h1>
+    <p class="lead">6 énoncés en anglais sur la capacité à rebondir après le stress. Pour chacun, indiquez dans quelle mesure vous êtes en désaccord ou d'accord.</p>
+    <p class="consigne">Use the following scale and circle one number for each statement to indicate how much you disagree or agree with each of the statements.</p>
+    <p class="lang-note">Questions et réponses en ANGLAIS : aucune version française n'a pu être lue (la version de Jacobs et Horsch, 2019, est inaccessible). Licence requise : incertaine.</p>
+    <div class="pill-row">
+      <span class="pill">6 questions</span>
+      <span class="pill">5 niveaux d&#x27;accord</span>
+      <span class="pill">Anglais</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Smith BW et coll. Int J Behav Med. 2008;15(3):194-200. Catégories indicatives (Todorović et coll. 2025) : ne remplacent pas un bilan.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["I tend to bounce back quickly after hard times.", "I have a hard time making it through stressful events.", "It does not take me long to recover from a stressful event.", "It is hard for me to snap back when something bad happens.", "I usually come through difficult times with little trouble.", "I tend to take a long time to get over setbacks in my life."];
+  var G = [{"label": "", "opts": ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"], "vals": [1, 2, 3, 4, 5]}];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = null;              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var INV = [2, 4, 6], LO = 1, HI = 5;
+    function val(k){ var v = answers[k-1][0]; return INV.indexOf(k) >= 0 ? (LO + HI - v) : v; }
+    function sum(list){ var s = 0; list.forEach(function(k){ s += val(k); }); return s; }
+    function mx(list){ var m = null; list.forEach(function(k){ var v = val(k); if (m === null || v > m) m = v; }); return m; }
+    function fq(s, n, d){ var p = Math.pow(10, d); var q = Math.floor((2 * s * p + n) / (2 * n)); return (q / p).toFixed(d).replace('.', ','); }
+    var rows = '';
+    function R(l, v){ rows += row(l, v); }
+    R("Score BRS : moyenne des 6 items (1,00 à 5,00)", fq(sum([1, 2, 3, 4, 5, 6]), 6, 2));
+    var BS = sum([1, 2, 3, 4, 5, 6]) / 6; var BC = ["Faible résilience (low resilience)", "Résilience normale / modérée (normal resilience)", "Résilience élevée (high resilience)"];
+    R("Catégorie (indicative, non diagnostique)", BS < 3 ? BC[0] : BS <= 4.3 ? BC[1] : BC[2]);
+    html += '<table class=\"result-table\">' + rows + '</table>';
+    html += '<p class=\"result-text\">' + "Le score est une moyenne (et non une somme) après inversion des items 2, 4 et 6. Catégories données à titre indicatif d'après Todorović et coll. 2025, citant Smith et coll. 2013 : moins de 3 = faible ; de 3 à 4,30 inclus = normale ; plus de 4,30 = élevée. Elles ne constituent pas un diagnostic." + '</p>';
+
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BRS : Brief Resilience Scale (anglais)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#35758D 0%,#B5D7E3 55%,#163541 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#163541;background:#E6F0F4;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #326F85;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#326F85;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#163541;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">BRS</span></div>
+
+  <h1 class="serif">Brief Resilience Scale (BRS), version originale anglaise</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">BRS : Smith, Dalen, Wiggins, Tooley, Christopher et Bernard (2008) ; version originale anglaise.</p>
+  <div class="meta-row">
+    <span class="pill">6 questions</span>
+    <span class="pill">5 niveaux d&#x27;accord</span>
+    <span class="pill">Anglais</span>
+    <span class="pill">Anglais (version originale)</span>
+    <span class="pill">Résilience</span>
+    <span class="pill">Licence requise : incertaine</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="brs.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p><strong>Domaine :</strong> résilience, entendue comme la capacité à rebondir après le stress ; échelle unidimensionnelle.</p>
+    <p><strong>Auteurs :</strong> Smith B.W., Dalen J., Wiggins K., Tooley E., Christopher P., Bernard J., 2008.</p>
+    <p><strong>Version :</strong> anglais original (guide de traduction du Duke Center for the Study of Aging). <strong>Nombre d'items :</strong> 6, cotés de 1 à 5. <strong>Délai de passation :</strong> non précisé dans les sources lues.</p>
+    <p class="reserve"><strong>Langue :</strong> les items et les réponses sont en anglais car aucun libellé français n'a pu être lu : la version française de Jacobs et Horsch (2019, Hogrefe) est inaccessible, et les articles français ouverts (Todorović et coll. 2025 et autres) ne reproduisent les items qu'en anglais. Cette page n'est utilisable en français qu'après obtention et validation d'une traduction (par exemple demande aux auteurs de la version française).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Items 2, 4 et 6 inversés (inversion : 5 = 1, 4 = 2, 3 = 3, 2 = 4, 1 = 5, soit 6 − réponse). <strong>Score :</strong> moyenne des 6 items après inversion (somme divisée par 6), de 1 à 5 ; ce n'est pas une somme.</p>
+    <p><strong>Catégories (indicatives) :</strong> moins de 3 (1,00-2,99) = faible résilience ; de 3 à 4,30 inclus = résilience normale/modérée ; plus de 4,30 (4,31-5,00) = résilience élevée. Source : Todorović et coll., Sci Rep 2025 (PMC11973138), citant Smith et coll. 2013 (non lu directement).</p>
+    <p class="source-note">L'article note 3-4,30 dans son tableau 2 et « between 3 and 4.3 (inclusive) » dans son texte. Une structure à deux facteurs (items positifs 1, 3, 5 / négatifs 2, 4, 6) est signalée dans le guide, sans usage pour la cotation.</p>
+    <p class="reserve">Ces catégories sont données à titre indicatif et ne constituent pas un diagnostic.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve"><strong>Source des items :</strong> guide de traduction de la BRS (Duke Center for the Study of Aging, B.W. Smith, juin 2020, mis à jour 2026), lu en texte intégral ; items recoupés mot à mot avec le tableau 3 de Todorović et coll. 2025 (identiques, sauf « set-backs » pour « setbacks » à l'item 6 ; le guide Duke est retenu).</p>
+    <p class="reserve"><strong>Licence requise : incertaine.</strong> Aucune phrase de droits dans le guide de traduction lu (Duke Center for the Study of Aging / B.W. Smith, juin 2020, mis à jour 2026). Le guide invite à développer de nouvelles traductions selon des étapes décrites, sans formule de licence.</p>
+    <p class="source-note">Références : Smith BW, Dalen J, Wiggins K, Tooley E, Christopher P, Bernard J. The Brief Resilience Scale: Assessing the ability to bounce back. Int J Behav Med. 2008;15(3):194-200. doi:10.1080/10705500802222972 : Smith BW, Epstein EM, Ortiz JA, Christopher PJ, Tooley EM. The foundations of resilience: what are the critical resources for bouncing back from stress? In: Prince-Embury S, Saklofske DH, eds. Resilience in Children, Adolescents, and Adults. New York: Springer; 2013:167-187 (seuils 3 et 4,3 ; cité par Todorović 2025, non lu directement) : Jacobs I, Horsch A. Psychometric properties of the French Brief Resilience Scale. Eur J Health Psychol. 2019;26:1-9. doi:10.1027/2512-8442/a000022 (version française validée en Suisse ; texte non accessible) : Todorović A, Bourion-Bédès S, Rousseau H, Baumann C. Psychometric validation and item invariance of the French version of the Brief Resilience Scale in a sample of French university students following the first COVID-19 lockdown. Sci Rep. 2025;15:11753. doi:10.1038/s41598-025-94935-w</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

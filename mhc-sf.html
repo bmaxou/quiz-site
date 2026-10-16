@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MHC-SF : Continuum de santé mentale (forme abrégée)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #7A3285;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#7A3285;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#3B1641;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#7A3285;background:#F2E6F4;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#3B1641;border-color:#E0D9C9;}
+  .btn-primary{background:#7A3285;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#7A3285;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#3B1641;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">MHC-SF : Continuum de santé mentale, questionnaire abrégé (version française canadienne)</h1>
+    <p class="lead">14 questions. Chacune complète la phrase de la consigne : « Au cours du dernier mois, à quelle fréquence vous êtes-vous senti / avez-vous senti… ». Choisissez la fréquence correspondante.</p>
+    <p class="consigne">Au cours du dernier mois, à quelle fréquence vous êtes-vous senti/avez-vous senti…</p>
+    <p class="lang-note">Questions en français (version canadienne, tableau de l'INSPQ). Aucune validation française de France n'a été lue. Licence requise : incertaine.</p>
+    <div class="pill-row">
+      <span class="pill">14 questions</span>
+      <span class="pill">6 fréquences (0 à 5)</span>
+      <span class="pill">Dernier mois</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Keyes CLM. 2009 ; Gilmour H. Rapports sur la santé 25(9), 2014 ; Canuel M et coll. INSPQ, 2019. Classement indicatif, non diagnostique.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["heureux(se)?", "intéressé(e) par la vie?", "satisfait(e) à l’égard de votre vie?", "que vous aviez quelque chose d’important à apporter à la société?", "que vous aviez un sentiment d’appartenance à une collectivité (comme un groupe social, votre quartier, votre ville, votre école)?", "que notre société devient un meilleur endroit pour les gens comme vous?", "que les gens sont fondamentalement bons?", "que le fonctionnement de la société a du sens pour vous?", "que vous aimiez la plupart des facettes de votre personnalité?", "que vous étiez bon(ne) pour gérer les responsabilités de votre quotidien?", "que vous aviez des relations chaleureuses et fondées sur la confiance avec d’autres personnes?", "que vous viviez des expériences qui vous poussent à grandir et à devenir une meilleure personne?", "capable de penser ou d’exprimer vos propres idées et opinions?", "que votre vie a un but ou une signification?"];
+  var G = [{"label": "", "opts": ["Jamais", "Une fois ou deux", "Environ 1 fois par semaine", "Environ 2 ou 3 fois par semaine", "Presque tous les jours", "Tous les jours"], "vals": [0, 1, 2, 3, 4, 5]}];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = null;              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var INV = [], LO = 0, HI = 5;
+    function val(k){ var v = answers[k-1][0]; return INV.indexOf(k) >= 0 ? (LO + HI - v) : v; }
+    function sum(list){ var s = 0; list.forEach(function(k){ s += val(k); }); return s; }
+    function mx(list){ var m = null; list.forEach(function(k){ var v = val(k); if (m === null || v > m) m = v; }); return m; }
+    function fq(s, n, d){ var p = Math.pow(10, d); var q = Math.floor((2 * s * p + n) / (2 * n)); return (q / p).toFixed(d).replace('.', ','); }
+    var rows = '';
+    function R(l, v){ rows += row(l, v); }
+    R("Score total MHC-SF (0 à 70)", String(sum([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14])));
+    R("Bien-être émotionnel (0 à 15)", String(sum([1, 2, 3])));
+    R("Bien-être social (0 à 25)", String(sum([4, 5, 6, 7, 8])));
+    R("Bien-être psychologique (0 à 30)", String(sum([9, 10, 11, 12, 13, 14])));
+    var CLS = ["Santé mentale florissante", "Santé mentale languissante", "Santé mentale modérément bonne"]; var eh = 0, el = 0, fh = 0, fl = 0;
+    [1, 2, 3].forEach(function(k){ var v = val(k); if (v >= 4) eh++; if (v <= 1) el++; });
+    [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14].forEach(function(k){ var v = val(k); if (v >= 4) fh++; if (v <= 1) fl++; });
+    R("Classement (critères Statistique Canada, d'après Keyes ; indicatif)", (eh >= 1 && fh >= 6) ? CLS[0] : (el >= 1 && fl >= 6) ? CLS[1] : CLS[2]);
+    html += '<table class=\"result-table\">' + rows + '</table>';
+    html += '<p class=\"result-text\">' + "Classement donné à titre indicatif d'après les critères de l'annexe de Statistique Canada (Gilmour 2014) ; il ne constitue pas un diagnostic. La somme 0-70 et les sous-scores proviennent de sources secondaires (articles de validation) : voir la fiche." + '</p>';
+
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MHC-SF : Continuum de santé mentale (forme abrégée)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#81358D 0%,#DDB5E3 55%,#3B1641 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#3B1641;background:#F2E6F4;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #7A3285;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#7A3285;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#3B1641;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">MHC-SF</span></div>
+
+  <h1 class="serif">Continuum de santé mentale, questionnaire abrégé (MHC-SF / CSM-QA), version française canadienne</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">MHC-SF : Keyes (2009) ; version française de l'Enquête sur la santé dans les collectivités canadiennes – Santé mentale 2012, reproduite par Statistique Canada et l'INSPQ.</p>
+  <div class="meta-row">
+    <span class="pill">14 questions</span>
+    <span class="pill">6 fréquences (0 à 5)</span>
+    <span class="pill">Dernier mois</span>
+    <span class="pill">Français (Canada)</span>
+    <span class="pill">Bien-être (émotionnel, social, psychologique)</span>
+    <span class="pill">Licence requise : incertaine</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="mhc-sf.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p><strong>Domaine :</strong> bien-être (émotionnel, social et psychologique) au cours du dernier mois.</p>
+    <p><strong>Auteurs :</strong> Keyes C.L.M., 2009 (Brief Description of the MHC-SF) ; version française de l'Enquête sur la santé dans les collectivités canadiennes - Santé mentale 2012, reproduite par Statistique Canada (Gilmour 2014) et l'INSPQ (Canuel et al. 2019).</p>
+    <p><strong>Version :</strong> libellés du tableau de l'INSPQ (consigne combinée « vous êtes-vous senti/avez-vous senti… »). <strong>Nombre d'items :</strong> 14, cotés de 0 à 5. <strong>Délai de passation :</strong> non précisé dans les sources lues.</p>
+    <p class="source-note">Les items sont des fins de phrase qui complètent la consigne (« heureux(se)? », « intéressé(e) par la vie? »…). Les astérisques de renvoi de l'INSPQ (items 5 et 6) ont été retirés du texte.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Aucun item inversé. <strong>Score total :</strong> somme des 14 items, de 0 à 70. <strong>Sous-échelles :</strong> bien-être émotionnel = items 1 à 3 (0-15) ; bien-être social = items 4 à 8 (0-25) ; bien-être psychologique = items 9 à 14 (0-30).</p>
+    <p><strong>Classement</strong> (Gilmour H., Rapports sur la santé 25(9), 2014, annexe, tableau A ; source citée : Keyes) : <em>santé mentale florissante</em> = réponse « presque tous les jours » ou « tous les jours » à au moins 1 des 3 questions sur le bien-être émotionnel ET à au moins 6 des 11 questions sur le fonctionnement positif (items 4 à 14) ; <em>languissante</em> = réponse « une fois ou deux » ou « jamais » à au moins 1 des 3 questions sur le bien-être émotionnel ET à au moins 6 des 11 questions sur le fonctionnement positif ; <em>modérément bonne</em> = ni florissante ni languissante.</p>
+    <p class="reserve">La somme 0-70 et les sous-scores viennent de sources secondaires et d'articles de validation (Opperman et coll. 2025 ; PsyToolkit) : l'annexe de Statistique Canada ne donne que les critères de classement et le nombre de questions (14). L'affectation 4-8 social / 9-14 psychologique est confirmée par les dimensions nommées de l'annexe.</p>
+    <p class="reserve">PsyToolkit (citant Kelley 2008) donne une règle différente pour « florissante » (au moins 7 des 14 symptômes, dont 1 hédonique) : non retenue ; la règle 1 sur 3 + 6 sur 11 (Statistique Canada / Keyes) est celle affichée. Le classement reste indicatif.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve"><strong>Source des items :</strong> tableau bilingue de l'INSPQ (Canuel et coll. 2019, questionnaire 13), comparé item par item à l'annexe de Statistique Canada : mêmes textes aux majuscules près. Statistique Canada sépare deux consignes (items 1-3 « …vous êtes-vous senti… » ; items 4-14 « …avez-vous senti / vous êtes-vous senti… ») et met une majuscule à l'item 1 ; la consigne combinée de l'INSPQ est reprise ici. Item 6 : les auteurs proposent désormais « la société devient un meilleur endroit pour tout le monde » ; la version ESCC, reprise ici, garde la première formulation. Item 5 : formulation différente pour les adolescents de 12 à 18 ans (note de l'INSPQ). Pas de validation française de France lue.</p>
+    <p class="reserve"><strong>Licence requise : incertaine.</strong> Aucune mention de droits dans les pages lues de l'INSPQ et de Statistique Canada. Mention secondaire (PsyToolkit, non officielle) : « The MHC-SF is copyrighted, but can be can be used for research when proper credit is given. This means that the work by Dr. C. Keyes needs to be acknowledged ». Source primaire de Keyes (aacu.org/…/MHC-SFEnglish.pdf) non lisible (page HTML renvoyée).</p>
+    <p class="source-note">Références : Keyes CLM. Brief Description of the Mental Health Continuum Short Form (MHC-SF). 2009. https://www.aacu.org/sites/default/files/MHC-SFEnglish.pdf (non lu) : Gilmour H. Santé mentale positive et maladie mentale. Rapports sur la santé, Statistique Canada, no 82-003-X, 25(9), 2014, p. 3-10 (annexe, tableau A). : Canuel M, Gosselin P, Duhoux A, Brunet A, Lesage A. Boîte à outils pour la surveillance post-sinistre des impacts sur la santé mentale. INSPQ, 2019 (Questionnaire 13 - MHC-SF). : Lamers SMA, Westerhof GJ, Bohlmeijer ET, ten Klooster PM, Keyes CLM. Evaluating the psychometric properties of the Mental Health Continuum-Short Form (MHC-SF). J Clin Psychol. 2011;67:99-110. doi:10.1002/jclp.20741 (référence recoupée dans PMC12133760 ; non lue)</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

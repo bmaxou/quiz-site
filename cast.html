@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CAST : Cannabis Abuse Screening Test</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #32854E;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#32854E;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#164124;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#32854E;background:#E6F4EB;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#164124;border-color:#E0D9C9;}
+  .btn-primary{background:#32854E;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#32854E;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#164124;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">CAST : repérage de l&#x27;usage problématique de cannabis</h1>
+    <p class="lead">6 questions sur les 12 derniers mois, cinq réponses de « Jamais » à « Très souvent ». Réservé aux personnes ayant consommé du cannabis au cours des 12 derniers mois (note OFDT 2013). Le résultat est donné selon deux cotations : 0 à 24 (CAST avancé) et 0 à 6 (CAST dichotomique).</p>
+    <p class="consigne">Au cours des 12 derniers mois… Une seule croix par ligne</p>
+    <p class="lang-note">Questions en français (version originale française de l'OFDT). Licence requise : incertaine.</p>
+    <div class="pill-row">
+      <span class="pill">6 questions</span>
+      <span class="pill">5 réponses de Jamais à Très souvent</span>
+      <span class="pill">12 derniers mois</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Référence principale : Spilka S, Janssen E, Legleye S. Détection des usages problématiques de cannabis : le Cannabis Abuse Screening Test (CAST). OFDT, Note 2013-02 ; Legleye et al., J Subst Use 2007. Outil de repérage : il ne remplace ni un entretien clinique ni un avis médical.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["Avez-vous fumé du cannabis avant midi ?", "Avez-vous fumé du cannabis lorsque vous étiez seul(e) ?", "Avez-vous eu des problèmes de mémoire quand vous fumiez du cannabis ?", "Des amis ou des membres de votre famille vous ont-ils dit que vous devriez réduire votre consommation de cannabis ?", "Avez-vous essayé de réduire ou d'arrêter votre consommation de cannabis sans y arriver ?", "Avez-vous eu des problèmes à cause de votre consommation de cannabis (dispute, bagarre, accident, mauvais résultats à l'école…) ? Lesquels ?"];
+  var G = [{"label": "", "opts": ["Jamais", "Rarement", "De temps en temps", "Assez souvent", "Très souvent"], "vals": [0, 1, 2, 3, 4]}];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = null;              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var s = 0, b = 0;
+    for (var i = 0; i < 6; i++){ var v = answers[i][0]; s += v; if (i < 2){ if (v >= 2) b += 1; } else { if (v >= 1) b += 1; } }
+    html += '<table class="result-table">' + row("CAST avancé, cotation 0 à 4 par ligne (0 à 24)", s) + row("CAST dichotomique (0 à 6)", b) + '</table>';
+    var cat = s < 3 ? 'inférieur à 3 : usager sans risque' : (s < 7 ? 'égal ou supérieur à 3 et inférieur à 7 : risque faible' : 'égal ou supérieur à 7 : risque élevé de dépendance');
+    html += '<p class="result-text">' + ("Note OFDT 2013 (cotation 0 à 24, seuils 3 et 7), score " + cat + ".") + '</p>';
+    html += '<p class="result-text">' + ("Pour la cotation 0 à 6, le Guide pratique OFDT/Fédération Addiction 2013 indique : « 2 ou 3 = risque élevé d'usage problématique ; &gt; 4 = risque très élevé d'usage problématique » (texte tel qu'imprimé, le cas du score 4 n'est pas explicite et n'est pas tranché). Pour la cotation 0 à 24, le Guide indique « &gt; 7 = usage problématique » alors que la note OFDT retient « égal ou supérieur à 7 » : le seuil 7 est affiché ici tel que dans la note. Les deux systèmes de seuils ne sont pas équivalents.") + '</p>';
+    html += '<p class="result-text">' + ("Les seuils ne sont pas définitivement arrêtés (note OFDT 2013). Le CAST est un outil de repérage, pas un diagnostic. À utiliser auprès de personnes ayant consommé du cannabis au cours des 12 derniers mois. Ce résultat est une indication : il ne remplace pas un entretien clinique.") + '</p>';
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CAST : Cannabis Abuse Screening Test</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#358D52 0%,#B5E3C4 55%,#164124 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#164124;background:#E6F4EB;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #32854E;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#32854E;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#164124;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">CAST</span></div>
+
+  <h1 class="serif">Cannabis Abuse Screening Test (CAST)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">CAST : Legleye, Karila, Beck, Reynaud (2007), développé depuis 2002 par l'OFDT (Beck et Legleye, ESCAPAD 2002-2003) ; version à 12 derniers mois définitive en 2006.</p>
+  <div class="meta-row">
+    <span class="pill">6 questions</span>
+    <span class="pill">5 réponses de Jamais à Très souvent</span>
+    <span class="pill">12 derniers mois</span>
+    <span class="pill">Français</span>
+    <span class="pill">Addictions · Cannabis</span>
+    <span class="pill">Licence requise : incertaine</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="cast.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>Domaine : repérage de l'usage problématique de cannabis. Auteurs : Legleye S, Karila L, Beck F, Reynaud M (2007) ; développé depuis 2002 par l'OFDT (Beck et Legleye, ESCAPAD 2002-2003) ; version à 12 derniers mois définitive en 2006. 6 questions, cinq modalités de réponse (Jamais, Rarement, De temps en temps, Assez souvent, Très souvent).</p>
+    <p>Population cible : adolescents et jeunes adultes ; la note OFDT de 2013 indique que l'outil n'était pas encore validé en population adulte. Passation uniquement auprès de personnes ayant consommé du cannabis dans les 12 derniers mois.</p>
+    <p class="source-note">Pour la question 6, la sous-question ouverte « Lesquels ? » fait partie du libellé imprimé ; elle n'est pas cotée et la page ne recueille pas de texte libre.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Deux cotations sont imprimées dans le Guide pratique OFDT/Fédération Addiction (2013, p. 15) pour les mêmes 6 questions et les mêmes 5 modalités. La page calcule les deux à partir d'une seule saisie.</p>
+    <p>(a) CAST avancé : toutes les lignes Jamais = 0, Rarement = 1, De temps en temps = 2, Assez souvent = 3, Très souvent = 4 ; total de 0 à 24. La note OFDT 2013-02 (Spilka, Janssen, Legleye) définit : score inférieur à 3 = usagers sans risque ; score égal à 3 et inférieur à 7 = risque faible ; score égal ou supérieur à 7 = risque élevé de dépendance. Ces seuils 3 et 7 sont ceux affichés par la page.</p>
+    <p>(b) CAST dichotomique : questions 1 et 2 : Jamais = 0, Rarement = 0, De temps en temps = 1, Assez souvent = 1, Très souvent = 1 ; questions 3 à 6 : Jamais = 0, toutes les autres modalités = 1 ; total de 0 à 6. Lecture donnée par la fiche signalétique du Guide : « 2 ou 3 = risque élevé d'usage problématique ; &gt; 4 = risque très élevé d'usage problématique » (texte tel qu'imprimé : le signe &gt; pour 4 est ambigu et n'est pas tranché).</p>
+    <p>Valeur manquante : le score n'est calculé que chez les personnes ayant complété l'ensemble du test (note OFDT) ; la page exige donc une réponse à chaque ligne.</p>
+    <p class="reserve">Divergence : le Guide 2013 indique pour le CAST avancé « &gt; 7 = usage problématique », alors que la note OFDT 2013-02 retient « égal ou supérieur à 7 » ; le seuil 7 est retenu tel que dans la note (7 inclus).</p>
+    <p class="reserve">Divergence : les seuils du Guide pour la cotation 0 à 6 et ceux de la note OFDT pour la cotation 0 à 24 ne sont pas équivalents. La note précise aussi que les seuils utilisés dans le rapport ESPAD 2011 étaient ceux des premières validations, avec un mode de calcul légèrement différent.</p>
+    <p class="reserve">Les seuils ne sont pas définitivement arrêtés (note OFDT : « Actuellement, les seuils ne sont pas définitivement arrêtés ») ; le CAST surestime les prévalences des usages à risque sévère ou de dépendance. C'est un outil de repérage, pas un diagnostic.</p>
+    <p>Repère d'étalonnage (OFDT, note 2013-02, usagers de cannabis de 17 ans, ESCAPAD 2011, n = 7 668) : score 0 = 34,5 % ; de 0 à moins de 3 = 25,5 % ; de 3 à moins de 7 = 21,6 % ; 7 et plus = 18,4 %. Échantillon d'adolescents français de 17 ans seulement.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Les questions, la consigne et les valeurs de réponse proviennent du Guide pratique OFDT/Fédération Addiction (janvier 2013), questionnaires CAST et CAST avancé, vérifiés sur la page imprimée ; les seuils proviennent aussi de la note OFDT 2013-02.</p>
+    <p class="reserve">Licence : aucune mention trouvée (le Guide OFDT/Fédération Addiction reproduit l'intégralité du questionnaire ; la note OFDT 2013-02 décrit le test sans clause de droits)</p>
+    <p class="reserve">Licence requise : incertaine. Outil publié par un organisme public (OFDT) et reproduit intégralement dans un guide public ; aucune clause de droits ni licence libre explicite trouvée : probablement libre d'usage avec citation de la source, mais non établi.</p>
+    <p class="source-note">Legleye S, Karila L, Beck F, Reynaud M. Validation of the CAST, a general population Cannabis Abuse Screening Test. Journal of Substance Use 2007;12(4):233-242.</p>
+    <p class="source-note">Legleye S, Piontek D, Kraus L. Psychometric properties of the Cannabis Abuse Screening Test (CAST) in a French sample of adolescents. Drug and Alcohol Dependence 2011;113(2-3):229-235.</p>
+    <p class="source-note">Legleye S, Kraus L, Piontek D, Phan O, Jouanne C. Validation of the Cannabis Abuse Screening Test in a sample of cannabis inpatients. European Addiction Research 2012;18(4):193-200.</p>
+    <p class="source-note">Legleye S, Piontek D, Kraus L, Morand E, Falissard B. A validation of the CAST using a latent class analysis of the DSM-IV among adolescents. Int J Methods Psychiatr Res 2013;22(1):16-26.</p>
+    <p class="source-note">Spilka S, Janssen E, Legleye S. Détection des usages problématiques de cannabis : le Cannabis Abuse Screening Test (CAST). OFDT, Note n°2013-02, Saint-Denis, 03/09/2013.</p>
+    <p class="source-note">Obradovic I. Guide pratique des principaux outils de repérage de l'usage problématique de cannabis chez les adolescents. OFDT / Fédération Addiction, janvier 2013.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Y-PSC, Pediatric Symptom Checklist (jeune)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #708532;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#708532;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#364116;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#708532;background:#F1F4E6;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#364116;border-color:#E0D9C9;}
+  .btn-primary{background:#708532;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#708532;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#364116;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">Y-PSC : Pediatric Symptom Checklist (version jeune)</h1>
+    <p class="lead">35 questions sur le comportement, les émotions et l'école. C'est le jeune qui répond lui-même, à propos de lui-même.</p>
+    <p class="consigne">Qui répond : le jeune lui-même, à propos de lui-même (auto-évaluation). La consigne ci-dessous est en anglais, non traduite.
+
+Please mark under the heading that best fits you:</p>
+    <p class="lang-note">Questions en anglais : aucune version française lisible n'a été trouvée ; les items n'ont pas été traduits. Licence requise : incertaine.</p>
+    <div class="pill-row">
+      <span class="pill">35 questions</span>
+      <span class="pill">Réponse par le jeune</span>
+      <span class="pill">Never / Sometimes / Often</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Jellinek MS, Murphy JM, Robinson J et coll. J Pediatr. 1988;112(2):201-209 ; Jellinek MS et coll. Arch Pediatr Adolesc Med. 1999;153(3):254-260. Outil de dépistage : il ne remplace ni un entretien clinique ni un avis médical.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["Complain of aches or pains", "Spend more time alone", "Tire easily, little energy", "Fidgety, unable to sit still", "Have trouble with teacher", "Less interested in school", "Act as if driven by motor", "Daydream too much", "Distract easily", "Are afraid of new situations", "Feel sad, unhappy", "Are irritable, angry", "Feel hopeless", "Have trouble concentrating", "Less interested in friends", "Fight with other children", "Absent from school", "School grades dropping", "Down on yourself", "Visit doctor with doctor finding nothing wrong", "Have trouble sleeping", "Worry a lot", "Want to be with parent more than before", "Feel that you are bad", "Take unnecessary risks", "Get hurt frequently", "Seem to be having less fun", "Act younger than children your age", "Do not listen to rules", "Do not show feelings", "Do not understand other people’s feelings", "Tease others", "Blame others for your troubles", "Take things that do not belong to you", "Refuse to share"];
+  var G = [{"label": "", "opts": ["Never", "Sometimes", "Often"], "vals": [0, 1, 2]}];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = null;              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var INV = [], LO = 0, HI = 2;
+    function val(k){ var v = answers[k-1][0]; if (v === 'NA') return null; return INV.indexOf(k) >= 0 ? (LO + HI - v) : v; }
+    function agg(list, m){ var s = 0, n = 0; list.forEach(function(k){ var v = val(k); if (v !== null){ s += v; n++; } }); if (n === 0) return null; return m === 'mean' ? s / n : s; }
+    var BL = [{"l": "Score total (35 items)", "it": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35], "m": "sum", "d": 0, "r": "0 à 70", "x": 1}];
+    var res = [], rows = '';
+    BL.forEach(function(b){ var v = agg(b.it, b.m); if (v !== null) v = v * b.x; res.push(v); rows += row(b.l + (b.r ? ' (' + b.r + ')' : ''), v === null ? '-' : v.toFixed(b.d).replace('.', ',')); });
+    html += '<table class=\"result-table\">' + rows + '</table>';
+    html += '<p class="result-text">' + 'Seuil publié pour cette version (Bright Futures) : 30 ou plus : ' + (res[0] >= 30 ? 'atteint' : 'non atteint') + '.' + '</p>';
+    html += '<p class=\"result-text\">' + "Aucune sous-échelle n'est décrite dans les sources lues pour cette version. Un score au-dessus du seuil suggère une évaluation complémentaire ; ce résultat est une indication, il ne remplace pas un entretien clinique." + '</p>';
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Y-PSC, Pediatric Symptom Checklist (jeune)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#778D35 0%,#D7E3B5 55%,#364116 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#364116;background:#F1F4E6;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #708532;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#708532;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#364116;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">Y-PSC</span></div>
+
+  <h1 class="serif">Youth Pediatric Symptom Checklist (Y-PSC), version jeune de la PSC-35</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Y-PSC, variante en auto-évaluation de la PSC-35. Jellinek, Murphy, Robinson, Feins, Lamb &amp; Fenton, 1988 ; Jellinek et al., 1999.</p>
+  <div class="meta-row">
+    <span class="pill">35 questions</span>
+    <span class="pill">Réponse par le jeune</span>
+    <span class="pill">Never / Sometimes / Often</span>
+    <span class="pill">Anglais</span>
+    <span class="pill">Santé mentale du jeune · Dépistage</span>
+    <span class="pill">Licence requise : incertaine</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="psc-35-jeune.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>La Youth Pediatric Symptom Checklist (Y-PSC) est la variante en auto-évaluation de la PSC-35 : les 35 items sont formulés à la 1re personne et c'est le jeune qui répond lui-même, à propos de lui-même. Les items sont les mêmes que dans la version parent, reformulés.</p>
+    <p>Auteurs et année (PSC d'origine) : Jellinek, Murphy, Robinson, Feins, Lamb &amp; Fenton, 1988 ; Jellinek et al., 1999.</p>
+    <p>Nombre d'items : 35. Âge d'utilisation et durée de passation : non indiqués dans les sources lues.</p>
+    <p class="source-note">La version à remplir par le parent a sa propre page (psc-35.html).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Cotation reprise de la PSC-35 : Never = 0, Sometimes = 1, Often = 2, aucun item inversé, total = somme des 35 items (0 à 70).</p>
+    <p>Seuil publié pour la Y-PSC (Bright Futures) : 30 ou plus. Les sources lues ne décrivent ni sous-échelles ni exclusion d'items pour cette version.</p>
+    <p>Valeurs manquantes (Bright Futures, énoncées pour la PSC) : les items laissés en blanc sont ignorés (score égal à 0) ; si quatre items ou plus sont en blanc, le questionnaire est considéré comme non valide. Cette page exige une réponse à chaque item.</p>
+    <p class="reserve">Les libellés de réponse propres à la Y-PSC ne sont pas donnés séparément dans les sources lues ; ceux de la version parent (Never, Sometimes, Often) sont repris et la cotation est donc déduite de la PSC. À confirmer sur le formulaire officiel.</p>
+    <p class="reserve">Le seuil de 30 de la Y-PSC et le seuil de 28 de la version parent sont deux seuils distincts, non contradictoires. Aucune norme ni validation française trouvée. Ce résultat est une indication et ne remplace pas un entretien clinique.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Les 35 items viennent de la version « youth » du formulaire anglais diffusé par Bright Futures (copie concordante d'un site de santé publique). La consigne propre à cette version est : « Please mark under the heading that best fits you: ». Les items sont reproduits tels quels, en anglais, sans traduction ; aucune version française n'a pu être lue.</p>
+    <p class="reserve">Phrase de droits lue : « aucune mention trouvée (les PDF Bright Futures et tnaap.org ne portent aucune mention de droits ; les pages MGH sont inaccessibles) »</p>
+    <p class="reserve">Licence requise : incertaine. Les sources lues ne contiennent aucune phrase d'autorisation. Le PSC est diffusé librement par le MGH mais je n'ai pas pu lire de phrase de licence ; à vérifier auprès de l'équipe PSC (Dr Jellinek, MGH) avant publication. Wikipedia (page lue) indique seulement : 'The PSC has been translated into 19 other languages including Spanish, Chinese, Dutch, French, German, and Japanese'.</p>
+    <p class="source-note">Jellinek MS, Murphy JM, Robinson J, et al. Pediatric Symptom Checklist: screening school-age children for psychosocial dysfunction. J Pediatr. 1988;112(2):201-209 (PMID 3339501, repéré dans les résultats de recherche ; citation Bright Futures).</p>
+    <p class="source-note">Jellinek MS, Murphy JM, Little M, et al. Use of the Pediatric Symptom Checklist (PSC) to screen for psychosocial problems in pediatric primary care: a national feasibility study. Arch Pediatr Adolesc Med. 1999;153(3):254-260 (citation Bright Futures).</p>
+    <p class="source-note">Little M, Murphy JM, Jellinek MS, et al. Screening 4- and 5-year-old children for psychosocial dysfunction: a preliminary study with the Pediatric Symptom Checklist. J Dev Behav Pediatr. 1994;15:191-197 (citation Bright Futures).</p>
+    <p class="source-note">Pagano M, Murphy JM, Pedersen M, et al. Screening for psychosocial problems in 4-5 year olds during routine EPSDT examinations: validity and reliability in a Mexican-American sample. Clin Pediatr. 1996;35(3):139-146 (citation Bright Futures).</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

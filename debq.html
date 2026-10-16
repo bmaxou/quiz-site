@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DEBQ : comportement alimentaire</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #853240;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#853240;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#41161D;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#853240;background:#F4E6E8;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#41161D;border-color:#E0D9C9;}
+  .btn-primary{background:#853240;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#853240;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#41161D;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">Questionnaire néerlandais du comportement alimentaire (DEBQ)</h1>
+    <p class="lead">33 questions sur vos habitudes alimentaires. Pour chacune, choisissez la réponse de jamais à très souvent ; quand la question le prévoit, une réponse supplémentaire (« Je ne suis jamais… ») est proposée.</p>
+    <p class="consigne">Vous trouverez dans les pages qui suivent un certain nombre de questions concernant vos habitudes alimentaires. Lisez attentivement chaque question et marquez d&#x27;une croix la case correspondant à la réponse que vous considérez comme la meilleure. Vous ne devez donner qu&#x27;une réponse par question. Votre première impression est souvent la meilleure, ne vous attardez donc pas trop longtemps sur chaque question.</p>
+    <p class="lang-note">Questions en français (version Lluch et Méjean, INSERM U308, Nancy). Licence requise : incertaine.</p>
+    <div class="pill-row">
+      <span class="pill">33 questions</span>
+      <span class="pill">Jamais → Très souvent</span>
+      <span class="pill">Réponse supplémentaire pour 13 questions</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Références : Van Strien T., Frijters J.E.R., Bergers G.P.A. et Defares P.B. (1986), Int J Eat Disord, 5(2), 295-315 ; Lluch A., Kahn J.P., Stricker-Krongrad A., Ziegler O., Drouin P. et Méjean L. (1996), Eur Psychiatry, 11(4), 198-203 ; Antinori R. (2004), thèse de médecine, Nancy, annexe 5. Outil de dépistage / d'auto-évaluation : ne remplace pas un bilan clinique.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["Quand vous êtes irrité (e), avez-vous envie de manger?", "Si vous trouvez un plat savoureux, en mangez-vous plus que d'habitude?", "Avez-vous envie de manger lorsque vous n'avez rien à faire?", "Quand vous avez pris un peu de poids, mangez-vous moins que d'habitude?", "Avez-vous envie de manger lorsque vous êtes déprimé (e) ou découragé (e)?", "Si un plat paraît appétissant par son odeur ou son aspect, en mangez-vous plus que d'habitude?", "Vous arrive-t-il de refuser de la nourriture ou des boissons que l'on vous offre parce que vous voulez faire attention à votre poids?", "Avez-vous envie de manger lorsque vous vous sentez seul (e)?", "Quand vous voyez ou vous sentez quelque chose d'appétissant, l'envie vous prend-elle de manger?", "Quand vous vous sentez abandonné (e), avez-vous envie de manger?", "Aux repas, essayez-vous de manger moins que ce que vous auriez envie de manger?", "Si vous disposez de quelque chose d'appétissant, le mangez-vous immédiatement?", "Quand vous êtes fâché (e), avez-vous envie de manger?", "Surveillez-vous exactement ce que vous mangez?", "Lorsque vous passez devant une boulangerie, l'envie vous prend-elle d'acheter quelque chose d'appétissant?", "Lorsque quelque chose de désagréable vous attend, avez-vous envie de manger?", "Mangez-vous volontairement des nourritures peu caloriques?", "Lorsque vous voyez d'autres personnes manger, l'envie vous prend-elle également de manger?", "Quand vous avez trop mangé, mangez-vous moins le lendemain que d'habitude?", "Avez-vous envie de manger lorsque vous êtes inquiet (e), soucieux (euse) ou tendu (e)?", "Pouvez-vous résister à des nourritures délicieuses?", "Mangez-vous volontairement un peu moins pour ne pas grossir?", "Quand quelque chose vous contrarie ou ne se déroule pas comme vous le souhaitiez, avez-vous envie de manger?", "Si vous passez devant un snack-bar ou un café, avez-vous envie de d'entrer prendre quelque chose de bon?", "Lorsque vous êtes énervé (e), avez-vous envie de manger?", "Essayez-vous de ne pas manger entre les repas parce que vous surveillez votre poids?", "Mangez-vous plus que d'habitude en voyant d'autres gens manger?", "Avez-vous envie de manger quand vous vous ennuyez ou quand vous ne tenez pas en place?", "Pendant la soirée, essayez-vous de ne pas manger parce que vous surveillez votre poids?", "Quand vous êtes anxieux (euse),avez-vous envie de manger?", "Lorsque vous mangez, tenez-vous compte de votre poids?", "Lorsque vous êtes déçu (e),avez-vous envie de manger?", "Quand vous préparez un repas, avez-vous tendance à manger quelque chose?"];
+  var G = [];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = [[{"label": "", "opts": ["Jamais", "Rarement", "Parfois", "Souvent", "Très souvent", "Je ne suis jamais irrité (e)"], "vals": [1, 2, 3, 4, 5, 0]}], [{"label": "", "opts": ["Jamais", "Rarement", "Parfois", "Souvent", "Très souvent"], "vals": [1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Jamais", "Rarement", "Parfois", "Souvent", "Très souvent", "J'ai toujours quelque chose à faire"], "vals": [1, 2, 3, 4, 5, 0]}], [{"label": "", "opts": ["Jamais", "Rarement", "Parfois", "Souvent", "Très souvent", "Je ne perds jamais de poids"], "vals": [1, 2, 3, 4, 5, 0]}], [{"label": "", "opts": ["Jamais", "Rarement", "Parfois", "Souvent", "Très souvent", "Je ne suis jamais déprimé (e) ou découragé (e)"], "vals": [1, 2, 3, 4, 5, 0]}], [{"label": "", "opts": ["Jamais", "Rarement", "Parfois", "Souvent", "Très souvent"], "vals": [1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Jamais", "Rarement", "Parfois", "Souvent", "Très souvent"], "vals": [1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Jamais", "Rarement", "Parfois", "Souvent", "Très souvent", "Je ne me sens jamais seul (e)"], "vals": [1, 2, 3, 4, 5, 0]}], [{"label": "", "opts": ["Jamais", "Rarement", "Parfois", "Souvent", "Très souvent"], "vals": [1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Jamais", "Rarement", "Parfois", "Souvent", "Très souvent", "Je ne me sens jamais abandonné (e)"], "vals": [1, 2, 3, 4, 5, 0]}], [{"label": "", "opts": ["Jamais", "Rarement", "Parfois", "Souvent", "Très souvent"], "vals": [1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Jamais", "Rarement", "Parfois", "Souvent", "Très souvent"], "vals": [1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Jamais", "Rarement", "Parfois", "Souvent", "Très souvent", "Je ne suis jamais fâché (e)"], "vals": [1, 2, 3, 4, 5, 0]}], [{"label": "", "opts": ["Jamais", "Rarement", "Parfois", "Souvent", "Très souvent"], "vals": [1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Jamais", "Rarement", "Parfois", "Souvent", "Très souvent"], "vals": [1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Jamais", "Rarement", "Parfois", "Souvent", "Très souvent"], "vals": [1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Jamais", "Rarement", "Parfois", "Souvent", "Très souvent"], "vals": [1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Jamais", "Rarement", "Parfois", "Souvent", "Très souvent"], "vals": [1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Jamais", "Rarement", "Parfois", "Souvent", "Très souvent", "Je ne mange jamais trop"], "vals": [1, 2, 3, 4, 5, 0]}], [{"label": "", "opts": ["Jamais", "Rarement", "Parfois", "Souvent", "Très souvent", "Je ne suis jamais inquiet (e), soucieux (euse) ou tendu (e)"], "vals": [1, 2, 3, 4, 5, 0]}], [{"label": "", "opts": ["Jamais", "Rarement", "Parfois", "Souvent", "Très souvent"], "vals": [1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Jamais", "Rarement", "Parfois", "Souvent", "Très souvent"], "vals": [1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Jamais", "Rarement", "Parfois", "Souvent", "Très souvent"], "vals": [1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Jamais", "Rarement", "Parfois", "Souvent", "Très souvent"], "vals": [1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Jamais", "Rarement", "Parfois", "Souvent", "Très souvent", "Je ne suis jamais énervé (e)"], "vals": [1, 2, 3, 4, 5, 0]}], [{"label": "", "opts": ["Jamais", "Rarement", "Parfois", "Souvent", "Très souvent"], "vals": [1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Jamais", "Rarement", "Parfois", "Souvent", "Très souvent"], "vals": [1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Jamais", "Rarement", "Parfois", "Souvent", "Très souvent", "Je ne m'ennuie jamais ou je suis toujours calme"], "vals": [1, 2, 3, 4, 5, 0]}], [{"label": "", "opts": ["Jamais", "Rarement", "Parfois", "Souvent", "Très souvent"], "vals": [1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Jamais", "Rarement", "Parfois", "Souvent", "Très souvent", "Je ne suis jamais anxieux (euse)"], "vals": [1, 2, 3, 4, 5, 0]}], [{"label": "", "opts": ["Jamais", "Rarement", "Parfois", "Souvent", "Très souvent"], "vals": [1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Jamais", "Rarement", "Parfois", "Souvent", "Très souvent", "Je ne suis jamais déçu (e)"], "vals": [1, 2, 3, 4, 5, 0]}], [{"label": "", "opts": ["Jamais", "Rarement", "Parfois", "Souvent", "Très souvent"], "vals": [1, 2, 3, 4, 5]}]];              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    function fmtH(h, d){ var p = d === 2 ? 100 : 10; var r = h % p; var s = String(r); while (s.length < d) s = '0' + s; return Math.floor(h / p) + ',' + s; }
+    function mean2(sum, n){ return Math.floor((sum * 200 + n) / (2 * n)); }
+    var BL = [["Restriction cognitive (items 4, 7, 11, 14, 17, 19, 22, 26, 29, 31)", [4, 7, 11, 14, 17, 19, 22, 26, 29, 31]], ["Alimentation émotionnelle, total (13 items)", [1, 3, 5, 8, 10, 13, 16, 20, 23, 25, 28, 30, 32]], ["dont émotivité diffuse (items 3, 8, 10, 28)", [3, 8, 10, 28]], ["dont émotivité définie (9 items)", [1, 5, 13, 16, 20, 23, 25, 30, 32]], ["Externalité (items 2, 6, 9, 12, 15, 18, 21, 24, 27, 33)", [2, 6, 9, 12, 15, 18, 21, 24, 27, 33]]], INV = [21], EXTRA = [1, 3, 4, 5, 8, 10, 13, 19, 20, 25, 28, 30, 32];
+    function val(k){ var v = answers[k-1][0]; return INV.indexOf(k) >= 0 ? (6 - v) : v; }
+    function ssum(list){ var t = 0; list.forEach(function(k){ t += val(k); }); return t; }
+    var rows = '', sums = [];
+    BL.forEach(function(b){ var s = ssum(b[1]); sums.push(s); rows += row(b[0] + ' (moyenne)', fmtH(mean2(s, b[1].length), 2)); });
+    var zeros = 0; EXTRA.forEach(function(k){ if (answers[k-1][0] === 0) zeros++; });
+    rows += row('Réponses « jamais concerné(e) » cotées 0 (sur 13 questions)', String(zeros));
+    html += '<table class=\"result-table\">' + rows + '</table>';
+    var flag = [];
+    if (sums[0] > 3 * BL[0][1].length) flag.push('restriction cognitive');
+    if (sums[1] > 3 * BL[1][1].length) flag.push('alimentation émotionnelle');
+    if (sums[4] > 3 * BL[4][1].length) flag.push('externalité');
+    html += '<p class=\"result-text\">Plus la moyenne d\'une sous-échelle est élevée, plus le comportement correspondant est marqué. Repère non diagnostique (thèse Antinori, Nancy, 2004 ; origine du seuil non précisée) : une moyenne supérieure à 3 est lue comme la présence du comportement. ' + (flag.length ? 'Moyenne supérieure à 3 pour : ' + flag.join(', ') + '.' : 'Aucune des trois moyennes principales n\'est supérieure à 3.') + '</p>';
+    html += '<p class=\"result-text\">Les réponses « jamais concerné(e) » sont cotées 0 point (thèse Antinori, 2004) et entrent dans les moyennes : elles peuvent abaisser une moyenne sous 1. La source ne précise aucune règle de traitement particulière pour ces réponses ; à interpréter avec prudence (voir la fiche).</p>';
+
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DEBQ : comportement alimentaire</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#8D3544 0%,#E3B5BD 55%,#41161D 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#41161D;background:#F4E6E8;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #853240;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#853240;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#41161D;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">DEBQ</span></div>
+
+  <h1 class="serif">Dutch Eating Behaviour Questionnaire, version française (DEBQ)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">DEBQ : Van Strien, Frijters, Bergers et Defares (1986) ; version française de Lluch et Méjean (INSERM U308, Nancy) : restriction cognitive, alimentation émotionnelle, externalité.</p>
+  <div class="meta-row">
+    <span class="pill">33 questions</span>
+    <span class="pill">Jamais → Très souvent</span>
+    <span class="pill">Réponse supplémentaire pour 13 questions</span>
+    <span class="pill">Français</span>
+    <span class="pill">Comportement alimentaire</span>
+    <span class="pill">Licence requise : incertaine</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="debq.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>Version française du Dutch Eating Behaviour Questionnaire (Van Strien et coll., 1986) par Anne Lluch et Luc Méjean (INSERM U308, Nancy), validée en interne par Lluch, Kahn, Stricker-Krongrad, Ziegler, Drouin et Méjean (Eur Psychiatry, 1996). 33 items répartis en restriction cognitive (10), alimentation émotionnelle ou émotivité (13) et externalité (10).</p>
+    <p>Cinq modalités de réponse : jamais, rarement, parfois, souvent, très souvent. Treize questions formulées de façon conditionnelle proposent une réponse supplémentaire (par exemple « Je ne suis jamais irrité (e) »).</p>
+    <p class="source-note">Validation française : Nancy (Lluch et coll. 1996, 166 sujets obèses et normo-pondérés) ; Tours (Brunault et coll. 2015, 74 sujets normo-pondérés et 75 obèses) ; version courte chez 262 personnes de 65 ans et plus (Bailly et coll. 2012, non lue).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Jamais = 1 point, rarement = 2, parfois = 3, souvent = 4, très souvent = 5 ; réponse supplémentaire = 0 point (thèse Antinori, Nancy, 2004). L'item 21 est inversé (6 moins la réponse). Chaque sous-échelle est la moyenne des réponses de ses items ; il n'y a pas de score total. Restriction : items 4, 7, 11, 14, 17, 19, 22, 26, 29, 31. Alimentation émotionnelle : items 1, 3, 5, 8, 10, 13, 16, 20, 23, 25, 28, 30, 32, dont émotivité diffuse (3, 8, 10, 28) et émotivité définie (1, 5, 13, 16, 20, 23, 25, 30, 32). Externalité : items 2, 6, 9, 12, 15, 18, 21, 24, 27, 33.</p>
+    <p>Repère de la source, non diagnostique : moyenne d'une sous-échelle supérieure à 3 = sujet considéré comme « restreint », présentant une alimentation émotionnelle, présentant une externalité (thèse Antinori, Nancy, France, 2004 ; origine du seuil, échantillon non précisés dans le texte lu).</p>
+    <p>Autre méthode, relative à l'échantillon et sans seuil fixe : classement selon que le score moyen atteint ou dépasse la médiane de la population étudiée (Dedenon-Mayer, thèse de médecine, Nancy, 2008, 701 patients obèses, CHU de Nancy ; médianes calculées dans cet échantillon). Repères descriptifs, non diagnostiques, dans ce même échantillon : restriction 2,8 ± 0,8 ; émotionnalité 2,7 ± 1,1 ; externalité 2,9 ± 0,7. Il s'agit de patients obèses, pas d'une norme.</p>
+    <p class="reserve">Réponses « jamais concerné(e) » : cotées 0 point d'après la thèse Antinori 2004 et intégrées ici telles quelles dans les moyennes, ce qui peut les ramener sous 1 (la plage annoncée est de 1 à 5). Aucune règle explicite de traitement (moyenne sur les items répondus, exclusion) n'a été lue : point à trancher, car intégrer des 0 dans une moyenne de 1 à 5 la fausse.</p>
+    <p class="reserve">La cotation (valeurs 1 à 5, item 21 inversé, seuil supérieur à 3) provient du texte d'une thèse ; les cases du questionnaire imprimé ne portent pas de chiffres. Le seuil supérieur à 3 n'a pas d'origine précisée.</p>
+    <p class="reserve">Aucune norme (percentiles, étalonnage) publiée sur un échantillon de la population générale française dans les sources lues.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Les items et modalités proviennent de l'annexe 5 de la thèse d'Antinori (Nancy, 2004), transcription de la version Lluch et Méjean, et non de la publication de validation (Eur Psychiatry, 1996, non lue).</p>
+    <p class="reserve">Coquille de la source : la modalité « Je ne me sens jamais abandonné (e) » est imprimée sous l'item 9 alors qu'elle correspond à l'item 10 (« Quand vous vous sentez abandonné (e)… ») ; elle est rattachée ici à l'item 10 par déduction de la logique de la question.</p>
+    <p class="reserve">Coquilles conservées telles quelles : « avez-vous envie de d'entrer » (item 24) ; « (euse),avez-vous » et « (e),avez-vous » sans espace (items 30 et 32). Item 16 : dans le PDF, les cases de réponse sont collées au texte ; texte reconstitué.</p>
+    <p class="reserve">Attribution des items aux sous-échelles : celle de la thèse Antinori (10, 13, 10). Brunault et coll. (2015) observent que les items 3, 8, 24 et 28 peuvent charger sur plusieurs dimensions. La thèse Dedenon-Mayer (2008) mentionne par erreur 34 questions (33 lues).</p>
+    <p class="reserve">Droits : aucune mention de droits ou de licence lue (l'annexe porte seulement « Anne LLUCH & Luc MEJEAN INSERM U308 »). Conditions d'utilisation de la version française non établies (éditeur Hogrefe non consulté). Ne pas la considérer comme libre. Licence requise : incertaine.</p>
+    <p class="source-note">Références : Van Strien et coll. (1986) ; Lluch et coll. (1996) ; Brunault P. et coll. (2015), Presse Med, 44(12), e363-372 ; Antinori R. (2004), thèse, Nancy (hal-01732191) ; Dedenon-Mayer I. (2008), thèse, Nancy (hal-01732994) ; Bailly N. et coll. (2012), Appetite.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

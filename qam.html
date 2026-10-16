@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>QAM : auto-évaluation de la mémoire</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #853255;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#853255;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#411628;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#853255;background:#F4E6EC;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#411628;border-color:#E0D9C9;}
+  .btn-primary{background:#853255;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#853255;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#411628;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">QAM : questionnaire d&#x27;auto-évaluation de la mémoire</h1>
+    <p class="lead">62 questions sur les oublis de la vie quotidienne, réparties en 10 rubriques, plus 2 questions générales (64 questions au total). Chaque réponse va de « jamais » à « toujours ». Version destinée à la personne elle-même.</p>
+    <p class="consigne">Le Questionnaire se subdivise en dix rubriques. Pour chaque rubrique, nous vous demandons tout d’abord de lire attentivement toutes les questions avant de répondre à chacune d’elles en particulier. Sur la grille de notation en face de la question, cochez le cercle (O) correspondant à la fréquence de l’oubli envisagé par la question. EXEMPLE : [une ligne de 6 cercles, un coché sous « parfois »] Veuillez répondre à toutes les questions sans en omettre aucune. Remplissez ce questionnaire dans l’ordre proposé. Ne revenez jamais en arrière.</p>
+    <p class="lang-note">Questions en français (version belge). Version « sujet » seulement : la version destinée à un proche n'est pas incluse. Licence requise : incertaine.</p>
+    <div class="pill-row">
+      <span class="pill">64 questions</span>
+      <span class="pill">6 réponses, de jamais à toujours</span>
+      <span class="pill">Moyennes de 1 à 6</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Van der Linden M, Wijns C, von Frenckell R, Coyette F, Seron X. Un questionnaire d'auto-évaluation de la mémoire (QAM). Bruxelles : Editest, 1989. Cet outil ne remplace ni un entretien clinique ni un avis médical.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["PENSEZ-VOUS AVOIR DES PROBLÈMES DE MÉMOIRE DANS LA VIE QUOTIDIENNE ?\n\n(Entourez votre réponse)", "OUBLIS CONCERNANT LES CONVERSATIONS\n\nAvez-vous des difficultés à suivre le fil d’une conversation qui se déroule avec une seule personne parce que vous oubliez ce qui vient d’être dit ?", "OUBLIS CONCERNANT LES CONVERSATIONS\n\nAvez-vous des difficultés à suivre le fil d’une conversation qui se déroule avec plusieurs personnes parce que vous oubliez ce qui vient d’être dit ?", "OUBLIS CONCERNANT LES CONVERSATIONS\n\nAu cours d’une conversation, répétez-vous plusieurs fois la même chose parce que vous avez oublié que vous veniez de la dire ?", "OUBLIS CONCERNANT LES CONVERSATIONS\n\nVous arrive-t-il de raconter plusieurs fois la même chose parce que vous avez oublié que vous l’aviez déjà dit quelques heures ou quelques jours auparavant ?", "OUBLIS CONCERNANT LES CONVERSATIONS\n\nOubliez-vous le contenu d’une conversation qui s’est déroulée quelques jours auparavant ?", "OUBLIS CONCERNANT LES CONVERSATIONS\n\nOubliez-vous le contenu d’une conversation qui vient d’avoir lieu ?", "OUBLIS CONCERNANT LES FILMS, LES LIVRES\n\nAvez-vous des difficultés à lire parce que vous oubliez au fur et à mesure ce que vous venez de lire, ce qui vous oblige à relire ?", "OUBLIS CONCERNANT LES FILMS, LES LIVRES\n\nAvez-vous des difficultés à vous souvenir de ce que vous avez lu il y a quelques jours ?", "OUBLIS CONCERNANT LES FILMS, LES LIVRES\n\nAvez-vous des difficultés à suivre le déroulement d’un film, d’une émission, parce que vous oubliez ce qui vient de se passer ?", "OUBLIS CONCERNANT LES FILMS, LES LIVRES\n\nAvez-vous des difficultés à vous rappeler l’histoire d’un film vu il y a quelques jours ?", "LES DISTRACTIONS\n\nOubliez-vous l’endroit où vous venez juste de déposer un objet sans plus savoir ce que vous en avez fait ?", "LES DISTRACTIONS\n\nOubliez-vous de reprendre certains objets personnels quand vous quittez un lieu ?\n\n(p. exemple, un parapluie, des clefs, un chapeau, votre monnaie, etc.)", "LES DISTRACTIONS\n\nVous avez l’habitude de faire quelque chose d’une certaine manière ; il y a un changement dans cette habitude ; éprouvez-vous des difficultés à perdre cette ancienne routine et à adopter ce changement ?\n\nPour vous aider à comprendre cette question, voici quelques exemples ; néanmoins, répondez bien à la question ci-dessus et non aux exemples qui suivent : - Vous avez l’habitude de saler vos aliments ; on vous met au régime sans sel, mais il vous arrive encore de prendre la salière par habitude. - Quand vous rentrez chez vous, vous trouvez directement l’interrupteur dans le noir. On change la place de cet interrupteur, et en rentrant chez vous, il vous arrive encore automatiquement de le chercher à l’ancien endroit.", "LES DISTRACTIONS\n\nVous arrive-t-il de d’entrer dans une pièce pour prendre quelque chose et d’en ressortir en ayant pris ou fait autre chose ?", "LES DISTRACTIONS\n\nVous arrive-t-il de d’entrer dans une pièce pour faire quelque chose et vous ne savez plus quoi ?", "LES DISTRACTIONS\n\nOubliez-vous de faire quelque chose que vous faisiez auparavant sans y penser, de manière automatique ?\n\nPour vous aider à comprendre cette question, voici quelques exemples ; néanmoins, répondez bien à la question ci-dessus et non aux exemples suivants : - Oublier d’éteindre le gaz quand on retire la casserole du feu. - Oublier de fermer le robinet quand on s’est servi d’eau. - Oublier de relâcher le frein à main quand on démarre.", "LES DISTRACTIONS\n\nSi on modifie chez vous la place habituelle d’objets ou de meubles, avez-vous des difficultés à apprendre ce nouvel emplacement ?", "OUBLIS CONCERNANT DES PERSONNES\n\nOubliez-vous le nom de personnes que vous connaissez depuis longtemps et que, par ailleurs, vous fréquentez régulièrement ?", "OUBLIS CONCERNANT DES PERSONNES\n\nOubliez-vous certaines informations sur la vie de personnes que vous connaissez depuis longtemps et que, par ailleurs, vous fréquentez régulièrement ?\n\n(P. exemple, vous oubliez le métier et / ou les goûts, et / ou les loisirs d’une personne.)", "OUBLIS CONCERNANT DES PERSONNES\n\nAvez-vous des difficultés à apprendre le nom d’une personne que vous connaissez depuis peu de temps et que vous fréquentez actuellement ?", "OUBLIS CONCERNANT DES PERSONNES\n\nOubliez-vous le nom de personnes célèbres ?\n\n(P. exemple, le nom d’acteurs de cinéma, le nom de certains sportifs, ou le nom d’hommes politiques.)", "OUBLIS CONCERNANT DES PERSONNES\n\nAvez-vous des difficultés à reconnaitre le visage de personnes que vous connaissez depuis longtemps et que vous fréquentez régulièrement ?", "OUBLIS CONCERNANT DES PERSONNES\n\nAvez-vous des difficultés à reconnaitre le visage de personnes que vous connaissez depuis peu et que vous fréquentez actuellement ?", "OUBLIS CONCERNANT DES PERSONNES\n\nAvez-vous des difficultés à reconnaitre le visage de personnes célèbres ?", "OUBLIS CONCERNANT LE MODE D’UTILISATION DE CERTAINS OBJETS\n\nAvez-vous des difficultés à vous souvenir du mode d’emploi de certains objets ?", "OUBLIS CONCERNANT LE MODE D’UTILISATION DE CERTAINS OBJETS\n\nAvez-vous des difficultés à apprendre le mode d’objets que vous n’aviez jamais utilisés auparavant ?", "OUBLIS CONCERNANT DES ÉVÉNEMENTS DE L’ACTUALITÉ ET CERTAINES CONNAISSANCES GÉNÉRALES\n\nAvez-vous des difficultés à vous rappeler des événements de l’actualité récente ?\n\n(Pour des événements qui se sont produits il y a un mois au maximum)", "OUBLIS CONCERNANT DES ÉVÉNEMENTS DE L’ACTUALITÉ ET CERTAINES CONNAISSANCES GÉNÉRALES\n\nAvez-vous des difficultés à vous rappeler des événements de l’actualité plus ancienne ?\n\n(Pour des événements qui se sont produits il y a plusieurs mois)", "OUBLIS CONCERNANT DES ÉVÉNEMENTS DE L’ACTUALITÉ ET CERTAINES CONNAISSANCES GÉNÉRALES\n\nAvez-vous des difficultés à retrouver des informations concernant des connaissances générales que vous avez acquises dans le passé ?\n\n(P. exemple, des connaissances scolaires, ménagères, professionnelles ou autres )", "OUBLIS CONCERNANT DES ÉVÉNEMENTS DE L’ACTUALITÉ ET CERTAINES CONNAISSANCES GÉNÉRALES\n\nAvez-vous des difficultés à mémoriser de nouvelles connaissances ?\n\n(P. exemple, des connaissances scolaires, ménagères, professionnelles ou autres)", "OUBLIS CONCERNANT LES LIEUX\n\nVous arrive-t-il de vous perdre dans des endroits que vous connaissez depuis longtemps et que, par ailleurs, vous fréquentez régulièrement ?", "OUBLIS CONCERNANT LES LIEUX\n\nAvez-vous des difficultés à apprendre un trajet que vous connaissez depuis peu de temps et que vous devez effectuer actuellement ?", "OUBLIS CONCERNANT LES LIEUX\n\nOubliez-vous le nom d’une rue que vous connaissez bien ?", "OUBLIS CONCERNANT LES LIEUX\n\nAvez-vous des difficultés à expliquer à une personne un trajet que vous connaissez depuis longtemps ?\n\n(P. exemple, expliquer un trajet à quelqu’un au téléphone.)", "OUBLIS CONCERNANT LES LIEUX\n\nAvez-vous des difficultés à reconnaitre des lieux que vous connaissez bien ?", "OUBLIS CONCERNANT LES LIEUX\n\nÀ la maison, vous arrive-t-il de ne pas retrouver l’emplacement d’objets qui se trouvent toujours à la même place ?", "OUBLIS CONCERNANT CERTAINES ACTIONS A EFFECTUER\n\nOubliez-vous de faire quelque chose que vous aviez prévu d’effectuer ?", "OUBLIS CONCERNANT CERTAINES ACTIONS A EFFECTUER\n\nOubliez-vous de dire quelque chose que vous aviez prévu de dire ?", "OUBLIS CONCERNANT CERTAINES ACTIONS A EFFECTUER\n\nOubliez-vous des rendez-vous ?", "OUBLIS CONCERNANT CERTAINES ACTIONS A EFFECTUER\n\nVous arrive-t-il d’hésiter sur le fait que vous avez déjà effectué quelque chose il y a quelques minutes, ce qui vous amène à le refaire ?", "OUBLIS CONCERNANT CERTAINES ACTIONS A EFFECTUER\n\nVous arrive-t-il d’hésiter sur le fait que vous aviez déjà effectué quelque chose il y a quelques jours, ce qui vous amène à le refaire ?", "OUBLIS CONCERNANT CERTAINES ACTIONS A EFFECTUER\n\nOubliez-vous de prendre des médicaments ?\n\n(Ne répondez à cette question que si vous en prenez régulièrement.)", "OUBLIS CONCERNANT QUELQUES FAITS RELATIFS À VOTRE VIE PERSONNELLE\n\nOubliez-vous des événements anciens personnellement vécus il y a quelques années ?", "OUBLIS CONCERNANT QUELQUES FAITS RELATIFS À VOTRE VIE PERSONNELLE\n\nOubliez-vous des événements récents personnellement vécus il y a quelques jours ou il y a quelques semaines ?", "OUBLIS CONCERNANT QUELQUES FAITS RELATIFS À VOTRE VIE PERSONNELLE\n\nVous arrive-t-il d’acheter des objets (p. exemple, des livres, des outils, des aliments, etc.) qui font double emploi parce que vous avez oublié que vous les possédiez déjà ?", "OUBLIS CONCERNANT QUELQUES FAITS RELATIFS À VOTRE VIE PERSONNELLE\n\nHésitez-vous à acheter quelque chose parce que vous n’êtes plus certain de le posséder déjà ?", "OUBLIS CONCERNANT QUELQUES FAITS RELATIFS À VOTRE VIE PERSONNELLE\n\nAvez-vous des difficultés à vous souvenir d’informations qui vous sont personnelles que vous vous connaissez par cœur ?\n\n(P. exemple, le numéro de votre compte en banque, votre numéro de téléphone, des dates de naissance, etc.)", "OUBLIS CONCERNANT QUELQUES FAITS RELATIFS À VOTRE VIE PERSONNELLE\n\nAvez-vous des difficultés à apprendre par cœur de nouvelles informations qui vous sont personnelles ?\n\n(P. exemple, un nouveau numéro de compte en banque, un nouveau numéro de téléphone, etc.)", "PENSEZ-VOUS AVOIR DES PROBLÈMES DE MÉMOIRE DANS LA VIE QUOTIDIENNE ?\n\n(Entourez votre réponse)", "FACTEURS DECLENCHANTS\n\nAvez-vous davantage de difficultés à apprendre quelque chose lorsque vous êtes fatigué ?", "FACTEURS DECLENCHANTS\n\nAvez-vous davantage de difficultés à vous souvenir de quelque chose lorsque vous êtes fatigué ?", "FACTEURS DECLENCHANTS\n\nAvez-vous davantage de difficultés à apprendre quelque chose lorsque vous êtes stressé ?", "FACTEURS DECLENCHANTS\n\nAvez-vous davantage de difficultés à vous souvenir de quelque chose lorsque vous êtes stressé ?", "FACTEURS DECLENCHANTS\n\nAvez-vous davantage de difficultés à apprendre quelque chose lorsque vous êtes dans un état émotif particulier ?", "FACTEURS DECLENCHANTS\n\nAvez-vous davantage de difficultés à vous souvenir de quelque chose lorsque vous êtes dans un état émotif particulier ?", "FACTEURS DECLENCHANTS\n\nAvez-vous davantage de difficultés à apprendre quelque chose lorsque vous avez des maux de tête ?", "FACTEURS DECLENCHANTS\n\nAvez-vous davantage de difficultés à vous souvenir de quelque chose lorsque vous avez des maux de tête ?", "FACTEURS DECLENCHANTS\n\nAvez-vous davantage de difficultés à apprendre quelque chose dans un environnement bruyant ?", "FACTEURS DECLENCHANTS\n\nAvez-vous davantage de difficultés à vous souvenir de quelque chose dans un environnement bruyant ?", "FACTEURS DECLENCHANTS\n\nAvez-vous davantage de difficultés à apprendre quelque chose lorsque vous avez plusieurs choses à apprendre en même temps ?", "FACTEURS DECLENCHANTS\n\nAvez-vous davantage de difficultés à vous souvenir de quelque chose lorsque vous devez vous souvenir de plusieurs choses en même temps ?", "FACTEURS DECLENCHANTS\n\nAvez-vous davantage de difficultés à apprendre quelque chose lorsque vous êtes occupé à faire autre chose ?", "FACTEURS DECLENCHANTS\n\nAvez-vous davantage de difficultés à vous souvenir de quelque chose lorsque vous êtes occupé à faire plusieurs choses à la fois ?"];
+  var G = [];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = [[{"label": "", "opts": ["JAMAIS", "TRÈS RAREMENT", "PARFOIS", "SOUVENT", "TRÈS SOUVENT", "TOUJOURS"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours", "Question non applicable (pas de médicaments pris régulièrement)"], "vals": [1, 2, 3, 4, 5, 6, "NA"]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["JAMAIS", "TRÈS RAREMENT", "PARFOIS", "SOUVENT", "TRÈS SOUVENT", "TOUJOURS"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}], [{"label": "", "opts": ["jamais", "très rarement", "parfois", "souvent", "très souvent", "toujours"], "vals": [1, 2, 3, 4, 5, 6]}]];              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var RUB = [{"l": "Rubrique I, conversations (items 1 à 6)", "p": [1, 2, 3, 4, 5, 6]}, {"l": "Rubrique II, films et livres (items 7 à 10)", "p": [7, 8, 9, 10]}, {"l": "Rubrique III, distractions (items 11 à 17)", "p": [11, 12, 13, 14, 15, 16, 17]}, {"l": "Rubrique IV, personnes (items 18 à 24)", "p": [18, 19, 20, 21, 22, 23, 24]}, {"l": "Rubrique V, utilisation d'objets (items 25 et 26)", "p": [25, 26]}, {"l": "Rubrique VI, actualité et connaissances générales (items 27 à 30)", "p": [27, 28, 29, 30]}, {"l": "Rubrique VII, lieux (items 31 à 36)", "p": [31, 32, 33, 34, 35, 36]}, {"l": "Rubrique VIII, actions à effectuer (items 37 à 42)", "p": [37, 38, 39, 40, 41, 42]}, {"l": "Rubrique IX, vie personnelle (items 43 à 48)", "p": [43, 44, 45, 46, 47, 48]}, {"l": "Rubrique X, facteurs déclenchants (items 49 à 62)", "p": [50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63]}], NUM = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63], GQL = ["JAMAIS", "TRÈS RAREMENT", "PARFOIS", "SOUVENT", "TRÈS SOUVENT", "TOUJOURS"];
+    function v(p){ var a = answers[p][0]; return a === 'NA' ? null : a; }
+    function mean(list){ var s = 0, n = 0; list.forEach(function(p){ var x = v(p); if (x !== null){ s += x; n++; } }); return n ? s / n : null; }
+    function f(m){ return m === null ? '-' : m.toFixed(2).replace('.', ','); }
+    var rows = '';
+    RUB.forEach(function(r){ rows += row(r.l + ' (moyenne, 1 à 6)', f(mean(r.p))); });
+    rows += row("Moyenne des 62 questions numérotées (1 à 6)", f(mean(NUM)));
+    rows += row("Moyenne des 64 questions, avec les 2 questions générales (1 à 6)", f(mean(NUM.concat([0, 49]))));
+    rows += row("Question générale posée au début", GQL[answers[0][0] - 1]);
+    rows += row("Question générale posée avant la rubrique X", GQL[answers[49][0] - 1]);
+    html += '<table class="result-table">' + rows + '</table>';
+    html += '<p class="result-text">' + "Plus la note moyenne est élevée, plus la plainte est forte (1 = jamais, 6 = toujours). Le manuel ne définit aucun seuil clinique : le résultat se compare au groupe de référence selon l'âge, le sexe et le niveau socio-culturel. Les normes publiées portent sur 324 sujets de 18 à 64 ans ; il n'existe pas de norme au-delà de 64 ans." + '</p>';
+    html += '<p class="result-text">' + "Le manuel ne précise pas si la note de l'ensemble du questionnaire inclut les 2 questions générales : les deux moyennes sont donc affichées. Il ne précise pas non plus comment traiter l'item 42 lorsqu'il est non applicable : il est ici simplement exclu de la moyenne." + '</p>';
+    html += '<p class="result-text">' + "Ce résultat est une indication, il ne remplace pas un entretien clinique." + '</p>';
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>QAM : auto-évaluation de la mémoire</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#8D355A 0%,#E3B5C8 55%,#411628 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#411628;background:#F4E6EC;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #853255;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#853255;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#411628;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">QAM</span></div>
+
+  <h1 class="serif">Questionnaire d&#x27;auto-évaluation de la mémoire (Q.A.M., version sujet)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Q.A.M. : Van der Linden, Wijns, von Frenckell, Coyette &amp; Seron (1989, Bruxelles : Editest). Plainte mnésique dans la vie quotidienne ; version sujet (auto-évaluation).</p>
+  <div class="meta-row">
+    <span class="pill">64 questions</span>
+    <span class="pill">6 réponses, de jamais à toujours</span>
+    <span class="pill">Moyennes de 1 à 6</span>
+    <span class="pill">Français</span>
+    <span class="pill">Mémoire, plainte mnésique</span>
+    <span class="pill">Version sujet</span>
+    <span class="pill">Licence requise : incertaine</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="qam.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>Domaine : plainte mnésique dans la vie quotidienne. Auteurs : Van der Linden, Wijns, von Frenckell, Coyette &amp; Seron (1989, Universités de Liège et de Louvain ; Bruxelles : Editest). Le manuel annonce 64 questions en 10 rubriques : 62 questions numérotées plus une question générale posée deux fois (au début, puis avant la rubrique X) pour apprécier la prise de conscience progressive.</p>
+    <p>Rubriques : I conversations (6 items), II films et livres (4), III distractions (7), IV personnes (7), V utilisation d'objets (2), VI actualité et connaissances générales (4), VII lieux (6), VIII actions à effectuer (6), IX vie personnelle (6), X facteurs déclenchants (14). Population des normes : adultes de 18 à 64 ans. Durée : non indiquée par la source.</p>
+    <p>Le manuel prévoit deux versions, « sujet » et « proche ». Seule la version « sujet » (auto-évaluation) est reprise ici ; la version pour un proche n'a pas été lue. Une forme abrégée, le QAM-A (rubriques I et II seulement, 10 items), existe (Clément, Belleville &amp; Gauthier, 2008) ; elle n'est pas utilisée.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Valeurs (manuel, § 2.3) : jamais = 1 ; très rarement = 2 ; parfois = 3 ; souvent = 4 ; très souvent = 5 ; toujours = 6. Le manuel permet d'obtenir une note par question, une note par rubrique (moyenne des notes des questions de la rubrique) et une note pour l'ensemble du questionnaire (moyenne des notes de l'ensemble des questions). Une note moyenne va de 1 à 6 ; plus elle est élevée, plus la plainte est forte. Aucun item inversé.</p>
+    <p>Seuils cliniques : aucun. Les résultats se comparent au groupe de référence selon l'âge, le sexe et le niveau socio-culturel (manuel). Normes du manuel (tableaux 2 et 3) : 324 sujets contrôles de 18 à 64 ans ; moyenne totale femmes 2,42 (écart type 0,57), hommes 2,37 (0,49) ; 18-24 ans 2,45 (0,52), 25-34 ans 2,37 (0,45), 35-44 ans 2,38 (0,58), 45-54 ans 2,41 (0,57), 55-64 ans 2,38 (0,52) ; niveau socio-culturel 1 : 2,34 (0,48), niveau 2 : 2,34 (0,54), niveau 3 : 2,47 (0,54). Il n'existe pas de norme au-delà de 64 ans (étude complémentaire annoncée « en cours »). Pas de norme française (France) trouvée.</p>
+    <p>Pour les deux questions générales, la page affiche la réponse choisie sans la faire entrer dans les moyennes de rubrique ; leurs valeurs de 1 à 6 sont déduites de l'ordre des réponses (le manuel ne détaille pas leur cotation).</p>
+    <p class="reserve">Points non tranchés par le manuel : (1) la note de l'ensemble du questionnaire inclut-elle les 2 questions générales ? La page affiche les deux moyennes (62 questions numérotées, puis 64 questions). Le périmètre exact de la moyenne totale utilisée pour les normes n'est donc pas établi ici. (2) Que faire de l'item 42 (médicaments), à ne remplir que si la personne en prend régulièrement ? Le traitement de la moyenne n'est pas précisé ; la page ajoute une option « question non applicable » pour cet item et l'exclut de la moyenne de sa rubrique. (3) La rubrique X (facteurs déclenchants) est appelée « Questions générales » dans le tableau 3 du manuel ; elle ne décrit pas des oublis mais des circonstances qui aggravent les difficultés.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Les questions, les consignes et les compléments (exemples) sont ceux du questionnaire « sujet » publié par l'auteur, reproduits sans correction. Typos conservées telles quelles : « Vous arrive-t-il de d’entrer dans une pièce… » (items 14 et 15), « reconnaitre » (items 22, 23, 24 et 35). Dans le document d'origine, la sixième rubrique est numérotée « IV » (au lieu de VI) ; la page n'affiche pas de numéro de rubrique en face des questions, seulement son titre.</p>
+    <p class="reserve">La consigne d'origine demande de répondre dans l'ordre et de ne jamais revenir en arrière ; cette page autorise le retour à la question précédente. Elle mentionne aussi une grille de cercles à cocher sur papier. Les deux questions générales, posées au début puis avant la rubrique X, sont reprises à leur place.</p>
+    <p class="reserve">Les normes de 1997 (Van der Linden, Philippot &amp; Heinen), citées par le CRIUGM, et l'article sur le QAM-A (Clément et coll., 2008) n'ont pas été consultés.</p>
+    <p class="reserve">Licence : ORBi (page du document) : « All documents in ORBi are protected by a user license. » ; CRIUGM (QAM-A) : « Cet outil est protégé par le droit d'auteur. Lors de son utilisation, la référence doit être citée. » ; le PDF du questionnaire porte « Editions EDITEST, Rue de Chambéry, 16, 1040 Bruxelles ».</p>
+    <p class="reserve">Licence requise : incertaine. Le questionnaire complet est publié en libre accès par un auteur (ORBi, université de Liège) et sur la page de M. Van der Linden (UNIGE : QAM_auto.pdf, QAM_hétéro.pdf, QAM_manuel.pdf), mais éditeur Editest et droit d'auteur maintenus.</p>
+    <p class="source-note">Van der Linden M, Wijns C, von Frenckell R, Coyette F, Seron X. Un questionnaire d'auto-évaluation de la mémoire (QAM). Bruxelles : Editest, 1989 (ORBi hdl.handle.net/2268/241972).</p>
+    <p class="source-note">Van der Linden M, Philippot P, Heinen P. (1997).</p>
+    <p class="source-note">Clément F, Belleville S, Gauthier S. Cognitive complaint in mild cognitive impairment and Alzheimer's disease. J Int Neuropsychol Soc 2008;14(2):222-232.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

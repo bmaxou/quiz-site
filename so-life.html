@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>sO-LIFE : Schizotypie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #703285;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#703285;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#361641;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#703285;background:#F1E6F4;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#361641;border-color:#E0D9C9;}
+  .btn-primary{background:#703285;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#703285;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#361641;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">sO-LIFE : Short Oxford-Liverpool Inventory of Feelings and Experiences</h1>
+    <p class="lead">43 questions auxquelles on répond par Oui ou Non, sur vos pensées, émotions, expériences et préférences.</p>
+    <p class="consigne">Veuillez lire les instructions ci-dessous avant de continuer:
+
+Ce questionnaire se compose de questions qui peuvent être liées à vos pensées, vos émotions, vos expériences et vos préférences.
+Il n&#x27;y a ni réponses justes ou fausses, ni question-piège, veuillez donc répondre aussi honnêtement que possible.
+
+Pour chaque question cliquez soit dans la case &quot;Oui&quot;, soit dans la case &quot;Non&quot;. Ne passez pas trop de temps à réfléchir à quelle réponse fournir mais choisissez une réponse au plus prêt de votre ressenti. Veuillez ne pas discuter de ce questionnaire avec qui que ce soit qui serait susceptible d&#x27;avoir à le remplir également, car ceci pourrait affecter ses réponses.
+Il est souhaitable de le remplir seul, sans se presser.</p>
+    <p class="lang-note">Questions en français (transcription de la version Sierro et al. dans l'annexe d'un mémoire de master, coquilles conservées). Licence requise : incertaine.</p>
+    <div class="pill-row">
+      <span class="pill">43 questions</span>
+      <span class="pill">Oui / Non</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Mason O, Linney Y, Claridge G. Schizophr Res 2005;78:293-296 ; Sierro G, Rossier J, Mason O, Mohr C. Eur J Psychol Assess 2016;32(3):195-203. Outil d'auto-évaluation : ne remplace pas un bilan clinique.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["Quand vous êtes dans l’obscurité, voyez-vous souvent des silhouettes et des formes alors qu’il n’y a rien?", "Êtes-vous facilement confus si trop d’événements arrivent en même temps?", "Vous sentez-vous beaucoup trop indépendant pour vous impliquer dans une relation avec autrui?", "Ressentez-vous parfois un grand besoin de faire quelque chose de nuisible ou de choquant?", "Est-ce que vous avez toujours aimé goûter de nouveaux plats?", "Pensez-vous que vous pourriez apprendre à lire dans l’esprit d’autrui si vous le souhaitiez?", "Avez-vous déjà ressenti un fort besoin de vous faire mal?", "Est-ce que l’idée ou l’action de danser vous a-t-elle toujours semblé ennuyeuse?", "Redoutez-vous d’aller par vous-mêmes dans une pièce où d’autres gens sont déjà réunis et discutent ensemble?", "Estimez-vous que vos accidents sont causes par des forces mystérieuses?", "Ressentez-vous souvent une furieuse envie de dépenser de l’argent, alors que vous ne pouvez pas vous le permettre?", "Avez-vous déjà eu l’impression que votre discours était difficile à comprendre, parce que les mots étaient mélangés et ne faisaient pas sens?", "Faites-vous souvent des excès en matière d’alcool ou de nourriture?", "Vous êtes-vous déjà senti mal à l’aise lorsque vos amis vous touchent?", "Ressentez-vous souvent une impression d'une menace imprécise ou une terreur soudaine pour des raisons qui vous échappent?", "Êtes-vous une personne dont l’humeur a facilement des hauts et des bas?", "Avez-vous souvent des difficultés à contrôler vos pensées?", "Est-ce que vos idées et intuitions vous viennent parfois si vite à l’esprit que vous ne parvenez pas à les exprimez?", "Vous sentez-vous très proches de vos amis?", "Voudriez-vous que d’autres gens aient peur de vous?", "Préférez-vous regarder la télévision plutôt que de sortir avec d’autres gens?", "Trouvez-vous difficile de rester intéressé à la même chose pour un long moment?", "Est-ce que certaines personnes peuvent vous faire penser à elles juste en pensant à vous?", "Avant de faire quoi que ce soit, prenez-vous le temps de bien y réfléchir?", "Y a-t-il très peu de choses que vous avez aimé faire?", "Dans une pièce remplie de gens, avez-vous souvent de la difficulté à suivre une conversation?", "Une pensée vous a-t-elle déjà semblé réelle au point de vous effrayer?", "Aimez-vous que l’on vous masse le dos?", "Lorsque vous vous regarder dans le miroir, est-ce que votre visage vous semble parfois inhabituel?", "Êtes-vous habituellement d’une humeur moyenne, ni trop bonne, ni trop basse?", "Trouvez-vous les lumières brillantes d’une ville passionnantes à regarder?", "Est-ce que votre odorat devient parfois inhabituellement sensible?", "Est-ce que vos pensées sont parfois si fortes que vous pouvez presque les entendre?", "Aimez-vous vous mêler aux autres gens?", "Avez-vous souvent l’impression de faire l’inverse de ce que les autres vous suggèrent de faire, même si vous savez qu’ils ont raison?", "Êtes-vous facilement distrait lorsque vous lisez ou parlez à quelqu’un?", "Avez-vous déjà ressenti un fort besoin de casser ou de détruire des objets?", "Avez-vous déjà cru que vous aviez des pouvoirs spéciaux, presque magiques?", "Éprouvez-vous fréquemment de la difficulté à débuter une activité?", "Vous est-il arrivé de ressentir une présence hostile autour de vous, même si vous ne pouviez pas la voir?", "Êtes-vous facilement distrait du travail par des rêveries?", "Vous considérez-vous comme une personne relativement dans la norme?", "Avez-vous de la difficulté à prendre des décisions?"];
+  var G = [{"label": "", "opts": ["Oui", "Non"], "vals": [1, 0]}];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = null;              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var INV = [5, 19, 24, 28, 30, 31, 34, 42], LO = 0, HI = 1;
+    function val(k){ var v = answers[k-1][0]; if (v === 'NA') return null; return INV.indexOf(k) >= 0 ? (LO + HI - v) : v; }
+    function agg(list, m){ var s = 0, n = 0; list.forEach(function(k){ var v = val(k); if (v !== null){ s += v; n++; } }); if (n === 0) return null; return m === 'mean' ? s / n : s; }
+    var BL = [{"l": "Expériences inhabituelles (UnEx)", "it": [1, 6, 10, 15, 18, 23, 27, 29, 32, 33, 38, 40], "m": "sum", "d": 0, "r": "0 à 12", "x": 1}, {"l": "Désorganisation cognitive (CogDis)", "it": [2, 9, 12, 16, 17, 22, 26, 36, 39, 41, 43], "m": "sum", "d": 0, "r": "0 à 11", "x": 1}, {"l": "Anhédonie introvertive (IntAn)", "it": [3, 5, 8, 14, 19, 21, 25, 28, 31, 34], "m": "sum", "d": 0, "r": "0 à 10", "x": 1}, {"l": "Non-conformité impulsive (ImpNon)", "it": [4, 7, 11, 13, 20, 24, 30, 35, 37, 42], "m": "sum", "d": 0, "r": "0 à 10", "x": 1}];
+    var res = [], rows = '';
+    BL.forEach(function(b){ var v = agg(b.it, b.m); if (v !== null) v = v * b.x; res.push(v); rows += row(b.l + (b.r ? ' (' + b.r + ')' : ''), v === null ? '-' : v.toFixed(b.d).replace('.', ',')); });
+    html += '<table class=\"result-table\">' + rows + '</table>';
+    html += '<p class=\"result-text\">' + "Un score par sous-échelle : chaque « Oui » vaut 1 point et chaque « Non » 0 point, inversé pour les 8 items formulés à l'inverse ; un score élevé correspond à une schizotypie plus élevée." + '</p>';
+    html += '<p class=\"result-text\">' + "Pas de score total officiel et pas de seuil : l'instrument est dimensionnel. Clé de cotation établie par appariement avec une source secondaire (PsyToolkit) : voir la fiche." + '</p>';
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>sO-LIFE : Schizotypie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#77358D 0%,#D7B5E3 55%,#361641 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#361641;background:#F1E6F4;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #703285;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#703285;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#361641;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">sO-LIFE</span></div>
+
+  <h1 class="serif">Short Oxford-Liverpool Inventory of Feelings and Experiences (sO-LIFE), version française</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">sO-LIFE : Mason O., Linney Y., Claridge G. (2005) ; version française : Sierro G., Rossier J., Mason O., Mohr C. (2016).</p>
+  <div class="meta-row">
+    <span class="pill">43 questions</span>
+    <span class="pill">Oui / Non</span>
+    <span class="pill">Français</span>
+    <span class="pill">Schizotypie · Personnalité</span>
+    <span class="pill">Licence requise : incertaine</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="so-life.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>Short Oxford-Liverpool Inventory of Feelings and Experiences (O-LIFE courte), version française. Auteurs : Mason O., Linney Y., Claridge G., 2005 (Schizophr Res 78:293-296 ; original, 43 items). Version française : Sierro G., Rossier J., Mason O., Mohr C., 2016 (Eur J Psychol Assess 32(3):195-203).</p>
+    <p>But : mesurer la schizotypie de façon dimensionnelle, par quatre sous-échelles : expériences inhabituelles (UnEx, 12 items), désorganisation cognitive (CogDis, 11), anhédonie introvertive (IntAn, 10) et non-conformité impulsive (ImpNon, 10). 43 items, 8 formulés à l'inverse, réponses Oui / Non. Version utilisée : française.</p>
+    <p class="source-note">Les coquilles de la transcription sont conservées telles quelles (item 10 « causes » pour « causées », item 18 « les exprimez », item 29 « vous regarder », consigne « au plus prêt »).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque « Oui » vaut 1 point et chaque « Non » 0 point, inversé pour les items formulés à l'inverse. Score de chaque sous-échelle = somme de ses items ; score élevé = schizotypie plus élevée (Sierro 2018, thèse UNIL, sect. 4.2.1.2.2).</p>
+    <p>Items inversés : 5, 19, 24, 28, 30, 31, 34, 42. UnEx : 1, 6, 10, 15, 18, 23, 27, 29, 32, 33, 38, 40 (0 à 12). CogDis : 2, 9, 12, 16, 17, 22, 26, 36, 39, 41, 43 (0 à 11). IntAn : 3, 5, 8, 14, 19, 21, 25, 28, 31, 34 (0 à 10). ImpNon : 4, 7, 11, 13, 20, 24, 30, 35, 37, 42 (0 à 10).</p>
+    <p class="reserve">Pas de score total officiel : seuls les quatre scores de sous-échelle sont affichés. Une somme de 0 à 43 a été utilisée dans une étude brésilienne (PMC7879081) mais n'est pas un score des auteurs.</p>
+    <p class="reserve">Pas de seuil clinique : l'instrument est dimensionnel. Des moyennes de référence existent (échantillon de jumeaux, âge moyen 47 ans, Mason 2005 via PsyToolkit : UnEx 3,17 H / 3,39 F ; CogDis 4,28 / 4,44 ; IntAn 2,80 / 2,40 ; ImpNon 2,70 / 2,59), mais ce ne sont pas des seuils et elles ne concernent pas un échantillon francophone. L'étalonnage français (n = 1048) est dans Sierro 2016, non lu.</p>
+    <p class="reserve">Clé de cotation : source secondaire. L'appartenance de chaque item français à sa sous-échelle et le sens d'inversion ne sont pas imprimés en français ; ils ont été établis en appariant chaque item français à l'item anglais correspondant de la clé PsyToolkit (43 appariements distincts, par le contenu). Les effectifs obtenus (12 / 11 / 10 / 10 ; 8 items inversés) coïncident avec ceux publiés (Mason 2005, Sierro 2018). La clé PsyToolkit n'a pas été vérifiée contre Mason 2005 (accès payant) ; recoupée sur un item inversé (PMC7879081) et par le total de 8 items inversés.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Origine du texte : annexe 7.5 « Questionnaire O-LIFE, version française et italienne » du travail de master d'Elia Franscioni (UNIL, 2016), pp. 82-83, lue en texte et visuellement. Ce n'est pas le texte publié de l'article Sierro et al. 2016 (accès fermé), dont le matériel supplémentaire n'a pas été lu. Le mémoire indique utiliser « une version française (Sierro, Rossier, Mason &amp; Mohr, 2015) ». Ces petites coquilles seraient à corriger si le texte officiel était obtenu. L'ordre des items est celui de l'annexe.</p>
+    <p class="reserve">Licence : statut incertain, permission des auteurs non retrouvée. Seule phrase trouvée, à propos de la version courte, par PsyToolkit (non par les auteurs) : « It seems that the short O-LIFE can be used for research, but you need to acknowledge the authors and their research paper when writing about it (References). » (https://www.psytoolkit.org/survey-library/schizotypy-short-olife.html). Aucune politique officielle de Mason, Claridge ou Sierro n'a été trouvée ; la version française publiée est chez Hogrefe (PsycTESTS doi:10.1037/t58208-000, non consultable). Une autorisation est à obtenir avant usage hors cabinet.</p>
+    <p class="source-note">Références : Mason O, Linney Y, Claridge G. Short scales for measuring schizotypy. Schizophr Res 2005;78(2-3):293-296. doi:10.1016/j.schres.2005.06.020. : Sierro G, Rossier J, Mason OJ, Mohr C. French validation of the O-LIFE Short questionnaire. Eur J Psychol Assess 2016;32(3):195-203. doi:10.1027/1015-5759/a000249. : Franscioni E. Cannabis, ivresses ponctuelles et fonctions cognitives. Travail de Master, Université de Lausanne, 2016 (dir. C. Mohr), annexe 7.5, pp. 82-83. : Sierro G. Using the diametrical model to examine the relationship between the autism and psychosis spectra. Thèse, Université de Lausanne, 2018.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

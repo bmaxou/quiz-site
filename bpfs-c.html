@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BPFS-C : Traits de personnalité limite (enfants)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #85326C;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#85326C;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#411634;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#85326C;background:#F4E6F0;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#411634;border-color:#E0D9C9;}
+  .btn-primary{background:#85326C;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#85326C;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#411634;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">BPFS-C / ÉTPLE : Échelle de traits de personnalité limite pour enfants</h1>
+    <p class="lead">24 énoncés auxquels l’enfant répond sur une échelle de 5 niveaux, de « Pas vrai du tout » à « Toujours vrai ». Le total va de 24 à 120.</p>
+
+    <p class="lang-note">Énoncés en français (ÉTPLE). Aucune consigne verbatim n’est publiée pour cette version. Licence requise : incertaine.</p>
+    <div class="pill-row">
+      <span class="pill">24 énoncés</span>
+      <span class="pill">5 niveaux de réponse</span>
+      <span class="pill">Total de 24 à 120</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Crick NR et al. Dev Psychopathol 2005;17(4):1051-1070. Dubé G et al. Santé mentale au Québec 2015;40(3):245-267. Outil d’auto-évaluation : ne remplace pas un bilan clinique.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["Je suis une personne assez heureuse.", "Je me sens très seul(e).", "Je me sens mal quand mes parents ou mes amis partent en dehors de la ville pour quelques jours.", "Je fais des choses que les autres trouvent étranges ou risquées, comme si j’avais perdu le contrôle de moi-même.", "Je me sens presque toujours pareil(le). Mes sentiments ne changent pas très souvent.", "Je veux que certaines personnes sachent combien elles m’ont fait du mal.", "Je fais des choses sans penser avant de les faire.", "Mes sentiments sont très forts. Quand je suis en colère, je suis vraiment très très en colère. Quand je suis heureux(se), je suis vraiment très très heureux(se).", "Je sens qu’il me manque quelque chose d’important, mais je ne sais pas quoi.", "J’ai déjà choisi des amis qui m’ont maltraité(e).", "Je ne prends pas soin des choses qui sont importantes pour moi.", "Je change d’idée presque chaque jour sur ce que je devrais faire quand je serai grand(e).", "Les gens qui étaient proches de moi m’ont laissé(e) tomber.", "Je passe souvent d’un sentiment à un autre, comme être fâché(e), puis triste ou heureux(se).", "Je m’attire des problèmes parce que je fais les choses sans réfléchir.", "Je m’inquiète que des gens que j’aime partent et ne reviennent plus.", "Quand je suis fâché(e), je ne peux pas contrôler ce que je fais.", "Comment je me sens ou ce que je pense de moi change beaucoup d’un jour à l’autre.", "Quand je me sens mal, je fais des choses qui ne sont pas bonnes pour moi.", "Souvent, mes amis(es) et moi sommes vraiment méchants(tes) les uns (unes) avec les autres.", "Je deviens tellement fâché(e) que je n’arrive pas à laisser sortir toute ma colère.", "Je m’ennuie souvent très facilement.", "Je prends bien soin des choses qui sont à moi.", "Une fois que quelqu’un est devenu mon ami, nous restons des amis."];
+  var G = [{"label": "", "opts": ["Pas vrai du tout", "Rarement vrai", "Parfois vrai", "Souvent vrai", "Toujours vrai"], "vals": [1, 2, 3, 4, 5]}];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = null;              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var INV = [1, 5, 23, 24], LO = 1, HI = 5;
+    function val(k){ var v = answers[k-1][0]; if (v === 'NA') return null; return INV.indexOf(k) >= 0 ? (LO + HI - v) : v; }
+    function agg(list, m){ var s = 0, n = 0; list.forEach(function(k){ var v = val(k); if (v !== null){ s += v; n++; } }); if (n === 0) return null; return m === 'mean' ? s / n : s; }
+    var BL = [{"l": "Score total BPFS-C / ÉTPLE", "it": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24], "m": "sum", "d": 0, "r": "24 à 120", "x": 1}, {"l": "Sous-échelle Instabilité affective (items 1, 5, 8, 14, 17, 21)", "it": [1, 5, 8, 14, 17, 21], "m": "sum", "d": 0, "r": "6 à 30", "x": 1}, {"l": "Sous-échelle Problèmes d’identité (items 3, 9, 12, 16, 18, 22)", "it": [3, 9, 12, 16, 18, 22], "m": "sum", "d": 0, "r": "6 à 30", "x": 1}, {"l": "Sous-échelle Relations interpersonnelles négatives (items 2, 6, 10, 13, 20, 24)", "it": [2, 6, 10, 13, 20, 24], "m": "sum", "d": 0, "r": "6 à 30", "x": 1}, {"l": "Sous-échelle Comportements d’autodestruction (items 4, 7, 11, 15, 19, 23)", "it": [4, 7, 11, 15, 19, 23], "m": "sum", "d": 0, "r": "6 à 30", "x": 1}];
+    var res = [], rows = '';
+    BL.forEach(function(b){ var v = agg(b.it, b.m); if (v !== null) v = v * b.x; res.push(v); rows += row(b.l + (b.r ? ' (' + b.r + ')' : ''), v === null ? '-' : v.toFixed(b.d).replace('.', ',')); });
+    html += '<table class=\"result-table\">' + rows + '</table>';
+    html += '<p class=\"result-text\">' + "Total : somme des 24 énoncés après inversion des énoncés 1, 5, 23 et 24 ; un score total élevé indique une forte présence de traits de personnalité limite. Aucun seuil n’est appliqué ici et il n’existe pas d’étalonnage francophone publié lu (voir la fiche)." + '</p>';
+    html += '<p class=\"result-text\">' + "Réserve : les sous-échelles sont celles de l’instrument d’origine, affichées à titre indicatif ; Sharp et al. (2014) déconseillent leur usage (instrument unidimensionnel) et préconisent le score total. Les libellés intermédiaires des réponses proviennent d’une thèse (Vallières 2020) et la consigne exacte n’est pas publiée." + '</p>';
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BPFS-C : Traits de personnalité limite (enfants)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#8D3572 0%,#E3B5D5 55%,#411634 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#411634;background:#F4E6F0;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #85326C;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#85326C;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#411634;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">BPFS-C</span></div>
+
+  <h1 class="serif">Échelle de traits de personnalité limite pour enfants (BPFS-C / ÉTPLE)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">BPFS-C : Crick, Murray-Close & Woods (2005) ; version française ÉTPLE : Terradas & Achim (2010), Dubé et al. (2015). 24 énoncés, 5 niveaux.</p>
+  <div class="meta-row">
+    <span class="pill">24 énoncés</span>
+    <span class="pill">5 niveaux de réponse</span>
+    <span class="pill">Total de 24 à 120</span>
+    <span class="pill">Français</span>
+    <span class="pill">Personnalité · Enfants</span>
+    <span class="pill">Licence requise : incertaine</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="bpfs-c.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>Borderline Personality Features Scale for Children (BPFS-C) ; version française : Échelle de traits de personnalité limite pour enfants (ÉTPLE). Auto-questionnaire de 24 énoncés mesurant des traits de personnalité limite, adapté de la sous-échelle BOR du PAI (Morey 1991).</p>
+    <p>Auteurs : Original : Crick N.R., Murray-Close D. &amp; Woods K. (2005), Dev Psychopathol 17(4):1051-1070 (adaptation de la sous-échelle BOR du PAI, Morey 1991). Traduction française des 24 items (ÉTPLE) : Terradas M.M. &amp; Achim J. (2010), traduction/retraduction, publiée dans Dubé G., Terradas M.M. &amp; Arsenault S. (2015), Santé mentale au Québec 40(3):245-267. Autre version française (non lue) : Ensink K., Bégin M., Kotiuga J., Sharp C. &amp; Normandin L. (2020), Adolesc Psychiatry 10(1):48-58.</p>
+    <p>Version utilisée ici : l’ÉTPLE (Terradas &amp; Achim), 24 énoncés, réponse sur 5 niveaux (1 à 5). La version Ensink et al. 2020 n’a pas été lue et peut avoir des formulations différentes.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque énoncé est coté de 1 à 5 selon la réponse ; inversion des énoncés 1, 5, 23, 24 (Dubé et al. 2015). Somme des 24 énoncés après inversion des énoncés 1, 5, 23 et 24 (Dubé et al. 2015 : « Le score total correspond à la somme des scores rencontrés pour chacun des énoncés. Un score total élevé indique une forte présence de traits de personnalité limite. »). Pas de moyenne. Plage : 24-120.</p>
+    <p>Sous-échelles d’origine : Instabilité affective = énoncés 1, 5, 8, 14, 17, 21 ; Problèmes d'identité = énoncés 3, 9, 12, 16, 18, 22 ; Relations interpersonnelles négatives = énoncés 2, 6, 10, 13, 20, 24 ; Comportements d'autodestruction (automutilation / self-harm dans la version anglaise) = énoncés 4, 7, 11, 15, 19, 23.</p>
+    <p class="reserve">Sous-échelles : Sous-échelles d'origine (Tableau 2 de Dubé et al. 2015), confirmées par la répartition des items dans l'étude chinoise (PMC6528549, tableau item/sous-échelle). Sharp et al. (2014) déconseillent l'usage des sous-échelles (instrument unidimensionnel) : préférer le score total. Dubé et al. 2015 ont trouvé une structure française à 4 composantes différente (contrôle des impulsions, relations interpersonnelles négatives, régulation des émotions, sentiment de vide) et ont écarté 2 énoncés dans l'ACP (non précisés dans le texte lu) : ne pas utiliser ces composantes comme sous-scores officiels.</p>
+    <p class="reserve">Inversion : Dubé et al. 2015 p. 254 : « L'échelle de cotation est inversée pour les énoncés 1, 5, 23 et 24. » Sur une échelle 1-5, inversion = 6 - réponse (déduction arithmétique, non écrite telle quelle dans la source).</p>
+    <p class="reserve">Seuils, uniquement à titre d’information et issus d’échantillons anglophones d’adolescents (non validés en français, pas d’étalonnage francophone publié lu ; l’échantillon de validation français compte 262 enfants québécois de 9 à 12 ans) : Seuil 66 (score total, auto-questionnaire) : Seuil optimal proposé pour discriminer des adolescents hospitalisés avec TPL (CI-BPD) ; échantillon de 51 adolescents, jugé trop bas par la réplication ; non validé en français Source : Chang, Sharp &amp; Ha (2011) rapporté par Vallières 2020 (thèse Laval) et par PMC11346013 (Ensink-indépendant, BPD Emot Dysregul 2024). Seuil 75 (score total, auto-questionnaire) : Seuil de la réplication (adolescents TPL vs contrôles psychiatriques), version anglaise Source : PMC11346013, doi:10.1186/s40479-024-00264-1.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Origine des énoncés et de la cotation : Dubé, Terradas &amp; Arsenault 2015 (Santé mentale au Québec 40(3):245-267), Tableaux 2 et 3 et p. 254, texte intégral lu.</p>
+    <p class="reserve">Consigne : aucune consigne verbatim n’est publiée (Dubé et al. 2015 ne la décrivent que par paraphrase : « L'enfant a pour consigne de lire des affirmations sur la façon dont il se sent et sur la façon dont il se sent par rapport aux autres et d'indiquer ce qui correspond le mieux à ce qu'il sent ou ce qu'il pense. »). La page est donc présentée sans consigne propre, par choix de ne rien inventer : la consigne à donner à l’enfant doit être précisée par le praticien.</p>
+    <p class="reserve">Libellés de réponse : Valeurs 1 et 5 et nature de l'échelle (Likert 5 points, « pas du tout vrai (1) » à « toujours vrai (5) ») : Dubé et al. 2015 p. 254 (lu). Les 3 libellés intermédiaires (Rarement vrai / Parfois vrai / Souvent vrai) et la graphie « Pas vrai du tout » proviennent uniquement de la thèse Vallières (2020, Univ. Laval, p. 15) qui décrit la version française de Ensink et al. ; ils concordent avec les libellés anglais originaux (not at all true / hardly ever true / sometimes true / often true / always true, lus dans Europe PMC PMC9856791 pour le BPFSC-11). Libellés intermédiaires de l'ÉTPLE de Terradas &amp; Achim NON lus directement : à valider avant mise en ligne.</p>
+    <p class="reserve">(1) Inversion : Dubé et al. 2015 et 2 articles anglais (PMC9470600, PMC5310093) donnent 1, 5, 23, 24 inversés ; l'article original de Crick 2005 dit seulement « summed » et PMC11346013 écrit que le score est la somme sans inversion ni cotation intermédiaire. Retenu : inversion des 4 items (source primaire française). Les items 1, 5, 23, 24 sont de sens positif/stable (« Je suis une personne assez heureuse », etc.), l'inversion est cohérente sémantiquement.</p>
+    <p class="reserve">(2) Libellé extrême : « pas du tout vrai » (Dubé) vs « Pas vrai du tout » (Vallières/Ensink).</p>
+    <p class="reserve">(3) Le texte lu est la version ÉTPLE (Terradas &amp; Achim) ; la version Ensink et al. 2020 peut avoir des formulations différentes (non lue).</p>
+    <p class="reserve">(4) Consigne verbatim introuvable.</p>
+    <p class="reserve">(5) Dubé 2015 : item 12 'quand je serai grand(e)' et 3, 16 classés en « problèmes d'identité » selon le modèle original (peu intuitif mais conforme au Tableau 2).</p>
+    <p class="reserve">(6) Instrument unidimensionnel selon Sharp et al. 2014 : score total recommandé.</p>
+    <p class="reserve">(7) Pas d'étalonnage francophone publié lu ; échantillon de validation 262 enfants québécois de 9-12 ans.</p>
+    <p class="reserve">(8) Les seuils (66, 75) viennent d'échantillons d'adolescents anglophones.</p>
+    <p class="reserve">Réserves de constructibilité : Constructible avec réserves : items et cotation sûrs (source primaire lue) ; consigne verbatim absente (utiliser une consigne neutre à valider par Max, marquée comme non verbatim) ; libellés intermédiaires de réponse issus d'une source secondaire ; licence incertaine ; pas de seuil francophone.</p>
+    <p class="reserve">Licence (statut « incertaine » : permission des auteurs non retrouvée) : Aucune politique de licence trouvée pour l'ÉTPLE ni pour le BPFS-C. Les articles d'application indiquent seulement : « Permission to use the original scale was granted by its author. » (Koullourou et al., Psychiatriki 2026, à propos du BPFSC-11). : https://psychiatriki-journal.gr/documents/psychiatry/37.1-EN-2026-018.pdf. Article de Dubé et al. 2015 © Santé mentale au Québec / Érudit (items reproduits dans le Tableau 2/3 ; accès libre). Article Ensink et al. 2020 sous CC BY 4.0 selon Crossref (mais texte intégral non lu : Bentham/EurekaSelect derrière Cloudflare). Droits sur l'instrument : auteurs Crick et al. (Cambridge Univ. Press) et traducteurs Terradas &amp; Achim ; permission à demander (je ne peux pas contacter les auteurs).</p>
+    <p class="source-note">Les mentions de licence : « incertaine » signifie que la permission des auteurs n’a pas été retrouvée ; « requise » qu’une autorisation ou licence est à obtenir avant tout usage hors cabinet.</p>
+    <p class="source-note">Crick N.R., Murray-Close D., Woods K. (2005). Borderline personality features in childhood: a short-term longitudinal study. Dev Psychopathol 17(4):1051-1070. DOI 10.1017/S0954579405050492</p>
+    <p class="source-note">Dubé G., Terradas M.M., Arsenault S. (2015). L'enfant borderline en devenir II : validation préliminaire de l'Échelle de traits de personnalité limite pour enfants. Santé mentale au Québec 40(3):245-267. DOI 10.7202/1034921ar ; PMID 26966858</p>
+    <p class="source-note">Ensink K., Bégin M., Kotiuga J., Sharp C., Normandin L. (2020). Psychometric Properties of the French Version of the Borderline Personality Features Scale for Children and Adolescents. Adolesc Psychiatry 10(1):48-58. DOI 10.2174/2210676609666190820145256 (texte intégral non lu)</p>
+    <p class="source-note">Sharp C., Steinberg L., Temple J., Newlin E. (2014). An 11-item measure to assess borderline traits in adolescents: refinement of the BPFSC using IRT. Personal Disord 2014. PMID 24588063 (volume/pages non vérifiés)</p>
+    <p class="source-note">Chang B., Sharp C., Ha C. (2011). The criterion validity of the Borderline Personality Features Scale for Children in an adolescent inpatient setting. (revue/pagination non vérifiées).</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

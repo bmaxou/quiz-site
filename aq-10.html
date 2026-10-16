@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AQ-10 : Quotient du Spectre Autistique en 10 items</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #858532;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#858532;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#414116;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#858532;background:#F4F4E6;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#414116;border-color:#E0D9C9;}
+  .btn-primary{background:#858532;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#858532;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#414116;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">AQ-10 : Quotient du Spectre Autistique en 10 items</h1>
+    <p class="lead">10 situations ; pour chacune, indiquez dans quelle mesure vous êtes d’accord ou non (4 niveaux, de « Tout à fait d’accord » à « Pas du tout d’accord »). Outil de repérage, pas de diagnostic.</p>
+    <p class="consigne">Voici une liste de situations. Veuillez lire chacune d’elles très attentivement et précisez dans quelle mesure vous êtes d’accord ou pas. POUR QUE CETTE ECHELLE SOIT VALIDE, VOUS DEVEZ REPONDRE A CHAQUE QUESTION.</p>
+    <p class="lang-note">Questions en français (adaptation Weiner 2007, fiche du Centre de Ressources Autisme Alsace). Licence requise : incertaine (gratuit pour un usage non lucratif ; des frais peuvent s’appliquer à un usage commercial).</p>
+    <div class="pill-row">
+      <span class="pill">10 questions</span>
+      <span class="pill">4 niveaux de réponse</span>
+      <span class="pill">Score de 0 à 10</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Allison C, Auyeung B, Baron-Cohen S. Toward brief « red flags » for autism screening: the Short Autism Spectrum Quotient and the Short Quantitative Checklist in 1,000 cases and 3,000 controls. J Am Acad Child Adolesc Psychiatry 2012 ; 51(2) : 202-212.<br>Baron-Cohen S, Wheelwright S, Skinner R, Martin J, Clubley E. The Autism-Spectrum Quotient (AQ). J Autism Dev Disord 2001 ; 31 : 5-17 (AQ-50 d’origine ; cité pour contexte, non lu).<br>NICE clinical guideline CG142 (AQ-10 recommandé comme guide de réorientation rapide chez l’adulte sans déficience intellectuelle) : mentionné sur la fiche anglaise officielle.<br>Outil de dépistage / d'auto-évaluation : ne remplace pas un bilan clinique.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["Je remarque souvent des bruits discrets que les autres ne remarquent pas.", "Je me concentre habituellement plus sur l’ensemble d’une image que sur les petits détails de celle-ci.", "Je trouve qu’il est facile de faire plus d’une chose à la fois", "Si je suis interrompu(e), je peux facilement revenir à ce que j’étais en train de faire.", "Je trouve qu’il est facile de « lire entre les lignes » lorsque quelqu’un me parle", "Je sais m’en rendre compte quand mon interlocuteur s’ennuie.", "Quand je lis une histoire, je trouve qu’il est difficile de me représenter les intentions des personnages.", "J’aime collectionner des informations sur des catégories de choses (types de voitures, d’oiseaux, de trains, de plantes, ...).", "Je trouve qu’il est facile de décoder ce que les autres pensent ou ressentent juste en regardant leur visage.", "Je trouve qu’il est difficile de décoder les intentions des autres."];
+  var G = [{"label": "", "opts": ["Tout à fait d’accord", "Plutôt d’accord", "Plutôt pas d’accord", "Pas du tout d’accord"], "vals": [1, 2, 3, 4]}];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = null;              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var AG = [1, 7, 8, 10], DIS = [2, 3, 4, 5, 6, 9];
+    var tot = 0;
+    for (var k = 1; k <= 10; k++){
+      var a = answers[k-1][0];
+      if (AG.indexOf(k) >= 0) { if (a <= 2) tot++; } else { if (a >= 3) tot++; }
+    }
+    html += '<table class=\"result-table\">' + row('Score total AQ-10 (0 à 10)', String(tot)) + '</table>';
+    var t;
+    if (tot >= 6) {
+      t = 'Score de 6 ou plus : selon la version anglaise officielle (Autism Research Centre) et Allison et al. (2012), envisager une orientation vers une évaluation diagnostique spécialisée (sensibilité 0,88, spécificité 0,91, valeur prédictive positive 0,85 à ce seuil ; 449 adultes avec TSA et 838 témoins, Royaume-Uni). Repère de dépistage, non diagnostique.';
+    } else {
+      t = 'Score inférieur à 6 : en dessous du repère de dépistage de l’original (6 ou plus ; Allison et al., 2012, Royaume-Uni). Repère, non diagnostique.';
+    }
+    html += '<p class=\"result-text\">' + t + '</p>';
+    if (tot === 6) {
+      html += '<p class=\"result-text\">Attention : la fiche française indique « supérieur à 6 sur 10 » (formulation ambiguë) alors que l’original anglais indique « 6 ou plus ». Le score de 6 se situe donc à la limite entre les deux formulations.</p>';
+    }
+
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AQ-10 : Quotient du Spectre Autistique en 10 items</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#8D8D35 0%,#E3E3B5 55%,#414116 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#414116;background:#F4F4E6;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #858532;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#858532;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#414116;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">AQ-10</span></div>
+
+  <h1 class="serif">Quotient du Spectre Autistique en 10 items, adulte (AQ-10)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">AQ-10 : Allison, Auyeung et Baron-Cohen (2012) ; adaptation française : L. Weiner (2007), mise en forme P. Schneider (Centre de Ressources Autisme Alsace), 2015. Outil de repérage, pas de diagnostic.</p>
+  <div class="meta-row">
+    <span class="pill">10 questions</span>
+    <span class="pill">4 niveaux de réponse</span>
+    <span class="pill">Score de 0 à 10</span>
+    <span class="pill">Français</span>
+    <span class="pill">Autisme · Repérage</span>
+    <span class="pill">Licence requise : incertaine</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="aq-10.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>L’AQ-10 est une forme courte à 10 items du Quotient du Spectre Autistique, conçue comme outil de repérage chez l’adulte (le Quotient du Spectre Autistique à 50 items est un instrument différent). Il ne permet pas de poser un diagnostic. La fiche anglaise officielle le mentionne comme guide de réorientation rapide chez l’adulte sans déficience intellectuelle (recommandation NICE CG142).</p>
+    <p>Les quatre exemples de la fiche d’origine (E1 à E4) servent seulement à expliquer comment répondre ; ils ne sont pas cotés.</p>
+    <p class="source-note">Les items 3 et 5 n’ont pas de point final dans la source (conservé).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Cotation binaire : 1 point au maximum par question. 1 point pour « Tout à fait d’accord » ou « Plutôt d’accord » aux items 1, 7, 8 et 10 ; 1 point pour « Plutôt pas d’accord » ou « Pas du tout d’accord » aux items 2, 3, 4, 5, 6 et 9. Score total = somme des 10 points (0 à 10).</p>
+    <p>Repère (non diagnostique) : score de 6 ou plus, envisager une orientation vers une évaluation diagnostique spécialisée. Sensibilité 0,88, spécificité 0,91, valeur prédictive positive 0,85 à ce seuil. Source : version anglaise officielle de l’Autism Research Centre et Allison et al. (2012), JAACAP 51(2) : 202-212 ; 449 adultes avec TSA et 838 témoins, volontaires en ligne, Royaume-Uni ; alpha de Cronbach 0,85 ; moyennes : adultes avec TSA 7,93 (écart-type 1,93), témoins 2,77 (écart-type 2,00).</p>
+    <p class="reserve">Écart entre les sources : la fiche française de cotation indique « Score seuil : supérieur à 6 sur 10 » (formulation ambiguë : au moins 7 ?), alors que l’original anglais indique « 6 ou plus ». Cette page suit l’original (seuil de 6 inclus) et signale l’écart lorsque le score est exactement 6. Cet écart reste à trancher avant publication.</p>
+    <p class="reserve">Aucune norme ni validation psychométrique française de l’AQ-10 n’a été retrouvée ; les seules données chiffrées viennent d’un échantillon britannique. Un Quotient du Spectre Autistique à 50 items existe en français (étude clinicaltrials.gov NCT00505830), non consulté.</p>
+    <p class="reserve">Les valeurs 1 à 4 associées aux réponses sont un simple code d’affichage : seule la moitié « accord » ou « désaccord » compte pour la cotation. Valeurs manquantes : règle non précisée ; la fiche exige de répondre à chaque question.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Droits : la page officielle de l’Autism Research Centre indique « The AQ-10 is available free of charge for non-profit use, including research and education. For-profit healthcare organisations, commercial users, and IT companies : Fees may apply to your project. » Pied de page de la version anglaise : « © SBC/CA/BA/ARC/Cambridge University 1/5/12 ». La fiche française est publiée par l’ARC sans mention de licence propre. Licence requise : incertaine.</p>
+    <p class="reserve">Le libellé français diffère de l’anglais (ex. item 1, « bruits discrets ») : adaptation de L. Weiner (2007), sans validation française publiée repérée. Le tableau de cotation de la fiche française omet la ligne de l’item 5, mais la règle écrite l’inclut (désaccord = 1 point), comme en anglais.</p>
+    <p class="source-note">Items, consigne, cotation : fiche française officielle de l’Autism Research Centre (AQ10-Adult_French) ; seuil et licence : version anglaise et page officielles de l’ARC ; propriétés : Allison et al. (2012).</p>
+    <p class="source-note">Allison C, Auyeung B, Baron-Cohen S. Toward brief « red flags » for autism screening: the Short Autism Spectrum Quotient and the Short Quantitative Checklist in 1,000 cases and 3,000 controls. J Am Acad Child Adolesc Psychiatry 2012 ; 51(2) : 202-212.<br>Baron-Cohen S, Wheelwright S, Skinner R, Martin J, Clubley E. The Autism-Spectrum Quotient (AQ). J Autism Dev Disord 2001 ; 31 : 5-17 (AQ-50 d’origine ; cité pour contexte, non lu).<br>NICE clinical guideline CG142 (AQ-10 recommandé comme guide de réorientation rapide chez l’adulte sans déficience intellectuelle) : mentionné sur la fiche anglaise officielle.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

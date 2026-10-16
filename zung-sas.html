@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Zung SAS : auto-évaluation de l&#x27;anxiété</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #855C32;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#855C32;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#412B16;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#855C32;background:#F4EDE6;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#412B16;border-color:#E0D9C9;}
+  .btn-primary{background:#855C32;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#855C32;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#412B16;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">Échelle d&#x27;auto-évaluation de l&#x27;anxiété de Zung (SAS)</h1>
+    <p class="lead">20 affirmations à coter selon la fréquence des symptômes durant les 2 dernières semaines (4 réponses possibles). Traduction française non validée.</p>
+    <p class="consigne">Durant les 2 dernières semaines :</p>
+    <p class="lang-note">Questions en français (traduction de l'équipe SEYLE-Lorraine, non validée : « il n'existe pas de version validée en Français » selon la source). Licence requise : incertaine.</p>
+    <div class="pill-row">
+      <span class="pill">20 questions</span>
+      <span class="pill">Durant les 2 dernières semaines</span>
+      <span class="pill">4 niveaux de fréquence</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Zung WWK. A rating instrument for anxiety disorders. Psychosomatics. 1971;12(6):371-379. Traduction française : Kostrzewa L, Gérard L. Thèse, Université de Lorraine, 2013. Outil d&#x27;aide à l&#x27;évaluation : il ne remplace ni un entretien clinique ni un avis médical.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["Je suis plus nerveux et anxieux que d’habitude.", "J’ai peur sans raison.", "Je m’énerve ou je panique facilement.", "J’ai l’impression de m’effondrer ou de « perdre les pédales ».", "J’ai l’impression que tout va bien et que rien de grave ne peut arriver.", "Mes bras et mes jambes se mettent à trembler.", "J’ai des mots de tête, de cou ou de dos.", "Je n’ai pas la force ou je me fatigue facilement.", "Je me sens calme et je peux rester tranquille facilement.", "J’ai des palpitations.", "J’ai des vertiges.", "J’ai des évanouissements ou j’ai l’impression d’en avoir.", "Je respire facilement.", "J’ai des fourmis, des engourdissements ou des picotements dans les doigts ou les orteils.", "J’ai des maux d’estomac ou de l’indigestion.", "J’ai souvent besoin d’uriner.", "Mes mains deviennent généralement chaudes et sèches.", "Je rougis facilement, mon visage brûle.", "Je m’endors facilement et passe une bonne nuit de sommeil.", "Je fais des cauchemars."];
+  var G = [{"label": "", "opts": ["Jamais ou rarement", "De temps en temps", "Très souvent", "La plupart du temps"], "vals": [1, 2, 3, 4]}];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = null;              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var INV = [5, 9, 13, 17, 19], raw = 0;
+    for (var k = 1; k <= 20; k++){ var v = answers[k-1][0]; raw += INV.indexOf(k) >= 0 ? 5 - v : v; }
+    var idx = raw / 0.8;
+    function f2(x){ return x.toFixed(2).replace('.', ','); }
+    html += "<table class='result-table'>" + row('Score brut (somme des 20 items, 20 à 80)', String(raw)) + row('Indice SAS (score brut / 0,8, 25 à 100)', f2(idx)) + "</table>";
+    var t;
+    if (raw < 36){ t = 'Indice inférieur à 45 : sous le seuil de 45 (indice) indiqué par Dunstan et Scott (2018) comme seuil clinique d’anxiété.'; }
+    else if (raw < 48){ t = 'Indice de 45 à 59 : seuil de 45 atteint (Dunstan et Scott, 2018) ; selon la thèse SEYLE (citant McDowell 2006), « anxiété minime à modérée ».'; }
+    else if (raw < 60){ t = 'Indice de 60 à 74 : seuil de 45 atteint (Dunstan et Scott, 2018) ; selon la thèse SEYLE (citant McDowell 2006), « anxiété sévère à marquée ».'; }
+    else if (raw === 60){ t = 'Indice de 75 : seuil de 45 atteint (Dunstan et Scott, 2018) ; la thèse SEYLE donne « 60 à 74 » puis « supérieur à 75 », l’indice 75 n’y est donc pas classé.'; }
+    else { t = 'Indice supérieur à 75 : seuil de 45 atteint (Dunstan et Scott, 2018) ; selon la thèse SEYLE (citant McDowell 2006), « anxiété extrême ».'; }
+    html += "<p class='result-text'>" + (t) + "</p>";
+    html += "<p class='result-text'>" + ("Les intervalles de gravité de la thèse sont à lire avec réserve : Dunstan et Scott (2018) écrivent qu'aucun intervalle de gravité n'a été publié dans la littérature scientifique pour cette échelle. Seuil d'indice 45 = score brut 36.") + "</p>";
+    html += "<p class='result-text'>" + ("Ce résultat est une indication, il ne remplace pas un entretien clinique.") + "</p>";
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Zung SAS : auto-évaluation de l&#x27;anxiété</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#8D6135 0%,#E3CCB5 55%,#412B16 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#412B16;background:#F4EDE6;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #855C32;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#855C32;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#412B16;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">ZUNG-SAS</span></div>
+
+  <h1 class="serif">Self-Rating Anxiety Scale (SAS) de Zung, échelle d&#x27;auto-évaluation de l&#x27;anxiété</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">ZUNG-SAS. Zung (1971) ; traduction française de l'équipe SEYLE (Kostrzewa et Gérard, 2013).</p>
+  <div class="meta-row">
+    <span class="pill">20 questions</span>
+    <span class="pill">Durant les 2 dernières semaines</span>
+    <span class="pill">4 niveaux de fréquence</span>
+    <span class="pill">Français (traduction non validée)</span>
+    <span class="pill">Anxiété</span>
+    <span class="pill">Auto-évaluation</span>
+    <span class="pill">Licence requise : incertaine</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="zung-sas.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>Domaine : anxiété. Échelle d&#x27;auto-évaluation de William W. K. Zung (Psychosomatics 1971 ; 12(6):371-379), 20 items cotés de 1 à 4 selon la fréquence. La traduction française affichée ici est celle de l&#x27;équipe française de l&#x27;étude SEYLE (thèse de médecine de Kostrzewa et Gérard, Université de Lorraine, 2013), qui précise qu&#x27;il n&#x27;existe pas de version validée en français.</p>
+    <p>Population : la seule source française lue porte sur des lycéens lorrains. Durée de passation : non précisée dans la source.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque item est coté de 1 à 4 : Jamais ou rarement = 1, De temps en temps = 2, Très souvent = 3, La plupart du temps = 4. Items à cotation inversée (4, 3, 2, 1) : 5, 9, 13, 17 et 19. Score brut = somme des 20 items (20 à 80). Indice = score brut / 0,8 (soit brut × 1,25), de 25 à 100 ; la page affiche score brut et indice.</p>
+    <p>Seuil : Dunstan et Scott (2018) donnent un seuil clinique d&#x27;anxiété à l&#x27;indice 45 (score brut 36). La thèse SEYLE, citant McDowell 2006, indique : indice 45 à 59 anxiété minime à modérée ; 60 à 74 anxiété sévère à marquée ; supérieur à 75 anxiété extrême ; seuil 45 pour une anxiété significative. Les sous-échelles « affective » (items 1 à 5) et « somatique » (items 6 à 20) sont mentionnées par la thèse sans cotation séparée. Valeur manquante : non traitée.</p>
+    <p>Repères français (adolescents lycéens, étude SEYLE-Lorraine, 1000 élèves, âge moyen 15,16 ans) : indice moyen 44,02 (écart-type 9,96) ; garçons (n = 318) 39,00 (6,85) ; filles (n = 682) 46,35 (10,32) ; alpha de Cronbach 0,844. Échantillon régional, restreint à l&#x27;adolescent : aucune norme adulte française lue.</p>
+    <p class="reserve">Coquille de la source à l&#x27;item 7 : « J’ai des mots de tête, de cou ou de dos. » (évidemment « maux de tête ») ; le texte est conservé tel quel. Dans la grille de cotation de la thèse, l&#x27;item 7 est aussi imprimé « 1 2 3 3 » (coquille : le texte annonce 1 à 4 pour tous les items). La page applique la clé 1-2-3-4 à l&#x27;item 7 ; cette cotation est déduite, non imprimée.</p>
+    <p class="reserve">Seuils de gravité : la thèse (citant McDowell 2006) les donne, mais Dunstan et Scott (2018) écrivent qu&#x27;aucun intervalle de gravité n&#x27;a été publié dans la littérature scientifique pour cette échelle ; seul le seuil 45 (indice) = 36 (brut) est confirmé par ces derniers. Les intervalles de la thèse (« 45 à 59 », « 60 à 74 », « supérieur à 75 ») laissent l&#x27;indice 75 non classé.</p>
+    <p class="reserve">Cadre temporel : le tableau français indique « Durant les 2 dernières semaines », alors que le texte méthodologique de la même thèse parle de la semaine précédant la passation et que l&#x27;original de Zung porte sur la dernière semaine. Seul l&#x27;en-tête du tableau est lisible : il n&#x27;y a pas de phrase d&#x27;instruction complète dans la source.</p>
+    <p class="reserve">Libellés de réponse : les en-têtes de colonnes de la source sont en image ; l&#x27;original anglais est « None or a little of the time / Some of the time / Good part of the time / Most or all of the time ».</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p>Items, libellés et cotation : tableau des 20 items et description de la cotation de la thèse de Kostrzewa et Gérard (Université de Lorraine, 2013, pages 73 à 77), relus contre l&#x27;image de la page ; clé d&#x27;inversion confirmée par deux formulaires anglais indépendants.</p>
+    <p class="reserve">Unique source française lue ; traduction d&#x27;équipe non validée.</p>
+    <p class="reserve">Phrase de licence relevée dans les sources : Sanford Health Plan (reproduction EN de l&#x27;échelle) : « Adapted from Zung WWK. A rating instrument for anxiety. Psychosomatics. 1971;XII:371-379. Reprinted with permission from Psychosomatics, ©1971. American Psychiatric Association. » ; UNC SABI : « Individuals may use this information for research or educational purposes only and may not use this information for commercial purposes. »</p>
+    <p class="reserve">Licence requise : incertaine.</p>
+    <p class="source-note">Zung WWK. A rating instrument for anxiety disorders. Psychosomatics. 1971;12(6):371-379. doi:10.1016/S0033-3182(71)71479-0 (PMID 5172928)</p>
+    <p class="source-note">Kostrzewa L, Gérard L. Consommation de substances psychoactives et psychopathologie chez les adolescents lorrains. Résultats de la cohorte française de l&#x27;étude SEYLE. Thèse (Sciences du Vivant), Univ. de Lorraine, 2013. HAL hal-01734342.</p>
+    <p class="source-note">Dunstan DA, Scott N. Depress Res Treat 2018;2018:9250972. doi:10.1155/2018/9250972</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

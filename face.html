@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FACE : Fast Alcohol Consumption Evaluation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #855532;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#855532;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#412816;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#855532;background:#F4ECE6;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#412816;border-color:#E0D9C9;}
+  .btn-primary{background:#855532;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#855532;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#412816;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">FACE : repérage des consommations problématiques d&#x27;alcool</h1>
+    <p class="lead">5 questions posées par un professionnel, qui cote les réponses spontanées de la personne (version destinée aux médecins généralistes). Les deux premières portent sur les douze derniers mois.</p>
+    <p class="consigne">Les cinq questions qui suivent doivent être de préférence posées sans reformulation, et cotées selon les réponses spontanées des patients. En cas d&#x27;hésitation, proposer les modalités de réponses, en demandant de choisir « la réponse la plus proche de la réalité ». Les deux premières questions portent sur les douze derniers mois.</p>
+    <p class="lang-note">Questions en français (instrument conçu en français). Questionnaire hétéro-administré : les questions sont posées par un professionnel. Licence requise : incertaine.</p>
+    <div class="pill-row">
+      <span class="pill">5 questions</span>
+      <span class="pill">Posées par un professionnel</span>
+      <span class="pill">Score de 0 à 20</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Référence principale : Dewost A-V, Michaud P, Arfaoui S, Gache P, Lancrenon S. Alcohol Clin Exp Res 2006;30(11):1889-1895 ; Société Française d'Alcoologie, 2015. Outil de repérage : il ne remplace ni un entretien clinique ni un avis médical.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["À quelle fréquence vous arrive-t-il de consommer des boissons contenant de l'alcool ?", "Combien de verres standard buvez-vous au cours d'une journée ordinaire où vous buvez de l'alcool ?", "Votre entourage vous a-t-il déjà fait des remarques au sujet de votre consommation d'alcool ?", "Avez-vous déjà eu besoin d'alcool le matin pour vous sentir en forme ?", "Vous arrive-t-il de boire et de ne plus vous souvenir ensuite de ce que vous avez pu dire ou faire ?"];
+  var G = [];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = [[{"label": "", "opts": ["Jamais", "Une fois par mois ou moins", "2 à 4 fois par mois", "2 à 3 fois par semaine", "4 fois ou plus par semaine"], "vals": [0, 1, 2, 3, 4]}], [{"label": "", "opts": ["1 ou 2", "3 ou 4", "5 ou 6", "7 à 9", "10 ou plus"], "vals": [0, 1, 2, 3, 4]}], [{"label": "", "opts": ["Non", "Oui"], "vals": [0, 4]}], [{"label": "", "opts": ["Non", "Oui"], "vals": [0, 4]}], [{"label": "", "opts": ["Non", "Oui"], "vals": [0, 4]}]];              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var s = 0; for (var i = 0; i < 5; i++){ s += answers[i][0]; }
+    html += '<table class="result-table">' + row("Score total FACE (0 à 20)", s) + '</table>';
+    html += '<p class="result-text">' + ("Seuils de la version SFA 2015 (Tabac Info Service) : un score égal ou supérieur à 5 chez l'homme et à 4 chez la femme conduit à suspecter un mésusage ; pour les deux sexes, un score égal ou supérieur à 9 est en faveur d'une dépendance.") + '</p>';
+    var h = s >= 5 ? 'atteint' : 'non atteint', f = s >= 4 ? 'atteint' : 'non atteint', d = s >= 9 ? 'atteint' : 'non atteint';
+    html += '<p class="result-text">' + ("Pour ce score : seuil de mésusage à suspecter chez l'homme (5) " + h + ", chez la femme (4) " + f + " ; seuil en faveur d'une dépendance (9) " + d + ".") + '</p>';
+    html += '<p class="result-text">' + ("Les fiches APIMED et l'article de validation (Dewost 2006) donnent les mêmes bornes avec d'autres termes (risque élevé, heavy drinking). Le score repère des troubles de l'usage d'alcool ; il n'est pas fondé sur les repères de consommation à moindre risque. Ce résultat est une indication : il ne remplace pas un entretien clinique.") + '</p>';
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FACE : Fast Alcohol Consumption Evaluation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#8D5A35 0%,#E3C8B5 55%,#412816 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#412816;background:#F4ECE6;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #855532;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#855532;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#412816;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">FACE</span></div>
+
+  <h1 class="serif">Fast Alcohol Consumption Evaluation (FACE)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">FACE : Dewost A-V, Michaud P, Arfaoui S, Gache P, Lancrenon S (2006), programme « Boire moins c'est mieux » ; version diffusée par la Société Française d'Alcoologie (2015).</p>
+  <div class="meta-row">
+    <span class="pill">5 questions</span>
+    <span class="pill">Posées par un professionnel</span>
+    <span class="pill">Score de 0 à 20</span>
+    <span class="pill">Français</span>
+    <span class="pill">Addictions · Alcool</span>
+    <span class="pill">Licence requise : incertaine</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="face.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>Domaine : repérage des consommations problématiques d'alcool. Auteurs : Dewost A-V, Michaud P, Arfaoui S, Gache P, Lancrenon S (2006), programme « Boire moins c'est mieux » ; version diffusée par la Société Française d'Alcoologie en 2015. 5 questions.</p>
+    <p>Passation : la consigne imprimée demande que les cinq questions soient posées de préférence sans reformulation et cotées selon les réponses spontanées des patients ; en cas d'hésitation, proposer les modalités de réponse en demandant de choisir la réponse la plus proche de la réalité. C'est donc un questionnaire hétéro-administré. Les deux premières questions portent sur les douze derniers mois.</p>
+    <p>Population de validation : 564 patients de 41 médecins généralistes d'Île-de-France.</p>
+    <p class="source-note">Le FACE n'est pas attribué à Rueff : celui-ci est l'auteur du DETA, dont deux questions sont reprises ; l'article de développement du FACE est signé Dewost et al.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Questions 1 et 2 : cinq modalités cotées de 0 à 4. Questions 3 à 5 : Non = 0, Oui = 4. Score total = somme des 5 questions, de 0 à 20 ; aucune inversion, pas de sous-échelle. Valeur manquante : non précisée dans les sources.</p>
+    <p>Version SFA 2015 (Tabac Info Service) : « Pour un score égal ou supérieur à 5 chez l'homme et 4 chez les femmes, un mésusage est à suspecter. Pour les deux sexes, un score supérieur ou égal à 9 est en faveur d'une dépendance. »</p>
+    <p>Fiche APIMED : hommes, 0 à 4 risque faible, 5 à 8 risque élevé, 9 ou plus dépendance probable ; femmes, 0 à 3 risque faible, 4 à 8 risque élevé, 9 ou plus dépendance probable (l'intervention brève est destinée aux patients en situation de risque élevé). Article original (Dewost 2006, table 5) : hommes moins de 5 risque faible, 5 à 8 heavy drinking, plus de 8 abus ou dépendance ; femmes moins de 4 risque faible, 4 à 8 heavy drinking, plus de 8 abus ou dépendance.</p>
+    <p>Qualités de repérage (article, table 6) : hommes, heavy drinking (FACE &gt; 4) : sensibilité 87,8 %, spécificité 74,0 %, valeur prédictive positive 43,4 % ; femmes (&gt; 3) : 84,4 %, 84,0 %, 35,5 % ; abus ou dépendance (&gt; 8) : 75,0 %, 95,8 %, 55,1 %.</p>
+    <p class="reserve">Divergences entre sources : la terminologie des niveaux varie (« mésusage à suspecter » pour la SFA, « risque élevé » pour l'APIMED, « heavy drinking » pour Dewost, « consommation excessive probable » pour Addictaide) ; les seuils « &gt; 8 » (Dewost, Addictaide) et « ≥ 9 » (SFA, APIMED) sont équivalents. Les seuils par sexe sont tous deux affichés par la page, qui ne demande pas le sexe de la personne.</p>
+    <p class="reserve">Mise en garde officielle (Tabac Info Service) : le test repère des troubles de l'usage d'alcool, il n'est pas basé sur les repères de consommation à moindre risque. La valeur prédictive positive est faible, surtout chez les femmes : le score est un repérage, pas un diagnostic.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Les questions, les modalités et la consigne reprennent la version SFA 2015 diffusée par Tabac Info Service, confrontée aux fiches APIMED et Addictaide et à l'article de Dewost 2006. Variantes de formulation entre sources, non retenues : « boissons alcoolisées » (APIMED) au lieu de « boissons contenant de l'alcool » ; « 1 fois par mois » (Addictaide) au lieu de « Une fois par mois ou moins » ; « Vous est-il arrivé de boire… » (APIMED) au lieu de « Vous arrive-t-il de boire… ».</p>
+    <p class="reserve">Licence : Société Française d'Alcoologie, 2015. (TIS) ; Copyright © 2006 Programme « Boire moins c'est mieux » (article Alcohol Clin Exp Res)</p>
+    <p class="reserve">Licence requise : incertaine. Aucune licence libre explicite ; le questionnaire est diffusé librement par des acteurs publics (Tabac Info Service/Santé publique France, SFA, Addictaide, APIMED). Citer SFA 2015 et Dewost 2006.</p>
+    <p class="source-note">Dewost A-V, Michaud P, Arfaoui S, Gache P, Lancrenon S. Fast Alcohol Consumption Evaluation: A Screening Instrument Adapted for French General Practitioners. Alcohol Clin Exp Res 2006;30(11):1889-1895. DOI 10.1111/j.1530-0277.2006.00226.x</p>
+    <p class="source-note">Société Française d'Alcoologie. Questionnaire FACE, 2015 (diffusé par Tabac Info Service).</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>
