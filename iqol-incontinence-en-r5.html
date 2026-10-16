@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>I-QOL : incontinence urinaire (anglais)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #853247;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#853247;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#411621;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#853247;background:#F4E6EA;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#411621;border-color:#E0D9C9;}
+  .btn-primary{background:#853247;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#853247;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#411621;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">I-QOL : Qualité de vie et incontinence urinaire (22 items, en anglais)</h1>
+    <p class="lead">Vingt-deux phrases en anglais sur l'effet de problèmes urinaires ou d'une incontinence sur votre vie ; pour chacune, indiquez à quel point elle vous correspond. Items non traduits.</p>
+    <p class="consigne">Pour chaque phrase, choisissez la réponse qui vous correspond (échelle de réponse reprise de la source : EXTREMELY, QUITE A BIT, MODERATELY, A LITTLE, NOT AT ALL).</p>
+    <p class="lang-note">Items en anglais, non traduits (aucune version française lisible n'a été retrouvée). Licence : incertaine.</p>
+    <div class="pill-row">
+      <span class="pill">22 items en anglais</span>
+      <span class="pill">EXTREMELY à NOT AT ALL</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Patrick DL et al. Eur Urol 1999 ; Lafond J., mémoire DEMK 2023 (DUMAS). Outil de dépistage/d'auto-évaluation : ne remplace pas un entretien clinique ni un bilan.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["I worry about not being able to get to the toilet on time", "I worry about coughing or sneezing because of my urinary problems or incontinence", "I have to be careful standing up after I’ve been sitting down because of my urinary problems or incontinence", "I worry about where toilets are in new places", "I feel depressed because of my urinary problems or incontinence", "Because of my urinary problems or incontinence, I don’t feel free to leave my home for long periods of time", "I feel frustrated because my urinary problems or incontinence prevents me from doing what I want", "I worry about others smelling urine on me", "My urinary problems or incontinence is always on my mind", "It’s important for me to make frequent trips to the toilet", "Because of my urinary problems or incontinence, it’s important to plan every detail in advance", "I worry about my urinary problems or incontinence getting worse as I grow older", "I have a hard time getting a good night of sleep because of my urinary problems or incontinence", "I worry about being embarrassed or humiliated because of my urinary problems or incontinence", "My urinary problems or incontinence makes me feel like I’m not a healthy person", "My urinary problems or incontinence makes me feel helpless", "I get less enjoyment out of life because of my urinary problems or incontinence", "I worry about wetting myself", "I feel like I have no control over my bladder", "I have to watch what or how much I drink because of my urinary problems or incontinence", "My urinary problems or incontinence limit my choice of clothing", "I worry about having sex because of my urinary problems or incontinence."];
+  var G = [{"label": "", "opts": ["EXTREMELY", "QUITE A BIT", "MODERATELY", "A LITTLE", "NOT AT ALL"], "vals": [1, 2, 3, 4, 5]}];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = null;              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var AV = [1, 2, 3, 4, 10, 11, 13, 20], PS = [5, 6, 7, 9, 15, 16, 17, 21, 22];
+    function sm(L){ var s = 0; L.forEach(function(k){ s += answers[k-1][0]; }); return s; }
+    function tr(s, n){ return (Math.floor((2000 * (s - n) + 4 * n) / (8 * n)) / 10).toFixed(1).replace('.', ','); }
+    var all = []; for (var i = 1; i <= 22; i++) all.push(i);
+    var st = sm(all);
+    html += '<table class="result-table">' + row('Total brut (22 à 110)', String(st)) + row('Score total transformé (0 à 100)', tr(st, 22)) + row('Évitement et limitation des comportements, transformé (0 à 100)', tr(sm(AV), AV.length)) + row('Impacts psychosociaux, transformé (0 à 100)', tr(sm(PS), PS.length)) + '</table>';
+    html += '<p class="result-text">Plus le score transformé est élevé, meilleure est la qualité de vie liée à l’incontinence urinaire. La transformation de 0 à 100 est une conversion linéaire déduite (la formule n’est pas écrite dans la source).</p>';
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>I-QOL : incontinence urinaire (anglais)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#8D354B 0%,#E3B5C1 55%,#411621 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#411621;background:#F4E6EA;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #853247;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#853247;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#411621;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">I-QOL-EN</span></div>
+
+  <h1 class="serif">Incontinence Quality of Life Instrument (I-QOL), items en anglais</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">I-QOL : Patrick et coll. (1999) ; 22 items en anglais lus dans l'annexe d'un mémoire français (2023) ; évitement, impacts psychosociaux.</p>
+  <div class="meta-row">
+    <span class="pill">22 items en anglais</span>
+    <span class="pill">EXTREMELY à NOT AT ALL</span>
+    <span class="pill">Anglais</span>
+    <span class="pill">Urologie</span>
+    <span class="pill">Licence : incertaine.</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="iqol-incontinence-en-r5.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>L'I-QOL (Incontinence Quality of Life Instrument), créé en 1993, est un questionnaire auto-administré de 22 items évaluant l'impact de l'incontinence urinaire d'effort, d'urgence ou mixte sur la qualité de vie des femmes et des hommes. Il est décrit en trois parties (contraintes d'évitement, impact psychologique, gêne sociale) ; chaque réponse est donnée sur une échelle de Likert en 5 points (1 = extrêmement à 5 = pas du tout). Une version française existe mais n'a pas pu être lue.</p>
+    <p class="reserve">Items en anglais jamais traduits : les phrases sont reproduites telles que lues dans l'annexe 7 du mémoire de Lafond (2023).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Les scores des sous-échelles et le score total sont transformés sur une échelle de 0 à 100 ; plus le score est élevé, plus la qualité de vie est jugée élevée. Sous-échelles listées dans l'annexe : évitement et limitation des comportements (items 1, 2, 3, 4, 10, 11, 13, 20) ; impacts psychosociaux (items 5, 6, 7, 9, 15, 16, 17, 21, 22).</p>
+    <p class="reserve">Cotation déduite : la formule de transformation n'est pas écrite dans la source lue ; la page applique la conversion linéaire (somme − minimum) / (maximum − minimum) × 100. La troisième sous-échelle (gêne sociale) n'est pas détaillée par items dans l'annexe : elle n'est pas calculée. Aucun seuil n'est affiché.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Licence : incertaine. Aucune mention de droits n'a été lue dans l'annexe qui reproduit le questionnaire ; l'I-QOL est un instrument publié par ses auteurs, dont la permission n'a pas été vérifiée.</p>
+    <p class="reserve">Étalonnage : aucune norme dans la source lue ; aucune norme française trouvée.</p>
+    <p class="source-note">Patrick DL, et al. Cultural adaptation of a quality-of-life measure for urinary incontinence. Eur Urol. 1999 (référence [34] du mémoire ; non lue). : Lafond J. Propriétés psychométriques de l'I-QOL, questionnaire de qualité de vie spécifique à l'incontinence urinaire : revue de littérature. Mémoire DEMK, 2023 (DUMAS dumas-04258083).</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

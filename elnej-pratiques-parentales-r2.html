@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ELNEJ-PP : Pratiques parentales (rempli par le parent)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #5C8532;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#5C8532;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#2B4116;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#5C8532;background:#EDF4E6;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#2B4116;border-color:#E0D9C9;}
+  .btn-primary{background:#5C8532;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#5C8532;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#2B4116;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">Pratiques parentales avec un enfant de 3 à 11 ans (ELNEJ-PP)</h1>
+    <p class="lead">Questionnaire à remplir par le PARENT d'un enfant de 3 à 11 ans : 21 questions sur ses réactions et ses échanges avec son enfant (interaction positive, inefficacité, cohérence, rationalité). Les réponses changent selon les questions (fréquence, proportion du temps, intensité).</p>
+    <p class="consigne">Les questions suivantes portent sur les gestes que pose votre enfant et sur vos diverses réactions envers lui/elle en tant que parent. Pour les questions suivantes, j&#x27;aimerais que vous me disiez, en tant que parent de votre enfant, comment les choses se déroulent lorsque vous passez du temps avec lui/elle.</p>
+    <p class="lang-note">Questions en français (questionnaire du parent de l'enquête canadienne ELNEJ, cycle 6). À remplir par le parent, à propos de son enfant. « Il / elle » et « votre enfant » remplacent le prénom de l'enfant. Licence : incertaine (voir la fiche).</p>
+    <div class="pill-row">
+      <span class="pill">21 questions</span>
+      <span class="pill">Trois jeux de réponses</span>
+      <span class="pill">À remplir par le parent</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Statistique Canada (2006), ELNEJ, cycle 6, Livre 1 - Parent, enfant et jeune ; Guide de l'utilisateur, 9.3.2 et 9.5.8. Licence ouverte de Statistique Canada. Outil de dépistage/d'auto-évaluation : ne remplace pas un entretien clinique ni un bilan.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["À quelle fréquence félicitez-vous votre enfant en lui disant des choses comme 'Bravo!', 'C'est très joli ce que tu as fait!' ou 'Très bien!'?", "À quelle fréquence vous arrive-t-il de parler ou de jouer avec votre enfant, de concentrer votre attention l'un sur l'autre pendant cinq minutes ou plus, pour le simple plaisir?", "À quelle fréquence vous arrive-t-il de rire avec votre enfant?", "À quelle fréquence vous arrive-t-il d'être contrarié par une parole ou un geste que votre enfant n'est pas censé(e) dire ou faire?", "À quelle fréquence vous arrive-t-il de faire avec votre enfant une activité spéciale qu'il / elle aime?", "À quelle fréquence vous arrive-t-il de faire des sports, des passe-temps ou des jeux avec votre enfant?", "Lorsque vous parlez à votre enfant de son comportement, dans quelle proportion du temps le / la félicitez-vous?", "Lorsque vous lui parlez de sa conduite, dans quelle proportion du temps le / la désapprouvez-vous?", "Lorsque vous lui ordonnez de faire quelque chose, dans quelle proportion du temps vous assurez-vous qu'il / elle le fait?", "Si vous lui dites qu'il / elle sera puni(e) s’il / elle ne cesse pas de faire quelque chose et qu'il / elle continue de le faire, à quelle fréquence le / la punissez-vous?", "À quelle fréquence laisse-t-on passer des choses pour lesquelles vous pensez qu'il / elle aurait dû être puni(e)?", "À quelle fréquence vous mettez-vous en colère lorsque vous punissez votre enfant?", "À quelle fréquence croyez-vous que le genre de punition que vous lui donnez dépend de votre humeur?", "À quelle fréquence croyez-vous avoir de la difficulté à vous y prendre avec votre enfant en général?", "À quelle fréquence réussit-il / elle à éviter une punition lorsqu'il / elle le veut vraiment?", "Lorsque vous punissez votre enfant, à quelle fréquence ne tient-il / elle pas compte de la punition que vous lui infligez?", "À quelle fréquence devez-vous punir votre enfant à maintes reprises pour la même chose?", "En tant que parent, lorsque votre enfant ne respecte pas les règles établies ou fait des choses qu'il / elle ne doit pas faire, dans quelle mesure réagissez-vous de l'une des façons suivantes : …d'élever la voix, de le / la gronder ou de lui crier après?", "En tant que parent, lorsque votre enfant ne respecte pas les règles établies ou fait des choses qu'il / elle ne doit pas faire, dans quelle mesure réagissez-vous de l'une des façons suivantes : …de discuter calmement du problème avec lui / elle?", "En tant que parent, lorsque votre enfant ne respecte pas les règles établies ou fait des choses qu'il / elle ne doit pas faire, dans quelle mesure réagissez-vous de l'une des façons suivantes : …de lui infliger des punitions corporelles?", "En tant que parent, lorsque votre enfant ne respecte pas les règles établies ou fait des choses qu'il / elle ne doit pas faire, dans quelle mesure réagissez-vous de l'une des façons suivantes : …de lui expliquer d'autres façons de se comporter qui sont acceptables?"];
+  var G = [];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = [[{"label": "", "opts": ["Jamais", "Environ une fois par semaine ou moins", "Quelques fois par semaine", "Une ou deux fois par jour", "Plusieurs fois par jour"], "vals": [0, 1, 2, 3, 4]}], [{"label": "", "opts": ["Jamais", "Environ une fois par semaine ou moins", "Quelques fois par semaine", "Une ou deux fois par jour", "Plusieurs fois par jour"], "vals": [0, 1, 2, 3, 4]}], [{"label": "", "opts": ["Jamais", "Environ une fois par semaine ou moins", "Quelques fois par semaine", "Une ou deux fois par jour", "Plusieurs fois par jour"], "vals": [0, 1, 2, 3, 4]}], [{"label": "", "opts": ["Jamais", "Environ une fois par semaine ou moins", "Quelques fois par semaine", "Une ou deux fois par jour", "Plusieurs fois par jour"], "vals": [0, 1, 2, 3, 4]}], [{"label": "", "opts": ["Jamais", "Environ une fois par semaine ou moins", "Quelques fois par semaine", "Une ou deux fois par jour", "Plusieurs fois par jour"], "vals": [0, 1, 2, 3, 4]}], [{"label": "", "opts": ["Jamais", "Environ une fois par semaine ou moins", "Quelques fois par semaine", "Une ou deux fois par jour", "Plusieurs fois par jour"], "vals": [0, 1, 2, 3, 4]}], [{"label": "", "opts": ["Jamais", "Moins de la moitié du temps", "Environ la moitié du temps", "Plus de la moitié du temps", "Tout le temps"], "vals": [0, 1, 2, 3, 4]}], [{"label": "", "opts": ["Jamais", "Moins de la moitié du temps", "Environ la moitié du temps", "Plus de la moitié du temps", "Tout le temps"], "vals": [0, 1, 2, 3, 4]}], [{"label": "", "opts": ["Jamais", "Moins de la moitié du temps", "Environ la moitié du temps", "Plus de la moitié du temps", "Tout le temps"], "vals": [0, 1, 2, 3, 4]}], [{"label": "", "opts": ["Jamais", "Moins de la moitié du temps", "Environ la moitié du temps", "Plus de la moitié du temps", "Tout le temps"], "vals": [0, 1, 2, 3, 4]}], [{"label": "", "opts": ["Jamais", "Moins de la moitié du temps", "Environ la moitié du temps", "Plus de la moitié du temps", "Tout le temps"], "vals": [0, 1, 2, 3, 4]}], [{"label": "", "opts": ["Jamais", "Moins de la moitié du temps", "Environ la moitié du temps", "Plus de la moitié du temps", "Tout le temps"], "vals": [0, 1, 2, 3, 4]}], [{"label": "", "opts": ["Jamais", "Moins de la moitié du temps", "Environ la moitié du temps", "Plus de la moitié du temps", "Tout le temps"], "vals": [0, 1, 2, 3, 4]}], [{"label": "", "opts": ["Jamais", "Moins de la moitié du temps", "Environ la moitié du temps", "Plus de la moitié du temps", "Tout le temps"], "vals": [0, 1, 2, 3, 4]}], [{"label": "", "opts": ["Jamais", "Moins de la moitié du temps", "Environ la moitié du temps", "Plus de la moitié du temps", "Tout le temps"], "vals": [0, 1, 2, 3, 4]}], [{"label": "", "opts": ["Jamais", "Moins de la moitié du temps", "Environ la moitié du temps", "Plus de la moitié du temps", "Tout le temps"], "vals": [0, 1, 2, 3, 4]}], [{"label": "", "opts": ["Jamais", "Moins de la moitié du temps", "Environ la moitié du temps", "Plus de la moitié du temps", "Tout le temps"], "vals": [0, 1, 2, 3, 4]}], [{"label": "", "opts": ["Jamais", "Rarement", "Parfois", "Souvent", "Toujours"], "vals": [0, 1, 2, 3, 4]}], [{"label": "", "opts": ["Jamais", "Rarement", "Parfois", "Souvent", "Toujours"], "vals": [0, 1, 2, 3, 4]}], [{"label": "", "opts": ["Jamais", "Rarement", "Parfois", "Souvent", "Toujours"], "vals": [0, 1, 2, 3, 4]}], [{"label": "", "opts": ["Jamais", "Rarement", "Parfois", "Souvent", "Toujours"], "vals": [0, 1, 2, 3, 4]}]];              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var INV = [7, 11, 15, 16, 19, 21], LO = 0, HI = 4;
+    function val(k){ var v = answers[k-1][0]; if (v === 'NA') return null; return INV.indexOf(k) >= 0 ? (LO + HI - v) : v; }
+    function agg(list, m){ var s = 0, n = 0; list.forEach(function(k){ var v = val(k); if (v !== null){ s += v; n++; } }); if (n === 0) return null; return m === 'mean' ? s / n : s; }
+    var BL = [{"l": "Interaction positive", "it": [1, 2, 3, 5, 6], "m": "sum", "d": 0, "r": "0 à 20", "x": 1}, {"l": "Inefficacité", "it": [4, 7, 8, 12, 13, 14, 17], "m": "sum", "d": 0, "r": "0 à 28", "x": 1}, {"l": "Cohérence", "it": [9, 10, 11, 15, 16], "m": "sum", "d": 0, "r": "0 à 20", "x": 1}, {"l": "Rationalité", "it": [18, 19, 20, 21], "m": "sum", "d": 0, "r": "0 à 16", "x": 1}];
+    var res = [], rows = '';
+    BL.forEach(function(b){ var v = agg(b.it, b.m); if (v !== null) v = v * b.x; res.push(v); rows += row(b.l + (b.r ? ' (' + b.r + ')' : ''), v === null ? ':' : v.toFixed(b.d).replace('.', ',')); });
+    html += '<table class=\"result-table\">' + rows + '</table>';
+    html += '<p class=\"result-text\">' + "Chaque score est la somme des réponses aux questions de l’échelle (valeurs de 0 à 4, avec inversion des questions marquées dans le guide). Aucune norme ni aucun seuil n’est publié. Pour l’échelle de rationalité, la formulation du guide sur le sens du score est ambiguë : le score est rapporté sans interprétation. Ces scores reflètent le point de vue du parent seul et ne posent pas de diagnostic." + '</p>';
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ELNEJ-PP : Pratiques parentales (rempli par le parent)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#618D35 0%,#CCE3B5 55%,#2B4116 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#2B4116;background:#EDF4E6;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #5C8532;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#5C8532;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#2B4116;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">ELNEJ-PP</span></div>
+
+  <h1 class="serif">ELNEJ : pratiques parentales (rempli par le parent, enfant de 3 à 11 ans) : interaction positive, inefficacité, cohérence, rationalité</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">ELNEJ-PP : ELNEJ (Statistique Canada), cycle 6, Livre 1 « Parent, enfant et jeune », section Rôle parental, questions PAR_Q01 à Q24. Hétéro-questionnaire rempli par le parent d'un enfant de 3 à 11 ans.</p>
+  <div class="meta-row">
+    <span class="pill">21 questions</span>
+    <span class="pill">Trois jeux de réponses</span>
+    <span class="pill">À remplir par le parent</span>
+    <span class="pill">Français</span>
+    <span class="pill">Parent d&#x27;enfant de 3-11 ans</span>
+    <span class="pill">Licence : incertaine</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="elnej-pratiques-parentales-r2.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>Vingt et une questions du questionnaire du parent sur les gestes de l'enfant et les réactions du parent : interaction positive (5 questions), inefficacité (7), cohérence (5) et rationalité (4). Elles sont remplies par le PARENT d'un enfant de 3 à 11 ans. Selon le guide, les questions ont été fournies par M. Boyle (Hôpital Chedoke-McMaster) à partir des travaux de K. Dodge et d'une adaptation de la Parent Practices Scale de Strayhorn et Weidman.</p>
+    <p class="source-note">Trois jeux de réponses (valeurs 0 à 4) : questions 1 à 6, « Jamais », « Environ une fois par semaine ou moins », « Quelques fois par semaine », « Une ou deux fois par jour », « Plusieurs fois par jour » ; questions 7 à 17, « Jamais », « Moins de la moitié du temps », « Environ la moitié du temps », « Plus de la moitié du temps », « Tout le temps » ; questions 18 à 21, « Jamais », « Rarement », « Parfois », « Souvent », « Toujours ». Dans le cahier de l'enquête, les catégories ne sont imprimées qu'à la première question de chaque série, selon la convention annoncée dans l'introduction. Pour les questions 18 à 21, l'amorce commune est répétée devant chaque question.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Les catégories sont recodées de 0 (« Jamais ») à 4 (dernière catégorie), puis additionnées par échelle. Interaction positive : questions 1, 2, 3, 5, 6 de la page (0 à 20). Inefficacité : 4, 7, 8, 12, 13, 14, 17 (0 à 28). Cohérence : 9, 10, 11, 15, 16 (0 à 20). Rationalité : 18, 19, 20, 21 (0 à 16). Questions inversées (marquées par le guide) : 7, 11, 15, 16, 19 et 21 de la page (Q08, Q12, Q16, Q17, Q22 et Q24 du questionnaire).</p>
+    <p>Le guide précise que 0 indique l'absence d'interactions positives, l'absence d'interactions hostiles ou inefficaces et l'absence de pratiques cohérentes. Pour la rationalité, sa formulation (« la présence d'interactions punitives ou de pratiques provoquant l'aversion ») est ambiguë : la page rapporte le score sans l'interpréter. Aucun seuil publié.</p>
+    <p class="reserve">Étalonnage : FR- (provisoire, aucune norme française trouvée). Aucune norme publiée. La question Q05 du questionnaire (« vilain(e) ») n'appartient à aucune échelle du guide et n'est pas reprise ; Q07A (enfants de moins de 3 ans) est remplacée par Q07.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Licence : incertaine. Licence ouverte de Statistique Canada : « Statistique Canada vous accorde une licence mondiale, libre de redevances et non exclusive vous permettant : d'utiliser, de reproduire, de publier, de diffuser gratuitement ou de vendre l'information » ; obligations : « reproduire l'information avec exactitude » et ne pas laisser croire que Statistique Canada appuie l'utilisation faite. Les énoncés sont reproduits tels qu'ils figurent dans le questionnaire de l'enquête ; cette page n'est ni établie ni appuyée par Statistique Canada. Les droits éventuels des auteurs des échelles d'origine n'ont pas été vérifiés, d'où la mention « incertaine ».</p>
+    <p class="reserve">Test à remplir par le parent : il ne mesure pas le point de vue de l'enfant. Dans le cahier, « ^INFO.FNAME » (prénom de l'enfant inséré par le logiciel) est remplacé par « votre enfant ». Aucune validation française n'a été faite.</p>
+    <p class="source-note">Références : Statistique Canada (2006). ELNEJ, cycle 6, Livre 1 – Parent, enfant et jeune. Statistique Canada (2006). ELNEJ, cycle 6 – Guide de l'utilisateur, 9.3.2, 9.5.8.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

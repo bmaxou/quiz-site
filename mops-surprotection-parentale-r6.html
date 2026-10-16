@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MOPS : surprotection parentale perçue (anglais)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #855C32;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#855C32;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#412B16;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#855C32;background:#F4EDE6;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#412B16;border-color:#E0D9C9;}
+  .btn-primary{background:#855C32;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#855C32;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#412B16;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">MOPS : Surprotection parentale perçue (items en anglais)</h1>
+    <p class="lead">35 énoncés en anglais décrivant le comportement de votre mère ou de votre père à votre égard ; pour chacun, choisissez de 1 (completely disagree) à 5 (completely agree). Questionnaire rempli par l’adolescent ou le jeune adulte à propos d’un seul parent à la fois : à remplir une fois pour la mère, une fois pour le père.</p>
+
+    <p class="lang-note">Items non traduits : la version française existe mais n’est pas lisible dans une source ouverte. Les énoncés disent « My mother/father » : répondez pour un seul parent à la fois (indication de la page). Cotation déduite. Licence : incertaine.</p>
+    <div class="pill-row">
+      <span class="pill">35 questions</span>
+      <span class="pill">5 à 8 minutes</span>
+      <span class="pill">1 (completely disagree) à 5 (completely agree)</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Chevrier B. et coll. (2022), Eur J Dev Psychol, doi:10.1080/17405629.2022.2079630 ; Kins E., Soenens B. (2013). Outil de dépistage / d'auto-évaluation : ne remplace pas un entretien clinique ni un bilan.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["My mother/father constantly warns me about bad things that could happen to me.", "My mother/father tries to solve all of my problems for me without me having to do anything.", "My mother/father treats me like a small child.", "My mother/father meddles in my personal business.", "My mother/father brags about how good and smart I am.", "When I’m not doing as well at school my mother/father says it’s not my fault.", "My mother/father is too protective.", "My mother/father fears for things that might happen when she/he is not nearby.", "My mother/father often takes tasks out of my hands without giving me the chance to try them myself first.", "My mother/father would want me to stay under her/his wings.", "My mother/father violates my privacy.", "My mother/father thinks that everything I do is extraordinary.", "Whenever I’m in trouble because of something I did, my mother/father always thinks that it is the responsibility of someone else.", "My mother/father pampers me.", "My mother/father immediately sees danger whenever I want to do something new.", "My mother/father often intervenes in things that I could actually solve myself.", "My mother/father often says that I’m too young to do things my peers are allowed to do.", "My mother/father makes comments about things that are none of her/his business like my clothes, hobbies, friends or music.", "My mother/father often says that I’m the best at everything I do.", "My mother/father rarely thinks that it’s my fault when something is going wrong in my life.", "My mother/father is overly concerned.", "My mother/father points out the potential risks in everything I do.", "My mother/father involves herself/himself in my arguments with others (e.g., brother/sister, peers, teachers).", "My mother/father behaves in a childish way towards me.", "My mother/father does not give me enough room to have my own space at home.", "My mother/father praises me in everything I do.", "My mother/father blames others for things that are not going well in my life.", "My mother/father is too involved in my life.", "My mother/father says that without her/him I would probably end up in trouble.", "My mother/father arranges a lot of things in my life without asking my opinion.", "My mother/father gives the impression that she/he doesn’t want me to grow up.", "My mother/father follows everything I do, even when I need time to myself.", "My mother/father shows that I can do nothing wrong in her/his eyes.", "My mother/father often shifts responsibility to others when I’m not pulling my weight.", "My mother/father is all over me."];
+  var G = [{"label": "", "opts": ["1 : completely disagree", "2", "3", "4", "5 : completely agree"], "vals": [1, 2, 3, 4, 5]}];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = null;              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var INV = [], LO = 1, HI = 5;
+    function val(k){ var v = answers[k-1][0]; if (v === 'NA') return null; return INV.indexOf(k) >= 0 ? (LO + HI - v) : v; }
+    function agg(list, m){ var s = 0, n = 0; list.forEach(function(k){ var v = val(k); if (v !== null){ s += v; n++; } }); if (n === 0) return null; return m === 'mean' ? s / n : s; }
+    var BL = [{"l": "Surprotection anxieuse (moyenne de 25 items : peurs, résolution de problèmes à la place de l’enfant, infantilisation, intrusion, protection excessive)", "it": [1, 8, 15, 22, 29, 2, 9, 16, 23, 30, 3, 10, 17, 24, 31, 4, 11, 18, 25, 32, 7, 14, 21, 28, 35], "m": "mean", "d": 2, "r": "1 à 5", "x": 1}, {"l": "Surprotection valorisante (moyenne de 10 items : éloges excessifs, attribution de l’échec aux autres)", "it": [5, 12, 19, 26, 33, 6, 13, 20, 27, 34], "m": "mean", "d": 2, "r": "1 à 5", "x": 1}];
+    var res = [], rows = '';
+    BL.forEach(function(b){ var v = agg(b.it, b.m); if (v !== null) v = v * b.x; res.push(v); rows += row(b.l + (b.r ? ' (' + b.r + ')' : ''), v === null ? ':' : v.toFixed(b.d).replace('.', ',')); });
+    html += '<table class=\"result-table\">' + rows + '</table>';
+    html += '<p class=\"result-text\">' + "Les deux scores sont des moyennes sur 1 à 5 ; plus le score est élevé, plus le comportement décrit est perçu comme fréquent chez le parent évalué. Aucun seuil ni norme n’est donné dans la source." + '</p>';
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MOPS : surprotection parentale perçue (anglais)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#8D6135 0%,#E3CCB5 55%,#412B16 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#412B16;background:#F4EDE6;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #855C32;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#855C32;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#412B16;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">MOPS</span></div>
+
+  <h1 class="serif">Multidimensional Overprotective Parenting Scale (MOPS)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">MOPS : Kins et Soenens (2013) ; énoncés lus dans Chevrier, Soenens, Zimmermann, Skhirtladze et Van Petegem (2022). Items en anglais, non traduits.</p>
+  <div class="meta-row">
+    <span class="pill">35 questions</span>
+    <span class="pill">5 à 8 minutes</span>
+    <span class="pill">1 (completely disagree) à 5 (completely agree)</span>
+    <span class="pill">Anglais</span>
+    <span class="pill">Items non traduits</span>
+    <span class="pill">Rempli par l’enfant à propos d’un parent</span>
+    <span class="pill">Cotation déduite</span>
+    <span class="pill">Licence : incertaine</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="mops-surprotection-parentale-r6.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>La MOPS décrit la surprotection parentale telle que la perçoit l’enfant (adolescent, jeune adulte) à propos de sa mère ou de son père, en deux grandes dimensions : la surprotection anxieuse (25 énoncés : parent anxieux, qui résout les problèmes à la place de l’enfant, infantilise, s’immisce dans sa vie privée, protège à l’excès) et la surprotection valorisante (10 énoncés : éloges excessifs, échecs attribués aux autres).</p>
+    <p class="source-note">Les 35 énoncés viennent du tableau 1 de l’article de Chevrier et coll. (2022), qui présente aussi une version courte de 16 énoncés dont les items retenus sont signalés en gras dans l’article ; ce repère n’est pas lisible dans le texte extrait, la version courte n’est donc pas proposée. Les échantillons de l’article comprennent des adolescents suisses francophones, des adolescents belges, des jeunes adultes géorgiens et des parents.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Surprotection anxieuse = moyenne des 25 énoncés des cinq sous-échelles (peur anxieuse, résolution prématurée des problèmes, infantilisation, intrusion dans la vie privée, protection générale) ; surprotection valorisante = moyenne des 10 énoncés (éloges excessifs, attribution externe de l’échec). Échelle 1 à 5, aucune inversion.</p>
+    <p class="reserve">Cotation déduite : la source donne la structure en deux dimensions mais n’écrit pas la formule des scores ; la moyenne des énoncés de chaque dimension est appliquée. Aucun seuil ni norme dans la source.</p>
+    <p class="reserve">Un score élevé indique une perception de comportements parentaux plus fréquents, pas un jugement sur la qualité de la parentalité.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Licence : incertaine. Aucune mention de licence de l’instrument dans le texte lu.</p>
+    <p class="reserve">Réserves : items anglais jamais traduits (la source indique des versions française, néerlandaise et géorgienne dans des matériels complémentaires en ligne chez l’éditeur, non consultables) ; indication « répondez pour un seul parent à la fois » ajoutée par la page (libellé de création) ; énoncé 6 reformulé « school/job » chez les jeunes adultes dans l’étude (« school » conservé). Étalonnage : aucune norme.</p>
+    <p class="source-note">Références : Chevrier B, Soenens B, Zimmermann G, Skhirtladze N, Van Petegem S. The psychometric qualities of a short version of the multidimensional overprotective parenting scale. Eur J Dev Psychol. 2022. doi:10.1080/17405629.2022.2079630. Kins E, Soenens B. (2013). Generation me and its helicopter parents: A study on parental overprotection in adolescence. Communication au 16th European Conference of Developmental Psychology, Lausanne (échelle d’origine, citée dans l’article).</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

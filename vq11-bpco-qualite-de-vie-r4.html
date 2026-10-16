@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VQ11 : qualité de vie et BPCO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #32854E;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#32854E;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#164124;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#32854E;background:#E6F4EB;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#164124;border-color:#E0D9C9;}
+  .btn-primary{background:#32854E;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#32854E;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#164124;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">VQ11 : Qualité de vie dans la BPCO (11 questions)</h1>
+    <p class="lead">11 phrases sur les conséquences d'une maladie respiratoire ; intensité de 1 (pas du tout) à 5 (extrêmement) ; trois composantes (fonctionnelle, psychologique, relationnelle).</p>
+    <p class="consigne">Les phrases suivantes expriment des sentiments sur les conséquences de la BPCO. Pour chacune, cochez l’intensité qui vous correspond le mieux maintenant (de « pas du tout » à « extrêmement »). Aucune réponse n’est juste. Elle est avant tout personnelle.</p>
+    <p class="lang-note">Questions en français (texte de l'article de validation, en accès libre). Licence : non requise (licence Creative Commons CC BY 2.0 de l'article).</p>
+    <div class="pill-row">
+      <span class="pill">11 questions</span>
+      <span class="pill">2 minutes</span>
+      <span class="pill">1 à 5</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Ninot et al., Health Qual Life Outcomes 2013. Outil de dépistage/d'auto-évaluation : ne remplace pas un entretien clinique ni un bilan.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["Je souffre de mon essoufflement", "Je me fais du souci pour mon état respiratoire", "Je me sens incompris(e) par mon entourage", "Mon état respiratoire m’empêche de me déplacer comme je le voudrais", "Je suis somnolent(e) dans la journée", "Je me sens incapable de réaliser mes projets", "Je me fatigue rapidement dans les activités de la vie quotidienne", "Physiquement. je suis insatisfait(e) de ce que je peux faire", "Ma maladie respiratoire perturbe ma vie sociale", "Je me sens triste", "Mon état respiratoire limite ma vie affective"];
+  var G = [{"label": "", "opts": ["Pas du tout", "Un peu", "Moyennement", "Beaucoup", "Extrêmement"], "vals": [1, 2, 3, 4, 5]}];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = null;              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    function hu(num, den, d){ var p = 1; for (var q = 0; q < d; q++) p *= 10; var s = Math.floor((2 * num * p + den) / (2 * den));
+      var neg = s < 0; if (neg) s = -s; var ip = Math.floor(s / p), fp = String(s % p); while (fp.length < d) fp = '0' + fp;
+      return (neg ? '-' : '') + ip + (d > 0 ? ',' + fp : ''); }
+    function tot(list){ var s = 0; list.forEach(function(k){ s += answers[k-1][0]; }); return s; }
+
+    var rr = '';
+    rr += row("Score total (11 à 55)", String(tot([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11])));
+    rr += row("Composante fonctionnelle (items 1, 4, 7) (3 à 15)", String(tot([1,4,7])));
+    rr += row("Composante psychologique (items 2, 5, 8, 10) (4 à 20)", String(tot([2,5,8,10])));
+    rr += row("Composante relationnelle (items 3, 6, 9, 11) (4 à 20)", String(tot([3,6,9,11])));
+    rr += row("Seuil de mauvaise qualité de vie (> 22)", (tot([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]) > 22) ? 'Dépassé' : 'Non dépassé');
+    html += '<table class="result-table">' + rr + '</table>';
+    html += '<p class="result-text">' + "Dans le manuel cité par un mémoire, un score total supérieur à 22 indique une mauvaise qualité de vie ; les composantes fonctionnelle (> 8), psychologique (> 10) et relationnelle (> 10) orientent respectivement vers une réhabilitation respiratoire, un soutien psychologique ou une prise en charge sociale. Un score plus faible indique une meilleure qualité de vie." + '</p>';
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VQ11 : qualité de vie et BPCO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#358D52 0%,#B5E3C4 55%,#164124 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#164124;background:#E6F4EB;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #32854E;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#32854E;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#164124;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">VQ11</span></div>
+
+  <h1 class="serif">VQ11 : questionnaire de qualité de vie à 11 items dans la bronchopneumopathie chronique obstructive (BPCO)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">VQ11 : Ninot, Soyez et Préfaut (2013), questionnaire français pour la BPCO.</p>
+  <div class="meta-row">
+    <span class="pill">11 questions</span>
+    <span class="pill">2 minutes</span>
+    <span class="pill">1 à 5</span>
+    <span class="pill">Français</span>
+    <span class="pill">BPCO</span>
+    <span class="pill">Qualité de vie</span>
+    <span class="pill">Licence : non requise</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="vq11-bpco-qualite-de-vie-r4.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>Le VQ11 est un auto-questionnaire français de 11 phrases, conçu pour suivre individuellement la qualité de vie des personnes atteintes de bronchopneumopathie chronique obstructive (BPCO). Il explore trois composantes : fonctionnelle (dyspnée, fatigue, mobilité), psychologique (confiance physique, anxiété, dépression, sommeil) et relationnelle (projet de vie, vie sociale, proximité avec l'entourage, vie affective).</p>
+    <p class="source-note">Cet instrument respiratoire a été ajouté au domaine neurologique car il figurait parmi les pistes déjà identifiées. La consigne est celle de l'article de validation ; la brochure imprimée dit « une maladie respiratoire » au lieu de « la BPCO ».</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque phrase est cotée de 1 (pas du tout) à 5 (extrêmement) ; score total de 11 à 55, un score plus faible indiquant une meilleure qualité de vie. Composantes : fonctionnelle (items 1, 4 et 7 : 3 à 15), psychologique (items 2, 5, 8 et 10 : 4 à 20), relationnelle (items 3, 6, 9 et 11 : 4 à 20).</p>
+    <p>Selon le manuel d'utilisation (Ninot, 2010) cité par un mémoire : score total supérieur à 22 = mauvaise qualité de vie (courbe ROC par rapport à un score de 34 au questionnaire de Saint-George) ; orientation selon la composante : fonctionnelle supérieure à 8, psychologique supérieure à 10, relationnelle supérieure à 10 ; seuil de changement clinique estimé entre 4 et 8 points (5 points paraissant le plus probable), mais « aucune étude n'avait encore étudié ce seuil ».</p>
+    <p class="reserve">Seuils cités de seconde main (mémoire) à partir d'un manuel non lu. Aucune norme française publiée (centiles) dans les sources lues.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Licence : non requise pour le texte de l'article de validation (« distributed under the terms of the Creative Commons Attribution License (http://creativecommons.org/licenses/by/2.0), which permits unrestricted use, distribution, and reproduction in any medium, provided the original work is properly cited »). Le tableau de l'article porte « Physiquement. je suis insatisfait(e) » (point) ; la brochure imprimée porte une virgule : le texte de l'article est repris tel quel.</p>
+    <p class="source-note">Ninot G, Soyez F, Préfaut C. A short questionnaire for the assessment of quality of life in patients with chronic obstructive pulmonary disease: psychometric properties of VQ11. Health Qual Life Outcomes. 2013;11:179. : Dewolf M. Étude EPIC (VQ11 et traitement bronchodilatateur dans la BPCO). Thèse, 2017 (HAL dumas-02047898). : Parents F. Comparaison de l'hétéro-évaluation de la qualité de vie des patients atteints de BPCO. Thèse, 2019 (HAL dumas-02353293), annexe 2.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

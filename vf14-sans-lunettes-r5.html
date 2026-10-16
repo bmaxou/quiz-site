@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VF-14 : gêne visuelle sans lunettes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #857E32;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#857E32;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#413D16;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#857E32;background:#F4F3E6;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#413D16;border-color:#E0D9C9;}
+  .btn-primary{background:#857E32;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#857E32;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#413D16;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">VF-14 : Gêne visuelle dans la vie quotidienne, sans lunettes (18 questions)</h1>
+    <p class="lead">Dix-huit questions sur la gêne visuelle dans les activités du quotidien, répondues sans lunettes, y compris la conduite.</p>
+    <p class="consigne">Voici le questionnaire « VF14, SANS LUNETTES » permettant de déterminer votre niveau de gêne visuelle éventuelle. Merci d’entourer la réponse de votre choix à chaque question.</p>
+    <p class="lang-note">Questions en français ; il s'agit d'une adaptation « sans lunettes » du VF-14. Licence : incertaine.</p>
+    <div class="pill-row">
+      <span class="pill">18 questions (14 cotées)</span>
+      <span class="pill">échelle de 0 à 4</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Steinberg EP et al. Arch Ophthalmol 1994 ; Le Dinahet J., mémoire DUMAS 2023. Outil de dépistage/d'auto-évaluation : ne remplace pas un entretien clinique ni un bilan.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["Avez-vous des difficultés, sans lunettes, à lire de petits caractères, comme les étiquettes sur les flacons de médicaments, un annuaire ou les étiquettes de produits alimentaires ?", "Avez-vous des difficultés, sans lunettes, pour lire un journal ou un livre ?", "Avez-vous des difficultés, sans lunettes, pour lire un journal écrit en grands caractères ou un livre écrit en grands caractères, ou pour lire les numéros sur un téléphone ?", "Avez-vous des difficultés, sans lunettes, pour reconnaître les gens quand ils sont proches de vous ?", "Avez-vous des difficultés, sans lunettes, pour voir des marches, un escalier ou des bordures de trottoir ?", "Avez-vous des difficultés, sans lunettes, pour lire les panneaux de signalisation routière, les panneaux indicateurs de rue, ou les enseignes de magasins ?", "Avez-vous des difficultés, sans lunettes, pour réaliser des travaux manuels de précision comme la couture, le tricot, faire du crochet, la menuiserie ?", "Avez-vous des difficultés, sans lunettes, pour remplir un chèque ou un formulaire ?", "Avez-vous des difficultés, sans lunettes, pour jouer à des jeux comme le loto, les dominos, les jeux de cartes, le mah-jong ?", "Avez-vous des difficultés, sans lunettes, pour prendre part à des sports tels que bowling, handball, tennis, golf ?", "Avez-vous des difficultés, sans lunettes, pour cuisiner ?", "Avez-vous des difficultés, sans lunettes, pour regarder la télévision ?", "Conduisez-vous actuellement une voiture ?", "Si oui, quel degré de difficulté présentez-vous pour conduire la journée, à cause de votre vue, sans lunettes ?", "Si oui, quel degré de difficulté présentez-vous pour conduire la nuit, à cause de votre vue, sans lunettes ?", "Si non, avez-vous déjà conduit une voiture ?", "Quand avez-vous cessé de conduire ?", "Pourquoi avez-vous cessé de conduire ?"];
+  var G = [];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = [[{"label": "", "opts": ["Non", "Un peu difficile", "Difficulté modérée", "Difficulté élevée", "Impossible"], "vals": [4, 3, 2, 1, 0]}], [{"label": "", "opts": ["Non", "Un peu difficile", "Difficulté modérée", "Difficulté élevée", "Impossible"], "vals": [4, 3, 2, 1, 0]}], [{"label": "", "opts": ["Non", "Un peu difficile", "Difficulté modérée", "Difficulté élevée", "Impossible"], "vals": [4, 3, 2, 1, 0]}], [{"label": "", "opts": ["Non", "Un peu difficile", "Difficulté modérée", "Difficulté élevée", "Impossible"], "vals": [4, 3, 2, 1, 0]}], [{"label": "", "opts": ["Non", "Un peu difficile", "Difficulté modérée", "Difficulté élevée", "Impossible"], "vals": [4, 3, 2, 1, 0]}], [{"label": "", "opts": ["Non", "Un peu difficile", "Difficulté modérée", "Difficulté élevée", "Impossible"], "vals": [4, 3, 2, 1, 0]}], [{"label": "", "opts": ["Non", "Un peu difficile", "Difficulté modérée", "Difficulté élevée", "Impossible"], "vals": [4, 3, 2, 1, 0]}], [{"label": "", "opts": ["Non", "Un peu difficile", "Difficulté modérée", "Difficulté élevée", "Impossible"], "vals": [4, 3, 2, 1, 0]}], [{"label": "", "opts": ["Non", "Un peu difficile", "Difficulté modérée", "Difficulté élevée", "Impossible"], "vals": [4, 3, 2, 1, 0]}], [{"label": "", "opts": ["Non", "Un peu difficile", "Difficulté modérée", "Difficulté élevée", "Impossible"], "vals": [4, 3, 2, 1, 0]}], [{"label": "", "opts": ["Non", "Un peu difficile", "Difficulté modérée", "Difficulté élevée", "Impossible"], "vals": [4, 3, 2, 1, 0]}], [{"label": "", "opts": ["Non", "Un peu difficile", "Difficulté modérée", "Difficulté élevée", "Impossible"], "vals": [4, 3, 2, 1, 0]}], [{"label": "", "opts": ["OUI", "NON"], "vals": [1, 0]}], [{"label": "", "opts": ["Aucun", "Un peu difficile", "Difficulté modérée", "Difficulté élevée", "Non concerné(e)"], "vals": [4, 3, 2, 1, "NA"]}], [{"label": "", "opts": ["Aucun", "Un peu difficile", "Difficulté modérée", "Difficulté élevée", "Non concerné(e)"], "vals": [4, 3, 2, 1, "NA"]}], [{"label": "", "opts": ["OUI", "NON", "Non concerné(e)"], "vals": [1, 0, "NA"]}], [{"label": "", "opts": ["Moins de 6 mois", "Entre 6 et 12 mois", "Plus de 12 mois", "Non concerné(e)"], "vals": [0, 1, 2, "NA"]}], [{"label": "", "opts": ["A cause de la vision", "A cause d’une autre maladie", "Pour une autre raison", "Non concerné(e)"], "vals": [0, 1, 2, "NA"]}]];              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var SC = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15], s = 0, n = 0;
+    SC.forEach(function(k){ var v = answers[k-1][0]; if (v !== 'NA'){ s += v; n++; } });
+    var g = n === 0 ? ':' : (Math.floor((500 * s + n) / (2 * n)) / 10).toFixed(1).replace('.', ',');
+    html += '<table class="result-table">' + row('Score global (0 à 100)', g) + row('Activités cotées', n + ' sur 14') + '</table>';
+    html += '<p class="result-text">Chaque activité est cotée de 0 (impossible) à 4 (non, aucune difficulté) ; le score global est la moyenne des activités répondues multipliée par 25. Un score plus élevé indique moins de gêne visuelle. Ce questionnaire est ici proposé dans sa version « sans lunettes » ; les questions sur la conduite (13, 16, 17 et 18) ne sont pas cotées.</p>';
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VF-14 : gêne visuelle sans lunettes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#8D8535 0%,#E3DFB5 55%,#413D16 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#413D16;background:#F4F3E6;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #857E32;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#857E32;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#413D16;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">VF-14-SL</span></div>
+
+  <h1 class="serif">Questionnaire VF-14, version « sans lunettes »</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">VF-14 (Steinberg et coll., 1994) : formulaire français « sans lunettes » reproduit dans un mémoire de 2023 : douze activités et la conduite de jour et de nuit.</p>
+  <div class="meta-row">
+    <span class="pill">18 questions (14 cotées)</span>
+    <span class="pill">échelle de 0 à 4</span>
+    <span class="pill">Français</span>
+    <span class="pill">Ophtalmologie</span>
+    <span class="pill">Licence : incertaine.</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="vf14-sans-lunettes-r5.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>Le VF-14 (Steinberg et coll., 1994) évalue le retentissement fonctionnel de la cataracte : 18 questions décrivant 14 activités quotidiennes (lecture de petits caractères, du journal, de panneaux, reconnaissance des visages, escaliers, travaux de précision, jeux, sport, cuisine, télévision, conduite de jour et de nuit). Il a été utilisé pour d'autres atteintes (glaucome, rétine, cornée). Une version française franco-canadienne a été validée (Gresset et coll., 1997).</p>
+    <p>Le formulaire reproduit ici est la version « sans lunettes » employée dans un mémoire de 2023 pour suivre des patients après chirurgie de la cataracte avec implants multifocaux : les questions demandent la difficulté éprouvée sans lunettes.</p>
+    <p class="reserve">Les questions 13 et 16 à 18 portent sur la conduite (conduit-on encore ? depuis quand a-t-on cessé, et pourquoi ?) ; elles ne sont pas cotées. Les modalités « Non concerné(e) » sont des libellés de création, ajoutés pour les personnes qui ne conduisent pas.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque activité est cotée de 0 (impossible) à 4 (non) ; la moyenne des scores est multipliée par 25 pour obtenir un score global de 0 à 100 ; un score plus élevé indique moins de gêne (description du VF-14 dans une thèse de 2021). Dans le mémoire de 2023, les 14 activités du tableau de résultats sont les 12 premières questions et la conduite de jour et de nuit.</p>
+    <p class="reserve">Cotation déduite en partie : le traitement des personnes qui ne conduisent pas n'est pas précisé dans les sources lues ; la page calcule la moyenne des activités répondues (arrondie à une décimale, demi-supérieure). Aucun seuil n'est affiché.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Licence : incertaine. Le mémoire qui reproduit le formulaire est « Distributed under a Creative Commons CC BY-NC-ND 4.0 - Attribution - Non-commercial use - No Derivative Works - International License » (mention portant sur le mémoire, non sur le VF-14). Les droits du VF-14 n'ont pas été vérifiés.</p>
+    <p class="reserve">Étalonnage : aucune norme française trouvée dans les sources lues.</p>
+    <p class="reserve">Il s'agit d'une adaptation « sans lunettes » du VF-14 (la formule d'origine concerne la vision avec la correction habituelle). La conduite est cotée dans le formulaire du mémoire par une échelle à 4 niveaux (de « Aucun » à « Difficulté élevée ») ; la correspondance des valeurs avec 4 à 1 est celle imprimée sur le formulaire.</p>
+    <p class="source-note">Steinberg EP, Tielsch JM, Schein OD, et al. The VF-14: an index of functional impairment in patients with cataract. Arch Ophthalmol. 1994 (cité dans les sources ; non lu). : Heren-Le Bastard C. Thèse, Université d'Angers, 2021 (HAL tel-03903035), section 7.1.1 (description du VF-14). : Le Dinahet J. Implantation intraoculaire bilatérale d’optiques à complémentarité de phase progressive, une plus-value sur la trifocalité ? Mémoire, DUMAS dumas-04336464, 2023, annexe 2 (questionnaire VF14 sans lunettes) et tableau 4 (14 activités).</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

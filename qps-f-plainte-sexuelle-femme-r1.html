@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>QPS-F : plainte sexuelle féminine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #853258;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#853258;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#411629;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#853258;background:#F4E6EC;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#411629;border-color:#E0D9C9;}
+  .btn-primary{background:#853258;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#853258;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#411629;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">QPS-F : plainte sexuelle féminine (6 derniers mois)</h1>
+    <p class="lead">7 domaines de la vie sexuelle, chacun avec une question de fréquence et une question d'impact, puis la satisfaction globale : un récapitulatif des réponses, sans score.</p>
+    <p class="consigne">Les questions portent sur les 6 derniers mois. (Consigne de création : l&#x27;annexe source ne reproduit pas de consigne en tête du questionnaire.) Pour chaque domaine, une question de fréquence (a) est suivie d&#x27;une question sur le caractère gênant (b).</p>
+    <p class="lang-note">Questions en français, destinées aux femmes. Licence : incertaine.</p>
+    <div class="pill-row">
+      <span class="pill">16 questions</span>
+      <span class="pill">4 minutes</span>
+      <span class="pill">Fréquence, impact</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">QPS-F, version française du Sexual Complaint Screener for Women. Outil de dépistage/d'auto-évaluation : ne remplace pas un entretien clinique ni un bilan.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["1a) Certaines femmes ressentent un manque ou un faible intérêt ou désir sexuel. Cela vous est-il arrivé au cours des 6 derniers mois ?", "1b) Est-ce que cela a été un problème pour vous ?", "2a) Certaines femmes ne ressentent pas d’excitation sexuelle physique pendant une stimulation et/ou une activité sexuelle (par exemple : gonflement génital, humidité vaginale, sensation de frisson ou picotement). Cela vous est-il arrivé au cours des 6 derniers mois ?", "2b) Est-ce que cela a été un problème pour vous ?", "3a) Certaines femmes ne se sentent pas excitées ou ne ressentent pas de sensations agréables lorsqu’elles se livrent à des activités sexuelles. Cela vous est-il arrivé au cours des 6 derniers mois ?", "3b) Est-ce que cela a été un problème pour vous ?", "4a) Certaines femmes éprouvent des difficultés à atteindre l’orgasme lors d’activités sexuelles même si elles sont excitées sexuellement. Cela vous est-il arrivé au cours des 6 derniers mois ?", "4b) Est-ce que cela a été un problème pour vous ?", "5a) Certaines femmes ressentent une douleur génitale pendant ou juste après une activité sexuelle. Cela vous est-il arrivé au cours des 6 derniers mois ?", "5b) Est-ce que cela a été un problème pour vous ?", "6a) La pénétration vaginale est difficile chez certaines femmes bien qu’elles le souhaitent. Cela vous est-il arrivé au cours des 6 derniers mois ?", "6b) Est-ce que cela a été un problème pour vous ?", "7a) Certaines femmes éprouvent une excitation génitale persistante et non désirée (sensation de picotements, battements, pulsations) en l’absence de tout intérêt sexuel. Cela vous est-il arrivé au cours des 6 derniers mois ?", "7b) Est-ce que cela a été un problème pour vous ?", "8a) Au cours des 6 derniers mois, ma vie sexuelle a été :", "10) Voudriez-vous que votre médecin (ou soignant) explore davantage les difficultés et/ou problèmes sexuels ?"];
+  var G = [];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = [[{"label": "", "opts": ["Jamais/ Presque jamais", "Rarement", "Parfois", "Souvent", "Presque tout le temps/ Presque toujours"], "vals": [1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Pas du tout un problème", "Un léger problème", "Un problème modéré", "Un problème important", "Un problème très important"], "vals": [1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Pas d’activité sexuelle", "Jamais/ Presque jamais", "Rarement", "Parfois", "Souvent", "Presque tout le temps"], "vals": [0, 1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Pas du tout un problème", "Un léger problème", "Un problème modéré", "Un problème important", "Un problème très important"], "vals": [1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Pas d’activité sexuelle", "Jamais/ Presque jamais", "Rarement", "Parfois", "Souvent", "Presque tout le temps"], "vals": [0, 1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Pas du tout un problème", "Un léger problème", "Un problème modéré", "Un problème important", "Un problème très important"], "vals": [1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Pas d’activité sexuelle", "Jamais/ Presque jamais", "Rarement", "Parfois", "Souvent", "Presque tout le temps"], "vals": [0, 1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Pas du tout un problème", "Un léger problème", "Un problème modéré", "Un problème important", "Un problème très important"], "vals": [1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Pas d’activité sexuelle", "Jamais/ Presque jamais", "Rarement", "Parfois", "Souvent", "Presque tout le temps"], "vals": [0, 1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Pas du tout un problème", "Un léger problème", "Un problème modéré", "Un problème important", "Un problème très important"], "vals": [1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Pas d’activité sexuelle", "Jamais/ Presque jamais", "Rarement", "Parfois", "Souvent", "Presque tout le temps"], "vals": [0, 1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Pas du tout un problème", "Un léger problème", "Un problème modéré", "Un problème important", "Un problème très important"], "vals": [1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Pas d’activité sexuelle", "Jamais/ Presque jamais", "Rarement", "Parfois", "Souvent", "Presque tout le temps"], "vals": [0, 1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Pas du tout un problème", "Un léger problème", "Un problème modéré", "Un problème important", "Un problème très important"], "vals": [1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Très insatisfaisante", "Insatisfaisante", "Plutôt insatisfaisante", "Satisfaisante", "Très satisfaisante"], "vals": [1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Non", "Pas maintenant", "Oui"], "vals": [1, 2, 3]}]];              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var DOM = ["Manque ou faible intérêt ou désir sexuel", "Absence d'excitation sexuelle physique", "Absence d'excitation sexuelle cérébrale et de sensation agréable", "Difficulté à atteindre l'orgasme", "Douleur génitale pendant ou juste après une activité sexuelle", "Difficulté à la pénétration vaginale", "Excitation génitale persistante et non désirée"], LF = [{"1": "Jamais/ Presque jamais", "2": "Rarement", "3": "Parfois", "4": "Souvent", "5": "Presque tout le temps/ Presque toujours"}, {"0": "Pas d’activité sexuelle", "1": "Jamais/ Presque jamais", "2": "Rarement", "3": "Parfois", "4": "Souvent", "5": "Presque tout le temps"}, {"0": "Pas d’activité sexuelle", "1": "Jamais/ Presque jamais", "2": "Rarement", "3": "Parfois", "4": "Souvent", "5": "Presque tout le temps"}, {"0": "Pas d’activité sexuelle", "1": "Jamais/ Presque jamais", "2": "Rarement", "3": "Parfois", "4": "Souvent", "5": "Presque tout le temps"}, {"0": "Pas d’activité sexuelle", "1": "Jamais/ Presque jamais", "2": "Rarement", "3": "Parfois", "4": "Souvent", "5": "Presque tout le temps"}, {"0": "Pas d’activité sexuelle", "1": "Jamais/ Presque jamais", "2": "Rarement", "3": "Parfois", "4": "Souvent", "5": "Presque tout le temps"}, {"0": "Pas d’activité sexuelle", "1": "Jamais/ Presque jamais", "2": "Rarement", "3": "Parfois", "4": "Souvent", "5": "Presque tout le temps"}], LI = {"1": "Pas du tout un problème", "2": "Un léger problème", "3": "Un problème modéré", "4": "Un problème important", "5": "Un problème très important"}, LS = null, LQ = {"1": "Non", "2": "Pas maintenant", "3": "Oui"};
+    var rows = '';
+    for (var d = 0; d < 7; d++){
+      var fa = answers[2*d][0], im = answers[2*d+1][0];
+      rows += row(DOM[d], LF[d][fa] + ' ; ' + LI[im]);
+    }
+    rows += row('Satisfaction de la vie sexuelle (1 à 5)', String(answers[14][0]));
+    rows += row('Souhait que le soignant explore davantage', LQ[answers[15][0]]);
+    html += '<table class="result-table">' + rows + '</table>';
+    html += '<p class="result-text">Récapitulatif des réponses, sans score : aucun score total ni seuil de dépistage n\'est décrit dans les sources lues. Plus la fréquence du trouble est élevée et plus l\'impact est important, plus le chiffre associé est élevé ; la satisfaction est cotée de 1 (très insatisfaisante) à 5 (très satisfaisante).</p>';
+
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>QPS-F : plainte sexuelle féminine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#8D355D 0%,#E3B5CA 55%,#411629 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#411629;background:#F4E6EC;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #853258;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#853258;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#411629;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">QPS-F</span></div>
+
+  <h1 class="serif">Questionnaire de plainte sexuelle féminine (QPS-F)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">QPS-F : version française du Sexual Complaint Screener for Women (SCS-W) ; version reproduite dans un mémoire universitaire (2025).</p>
+  <div class="meta-row">
+    <span class="pill">16 questions</span>
+    <span class="pill">4 minutes</span>
+    <span class="pill">Fréquence, impact</span>
+    <span class="pill">Français</span>
+    <span class="pill">Sexualité</span>
+    <span class="pill">Récapitulatif sans score</span>
+    <span class="pill">Licence : incertaine</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="qps-f-plainte-sexuelle-femme-r1.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>Le QPS-F est, selon le mémoire source, la version française du Sexual Complaint Screener for Women (SCS-W), créé par la Société internationale de médecine sexuelle pour repérer rapidement des plaintes sexuelles. Il aborde le désir, l'excitation physique et subjective, l'orgasme, la douleur génitale, la difficulté à la pénétration et l'excitation génitale persistante et non désirée, sur les six derniers mois. Pour chaque domaine, la partie « a » interroge la fréquence et la partie « b » l'impact (« Est-ce que cela a été un problème pour vous ? »). Le questionnaire ne suppose pas de pénétration vaginale et ne dépend ni de l'orientation sexuelle ni de la situation relationnelle.</p>
+    <p class="source-note">La question 9 (texte libre) n'est pas reprise. Le mémoire utilisait aussi une version sur 3 mois : seule la version sur 6 mois est reprise.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Aucun score total ni seuil de dépistage n'est décrit dans les textes lus. La page affiche un récapitulatif des réponses par domaine (fréquence ; impact), la satisfaction de la vie sexuelle (de 1 « très insatisfaisante » à 5 « très satisfaisante ») et le souhait que le soignant explore davantage. Selon le mémoire, plus le trouble est fréquent et plus l'impact est important, plus le chiffre associé est élevé.</p>
+    <p class="reserve">Cotation déduite : la règle de repérage d'une plainte (par exemple niveau de fréquence et d'impact) n'a pas été lue. Les intitulés des sept domaines du récapitulatif sont des libellés de création tirés des titres de tableaux du mémoire.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Licence : incertaine. Aucune phrase de licence n'a été lue ; l'outil d'origine est publié par une société savante.</p>
+    <p class="reserve">Questionnaire lu dans l'annexe I du mémoire « Troubles de la sexualité associés aux douleurs pelviennes chroniques : impact de la prise en charge en sexologie » (2025, DUMAS dumas-05418975). Le mémoire cite une validation française du QPS-F en 2024 (patientes atteintes de sclérose en plaques) qui n'a pas été retrouvée ni lue. Aucune norme française trouvée.</p>
+    <p class="source-note">Questionnaire de plainte sexuelle féminine (QPS-F), version française du SCS-W, reproduit dans le mémoire cité.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

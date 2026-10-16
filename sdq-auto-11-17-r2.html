@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SDQ-A : Points forts et difficultés (auto-questionnaire 11-17 ans)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #326385;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#326385;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#162F41;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#326385;background:#E6EEF4;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#162F41;border-color:#E0D9C9;}
+  .btn-primary{background:#326385;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#326385;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#162F41;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">Questionnaire Points forts - Points faibles (SDQ-A)</h1>
+    <p class="lead">Auto-questionnaire du jeune de 11 à 17 ans : 25 énoncés sur ce qu'il vit et ressent (pas vrai / un peu vrai / très vrai), sur les six derniers mois. À remplir par l'enfant ou l'adolescent lui-même.</p>
+    <p class="consigne">Coche pour chaque énoncé la case &quot;Pas vrai&quot;, &quot;Un peu vrai&quot; ou &quot;Très vrai&quot;. Cela nous aiderait si tu répondais, pour chaque énoncé, du mieux que tu peux, même si tu n&#x27;es pas absolument sûr. Réponds, s&#x27;il-te-plaît, en te basant sur ton expérience des six derniers mois.</p>
+    <p class="lang-note">Questions en français (version SDQ-Fra du site officiel du questionnaire). À remplir par l'enfant ou l'adolescent lui-même (11-17 ans). Période : les six derniers mois. Licence : requise (droits d'auteur de R. Goodman ; voir la fiche).</p>
+    <div class="pill-row">
+      <span class="pill">25 questions</span>
+      <span class="pill">Pas vrai / Un peu vrai / Très vrai</span>
+      <span class="pill">Auto-questionnaire du jeune</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Goodman R. (1997 ; 2005), Questionnaire Points forts - Points faibles (SDQ-Fra), sdqinfo.org ; seuils : document de cotation de septembre 2024. Outil de dépistage/d'auto-évaluation : ne remplace pas un entretien clinique ni un bilan.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["J'essaie d'être gentil(le) envers les autres. Je tiens compte de leurs sentiments", "Je suis agité(e), j'ai du mal à me tenir en place", "Je souffre souvent de maux de tête ou de ventre ou de nausées", "Je partage d'habitude avec les autres (nourriture, jeux, stylos, etc.)", "Je m'énerve facilement et me mets souvent en colère", "Je suis habituellement solitaire. J'ai tendance à jouer seul(e) ou à me tenir à l'écart", "En général, je fais ce qu'on me dit", "Je me fais beaucoup de soucis", "J'aide volontiers quand quelqu'un s'est fait mal ou ne se sent pas bien", "Je ne me tiens pas en place ou me tortille constamment", "J'ai au moins un(e) ami(e)", "Je me bagarre beaucoup. Je peux faire faire aux autres ce que je veux", "Je suis souvent malheureux(se), abattu(e) ou je pleure facilement", "En général, les gens de mon âge m'aiment bien", "Je suis facilement distrait(e), j'ai du mal à me concentrer", "Les situations nouvelles me rendent anxieux(se). Je perds facilement confiance en moi", "Je suis gentil(le) avec les enfants plus jeunes", "On m'accuse souvent de mentir ou de tricher", "Des jeunes de mon âge s'en prennent à moi ou me tyrannisent", "Toujours prêt(e) à aider les autres (parents, professeurs, jeunes de mon âge)", "Je réfléchis avant d'agir", "Je prends des choses qui ne m'appartiennent pas, à la maison, à l'école ou ailleurs", "Je m'entends mieux avec les adultes qu'avec les jeunes de mon âge", "J'ai beaucoup de peurs, je suis facilement effrayé(e)", "Je finis ce que j'ai commencé. Je me concentre bien"];
+  var G = [{"label": "", "opts": ["Pas vrai", "Un peu vrai", "Très vrai"], "vals": [0, 1, 2]}];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = null;              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var SC = {"Emotional": [3, 8, 13, 16, 24], "Conduct": [5, 7, 12, 18, 22], "Hyperactivity": [2, 10, 15, 21, 25], "Peer": [6, 11, 14, 19, 23], "Prosocial": [1, 4, 9, 17, 20]}, INVS = [7, 11, 14, 21, 25], BANDS = {"total": ["0-14", "15-17", "18-19", "20-40"], "emo": ["0-4", "5", "6", "7-10"], "cond": ["0-3", "4", "5", "6-10"], "hyper": ["0-5", "6", "7", "8-10"], "peer": ["0-2", "3", "4", "5-10"], "pro": ["7-10", "6", "5", "0-4"], "impact": ["0", "1", "2", "3-10"], "int": ["0-6", "7-8", "9-10", "11-20"], "ext": ["0-8", "9-10", "11-12", "13-20"]}, LAB = ["proche de la moyenne", "légèrement élevé", "élevé", "très élevé"], LABP = ["proche de la moyenne", "légèrement abaissé", "bas", "très bas"];
+    function v(k){ var x = answers[k-1][0]; return INVS.indexOf(k) >= 0 ? 2 - x : x; }
+    function sm(a){ var s = 0; a.forEach(function(k){ s += v(k); }); return s; }
+    function inr(r, n){ var p = r.split('-'); if (p.length === 1) return n === parseInt(p[0], 10); return n >= parseInt(p[0], 10) && n <= parseInt(p[1], 10); }
+    function band(key, n, pro){ var b = BANDS[key], L = pro ? LABP : LAB; for (var i = 0; i < 4; i++){ if (inr(b[i], n)) return L[i]; } return '?'; }
+    var emo = sm(SC.Emotional), con = sm(SC.Conduct), hyp = sm(SC.Hyperactivity), pee = sm(SC.Peer), pro = sm(SC.Prosocial);
+    var tot = emo + con + hyp + pee, inte = emo + pee, ext = con + hyp;
+    var rows = '';
+    rows += row('Total des difficultés (0 à 40)', tot + ' : ' + band('total', tot, false));
+    rows += row('Symptômes émotionnels (0 à 10)', emo + ' : ' + band('emo', emo, false));
+    rows += row('Problèmes de conduite (0 à 10)', con + ' : ' + band('cond', con, false));
+    rows += row('Hyperactivité / inattention (0 à 10)', hyp + ' : ' + band('hyper', hyp, false));
+    rows += row('Problèmes avec les pairs (0 à 10)', pee + ' : ' + band('peer', pee, false));
+    rows += row('Difficultés internalisées : émotionnel + pairs (0 à 20)', inte + ' : ' + band('int', inte, false));
+    rows += row('Difficultés externalisées : conduite + hyperactivité (0 à 20)', ext + ' : ' + band('ext', ext, false));
+    rows += row('Comportement prosocial (0 à 10)', pro + ' : ' + band('pro', pro, true));
+    html += '<table class="result-table">' + rows + '</table>';
+    html += '<p class="result-text">Les catégories s\u2019appuient sur des seuils établis sur des échantillons britanniques ; elles servent de repère de dépistage et ne constituent pas un diagnostic. Une seule source d\u2019information (ici une seule personne) est un point de vue parmi d\u2019autres.</p>';
+
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SDQ-A : Points forts et difficultés (auto-questionnaire 11-17 ans)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#35688D 0%,#B5D0E3 55%,#162F41 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#162F41;background:#E6EEF4;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #326385;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#326385;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#162F41;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">SDQ-A</span></div>
+
+  <h1 class="serif">Questionnaire Points forts - Points faibles, version auto-questionnaire des 11-17 ans (SDQ-A)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">SDQ-A : Goodman, Meltzer et Bailey (1998) ; Goodman (2005), version française SDQ-Fra de la feuille « A 11-17 ». Auto-questionnaire du jeune de 11 à 17 ans.</p>
+  <div class="meta-row">
+    <span class="pill">25 questions</span>
+    <span class="pill">Pas vrai / Un peu vrai / Très vrai</span>
+    <span class="pill">Auto-questionnaire du jeune</span>
+    <span class="pill">Français</span>
+    <span class="pill">Enfant et adolescent</span>
+    <span class="pill">Licence : requise</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="sdq-auto-11-17-r2.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>Le SDQ est un court questionnaire de repérage de 25 énoncés répartis en cinq échelles de cinq énoncés : symptômes émotionnels, problèmes de conduite, hyperactivité/inattention, problèmes avec les pairs et comportement prosocial. Cette version est destinée à être remplie par le jeune lui-même, vers 11-17 ans selon son niveau de compréhension et de lecture.</p>
+    <p class="source-note">Réponses : « Pas vrai », « Un peu vrai », « Très vrai ». Période considérée : les six derniers mois.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>« Un peu vrai » vaut toujours 1 ; « Pas vrai » et « Très vrai » valent 0 et 2, ou 2 et 0 pour cinq énoncés cotés à l'envers (7, 11, 14, 21 et 25). Chaque échelle va de 0 à 10. Le total des difficultés additionne les quatre premières échelles (0 à 40, sans le prosocial) ; le score internalisé additionne émotionnel et pairs (0 à 20), l'externalisé conduite et hyperactivité (0 à 20).</p>
+    <p>Les catégories affichées (« proche de la moyenne », « légèrement élevé », « élevé », « très élevé » ; pour le prosocial « légèrement abaissé », « bas », « très bas ») correspondent à la classification en quatre bandes du document officiel de cotation : ligne « Self-completed SDQ » du tableau 3 (jeunes de 11 à 17 ans).</p>
+    <p class="reserve">Ces seuils viennent d'enquêtes en population britannique : aucune norme française n'a été retrouvée. Ils orientent le dépistage ; ils ne posent pas de diagnostic. Les noms français des catégories sont des libellés de création (traduction des catégories anglaises du document de cotation).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Licence : requise. « Paper versions may be downloaded and subsequently photocopied without charge for non-commercial purposes. » ; « The Strengths and Difficulties Questionnaires, whether in English or in translation, are copyrighted documents that may not be modified in any way. » (sdqinfo.org). Feuille officielle : © Robert Goodman, 2005. Le site officiel réserve les programmes de cotation informatique à une licence : cette version en ligne est proposée avec la licence signalée comme requise.</p>
+    <p class="reserve">Le supplément d'impact de la feuille officielle (gêne, durée, retentissement des difficultés) n'est pas repris. Les énoncés sont reproduits tels qu'ils figurent sur la feuille officielle française (SDQ-Fra) ; seuls les cases à cocher sont remplacées par des boutons.</p>
+    <p class="source-note">Références : Goodman R. (1997). The Strengths and Difficulties Questionnaire: a research note. J Child Psychol Psychiatry, 38, 581-586. Goodman R., Meltzer H., Bailey V. (1998). Eur Child Adolesc Psychiatry, 7, 125-130 (version auto-questionnaire). Goodman R. (2005). Questionnaire Points forts - Points faibles (SDQ-Fra), Youth in Mind, sdqinfo.org. Youth in Mind (2024). Scoring the 4-17 year old or 18+ versions of the SDQ ; Scoring the 2-4 year old version of the SDQ.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

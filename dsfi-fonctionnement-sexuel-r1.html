@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DSFI : fonctionnement sexuel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #854B32;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#854B32;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#412316;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#854B32;background:#F4EAE6;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#412316;border-color:#E0D9C9;}
+  .btn-primary{background:#854B32;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#854B32;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#412316;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">DSFI : fréquences et satisfaction sexuelles</h1>
+    <p class="lead">15 éléments : fréquence de quatre activités sexuelles, dix énoncés vrai/faux sur la satisfaction sexuelle et un indice global de satisfaction de 1 à 8.</p>
+    <p class="consigne">Les consignes ci-dessous sont celles de la thèse source, conçue pour des personnes atteintes d&#x27;une maladie (« depuis le diagnostic de la maladie »). Elles apparaissent en tête de chaque série de questions.</p>
+    <p class="lang-note">Questions en français. Consignes rédigées pour des patients atteints de cancer. Licence : incertaine.</p>
+    <div class="pill-row">
+      <span class="pill">15 éléments</span>
+      <span class="pill">5 minutes</span>
+      <span class="pill">Fréquences, vrai/faux, 1 à 8</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Derogatis et Melisaratos (1979), J Sex Marital Ther 5(3) ; Gautier et Garceau (1982). Outil de dépistage/d'auto-évaluation : ne remplace pas un entretien clinique ni un bilan.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["Expériences récentes\n1 Relations sexuelles", "Expériences récentes\n2 Masturbation", "Expériences récentes\n3 Embrasser et caresser", "Expériences récentes\n4 À quelle fréquence aimeriez-vous avoir des relations sexuelles (idéalement) ?", "Satisfaction sexuelle\n1 Habituellement, je suis satisfait avec mon(ma) partenaire sexuel(le)", "Satisfaction sexuelle\n2 Je crois que je ne fais pas l’amour assez souvent", "Satisfaction sexuelle\n3 Il n’y a pas assez de variété dans ma vie sexuelle", "Satisfaction sexuelle\n4 Après une relation sexuelle, je me sens habituellement détendu(e) et Pleinement satisfait(e)", "Satisfaction sexuelle\n5 Habituellement, l’acte sexuel ne dure pas assez longtemps", "Satisfaction sexuelle\n6 La sexualité ne m’intéresse pas tellement", "Satisfaction sexuelle\n7 Habituellement, j’obtiens un orgasme satisfaisant en faisant l’amour", "Satisfaction sexuelle\n8 L’échange de caresses qui précèdent les rapports m’excitent beaucoup", "Satisfaction sexuelle\n9 Je me préoccupe de ma performance sexuelle", "Satisfaction sexuelle\n10 Habituellement, mon(ma) partenaire et moi avons une bonne communication sur la sexualité", "Indice global de satisfaction\n15 Indice global de satisfaction : D’après l’échelle suivante, évaluez dans quelle mesure vous êtes satisfait(e) de vos relations sexuelles. Pour ce faire, cochez le chiffre qui correspond le mieux à votre satisfaction."];
+  var G = [];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = [[{"label": "", "opts": ["Jamais", "Moins d'une fois par mois", "1 à 2 fois par mois", "1 fois par semaine", "2 à 3 fois par semaine", "4 à 6 fois par semaine", "1 fois par jour", "2 à 3 fois par jour", "4 ou plus par jour"], "vals": [0, 1, 2, 3, 4, 5, 6, 7, 8]}], [{"label": "", "opts": ["Jamais", "Moins d'une fois par mois", "1 à 2 fois par mois", "1 fois par semaine", "2 à 3 fois par semaine", "4 à 6 fois par semaine", "1 fois par jour", "2 à 3 fois par jour", "4 ou plus par jour"], "vals": [0, 1, 2, 3, 4, 5, 6, 7, 8]}], [{"label": "", "opts": ["Jamais", "Moins d'une fois par mois", "1 à 2 fois par mois", "1 fois par semaine", "2 à 3 fois par semaine", "4 à 6 fois par semaine", "1 fois par jour", "2 à 3 fois par jour", "4 ou plus par jour"], "vals": [0, 1, 2, 3, 4, 5, 6, 7, 8]}], [{"label": "", "opts": ["Jamais", "Moins d'une fois par mois", "1 à 2 fois par mois", "1 fois par semaine", "2 à 3 fois par semaine", "4 à 6 fois par semaine", "1 fois par jour", "2 à 3 fois par jour", "4 ou plus par jour"], "vals": [0, 1, 2, 3, 4, 5, 6, 7, 8]}], [{"label": "", "opts": ["VRAI", "FAUX"], "vals": [1, 0]}], [{"label": "", "opts": ["VRAI", "FAUX"], "vals": [1, 0]}], [{"label": "", "opts": ["VRAI", "FAUX"], "vals": [1, 0]}], [{"label": "", "opts": ["VRAI", "FAUX"], "vals": [1, 0]}], [{"label": "", "opts": ["VRAI", "FAUX"], "vals": [1, 0]}], [{"label": "", "opts": ["VRAI", "FAUX"], "vals": [1, 0]}], [{"label": "", "opts": ["VRAI", "FAUX"], "vals": [1, 0]}], [{"label": "", "opts": ["VRAI", "FAUX"], "vals": [1, 0]}], [{"label": "", "opts": ["VRAI", "FAUX"], "vals": [1, 0]}], [{"label": "", "opts": ["VRAI", "FAUX"], "vals": [1, 0]}], [{"label": "", "opts": ["1 : Ne pourraient être pires", "2", "3", "4", "5", "6", "7", "8 : Ne pourraient être meilleures"], "vals": [1, 2, 3, 4, 5, 6, 7, 8]}]];              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var INV = [6, 7, 9, 10, 13], LO = 0, HI = 1;
+    function val(k){ var v = answers[k-1][0]; if (v === 'NA') return null; return INV.indexOf(k) >= 0 ? (LO + HI - v) : v; }
+    function agg(list, m){ var s = 0, n = 0; list.forEach(function(k){ var v = val(k); if (v !== null){ s += v; n++; } }); if (n === 0) return null; return m === 'mean' ? s / n : s; }
+    var BL = [{"l": "Satisfaction sexuelle (10 énoncés vrai/faux)", "it": [5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "m": "sum", "d": 0, "r": "0 à 10", "x": 1}, {"l": "Indice global de satisfaction", "it": [15], "m": "sum", "d": 0, "r": "1 à 8", "x": 1}, {"l": "Fréquence des relations sexuelles (code)", "it": [1], "m": "sum", "d": 0, "r": "0 à 8", "x": 1}, {"l": "Fréquence de la masturbation (code)", "it": [2], "m": "sum", "d": 0, "r": "0 à 8", "x": 1}, {"l": "Fréquence d'embrasser et caresser (code)", "it": [3], "m": "sum", "d": 0, "r": "0 à 8", "x": 1}, {"l": "Fréquence idéale des relations sexuelles (code)", "it": [4], "m": "sum", "d": 0, "r": "0 à 8", "x": 1}];
+    var res = [], rows = '';
+    BL.forEach(function(b){ var v = agg(b.it, b.m); if (v !== null) v = v * b.x; res.push(v); rows += row(b.l + (b.r ? ' (' + b.r + ')' : ''), v === null ? ':' : v.toFixed(b.d).replace('.', ',')); });
+    html += '<table class=\"result-table\">' + rows + '</table>';
+    html += '<p class=\"result-text\">' + "Un score de satisfaction élevé traduit une satisfaction sexuelle plus grande (les énoncés 2, 3, 5, 6 et 9 comptent 1 pour la réponse FAUX). Les codes de fréquence vont de 0 (jamais) à 8 (4 fois ou plus par jour) : plus le code est élevé, plus la fréquence est importante ; ils sont à comparer à la fréquence idéale et à la satisfaction globale. Aucun seuil n'est décrit dans la source lue." + '</p>';
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DSFI : fonctionnement sexuel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#8D4F35 0%,#E3C3B5 55%,#412316 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#412316;background:#F4EAE6;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #854B32;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#854B32;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#412316;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">DSFI-FR</span></div>
+
+  <h1 class="serif">Inventaire du fonctionnement sexuel de Derogatis (DSFI), éléments abrégés en français</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">DSFI : Derogatis et Melisaratos (1979), traduction française de Gautier et Garceau (1982) ; éléments tels que reproduits dans une thèse de doctorat (2020).</p>
+  <div class="meta-row">
+    <span class="pill">15 éléments</span>
+    <span class="pill">5 minutes</span>
+    <span class="pill">Fréquences, vrai/faux, 1 à 8</span>
+    <span class="pill">Français</span>
+    <span class="pill">Sexualité</span>
+    <span class="pill">Licence : incertaine</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="dsfi-fonctionnement-sexuel-r1.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>Le Derogatis Sexual Functioning Inventory (DSFI) est un inventaire multidimensionnel du fonctionnement sexuel (dix sous-échelles dans la source). La thèse source n'en a utilisé que trois parties, reprises ici : les expériences récentes (fréquence des relations sexuelles, de la masturbation, d'embrasser et caresser, et fréquence idéale des relations sexuelles), la satisfaction sexuelle (dix énoncés à répondre par VRAI ou FAUX) et l'indice global de satisfaction (de 1, « ne pourraient être pires », à 8, « ne pourraient être meilleures »).</p>
+    <p class="reserve">Les consignes sont celles de la thèse, écrites pour des personnes atteintes d'un cancer du côlon et pour leurs partenaires (« depuis le diagnostic de la maladie »).</p>
+    <p class="source-note">Les trois questions d'information du début de l'inventaire (âge au premier intérêt pour la sexualité, âge au premier rapport, nombre de partenaires) ne sont pas reprises.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Satisfaction sexuelle : chaque énoncé vaut 0 ou 1 selon la satisfaction rapportée ; les énoncés 2, 3, 5, 6 et 9 sont inversés (ils comptent 1 pour la réponse FAUX). La somme (0 à 10) est d'autant plus élevée que la satisfaction est grande. Indice global : de 1 à 8, plus il est élevé, plus la personne est satisfaite de ses relations sexuelles. Expériences récentes : codes de fréquence de 0 (jamais) à 8 (4 fois ou plus par jour) ; ils sont à comparer à la fréquence idéale et à la satisfaction globale.</p>
+    <p class="reserve">Cotation déduite en partie : la source écrit que les énoncés non inversés valent 1 quand la satisfaction est rapportée et que « plus le score est élevé, plus la satisfaction l'est » ; elle ne détaille pas la valeur de VRAI et de FAUX pour chaque énoncé. La page applique VRAI = 1 aux énoncés non inversés et FAUX = 1 aux énoncés inversés.</p>
+    <p class="reserve">La section méthode de la thèse décrit les fréquences de 0 à 7 (« 2 fois par jour ou plus ») alors que l'annexe imprimée porte neuf colonnes de 0 à 8 : la page suit l'annexe. Aucun seuil ni norme n'est donné.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Licence : incertaine. Aucune phrase de licence n'a été lue. Le DSFI est un outil publié (Derogatis et Melisaratos, 1979) ; l'autorisation de reproduction de la traduction française n'est pas documentée.</p>
+    <p class="reserve">Texte lu dans l'annexe « Inventaire du fonctionnement sexuel » de la thèse « Ajustement affectif et sexuel des couples face au cancer du côlon » (2020, HAL tel-04149974), version abrégée de 18 éléments utilisée par cette thèse. Les autres sous-échelles du DSFI n'ont pas été lues.</p>
+    <p class="source-note">Derogatis LR, Melisaratos N. The DSFI: a multidimensional measure of sexual functioning. Journal of Sex & Marital Therapy, 1979;5(3):244-281. Traduction française : Gautier et Garceau (1982), citée par la thèse. Étalonnage : aucune norme française trouvée.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

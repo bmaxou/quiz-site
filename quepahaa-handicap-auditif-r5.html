@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>QUEPAHAA : perception et adaptation au handicap auditif</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #553285;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#553285;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#281641;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#553285;background:#ECE6F4;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#281641;border-color:#E0D9C9;}
+  .btn-primary{background:#553285;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#553285;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#281641;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">QUEPAHAA : Perception et adaptation au handicap auditif (31 questions)</h1>
+    <p class="lead">Trente et une questions sur vos difficultés d'audition, leurs répercussions et la manière dont vous les vivez : répondez de « non » à « tout à fait ».</p>
+    <p class="consigne">Les questions posées sont en lien avec vos difficultés d’audition, leurs répercussions et la manière dont vous les vivez dans votre vie de tous les jours.</p>
+    <p class="lang-note">Questions en français, reproduites de l'annexe d'une thèse (Angers, 2021). Licence : incertaine.</p>
+    <div class="pill-row">
+      <span class="pill">31 questions</span>
+      <span class="pill">environ 10 minutes</span>
+      <span class="pill">5 niveaux, de non à tout à fait</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Heren-Le Bastard C. Thèse, Université d'Angers, 2021. Outil de dépistage/d'auto-évaluation : ne remplace pas un entretien clinique ni un bilan.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["Avez-vous suffisamment d’informations pour comprendre ce qui se passe au niveau de votre audition ? (Connaissances médicales et autres sur vos troubles de l’audition, degré de la perte auditive, évolution, capacités auditives actuelles…).", "Savez-vous où se situent vos difficultés dans votre vie de tous les jours ?", "Connaissez-vous les moyens que vous pouvez mettre en place pour compenser vos difficultés d’audition ? (aides, techniques, moyens pour gérer les difficultés…)", "Vos prothèses auditives vous apportent-t-elles un bénéfice ?", "Avez-vous un bon confort d’écoute ?", "Les aides techniques que vous utilisez dans votre quotidien, vous apportent-elles un bénéfice ? (téléphone adapté, système de lampe flash, casque TV, réveil vibrant, générateur de sons, générateur de bruit …)?", "Pensez-vous utiliser au mieux les capacités d’audition qui vous reste ?", "Avez-vous pu préserver la plupart de vos habitudes de vie ?", "Etes-vous satisfait(e) de votre communication à l’oral ?", "Vous sentez-vous autonome dans votre vie de tous les jours ?", "Ressentez-vous de l’envie à faire des choses ?", "Avez-vous développé des stratégies autres qu’auditives dans votre vie de tous les jours (visuelles, gestuelle, lecture sur les lèvres, stratégies mentales, attitudes différentes de communication, utilisation de l’écrit…) ?", "Demandez-vous de l’aide aux autres quand vous en ressentez le besoin (faire répéter, parler plus lentement, besoin d’intermédiaire lors d’un échange) ?", "Vous sentez-vous à l’aise dans les situations d’échange à plusieurs (repas, réunion, situation de groupe…) ?", "Vous sentez-vous indépendant(e) vis-à-vis des autres ?", "Vous êtes-vous adapté(e) à vos difficultés d’audition ?", "Parlez-vous de vos difficultés d’audition aux autres ?", "Vous sentez-vous en sécurité chez vous ?", "Vous sentez-vous en sécurité à l’extérieur ?", "Etes-vous satisfait(e) de votre participation à votre vie familiale ?", "Etes-vous satisfait(e) de votre participation à votre vie sociale ?", "Pensez-vous gérer au mieux les difficultés que vous rencontrez en lien avec vos difficultés d’audition ?", "Pensez-vous vivre au mieux le regard des autres sur vos difficultés d’audition ?", "Pensez-vous que votre entourage proche comprend votre situation ?", "Osez-vous aller vers les autres ?", "Avez-vous confiance en vous ?", "Osez-vous participer à une conversation ?", "Pensez-vous gérer au mieux les conséquences émotionnelles liées à vos difficultés d’audition ? (anxiété, nervosité, stress, tristesse, frustration…).", "Avez-vous envie de faire des projets ?", "Avez-vous une image positive de vous-même ?", "Ressentez-vous un état de bien-être dans votre vie de tous les jours ?", "Comment évalueriez-vous votre qualité de vie ? (entourez un chiffre)"];
+  var G = [];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = [[{"label": "", "opts": ["Non", "Un peu", "Moyennement", "Beaucoup", "Tout à fait"], "vals": [1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Non", "Un peu", "Moyennement", "Beaucoup", "Tout à fait"], "vals": [1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Non", "Un peu", "Moyennement", "Beaucoup", "Tout à fait"], "vals": [1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Non", "Un peu", "Moyennement", "Beaucoup", "Tout à fait", "Non concerné"], "vals": [1, 2, 3, 4, 5, "NA"]}], [{"label": "", "opts": ["Non", "Un peu", "Moyennement", "Beaucoup", "Tout à fait"], "vals": [1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Non", "Un peu", "Moyennement", "Beaucoup", "Tout à fait", "Non concerné"], "vals": [1, 2, 3, 4, 5, "NA"]}], [{"label": "", "opts": ["Non", "Un peu", "Moyennement", "Beaucoup", "Tout à fait"], "vals": [1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Non", "Un peu", "Moyennement", "Beaucoup", "Tout à fait"], "vals": [1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Non", "Un peu", "Moyennement", "Beaucoup", "Tout à fait"], "vals": [1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Non", "Un peu", "Moyennement", "Beaucoup", "Tout à fait"], "vals": [1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Non", "Un peu", "Moyennement", "Beaucoup", "Tout à fait"], "vals": [1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Non", "Un peu", "Moyennement", "Beaucoup", "Tout à fait"], "vals": [1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Non", "Un peu", "Moyennement", "Beaucoup", "Tout à fait"], "vals": [1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Non", "Un peu", "Moyennement", "Beaucoup", "Tout à fait"], "vals": [1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Non", "Un peu", "Moyennement", "Beaucoup", "Tout à fait"], "vals": [1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Non", "Un peu", "Moyennement", "Beaucoup", "Tout à fait"], "vals": [1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Non", "Un peu", "Moyennement", "Beaucoup", "Tout à fait"], "vals": [1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Non", "Un peu", "Moyennement", "Beaucoup", "Tout à fait"], "vals": [1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Non", "Un peu", "Moyennement", "Beaucoup", "Tout à fait"], "vals": [1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Non", "Un peu", "Moyennement", "Beaucoup", "Tout à fait"], "vals": [1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Non", "Un peu", "Moyennement", "Beaucoup", "Tout à fait"], "vals": [1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Non", "Un peu", "Moyennement", "Beaucoup", "Tout à fait"], "vals": [1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Non", "Un peu", "Moyennement", "Beaucoup", "Tout à fait"], "vals": [1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Non", "Un peu", "Moyennement", "Beaucoup", "Tout à fait"], "vals": [1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Non", "Un peu", "Moyennement", "Beaucoup", "Tout à fait"], "vals": [1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Non", "Un peu", "Moyennement", "Beaucoup", "Tout à fait"], "vals": [1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Non", "Un peu", "Moyennement", "Beaucoup", "Tout à fait"], "vals": [1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Non", "Un peu", "Moyennement", "Beaucoup", "Tout à fait"], "vals": [1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Non", "Un peu", "Moyennement", "Beaucoup", "Tout à fait"], "vals": [1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Non", "Un peu", "Moyennement", "Beaucoup", "Tout à fait"], "vals": [1, 2, 3, 4, 5]}], [{"label": "", "opts": ["Non", "Un peu", "Moyennement", "Beaucoup", "Tout à fait"], "vals": [1, 2, 3, 4, 5]}], [{"label": "0 = très mauvaise, 10 = excellente", "type": "num", "min": 0, "max": 10}]];              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var DM = [{"l": "Score total", "it": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]}, {"l": "F1 Perception de la vie quotidienne et de la relation à l’autre", "it": [8, 9, 10, 14, 15, 18, 19, 20, 21, 25, 26, 27]}, {"l": "F2 Perception de la situation auditive et des moyens de compensation", "it": [1, 2, 3, 4, 5, 6, 7, 12, 16, 22]}, {"l": "F3 Vécu psychologique du handicap auditif", "it": [11, 13, 17, 23, 24, 28, 29, 30, 31]}], QV = 32;
+    var rows = '';
+    DM.forEach(function(d){
+      var s = 0, n = 0;
+      d.it.forEach(function(k){ var v = answers[k-1][0]; if (v !== 'NA'){ s += v; n++; } });
+      rows += row(d.l, s + ' / ' + (5 * n));
+    });
+    rows += row('Qualité de vie auto-évaluée (0 à 10, hors total)', String(answers[QV-1][0]));
+    html += '<table class="result-table">' + rows + '</table>';
+    html += '<p class="result-text">Plus les scores sont élevés, meilleure est l’adaptation au handicap. Les items « non concernés » sont exclus et le maximum est ajusté en conséquence (5 points par item répondu).</p>';
+    html += '<p class="result-text">Ce questionnaire est un outil de recherche et d’accompagnement : il n’existe pas de seuil dans la source lue.</p>';
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>QUEPAHAA : perception et adaptation au handicap auditif</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#5A358D 0%,#C8B5E3 55%,#281641 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#281641;background:#ECE6F4;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #553285;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#553285;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#281641;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">QUEPAHAA</span></div>
+
+  <h1 class="serif">Questionnaire d’Évaluation de la Perception et de l’Adaptation au Handicap Auditif chez l’Adulte (QUEPAHAA)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">QUEPAHAA : Heren-Le Bastard C. (thèse, Angers, 2021) ; 31 items en trois dimensions (F1 Perception de la vie quotidienne et de la relation à l’autre : 12 items ; F2 Perception de la situation auditive et des moyens de compensation : 10 items ; F3 Vécu psychologique du handicap auditif : 9 items).</p>
+  <div class="meta-row">
+    <span class="pill">31 questions</span>
+    <span class="pill">environ 10 minutes</span>
+    <span class="pill">5 niveaux, de non à tout à fait</span>
+    <span class="pill">Français</span>
+    <span class="pill">Audition</span>
+    <span class="pill">Licence : incertaine.</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="quepahaa-handicap-auditif-r5.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>QUEPAHAA est un auto-questionnaire français élaboré à partir d'une cinquantaine d'entretiens semi-directifs d'adultes concernés, soumis à un groupe d'experts puis éprouvé auprès de patients. Il évalue la perception du handicap, ses répercussions et les ressources adaptatives, selon le point de vue de la personne.</p>
+    <p>Il compte 31 items regroupés en trois dimensions : F1 Perception de la vie quotidienne et de la relation à l’autre : 12 items ; F2 Perception de la situation auditive et des moyens de compensation : 10 items ; F3 Vécu psychologique du handicap auditif : 9 items. Les réponses sont données sur une échelle de Likert en 5 points (non, un peu, moyennement, beaucoup, tout à fait), suivie d'une question sur la qualité de vie de 0 à 10.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Non = 1 point, un peu = 2, moyennement = 3, beaucoup = 4, tout à fait = 5. Le score total est sur 155 points, et les sous-dimensions sur 60 (F1), 50 (F2) et 45 (F3). Plus les scores sont élevés, meilleure est l'adaptation au handicap.</p>
+    <p>La question finale de qualité de vie (de 0, très mauvaise, à 10, excellente) est à part et n'entre pas dans le total.</p>
+    <p class="reserve">Aucun seuil ni norme n'a été lu dans la source. Les items 4 et 6 portent la case « Non concerné » sur le formulaire, mais la source ne dit pas comment ils sont cotés : la page les exclut du total et ajuste le maximum (traitement de création).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Licence : incertaine. Aucune mention de droits n'a été lue sur le formulaire reproduit en annexe de la thèse de doctorat citée ; la permission des auteurs n'a pas été retrouvée.</p>
+    <p class="reserve">Étalonnage : validation psychométrique sans centiles ni seuils ; aucune norme française trouvée dans la source lue. La page n'affiche aucun seuil.</p>
+    <p class="reserve">Les items 18/19 et 20/21 sont imprimés avec une amorce commune puis « chez vous / à l’extérieur », « à votre vie familiale / sociale » : amorce et fin ont été jointes. Les items 4 et 6 portent la case « Non Concerné » ; leurs exemples sont rattachés à l'énoncé.</p>
+    <p class="source-note">Heren-Le Bastard C. Évaluation de la perception et de l’adaptation au handicap auditif ou visuel chez l’adulte : validation de questionnaires spécifiques et études cliniques. Thèse, Université d'Angers, 2021 (HAL tel-03903035), annexes 16 et 19.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>
