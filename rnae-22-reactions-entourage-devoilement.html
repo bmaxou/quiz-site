@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RNAE-22 : Réactions de l&#x27;entourage au dévoilement</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #85325C;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#85325C;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#41162B;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#85325C;background:#F4E6ED;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#41162B;border-color:#E0D9C9;}
+  .btn-primary{background:#85325C;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#85325C;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#41162B;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">RNAE-22 : Réactions de l&#x27;entourage après un dévoilement (22 questions)</h1>
+    <p class="lead">Vingt-deux réactions possibles de l'entourage quand la personne a parlé de violences sexuelles ou de harcèlement sexuel qu'elle a vécus : à quelle fréquence chacune a-t-elle été rencontrée ? Cinq réponses possibles, de Jamais à Toujours. Questionnaire pour adulte ; sujet sensible.</p>
+    <p class="consigne">À la section précédente, vous avez répondu avoir parlé des évènements de harcèlement ou de violences sexuelles vécus à une autre personne que celle ayant commis les gestes. Quelles ont été les réactions de ces personnes? Indiquez à quelle fréquence vous avez rencontré chacune des réactions suivantes lorsque vous vous êtes confié.e.</p>
+    <p class="lang-note">Questions en français du Québec (adaptation de l'équipe ÉVISSA, enquête ESSIMU, universités québécoises). Sujet sensible. Licence incertaine.</p>
+    <div class="pill-row">
+      <span class="pill">22 questions</span>
+      <span class="pill">Jamais à Toujours</span>
+      <span class="pill">Auto-questionnaire</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Ullman et coll. (2017) ; Lavoie, Parent, Auclair, Hébert et Bergeron (2018). Outil d'auto-évaluation : ne remplace pas un entretien clinique ni un bilan.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["M'ont dit que j'avais été irresponsable ou imprudent.e", "M'ont rassuré.e que j'étais une bonne personne", "Après leur avoir dit, m'ont traité.e d'une manière différente qui m'a mis.e mal à l'aise", "M'ont dit de continuer ma vie", "M'ont réconforté.e en me disant que tout irait bien ou en me prenant dans leurs bras", "Ont essayé de prendre le contrôle de mes actions ou mes décisions", "Ont été tellement bouleversées qu'elles ont eu besoin que je les rassure", "Ont pris des décisions ou ont fait des choses à ma place", "M'ont dit que j'aurais pu prévenir cette situation", "M'ont fourni de l'information et ont discuté des options avec moi", "M'ont dit de cesser d'y penser", "Ont exprimé tellement de colère envers l'agresseur que j'ai dû les calmer", "Ont évité de me parler ou de passer du temps avec moi", "M'ont traité.e comme un enfant ou une personne incompétente", "M'ont aidé.e à trouver de l'information sur les moyens de surmonter cette expérience", "M'ont fait sentir comme si j'étais incapable de prendre soin de moi-même", "Ont tenté de me distraire avec d'autres choses", "M'ont encouragé.e à tenir cela secret", "Ont minimisé le sérieux de cet événement", "Ont agi comme si je ne valais rien à leurs yeux", "Ont agi comme si j'étais endommagé.e", "Ont fait une blague ou utilisé le sarcasme"];
+  var G = [{"label": "", "opts": ["Jamais", "Rarement", "Des fois", "Fréquemment", "Toujours"], "vals": [0, 1, 2, 3, 4]}];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = null;              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var INV = [], LO = 0, HI = 4;
+    function val(k){ var v = answers[k-1][0]; if (v === 'NA') return null; return INV.indexOf(k) >= 0 ? (LO + HI - v) : v; }
+    function agg(list, m){ var s = 0, n = 0; list.forEach(function(k){ var v = val(k); if (v !== null){ s += v; n++; } }); if (n === 0) return null; return m === 'mean' ? s / n : s; }
+    var BL = [{"l": "Accusation / exclusion (12 items : 1, 3, 6, 7, 8, 9, 12, 13, 14, 16, 20, 21)", "it": [1, 3, 6, 7, 8, 9, 12, 13, 14, 16, 20, 21], "m": "mean", "d": 2, "r": "0 à 4", "x": 1}, {"l": "Constatation sans soutien (6 items : 4, 11, 17, 18, 19, 22)", "it": [4, 11, 17, 18, 19, 22], "m": "mean", "d": 2, "r": "0 à 4", "x": 1}, {"l": "Réactions aidantes (4 items : 2, 5, 10, 15)", "it": [2, 5, 10, 15], "m": "mean", "d": 2, "r": "0 à 4", "x": 1}];
+    var res = [], rows = '';
+    BL.forEach(function(b){ var v = agg(b.it, b.m); if (v !== null) v = v * b.x; res.push(v); rows += row(b.l + (b.r ? ' (' + b.r + ')' : ''), v === null ? '-' : v.toFixed(b.d).replace('.', ',')); });
+    html += '<table class=\"result-table\">' + rows + '</table>';
+    html += '<p class=\"result-text\">' + "Moyennes des items de chaque sous-échelle. Les deux premières décrivent des réactions nuisibles de l'entourage ; la troisième, des réactions aidantes. La source ne fournit ni seuil ni norme." + '</p>';
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RNAE-22 : Réactions de l&#x27;entourage au dévoilement</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#8D3561 0%,#E3B5CC 55%,#41162B 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#41162B;background:#F4E6ED;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #85325C;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#85325C;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#41162B;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">RNAE-22</span></div>
+
+  <h1 class="serif">Questionnaire sur les réactions nuisibles et aidantes de l&#x27;entourage lors d&#x27;un dévoilement de violences à caractère sexuel (RNAE-22)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">RNAE-22 : Lavoie, Parent, Auclair, Hébert et Bergeron (2018), capsule de mesure n° 6 de l'équipe ÉVISSA (UQAM) ; adaptation du Social Reactions Questionnaire – Shortened (Ullman et coll., 2017).</p>
+  <div class="meta-row">
+    <span class="pill">22 questions</span>
+    <span class="pill">Jamais à Toujours</span>
+    <span class="pill">Auto-questionnaire</span>
+    <span class="pill">Français (Québec)</span>
+    <span class="pill">Adulte</span>
+    <span class="pill">Violence sexuelle</span>
+    <span class="pill">Soutien social</span>
+    <span class="pill">Sujet sensible</span>
+    <span class="pill">Licence incertaine</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="rnae-22-reactions-entourage-devoilement.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>Le RNAE-22 mesure les réactions, nuisibles ou aidantes, des personnes à qui une victime de violence sexuelle ou de harcèlement sexuel s'est confiée. C'est l'adaptation francophone du Social Reactions Questionnaire – Shortened (SRQ-S, 16 items ; Ullman, Relyea, Sigurvinsdottir et Bennett, 2017) : 16 items de la version brève plus 6 items tirés de la version longue (items 17 à 22), après consultation d'hommes et analyse du point de vue du harcèlement sexuel et du milieu sportif.</p>
+    <p>Elle a été utilisée pour la première fois dans l'Enquête Sexualité, Sécurité et Interactions en Milieu Universitaire (ESSIMU, 2016), auprès de personnes étudiant ou travaillant dans six universités francophones du Québec. L'instrument original avait été validé uniquement auprès de femmes états-uniennes.</p>
+    <p class="source-note">La consigne est celle de l'enquête ESSIMU et renvoie à « la section précédente » du questionnaire d'enquête ; elle est reprise telle quelle. Les astérisques de l'annexe (items 17 à 22, tirés de la version longue) ne sont pas affichés.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Trois sous-échelles, chacune cotée par la moyenne de ses items (Jamais = 0 à Toujours = 4) : accusation / exclusion (12 items : 1, 3, 6, 7, 8, 9, 12, 13, 14, 16, 20, 21), constatation sans soutien (6 items : 4, 11, 17, 18, 19, 22) et réactions aidantes (4 items : 2, 5, 10, 15). Selon Ullman et coll., on peut aussi composer deux scores (réactions positives et réactions négatives, ces dernières regroupant les deux premières sous-échelles) ou dichotomiser chaque item (jamais / au moins une fois). Aucun seuil ni norme ; alphas de Cronbach de l'enquête ESSIMU : 0,85, 0,69 et 0,68.</p>
+    <p class="reserve">Item 12 : la capsule recommande pour l'avenir de reformuler l'énoncé (« … que j'ai dû prendre le temps de les calmer en m'oubliant ») car il est perçu tantôt comme aidant, tantôt comme nuisible ; le texte d'origine est conservé ici.</p>
+    <p class="reserve">FR- (provisoire, aucune norme française trouvée) : pas de norme ; recherche dans HAL « Social Reactions Questionnaire » : 0 résultat.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Sujet sensible : violences sexuelles et harcèlement sexuel. À proposer dans un cadre clinique, avec un temps d'échange après la passation (avertissement ajouté par le cabinet, absent de la source). Pour des personnes adultes, hors enfants.</p>
+    <p class="reserve">Adaptation et non traduction fidèle (selon les auteurs) ; la capsule ne rapporte pas de validation hors du Québec. Aucune phrase de licence dans la capsule ; l'instrument original est à demander à Sarah E. Ullman (University of Illinois at Chicago). Licence : incertaine.</p>
+    <p class="source-note">Références : Lavoie, F., Parent, S., Auclair, I., Hébert, M., &amp; Bergeron, M. (2018, mars). Capsule de mesure #6 : RNAE-22 - Questionnaire sur les réactions nuisibles et aidantes de l’entourage lors d’un dévoilement de violences à caractère sexuel. Adaptation francophone du Social Reaction Questionnaire - Shortened version (SRQ-S; Ullman, Relyea, Sigurvinsdottir, &amp; Bennett, 2017). Équipe de recherche FQRSC - Violence sexuelle et santé (EVISSA), UQAM, Montréal, Québec. Ullman, S. E., Relyea, M., Sigurvinsdottir, R., &amp; Bennett, S. (2017). A short measure of social reactions to sexual assault: The Social Reactions Questionnaire-Shortened. Violence and Victims, 32(6), 1096-1115. doi:10.1891/0886-6708.VV-D-16-00066 Bergeron, M., Hébert, M., Ricci, S., Goyer, M.-F., Duhamel, N., Kurtzman, L., ... Parent S. (2016). Violences sexuelles en milieu universitaire au Québec : Rapport de recherche de l’enquête ESSIMU. Montréal, QC : Université du Québec à Montréal.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

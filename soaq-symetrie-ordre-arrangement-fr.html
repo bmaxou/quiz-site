@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SOAQ : Symétrie, ordre et arrangement</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #633285;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#633285;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#2F1641;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#633285;background:#EEE6F4;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#2F1641;border-color:#E0D9C9;}
+  .btn-primary{background:#633285;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#633285;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#2F1641;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">SOAQ : Symétrie, ordre et arrangement</h1>
+    <p class="lead">20 phrases sur la manière dont vous rangez et disposez vos affaires. Indiquez votre degré d'accord de « pas du tout » à « extrêmement ».</p>
+    <p class="consigne">Encerclez un nombre entre 0 et 4 correspondant à votre degré d&#x27;accord avec chacune des phrases suivantes.</p>
+    <p class="lang-note">Phrases en français (traduction canadienne-française). Licence : non requise (usage public indiqué par le laboratoire).</p>
+    <div class="pill-row">
+      <span class="pill">20 phrases</span>
+      <span class="pill">4 minutes</span>
+      <span class="pill">Pas du tout → Extrêmement</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Radomsky et Rachman (2004), Behav Res Ther 42(8) ; Radomsky et al. (2006), Cogn Behav Ther 35(3). Outil de dépistage/d'auto-évaluation : ne remplace pas un entretien clinique ni un bilan.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["Je me sens contrarié si mes meubles ou mes effets personnels ne sont pas toujours placés exactement dans la même position.", "Les autres trouvent que je passe trop de temps à mettre en ordre et à arranger mes effets personnes.", "Il est essentiel que je place mes vêtements d'une façon précise.", "Je me sens plus à mon aise quand mes choses sont \"juste comme il faut\".", "Je dois garde mes papiers, reçus, documents, etc., organisés selon une série de règles spécifiques.", "Il est important que mes effets personnels soient placés de façon symétrique et de manière égale.", "Si quelqu'un déplace accidentellement mes effets personnels, ne serait-ce que légèrement, cela me dérange et me contrarie.", "Je me sens obligé d'arranger mes choses jusqu'à ce que je ressente que c'est \"juste comme il faut\".", "Lorsque je pense que mes choses ne sont pas à leur place, je suis inconfortable ou anxieux.", "Lorsque je range des choses, je me sens obligé de le faire de façon précise et soigneusement.", "Les meubles dans ma maison doivent être placés exactement au bon endroit.", "Je me sens calme et détendu uniquement si les objets autour de moi sont organisés et placés correctement.", "Je me sens obligé de placer les boîtes et les conserves dans mes armoires de cuisine d'une façon précise.", "Lorsque je vois que mes effets personnels ne sont pas à leur place, je deviens anxieux jusqu'à ce que je puisse les placer adéquatement.", "Je me sens obligé d'arranger les objets afin qu'ils soient équilibrés et espacés également.", "Je me sens calme et à mon aise seulement lorsque mon environnement est propre et bien rangé.", "Même lorsque mon domicile est en désordre, je garde les choses organisées selon une série de règles spécifiques.", "Les choses dans ma maison ont une place exacte qui leur est propre.", "Je ne peux me concentrer tant et aussi longtemps que les choses ne sont pas à leur place.", "Je n'aime pas déplacer les objets une fois qu'ils ont été rangés adéquatement."];
+  var G = [{"label": "", "opts": ["Pas du tout", "Légèrement", "Modérément", "Beaucoup", "Extrêmement"], "vals": [0, 1, 2, 3, 4]}];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = null;              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var INV = [], LO = 0, HI = 4;
+    function val(k){ var v = answers[k-1][0]; if (v === 'NA') return null; return INV.indexOf(k) >= 0 ? (LO + HI - v) : v; }
+    function agg(list, m){ var s = 0, n = 0; list.forEach(function(k){ var v = val(k); if (v !== null){ s += v; n++; } }); if (n === 0) return null; return m === 'mean' ? s / n : s; }
+    var BL = [{"l": "Score total SOAQ", "it": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20], "m": "sum", "d": 0, "r": "0 à 80", "x": 1}];
+    var res = [], rows = '';
+    BL.forEach(function(b){ var v = agg(b.it, b.m); if (v !== null) v = v * b.x; res.push(v); rows += row(b.l + (b.r ? ' (' + b.r + ')' : ''), v === null ? '-' : v.toFixed(b.d).replace('.', ',')); });
+    html += '<table class=\"result-table\">' + rows + '</table>';
+    html += '<p class=\"result-text\">' + "Plus le score est élevé, plus le besoin de symétrie, d'ordre et d'arrangement est marqué. Aucun seuil publié n'a été lu : ce résultat se discute en entretien." + '</p>';
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SOAQ : Symétrie, ordre et arrangement</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#68358D 0%,#D0B5E3 55%,#2F1641 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#2F1641;background:#EEE6F4;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #633285;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#633285;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#2F1641;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">SOAQ</span></div>
+
+  <h1 class="serif">Questionnaire de symétrie, d&#x27;ordre et d&#x27;arrangement (SOAQ)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">SOAQ : Radomsky et Rachman (2004) ; traduction française du Centre de recherche Fernand-Seguin (Montréal, 2003).</p>
+  <div class="meta-row">
+    <span class="pill">20 phrases</span>
+    <span class="pill">4 minutes</span>
+    <span class="pill">Pas du tout → Extrêmement</span>
+    <span class="pill">Français</span>
+    <span class="pill">TOC · symétrie et rangement</span>
+    <span class="pill">Licence : non requise</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="soaq-symetrie-ordre-arrangement-fr.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>Le SOAQ évalue les obsessions de symétrie et les compulsions d'ordre et d'arrangement : besoin que les objets soient « juste comme il faut », gêne quand ils sont déplacés, temps passé à ranger. C'est l'une des dimensions du TOC, distincte du lavage ou de la vérification.</p>
+    <p>Les 20 phrases sont celles de la version française du laboratoire de A. Radomsky (Université Concordia), traduite par J. Charrette, C. Léveillé, K. O'Connor, M.-C. Pélissier et É. St-Jean-Trudel (Centre de recherche Fernand-Seguin, août 2003), étudiée par Radomsky et al. (2006) sur 222 étudiants francophones de Montréal.</p>
+    <p class="source-note">Deux fautes de frappe du formulaire sont conservées telles quelles : phrase 2 (« effets personnes ») et phrase 5 (« Je dois garde »). La phrase 14, coupée par un saut de page dans le PDF, a été reconstituée en lisant ses deux moitiés.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque phrase est cotée de 0 (pas du tout) à 4 (extrêmement). Le score total est la somme des 20 phrases (0 à 80) ; aucune phrase n'est inversée. Un score plus élevé traduit des préoccupations de symétrie, d'ordre et d'arrangement plus marquées.</p>
+    <p class="reserve">Cotation déduite : la somme de 0 à 80 est celle du tableau 1 de l'article de validation (résumé consulté ; le PDF n'a pas pu être téléchargé directement) et n'est pas imprimée sur le formulaire. Aucun seuil ni norme n'a été lu. Étalonnage : FR- (étudiants québécois ; aucune norme de France trouvée).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="source-note">Les 20 phrases et les libellés de réponses sont lus dans le formulaire PDF « SOAQ » du site radomskylab.ca, contrôlé contre la version anglaise.</p>
+    <p class="reserve">Licence : non requise. Page du laboratoire : « The following scales are available for public use. PDF formatted English and French versions of each scale can be downloaded by clicking on the appropriate link. Please feel free to use these scales in your research and kindly keep us informed of your findings. »</p>
+    <p class="source-note">Références : Radomsky AS, Rachman S (2004). Symmetry, ordering and arranging compulsive behaviour. Behaviour Research and Therapy, 42(8), 893-913. Radomsky AS, Ouimet AJ, Ashbaugh AR, Lavoie SL, Parrish CL, O'Connor KP (2006). Psychometric properties of the French and English versions of the Vancouver Obsessional-Compulsive Inventory and the Symmetry Ordering and Arranging Questionnaire. Cognitive Behaviour Therapy, 35(3), 164-173.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

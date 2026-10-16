@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ZTPI-15 : Rapport au temps</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #513285;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#513285;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#261641;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#513285;background:#EBE6F4;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#261641;border-color:#E0D9C9;}
+  .btn-primary{background:#513285;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#513285;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#261641;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">ZTPI-15 : Échelle de temporalité (version courte)</h1>
+    <p class="lead">15 propositions sur votre manière de vivre le passé, le présent et l’avenir, à noter de 1 à 5.</p>
+    <p class="consigne">Vous trouverez, ci-dessous, une liste de propositions. Nous vous demandons de lire chacune d’entre elles attentivement et de répondre, en indiquant dans quelle mesure chacune vous correspond ou s’applique à vous. Pour cela, nous vous proposons de répondre à l’aide de l’échelle suivante : 1 = ne me correspond pas du tout / Ne s’applique pas du tout à moi ; 2 = ne me correspond pas / Ne s’applique pas à moi ; 3 = ni l’un / ni l’autre ; 4 = me correspond / S’applique à moi ; 5 = me correspond tout à fait / S’applique tout à fait à moi. Répondez sincèrement et spontanément. Il n’y a ni bonne ni mauvaise réponse.</p>
+    <p class="lang-note">Questions en français (validation française à Toulouse, adultes de 18 à 98 ans). Licence : incertaine.</p>
+    <div class="pill-row">
+      <span class="pill">15 questions</span>
+      <span class="pill">environ 3 minutes</span>
+      <span class="pill">1 à 5</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Fritsch &amp; Cuervo-Lombard (2022), Psychologie Française, 67(1) ; Apostolidis &amp; Fieulaine (2004) ; Zimbardo &amp; Boyd (1999). Outil d’auto-évaluation : ne remplace pas un entretien clinique ni un bilan.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["Les images, les odeurs et les sons familiers de mon enfance me rappellent souvent des souvenirs merveilleux.", "Je pense souvent à ce que j’aurais dû faire autrement dans ma vie.", "Le fait de penser à mon passé me donne du plaisir.", "Quand je dois réaliser quelque chose, je me fixe des buts et j’envisage les moyens précis pour les atteindre.", "Puisque ce qui doit arriver arrivera, peu importe vraiment ce que je fais.", "Les souvenirs heureux des bons moments me viennent facilement à l’esprit.", "C’est important de mettre de l’excitation dans ma vie.", "Je pense aux bonnes choses que j’ai ratées dans ma vie.", "Se préoccuper de l’avenir n’a aucun sens, puisque de toute façon je ne peux rien y faire.", "Je fais aboutir mes projets à temps, en progressant étape par étape.", "Je prends des risques pour mettre de l’excitation dans ma vie.", "Je suis capable de résister aux tentations quand je sais qu’il y a du travail à faire.", "Je me trouve toujours entraîné par l’excitation du moment.", "Je pense aux mauvaises choses qui me sont arrivées dans le passé.", "Je n’ai plus aucun plaisir à faire des choses si je dois penser aux objectifs, aux conséquences et aux résultats."];
+  var G = [{"label": "", "opts": ["1 : ne me correspond pas du tout / Ne s’applique pas du tout à moi", "2 : ne me correspond pas / Ne s’applique pas à moi", "3 : ni l’un / ni l’autre", "4 : me correspond / S’applique à moi", "5 : me correspond tout à fait / S’applique tout à fait à moi"], "vals": [1, 2, 3, 4, 5]}];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = null;              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var INV = [], LO = 1, HI = 5;
+    function val(k){ var v = answers[k-1][0]; if (v === 'NA') return null; return INV.indexOf(k) >= 0 ? (LO + HI - v) : v; }
+    function agg(list, m){ var s = 0, n = 0; list.forEach(function(k){ var v = val(k); if (v !== null){ s += v; n++; } }); if (n === 0) return null; return m === 'mean' ? s / n : s; }
+    var BL = [{"l": "Passé positif", "it": [1, 3, 6], "m": "mean", "d": 2, "r": "moyenne de 3 items, 1 à 5", "x": 1}, {"l": "Passé négatif", "it": [2, 8, 14], "m": "mean", "d": 2, "r": "moyenne de 3 items, 1 à 5", "x": 1}, {"l": "Présent hédoniste", "it": [7, 11, 13], "m": "mean", "d": 2, "r": "moyenne de 3 items, 1 à 5", "x": 1}, {"l": "Présent fataliste", "it": [5, 9, 15], "m": "mean", "d": 2, "r": "moyenne de 3 items, 1 à 5", "x": 1}, {"l": "Futur", "it": [4, 10, 12], "m": "mean", "d": 2, "r": "moyenne de 3 items, 1 à 5", "x": 1}];
+    var res = [], rows = '';
+    BL.forEach(function(b){ var v = agg(b.it, b.m); if (v !== null) v = v * b.x; res.push(v); rows += row(b.l + (b.r ? ' (' + b.r + ')' : ''), v === null ? '-' : v.toFixed(b.d).replace('.', ',')); });
+    html += '<table class=\"result-table\">' + rows + '</table>';
+    html += '<p class="result-text">Chaque score est la moyenne des 3 questions de la dimension : plus il est élevé, plus cette orientation du rapport au temps est marquée. Il n’y a pas de score total ni de seuil.</p>';
+    html += "<table class=\"result-table\"><tr><td><b>Repères (moyenne et écart-type)</b></td><td><b>18-30 ans · 60 ans et plus</b></td></tr><tr><td>Passé positif</td><td>3,65 (0,77) · 3,88 (0,84)</td></tr><tr><td>Passé négatif</td><td>3,21 (0,94) · 2,77 (1,01)</td></tr><tr><td>Présent hédoniste</td><td>3,49 (0,81) · 2,94 (1,01)</td></tr><tr><td>Présent fataliste</td><td>2,17 (0,79) · 2,45 (0,96)</td></tr><tr><td>Futur</td><td>3,35 (0,87) · 3,82 (0,81)</td></tr></table>";
+    html += '<p class="result-text">Repères tirés d’un échantillon de 253 jeunes adultes (18 à 30 ans) et de 160 adultes de 60 ans et plus recrutés à Toulouse (échelle de 1 à 5). Ce sont des moyennes descriptives, pas des normes cliniques.</p>';
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ZTPI-15 : Rapport au temps</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#55358D 0%,#C6B5E3 55%,#261641 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#261641;background:#EBE6F4;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #513285;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#513285;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#261641;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">ZTPI-15</span></div>
+
+  <h1 class="serif">Échelle de temporalité, version courte à 15 items (ZTPI-15)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">ZTPI-15 : Fritsch et Cuervo-Lombard (2022), version courte de la Zimbardo Time Perspective Inventory ; cinq dimensions de trois items.</p>
+  <div class="meta-row">
+    <span class="pill">15 questions</span>
+    <span class="pill">environ 3 minutes</span>
+    <span class="pill">1 à 5</span>
+    <span class="pill">Français</span>
+    <span class="pill">Perspective temporelle</span>
+    <span class="pill">Licence : incertaine</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="ztpi-15-perspective-temporelle.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>La ZTPI explore la manière dont une personne se rapporte au temps. La version courte à 15 items, proposée à partir de la validation française de la version à 54 items, comprend trois propositions pour chacune des cinq dimensions : passé positif, passé négatif, présent hédoniste, présent fataliste et futur. La personne indique, de 1 à 5, dans quelle mesure chaque proposition lui correspond.</p>
+    <p class="source-note">Affectation des items lue dans l’article : passé positif (1, 3, 6), passé négatif (2, 8, 14), présent hédoniste (7, 11, 13), présent fataliste (5, 9, 15), futur (4, 10, 12). Les dimensions ne sont pas des degrés de « bon » ou de « mauvais » rapport au temps : elles décrivent des orientations.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Un score par dimension : moyenne des trois items (de 1 à 5), sans item inversé. L’article ne propose ni score total ni seuil. Les moyennes publiées (écart-type) pour 253 jeunes adultes de 18 à 30 ans puis 160 adultes de 60 ans et plus, recrutés à Toulouse, sont : passé positif 3,65 (0,77) puis 3,88 (0,84) ; passé négatif 3,21 (0,94) puis 2,77 (1,01) ; présent hédoniste 3,49 (0,81) puis 2,94 (1,01) ; présent fataliste 2,17 (0,79) puis 2,45 (0,96) ; futur 3,35 (0,87) puis 3,82 (0,81).</p>
+    <p class="reserve">Ces repères sont des moyennes descriptives de deux groupes d’âge d’une seule ville universitaire (adultes âgés sans trouble cognitif au MMSE) : ce ne sont ni des percentiles ni des classes cliniques. La fidélité du présent fataliste est la plus faible (alpha de 0,50 ; les autres dimensions de 0,64 à 0,70). Le test-retest des cinq dimensions est de 0,77 à 0,85.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Les 15 items, la consigne et l’échelle de réponse sont lus dans l’annexe 1 de l’article de Fritsch et Cuervo-Lombard (2022), archive ouverte HAL (hal-04344596). Ces 15 items sont extraits de la version à 54 items validée par Apostolidis et Fieulaine (2004), dont l’échelle d’origine est celle de Zimbardo et Boyd (1999).</p>
+    <p class="reserve">Licence : incertaine. Aucune mention de droits d’usage n’a été trouvée dans l’article (archive HAL avec « HAL Authorization ») ; les conditions d’utilisation de l’échelle d’origine n’ont pas été lues.</p>
+    <p class="source-note">Références : Fritsch A., Cuervo-Lombard C. (2022). Échelle de temporalité : validation française d’une version courte de la Zimbardo Time Perspective Inventory (ZTPI). Psychologie Française, 67(1), 1-15. doi:10.1016/j.psfr.2021.02.004. Apostolidis T., Fieulaine N. (2004). Validation française de l’échelle de temporalité : The Zimbardo Time Perspective Inventory (ZTPI). Revue européenne de psychologie appliquée, 54, 207-217. Zimbardo P.G., Boyd J.N. (1999). Putting time in perspective: A valid, reliable individual-differences metric. Journal of Personality and Social Psychology, 77(6), 1271-1288.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

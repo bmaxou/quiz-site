@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SCS-SF : Auto-compassion, forme courte</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #85325C;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#85325C;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#41162B;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#85325C;background:#F4E6ED;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#41162B;border-color:#E0D9C9;}
+  .btn-primary{background:#85325C;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#85325C;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#41162B;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">SCS-SF : Échelle d’auto-compassion, forme courte</h1>
+    <p class="lead">12 énoncés sur la manière dont vous agissez envers vous-même dans les moments difficiles, à noter de 1 (presque jamais) à 5 (très souvent ou toujours).</p>
+    <p class="consigne">Dans les moments difficiles, quelle est la manière habituelle dont j’agis envers moi-même ?
+Lisez attentivement chaque affirmation avant de répondre.</p>
+    <p class="lang-note">Énoncés et réponses en français (adaptation française de Karras et collègues, France). Licence : incertaine.</p>
+    <div class="pill-row">
+      <span class="pill">12 questions</span>
+      <span class="pill">Presque jamais → Très souvent ou toujours</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Raes, Pommier, Neff et Van Gucht (2011), Clinical Psychology and Psychotherapy, 18, 250-255 ; adaptation française : Karras et collègues. Outil d'auto-évaluation : ne remplace pas un entretien clinique ni un bilan.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["Lorsque j’échoue à quelque chose d’important à mes yeux, je suis envahi(e) par un sentiment d’incompétence.", "J'essaye d'être compréhensif(ve) et patient(e) par rapport aux aspects de ma personnalité que je n'aime pas.", "Lorsqu'il m'arrive quelque chose de douloureux, j'essaie de voir tous les côtés de la situation.", "Lorsque je me sens déprimé(e), j’ai tendance à penser que la plupart des gens sont probablement plus heureux que moi.", "J’essaie de voir mes échecs comme faisant partie intégrante de la condition humaine.", "Lorsque je traverse des moments très difficiles, je m’accorde la bienveillance et la tendresse dont j’ai besoin.", "Lorsque quelque chose me contrarie, j’essaie de garder mon équilibre émotionnel.", "Lorsque j'échoue à quelque chose d'important à mes yeux, j'ai tendance à me sentir seul(e) face à mon échec.", "Lorsque je me sens déprimé(e), j’ai tendance à fixer mon attention sur tout ce qui ne va pas et à en être obsédé(e).", "Lorsque je ne me sens pas à la hauteur dans une situation, j’essaie de me rappeler que le sentiment d’être incompétent(e) est vécu par la plupart des gens.", "Je désapprouve et critique mes propres défauts et faiblesses.", "Je suis intolérant(e) et impatient(e) envers les aspects de ma personnalité que je n’aime pas."];
+  var G = [{"label": "", "opts": ["Presque jamais", "Rarement", "Parfois", "Souvent", "Très souvent ou toujours"], "vals": [1, 2, 3, 4, 5]}];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = null;              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var INV = [1, 4, 8, 9, 11, 12], LO = 1, HI = 5;
+    function val(k){ var v = answers[k-1][0]; if (v === 'NA') return null; return INV.indexOf(k) >= 0 ? (LO + HI - v) : v; }
+    function agg(list, m){ var s = 0, n = 0; list.forEach(function(k){ var v = val(k); if (v !== null){ s += v; n++; } }); if (n === 0) return null; return m === 'mean' ? s / n : s; }
+    var BL = [{"l": "Score total (somme des 12 items)", "it": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], "m": "sum", "d": 0, "r": "12 à 60", "x": 1}, {"l": "Moyenne des 12 items", "it": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], "m": "mean", "d": 2, "r": "1 à 5", "x": 1}];
+    var res = [], rows = '';
+    BL.forEach(function(b){ var v = agg(b.it, b.m); if (v !== null) v = v * b.x; res.push(v); rows += row(b.l + (b.r ? ' (' + b.r + ')' : ''), v === null ? '-' : v.toFixed(b.d).replace('.', ',')); });
+    html += '<table class=\"result-table\">' + rows + '</table>';
+    html += '<p class=\"result-text\">' + "Les énoncés 1, 4, 8, 9, 11 et 12 sont inversés avant le calcul. Plus le score est élevé, plus l’auto-compassion est élevée. Aucun seuil d’interprétation n’est donné par les sources lues." + '</p>';
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SCS-SF : Auto-compassion, forme courte</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#8D3561 0%,#E3B5CC 55%,#41162B 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#41162B;background:#F4E6ED;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #85325C;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#85325C;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#41162B;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">SCS-SF</span></div>
+
+  <h1 class="serif">Self-Compassion Scale – Short Form (SCS-SF), adaptation française</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">SCS-SF : Raes, Pommier, Neff et Van Gucht (2011) ; adaptation française de Karras, Csillik, Delhomme et Fenouillet (2019), France.</p>
+  <div class="meta-row">
+    <span class="pill">12 questions</span>
+    <span class="pill">Presque jamais → Très souvent ou toujours</span>
+    <span class="pill">Français</span>
+    <span class="pill">Auto-compassion</span>
+    <span class="pill">Auto-questionnaire</span>
+    <span class="pill">Licence incertaine</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="scs-sf-12.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>La SCS-SF est la forme courte, à 12 énoncés, de l’échelle d’auto-compassion de Neff. Elle donne un score global : plus il est élevé, plus la personne se traite avec bienveillance dans les moments difficiles. Il ne faut pas la confondre avec la version longue de l’échelle (SCS) déjà présente au catalogue.</p>
+    <p>Les énoncés français sont ceux utilisés dans la thèse de Marion Saly Karras (Université Paris Nanterre / Université Gustave Eiffel, 2022), auprès d’automobilistes français « tout-venant » ; l’adaptation française est attribuée à Karras, Csillik, Delhomme et Fenouillet (2019, communication orale).</p>
+    <p class="source-note">Consigne : la thèse donne « Dans les moments difficiles, quelle est la manière habituelle dont j’agis envers moi-même ? Lisez attentivement chaque affirmation avant de répondre. » suivie d’une phrase qui renvoie à la mise en page papier (« A droite de chaque énoncé… ») ; cette dernière phrase n’est pas reprise ici. Échelle : 1 = Presque jamais, 2 = Rarement, 3 = Parfois, 4 = Souvent, 5 = Très souvent ou toujours.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Les énoncés 1, 4, 8, 9, 11 et 12 (formulés négativement : jugement de soi, isolement, sur-identification) sont inversés (6 moins la réponse) ; le score total est la somme des 12 énoncés (12 à 60), la moyenne va de 1 à 5. Un score élevé indique une auto-compassion élevée.</p>
+    <p class="reserve">Cotation déduite : les numéros d’énoncés inversés ne sont pas écrits dans la thèse. Ils sont lus dans des articles ouverts sur la même forme courte (PMC11764450 : « 1, 4, 8, 9, 11, and 12 were reverse-scored » ; PMC13180581 et PMC13403448 : inversion des six énoncés négatifs puis moyenne des 12) et correspondent aux six énoncés négatifs du texte français.</p>
+    <p>Aucun seuil ni classe de score n’est donné par les sources lues. À titre descriptif, la thèse rapporte, chez 550 automobilistes français, un score moyen de 36,16 (écart-type 6,73), hommes 36,99 (6,14), femmes 35,41 (7,14) ; alpha de Cronbach .76.</p>
+    <p>Étalonnage français : non (FR-, provisoire, après recherches dans HAL et Europe PMC) : ces moyennes décrivent un échantillon particulier et ne sont pas des normes.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Les 12 énoncés, la consigne et l’échelle sont lus dans les annexes A et B de la thèse (identiques dans les deux annexes) ; la validation psychométrique de cette adaptation française n’a pas été lue (communication orale de 2019, non publiée).</p>
+    <p class="reserve">Licence : incertaine. Aucune mention de licence ni de permission n’a été trouvée dans la thèse pour cette échelle.</p>
+    <p class="source-note">Raes F, Pommier E, Neff KD, Van Gucht D (2011). Construction and validation of a short form of the Self-Compassion Scale. Clinical Psychology and Psychotherapy, 18, 250-255. Karras M, Csillik A, Delhomme P, Fenouillet F (2019). Empathy and Self-compassion in French Drivers’ Behaviors [communication orale], Second Positive Psychology Conference, Metz. Karras MS (2022). Ressources et vulnérabilités psychologiques des conducteurs « tout-venant » et infractionnistes. Thèse, Université de Nanterre – Paris X / Université Gustave Eiffel (NNT 2022PA100080).</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

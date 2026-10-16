@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vanderbilt : échelle NICHQ, forme enseignant (TDAH et comorbidités)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #855C32;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#855C32;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#412B16;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#855C32;background:#F4EDE6;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#412B16;border-color:#E0D9C9;}
+  .btn-primary{background:#855C32;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#855C32;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#412B16;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">Vanderbilt NICHQ : Forme enseignant</h1>
+    <p class="lead">Échelle <strong>remplie par l’enseignant</strong> à propos d’un élève : 35 symptômes (inattention, hyperactivité, opposition, conduite, anxiété/dépression) et 8 questions de performance scolaire.</p>
+    <p class="consigne">Hétéro-évaluation : l’enseignant remplit l’échelle pour un élève. Consigne du formulaire (en anglais) : « Directions: Each rating should be considered in the context of what is appropriate for the age of the child you are rating and should reflect that child’s behavior since the beginning of the school year. Please indicate the number of weeks or months you have been able to evaluate the behaviors. »</p>
+    <p class="lang-note">Questions en anglais, non traduites (aucune version française lue). Licence : requise (droits AAP / NICHQ, voir la fiche).</p>
+    <div class="pill-row">
+      <span class="pill">43 questions</span>
+      <span class="pill">10 minutes</span>
+      <span class="pill">Rempli par l’enseignant</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">NICHQ Vanderbilt Assessment Scale, forme enseignant (AAP/NICHQ, 2002) ; instructions de cotation (Caring for Children With ADHD, 2e éd.). Outil de dépistage : ne remplace pas un entretien clinique ni un bilan.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["Fails to give attention to details or makes careless mistakes in schoolwork", "Has difficulty sustaining attention to tasks or activities", "Does not seem to listen when spoken to directly", "Does not follow through on instructions and fails to finish schoolwork (not due to oppositional behavior or failure to understand)", "Has difficulty organizing tasks and activities", "Avoids, dislikes, or is reluctant to engage in tasks that require sustained mental effort", "Loses things necessary for tasks or activities (school assignments, pencils, or books)", "Is easily distracted by extraneous stimuli", "Is forgetful in daily activities", "Fidgets with hands or feet or squirms in seat", "Leaves seat in classroom or in other situations in which remaining seated is expected", "Runs about or climbs excessively in situations in which remaining seated is expected", "Has difficulty playing or engaging in leisure activities quietly", "Is “on the go” or often acts as if “driven by a motor”", "Talks excessively", "Blurts out answers before questions have been completed", "Has difficulty waiting in line", "Interrupts or intrudes on others (eg, butts into conversations/games)", "Loses temper", "Actively defies or refuses to comply with adult’s requests or rules", "Is angry or resentful", "Is spiteful and vindictive", "Bullies, threatens, or intimidates others", "Initiates physical fights", "Lies to obtain goods for favors or to avoid obligations (eg, “cons” others)", "Is physically cruel to people", "Has stolen items of nontrivial value", "Deliberately destroys others’ property", "Is fearful, anxious, or worried", "Is self-conscious or easily embarrassed", "Is afraid to try new things for fear of making mistakes", "Feels worthless or inferior", "Blames self for problems; feels guilty", "Feels lonely, unwanted, or unloved; complains that “no one loves him or her”", "Is sad, unhappy, or depressed", "Reading", "Mathematics", "Written expression", "Relationship with peers", "Following directions", "Disrupting class", "Assignment completion", "Organizational skills"];
+  var G = [];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = [[{"label": "Symptoms", "opts": ["Never", "Occasionally", "Often", "Very Often"], "vals": [0, 1, 2, 3]}], [{"label": "Symptoms", "opts": ["Never", "Occasionally", "Often", "Very Often"], "vals": [0, 1, 2, 3]}], [{"label": "Symptoms", "opts": ["Never", "Occasionally", "Often", "Very Often"], "vals": [0, 1, 2, 3]}], [{"label": "Symptoms", "opts": ["Never", "Occasionally", "Often", "Very Often"], "vals": [0, 1, 2, 3]}], [{"label": "Symptoms", "opts": ["Never", "Occasionally", "Often", "Very Often"], "vals": [0, 1, 2, 3]}], [{"label": "Symptoms", "opts": ["Never", "Occasionally", "Often", "Very Often"], "vals": [0, 1, 2, 3]}], [{"label": "Symptoms", "opts": ["Never", "Occasionally", "Often", "Very Often"], "vals": [0, 1, 2, 3]}], [{"label": "Symptoms", "opts": ["Never", "Occasionally", "Often", "Very Often"], "vals": [0, 1, 2, 3]}], [{"label": "Symptoms", "opts": ["Never", "Occasionally", "Often", "Very Often"], "vals": [0, 1, 2, 3]}], [{"label": "Symptoms", "opts": ["Never", "Occasionally", "Often", "Very Often"], "vals": [0, 1, 2, 3]}], [{"label": "Symptoms", "opts": ["Never", "Occasionally", "Often", "Very Often"], "vals": [0, 1, 2, 3]}], [{"label": "Symptoms", "opts": ["Never", "Occasionally", "Often", "Very Often"], "vals": [0, 1, 2, 3]}], [{"label": "Symptoms", "opts": ["Never", "Occasionally", "Often", "Very Often"], "vals": [0, 1, 2, 3]}], [{"label": "Symptoms", "opts": ["Never", "Occasionally", "Often", "Very Often"], "vals": [0, 1, 2, 3]}], [{"label": "Symptoms", "opts": ["Never", "Occasionally", "Often", "Very Often"], "vals": [0, 1, 2, 3]}], [{"label": "Symptoms", "opts": ["Never", "Occasionally", "Often", "Very Often"], "vals": [0, 1, 2, 3]}], [{"label": "Symptoms", "opts": ["Never", "Occasionally", "Often", "Very Often"], "vals": [0, 1, 2, 3]}], [{"label": "Symptoms", "opts": ["Never", "Occasionally", "Often", "Very Often"], "vals": [0, 1, 2, 3]}], [{"label": "Symptoms", "opts": ["Never", "Occasionally", "Often", "Very Often"], "vals": [0, 1, 2, 3]}], [{"label": "Symptoms", "opts": ["Never", "Occasionally", "Often", "Very Often"], "vals": [0, 1, 2, 3]}], [{"label": "Symptoms", "opts": ["Never", "Occasionally", "Often", "Very Often"], "vals": [0, 1, 2, 3]}], [{"label": "Symptoms", "opts": ["Never", "Occasionally", "Often", "Very Often"], "vals": [0, 1, 2, 3]}], [{"label": "Symptoms", "opts": ["Never", "Occasionally", "Often", "Very Often"], "vals": [0, 1, 2, 3]}], [{"label": "Symptoms", "opts": ["Never", "Occasionally", "Often", "Very Often"], "vals": [0, 1, 2, 3]}], [{"label": "Symptoms", "opts": ["Never", "Occasionally", "Often", "Very Often"], "vals": [0, 1, 2, 3]}], [{"label": "Symptoms", "opts": ["Never", "Occasionally", "Often", "Very Often"], "vals": [0, 1, 2, 3]}], [{"label": "Symptoms", "opts": ["Never", "Occasionally", "Often", "Very Often"], "vals": [0, 1, 2, 3]}], [{"label": "Symptoms", "opts": ["Never", "Occasionally", "Often", "Very Often"], "vals": [0, 1, 2, 3]}], [{"label": "Symptoms", "opts": ["Never", "Occasionally", "Often", "Very Often"], "vals": [0, 1, 2, 3]}], [{"label": "Symptoms", "opts": ["Never", "Occasionally", "Often", "Very Often"], "vals": [0, 1, 2, 3]}], [{"label": "Symptoms", "opts": ["Never", "Occasionally", "Often", "Very Often"], "vals": [0, 1, 2, 3]}], [{"label": "Symptoms", "opts": ["Never", "Occasionally", "Often", "Very Often"], "vals": [0, 1, 2, 3]}], [{"label": "Symptoms", "opts": ["Never", "Occasionally", "Often", "Very Often"], "vals": [0, 1, 2, 3]}], [{"label": "Symptoms", "opts": ["Never", "Occasionally", "Often", "Very Often"], "vals": [0, 1, 2, 3]}], [{"label": "Symptoms", "opts": ["Never", "Occasionally", "Often", "Very Often"], "vals": [0, 1, 2, 3]}], [{"label": "Academic Performance", "opts": ["Excellent", "Above Average", "Average", "Somewhat of a Problem", "Problematic"], "vals": [1, 2, 3, 4, 5]}], [{"label": "Academic Performance", "opts": ["Excellent", "Above Average", "Average", "Somewhat of a Problem", "Problematic"], "vals": [1, 2, 3, 4, 5]}], [{"label": "Academic Performance", "opts": ["Excellent", "Above Average", "Average", "Somewhat of a Problem", "Problematic"], "vals": [1, 2, 3, 4, 5]}], [{"label": "Classroom Behavioral Performance", "opts": ["Excellent", "Above Average", "Average", "Somewhat of a Problem", "Problematic"], "vals": [1, 2, 3, 4, 5]}], [{"label": "Classroom Behavioral Performance", "opts": ["Excellent", "Above Average", "Average", "Somewhat of a Problem", "Problematic"], "vals": [1, 2, 3, 4, 5]}], [{"label": "Classroom Behavioral Performance", "opts": ["Excellent", "Above Average", "Average", "Somewhat of a Problem", "Problematic"], "vals": [1, 2, 3, 4, 5]}], [{"label": "Classroom Behavioral Performance", "opts": ["Excellent", "Above Average", "Average", "Somewhat of a Problem", "Problematic"], "vals": [1, 2, 3, 4, 5]}], [{"label": "Classroom Behavioral Performance", "opts": ["Excellent", "Above Average", "Average", "Somewhat of a Problem", "Problematic"], "vals": [1, 2, 3, 4, 5]}]];              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var A = answers.map(function(a){ return a[0]; });
+    function cnt(a, b, f){ var n = 0; for (var k = a; k <= b; k++) if (f(A[k-1])) n++; return n; }
+    function sm(a, b){ var s = 0; for (var k = a; k <= b; k++) s += A[k-1]; return s; }
+    function ge2(v){ return v >= 2; }
+    var inat = cnt(1, 9, ge2), hyp = cnt(10, 18, ge2), tot = sm(1, 18), odd = cnt(19, 28, ge2), anx = cnt(29, 35, ge2);
+    var p45 = cnt(36, 43, function(v){ return v >= 4; }), p4 = cnt(36, 43, function(v){ return v === 4; }), p5 = cnt(36, 43, function(v){ return v === 5; });
+    var perfOK = (p4 >= 2 || p5 >= 1);
+    var mi = sm(1, 9) / 9, mh = sm(10, 18) / 9, mp = sm(36, 43) / 8;
+    var cI = inat >= 6 && perfOK, cH = hyp >= 6 && perfOK, cO = odd >= 3 && perfOK, cA = anx >= 3 && perfOK;
+    var cL = (A[35] === 4 && A[37] === 4) || A[35] === 5 || A[37] === 5;
+    function yn(b){ return b ? 'oui' : 'non'; }
+    function r2(x){ return (Math.round(x * 1000) / 1000 + 0.0000001).toFixed(2).replace('.', ','); }
+    html += '<table class="result-table">'
+      + row('Inattention : réponses 2 ou 3, questions 1 à 9 (sur 9)', inat)
+      + row('Hyperactivité/impulsivité : réponses 2 ou 3, questions 10 à 18 (sur 9)', hyp)
+      + row('Score total des symptômes, questions 1 à 18 (0 à 54)', tot)
+      + row('Moyenne inattention, questions 1 à 9 (0 à 3)', r2(mi))
+      + row('Moyenne hyperactivité/impulsivité, questions 10 à 18 (0 à 3)', r2(mh))
+      + row('Opposition/conduite : réponses 2 ou 3, questions 19 à 28 (sur 10)', odd)
+      + row('Anxiété/dépression : réponses 2 ou 3, questions 29 à 35 (sur 7)', anx)
+      + row('Performance : réponses 4 ou 5, questions 36 à 43 (sur 8)', p45)
+      + row('Score moyen de performance, questions 36 à 43 (1 à 5)', r2(mp))
+      + row('Critère inattention atteint (6 sur 9 et critère de performance)', yn(cI))
+      + row('Critère hyperactivité/impulsivité atteint (6 sur 9 et critère de performance)', yn(cH))
+      + row('Critères des deux présentations réunis (présentation combinée)', yn(cI && cH))
+      + row('Critère opposition/conduite atteint (3 sur 10 et critère de performance)', yn(cO))
+      + row('Critère anxiété/dépression atteint (3 sur 7 et critère de performance)', yn(cA))
+      + row('Critère troubles d’apprentissage (questions 36 et 38)', yn(cL))
+      + '</table>';
+    html += '<p class="result-text">Critère de performance : au moins 2 questions de performance (36 à 43) cotées 4, ou au moins 1 cotée 5. Ces critères reprennent l’instruction de cotation de la forme enseignant ; ils ne permettent pas de poser un diagnostic à eux seuls.</p>';
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vanderbilt : échelle NICHQ, forme enseignant (TDAH et comorbidités)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#8D6135 0%,#E3CCB5 55%,#412B16 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#412B16;background:#F4EDE6;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #855C32;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#855C32;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#412B16;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">Vanderbilt-E</span></div>
+
+  <h1 class="serif">NICHQ Vanderbilt Assessment Scale : Teacher Informant (43 questions)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">NICHQ Vanderbilt Assessment Scale : adaptée des Vanderbilt Rating Scales de Mark L. Wolraich ; © 2002 American Academy of Pediatrics et NICHQ.</p>
+  <div class="meta-row">
+    <span class="pill">43 questions</span>
+    <span class="pill">10 minutes</span>
+    <span class="pill">Rempli par l’enseignant</span>
+    <span class="pill">Anglais</span>
+    <span class="pill">TDAH · enfant</span>
+    <span class="pill">Licence : requise</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="vanderbilt-enseignant.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>L’échelle Vanderbilt du NICHQ, forme enseignant, comprend 35 questions sur des symptômes (questions 1 à 9 : inattention ; 10 à 18 : hyperactivité/impulsivité ; 19 à 28 : opposition et conduite ; 29 à 35 : anxiété et dépression) et 8 questions de performance (36 à 38 : performance scolaire ; 39 à 43 : comportement en classe). Les symptômes sont cotés de 0 (never) à 3 (very often), la performance de 1 (excellent) à 5 (problematic).</p>
+    <p class="source-note">Échelle <strong>remplie par l’enseignant</strong> (hétéro-évaluation d’un élève) ; les études de validation citées par l’instruction de cotation portent sur les enfants de 6 à 12 ans. Les champs d’identification, de période d’observation et de prise de médicament du formulaire papier ne sont pas reproduits.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Une réponse de 2 ou 3 à une question de symptôme reflète un comportement fréquent ; une réponse de 4 ou 5 à une question de performance reflète un problème. Inattention : au moins 6 réponses 2 ou 3 sur les questions 1 à 9 ; hyperactivité/impulsivité : au moins 6 sur les questions 10 à 18 ; opposition/conduite : au moins 3 sur les 10 questions 19 à 28 ; anxiété/dépression : au moins 3 sur les 7 questions 29 à 35 ; dans chaque cas, avec un critère de performance : un 4 sur au moins 2 des questions 36 à 43, ou un 5 sur au moins 1. Troubles d’apprentissage : un 4 aux deux questions 36 et 38, ou un 5 à l’une des deux. Pour le suivi, on calcule la moyenne des réponses par sous-ensemble (inattention, hyperactivité).</p>
+    <p class="reserve">L’instruction de cotation précise que ces échelles ne doivent pas être utilisées seules pour poser un diagnostic de TDAH, sans entretien avec au moins les parents et le patient. Aucune norme française n’a été trouvée (FR- provisoire) : les critères sont fondés sur le DSM, sans normes.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Questions et options lues dans le formulaire publié par le CHKD (chkd.org) ; critères lus dans l’instruction de cotation du kit « Caring for Children With ADHD » (2e édition, AAP), copie hébergée par rmu.edu. Questions non traduites : aucune version française n’a été lue. La mention de droits du formulaire : « Copyright ©2002 American Academy of Pediatrics and National Initiative for Children’s Healthcare Quality. Adapted from the Vanderbilt Rating Scales developed by Mark L. Wolraich, MD. »</p>
+    <p class="reserve">Licence : requise (droits d’auteur AAP / NICHQ ; aucune autorisation de reproduction retrouvée). Max a décidé de construire la page avec cette réserve signalée.</p>
+    <p class="source-note">Références : NICHQ Vanderbilt Assessment Scale : Teacher Informant (2002), American Academy of Pediatrics and National Initiative for Children’s Healthcare Quality, adaptée des Vanderbilt Rating Scales de Wolraich ML ; révision 03/03, HE0351. Scoring Instructions for NICHQ Vanderbilt Assessment Scales, Caring for Children With ADHD: A Resource Toolkit for Clinicians, 2nd Edition, American Academy of Pediatrics.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

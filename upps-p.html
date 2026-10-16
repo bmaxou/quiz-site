@@ -1,0 +1,715 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Échelle de comportement impulsif UPPS-P</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 14px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#2F6F8F;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .period{font-size:12.5px;font-weight:600;color:#2F6F8F;margin:0 0 8px;}
+  .q-text{font-size:16px;margin:0 0 6px;}
+  .q-ex{font-size:13px;color:#63695D;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;margin-top:14px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#2F6F8F;background:#E3F0F6;}
+  .num-in{width:140px;font-family:'Inter',sans-serif;font-size:16px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;background:#F4F1EA;color:#20241E;}
+  .num-lab{font-size:13px;color:#63695D;margin-left:8px;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#2F6F8F;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 16px;}
+  .sc-title{font-size:13px;font-weight:700;color:#2F6F8F;margin:18px 0 6px;}
+  .sc-row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-top:1px solid #EFEBE1;font-size:14px;}
+  .sc-row b{font-variant-numeric:tabular-nums;text-align:right;}
+  .sc-read{font-size:13px;color:#63695D;margin:0 0 6px;padding-left:2px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">Échelle de comportement impulsif UPPS-P</h1>
+    <p class="lead">Below are a number of statements that describe ways in which people act and think. For each statement, please indicate how much you agree or disagree with the statement. If you Agree Strongly circle 1, if you Agree Somewhat circle 2, if you Disagree somewhat circle 3, and if you Disagree Strongly circle 4. Be sure to indicate your agreement or disagreement for every statement.</p>
+    <p class="lang-note">Items en anglais (UPPS-P, 59 items, Lynam et al., 2006) : version française non retrouvée ici. La version originale à 45 items (UPPS, 2001) n’est pas reprise. Droits : « Licence requise : incertaine ».</p>
+    <div class="pill-row">
+    <span class="pill">59 questions</span>
+    <span class="pill">5 sous-échelles</span>
+    <span class="pill">moyennes de 1 à 4</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="period" id="period-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <p class="q-ex" id="q-ex"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="rows-all"></div>
+    <p class="result-text">Chaque sous-échelle est la moyenne de ses items après inversion des items concernés (1 = 4, 2 = 3, 3 = 2, 4 = 1) : une moyenne plus élevée signifie un comportement plus impulsif. Les auteurs recommandent d’exiger au moins 70 % des items répondus ; cette page demande toutes les réponses. Aucun étalonnage n’est repris ici.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">UPPS-P : Lynam, D. R., Smith, G. T., Whiteside, S. P., &amp; Cyders, M. A. (2006) ; d’après Whiteside, S. P., &amp; Lynam, D. R. (2001), Personality and Individual Differences, 30(4), 669-689. Outil d’évaluation, ne remplace pas une évaluation clinique.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var CFG = {
+ "items": [
+  {
+   "n": "1",
+   "t": "I have a reserved and cautious attitude toward life."
+  },
+  {
+   "n": "2",
+   "t": "I have trouble controlling my impulses."
+  },
+  {
+   "n": "3",
+   "t": "I generally seek new and exciting experiences and sensations."
+  },
+  {
+   "n": "4",
+   "t": "I generally like to see things through to the end."
+  },
+  {
+   "n": "5",
+   "t": "When I am very happy, I can’t seem to stop myself from doing things that can have bad consequences."
+  },
+  {
+   "n": "6",
+   "t": "My thinking is usually careful and purposeful."
+  },
+  {
+   "n": "7",
+   "t": "I have trouble resisting my cravings (for food, cigarettes, etc.)."
+  },
+  {
+   "n": "8",
+   "t": "I'll try anything once."
+  },
+  {
+   "n": "9",
+   "t": "I tend to give up easily."
+  },
+  {
+   "n": "10",
+   "t": "When I am in great mood, I tend to get into situations that could cause me problems."
+  },
+  {
+   "n": "11",
+   "t": "I am not one of those people who blurt out things without thinking."
+  },
+  {
+   "n": "12",
+   "t": "I often get involved in things I later wish I could get out of."
+  },
+  {
+   "n": "13",
+   "t": "I like sports and games in which you have to choose your next move very quickly."
+  },
+  {
+   "n": "14",
+   "t": "Unfinished tasks really bother me."
+  },
+  {
+   "n": "15",
+   "t": "When I am very happy, I tend to do things that may cause problems in my life."
+  },
+  {
+   "n": "16",
+   "t": "I like to stop and think things over before I do them."
+  },
+  {
+   "n": "17",
+   "t": "When I feel bad, I will often do things I later regret in order to make myself feel better now."
+  },
+  {
+   "n": "18",
+   "t": "I would enjoy water skiing."
+  },
+  {
+   "n": "19",
+   "t": "Once I get going on something I hate to stop."
+  },
+  {
+   "n": "20",
+   "t": "I tend to lose control when I am in a great mood."
+  },
+  {
+   "n": "21",
+   "t": "I don't like to start a project until I know exactly how to proceed."
+  },
+  {
+   "n": "22",
+   "t": "Sometimes when I feel bad, I can’t seem to stop what I am doing even though it is making me feel worse."
+  },
+  {
+   "n": "23",
+   "t": "I quite enjoy taking risks."
+  },
+  {
+   "n": "24",
+   "t": "I concentrate easily."
+  },
+  {
+   "n": "25",
+   "t": "When I am really ecstatic, I tend to get out of control."
+  },
+  {
+   "n": "26",
+   "t": "I would enjoy parachute jumping."
+  },
+  {
+   "n": "27",
+   "t": "I finish what I start."
+  },
+  {
+   "n": "28",
+   "t": "I tend to value and follow a rational, \"sensible\" approach to things."
+  },
+  {
+   "n": "29",
+   "t": "When I am upset I often act without thinking."
+  },
+  {
+   "n": "30",
+   "t": "Others would say I make bad choices when I am extremely happy about something."
+  },
+  {
+   "n": "31",
+   "t": "I welcome new and exciting experiences and sensations, even if they are a little frightening and unconventional."
+  },
+  {
+   "n": "32",
+   "t": "I am able to pace myself so as to get things done on time."
+  },
+  {
+   "n": "33",
+   "t": "I usually make up my mind through careful reasoning."
+  },
+  {
+   "n": "34",
+   "t": "When I feel rejected, I will often say things that I later regret."
+  },
+  {
+   "n": "35",
+   "t": "Others are shocked or worried about the things I do when I am feeling very excited."
+  },
+  {
+   "n": "36",
+   "t": "I would like to learn to fly an airplane."
+  },
+  {
+   "n": "37",
+   "t": "I am a person who always gets the job done."
+  },
+  {
+   "n": "38",
+   "t": "I am a cautious person."
+  },
+  {
+   "n": "39",
+   "t": "It is hard for me to resist acting on my feelings."
+  },
+  {
+   "n": "40",
+   "t": "When I get really happy about something, I tend to do things that can have bad consequences."
+  },
+  {
+   "n": "41",
+   "t": "I sometimes like doing things that are a bit frightening."
+  },
+  {
+   "n": "42",
+   "t": "I almost always finish projects that I start."
+  },
+  {
+   "n": "43",
+   "t": "Before I get into a new situation I like to find out what to expect from it."
+  },
+  {
+   "n": "44",
+   "t": "I often make matters worse because I act without thinking when I am upset."
+  },
+  {
+   "n": "45",
+   "t": "When overjoyed, I feel like I can’t stop myself from going overboard."
+  },
+  {
+   "n": "46",
+   "t": "I would enjoy the sensation of skiing very fast down a high mountain slope."
+  },
+  {
+   "n": "47",
+   "t": "Sometimes there are so many little things to be done that I just ignore them all."
+  },
+  {
+   "n": "48",
+   "t": "I usually think carefully before doing anything."
+  },
+  {
+   "n": "49",
+   "t": "When I am really excited, I tend not to think of the consequences of my actions."
+  },
+  {
+   "n": "50",
+   "t": "In the heat of an argument, I will often say things that I later regret."
+  },
+  {
+   "n": "51",
+   "t": "I would like to go scuba diving."
+  },
+  {
+   "n": "52",
+   "t": "I tend to act without thinking when I am really excited."
+  },
+  {
+   "n": "53",
+   "t": "I always keep my feelings under control."
+  },
+  {
+   "n": "54",
+   "t": "When I am really happy, I often find myself in situations that I normally wouldn’t be comfortable with."
+  },
+  {
+   "n": "55",
+   "t": "Before making up my mind, I consider all the advantages and disadvantages."
+  },
+  {
+   "n": "56",
+   "t": "I would enjoy fast driving."
+  },
+  {
+   "n": "57",
+   "t": "When I am very happy, I feel like it is ok to give in to cravings or overindulge."
+  },
+  {
+   "n": "58",
+   "t": "Sometimes I do impulsive things that I later regret."
+  },
+  {
+   "n": "59",
+   "t": "I am surprised at the things I do while in a great mood."
+  }
+ ],
+ "opts": [
+  [
+   "1 : Agree Strongly",
+   1
+  ],
+  [
+   "2 : Agree Some",
+   2
+  ],
+  [
+   "3 : Disagree Some",
+   3
+  ],
+  [
+   "4 : Disagree Strongly",
+   4
+  ]
+ ],
+ "scores": [
+  {
+   "label": "Urgence négative (Negative Urgency)",
+   "items": [
+    1,
+    6,
+    11,
+    16,
+    21,
+    28,
+    33,
+    38,
+    43,
+    49,
+    52,
+    57
+   ],
+   "rev": [
+    1,
+    6,
+    11,
+    16,
+    21,
+    28,
+    33,
+    38,
+    43,
+    49,
+    57
+   ],
+   "revSum": 5,
+   "method": "mean",
+   "range": "1 à 4"
+  },
+  {
+   "label": "Manque de préméditation (lack of Premeditation)",
+   "items": [
+    0,
+    5,
+    10,
+    15,
+    20,
+    27,
+    32,
+    37,
+    42,
+    47,
+    54
+   ],
+   "revSum": 5,
+   "method": "mean",
+   "range": "1 à 4"
+  },
+  {
+   "label": "Manque de persévérance (lack of Perseverance)",
+   "items": [
+    3,
+    8,
+    13,
+    18,
+    23,
+    26,
+    31,
+    36,
+    41,
+    46
+   ],
+   "rev": [
+    8,
+    46
+   ],
+   "revSum": 5,
+   "method": "mean",
+   "range": "1 à 4"
+  },
+  {
+   "label": "Recherche de sensations (Sensation Seeking)",
+   "items": [
+    2,
+    7,
+    12,
+    17,
+    22,
+    25,
+    30,
+    35,
+    40,
+    45,
+    50,
+    55
+   ],
+   "rev": [
+    2,
+    7,
+    12,
+    17,
+    22,
+    25,
+    30,
+    35,
+    40,
+    45,
+    50,
+    55
+   ],
+   "revSum": 5,
+   "method": "mean",
+   "range": "1 à 4"
+  },
+  {
+   "label": "Urgence positive (Positive Urgency)",
+   "items": [
+    4,
+    9,
+    14,
+    19,
+    24,
+    29,
+    34,
+    39,
+    44,
+    48,
+    51,
+    53,
+    56,
+    58
+   ],
+   "rev": [
+    4,
+    9,
+    14,
+    19,
+    24,
+    29,
+    34,
+    39,
+    44,
+    48,
+    51,
+    53,
+    56,
+    58
+   ],
+   "revSum": 5,
+   "method": "mean",
+   "range": "1 à 4"
+  }
+ ],
+ "qword": "Question",
+ "next": "Suivant",
+ "seeResult": "Voir le résultat"
+};
+  var items = CFG.items;
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function active(i){
+    var c = items[i].c;
+    if(!c) return true;
+    return c.anyOf.some(function(j){ return answers[j] !== null && answers[j] > (c.gt || 0); });
+  }
+  function nextIdx(i){ var j = i + 1; while(j < items.length && !active(j)) j++; return j; }
+  function prevIdx(i){ var j = i - 1; while(j >= 0 && !active(j)) j--; return j; }
+  function position(i){
+    var k = 0, tot = 0;
+    for(var j = 0; j < items.length; j++){ if(active(j)){ tot++; if(j <= i) k++; } }
+    return [k, tot];
+  }
+  function optsOf(i){ return items[i].o || CFG.opts; }
+
+  function renderQuestion(){
+    var pos = position(idx);
+    var it = items[idx];
+    document.getElementById('progress-text').textContent = (it.n ? CFG.qword + ' ' + it.n + ' : ' : '') + pos[0] + ' / ' + pos[1];
+    document.getElementById('period-text').textContent = it.p || '';
+    document.getElementById('q-text').textContent = it.t;
+    document.getElementById('q-ex').textContent = it.x || '';
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    if(it.num){
+      var inp = document.createElement('input');
+      inp.type = 'number'; inp.min = 0; inp.max = 365; inp.step = 1; inp.className = 'num-in';
+      inp.value = answers[idx] === null ? '' : answers[idx];
+      inp.addEventListener('input', function(){
+        var v = inp.value.trim();
+        if(v === '' || !/^\d+$/.test(v) || +v > 365){ answers[idx] = null; } else { answers[idx] = +v; }
+        document.getElementById('btn-next').disabled = answers[idx] === null;
+      });
+      row.appendChild(inp);
+      var lab = document.createElement('span'); lab.className = 'num-lab'; lab.textContent = it.num; row.appendChild(lab);
+    } else {
+      optsOf(idx).forEach(function(o){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx] === o[1] ? ' selected' : '');
+        d.textContent = o[0];
+        d.addEventListener('click', function(){ answers[idx] = o[1]; renderQuestion(); });
+        row.appendChild(d);
+      });
+    }
+    document.getElementById('btn-prev').disabled = prevIdx(idx) < 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = nextIdx(idx) >= items.length ? CFG.seeResult : CFG.next;
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    var p = prevIdx(idx);
+    if (p >= 0){ idx = p; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    var n = nextIdx(idx);
+    if (n < items.length){ idx = n; renderQuestion(); } else { showResult(); }
+  });
+
+  function compute(def){
+    var s = 0, k = 0, flagged = [];
+    def.items.forEach(function(i){
+      if(!active(i) || answers[i] === null) return;
+      var v = answers[i];
+      if(def.rev && def.rev.indexOf(i) >= 0) v = def.revSum - v;
+      s += v; k++;
+      if(def.flag && v >= 1) flagged.push(items[i].n);
+    });
+    return {sum: s, n: k, flagged: flagged};
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var box = document.getElementById('rows-all');
+    box.innerHTML = '';
+    function row(a, b){
+      var d = document.createElement('div'); d.className = 'sc-row';
+      var x = document.createElement('span'); x.textContent = a;
+      var y = document.createElement('b'); y.textContent = b;
+      d.appendChild(x); d.appendChild(y); box.appendChild(d);
+    }
+    function read(t){
+      var p = document.createElement('p'); p.className = 'sc-read'; p.textContent = t; box.appendChild(p);
+    }
+    CFG.scores.forEach(function(def){
+      if(def.title){
+        var t = document.createElement('p'); t.className = 'sc-title'; t.textContent = def.title; box.appendChild(t);
+      }
+      var r = compute(def);
+      if(!r.n){ row(def.label, '-'); return; }
+      var val, txt;
+      if(def.method === 'mean'){
+        val = r.sum / r.n; txt = val.toFixed(2).replace('.', ',') + ' (moyenne, ' + def.range + ')';
+      } else {
+        val = r.sum; txt = val + ' / ' + def.max;
+        if(def.norm){
+          var nv = Math.round((val - def.norm.min) / (def.norm.max - def.norm.min) * 100);
+          txt = val + ' / ' + def.max + ' : transformé 0-100 : ' + nv;
+        }
+      }
+      if(def.raw){ txt = val + (def.unit || ''); }
+      row(def.label, txt);
+      if(def.flag && r.flagged.length){ read(def.flagLabel + ' ' + r.flagged.join(', ') + '.'); }
+      if(def.bands){
+        def.bands.forEach(function(b){ if(val >= b[0] && val <= b[1]){ read(b[2]); } });
+      }
+      if(def.note){ read(def.note); }
+    });
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Échelle de comportement impulsif UPPS-P</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#8A5A9C 0%,#E3CFEC 55%,#432452 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,245,235,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#123B4F;background:#E3F0F6;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#2F6F8F;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#123B4F;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">UPPS-P</span></div>
+
+  <h1 class="serif">Échelle de comportement impulsif UPPS-P</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">UPPS-P Impulsive Behavior Scale (Lynam, Smith, Whiteside &amp; Cyders, 2006) : cinq voies de l’impulsivité</p>
+  <div class="meta-row">
+    <span class="pill">59 questions</span>
+    <span class="pill">5 sous-échelles</span>
+    <span class="pill">moyennes de 1 à 4</span>
+    <span class="pill">Anglais</span>
+    <span class="pill">Licence requise : incertaine</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="upps-p.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l'outil</h2>
+    <p>L’UPPS-P est la version révisée à 59 items de l’échelle UPPS (Whiteside &amp; Lynam, 2001). Elle évalue cinq dimensions de l’impulsivité : urgence négative, manque de préméditation, manque de persévérance, recherche de sensations et urgence positive (ajoutée en 2006). Les réponses vont de 1 (tout à fait d’accord) à 4 (pas du tout d’accord).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque sous-échelle se calcule comme la moyenne de ses items, après inversion des items marqués (R) : urgence négative = items 2, 7, 12, 17, 22, 29, 34, 39, 44, 50, 58 inversés et 53 non inversé ; préméditation = items 1, 6, 11, 16, 21, 28, 33, 38, 43, 48, 55 (aucun inversé) ; persévérance = items 4, 9 (R), 14, 19, 24, 27, 32, 37, 42, 47 (R) ; recherche de sensations = items 3, 8, 13, 18, 23, 26, 31, 36, 41, 46, 51, 56 (tous inversés) ; urgence positive = items 5, 10, 15, 20, 25, 30, 35, 40, 45, 49, 52, 54, 57, 59 (tous inversés). Un score plus élevé indique plus d’impulsivité.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p><strong>Licence requise : incertaine.</strong> Les conditions de reproduction de l’UPPS-P n’ont pas été vérifiées auprès des auteurs (documents diffusés par les auteurs eux-mêmes et par des dépôts de recherche) : statut « incertaine ». Instrument construit ici conformément à la décision du 30/09/2026 ; la diffusion publique reste soumise à vérification des droits.</p>
+    <p class="source-note">Texte des 59 items, échelle de réponse et clé de cotation : « UPPS-P 59-item version », dépôt NIDDK (repository.niddk.nih.gov), PDF lu en entier ; items vérifiés par script. Le nombre d’items par sous-échelle a été recoupé avec le manuel technique Millisecond (UPPS 45 items). Version française non retrouvée ici.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

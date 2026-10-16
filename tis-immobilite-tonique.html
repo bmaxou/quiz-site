@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TIS : Échelle d’immobilité tonique</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #853239;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#853239;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#411619;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#853239;background:#F4E6E7;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#411619;border-color:#E0D9C9;}
+  .btn-primary{background:#853239;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#853239;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#411619;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">TIS : Échelle d’immobilité tonique (10 items)</h1>
+    <p class="lead">10 propositions, de 0 à 6, sur le dernier événement vécu comme menaçant (menace vitale ou agression sexuelle). Auto-questionnaire pour adulte.</p>
+    <p class="consigne">Durant le dernier évènement que vous avez vécu comme particulièrement stressant / menaçant / angoissant, impliquant une menace vitale ou une agression sexuelle, lisez chacune des propositions suivantes et évaluez-les :</p>
+    <p class="lang-note">Questions en français (traduction d’un mémoire de médecine, non validée psychométriquement). Licence requise : incertaine.</p>
+    <div class="pill-row">
+      <span class="pill">10 propositions</span>
+      <span class="pill">Échelle de 0 à 6</span>
+      <span class="pill">Score de 0 à 60</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Forsyth, Marx, Fusé, Heidt et Gallup (2000), Tonic Immobility Scale ; traduction française : Fauvre (Nantes, 2022). Outil de dépistage/d’auto-évaluation : ne remplace pas un entretien clinique ni un bilan.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["Évaluez dans quelle mesure vous vous êtes senti(e) comme « immobilisé(e) » ou paralysé(e) pendant votre expérience plus récente ?", "Évaluez dans quelle mesure vous vous êtes senti(e) limité(e) dans vos mouvements pendant cet évènement, sans en avoir été empêché(e) pour autant ?", "Évaluez à quel point votre corps tremblait pendant cet événement ?", "Évaluez dans quelle mesure vous vous êtes senti(e) incapable d’appeler à l’aide ou de crier pendant cet évènement ?", "Évaluez dans quelle mesure vous vous êtes senti(e) comme engourdi(e) ou sans douleur pendant cet événement ?", "Évaluez dans quelle mesure vous avez eu froid pendant cet événement ?", "Évaluez dans quelle mesure vous avez ressenti de la peur / de la panique pendant cet événement ?", "Évaluez dans quelle mesure vous avez eu peur pour votre vie ou que vous avez pensé mourir pendant cet événement ?", "Évaluez dans quelle mesure vous vous êtes senti(e) détaché(e) de vous-même pendant cet événement ?", "Évaluez dans quelle mesure vous vous êtes senti(e) détaché(e) de ce qui se passait autour de vous pendant cet événement ?"];
+  var G = [{"label": "", "opts": ["0 (Pas du tout)", "1", "2", "3", "4", "5", "6 (Extrêmement)"], "vals": [0, 1, 2, 3, 4, 5, 6]}];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = null;              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var INV = [], LO = 0, HI = 6;
+    function val(k){ var v = answers[k-1][0]; if (v === 'NA') return null; return INV.indexOf(k) >= 0 ? (LO + HI - v) : v; }
+    function agg(list, m){ var s = 0, n = 0; list.forEach(function(k){ var v = val(k); if (v !== null){ s += v; n++; } }); if (n === 0) return null; return m === 'mean' ? s / n : s; }
+    var BL = [{"l": "Score total", "it": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], "m": "sum", "d": 0, "r": "0 à 60", "x": 1}, {"l": "Symptômes d’immobilité physique (items 1 à 6)", "it": [1, 2, 3, 4, 5, 6], "m": "sum", "d": 0, "r": "0 à 36", "x": 1}, {"l": "Symptômes de peur (items 7 et 8)", "it": [7, 8], "m": "sum", "d": 0, "r": "0 à 12", "x": 1}, {"l": "Déréalisation / dépersonnalisation (items 9 et 10)", "it": [9, 10], "m": "sum", "d": 0, "r": "0 à 12", "x": 1}];
+    var res = [], rows = '';
+    BL.forEach(function(b){ var v = agg(b.it, b.m); if (v !== null) v = v * b.x; res.push(v); rows += row(b.l + (b.r ? ' (' + b.r + ')' : ''), v === null ? '-' : v.toFixed(b.d).replace('.', ',')); });
+    html += '<table class=\"result-table\">' + rows + '</table>';
+    html += '<p class=\"result-text\">' + "Aucun seuil validé en français : voir la fiche. Plus le score est élevé, plus l’immobilité tonique rapportée est marquée." + '</p>';
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TIS : Échelle d’immobilité tonique</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#8D353D 0%,#E3B5B9 55%,#411619 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#411619;background:#F4E6E7;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #853239;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#853239;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#411619;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">TIS</span></div>
+
+  <h1 class="serif">Échelle d’immobilité tonique (Tonic Immobility Scale, TIS)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">TIS : Forsyth, Marx, Fusé, Heidt et Gallup (2000) ; traduction française de M. Fauvre et de l’équipe du CHU de Nantes (mémoire de médecine, 2022).</p>
+  <div class="meta-row">
+    <span class="pill">10 propositions</span>
+    <span class="pill">Échelle de 0 à 6</span>
+    <span class="pill">Score de 0 à 60</span>
+    <span class="pill">Français</span>
+    <span class="pill">Trauma</span>
+    <span class="pill">Auto-questionnaire</span>
+    <span class="pill">Licence : incertaine</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="tis-immobilite-tonique.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>La TIS explore l’immobilité tonique, réaction de paralysie involontaire décrite pendant des événements perçus comme menaçants (menace vitale, agression sexuelle). La personne évalue, de 0 à 6, dans quelle mesure chacune des 10 propositions correspond au dernier événement qu’elle a vécu comme particulièrement stressant, menaçant ou angoissant.</p>
+    <p class="source-note">Seules les deux extrémités de l’échelle sont libellées dans la source (0 : « Pas du tout » ; 6 : « Extrêmement ») : les chiffres 1 à 5 ne portent pas de libellé.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Les scores des 10 items sont additionnés ; aucun item n’est inversé. Le score total va de 0 à 60. Le mémoire regroupe les items en symptômes physiques (items 1 à 6, de 0 à 36), symptômes de peur (items 7 et 8, de 0 à 12) et symptômes de déréalisation / dépersonnalisation (items 9 et 10, de 0 à 12) ; la page affiche ces trois sous-totaux.</p>
+    <p class="reserve">Aucun seuil n’est validé en français. Le mémoire cite la littérature (Forsyth ; Fusé ; Reichenheim) : un seuil « égal ou supérieur à la moyenne théorique sur l'échelle utilisée » et une immobilité « plus extrême » à « au moins cinq points au-dessus de la moyenne théorique ». La valeur numérique de cette moyenne théorique n’est pas écrite dans le mémoire : la page n’affiche donc aucun seuil. Les 6 patientes de l’étude (stress post-traumatique) avaient des scores totaux de 26 à 52 : effectif trop faible pour servir de norme.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Les items, la consigne et l’échelle sont lus dans la traduction française reproduite en annexe d’un mémoire de médecine (Nantes, 2022). Cette traduction ne repose que sur une validité apparente auprès de 6 patientes ; elle n’a pas été validée psychométriquement. L’item 1 conserve la formulation de la source (« votre expérience plus récente »). L’item 2 et l’item 8 diffèrent un peu de la version anglaise reproduite dans le mémoire (formulation de la traduction).</p>
+    <p class="reserve">Licence : incertaine. Aucune mention de licence ni de droits n&#x27;a été trouvée sur la traduction française. Le mémoire indique : « Forsyth n’a jamais répondu à nos sollicitations pour participer au processus de traduction. » L&#x27;échelle originale est présentée comme « Forsyth, Marx, Fusé, Heidt, Gallup. The Tonic Immobility Scale. 2000 » (référence 63 du mémoire).</p>
+    <p class="source-note">Références : Fauvre M. Traduction française de l’échelle d’immobilité tonique chez des patients souffrant d’un trouble de stress post-traumatique : étude de la validité apparente. Médecine humaine et pathologie. Mémoire, Université de Nantes, 2022. HAL dumas-03905789. Forsyth JP, Marx B, Fusé T, Heidt J, Gallup GG. The Tonic Immobility Scale. 2000 (référence 63 du mémoire). Reichenheim M, Souza W, Coutinho ESF, Figueira I, Quintana MI, de Mello MF, et al. Structural Validity of the Tonic Immobility Scale in a Population Exposed to Trauma: Evidence from Two Large Brazilian Samples. PLoS ONE. 2014;9(4):e94367.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>
