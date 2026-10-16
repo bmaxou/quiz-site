@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CTI : Cognitive Triad Inventory (anglais)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #328570;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#328570;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#164136;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#328570;background:#E6F4F1;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#164136;border-color:#E0D9C9;}
+  .btn-primary{background:#328570;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#328570;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#164136;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">CTI : Cognitive Triad Inventory : vision de soi, du monde et du futur (items en anglais)</h1>
+    <p class="lead">36 énoncés en anglais sur ce que vous pensez en ce moment de vous-même, du monde et de votre avenir. Indiquez votre degré d'accord avec chacun.</p>
+    <p class="consigne">This inventory contains ideas that people have at a given moment. Read each of these ideas and decide whether or not you agree with them. Choose the answers that show what you are thinking now. Give an answer for each statement, even if you are not completely sure of your answer. Give the answers quickly, without thinking too much.</p>
+    <p class="lang-note">Énoncés en anglais, non traduits. Cotation déduite (sens des réponses) : voir la fiche. Licence : incertaine.</p>
+    <div class="pill-row">
+      <span class="pill">36 énoncés (30 cotés)</span>
+      <span class="pill">6 minutes</span>
+      <span class="pill">7 niveaux d&#x27;accord</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Beckham et al. (1986) ; Corcoran et Fischer (2000) ; énoncés reproduits dans Puia et al. (2025), BMC Psychology. Outil de dépistage/d'auto-évaluation : ne remplace pas un entretien clinique ni un bilan.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["I have many talents and skills.", "My job (housework, schoolwork, daily duties) is unpleasant.", "Most people are friendly and helpful.", "Nothing is likely to work out for me.", "I am a failure.", "I like to think about the good things that lie ahead for me.", "I do my work (job, schoolwork, housework) adequately.", "The people I know help me when need it.", "I expect that things will be going very well for me a few years from now.", "I have messed up almost all the important relationships I have ever had.", "The future holds a lot of excitement for me.", "My daily activities are fun and rewarding.", "I can't do anything right.", "People like me.", "There is nothing left in my life to look forward to.", "My current problems or concerns will always be there in one way or another.", "I am as adequate as other people I know.", "The world is a very hostile place.", "There is no reason for me to be hopeful about my future.", "The important people in my life are helpful and supportive.", "I hate myself.", "I will overcome my problems.", "Bad things happen to me a lot.", "I have a spouse or friend who is warm and supportive.", "I can do a lot of things well.", "My future is simply too awful to think about.", "My family doesn't care what happens to me.", "Things will work out well for me in the future.", "I am guilty of a great many things.", "No matter what I do, others make it difficult for me to get what I need.", "I am a worthwhile human being.", "There is nothing to look forward to in the years ahead.", "I like myself.", "I am faced with many difficulties.", "I have serious flaws in my character.", "I expect to be content and satisfied as the years go by."];
+  var G = [{"label": "", "opts": ["Strongly agree", "Mostly agree", "Weak agreement", "Neutral (neither agree nor disagree)", "Weak disagreement", "Mostly disagree", "Totally disagree"], "vals": [7, 6, 5, 4, 3, 2, 1]}];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = null;              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var SC = {"self": {"plus": [17, 25, 31, 33], "minus": [5, 10, 13, 21, 29, 35], "const": 48}, "world": {"plus": [3, 8, 12, 20, 24], "minus": [18, 23, 27, 30, 34], "const": 40}, "fut": {"plus": [6, 9, 11, 28, 36], "minus": [15, 16, 19, 26, 32], "const": 40}};
+    function sub(d){ var t = d.const; d.plus.forEach(function(k){ t += answers[k-1][0] - 0; }); d.minus.forEach(function(k){ t -= answers[k-1][0]; }); return t; }
+    var rows = row('Vision de soi (10 à 70)', String(sub(SC.self))) + row('Vision du monde (10 à 70)', String(sub(SC.world))) + row('Vision du futur (10 à 70)', String(sub(SC.fut)));
+    html += '<table class=\"result-table\">' + rows + '</table>';
+    html += '<p class=\"result-text\">Un score élevé indique une vision plus positive de soi, du monde ou du futur ; un score bas, une vision plus négative. Aucun seuil n’est publié. Repères de l’étude de validation roumaine (N = 675 adultes) : vision de soi 60,10 ± 8,24 ; du monde 51,04 ± 8,02 ; du futur 54,78 ± 8,24 (moyennes ± écarts-types).</p>';
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CTI : Cognitive Triad Inventory (anglais)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#358D77 0%,#B5E3D7 55%,#164136 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#164136;background:#E6F4F1;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #328570;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#328570;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#164136;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">CTI</span></div>
+
+  <h1 class="serif">Cognitive Triad Inventory (CTI) : inventaire de la triade cognitive de Beck, 36 énoncés (anglais)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">CTI : Beckham, Leber, Watkins, Boyer et Cook (1986) ; trois sous-échelles (vision de soi, du monde, du futur) correspondant à la triade cognitive de Beck. Énoncés anglais d'origine non traduits.</p>
+  <div class="meta-row">
+    <span class="pill">36 énoncés (30 cotés)</span>
+    <span class="pill">6 minutes</span>
+    <span class="pill">7 niveaux d&#x27;accord</span>
+    <span class="pill">Anglais (non traduit)</span>
+    <span class="pill">Cognitions dépressives</span>
+    <span class="pill">Licence requise : incertaine</span>
+    <span class="pill">Cotation déduite</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="cti-triade-cognitive-beck-en.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>Le CTI mesure les trois composantes de la triade cognitive de Beck : l'image de soi, la vision du monde et la vision de l'avenir. Il comprend 36 énoncés, dont 30 sont cotés en trois sous-échelles de 10 énoncés (vision de soi, du monde, du futur) ; les énoncés 1, 2, 4, 7, 14 et 22 sont des énoncés de remplissage qui ne sont pas cotés.</p>
+    <p class="source-note">Énoncés anglais d'origine, lus dans le matériel supplémentaire d'un article de validation roumaine ; la page est en anglais non traduit.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque énoncé est noté de 1 à 7. Les signes indiqués par le mode d'emploi (Corcoran et Fischer, 2000) sont : vision de soi : -5, -10, -13, +17, -21, +25, -29, +31, +33, -35, plus 48 ; vision du monde : +3, +8, +12, -18, +20, -23, +24, -27, -30, -34, plus 40 ; vision du futur : +6, +9, +11, -15, -16, -19, -26, +28, -32, +36, plus 40. Chaque sous-score est la somme des énoncés « + » moins celle des énoncés « - », plus la constante, soit de 10 à 70. Selon le mode d'emploi, des scores élevés correspondent à une vision positive de soi, du monde et du futur, des scores bas à une vision négative.</p>
+    <p class="reserve">Cotation déduite : le matériel supplémentaire annonce « 1 = strongly agree » à « 7 = totally disagree », mais ses signes de cotation ne donnent « score élevé = vision positive » que si 7 correspond à l'accord. La page affiche les niveaux de réponse dans l'ordre de la source et applique le sens « un accord avec un énoncé positif augmente le score, un accord avec un énoncé négatif le diminue », conforme à la phrase d'interprétation du mode d'emploi. Aucun seuil n'est publié ; l'échantillon de référence est roumain (N = 675).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Licence : incertaine. L'article et son matériel supplémentaire sont en libre accès (BMC Psychology), mais aucune autorisation de reproduction du CTI (Beckham et al., 1986) n'a été retrouvée. Version anglaise jamais traduite par ce site ; un énoncé comporte une faute de la source (« when need it », énoncé 8).</p>
+    <p class="reserve">Étalonnage : FR- (provisoire, aucune norme française trouvée) ; seules des moyennes d'un échantillon roumain sont publiées. Cet outil explore des cognitions dépressives (par exemple « I hate myself ») : un score bas appelle une évaluation clinique, il n'établit pas un diagnostic.</p>
+    <p class="source-note">Puia AM, Mihalcea A, Rotărescu VȘ. The Cognitive Triad Inventory (CTI) psychometric properties on a Romanian sample. BMC Psychology. 2025 (matériel supplémentaire 2). Beckham EE, Leber WR, Watkins JT, Boyer JL, Cook M. Development of an instrument to measure Beck's cognitive triad: the Cognitive Triad Inventory. Journal of Consulting and Clinical Psychology. 1986;54:566-567. Corcoran K, Fischer J. Measures for Clinical Practice: A Sourcebook (3rd ed.). New York: Free Press; 2000.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

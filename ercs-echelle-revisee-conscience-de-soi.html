@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ERCS : Échelle révisée de conscience de soi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #327785;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#327785;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#163A41;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#327785;background:#E6F2F4;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#163A41;border-color:#E0D9C9;}
+  .btn-primary{background:#327785;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#327785;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#163A41;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">ERCS : Échelle révisée de conscience de soi</h1>
+    <p class="lead">Vingt-deux énoncés sur l’attention portée à soi-même, à son image et à la gêne en public, réponses de 0 à 3 : trois scores (conscience de soi privée, publique, anxiété sociale).</p>
+    <p class="consigne">Indiquez à quel point les caractéristiques ou descriptions suivantes s&#x27;appliquent à vous.</p>
+    <p class="lang-note">Questions en français (version canadienne-française lue dans une annexe de thèse ; quelques coquilles de la source sont conservées). Licence requise : incertaine.</p>
+    <div class="pill-row">
+      <span class="pill">22 questions</span>
+      <span class="pill">Réponses de 0 à 3</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Scheier &amp; Carver (1985) ; Pelletier &amp; Vallerand (1990), Revue canadienne des sciences du comportement. Outil d’auto-évaluation : ne remplace pas un entretien clinique ni un bilan.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["J'essaie continuellement de me comprendre.", "Je me préoccupe de la manière dont je fais les choses.", "Dans les situations nouvelles, j'ai besoin de temps pour surmonter ma timidité.", "Je réfléchis beaucoup sur moi-même.", "Je me préoccupe beaucoup de la façon dont je me présente aux autres.", "Mes rêveries sont souvent à mon sujet.", "C'est difficile pour moi de travailler lorsque quelqu'un m'observe.", "Je ne m'analyse jamais de près.", "Je deviens facilement embarassé-e.", "Je suis soucieux-se de mon apparence.", "Il m'est facile de parler à des étrangers.", "Je suis généralement attentif-ve à mes sentiments.", "Je me soucie généralement de faire bonne impression.", "J'examine constamment mes raisons d'agir.", "Lorsque je parle devant un groupe, je me sens nerveux-se.", "Avant de quitter la maison, je vérifie mon apparence.", "Je prends parfois un certain recul (dans ma tête) afin de mieux m'examiner.", "Je me préoccupe de ce que les gens pensent de moi.", "Je détecte rapidement mes changements d'humeur.", "D'habitude je suis conscient-e de mon apparence.", "Je sais comment je fonctionne mentalement lorsque j'essaie de solutionner un problème.", "Les grands groupes me mettent mal à l'aise."];
+  var G = [{"label": "", "opts": ["Pas du tout semblable à moi", "Un peu semblable à moi", "Assez semblable à moi", "Très semblable à moi"], "vals": [0, 1, 2, 3]}];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = null;              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var INV = [8, 11], LO = 0, HI = 3;
+    function val(k){ var v = answers[k-1][0]; if (v === 'NA') return null; return INV.indexOf(k) >= 0 ? (LO + HI - v) : v; }
+    function agg(list, m){ var s = 0, n = 0; list.forEach(function(k){ var v = val(k); if (v !== null){ s += v; n++; } }); if (n === 0) return null; return m === 'mean' ? s / n : s; }
+    var BL = [{"l": "Conscience de soi privée", "it": [1, 4, 6, 8, 12, 14, 17, 19, 21], "m": "sum", "d": 0, "r": "0 à 27", "x": 1}, {"l": "Conscience de soi publique", "it": [2, 5, 10, 13, 16, 18, 20], "m": "sum", "d": 0, "r": "0 à 21", "x": 1}, {"l": "Anxiété sociale", "it": [3, 7, 9, 11, 15, 22], "m": "sum", "d": 0, "r": "0 à 18", "x": 1}];
+    var res = [], rows = '';
+    BL.forEach(function(b){ var v = agg(b.it, b.m); if (v !== null) v = v * b.x; res.push(v); rows += row(b.l + (b.r ? ' (' + b.r + ')' : ''), v === null ? '-' : v.toFixed(b.d).replace('.', ',')); });
+    html += '<table class=\"result-table\">' + rows + '</table>';
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ERCS : Échelle révisée de conscience de soi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#357E8D 0%,#B5DBE3 55%,#163A41 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#163A41;background:#E6F2F4;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #327785;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#327785;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#163A41;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">ERCS</span></div>
+
+  <h1 class="serif">Échelle révisée de conscience de soi (ERCS)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">ERCS : traduction et validation canadienne-française (Pelletier &amp; Vallerand, 1990) de la Revised Self-Consciousness Scale de Scheier et Carver (1985).</p>
+  <div class="meta-row">
+    <span class="pill">22 questions</span>
+    <span class="pill">Réponses de 0 à 3</span>
+    <span class="pill">Français</span>
+    <span class="pill">Concept de soi</span>
+    <span class="pill">Licence requise : incertaine</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="ercs-echelle-revisee-conscience-de-soi.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>La conscience de soi désigne la capacité à devenir l’objet de sa propre attention. L’échelle comprend 22 énoncés évaluant trois aspects : la conscience de soi privée (attention portée aux sentiments et aux pensées personnelles), la conscience de soi publique (attention portée aux aspects du soi observables par autrui : apparence, impression produite) et l’anxiété sociale (réaction à la conscience de l’aspect public de soi). Les énoncés sont cotés de 0 (« Pas du tout semblable à moi ») à 3 (« Très semblable à moi »).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque sous-échelle est la somme de ses énoncés : conscience de soi privée (9 énoncés : 1, 4, 6, 8, 12, 14, 17, 19, 21 ; 0 à 27) ; conscience de soi publique (7 énoncés : 2, 5, 10, 13, 16, 18, 20 ; 0 à 21) ; anxiété sociale (6 énoncés : 3, 7, 9, 11, 15, 22 ; 0 à 18). Deux énoncés sont formulés à la négative (8 et 11) et sont inversés (3 moins la réponse).</p>
+    <p class="reserve">Les sources lues donnent le nombre d’énoncés de chaque sous-échelle, les plages et le fait que deux énoncés sont négatifs, mais pas la liste des énoncés par sous-échelle sur la numérotation à 22 énoncés ni les numéros des énoncés inversés : l’affectation ci-dessus est déduite d’une autre thèse (version à 16 énoncés) et du sens des énoncés. Aucun seuil ni norme n’est donné ; aucune norme française n’a été trouvée (seulement des moyennes de groupes cliniques âgés).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Licence requise : incertaine. Aucune mention de droits n’a été lue dans les annexes (thèse de psychologie sociale et mémoire de médecine) qui reproduisent l’échelle.</p>
+    <p class="source-note">Pelletier, L. G., &amp; Vallerand, R. J. (1990). L’Échelle révisée de conscience de soi : Une traduction et une validation canadienne-française du « Revised Self-Consciousness Scale ». Revue canadienne des sciences du comportement, 22, 191-206. Scheier, M. F., &amp; Carver, C. S. (1985). The Self-Consciousness Scale: A revised version for use with general populations. Journal of Applied Social Psychology, 15, 687-699.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

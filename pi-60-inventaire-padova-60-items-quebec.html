@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PI-60 : inventaire de Padova</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #6C3285;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#6C3285;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#341641;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#6C3285;background:#F0E6F4;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#341641;border-color:#E0D9C9;}
+  .btn-primary{background:#6C3285;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#6C3285;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#341641;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">PI-60 : inventaire de Padova (obsessions et compulsions)</h1>
+    <p class="lead">60 énoncés sur des pensées et comportements du quotidien, chacun coté de 0 (« Pas du tout ») à 4 (« Extrêmement ») selon le degré de perturbation.</p>
+    <p class="consigne">Les énoncés suivants réfèrent à des pensées et des comportements qui peuvent survenir à tous les jours dans la vie de chacun. Pour chacun des énoncés, choisir la réponse qui semble le mieux vous décrire en tenant compte du degré de perturbation que ces pensées ou comportements peuvent vous causer. Cotez vos réponses comme suit:</p>
+    <p class="lang-note">Questions en français (Québec). Licence : incertaine (droits réservés).</p>
+    <div class="pill-row">
+      <span class="pill">60 questions</span>
+      <span class="pill">10 minutes</span>
+      <span class="pill">Échelle de 0 à 4</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Sanavio (1988) ; adaptation Freeston et Ladouceur (1992, révision 1995) ; thèse de Grenier (2007), UQAM, annexe. Outil d'auto-évaluation : ne remplace pas un entretien clinique ni un bilan.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["Je sens que mes mains sont sales quand je touche de l'argent.", "Je pense qu'un contact, même léger, avec des sécrétions corporelles (transpiration, salive, urine etc.) peut contaminer mes vêtements ou me nuire de quelque façon.", "J'éprouve de la difficulté à toucher un objet quand je sais que des étrangers ou d'autres personnes lui ont touché.", "J'éprouve de la difficulté à toucher aux déchets ou aux choses sales.", "J'évite d'utiliser les toilettes publiques parce que j'ai peur d'attraper des maladies ou d'être contaminé(e).", "J'évite d'utiliser les téléphones publics parce que j'ai peur d'attraper des maladies ou d'être contaminé(e).", "Je me lave les mains plus souvent et plus longtemps que nécessaire.", "Parfois, je dois me laver ou me nettoyer uniquement parce que je crois être possiblement sale ou contaminé(e).", "Si je touche à quelque chose que je crois contaminé(e), je dois immédiatement me laver ou me nettoyer.", "Si un animal me touche, je me sens sale et je dois immédiatement me laver ou changer mes vêtements.", "Quand des doutes et des inquiétudes me viennent à l'esprit, je ne peux pas me reposer avant d'en avoir discuté avec une personne rassurante.", "Quand je parle, j'ai tendance à répéter les mêmes choses et les mêmes phrases plusieurs fois.", "J'ai tendance à demander aux gens de répéter les mêmes choses plusieurs fois de suite, même si j'ai bien compris ce qu'ils disaient la première fois.", "Je me sens obligé(e) de suivre la même séquence lorsque je m'habille, me déshabille et me lave.", "Avant d'aller me coucher, je dois faire certaines choses dans une certaine séquence.", "Avant d'aller au lit, je dois suspendre ou plier mes vêtements d'une façon spéciale.", "Je sens que je dois répéter certains chiffres sans aucune raison.", "Je dois faire les choses plusieurs fois avant de penser qu'elles sont faites correctement.", "J'ai tendance à vérifier les choses plus souvent que nécessaire.", "Je vérifie et revérifie les robinets, le four, les ronds du poêle et les interrupteurs de lumière, même après les avoir fermés.", "Je retourne à la maison vérifier les portes, fenêtres, tiroirs, etc. pour m'assurer qu'ils sont correctement fermés.", "Je vérifie continuellement en détail les formulaires, documents, chèques, etc. pour être certain(e) de les avoir remplis correctement.", "Je reviens continuellement en arrière pour voir si les allumettes, les cigarettes, etc. sont bel et bien éteintes.", "Quand je manipule de l'argent, je le compte et le recompte plusieurs fois.", "Avant de mettre une lettre à la poste, je la vérifie avec soin à plusieurs reprises.", "J'éprouve de la difficulté à prendre des décisions, même pour des choses sans importance.", "Parfois, je doute d'avoir fait des choses, même si je sais les avoir faites.", "J'ai l'impression que je ne serai jamais capable d'expliquer clairement mes pensées, surtout quand je parle de choses importantes qui me touchent.", "Après avoir fait quelque chose avec soin, j'ai l'impression de l'avoir mal faite ou de ne pas l'avoir finie.", "Je suis quelquefois en retard parce que je m'attarde à faire certaines choses plus souvent que nécessaire.", "Je me crée des problèmes et des doutes avec de la plupart des choses que je fais.", "Quand je commence à penser à certaines choses, je deviens obsédé(e) par celles-ci.", "Des pensées déplaisantes me viennent à l'esprit, contre ma volonté, et je ne peux pas m'en débarrasser.", "Des blasphèmes ou des mots obscènes et grossiers me viennent à l'esprit et je ne peux pas m'en débarrasser.", "Mes pensées prennent leurs propres directions et j'éprouve de la difficulté à être attentif(ve) à ce qui se passe autour de moi.", "J'imagine des conséquences catastrophiques comme le résultat de mon inattention ou d'erreurs mineures que j'ai faites.", "Je pense ou me fait du souci longtemps à propos du mal que j'aurais pu faire à quelqu'un sans m'en apercevoir.", "Quand j'entends parler d'un désastre, je pense que, d'une manière ou d'une autre, c'est de ma faute.", "Sans raison, il m'arrive de m'inquiéter longuement à propos de l'éventualité d'avoir une blessure ou une maladie.", "Parfois je commence à compter des objets sans raison.", "J'ai l'impression que je dois me souvenir de numéros sans aucune importance.", "Quand je lis, j'ai l'impression d'avoir manqué des passages importants et de devoir les relire au moins deux à trois fois.", "Je me préoccupe de me souvenir de choses sans importance et je fais des efforts pour ne pas les oublier.", "Quand une pensée ou un doute me vient à l'esprit, je dois examiner tous les aspects et je ne peux m'arrêter tant que je ne l'ai pas fait.", "Dans certaines situations, j'ai peur de perdre le contrôle et de poser des gestes embarrassants.", "Quand je regarde en bas d'un pont ou d'une fenêtre très élevés, je ressens l'impulsion de me lancer dans le vide.", "Quand je vois un train s'approcher, je pense parfois que je pourrais me jeter sous ses roues.", "À certains moments, je suis tenté(e) d'enlever vivement mes vêtements en public.", "Quand je conduis un véhicule, je me sens parfois poussé(e) à frapper quelqu'un ou quelque chose.", "Voir des armes m'excite et m'amène à avoir des pensées violentes.", "Je deviens contrarié(e) et inquiet(ète) à la vue de couteaux, poignards et autres objets pointus.", "Je ressens parfois quelque chose en moi qui me pousse à poser des gestes vraiment insensés et contre ma volonté.", "Je ressens parfois le besoin de briser ou d'endommager des choses sans aucune raison.", "Je me sens parfois poussé(e) à voler quelque chose appartenant à quelqu'un d'autre, même s'il m'est complètement inutile.", "Je ressens parfois une irrésistible tentation de voler quelque chose à l'épicerie.", "Je me sens parfois poussé(e) à blesser des enfants ou des animaux sans défense.", "Je crois que je dois effectuer des gestes particuliers ou marcher d'une certaine manière", "Dans certaines situations, je me sens parfois poussé(e) à trop manger, même si j'en deviens malade.", "Quand j'apprends qu'il y a eu un suicide ou un crime, je me sens longtemps bouleversé(e) et j'éprouve de la difficulté à arrêter d'y penser.", "Je me fais du souci inutilement à propos des microbes et des maladies."];
+  var G = [{"label": "", "opts": ["Pas du tout", "Peu", "Moyennement", "Beaucoup", "Extrêmement"], "vals": [0, 1, 2, 3, 4]}];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = null;              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var INV = [], LO = 0, HI = 4;
+    function val(k){ var v = answers[k-1][0]; if (v === 'NA') return null; return INV.indexOf(k) >= 0 ? (LO + HI - v) : v; }
+    function agg(list, m){ var s = 0, n = 0; list.forEach(function(k){ var v = val(k); if (v !== null){ s += v; n++; } }); if (n === 0) return null; return m === 'mean' ? s / n : s; }
+    var BL = [{"l": "Score total", "it": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60], "m": "sum", "d": 0, "r": "0 à 240", "x": 1}];
+    var res = [], rows = '';
+    BL.forEach(function(b){ var v = agg(b.it, b.m); if (v !== null) v = v * b.x; res.push(v); rows += row(b.l + (b.r ? ' (' + b.r + ')' : ''), v === null ? '-' : v.toFixed(b.d).replace('.', ',')); });
+    html += '<table class=\"result-table\">' + rows + '</table>';
+    html += '<p class=\"result-text\">' + "Le score total, de 0 à 240, indique la présence de traits obsessionnels-compulsifs : plus il est élevé, plus les pensées et comportements décrits vous perturbent. Aucun seuil d'interprétation n'a été lu pour cette version : le résultat se lit comme un repère personnel, à discuter avec un professionnel." + '</p>';
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PI-60 : inventaire de Padova</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#72358D 0%,#D5B5E3 55%,#341641 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#341641;background:#F0E6F4;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #6C3285;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#6C3285;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#341641;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">PI-60</span></div>
+
+  <h1 class="serif">Inventaire de Padova (Padua Inventory), 60 items, adaptation québécoise (PI-60)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">PI-60 : Sanavio (1988) ; adaptation québécoise de Freeston et Ladouceur (1992), révision de 1995, reproduite en annexe de la thèse de Grenier (2007).</p>
+  <div class="meta-row">
+    <span class="pill">60 questions</span>
+    <span class="pill">10 minutes</span>
+    <span class="pill">Échelle de 0 à 4</span>
+    <span class="pill">Français (Québec)</span>
+    <span class="pill">Obsessions · compulsions</span>
+    <span class="pill">Licence : incertaine</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="pi-60-inventaire-padova-60-items-quebec.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>L'inventaire de Padova (Padua Inventory) est un questionnaire auto-administré de 60 énoncés qui mesurent les symptômes obsessionnels-compulsifs, y compris certains absents d'autres instruments ; il a l'avantage de distinguer la composante obsessionnelle des éléments compulsifs (thèse de Grenier). Les énoncés portent par exemple sur la contamination et le lavage, la vérification, les doutes, les pensées intrusives et les impulsions.</p>
+    <p class="source-note">Version reproduite : adaptation québécoise de M. H. Freeston et R. Ladouceur (1992), révision de M. H. Freeston (mars 1995), lue en annexe de la thèse de Grenier (Université du Québec à Montréal, 2007).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque énoncé est coté de 0 (« Pas du tout ») à 4 (« Extrêmement ») ; aucun item n'est inversé. Le score total va de 0 à 240 et indique la présence de traits obsessionnels-compulsifs (Mancini et al., 1999, qui décrivent la cotation de 0 à 4 du degré de perturbation).</p>
+    <p class="reserve">Les sous-échelles de l'inventaire (quatre chez Sanavio, cinq dans la version révisée citée par la thèse) ne sont pas rattachées à des numéros d'items dans les sources lues : seul le score total est affiché. Aucun seuil d'interprétation n'a été lu.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Licence : incertaine. La version de 2005 du même inventaire, reproduite dans une autre thèse, porte la mention « Traduit et adapté par M.H. Freeston, R. Ladouceur, H. Letarte, N. Thibodeau & F. Gagnon. Tous droits réservés, Université Laval, Québec 1991 ». Aucune permission de reproduction n'a été retrouvée : demander l'autorisation avant tout usage hors cadre personnel.</p>
+    <p class="reserve">Le texte provient de l'océrisation d'un scan : les défauts de reconnaissance ont été corrigés par comparaison avec la version de 2005 lue visuellement. Cette version de 2005 diffère légèrement de celle de 1995 sur quelques énoncés (par exemple les énoncés 31, 37 et 39) ; c'est la version de 1995 qui est reprise ici.</p>
+    <p class="reserve">Étalonnage : FR- (provisoire, aucune norme française trouvée). Les seules normes lues (Mancini et al., 1999) portent sur des adolescents italiens et ne sont pas reprises.</p>
+    <p class="source-note">Références : Grenier, S. (2007). Évaluation des dimensions cognitives de l'insight auprès d'individus souffrant d'un trouble obsessionnel-compulsif. Thèse de doctorat, Université du Québec à Montréal. Sanavio, E. (1988). Obsessions and compulsions: The Padua Inventory. Behaviour Research and Therapy, 26, 169-177. Mancini, F., Gragnani, A., Orazi, F., & Pietrangeli, M. G. (1999). Obsessions and compulsions: normative data on the Padua Inventory from an Italian non-clinical adolescent sample. Behaviour Research and Therapy, 37, 919-925.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

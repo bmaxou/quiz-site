@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ISEL-40 : Soutien social perçu (version complète)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #325985;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#325985;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#162A41;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#325985;background:#E6EDF4;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#162A41;border-color:#E0D9C9;}
+  .btn-primary{background:#325985;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#325985;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#162A41;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">ISEL-40 : Interpersonal Support Evaluation List (40 items)</h1>
+    <p class="lead">40 énoncés en anglais, non traduits, sur la disponibilité perçue du soutien social. Réponse en 4 points, de « definitely false » à « definitely true ».</p>
+    <p class="consigne">INSTRUCTIONS: This scale is made up of a list of statements each of which may or may not be true about you. For each statement check &quot;definitely true&quot; if you are sure it is true about you and &quot;probably true&quot; if you think it is true but are not absolutely certain. Similarly, you should check &quot;definitely false&quot; if you are sure the statement is false and &quot;probably false&quot; is you think it is false but are not absolutely certain.</p>
+    <p class="lang-note">Questions en anglais, non traduites (aucune version française lue). Licence requise : incertaine.</p>
+    <div class="pill-row">
+      <span class="pill">40 questions</span>
+      <span class="pill">8 minutes</span>
+      <span class="pill">definitely false → definitely true</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Cohen &amp; Hoberman (1983) ; Cohen et al. (1985). Outil d'auto-évaluation : ne remplace pas un entretien clinique ni un bilan.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["There are several people that I trust to help solve my problems.", "If I needed help fixing an appliance or repairing my car, there is someone who would help me.", "Most of my friends are more interesting than I am.", "There is someone who takes pride in my accomplishments.", "When I feel lonely, there are several people I can talk to.", "There is no one that I feel comfortable to talking about intimate personal problems.", "I often meet or talk with family or friends.", "Most people I know think highly of me.", "If I needed a ride to the airport very early in the morning, I would have a hard time finding someone to take me.", "I feel like I’m not always included by my circle of friends.", "There really is no one who can give me an objective view of how I’m handling my problems.", "There are several different people I enjoy spending time with.", "I think that my friends feel that I’m not very good at helping them solve their problems.", "If I were sick and needed someone (friend, family member, or acquaintance) to take me to the doctor, I would have trouble finding someone.", "If I wanted to go on a trip for a day (e.g., to the mountains, beach, or country), I would have a hard time finding someone to go with me.", "If I needed a place to stay for a week because of an emergency (for example, water or electricity out in my apartment or house), I could easily find someone who would put me up.", "I feel that there is no one I can share my most private worries and fears with.", "If I were sick, I could easily find someone to help me with my daily chores.", "There is someone I can turn to for advice about handling problems with my family.", "I am as good at doing things as most other people are.", "If I decide one afternoon that I would like to go to a movie that evening, I could easily find someone to go with me.", "When I need suggestions on how to deal with a personal problem, I know someone I can turn to.", "If I needed an emergency loan of $100, there is someone (friend, relative, or acquaintance) I could get it from.", "In general, people do not have much confidence in me.", "Most people I know do not enjoy the same things that I do.", "There is someone I could turn to for advice about making career plans or changing my job.", "I don’t often get invited to do things with others.", "Most of my friends are more successful at making changes in their lives than I am.", "If I had to go out of town for a few weeks, it would be difficult to find someone who would look after my house or apartment (the plants, pets, garden, etc.).", "There really is no one I can trust to give me good financial advice.", "If I wanted to have lunch with someone, I could easily find someone to join me.", "I am more satisfied with my life than most people are with theirs.", "If I was stranded 10 miles from home, there is someone I could call who would come and get me.", "No one I know would throw a birthday party for me.", "It would me difficult to find someone who would lend me their car for a few hours.", "If a family crisis arose, it would be difficult to find someone who could give me good advice about how to handle it.", "I am closer to my friends than most other people are to theirs.", "There is at least one person I know whose advice I really trust.", "If I needed some help in moving to a new house or apartment, I would have a hard time finding someone to help me.", "I have a hard time keeping pace with my friends."];
+  var G = [{"label": "", "opts": ["definitely false", "probably false", "probably true", "definitely true"], "vals": [0, 1, 2, 3]}];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = null;              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var INV = [3, 6, 9, 10, 11, 13, 14, 15, 17, 24, 25, 27, 28, 29, 30, 34, 35, 36, 39, 40], LO = 0, HI = 3;
+    function val(k){ var v = answers[k-1][0]; if (v === 'NA') return null; return INV.indexOf(k) >= 0 ? (LO + HI - v) : v; }
+    function agg(list, m){ var s = 0, n = 0; list.forEach(function(k){ var v = val(k); if (v !== null){ s += v; n++; } }); if (n === 0) return null; return m === 'mean' ? s / n : s; }
+    var BL = [{"l": "Appraisal", "it": [1, 6, 11, 17, 19, 22, 26, 30, 36, 38], "m": "sum", "d": 0, "r": "0 à 30", "x": 1}, {"l": "Tangible", "it": [2, 9, 14, 16, 18, 23, 29, 33, 35, 39], "m": "sum", "d": 0, "r": "0 à 30", "x": 1}, {"l": "Self-Esteem", "it": [3, 4, 8, 13, 20, 24, 28, 32, 37, 40], "m": "sum", "d": 0, "r": "0 à 30", "x": 1}, {"l": "Belonging", "it": [5, 7, 10, 12, 15, 21, 25, 27, 31, 34], "m": "sum", "d": 0, "r": "0 à 30", "x": 1}, {"l": "Soutien perçu total", "it": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40], "m": "sum", "d": 0, "r": "0 à 120", "x": 1}];
+    var res = [], rows = '';
+    BL.forEach(function(b){ var v = agg(b.it, b.m); if (v !== null) v = v * b.x; res.push(v); rows += row(b.l + (b.r ? ' (' + b.r + ')' : ''), v === null ? '-' : v.toFixed(b.d).replace('.', ',')); });
+    html += '<table class=\"result-table\">' + rows + '</table>';
+    html += '<p class=\"result-text\">' + "Score continu : la source ne fournit aucun seuil ni aucune norme, ce résultat sert de repère de suivi et ne se lit pas comme un diagnostic." + '</p>';
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ISEL-40 : Soutien social perçu (version complète)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#355E8D 0%,#B5CAE3 55%,#162A41 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#162A41;background:#E6EDF4;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #325985;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#325985;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#162A41;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">ISEL-40</span></div>
+
+  <h1 class="serif">Interpersonal Support Evaluation List, version complète (ISEL-40)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">ISEL-40 : Cohen &amp; Hoberman (1983), version complète de 40 items ; items anglais non traduits.</p>
+  <div class="meta-row">
+    <span class="pill">40 questions</span>
+    <span class="pill">8 minutes</span>
+    <span class="pill">definitely false → definitely true</span>
+    <span class="pill">Anglais (non traduit)</span>
+    <span class="pill">Soutien social</span>
+    <span class="pill">Licence requise : incertaine</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="isel-40-soutien-social-interpersonnel-complet-en.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>L'ISEL d'origine comprend 40 énoncés répartis en quatre sous-échelles de 10 items : soutien tangible, d'appartenance (belonging), d'estime de soi (self-esteem) et d'appraisal. Il évalue la disponibilité perçue de personnes pour aider, accompagner, valoriser ou conseiller. Les réponses se donnent sur 4 points.</p>
+    <p>L'ISEL-12 (page distincte du catalogue) en est la forme abrégée.</p>
+    <p class="source-note">Les énoncés sont proposés en anglais, tels qu'ils figurent dans la source ; aucune traduction n'a été faite pour cette page.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Réponses cotées de 0 (definitely false) à 3 (definitely true). Les items 3, 6, 9, 10, 11, 13, 14, 15, 17, 24, 25, 27, 28, 29, 30, 34, 35, 36, 39 et 40 sont inversés. Chaque sous-échelle est la somme de ses 10 items (0 à 30) ; le score total est la somme des quatre sous-échelles (0 à 120).</p>
+    <p>Appraisal : items 1, 6, 11, 17, 19, 22, 26, 30, 36, 38. Tangible : 2, 9, 14, 16, 18, 23, 29, 33, 35, 39. Self-Esteem : 3, 4, 8, 13, 20, 24, 28, 32, 37, 40. Belonging : 5, 7, 10, 12, 15, 21, 25, 27, 31, 34.</p>
+    <p class="reserve">La source précise que les scores sont conservés continus : aucun seuil ni aucune norme n'est fourni. Le CMU rapporte des alphas de 0,92 (total), 0,87 (appraisal), 0,84 (belonging), 0,79 (tangible) et 0,69 (self-esteem).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Items, options, inversions et sous-échelles lus dans le document Fetzer « Self Report Measures for Love and Compassion Research: Social Support » ; l'item 35 y contient la coquille « It would me difficult » (reproduite telle quelle).</p>
+    <p class="reserve">Licence requise : incertaine. Le CMU indique « Copyright is owned by Dr. Cohen » ; aucune permission d'utilisation n'a été retrouvée. Aucune version française validée n'a été lue.</p>
+    <p class="source-note">Références : Cohen, S., &amp; Hoberman, H. (1983). Positive events and social supports as buffers of life change stress. Journal of Applied Social Psychology, 13, 99-125. Cohen, S., Mermelstein, R., Kamarck, T., &amp; Hoberman, H. M. (1985). Measuring the functional components of social support. In I. G. Sarason &amp; B. R. Sarason (Eds.), Social support: Theory, research and applications (pp. 73-94). The Hague: Martinus Nijhoff.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

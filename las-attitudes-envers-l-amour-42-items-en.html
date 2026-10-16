@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LAS : Attitudes envers l&#x27;amour (Hendrick)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #853255;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#853255;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#411628;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#853255;background:#F4E6EC;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#411628;border-color:#E0D9C9;}
+  .btn-primary{background:#853255;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#853255;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#411628;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">LAS : Love Attitudes Scale (42 items)</h1>
+    <p class="lead">42 énoncés en anglais, non traduits, sur vos attitudes envers l'amour : six styles d'amour. Réponse de « strongly agree » à « strongly disagree ».</p>
+    <p class="consigne">Some of the items refer to a specific love relationship, while others refer to general attitudes and beliefs about love. Whenever possible, answer the questions with your current partner in mind. If you are not currently dating anyone, answer the questions with your most recent partner in mind. If you have never been in love, answer in terms of what you think your responses would most likely be.</p>
+    <p class="lang-note">Questions en anglais, non traduites (aucune version française lue). Licence requise : incertaine.</p>
+    <div class="pill-row">
+      <span class="pill">42 questions</span>
+      <span class="pill">8 minutes</span>
+      <span class="pill">strongly agree → strongly disagree</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Hendrick &amp; Hendrick (1986) ; Hendrick, Hendrick &amp; Dicke (1998). Outil d'auto-évaluation : ne remplace pas un entretien clinique ni un bilan.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["My lover and I were attracted to each other immediately after we first met.", "My lover and I have the right physical \"chemistry\" between us.", "Our lovemaking is very intense and satisfying.", "I feel that my lover and I were meant for each other.", "My lover and I became emotionally involved rather quickly.", "My lover and I really understand each other.", "My lover fits my ideal standards of physical beauty/handsomeness.", "I try to keep my lover a little uncertain about my commitment to him/her.", "I believe that what my lover doesn't know about me won't hurt him/her.", "I have sometimes had to keep two of my lovers from finding out about each other.", "I can get over love affairs pretty easily and quickly.", "My lover would get upset if he/she knew of some of the things I've done with other people.", "When my lover gets too dependent on me, I want to back off a little.", "I enjoy playing the \"game of love\" with a number of different partners.", "It is hard to say exactly where friendship ends and love begins.", "Genuine love first requires caring for awhile.", "I expect to always be friends with the one I love.", "The best kind of love grows out of a long friendship.", "Our friendship merged gradually into love over time.", "Love is really a deep friendship, not a mysterious, mystical emotion.", "My most satisfying love relationships have developed from good friendships.", "I consider what a person is going to become in life before I commit myself to him/her.", "I try to plan my life carefully before choosing a lover.", "It is best to love someone with a similar background.", "A main consideration in choosing a lover is how he/she reflects on my family.", "An important factor in choosing a partner is whether or not he/she will be a good parent.", "One consideration in choosing a partner is how he/she will reflect on my career.", "Before getting very involved with anyone, I try to figure out how compatible his/her hereditary background is with mine in case we ever have children.", "When things aren't right with my lover and me, my stomach gets upset.", "When my love affairs break up, I get so depressed that I have even thought of suicide.", "Sometimes I get so excited about being in love that I can't sleep.", "When my lover doesn't pay attention to me, I feel sick all over.", "When I am in love, I have trouble concentrating on anything else.", "I cannot relax if I suspect that my lover is with someone else.", "If my lover ignores me for a while, I sometimes do stupid things to get his/ her attention back.", "I try to always help my lover through difficult times.", "I would rather suffer myself than let my lover suffer.", "I cannot be happy unless I place my lover's happiness before my own.", "I am usually willing to sacrifice my own wishes to let my lover achieve his/hers.", "Whatever I own is my lover's to use as he/ she chooses.", "When my lover gets angry with me, I still love him/her fully and unconditionally.", "I would endure all things for the sake of my lover."];
+  var G = [{"label": "", "opts": ["strongly agree", "moderately agree", "neutral", "moderately disagree", "strongly disagree"], "vals": [1, 2, 3, 4, 5]}];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = null;              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var INV = [], LO = 1, HI = 5;
+    function val(k){ var v = answers[k-1][0]; if (v === 'NA') return null; return INV.indexOf(k) >= 0 ? (LO + HI - v) : v; }
+    function agg(list, m){ var s = 0, n = 0; list.forEach(function(k){ var v = val(k); if (v !== null){ s += v; n++; } }); if (n === 0) return null; return m === 'mean' ? s / n : s; }
+    var BL = [{"l": "Eros (amour passionnel) : somme", "it": [1, 2, 3, 4, 5, 6, 7], "m": "sum", "d": 0, "r": "7 à 35", "x": 1}, {"l": "Eros (amour passionnel) : moyenne", "it": [1, 2, 3, 4, 5, 6, 7], "m": "mean", "d": 2, "r": "1 à 5", "x": 1}, {"l": "Ludus (amour-jeu) : somme", "it": [8, 9, 10, 11, 12, 13, 14], "m": "sum", "d": 0, "r": "7 à 35", "x": 1}, {"l": "Ludus (amour-jeu) : moyenne", "it": [8, 9, 10, 11, 12, 13, 14], "m": "mean", "d": 2, "r": "1 à 5", "x": 1}, {"l": "Storge (amour-amitié) : somme", "it": [15, 16, 17, 18, 19, 20, 21], "m": "sum", "d": 0, "r": "7 à 35", "x": 1}, {"l": "Storge (amour-amitié) : moyenne", "it": [15, 16, 17, 18, 19, 20, 21], "m": "mean", "d": 2, "r": "1 à 5", "x": 1}, {"l": "Pragma (amour pragmatique) : somme", "it": [22, 23, 24, 25, 26, 27, 28], "m": "sum", "d": 0, "r": "7 à 35", "x": 1}, {"l": "Pragma (amour pragmatique) : moyenne", "it": [22, 23, 24, 25, 26, 27, 28], "m": "mean", "d": 2, "r": "1 à 5", "x": 1}, {"l": "Mania (amour possessif, dépendant) : somme", "it": [29, 30, 31, 32, 33, 34, 35], "m": "sum", "d": 0, "r": "7 à 35", "x": 1}, {"l": "Mania (amour possessif, dépendant) : moyenne", "it": [29, 30, 31, 32, 33, 34, 35], "m": "mean", "d": 2, "r": "1 à 5", "x": 1}, {"l": "Agape (amour altruiste) : somme", "it": [36, 37, 38, 39, 40, 41, 42], "m": "sum", "d": 0, "r": "7 à 35", "x": 1}, {"l": "Agape (amour altruiste) : moyenne", "it": [36, 37, 38, 39, 40, 41, 42], "m": "mean", "d": 2, "r": "1 à 5", "x": 1}];
+    var res = [], rows = '';
+    BL.forEach(function(b){ var v = agg(b.it, b.m); if (v !== null) v = v * b.x; res.push(v); rows += row(b.l + (b.r ? ' (' + b.r + ')' : ''), v === null ? '-' : v.toFixed(b.d).replace('.', ',')); });
+    html += '<table class=\"result-table\">' + rows + '</table>';
+    html += '<p class=\"result-text\">' + "Plus le score est faible, plus l'accord avec ce style est fort (1 = strongly agree). Score continu : la source ne fournit aucun seuil ni aucune norme, ce résultat sert de repère de suivi et ne se lit pas comme un diagnostic." + '</p>';
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LAS : Attitudes envers l&#x27;amour (Hendrick)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#8D355A 0%,#E3B5C8 55%,#411628 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#411628;background:#F4E6EC;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #853255;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#853255;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#411628;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">LAS</span></div>
+
+  <h1 class="serif">Love Attitudes Scale (LAS)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">LAS : Hendrick &amp; Hendrick (1986) ; six styles d'amour (Eros, Ludus, Storge, Pragma, Mania, Agape) ; items anglais non traduits.</p>
+  <div class="meta-row">
+    <span class="pill">42 questions</span>
+    <span class="pill">8 minutes</span>
+    <span class="pill">strongly agree → strongly disagree</span>
+    <span class="pill">Anglais (non traduit)</span>
+    <span class="pill">Amour, couple</span>
+    <span class="pill">Licence requise : incertaine</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="las-attitudes-envers-l-amour-42-items-en.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>La Love Attitudes Scale décrit les attitudes envers l'amour selon six styles, inspirés de la typologie de Lee : Eros (amour passionnel), Ludus (amour-jeu), Storge (amour-amitié), Pragma (amour pragmatique), Mania (amour possessif et dépendant) et Agape (amour altruiste). Elle compte 42 énoncés, 7 par style. Certains portent sur le partenaire actuel, d'autres sur des attitudes générales à propos de l'amour.</p>
+    <p class="source-note">Les énoncés sont proposés en anglais, tels qu'ils figurent dans la source ; aucune traduction n'a été faite pour cette page.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Réponses de 1 (strongly agree) à 5 (strongly disagree). Chaque style est coté séparément : Eros = items 1 à 7, Ludus = 8 à 14, Storge = 15 à 21, Pragma = 22 à 28, Mania = 29 à 35, Agape = 36 à 42. La page affiche la somme (7 à 35) et la moyenne (1 à 5) de chaque style ; un score faible signale un accord plus fort avec le style.</p>
+    <p class="reserve">Le document Fetzer indique seulement que « scoring is kept continuous » : le recours à la moyenne vient de la page psytoolkit consacrée à la forme courte de 1998, dont la présentation précise qu'un score bas correspond à une plus grande quantité de l'attitude. Aucun seuil ni aucune norme n'est retenu.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Items, options et répartition en six styles lus dans le document Fetzer « Different Types of Love: Love Attitudes ». Items anglais non traduits ; aucune version française n'a été lue.</p>
+    <p class="reserve">Licence requise : incertaine. Le document Fetzer ne mentionne aucune permission ; psytoolkit écrit, à propos de la forme courte : « it seems that it can be used in research, given that the relevant researchers and papers are acknowledged and cited ».</p>
+    <p class="source-note">Références : Hendrick, C., &amp; Hendrick, S. (1986). A theory and method of love. Journal of Personality and Social Psychology, 50, 392-402. Hendrick, C., Hendrick, S. S., &amp; Dicke, A. (1998). The Love Attitudes Scale: Short form. Journal of Social and Personal Relationships, 15, 147-159.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

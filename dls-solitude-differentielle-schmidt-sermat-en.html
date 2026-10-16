@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DLS : Solitude différentielle (Schmidt et Sermat)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #323285;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#323285;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#161641;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#323285;background:#E6E6F4;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#161641;border-color:#E0D9C9;}
+  .btn-primary{background:#323285;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#323285;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#161641;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">DLS : Differential Loneliness Scale (60 items)</h1>
+    <p class="lead">60 énoncés en anglais, non traduits, à marquer vrai (TRUE) ou faux (FALSE) selon qu'ils décrivent ou non votre situation : relations amoureuses, amis, famille, communauté.</p>
+    <p class="consigne">Instructions: For each statement, decide whether it describes you or your situation or not. If it does seem to describe you or your situation, mark it TRUE (T). If not, mark it FALSE (F). If an item is not applicable to you because you are currently not involved in the situation it depicts, e.g., a current romantic or marital relationship, then mark it FALSE (F).</p>
+    <p class="lang-note">Questions en anglais, non traduites (aucune version française lue). Licence requise : incertaine.</p>
+    <div class="pill-row">
+      <span class="pill">60 questions</span>
+      <span class="pill">10 minutes</span>
+      <span class="pill">TRUE / FALSE</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Schmidt &amp; Sermat (1983). Outil d'auto-évaluation : ne remplace pas un entretien clinique ni un bilan.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["I find it easy to express feelings of affection toward members of my family.", "Most everyone around me is a stranger.", "I usually wait for a friend to call me up and invite me out before making plans to go anywhere.", "Most of my friends understand my motives and reasoning.", "At this time, I do not have a romantic relationship that means a lot to me.", "I don't get along very well with my family.", "I have at least one good friend of the same sex.", "I can't depend on getting moral or financial support from any group or organization in a time of trouble.", "I am now involved in a romantic or marital relationship where both of us make a genuine effort at cooperation.", "I often become shy and retiring in the company of relatives.", "Some of my friends will stand by me in almost any difficulty.", "People in my community aren't really interested in what I think or feel.", "My trying to have friends and to be liked seldom succeeds the way I would like it to.", "I spend time talking individually with each member of my family.", "I find it difficult to tell anyone that I love him or her.", "I don't have many friends in the city where I live.", "I work well with others in a group.", "I am an important part of the emotional and physical well-being of my lover or spouse.", "I don't feel that I can turn to my friends living around me for help when I need it.", "I don't think that anyone in my family really understands me.", "I have a lover or spouse who fulfils many of my emotional needs.", "My friends are generally interested in what I am doing, although not to the point of being nosy.", "Members of my family enjoy meeting my friends.", "I allow myself to become close to my friends.", "My relatives are generally too busy with their concerns to bother about my problems.", "Few of my friends understand me the way I want to be understood.", "No one in the community where I live cares much about me.", "Right now, I don't have true compatibility in a romantic or marital relationship.", "Members of my family give me the kind of support that I need.", "A lot of my friendships ultimately turn out to be pretty disappointing.", "My romantic or marital partner gives me much support and encouragement.", "I am not very open with members of my family.", "I often feel resentful about certain actions of my friends.", "I am embarrassed about the way my family behaves.", "People who say they are in love with me are usually only trying to rationalize using me for their own purposes.", "I have a good relationship with most members of my family.", "In my relationships, I am generally able to express both positive and negative feelings.", "I don't get much satisfaction from the groups I attend.", "I get plenty of help and support from friends.", "I seem to have little to say to members of my family.", "I don't have any one special love relationship in which I feel really understood.", "I really feel that I belong to a family.", "I have few friends with whom I can talk openly.", "My family is quite critical of me.", "I have an active love life.", "I have few friends that I can depend on to fulfil their end of mutual commitments.", "Generally I feel that members of my family acknowledge my strengths and positive qualities.", "I have at least one real friend.", "I don't have any neighbours who would help me out in a time of need.", "Members of my family are relaxed and easy-going with each other.", "I have moved around so much that I find it difficult to maintain lasting friendships.", "I tend to get along well with partners in romantic relationships.", "I find it difficult to invite a friend to do something with me.", "I have little contact with members of my family.", "My friends don't seem to stay interested in me for long.", "There are people in my community who understand my views and beliefs.", "As much as possible, I avoid members of my family.", "I seldom get the emotional security I need from a romantic or sexual relationship.", "My family usually values my opinion when a family decision is to be made.", "Most of my friends are genuinely concerned about my welfare."];
+  var G = [{"label": "", "opts": ["TRUE (T)", "FALSE (F)"], "vals": [1, 0]}];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = null;              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var INV = [1, 4, 7, 9, 11, 14, 17, 18, 21, 22, 23, 24, 29, 31, 36, 37, 39, 42, 45, 47, 48, 50, 52, 56, 59, 60], LO = 0, HI = 1;
+    function val(k){ var v = answers[k-1][0]; if (v === 'NA') return null; return INV.indexOf(k) >= 0 ? (LO + HI - v) : v; }
+    function agg(list, m){ var s = 0, n = 0; list.forEach(function(k){ var v = val(k); if (v !== null){ s += v; n++; } }); if (n === 0) return null; return m === 'mean' ? s / n : s; }
+    var BL = [{"l": "Solitude totale (points)", "it": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60], "m": "sum", "d": 0, "r": "0 à 60", "x": 1}];
+    var res = [], rows = '';
+    BL.forEach(function(b){ var v = agg(b.it, b.m); if (v !== null) v = v * b.x; res.push(v); rows += row(b.l + (b.r ? ' (' + b.r + ')' : ''), v === null ? '-' : v.toFixed(b.d).replace('.', ',')); });
+    html += '<table class=\"result-table\">' + rows + '</table>';
+    html += '<p class=\"result-text\">' + "Plus le score est élevé, plus la solitude déclarée est grande. Score continu : la source ne fournit aucun seuil ni aucune norme, ce résultat sert de repère de suivi et ne se lit pas comme un diagnostic." + '</p>';
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DLS : Solitude différentielle (Schmidt et Sermat)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#35358D 0%,#B5B5E3 55%,#161641 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#161641;background:#E6E6F4;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #323285;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#323285;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#161641;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">DLS</span></div>
+
+  <h1 class="serif">Differential Loneliness Scale (DLS)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">DLS : Schmidt &amp; Sermat (1983) ; solitude dans différents types de relations ; items anglais non traduits.</p>
+  <div class="meta-row">
+    <span class="pill">60 questions</span>
+    <span class="pill">10 minutes</span>
+    <span class="pill">TRUE / FALSE</span>
+    <span class="pill">Anglais (non traduit)</span>
+    <span class="pill">Solitude, relations</span>
+    <span class="pill">Licence requise : incertaine</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="dls-solitude-differentielle-schmidt-sermat-en.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>La Differential Loneliness Scale compte 60 énoncés à marquer TRUE ou FALSE. Elle mesure le sentiment de manquer de satisfaction dans différents types de relations : romantiques ou sexuelles, amicales, familiales et avec la communauté, en cherchant à saisir l'écart entre la relation souhaitée et la relation vécue.</p>
+    <p class="source-note">Les énoncés sont proposés en anglais, tels qu'ils figurent dans la source ; aucune traduction n'a été faite pour cette page. Dans la source, l'apostrophe est rendue par « = » : elle est remplacée ici par une apostrophe.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Pour les énoncés sans astérisque dans la source, chaque réponse TRUE vaut un point ; pour les énoncés à astérisque (énoncés favorables : 1, 4, 7, 9, 11, 14, 17, 18, 21, 22, 23, 24, 29, 31, 36, 37, 39, 42, 45, 47, 48, 50, 52, 56, 59, 60), chaque réponse FALSE vaut un point. Le score total va de 0 à 60 ; plus il est élevé, plus la solitude est grande. La consigne demande de répondre FALSE à un énoncé qui ne s'applique pas (par exemple s'il n'y a pas de relation amoureuse en cours).</p>
+    <p class="reserve">Le document attribue à chaque énoncé une étiquette de type de relation (R/S, Fr, Fam, Gr), mais la répartition observée dans le texte (22, 18, 12 et 8 énoncés) est déséquilibrée et n'a pas pu être vérifiée : seuls le score total est affiché et aucun score par type de relation. Aucun seuil ni aucune norme n'est fourni.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Items, consigne et règle de cotation lus dans le document Fetzer « Self Report Measures for Love and Compassion Research: Loneliness and Interpersonal Problems » (texte repris d'un fichier du site de York University). L'article de Schmidt et Sermat (1983) n'a pas été lu. Items anglais non traduits.</p>
+    <p class="reserve">Licence requise : incertaine ; le document ne mentionne aucune permission d'utilisation.</p>
+    <p class="source-note">Références : Schmidt, N., &amp; Sermat, V. (1983). Measuring loneliness in different relationships. Journal of Personality and Social Psychology, 44, 1038-1047.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

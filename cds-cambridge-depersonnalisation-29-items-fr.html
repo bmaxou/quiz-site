@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CDS-Cambridge : Échelle de dépersonnalisation de Cambridge</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #593285;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#593285;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#2A1641;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#593285;background:#EDE6F4;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#2A1641;border-color:#E0D9C9;}
+  .btn-primary{background:#593285;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#593285;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#2A1641;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">CDS-Cambridge : Échelle de dépersonnalisation de Cambridge</h1>
+    <p class="lead">29 énoncés sur des expériences de dépersonnalisation et de déréalisation vécues au cours des six derniers mois ; pour chacun, vous indiquez la fréquence puis la durée habituelle.</p>
+    <p class="consigne">Ce questionnaire décrit des expériences plus ou moins étranges ou amusantes que des personnes bien portantes peuvent avoir dans leur vie quotidienne.
+Nous souhaitons déterminer à quelle fréquence et pendant combien de temps vous avez ressenti ces expériences au cours des six derniers mois.
+Pour chaque question, nous vous prions d’indiquer avec quel degré la sensation décrite s’applique à vous en entourant la réponse appropriée. Il est important que vous répondiez à chaque question et pour chaque colonne (fréquence et durée) même si vous n’êtes pas tout à fait certain que ce soit la meilleure réponse.
+Au cours des six derniers mois :</p>
+    <p class="lang-note">Questions en français (traduction avec rétro-traduction, Marseille ; version non validée psychométriquement). Licence requise : incertaine.</p>
+    <div class="pill-row">
+      <span class="pill">29 questions</span>
+      <span class="pill">5 à 10 minutes</span>
+      <span class="pill">fréquence + durée</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Sierra et Berrios (2000), Psychiatry Research 93 ; Lopez et Elzière (2022), HAL hal-03820019. Outil d’auto-évaluation : ne remplace pas un entretien clinique ni un bilan.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["Soudainement, je me sens étrange, comme si je n’étais pas réel ou comme si j’étais coupé du monde.", "Ce que je vois paraît « plat » et « inanimé », comme si j’étais en train de regarder une image.", "J’ai l’impression que des parties de mon corps ne m’appartiennent pas.", "J’ai eu le sentiment de ne pas être effrayé du tout par des situations que j’aurais normalement trouvées effrayantes ou angoissantes.", "Mes activités favorites ne me paraissent plus agréables.", "Pendant que je fais quelque chose j’ai le sentiment d’être comme un « observateur extérieur » de moi-même.", "Le goût des aliments ne me donne plus de sentiment de plaisir ou de dégoût.", "Mon corps paraît très léger, comme s’il flottait dans les airs.", "Lorsque je pleure ou ris, il me semble que je n’éprouve plus aucune émotion.", "J’ai le sentiment de ne plus avoir aucune pensée, si bien que lorsque je parle mes paroles semblent être prononcées comme par un « automate »", "Les voix familières (y compris la mienne) paraissent distantes et irréelles.", "J’ai le sentiment que mes mains ou mes pieds sont devenus plus grands ou plus petits.", "L’environnement autour de moi me paraît détaché et irréel, comme s’il y avait un voile entre moi et le monde extérieur.", "J’ai l’impression que les choses que j’ai faites récemment ont eu lieu il y a longtemps. Par exemple, ce que j’ai fait ce matin me paraît avoir été fait il y a des semaines.", "Alors que je suis éveillé, j’ai des expériences visuelles au cours desquelles je peux me voir à l’extérieur, comme si je regardais ma propre image dans un miroir.", "Je me sens détaché des souvenirs des choses qui me sont arrivées, comme si je n’avais pas pris part à ces choses-là.", "Alors que je suis face à une nouvelle situation, j’ai l’impression de l’avoir déjà vécue auparavant.", "Soudainement, il m’arrive de ne plus ressentir aucune affection pour ma famille et mes amis proches.", "Les objets autour de moi paraissent plus petits ou plus distants.", "Je ne peux pas ressentir correctement les objets que je touche avec mes mains, comme si ce n’était pas moi qui les touchais.", "Je ne suis pas capable de me représenter des choses, comme par exemple le visage d’un ami proche ou un lieu familier.", "Lorsqu’une partie de mon corps me fait mal, je me sens si détaché de la douleur que c’est un peu comme si c’était « la douleur de quelqu’un d’autre ».", "J’ai le sentiment d’être en dehors de mon corps.", "Lorsque je bouge j’ai le sentiment de ne pas avoir le contrôle de mes mouvements, si bien que je me sens fonctionner sur un mode « automatique » et mécanique comme si j’étais un « robot ».", "L’odeur des choses ne me donne plus de sentiment de plaisir ou de dégoût.", "Je me sens si détaché de mes pensées qu’elles semblent avoir leur propre « vie ».", "Je dois me toucher pour être certain que j’ai bien un corps ou que j’existe réellement.", "Il me semble avoir perdu quelques sensations corporelles (par exemple la faim et la soif) si bien que lorsque je mange ou que je bois c’est comme une routine automatique.", "Des lieux qui m’étaient familiers autrefois ne me paraissent plus familiers, comme si je ne les avais jamais vus auparavant."];
+  var G = [];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = [[{"label": "Fréquence :", "opts": ["jamais", "rarement", "souvent", "très souvent", "tout le temps"], "vals": [0, 1, 2, 3, 4]}, {"label": "Durée. En général, cela dure :", "opts": ["Sans objet (fréquence : jamais)", "quelques secondes", "quelques minutes", "quelques heures", "environ un jour", "plus d’un jour", "plus d’une semaine"], "vals": [0, 1, 2, 3, 4, 5, 6]}], [{"label": "Fréquence :", "opts": ["jamais", "rarement", "souvent", "très souvent", "tout le temps"], "vals": [0, 1, 2, 3, 4]}, {"label": "Durée. En général, cela dure :", "opts": ["Sans objet (fréquence : jamais)", "quelques secondes", "quelques minutes", "quelques heures", "environ un jour", "plus d’un jour", "plus d’une semaine"], "vals": [0, 1, 2, 3, 4, 5, 6]}], [{"label": "Fréquence :", "opts": ["jamais", "rarement", "souvent", "très souvent", "tout le temps"], "vals": [0, 1, 2, 3, 4]}, {"label": "Durée. En général, cela dure :", "opts": ["Sans objet (fréquence : jamais)", "quelques secondes", "quelques minutes", "quelques heures", "environ un jour", "plus d’un jour", "plus d’une semaine"], "vals": [0, 1, 2, 3, 4, 5, 6]}], [{"label": "Fréquence :", "opts": ["jamais", "rarement", "souvent", "très souvent", "tout le temps"], "vals": [0, 1, 2, 3, 4]}, {"label": "Durée. En général, cela dure :", "opts": ["Sans objet (fréquence : jamais)", "quelques secondes", "quelques minutes", "quelques heures", "environ un jour", "plus d’un jour", "plus d’une semaine"], "vals": [0, 1, 2, 3, 4, 5, 6]}], [{"label": "Fréquence :", "opts": ["jamais", "rarement", "souvent", "très souvent", "tout le temps"], "vals": [0, 1, 2, 3, 4]}, {"label": "Durée. En général, cela dure :", "opts": ["Sans objet (fréquence : jamais)", "quelques secondes", "quelques minutes", "quelques heures", "environ un jour", "plus d’un jour", "plus d’une semaine"], "vals": [0, 1, 2, 3, 4, 5, 6]}], [{"label": "Fréquence :", "opts": ["jamais", "rarement", "souvent", "très souvent", "tout le temps"], "vals": [0, 1, 2, 3, 4]}, {"label": "Durée. En général, cela dure :", "opts": ["Sans objet (fréquence : jamais)", "quelques secondes", "quelques minutes", "quelques heures", "environ un jour", "plus d’un jour", "plus d’une semaine"], "vals": [0, 1, 2, 3, 4, 5, 6]}], [{"label": "Fréquence :", "opts": ["jamais", "rarement", "souvent", "très souvent", "tout le temps"], "vals": [0, 1, 2, 3, 4]}, {"label": "Durée. En général, cela dure :", "opts": ["Sans objet (fréquence : jamais)", "quelques secondes", "quelques minutes", "quelques heures", "environ un jour", "plus d’un jour", "plus d’une semaine"], "vals": [0, 1, 2, 3, 4, 5, 6]}], [{"label": "Fréquence :", "opts": ["jamais", "rarement", "souvent", "très souvent", "tout le temps"], "vals": [0, 1, 2, 3, 4]}, {"label": "Durée. En général, cela dure :", "opts": ["Sans objet (fréquence : jamais)", "quelques secondes", "quelques minutes", "quelques heures", "environ un jour", "plus d’un jour", "plus d’une semaine"], "vals": [0, 1, 2, 3, 4, 5, 6]}], [{"label": "Fréquence :", "opts": ["jamais", "rarement", "souvent", "très souvent", "tout le temps"], "vals": [0, 1, 2, 3, 4]}, {"label": "Durée. En général, cela dure :", "opts": ["Sans objet (fréquence : jamais)", "quelques secondes", "quelques minutes", "quelques heures", "environ un jour", "plus d’un jour", "plus d’une semaine"], "vals": [0, 1, 2, 3, 4, 5, 6]}], [{"label": "Fréquence :", "opts": ["jamais", "rarement", "souvent", "très souvent", "tout le temps"], "vals": [0, 1, 2, 3, 4]}, {"label": "Durée. En général, cela dure :", "opts": ["Sans objet (fréquence : jamais)", "quelques secondes", "quelques minutes", "quelques heures", "environ un jour", "plus d’un jour", "plus d’une semaine"], "vals": [0, 1, 2, 3, 4, 5, 6]}], [{"label": "Fréquence :", "opts": ["jamais", "rarement", "souvent", "très souvent", "tout le temps"], "vals": [0, 1, 2, 3, 4]}, {"label": "Durée. En général, cela dure :", "opts": ["Sans objet (fréquence : jamais)", "quelques secondes", "quelques minutes", "quelques heures", "environ un jour", "plus d’un jour", "plus d’une semaine"], "vals": [0, 1, 2, 3, 4, 5, 6]}], [{"label": "Fréquence :", "opts": ["jamais", "rarement", "souvent", "très souvent", "tout le temps"], "vals": [0, 1, 2, 3, 4]}, {"label": "Durée. En général, cela dure :", "opts": ["Sans objet (fréquence : jamais)", "quelques secondes", "quelques minutes", "quelques heures", "environ un jour", "plus d’un jour", "plus d’une semaine"], "vals": [0, 1, 2, 3, 4, 5, 6]}], [{"label": "Fréquence :", "opts": ["jamais", "rarement", "souvent", "très souvent", "tout le temps"], "vals": [0, 1, 2, 3, 4]}, {"label": "Durée. En général, cela dure :", "opts": ["Sans objet (fréquence : jamais)", "quelques secondes", "quelques minutes", "quelques heures", "environ un jour", "plus d’un jour", "plus d’une semaine"], "vals": [0, 1, 2, 3, 4, 5, 6]}], [{"label": "Fréquence :", "opts": ["jamais", "rarement", "souvent", "très souvent", "tout le temps"], "vals": [0, 1, 2, 3, 4]}, {"label": "Durée. En général, cela dure :", "opts": ["Sans objet (fréquence : jamais)", "quelques secondes", "quelques minutes", "quelques heures", "environ un jour", "plus d’un jour", "plus d’une semaine"], "vals": [0, 1, 2, 3, 4, 5, 6]}], [{"label": "Fréquence :", "opts": ["jamais", "rarement", "souvent", "très souvent", "tout le temps"], "vals": [0, 1, 2, 3, 4]}, {"label": "Durée. En général, cela dure :", "opts": ["Sans objet (fréquence : jamais)", "quelques secondes", "quelques minutes", "quelques heures", "environ un jour", "plus d’un jour", "plus d’une semaine"], "vals": [0, 1, 2, 3, 4, 5, 6]}], [{"label": "Fréquence :", "opts": ["jamais", "rarement", "souvent", "très souvent", "tout le temps"], "vals": [0, 1, 2, 3, 4]}, {"label": "Durée. En général, cela dure :", "opts": ["Sans objet (fréquence : jamais)", "quelques secondes", "quelques minutes", "quelques heures", "environ un jour", "plus d’un jour", "plus d’une semaine"], "vals": [0, 1, 2, 3, 4, 5, 6]}], [{"label": "Fréquence :", "opts": ["jamais", "rarement", "souvent", "très souvent", "tout le temps"], "vals": [0, 1, 2, 3, 4]}, {"label": "Durée. En général, cela dure :", "opts": ["Sans objet (fréquence : jamais)", "quelques secondes", "quelques minutes", "quelques heures", "environ un jour", "plus d’un jour", "plus d’une semaine"], "vals": [0, 1, 2, 3, 4, 5, 6]}], [{"label": "Fréquence :", "opts": ["jamais", "rarement", "souvent", "très souvent", "tout le temps"], "vals": [0, 1, 2, 3, 4]}, {"label": "Durée. En général, cela dure :", "opts": ["Sans objet (fréquence : jamais)", "quelques secondes", "quelques minutes", "quelques heures", "environ un jour", "plus d’un jour", "plus d’une semaine"], "vals": [0, 1, 2, 3, 4, 5, 6]}], [{"label": "Fréquence :", "opts": ["jamais", "rarement", "souvent", "très souvent", "tout le temps"], "vals": [0, 1, 2, 3, 4]}, {"label": "Durée. En général, cela dure :", "opts": ["Sans objet (fréquence : jamais)", "quelques secondes", "quelques minutes", "quelques heures", "environ un jour", "plus d’un jour", "plus d’une semaine"], "vals": [0, 1, 2, 3, 4, 5, 6]}], [{"label": "Fréquence :", "opts": ["jamais", "rarement", "souvent", "très souvent", "tout le temps"], "vals": [0, 1, 2, 3, 4]}, {"label": "Durée. En général, cela dure :", "opts": ["Sans objet (fréquence : jamais)", "quelques secondes", "quelques minutes", "quelques heures", "environ un jour", "plus d’un jour", "plus d’une semaine"], "vals": [0, 1, 2, 3, 4, 5, 6]}], [{"label": "Fréquence :", "opts": ["jamais", "rarement", "souvent", "très souvent", "tout le temps"], "vals": [0, 1, 2, 3, 4]}, {"label": "Durée. En général, cela dure :", "opts": ["Sans objet (fréquence : jamais)", "quelques secondes", "quelques minutes", "quelques heures", "environ un jour", "plus d’un jour", "plus d’une semaine"], "vals": [0, 1, 2, 3, 4, 5, 6]}], [{"label": "Fréquence :", "opts": ["jamais", "rarement", "souvent", "très souvent", "tout le temps"], "vals": [0, 1, 2, 3, 4]}, {"label": "Durée. En général, cela dure :", "opts": ["Sans objet (fréquence : jamais)", "quelques secondes", "quelques minutes", "quelques heures", "environ un jour", "plus d’un jour", "plus d’une semaine"], "vals": [0, 1, 2, 3, 4, 5, 6]}], [{"label": "Fréquence :", "opts": ["jamais", "rarement", "souvent", "très souvent", "tout le temps"], "vals": [0, 1, 2, 3, 4]}, {"label": "Durée. En général, cela dure :", "opts": ["Sans objet (fréquence : jamais)", "quelques secondes", "quelques minutes", "quelques heures", "environ un jour", "plus d’un jour", "plus d’une semaine"], "vals": [0, 1, 2, 3, 4, 5, 6]}], [{"label": "Fréquence :", "opts": ["jamais", "rarement", "souvent", "très souvent", "tout le temps"], "vals": [0, 1, 2, 3, 4]}, {"label": "Durée. En général, cela dure :", "opts": ["Sans objet (fréquence : jamais)", "quelques secondes", "quelques minutes", "quelques heures", "environ un jour", "plus d’un jour", "plus d’une semaine"], "vals": [0, 1, 2, 3, 4, 5, 6]}], [{"label": "Fréquence :", "opts": ["jamais", "rarement", "souvent", "très souvent", "tout le temps"], "vals": [0, 1, 2, 3, 4]}, {"label": "Durée. En général, cela dure :", "opts": ["Sans objet (fréquence : jamais)", "quelques secondes", "quelques minutes", "quelques heures", "environ un jour", "plus d’un jour", "plus d’une semaine"], "vals": [0, 1, 2, 3, 4, 5, 6]}], [{"label": "Fréquence :", "opts": ["jamais", "rarement", "souvent", "très souvent", "tout le temps"], "vals": [0, 1, 2, 3, 4]}, {"label": "Durée. En général, cela dure :", "opts": ["Sans objet (fréquence : jamais)", "quelques secondes", "quelques minutes", "quelques heures", "environ un jour", "plus d’un jour", "plus d’une semaine"], "vals": [0, 1, 2, 3, 4, 5, 6]}], [{"label": "Fréquence :", "opts": ["jamais", "rarement", "souvent", "très souvent", "tout le temps"], "vals": [0, 1, 2, 3, 4]}, {"label": "Durée. En général, cela dure :", "opts": ["Sans objet (fréquence : jamais)", "quelques secondes", "quelques minutes", "quelques heures", "environ un jour", "plus d’un jour", "plus d’une semaine"], "vals": [0, 1, 2, 3, 4, 5, 6]}], [{"label": "Fréquence :", "opts": ["jamais", "rarement", "souvent", "très souvent", "tout le temps"], "vals": [0, 1, 2, 3, 4]}, {"label": "Durée. En général, cela dure :", "opts": ["Sans objet (fréquence : jamais)", "quelques secondes", "quelques minutes", "quelques heures", "environ un jour", "plus d’un jour", "plus d’une semaine"], "vals": [0, 1, 2, 3, 4, 5, 6]}], [{"label": "Fréquence :", "opts": ["jamais", "rarement", "souvent", "très souvent", "tout le temps"], "vals": [0, 1, 2, 3, 4]}, {"label": "Durée. En général, cela dure :", "opts": ["Sans objet (fréquence : jamais)", "quelques secondes", "quelques minutes", "quelques heures", "environ un jour", "plus d’un jour", "plus d’une semaine"], "vals": [0, 1, 2, 3, 4, 5, 6]}]];              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var F = 0, D = 0, inc = 0;
+    answers.forEach(function(a){ var f = a[0], d = a[1]; F += f; if (f > 0){ D += d; if (d === 0) inc++; } });
+    var T = F + D;
+    html += '<table class="result-table">' + row('Fréquence des expériences (0 à 116)', F) + row('Durée des expériences (0 à 174)', D) + row('Score total (0 à 290)', T) + '</table>';
+    var phr = T > 70 ? 'Le total est supérieur au repère de 70 points cité dans la littérature (Sierra et Berrios, 2000) pour repérer une dépersonnalisation cliniquement significative.' : (T === 70 ? 'Le total est égal au repère de 70 points cité dans la littérature (Sierra et Berrios, 2000) pour repérer une dépersonnalisation cliniquement significative.' : 'Le total est inférieur au repère de 70 points cité dans la littérature (Sierra et Berrios, 2000) pour repérer une dépersonnalisation cliniquement significative.');
+    html += '<p class="result-text">' + phr + ' Ce repère vient de sources secondaires ; un score seul ne pose pas de diagnostic.</p>';
+    if (inc > 0) html += '<p class="result-text">Attention : ' + inc + ' énoncé(s) ont une fréquence supérieure à « jamais » mais une durée « sans objet » ; leur durée est comptée pour 0 et le total est donc probablement sous-estimé.</p>';
+    html += '<p class="result-text">Chaque énoncé compte la fréquence (0 à 4) plus la durée (1 à 6) ; la durée n’est comptée que si la fréquence n’est pas « jamais ».</p>';
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CDS-Cambridge : Échelle de dépersonnalisation de Cambridge</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#5E358D 0%,#CAB5E3 55%,#2A1641 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#2A1641;background:#EDE6F4;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #593285;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#593285;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#2A1641;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">CDS-Cambridge</span></div>
+
+  <h1 class="serif">Échelle de dépersonnalisation de Cambridge (CDS-Cambridge)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">CDS-Cambridge : Sierra et Berrios (2000) ; traduction et adaptation françaises de Lopez et Elzière (2021).</p>
+  <div class="meta-row">
+    <span class="pill">29 questions</span>
+    <span class="pill">5 à 10 minutes</span>
+    <span class="pill">fréquence + durée</span>
+    <span class="pill">Français</span>
+    <span class="pill">Dissociation</span>
+    <span class="pill">Licence requise : incertaine</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="cds-cambridge-depersonnalisation-29-items-fr.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>La Cambridge Depersonalization Scale décrit 29 expériences de dépersonnalisation et de déréalisation (sentiment d’irréalité, de détachement du corps ou des émotions, modifications des perceptions, impression de déjà-vu, etc.). Pour chaque énoncé, la personne indique à quelle fréquence l’expérience s’est produite au cours des six derniers mois (de « jamais » à « tout le temps ») et combien de temps elle dure en général (de « quelques secondes » à « plus d’une semaine »).</p>
+    <p class="source-note">Version française publiée en préimpression par Christophe Lopez et Maya Elzière (laboratoire de neurosciences cognitives, CNRS et Aix-Marseille Université). Les auteurs décrivent une traduction aller, une rétro-traduction et une révision des écarts ; aucune étude psychométrique de la version française n’est présentée.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque énoncé reçoit une cote de fréquence (0 à 4) et une cote de durée (1 à 6). Le score total est la somme des cotes de fréquence et de durée des 29 énoncés (plage de 0 à 290, d’après des articles qui utilisent l’échelle) ; la page affiche aussi les deux sous-totaux (fréquence 0 à 116, durée 0 à 174).</p>
+    <p class="reserve">Un repère de 70 points est attribué à Sierra et Berrios (2000) par plusieurs articles ultérieurs (« au-dessus de 70 » dans l’un, « 70 » dans d’autres) ; l’article original n’a pas pu être lu : ce seuil provient de sources secondaires et reste une aide au repérage, pas un diagnostic.</p>
+    <p class="reserve">Cotation déduite : la source française ne décrit que le questionnaire. Par cohérence avec la plage de 0 à 290 (29 x [4 + 6]), la durée n’est comptée que lorsque la fréquence n’est pas « jamais ». L’option « Sans objet (fréquence : jamais) » de la colonne durée est un libellé de création de la page, absent de la version française.</p>
+    <p class="reserve">Étalonnage français : aucune norme française trouvée (FR-, provisoire).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Items, consigne et libellés lus dans la préimpression HAL hal-03820019 (Lopez et Elzière), qui indique : « The rights to translate the questionnaire (Appendix A from Sierra & Berrios (2000)) into French and to reproduce it were granted by Elsevier, the publisher. » Aucune licence d’usage pour des tiers n’y est mentionnée.</p>
+    <p class="reserve">Licence : incertaine. L’instrument original appartient à ses auteurs et à son éditeur ; la page reprend la traduction publiée en accès libre sans permission écrite supplémentaire.</p>
+    <p class="source-note">Références : Sierra M., Berrios G.E. (2000). The Cambridge Depersonalization Scale: a new instrument for the measurement of depersonalization. Psychiatry Research, 93, 153-164. : Lopez C., Elzière M. (2022). French translation of the Cambridge Depersonalization scale. HAL hal-03820019 (préimpression). : Plage et repère de 70 : Eur J Pain 2025 (PMC12417787), Front Psychol 2022 (PMC9201777), Pilot Feasibility Stud 2025 (PMC12801544).</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>
