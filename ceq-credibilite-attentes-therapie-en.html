@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CEQ : crédibilité et attentes envers la thérapie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #326385;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#326385;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#162F41;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#326385;background:#E6EEF4;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#162F41;border-color:#E0D9C9;}
+  .btn-primary{background:#326385;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#326385;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#162F41;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">CEQ : crédibilité et attentes envers la thérapie (anglais)</h1>
+    <p class="lead">6 questions pour apprécier, à un moment donné de la thérapie, à quel point le patient croit que le traitement va l’aider (crédibilité) et ce qu’il en attend (attente) : réponses de 1 à 9 ou en pourcentage. Questionnaire en anglais, non traduit.</p>
+    <p class="consigne">We would like you to indicate below how much you believe, right now, that the therapy you are receiving will help to reduce your anxiety. Belief usually has two aspects to it: (1) what one thinks will happen and (2) what one feels will happen. Sometimes these are similar; sometimes they are different. Please answer the questions below. In the first set, answer in terms of what you think. In the second set answer in terms of what you really and truly feel. We do not want your therapist to ever see these ratings, so please keep the sheet covered when you are done.</p>
+    <p class="lang-note">Questions en anglais, non traduites (lues telles quelles dans l’annexe de l’article d’origine). Licence : incertaine.</p>
+    <div class="pill-row">
+      <span class="pill">6 questions</span>
+      <span class="pill">Anglais (non traduit)</span>
+      <span class="pill">Échelles de 1 à 9 et de 0 à 100 %</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Devilly GJ, Borkovec TD (2000). J Behav Ther Exp Psychiatry 31:73-86. Outil d’auto-évaluation : ne remplace pas un entretien clinique ni un bilan.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["At this point, how logical does the therapy offered to you seem?", "At this point, how successfully do you think this treatment will be in reducing your trauma symptoms?", "How confident would you be in recommending this treatment to a friend who experiences similar problems?", "By the end of the therapy period, how much improvement in your trauma symptoms do you think will occur?", "For this set, close your eyes for a few moments, and try to identify what you really feel about the therapy and its likely success. Then answer the following questions.\n\nAt this point, how much do you really feel that therapy will help you to reduce your trauma symptoms?", "By the end of the therapy period, how much improvement in your trauma symptoms do you really feel will occur?"];
+  var G = [];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = [[{"label": "1 = not at all logical · 5 = somewhat logical · 9 = very logical", "opts": ["1", "2", "3", "4", "5", "6", "7", "8", "9"], "vals": [1, 2, 3, 4, 5, 6, 7, 8, 9]}], [{"label": "1 = not at all useful · 5 = somewhat useful · 9 = very useful", "opts": ["1", "2", "3", "4", "5", "6", "7", "8", "9"], "vals": [1, 2, 3, 4, 5, 6, 7, 8, 9]}], [{"label": "1 = not at all confident · 5 = somewhat confident · 9 = very confident", "opts": ["1", "2", "3", "4", "5", "6", "7", "8", "9"], "vals": [1, 2, 3, 4, 5, 6, 7, 8, 9]}], [{"label": "0% … 100%", "opts": ["0 %", "10 %", "20 %", "30 %", "40 %", "50 %", "60 %", "70 %", "80 %", "90 %", "100 %"], "vals": [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]}], [{"label": "1 = not at all · 5 = somewhat · 9 = Very much", "opts": ["1", "2", "3", "4", "5", "6", "7", "8", "9"], "vals": [1, 2, 3, 4, 5, 6, 7, 8, 9]}], [{"label": "0% … 100%", "opts": ["0 %", "10 %", "20 %", "30 %", "40 %", "50 %", "60 %", "70 %", "80 %", "90 %", "100 %"], "vals": [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]}]];              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+
+    var s = answers[0][0] + answers[1][0] + answers[2][0];
+    html += '<table class="result-table">' +
+      row('Crédibilité : somme des questions 1 à 3 du « Set I » (3 à 27)', s) +
+      row('Question 4 (« Set I ») : amélioration attendue, en %', answers[3][0] + ' %') +
+      row('Question 5 (« Set II ») : « feel », de 1 à 9', answers[4][0]) +
+      row('Question 6 (« Set II ») : amélioration ressentie, en %', answers[5][0] + ' %') +
+      '</table>';
+    html += '<p class="result-text">Ces valeurs sont brutes. L’article d’origine calcule les deux facteurs (crédibilité, attente) en standardisant d’abord chaque question sur l’échantillon étudié, puis en les sommant : ce calcul n’est pas possible pour une seule personne et aucun seuil n’est publié.</p>';
+    html += '<p class="result-text">Selon l’article, la crédibilité provient des trois premières questions « think » ; l’attente provient de la quatrième question « think » et des deux questions « feel » (questions 4, 5 et 6 de cette page).</p>';
+
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CEQ : crédibilité et attentes envers la thérapie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#35688D 0%,#B5D0E3 55%,#162F41 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#162F41;background:#E6EEF4;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #326385;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#326385;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#162F41;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">CEQ</span></div>
+
+  <h1 class="serif">Credibility/Expectancy Questionnaire (CEQ)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">CEQ : Devilly, G. J., & Borkovec, T. D. (2000). Version originale anglaise (questionnaire reproduit en annexe de l’article).</p>
+  <div class="meta-row">
+    <span class="pill">6 questions</span>
+    <span class="pill">Anglais (non traduit)</span>
+    <span class="pill">Échelles de 1 à 9 et de 0 à 100 %</span>
+    <span class="pill">Processus thérapeutique</span>
+    <span class="pill">Attentes</span>
+    <span class="pill">Licence : incertaine</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="ceq-credibilite-attentes-therapie-en.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>Le CEQ est un questionnaire court qui apprécie « how much one believes, right now, that the therapy you are receiving will help ». Il distingue ce que la personne pense (questions « think », ensemble I) de ce qu’elle ressent vraiment (questions « feel », ensemble II). Il comporte 6 questions : 4 dans l’ensemble I et 2 dans l’ensemble II.</p>
+    <p>Les questions 1, 2, 3 et 5 de cette page sont notées de 1 à 9 ; les questions 4 et 6 demandent un pourcentage d’amélioration attendue, de 0 % à 100 % par pas de 10. La consigne de l’article précise que le thérapeute ne doit pas voir ces réponses (« keep the sheet covered »).</p>
+    <p class="source-note">Le texte intégral de l’ensemble II (« close your eyes for a few moments… ») est placé en tête de la question 5, qui ouvre cet ensemble.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Dans l’article, la crédibilité est tirée des trois premières questions « think » et l’attente de la quatrième question « think » et des deux questions « feel ». Comme le questionnaire utilise deux échelles (1 à 9 et 0 à 100 %), les auteurs indiquent qu’il faut standardiser chaque question puis former un composite par facteur.</p>
+    <p>Cette page n’effectue pas cette standardisation, qui exige les moyennes et écarts-types d’un échantillon : elle restitue la somme des questions 1 à 3 (3 à 27) et les valeurs brutes des questions 4, 5 et 6.</p>
+    <p class="reserve">Aucun seuil n’est publié dans la source et aucune norme française n’a été trouvée (étalonnage français : non, FR-, provisoire). Une version française validée existe (Coste et al., 2020, patients adressés pour un trouble de stress post-traumatique) mais son texte intégral n’a pas pu être lu : cette page reste en anglais.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Items et consigne repris mot pour mot de l’annexe A de l’article (« Therapy evaluation form »), sans traduction. La consigne mentionne « your anxiety » tandis que les questions de l’annexe parlent de « your trauma symptoms » : ces formulations sont conservées telles quelles (l’article précise que le questionnaire s’adapte au problème traité).</p>
+    <p class="reserve">Licence : incertaine. L’article porte la mention « © 2000 Elsevier Science Ltd. All rights reserved. » ; le questionnaire est reproduit en annexe, sans mention de permission d’usage.</p>
+    <p class="source-note">Devilly GJ, Borkovec TD. Psychometric properties of the credibility/expectancy questionnaire. Journal of Behavior Therapy and Experimental Psychiatry 2000 ; 31 : 73-86. Coste J, Tarquinio C, Rouquette A, Montel S, Pouchot J. Adaptation transculturelle et validation de la version française du questionnaire Croyances et Attentes. Psychologie Française 2020 ; 65(2) : 173-184 (résumé seul consulté).</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

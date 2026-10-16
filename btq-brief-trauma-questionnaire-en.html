@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BTQ : Brief Trauma Questionnaire</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #854732;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#854732;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#412116;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#854732;background:#F4EAE6;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#412116;border-color:#E0D9C9;}
+  .btn-primary{background:#854732;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#854732;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#412116;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">BTQ : questionnaire bref sur l’exposition aux événements traumatiques (anglais)</h1>
+    <p class="lead">10 types d’événements potentiellement traumatiques (guerre, accident, catastrophe, maladie grave, violences, agression sexuelle, deuil violent, témoin) : pour chacun, le BTQ demande s’il est arrivé et, selon l’événement, s’il y a eu menace vitale ou blessure grave. Questionnaire en anglais, non traduit ; il aborde des événements très éprouvants (dont une agression sexuelle).</p>
+    <p class="consigne">The following questions ask about events that may be extraordinarily stressful or disturbing for almost everyone. Please circle “Yes” or “No” to report what has happened to you. If you answer “Yes” for an event, please answer any additional questions that are listed on the right side of the page to report: (1) whether you thought your life was in danger or you might be seriously injured; and (2) whether you were seriously injured. If you answer “No” for an event, go on to the next event.</p>
+    <p class="lang-note">Questions en anglais, non traduites. Sur cette page, les questions complémentaires sont posées à l’écran (réponse « sans objet » si l’événement n’a pas eu lieu), alors que la consigne ci-dessus décrit le formulaire papier. Licence : incertaine.</p>
+    <div class="pill-row">
+      <span class="pill">10 événements</span>
+      <span class="pill">Anglais (non traduit)</span>
+      <span class="pill">No / Yes</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Schnurr P, Vielhauer M, Weathers F, Findler M (1999). The Brief Trauma Questionnaire (BTQ), National Center for PTSD. Outil de dépistage : ne remplace pas un entretien clinique ni un bilan.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["Have you ever served in a war zone, or have you ever served in a noncombat job that exposed you to war-related casualties (for example, as a medic or on graves registration duty?)", "Have you ever been in a serious car accident, or a serious accident at work or somewhere else?", "Have you ever been in a major natural or technological disaster, such as a fire, tornado, hurricane, flood, earthquake, or chemical spill?", "Have you ever had a life-threatening illness such as cancer, a heart attack, leukemia, AIDS, multiple sclerosis, etc.?", "Before age 18, were you ever physically punished or beaten by a parent, caretaker, or teacher so that: you were very frightened; or you thought you would be injured; or you received bruises, cuts, welts, lumps or other injuries?", "Not including any punishments or beatings you already reported in Question 5, have you ever been attacked, beaten, or mugged by anyone, including friends, family members or strangers?", "Has anyone ever made or pressured you into having some type of unwanted sexual contact?\nNote: By sexual contact we mean any contact between someone else and your private parts or between you and some else’s private parts", "Have you ever been in any other situation in which you were seriously injured, or have you ever been in any other situation in which you feared you might be seriously injured or killed?", "Has a close family member or friend died violently, for example, in a serious car crash, mugging, or attack?", "Have you ever witnessed a situation in which someone was seriously injured or killed, or have you ever witnessed a situation in which you feared someone would be seriously injured or killed?\nNote: Do not answer “yes” for any event you already reported in Questions 1-9"];
+  var G = [];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = [[{"label": "Has this ever happened to you?", "opts": ["No", "Yes"], "vals": [0, 1]}, {"label": "If the event happened, did you think your life was in danger or you might be seriously injured?", "opts": ["No", "Yes", "Sans objet (l’événement n’a pas eu lieu)"], "vals": [0, 1, "NA"]}, {"label": "If the event happened, were you seriously injured?", "opts": ["No", "Yes", "Sans objet (l’événement n’a pas eu lieu)"], "vals": [0, 1, "NA"]}], [{"label": "Has this ever happened to you?", "opts": ["No", "Yes"], "vals": [0, 1]}, {"label": "If the event happened, did you think your life was in danger or you might be seriously injured?", "opts": ["No", "Yes", "Sans objet (l’événement n’a pas eu lieu)"], "vals": [0, 1, "NA"]}, {"label": "If the event happened, were you seriously injured?", "opts": ["No", "Yes", "Sans objet (l’événement n’a pas eu lieu)"], "vals": [0, 1, "NA"]}], [{"label": "Has this ever happened to you?", "opts": ["No", "Yes"], "vals": [0, 1]}, {"label": "If the event happened, did you think your life was in danger or you might be seriously injured?", "opts": ["No", "Yes", "Sans objet (l’événement n’a pas eu lieu)"], "vals": [0, 1, "NA"]}, {"label": "If the event happened, were you seriously injured?", "opts": ["No", "Yes", "Sans objet (l’événement n’a pas eu lieu)"], "vals": [0, 1, "NA"]}], [{"label": "Has this ever happened to you?", "opts": ["No", "Yes"], "vals": [0, 1]}, {"label": "If the event happened, did you think your life was in danger or you might be seriously injured?", "opts": ["No", "Yes", "Sans objet (l’événement n’a pas eu lieu)"], "vals": [0, 1, "NA"]}], [{"label": "Has this ever happened to you?", "opts": ["No", "Yes"], "vals": [0, 1]}, {"label": "If the event happened, did you think your life was in danger or you might be seriously injured?", "opts": ["No", "Yes", "Sans objet (l’événement n’a pas eu lieu)"], "vals": [0, 1, "NA"]}, {"label": "If the event happened, were you seriously injured?", "opts": ["No", "Yes", "Sans objet (l’événement n’a pas eu lieu)"], "vals": [0, 1, "NA"]}], [{"label": "Has this ever happened to you?", "opts": ["No", "Yes"], "vals": [0, 1]}, {"label": "If the event happened, did you think your life was in danger or you might be seriously injured?", "opts": ["No", "Yes", "Sans objet (l’événement n’a pas eu lieu)"], "vals": [0, 1, "NA"]}, {"label": "If the event happened, were you seriously injured?", "opts": ["No", "Yes", "Sans objet (l’événement n’a pas eu lieu)"], "vals": [0, 1, "NA"]}], [{"label": "Has this ever happened to you?", "opts": ["No", "Yes"], "vals": [0, 1]}, {"label": "If the event happened, did you think your life was in danger or you might be seriously injured?", "opts": ["No", "Yes", "Sans objet (l’événement n’a pas eu lieu)"], "vals": [0, 1, "NA"]}, {"label": "If the event happened, were you seriously injured?", "opts": ["No", "Yes", "Sans objet (l’événement n’a pas eu lieu)"], "vals": [0, 1, "NA"]}], [{"label": "Has this ever happened to you?", "opts": ["No", "Yes"], "vals": [0, 1]}, {"label": "If the event happened, were you seriously injured?", "opts": ["No", "Yes", "Sans objet (l’événement n’a pas eu lieu)"], "vals": [0, 1, "NA"]}], [{"label": "Has this ever happened to you?", "opts": ["No", "Yes"], "vals": [0, 1]}, {"label": "If the event happened, were you seriously injured?", "opts": ["No", "Yes", "Sans objet (l’événement n’a pas eu lieu)"], "vals": [0, 1, "NA"]}], [{"label": "Has this ever happened to you?", "opts": ["No", "Yes"], "vals": [0, 1]}]];              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+
+    var SUBQ = [[true, true], [true, true], [true, true], [true, false], [true, true], [true, true], [true, true], [false, true], [false, true], [false, false]];
+    var happened = 0, pos = [];
+    for (var k = 0; k < 10; k++){
+      var a = answers[k], ev = a[0] === 1, d = null, b = null, idx = 1;
+      if (SUBQ[k][0]) { d = a[idx] === 1; idx++; }
+      if (SUBQ[k][1]) { b = a[idx] === 1; }
+      if (ev) happened++;
+      var p = false;
+      if (ev){
+        if (k === 8 || k === 9) p = true;               /* 9 et 10 : « Has this ever happened to you? » */
+        else if (k === 3) p = !!d;                      /* 4 : menace vitale */
+        else if (k === 7) p = !!b;                      /* 8 : blessure grave */
+        else p = !!d || !!b;                            /* 1-3 et 5-7 : menace vitale ou blessure grave */
+      }
+      if (p) pos.push(k + 1);
+    }
+    html += '<table class="result-table">' +
+      row('Événements ayant eu lieu (0 à 10)', happened) +
+      row('Événements positifs au sens du BTQ (0 à 10)', pos.length) +
+      row('Numéros des événements positifs', pos.length ? pos.join(', ') : 'aucun') +
+      '</table>';
+    html += '<p class="result-text">' + (pos.length ? 'Au moins un événement est positif selon la règle de cotation du BTQ : l’exposition à un événement de type critère A est retenue pour ces numéros.' : 'Aucun événement n’est positif selon la règle de cotation du BTQ.') + '</p>';
+    html += '<p class="result-text">Le BTQ sert à repérer l’exposition (critère A) et les types d’événements vécus ; il ne mesure ni les symptômes ni leur gravité.</p>';
+
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BTQ : Brief Trauma Questionnaire</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#8D4B35 0%,#E3C1B5 55%,#412116 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#412116;background:#F4EAE6;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #854732;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#854732;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#412116;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">BTQ</span></div>
+
+  <h1 class="serif">Brief Trauma Questionnaire (BTQ)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">BTQ : Schnurr, P., Vielhauer, M., Weathers, F., & Findler, M. (1999) ; National Center for PTSD.</p>
+  <div class="meta-row">
+    <span class="pill">10 événements</span>
+    <span class="pill">Anglais (non traduit)</span>
+    <span class="pill">No / Yes</span>
+    <span class="pill">Trauma</span>
+    <span class="pill">Exposition (critère A)</span>
+    <span class="pill">Licence : incertaine</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="btq-brief-trauma-questionnaire-en.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>Le BTQ est un court questionnaire auto-administré dérivé du Brief Trauma Interview. Il a été conçu pour évaluer l’exposition traumatique selon le DSM-IV, en n’interrogeant que le critère A.1 (menace vitale ou blessure grave) ; la source précise que, le critère A.2 ayant été supprimé du DSM-5, le BTQ offre une évaluation complète du critère A.</p>
+    <p>Il peut servir à déterminer si une personne a vécu un événement répondant au critère A, ou à identifier les différents types d’événements de critère A vécus.</p>
+    <p class="source-note">Chaque événement a trois colonnes dans le formulaire d’origine : « Has this ever happened to you? », puis « If the event happened, did you think your life was in danger or you might be seriously injured? » et « If the event happened, were you seriously injured? », avec des cases « N/A » là où la question ne se pose pas (blessure pour l’événement 4 ; menace vitale pour les événements 8 et 9 ; les deux pour l’événement 10).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Un événement est compté comme positif si la personne répond oui : à la menace vitale ou à la blessure grave pour les événements 1 à 3 et 5 à 7 ; à la menace vitale pour l’événement 4 ; à la blessure grave pour l’événement 8 ; à « Has this ever happened to you? » pour les événements 9 et 10.</p>
+    <p>Cette page affiche le nombre d’événements survenus, le nombre d’événements positifs (0 à 10) et leurs numéros. Il n’y a ni score de gravité ni seuil.</p>
+    <p class="reserve">Étalonnage français : non (FR-, provisoire) ; aucune version française n’a été trouvée ; pas de norme attendue pour un inventaire d’événements.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Items et règles de cotation extraits du PDF du National Center for PTSD (version de 1999), sans traduction. Seule retouche : la mise en page du PDF colle deux mots dans l’item 3 (« orchemical ») ; le texte « or chemical » a été rétabli après contrôle sur l’image. La formulation « some else’s » de la note de l’item 7 est celle de la source.</p>
+    <p class="reserve">Libellé de création : l’option « Sans objet (l’événement n’a pas eu lieu) », ajoutée pour remplacer le renvoi à la question suivante du formulaire papier. La page pose toutes les questions complémentaires, y compris la blessure grave de l’événement 9, qui ne change pas la cotation.</p>
+    <p class="reserve">Licence : incertaine. Le document indique « Available from http://www.ptsd.va.gov » ; aucune mention de licence ou de domaine public n’a été trouvée.</p>
+    <p class="source-note">Schnurr P, Vielhauer M, Weathers F, Findler M. The Brief Trauma Questionnaire (BTQ) [Measurement instrument], 1999. Available from http://www.ptsd.va.gov</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>
