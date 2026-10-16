@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ASI : Inventaire de saillance aberrante</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #593285;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#593285;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#2A1641;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#593285;background:#EDE6F4;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#2A1641;border-color:#E0D9C9;}
+  .btn-primary{background:#593285;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#593285;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#2A1641;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">ASI : Inventaire de saillance aberrante (Aberrant Salience Inventory)</h1>
+    <p class="lead">29 questions sur des expériences où certaines choses prennent soudain une importance ou une signification particulière. Réponse Oui ou Non à chaque question.</p>
+    <p class="consigne">Nous nous intéressons ici à l’étude des attitudes et expériences de vie que les gens ont. Le questionnaire qui suit contient de questions à propos de vos attitudes et expériences de vie. S’il vous plait, répondez par « Oui » ou « Non » après chaque question. En réfléchissant sur vous-même et à vos expériences, ne prenez pas en compte vos attitudes, sentiments ou expériences que vous auriez pu avoir sous l’influence d’alcool ou d’autres drogues (p.ex. cannabis, LSD, cocaïne).</p>
+    <p class="lang-note">Questions en français (version française validée en Suisse et en Belgique). Licence requise : incertaine.</p>
+    <div class="pill-row">
+      <span class="pill">29 questions</span>
+      <span class="pill">5 minutes</span>
+      <span class="pill">Oui / Non</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Golay et coll. (2020), Ann Gen Psychiatry 19:58 ; Cicero, Kerns &amp; McCarthy (2010), Psychol Assess 22(3):688. Outil d'auto-évaluation : ne remplace pas un entretien clinique ni un bilan.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["Arrive-t-il que certaines choses insignifiantes semblent soudainement particulièrement importantes ou significatives pour vous ?", "Avez-vous parfois l'impression que quelque chose de particulièrement important pour vous est sur le point d’arriver, mais sans être sûr de ce que c’est ?", "Vos sens semblent-ils parfois aiguisés ?", "Vous arrive-t-il de vous sentir comme si vous étiez en train d’atteindre rapidement le summum de vos facultés intellectuelles ?", "Remarquez-vous parfois des petits détails qui vous semblent importants alors que vous ne les aviez pas remarqués avant ?", "Vous sentez-vous parfois comme s’il était important pour vous de comprendre quelque chose, mais sans être sûr de ce que c’est ?", "Vous arrive-t-il de vivre des périodes durant lesquelles vous vous sentez particulièrement religieux ou mystique ?", "Vous arrive-t-il d’avoir des difficultés à dire si vous êtes ravi, effrayé, peiné ou anxieux ?", "Vous arrive-t-il de vivre des périodes de conscience accrue ?", "Vous arrive-t-il d’éprouver le besoin de donner un sens à des situations ou évènements qui semblent aléatoires ?", "Vous arrive-t-il d’avoir le sentiment d’être en train de trouver la pièce manquante d’un puzzle ?", "Avez-vous parfois le sentiment de pouvoir entendre avec une plus grande clarté ?", "Vous arrive-t-il de vous sentir comme si vous étiez une personne particulièrement évoluée au niveau spirituel ?", "Des observations habituellement insignifiantes prennent-elles parfois une signification de mauvaise augure ?", "Vous arrive-t-il de vivre des périodes pendant lesquelles les chansons semblent avoir un sens particulier pour votre vie ?", "Vous arrive-t-il parfois d’attribuer de l’importance à des objets auxquels vous n’en accorderiez normalement pas ?", "Avez-vous parfois l’impression d’être sur le point de comprendre quelque chose de vraiment grand ou d’important sans être sûr de ce que c’est ?", "Votre sens du goût vous a-t-il déjà semblé plus fin ?", "Vous arrive-t-il d’avoir l’impression que les mystères de l’univers se révélaient d’eux-mêmes à vous ?", "Vous arrive-t-il de vivre des périodes durant lesquelles vous vous sentez surstimulé par des choses ou des expériences qui sont habituellement gérables ?", "Vous arrive-t-il souvent d’être fasciné par les petites choses autour de vous ?", "Vos sens vous paraissent-ils parfois extrêmement forts ou clairs ?", "Vous arrive-t-il d’avoir l’impression qu’un monde entier s’ouvre à vous ?", "Vous arrive-t-il d’avoir l’impression que les frontières entre vos sensations internes et externes ont été enlevées ?", "Avez-vous parfois le sentiment que le monde est en train de changer et que vous cherchez une explication ?", "Vous arrive-t-il d’avoir un sentiment d’urgence inexprimable sans être sûr de ce qu’il faut faire ?", "Vous arrive-t-il parfois d'être intéressé par des personnes, des événements, des lieux, ou des idées qui ne devraient normalement pas retenir votre attention ?", "Arrive-t-il que vos pensées et vos perceptions surgissent plus vite qu’elles ne peuvent être assimilées ?", "Vous arrive-t-il de remarquer des choses que vous n’aviez pas remarquées avant et qui prennent une signification particulière ?"];
+  var G = [{"label": "", "opts": ["Oui", "Non"], "vals": [1, 0]}];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = null;              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var INV = [], LO = 0, HI = 1;
+    function val(k){ var v = answers[k-1][0]; if (v === 'NA') return null; return INV.indexOf(k) >= 0 ? (LO + HI - v) : v; }
+    function agg(list, m){ var s = 0, n = 0; list.forEach(function(k){ var v = val(k); if (v !== null){ s += v; n++; } }); if (n === 0) return null; return m === 'mean' ? s / n : s; }
+    var BL = [{"l": "Importance et émotionalité accrues", "it": [1, 2, 5, 6, 10, 11, 14, 15, 16, 17, 20, 21, 24, 26, 27, 28, 29], "m": "sum", "d": 0, "r": "0 à 17", "x": 1}, {"l": "Aiguisement des sens", "it": [3, 9, 12, 18, 22], "m": "sum", "d": 0, "r": "0 à 5", "x": 1}, {"l": "Cognition augmentée", "it": [4, 7, 13, 19, 23, 25], "m": "sum", "d": 0, "r": "0 à 6", "x": 1}];
+    var res = [], rows = '';
+    BL.forEach(function(b){ var v = agg(b.it, b.m); if (v !== null) v = v * b.x; res.push(v); rows += row(b.l + (b.r ? ' (' + b.r + ')' : ''), v === null ? '-' : v.toFixed(b.d).replace('.', ',')); });
+    html += '<table class=\"result-table\">' + rows + '</table>';
+    html += '<p class=\"result-text\">' + "Chaque score est le nombre de réponses « Oui » dans le groupe d’items correspondant (l’item 8 n’entre dans aucun des trois scores). Ces scores n’ont pas de seuil clinique établi : ils se lisent avec le clinicien, en tenant compte du contexte." + '</p>';
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ASI : Inventaire de saillance aberrante</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#5E358D 0%,#CAB5E3 55%,#2A1641 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#2A1641;background:#EDE6F4;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #593285;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#593285;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#2A1641;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">ASI-Sal</span></div>
+
+  <h1 class="serif">Inventaire de saillance aberrante : Aberrant Salience Inventory (ASI), version française</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">ASI : Cicero, Kerns &amp; McCarthy (2010) ; version française validée par Golay et coll. (2020), échantillons belge et suisse francophones.</p>
+  <div class="meta-row">
+    <span class="pill">29 questions</span>
+    <span class="pill">5 minutes</span>
+    <span class="pill">Oui / Non</span>
+    <span class="pill">Français</span>
+    <span class="pill">Expériences de saillance, proximité psychotique</span>
+    <span class="pill">Licence requise : incertaine</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="asi-sal-salience-aberrante.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>L’Aberrant Salience Inventory explore, en 29 questions auxquelles on répond par Oui ou Non, la tendance à attribuer une importance ou une signification particulière à des stimuli ordinaires, notamment des expériences de sens aiguisés, d’intuition d’une signification proche et de cognition accrue. Il a été conçu comme une mesure de la prédisposition aux expériences psychotiques.</p>
+    <p>Cette version française a été traduite par Charles Bonsack, Julien Laloyaux, Philippe Golay et Imane Semlali, retraduite en anglais par un traducteur professionnel indépendant, puis examinée par l’auteur de l’échelle originale (David C. Cicero), qui n’a demandé aucune modification notable. Elle a été étudiée auprès de 282 personnes de la population générale belge et de 150 patients hospitalisés dans des établissements psychiatriques suisses francophones.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Réponse Oui ou Non ; chaque score est la somme des réponses « Oui » du groupe d’items concerné : « Importance et émotionalité accrues » (items 1, 2, 5, 6, 10, 11, 14, 15, 16, 17, 20, 21, 24, 26, 27, 28, 29 ; 0 à 17), « Aiguisement des sens » (items 3, 9, 12, 18, 22 ; 0 à 5), « Cognition augmentée » (items 4, 7, 13, 19, 23, 25 ; 0 à 6). L’item 8 est exclu du modèle à trois facteurs retenu par les auteurs.</p>
+    <p>Aucun seuil clinique n’est établi. L’étude rapporte seulement des seuils exploratoires issus de courbes ROC (valeur optimale de 2,5) : pour « Aiguisement des sens », population générale contre patients psychiatriques (aire sous la courbe 0,678 ; sensibilité 0,627 ; spécificité 0,667) ; pour « Cognition augmentée », patients avec psychose contre les autres groupes (aire 0,676 ; sensibilité 0,582 ; spécificité 0,703). Le score « Importance et émotionalité accrues » ne distingue pas les groupes. Moyennes (écart type) de la population générale belge : 9,03 (3,97) ; 1,85 (1,48) ; 1,80 (1,47), à titre descriptif seulement.</p>
+    <p class="reserve">Ces scores ne constituent pas un diagnostic et ne servent pas à poser un trouble psychotique. Seul un entretien clinique permet d’interpréter ces réponses.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="source-note">Licence : incertaine. Le questionnaire figure en annexe (Appendix 1) d’un article sous licence « Creative Commons Attribution 4.0 International » : « …which permits use, sharing, adaptation, distribution and reproduction in any medium or format, as long as you give appropriate credit to the original author(s) and the source… ». Aucune mention de droits propre à l’ASI original n’a été retrouvée.</p>
+    <p class="reserve">Le codage Oui = 1 / Non = 0 n’est pas écrit en toutes lettres dans l’article ; il est cohérent avec les moyennes publiées. Les normes sont celles d’un échantillon belge de jeunes adultes (72 % d’étudiants) et de patients suisses : aucune norme française (France) n’a été trouvée.</p>
+    <p class="source-note">Golay P., Laloyaux J., Moga M., Della Libera C., Larøi F., Bonsack C. (2020). Psychometric investigation of the French version of the Aberrant Salience Inventory (ASI): differentiating patients with psychosis, patients with other psychiatric diagnoses and non-clinical participants. Annals of General Psychiatry, 19, 58. doi:10.1186/s12991-020-00308-0.</p>
+    <p class="source-note">Cicero D.C., Kerns J.G., McCarthy D.M. (2010). The Aberrant Salience Inventory: a new measure of psychosis proneness. Psychological Assessment, 22(3), 688. doi:10.1037/a0019913.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

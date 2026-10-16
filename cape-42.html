@@ -1,0 +1,2758 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Évaluation communautaire des expériences psychiques (CAPE-42)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 14px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#2F6F8F;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .period{font-size:12.5px;font-weight:600;color:#2F6F8F;margin:0 0 8px;}
+  .q-text{font-size:16px;margin:0 0 6px;}
+  .q-ex{font-size:13px;color:#63695D;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;margin-top:14px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#2F6F8F;background:#E3F0F6;}
+  .num-in{width:140px;font-family:'Inter',sans-serif;font-size:16px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;background:#F4F1EA;color:#20241E;}
+  .num-lab{font-size:13px;color:#63695D;margin-left:8px;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#2F6F8F;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 16px;}
+  .sc-title{font-size:13px;font-weight:700;color:#2F6F8F;margin:18px 0 6px;}
+  .sc-row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-top:1px solid #EFEBE1;font-size:14px;}
+  .sc-row b{font-variant-numeric:tabular-nums;text-align:right;}
+  .sc-read{font-size:13px;color:#63695D;margin:0 0 6px;padding-left:2px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">Évaluation communautaire des expériences psychiques (CAPE-42)</h1>
+    <p class="lead">Mode d&#x27;emploi de cette page (texte propre à ce site, non cité du questionnaire) : pour chacune des 42 expériences, indiquez d&#x27;abord la fréquence (« Never », « Sometimes », « Often », « Nearly always »). Si l&#x27;expérience existe (réponse autre que « Never »), indiquez ensuite la détresse qu&#x27;elle provoque.</p>
+    <p class="lang-note">Consigne générale officielle non retrouvée (site officiel désactivé) : seuls les libellés d&#x27;items et de réponses sont reproduits, en anglais ; la période de référence n&#x27;est pas précisée ici. Version française non retrouvée. Licence requise : non (« freeware » selon l&#x27;auteur, source secondaire).</p>
+    <div class="pill-row">
+    <span class="pill">42 questions</span>
+    <span class="pill">fréquence puis détresse</span>
+    <span class="pill">trois dimensions</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="period" id="period-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <p class="q-ex" id="q-ex"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="rows-all"></div>
+    <p class="result-text">Fréquence et détresse sont cotées de 1 à 4. Un item jamais vécu (« Never ») reçoit 1 en détresse. Scores totaux : 42 à 168. Dimensions : positive (20 items, expériences de type psychotique), négative (14 items, retrait, émoussement, baisse de motivation) et dépressive (8 items), exprimées en moyenne par item (1 à 4). Outil de repérage : il ne pose pas un diagnostic et ne remplace pas une évaluation clinique.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">CAPE-42 : Stefanis, N. C., et al. (2002). Evidence that three dimensions of psychosis have a distribution in the general population. Psychological Medicine, 32, 347-358. Outil de repérage, ne remplace pas une évaluation clinique.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var CFG = {
+ "items": [
+  {
+   "n": "1",
+   "t": "Do you ever feel sad?",
+   "o": [
+    [
+     "Never",
+     1
+    ],
+    [
+     "Sometimes",
+     2
+    ],
+    [
+     "Often",
+     3
+    ],
+    [
+     "Nearly always",
+     4
+    ]
+   ],
+   "p": "Fréquence"
+  },
+  {
+   "n": "1",
+   "t": "Do you ever feel sad?",
+   "o": [
+    [
+     "Not distressed",
+     1
+    ],
+    [
+     "A bit distressed",
+     2
+    ],
+    [
+     "Quite distressed",
+     3
+    ],
+    [
+     "Very distressed",
+     4
+    ]
+   ],
+   "p": "Détresse : « Please indicate how distressed you are by this experience: »",
+   "c": {
+    "anyOf": [
+     0
+    ],
+    "gt": 1
+   }
+  },
+  {
+   "n": "2",
+   "t": "Do you ever feel as if people seem to drop hints about you or say things with a double meaning?",
+   "o": [
+    [
+     "Never",
+     1
+    ],
+    [
+     "Sometimes",
+     2
+    ],
+    [
+     "Often",
+     3
+    ],
+    [
+     "Nearly always",
+     4
+    ]
+   ],
+   "p": "Fréquence"
+  },
+  {
+   "n": "2",
+   "t": "Do you ever feel as if people seem to drop hints about you or say things with a double meaning?",
+   "o": [
+    [
+     "Not distressed",
+     1
+    ],
+    [
+     "A bit distressed",
+     2
+    ],
+    [
+     "Quite distressed",
+     3
+    ],
+    [
+     "Very distressed",
+     4
+    ]
+   ],
+   "p": "Détresse : « Please indicate how distressed you are by this experience: »",
+   "c": {
+    "anyOf": [
+     2
+    ],
+    "gt": 1
+   }
+  },
+  {
+   "n": "3",
+   "t": "Do you ever feel that you are not a very animated person?",
+   "o": [
+    [
+     "Never",
+     1
+    ],
+    [
+     "Sometimes",
+     2
+    ],
+    [
+     "Often",
+     3
+    ],
+    [
+     "Nearly always",
+     4
+    ]
+   ],
+   "p": "Fréquence"
+  },
+  {
+   "n": "3",
+   "t": "Do you ever feel that you are not a very animated person?",
+   "o": [
+    [
+     "Not distressed",
+     1
+    ],
+    [
+     "A bit distressed",
+     2
+    ],
+    [
+     "Quite distressed",
+     3
+    ],
+    [
+     "Very distressed",
+     4
+    ]
+   ],
+   "p": "Détresse : « Please indicate how distressed you are by this experience: »",
+   "c": {
+    "anyOf": [
+     4
+    ],
+    "gt": 1
+   }
+  },
+  {
+   "n": "4",
+   "t": "Do you ever feel that you are not much of a talker when you are conversing with other people?",
+   "o": [
+    [
+     "Never",
+     1
+    ],
+    [
+     "Sometimes",
+     2
+    ],
+    [
+     "Often",
+     3
+    ],
+    [
+     "Nearly always",
+     4
+    ]
+   ],
+   "p": "Fréquence"
+  },
+  {
+   "n": "4",
+   "t": "Do you ever feel that you are not much of a talker when you are conversing with other people?",
+   "o": [
+    [
+     "Not distressed",
+     1
+    ],
+    [
+     "A bit distressed",
+     2
+    ],
+    [
+     "Quite distressed",
+     3
+    ],
+    [
+     "Very distressed",
+     4
+    ]
+   ],
+   "p": "Détresse : « Please indicate how distressed you are by this experience: »",
+   "c": {
+    "anyOf": [
+     6
+    ],
+    "gt": 1
+   }
+  },
+  {
+   "n": "5",
+   "t": "Do you ever feel as if things in magazines or on TV were written especially for you?",
+   "o": [
+    [
+     "Never",
+     1
+    ],
+    [
+     "Sometimes",
+     2
+    ],
+    [
+     "Often",
+     3
+    ],
+    [
+     "Nearly always",
+     4
+    ]
+   ],
+   "p": "Fréquence"
+  },
+  {
+   "n": "5",
+   "t": "Do you ever feel as if things in magazines or on TV were written especially for you?",
+   "o": [
+    [
+     "Not distressed",
+     1
+    ],
+    [
+     "A bit distressed",
+     2
+    ],
+    [
+     "Quite distressed",
+     3
+    ],
+    [
+     "Very distressed",
+     4
+    ]
+   ],
+   "p": "Détresse : « Please indicate how distressed you are by this experience: »",
+   "c": {
+    "anyOf": [
+     8
+    ],
+    "gt": 1
+   }
+  },
+  {
+   "n": "6",
+   "t": "Do you ever feel as if some people are not what they seem to be?",
+   "o": [
+    [
+     "Never",
+     1
+    ],
+    [
+     "Sometimes",
+     2
+    ],
+    [
+     "Often",
+     3
+    ],
+    [
+     "Nearly always",
+     4
+    ]
+   ],
+   "p": "Fréquence"
+  },
+  {
+   "n": "6",
+   "t": "Do you ever feel as if some people are not what they seem to be?",
+   "o": [
+    [
+     "Not distressed",
+     1
+    ],
+    [
+     "A bit distressed",
+     2
+    ],
+    [
+     "Quite distressed",
+     3
+    ],
+    [
+     "Very distressed",
+     4
+    ]
+   ],
+   "p": "Détresse : « Please indicate how distressed you are by this experience: »",
+   "c": {
+    "anyOf": [
+     10
+    ],
+    "gt": 1
+   }
+  },
+  {
+   "n": "7",
+   "t": "Do you ever feel as if you are being persecuted in some way?",
+   "o": [
+    [
+     "Never",
+     1
+    ],
+    [
+     "Sometimes",
+     2
+    ],
+    [
+     "Often",
+     3
+    ],
+    [
+     "Nearly always",
+     4
+    ]
+   ],
+   "p": "Fréquence"
+  },
+  {
+   "n": "7",
+   "t": "Do you ever feel as if you are being persecuted in some way?",
+   "o": [
+    [
+     "Not distressed",
+     1
+    ],
+    [
+     "A bit distressed",
+     2
+    ],
+    [
+     "Quite distressed",
+     3
+    ],
+    [
+     "Very distressed",
+     4
+    ]
+   ],
+   "p": "Détresse : « Please indicate how distressed you are by this experience: »",
+   "c": {
+    "anyOf": [
+     12
+    ],
+    "gt": 1
+   }
+  },
+  {
+   "n": "8",
+   "t": "Do you ever feel that you experience few or no emotions at important events?",
+   "o": [
+    [
+     "Never",
+     1
+    ],
+    [
+     "Sometimes",
+     2
+    ],
+    [
+     "Often",
+     3
+    ],
+    [
+     "Nearly always",
+     4
+    ]
+   ],
+   "p": "Fréquence"
+  },
+  {
+   "n": "8",
+   "t": "Do you ever feel that you experience few or no emotions at important events?",
+   "o": [
+    [
+     "Not distressed",
+     1
+    ],
+    [
+     "A bit distressed",
+     2
+    ],
+    [
+     "Quite distressed",
+     3
+    ],
+    [
+     "Very distressed",
+     4
+    ]
+   ],
+   "p": "Détresse : « Please indicate how distressed you are by this experience: »",
+   "c": {
+    "anyOf": [
+     14
+    ],
+    "gt": 1
+   }
+  },
+  {
+   "n": "9",
+   "t": "Do you ever feel pessimistic about everything?",
+   "o": [
+    [
+     "Never",
+     1
+    ],
+    [
+     "Sometimes",
+     2
+    ],
+    [
+     "Often",
+     3
+    ],
+    [
+     "Nearly always",
+     4
+    ]
+   ],
+   "p": "Fréquence"
+  },
+  {
+   "n": "9",
+   "t": "Do you ever feel pessimistic about everything?",
+   "o": [
+    [
+     "Not distressed",
+     1
+    ],
+    [
+     "A bit distressed",
+     2
+    ],
+    [
+     "Quite distressed",
+     3
+    ],
+    [
+     "Very distressed",
+     4
+    ]
+   ],
+   "p": "Détresse : « Please indicate how distressed you are by this experience: »",
+   "c": {
+    "anyOf": [
+     16
+    ],
+    "gt": 1
+   }
+  },
+  {
+   "n": "10",
+   "t": "Do you ever feel as if there is a conspiracy against you?",
+   "o": [
+    [
+     "Never",
+     1
+    ],
+    [
+     "Sometimes",
+     2
+    ],
+    [
+     "Often",
+     3
+    ],
+    [
+     "Nearly always",
+     4
+    ]
+   ],
+   "p": "Fréquence"
+  },
+  {
+   "n": "10",
+   "t": "Do you ever feel as if there is a conspiracy against you?",
+   "o": [
+    [
+     "Not distressed",
+     1
+    ],
+    [
+     "A bit distressed",
+     2
+    ],
+    [
+     "Quite distressed",
+     3
+    ],
+    [
+     "Very distressed",
+     4
+    ]
+   ],
+   "p": "Détresse : « Please indicate how distressed you are by this experience: »",
+   "c": {
+    "anyOf": [
+     18
+    ],
+    "gt": 1
+   }
+  },
+  {
+   "n": "11",
+   "t": "Do you ever feel as if you are destined to be someone very important?",
+   "o": [
+    [
+     "Never",
+     1
+    ],
+    [
+     "Sometimes",
+     2
+    ],
+    [
+     "Often",
+     3
+    ],
+    [
+     "Nearly always",
+     4
+    ]
+   ],
+   "p": "Fréquence"
+  },
+  {
+   "n": "11",
+   "t": "Do you ever feel as if you are destined to be someone very important?",
+   "o": [
+    [
+     "Not distressed",
+     1
+    ],
+    [
+     "A bit distressed",
+     2
+    ],
+    [
+     "Quite distressed",
+     3
+    ],
+    [
+     "Very distressed",
+     4
+    ]
+   ],
+   "p": "Détresse : « Please indicate how distressed you are by this experience: »",
+   "c": {
+    "anyOf": [
+     20
+    ],
+    "gt": 1
+   }
+  },
+  {
+   "n": "12",
+   "t": "Do you ever feel as if there is no future for you?",
+   "o": [
+    [
+     "Never",
+     1
+    ],
+    [
+     "Sometimes",
+     2
+    ],
+    [
+     "Often",
+     3
+    ],
+    [
+     "Nearly always",
+     4
+    ]
+   ],
+   "p": "Fréquence"
+  },
+  {
+   "n": "12",
+   "t": "Do you ever feel as if there is no future for you?",
+   "o": [
+    [
+     "Not distressed",
+     1
+    ],
+    [
+     "A bit distressed",
+     2
+    ],
+    [
+     "Quite distressed",
+     3
+    ],
+    [
+     "Very distressed",
+     4
+    ]
+   ],
+   "p": "Détresse : « Please indicate how distressed you are by this experience: »",
+   "c": {
+    "anyOf": [
+     22
+    ],
+    "gt": 1
+   }
+  },
+  {
+   "n": "13",
+   "t": "Do you ever feel that you are a very special or unusual person?",
+   "o": [
+    [
+     "Never",
+     1
+    ],
+    [
+     "Sometimes",
+     2
+    ],
+    [
+     "Often",
+     3
+    ],
+    [
+     "Nearly always",
+     4
+    ]
+   ],
+   "p": "Fréquence"
+  },
+  {
+   "n": "13",
+   "t": "Do you ever feel that you are a very special or unusual person?",
+   "o": [
+    [
+     "Not distressed",
+     1
+    ],
+    [
+     "A bit distressed",
+     2
+    ],
+    [
+     "Quite distressed",
+     3
+    ],
+    [
+     "Very distressed",
+     4
+    ]
+   ],
+   "p": "Détresse : « Please indicate how distressed you are by this experience: »",
+   "c": {
+    "anyOf": [
+     24
+    ],
+    "gt": 1
+   }
+  },
+  {
+   "n": "14",
+   "t": "Do you ever feel as if you do not want to live anymore?",
+   "o": [
+    [
+     "Never",
+     1
+    ],
+    [
+     "Sometimes",
+     2
+    ],
+    [
+     "Often",
+     3
+    ],
+    [
+     "Nearly always",
+     4
+    ]
+   ],
+   "p": "Fréquence"
+  },
+  {
+   "n": "14",
+   "t": "Do you ever feel as if you do not want to live anymore?",
+   "o": [
+    [
+     "Not distressed",
+     1
+    ],
+    [
+     "A bit distressed",
+     2
+    ],
+    [
+     "Quite distressed",
+     3
+    ],
+    [
+     "Very distressed",
+     4
+    ]
+   ],
+   "p": "Détresse : « Please indicate how distressed you are by this experience: »",
+   "c": {
+    "anyOf": [
+     26
+    ],
+    "gt": 1
+   }
+  },
+  {
+   "n": "15",
+   "t": "Do you ever think that people can communicate telepathically?",
+   "o": [
+    [
+     "Never",
+     1
+    ],
+    [
+     "Sometimes",
+     2
+    ],
+    [
+     "Often",
+     3
+    ],
+    [
+     "Nearly always",
+     4
+    ]
+   ],
+   "p": "Fréquence"
+  },
+  {
+   "n": "15",
+   "t": "Do you ever think that people can communicate telepathically?",
+   "o": [
+    [
+     "Not distressed",
+     1
+    ],
+    [
+     "A bit distressed",
+     2
+    ],
+    [
+     "Quite distressed",
+     3
+    ],
+    [
+     "Very distressed",
+     4
+    ]
+   ],
+   "p": "Détresse : « Please indicate how distressed you are by this experience: »",
+   "c": {
+    "anyOf": [
+     28
+    ],
+    "gt": 1
+   }
+  },
+  {
+   "n": "16",
+   "t": "Do you ever feel that you have no interest to be with other people?",
+   "o": [
+    [
+     "Never",
+     1
+    ],
+    [
+     "Sometimes",
+     2
+    ],
+    [
+     "Often",
+     3
+    ],
+    [
+     "Nearly always",
+     4
+    ]
+   ],
+   "p": "Fréquence"
+  },
+  {
+   "n": "16",
+   "t": "Do you ever feel that you have no interest to be with other people?",
+   "o": [
+    [
+     "Not distressed",
+     1
+    ],
+    [
+     "A bit distressed",
+     2
+    ],
+    [
+     "Quite distressed",
+     3
+    ],
+    [
+     "Very distressed",
+     4
+    ]
+   ],
+   "p": "Détresse : « Please indicate how distressed you are by this experience: »",
+   "c": {
+    "anyOf": [
+     30
+    ],
+    "gt": 1
+   }
+  },
+  {
+   "n": "17",
+   "t": "Do you ever feel as if electrical devices such as computers can influence the way you think?",
+   "o": [
+    [
+     "Never",
+     1
+    ],
+    [
+     "Sometimes",
+     2
+    ],
+    [
+     "Often",
+     3
+    ],
+    [
+     "Nearly always",
+     4
+    ]
+   ],
+   "p": "Fréquence"
+  },
+  {
+   "n": "17",
+   "t": "Do you ever feel as if electrical devices such as computers can influence the way you think?",
+   "o": [
+    [
+     "Not distressed",
+     1
+    ],
+    [
+     "A bit distressed",
+     2
+    ],
+    [
+     "Quite distressed",
+     3
+    ],
+    [
+     "Very distressed",
+     4
+    ]
+   ],
+   "p": "Détresse : « Please indicate how distressed you are by this experience: »",
+   "c": {
+    "anyOf": [
+     32
+    ],
+    "gt": 1
+   }
+  },
+  {
+   "n": "18",
+   "t": "Do you ever feel that you are lacking in motivation to do things?",
+   "o": [
+    [
+     "Never",
+     1
+    ],
+    [
+     "Sometimes",
+     2
+    ],
+    [
+     "Often",
+     3
+    ],
+    [
+     "Nearly always",
+     4
+    ]
+   ],
+   "p": "Fréquence"
+  },
+  {
+   "n": "18",
+   "t": "Do you ever feel that you are lacking in motivation to do things?",
+   "o": [
+    [
+     "Not distressed",
+     1
+    ],
+    [
+     "A bit distressed",
+     2
+    ],
+    [
+     "Quite distressed",
+     3
+    ],
+    [
+     "Very distressed",
+     4
+    ]
+   ],
+   "p": "Détresse : « Please indicate how distressed you are by this experience: »",
+   "c": {
+    "anyOf": [
+     34
+    ],
+    "gt": 1
+   }
+  },
+  {
+   "n": "19",
+   "t": "Do you ever cry about nothing?",
+   "o": [
+    [
+     "Never",
+     1
+    ],
+    [
+     "Sometimes",
+     2
+    ],
+    [
+     "Often",
+     3
+    ],
+    [
+     "Nearly always",
+     4
+    ]
+   ],
+   "p": "Fréquence"
+  },
+  {
+   "n": "19",
+   "t": "Do you ever cry about nothing?",
+   "o": [
+    [
+     "Not distressed",
+     1
+    ],
+    [
+     "A bit distressed",
+     2
+    ],
+    [
+     "Quite distressed",
+     3
+    ],
+    [
+     "Very distressed",
+     4
+    ]
+   ],
+   "p": "Détresse : « Please indicate how distressed you are by this experience: »",
+   "c": {
+    "anyOf": [
+     36
+    ],
+    "gt": 1
+   }
+  },
+  {
+   "n": "20",
+   "t": "Do you believe in the power of witchcraft, voodoo or the occult?",
+   "o": [
+    [
+     "Never",
+     1
+    ],
+    [
+     "Sometimes",
+     2
+    ],
+    [
+     "Often",
+     3
+    ],
+    [
+     "Nearly always",
+     4
+    ]
+   ],
+   "p": "Fréquence"
+  },
+  {
+   "n": "20",
+   "t": "Do you believe in the power of witchcraft, voodoo or the occult?",
+   "o": [
+    [
+     "Not distressed",
+     1
+    ],
+    [
+     "A bit distressed",
+     2
+    ],
+    [
+     "Quite distressed",
+     3
+    ],
+    [
+     "Very distressed",
+     4
+    ]
+   ],
+   "p": "Détresse : « Please indicate how distressed you are by this experience: »",
+   "c": {
+    "anyOf": [
+     38
+    ],
+    "gt": 1
+   }
+  },
+  {
+   "n": "21",
+   "t": "Do you ever feel that you are lacking in energy?",
+   "o": [
+    [
+     "Never",
+     1
+    ],
+    [
+     "Sometimes",
+     2
+    ],
+    [
+     "Often",
+     3
+    ],
+    [
+     "Nearly always",
+     4
+    ]
+   ],
+   "p": "Fréquence"
+  },
+  {
+   "n": "21",
+   "t": "Do you ever feel that you are lacking in energy?",
+   "o": [
+    [
+     "Not distressed",
+     1
+    ],
+    [
+     "A bit distressed",
+     2
+    ],
+    [
+     "Quite distressed",
+     3
+    ],
+    [
+     "Very distressed",
+     4
+    ]
+   ],
+   "p": "Détresse : « Please indicate how distressed you are by this experience: »",
+   "c": {
+    "anyOf": [
+     40
+    ],
+    "gt": 1
+   }
+  },
+  {
+   "n": "22",
+   "t": "Do you ever feel that people look at you oddly because of your appearance?",
+   "o": [
+    [
+     "Never",
+     1
+    ],
+    [
+     "Sometimes",
+     2
+    ],
+    [
+     "Often",
+     3
+    ],
+    [
+     "Nearly always",
+     4
+    ]
+   ],
+   "p": "Fréquence"
+  },
+  {
+   "n": "22",
+   "t": "Do you ever feel that people look at you oddly because of your appearance?",
+   "o": [
+    [
+     "Not distressed",
+     1
+    ],
+    [
+     "A bit distressed",
+     2
+    ],
+    [
+     "Quite distressed",
+     3
+    ],
+    [
+     "Very distressed",
+     4
+    ]
+   ],
+   "p": "Détresse : « Please indicate how distressed you are by this experience: »",
+   "c": {
+    "anyOf": [
+     42
+    ],
+    "gt": 1
+   }
+  },
+  {
+   "n": "23",
+   "t": "Do you ever feel that your mind is empty?",
+   "o": [
+    [
+     "Never",
+     1
+    ],
+    [
+     "Sometimes",
+     2
+    ],
+    [
+     "Often",
+     3
+    ],
+    [
+     "Nearly always",
+     4
+    ]
+   ],
+   "p": "Fréquence"
+  },
+  {
+   "n": "23",
+   "t": "Do you ever feel that your mind is empty?",
+   "o": [
+    [
+     "Not distressed",
+     1
+    ],
+    [
+     "A bit distressed",
+     2
+    ],
+    [
+     "Quite distressed",
+     3
+    ],
+    [
+     "Very distressed",
+     4
+    ]
+   ],
+   "p": "Détresse : « Please indicate how distressed you are by this experience: »",
+   "c": {
+    "anyOf": [
+     44
+    ],
+    "gt": 1
+   }
+  },
+  {
+   "n": "24",
+   "t": "Do you ever feel as if the thoughts in your head are being taken away from you?",
+   "o": [
+    [
+     "Never",
+     1
+    ],
+    [
+     "Sometimes",
+     2
+    ],
+    [
+     "Often",
+     3
+    ],
+    [
+     "Nearly always",
+     4
+    ]
+   ],
+   "p": "Fréquence"
+  },
+  {
+   "n": "24",
+   "t": "Do you ever feel as if the thoughts in your head are being taken away from you?",
+   "o": [
+    [
+     "Not distressed",
+     1
+    ],
+    [
+     "A bit distressed",
+     2
+    ],
+    [
+     "Quite distressed",
+     3
+    ],
+    [
+     "Very distressed",
+     4
+    ]
+   ],
+   "p": "Détresse : « Please indicate how distressed you are by this experience: »",
+   "c": {
+    "anyOf": [
+     46
+    ],
+    "gt": 1
+   }
+  },
+  {
+   "n": "25",
+   "t": "Do you ever feel that you are spending all your days doing nothing?",
+   "o": [
+    [
+     "Never",
+     1
+    ],
+    [
+     "Sometimes",
+     2
+    ],
+    [
+     "Often",
+     3
+    ],
+    [
+     "Nearly always",
+     4
+    ]
+   ],
+   "p": "Fréquence"
+  },
+  {
+   "n": "25",
+   "t": "Do you ever feel that you are spending all your days doing nothing?",
+   "o": [
+    [
+     "Not distressed",
+     1
+    ],
+    [
+     "A bit distressed",
+     2
+    ],
+    [
+     "Quite distressed",
+     3
+    ],
+    [
+     "Very distressed",
+     4
+    ]
+   ],
+   "p": "Détresse : « Please indicate how distressed you are by this experience: »",
+   "c": {
+    "anyOf": [
+     48
+    ],
+    "gt": 1
+   }
+  },
+  {
+   "n": "26",
+   "t": "Do you ever feel as if the thoughts in your head are not your own?",
+   "o": [
+    [
+     "Never",
+     1
+    ],
+    [
+     "Sometimes",
+     2
+    ],
+    [
+     "Often",
+     3
+    ],
+    [
+     "Nearly always",
+     4
+    ]
+   ],
+   "p": "Fréquence"
+  },
+  {
+   "n": "26",
+   "t": "Do you ever feel as if the thoughts in your head are not your own?",
+   "o": [
+    [
+     "Not distressed",
+     1
+    ],
+    [
+     "A bit distressed",
+     2
+    ],
+    [
+     "Quite distressed",
+     3
+    ],
+    [
+     "Very distressed",
+     4
+    ]
+   ],
+   "p": "Détresse : « Please indicate how distressed you are by this experience: »",
+   "c": {
+    "anyOf": [
+     50
+    ],
+    "gt": 1
+   }
+  },
+  {
+   "n": "27",
+   "t": "Do you ever feel that your feelings are lacking in intensity?",
+   "o": [
+    [
+     "Never",
+     1
+    ],
+    [
+     "Sometimes",
+     2
+    ],
+    [
+     "Often",
+     3
+    ],
+    [
+     "Nearly always",
+     4
+    ]
+   ],
+   "p": "Fréquence"
+  },
+  {
+   "n": "27",
+   "t": "Do you ever feel that your feelings are lacking in intensity?",
+   "o": [
+    [
+     "Not distressed",
+     1
+    ],
+    [
+     "A bit distressed",
+     2
+    ],
+    [
+     "Quite distressed",
+     3
+    ],
+    [
+     "Very distressed",
+     4
+    ]
+   ],
+   "p": "Détresse : « Please indicate how distressed you are by this experience: »",
+   "c": {
+    "anyOf": [
+     52
+    ],
+    "gt": 1
+   }
+  },
+  {
+   "n": "28",
+   "t": "Have your thoughts ever been so vivid that you were worried other people would hear them?",
+   "o": [
+    [
+     "Never",
+     1
+    ],
+    [
+     "Sometimes",
+     2
+    ],
+    [
+     "Often",
+     3
+    ],
+    [
+     "Nearly always",
+     4
+    ]
+   ],
+   "p": "Fréquence"
+  },
+  {
+   "n": "28",
+   "t": "Have your thoughts ever been so vivid that you were worried other people would hear them?",
+   "o": [
+    [
+     "Not distressed",
+     1
+    ],
+    [
+     "A bit distressed",
+     2
+    ],
+    [
+     "Quite distressed",
+     3
+    ],
+    [
+     "Very distressed",
+     4
+    ]
+   ],
+   "p": "Détresse : « Please indicate how distressed you are by this experience: »",
+   "c": {
+    "anyOf": [
+     54
+    ],
+    "gt": 1
+   }
+  },
+  {
+   "n": "29",
+   "t": "Do you ever feel that you are lacking in spontaneity?",
+   "o": [
+    [
+     "Never",
+     1
+    ],
+    [
+     "Sometimes",
+     2
+    ],
+    [
+     "Often",
+     3
+    ],
+    [
+     "Nearly always",
+     4
+    ]
+   ],
+   "p": "Fréquence"
+  },
+  {
+   "n": "29",
+   "t": "Do you ever feel that you are lacking in spontaneity?",
+   "o": [
+    [
+     "Not distressed",
+     1
+    ],
+    [
+     "A bit distressed",
+     2
+    ],
+    [
+     "Quite distressed",
+     3
+    ],
+    [
+     "Very distressed",
+     4
+    ]
+   ],
+   "p": "Détresse : « Please indicate how distressed you are by this experience: »",
+   "c": {
+    "anyOf": [
+     56
+    ],
+    "gt": 1
+   }
+  },
+  {
+   "n": "30",
+   "t": "Do you ever hear your own thoughts being echoed back to you?",
+   "o": [
+    [
+     "Never",
+     1
+    ],
+    [
+     "Sometimes",
+     2
+    ],
+    [
+     "Often",
+     3
+    ],
+    [
+     "Nearly always",
+     4
+    ]
+   ],
+   "p": "Fréquence"
+  },
+  {
+   "n": "30",
+   "t": "Do you ever hear your own thoughts being echoed back to you?",
+   "o": [
+    [
+     "Not distressed",
+     1
+    ],
+    [
+     "A bit distressed",
+     2
+    ],
+    [
+     "Quite distressed",
+     3
+    ],
+    [
+     "Very distressed",
+     4
+    ]
+   ],
+   "p": "Détresse : « Please indicate how distressed you are by this experience: »",
+   "c": {
+    "anyOf": [
+     58
+    ],
+    "gt": 1
+   }
+  },
+  {
+   "n": "31",
+   "t": "Do you ever feel as if you are under the control of some force or power other than yourself?",
+   "o": [
+    [
+     "Never",
+     1
+    ],
+    [
+     "Sometimes",
+     2
+    ],
+    [
+     "Often",
+     3
+    ],
+    [
+     "Nearly always",
+     4
+    ]
+   ],
+   "p": "Fréquence"
+  },
+  {
+   "n": "31",
+   "t": "Do you ever feel as if you are under the control of some force or power other than yourself?",
+   "o": [
+    [
+     "Not distressed",
+     1
+    ],
+    [
+     "A bit distressed",
+     2
+    ],
+    [
+     "Quite distressed",
+     3
+    ],
+    [
+     "Very distressed",
+     4
+    ]
+   ],
+   "p": "Détresse : « Please indicate how distressed you are by this experience: »",
+   "c": {
+    "anyOf": [
+     60
+    ],
+    "gt": 1
+   }
+  },
+  {
+   "n": "32",
+   "t": "Do you ever feel that your emotions are blunted?",
+   "o": [
+    [
+     "Never",
+     1
+    ],
+    [
+     "Sometimes",
+     2
+    ],
+    [
+     "Often",
+     3
+    ],
+    [
+     "Nearly always",
+     4
+    ]
+   ],
+   "p": "Fréquence"
+  },
+  {
+   "n": "32",
+   "t": "Do you ever feel that your emotions are blunted?",
+   "o": [
+    [
+     "Not distressed",
+     1
+    ],
+    [
+     "A bit distressed",
+     2
+    ],
+    [
+     "Quite distressed",
+     3
+    ],
+    [
+     "Very distressed",
+     4
+    ]
+   ],
+   "p": "Détresse : « Please indicate how distressed you are by this experience: »",
+   "c": {
+    "anyOf": [
+     62
+    ],
+    "gt": 1
+   }
+  },
+  {
+   "n": "33",
+   "t": "Do you ever hear voices when you are alone?",
+   "o": [
+    [
+     "Never",
+     1
+    ],
+    [
+     "Sometimes",
+     2
+    ],
+    [
+     "Often",
+     3
+    ],
+    [
+     "Nearly always",
+     4
+    ]
+   ],
+   "p": "Fréquence"
+  },
+  {
+   "n": "33",
+   "t": "Do you ever hear voices when you are alone?",
+   "o": [
+    [
+     "Not distressed",
+     1
+    ],
+    [
+     "A bit distressed",
+     2
+    ],
+    [
+     "Quite distressed",
+     3
+    ],
+    [
+     "Very distressed",
+     4
+    ]
+   ],
+   "p": "Détresse : « Please indicate how distressed you are by this experience: »",
+   "c": {
+    "anyOf": [
+     64
+    ],
+    "gt": 1
+   }
+  },
+  {
+   "n": "34",
+   "t": "Do you ever hear voices talking to each other when you are alone?",
+   "o": [
+    [
+     "Never",
+     1
+    ],
+    [
+     "Sometimes",
+     2
+    ],
+    [
+     "Often",
+     3
+    ],
+    [
+     "Nearly always",
+     4
+    ]
+   ],
+   "p": "Fréquence"
+  },
+  {
+   "n": "34",
+   "t": "Do you ever hear voices talking to each other when you are alone?",
+   "o": [
+    [
+     "Not distressed",
+     1
+    ],
+    [
+     "A bit distressed",
+     2
+    ],
+    [
+     "Quite distressed",
+     3
+    ],
+    [
+     "Very distressed",
+     4
+    ]
+   ],
+   "p": "Détresse : « Please indicate how distressed you are by this experience: »",
+   "c": {
+    "anyOf": [
+     66
+    ],
+    "gt": 1
+   }
+  },
+  {
+   "n": "35",
+   "t": "Do you ever feel that you are neglecting your appearance or personal hygiene?",
+   "o": [
+    [
+     "Never",
+     1
+    ],
+    [
+     "Sometimes",
+     2
+    ],
+    [
+     "Often",
+     3
+    ],
+    [
+     "Nearly always",
+     4
+    ]
+   ],
+   "p": "Fréquence"
+  },
+  {
+   "n": "35",
+   "t": "Do you ever feel that you are neglecting your appearance or personal hygiene?",
+   "o": [
+    [
+     "Not distressed",
+     1
+    ],
+    [
+     "A bit distressed",
+     2
+    ],
+    [
+     "Quite distressed",
+     3
+    ],
+    [
+     "Very distressed",
+     4
+    ]
+   ],
+   "p": "Détresse : « Please indicate how distressed you are by this experience: »",
+   "c": {
+    "anyOf": [
+     68
+    ],
+    "gt": 1
+   }
+  },
+  {
+   "n": "36",
+   "t": "Do you ever feel that you can never get things done?",
+   "o": [
+    [
+     "Never",
+     1
+    ],
+    [
+     "Sometimes",
+     2
+    ],
+    [
+     "Often",
+     3
+    ],
+    [
+     "Nearly always",
+     4
+    ]
+   ],
+   "p": "Fréquence"
+  },
+  {
+   "n": "36",
+   "t": "Do you ever feel that you can never get things done?",
+   "o": [
+    [
+     "Not distressed",
+     1
+    ],
+    [
+     "A bit distressed",
+     2
+    ],
+    [
+     "Quite distressed",
+     3
+    ],
+    [
+     "Very distressed",
+     4
+    ]
+   ],
+   "p": "Détresse : « Please indicate how distressed you are by this experience: »",
+   "c": {
+    "anyOf": [
+     70
+    ],
+    "gt": 1
+   }
+  },
+  {
+   "n": "37",
+   "t": "Do you ever feel that you have only few hobbies or interests?",
+   "o": [
+    [
+     "Never",
+     1
+    ],
+    [
+     "Sometimes",
+     2
+    ],
+    [
+     "Often",
+     3
+    ],
+    [
+     "Nearly always",
+     4
+    ]
+   ],
+   "p": "Fréquence"
+  },
+  {
+   "n": "37",
+   "t": "Do you ever feel that you have only few hobbies or interests?",
+   "o": [
+    [
+     "Not distressed",
+     1
+    ],
+    [
+     "A bit distressed",
+     2
+    ],
+    [
+     "Quite distressed",
+     3
+    ],
+    [
+     "Very distressed",
+     4
+    ]
+   ],
+   "p": "Détresse : « Please indicate how distressed you are by this experience: »",
+   "c": {
+    "anyOf": [
+     72
+    ],
+    "gt": 1
+   }
+  },
+  {
+   "n": "38",
+   "t": "Do you ever feel guilty?",
+   "o": [
+    [
+     "Never",
+     1
+    ],
+    [
+     "Sometimes",
+     2
+    ],
+    [
+     "Often",
+     3
+    ],
+    [
+     "Nearly always",
+     4
+    ]
+   ],
+   "p": "Fréquence"
+  },
+  {
+   "n": "38",
+   "t": "Do you ever feel guilty?",
+   "o": [
+    [
+     "Not distressed",
+     1
+    ],
+    [
+     "A bit distressed",
+     2
+    ],
+    [
+     "Quite distressed",
+     3
+    ],
+    [
+     "Very distressed",
+     4
+    ]
+   ],
+   "p": "Détresse : « Please indicate how distressed you are by this experience: »",
+   "c": {
+    "anyOf": [
+     74
+    ],
+    "gt": 1
+   }
+  },
+  {
+   "n": "39",
+   "t": "Do you ever feel like a failure?",
+   "o": [
+    [
+     "Never",
+     1
+    ],
+    [
+     "Sometimes",
+     2
+    ],
+    [
+     "Often",
+     3
+    ],
+    [
+     "Nearly always",
+     4
+    ]
+   ],
+   "p": "Fréquence"
+  },
+  {
+   "n": "39",
+   "t": "Do you ever feel like a failure?",
+   "o": [
+    [
+     "Not distressed",
+     1
+    ],
+    [
+     "A bit distressed",
+     2
+    ],
+    [
+     "Quite distressed",
+     3
+    ],
+    [
+     "Very distressed",
+     4
+    ]
+   ],
+   "p": "Détresse : « Please indicate how distressed you are by this experience: »",
+   "c": {
+    "anyOf": [
+     76
+    ],
+    "gt": 1
+   }
+  },
+  {
+   "n": "40",
+   "t": "Do you ever feel tense?",
+   "o": [
+    [
+     "Never",
+     1
+    ],
+    [
+     "Sometimes",
+     2
+    ],
+    [
+     "Often",
+     3
+    ],
+    [
+     "Nearly always",
+     4
+    ]
+   ],
+   "p": "Fréquence"
+  },
+  {
+   "n": "40",
+   "t": "Do you ever feel tense?",
+   "o": [
+    [
+     "Not distressed",
+     1
+    ],
+    [
+     "A bit distressed",
+     2
+    ],
+    [
+     "Quite distressed",
+     3
+    ],
+    [
+     "Very distressed",
+     4
+    ]
+   ],
+   "p": "Détresse : « Please indicate how distressed you are by this experience: »",
+   "c": {
+    "anyOf": [
+     78
+    ],
+    "gt": 1
+   }
+  },
+  {
+   "n": "41",
+   "t": "Do you ever feel as if a double has taken the place of a family member, friend or acquaintance?",
+   "o": [
+    [
+     "Never",
+     1
+    ],
+    [
+     "Sometimes",
+     2
+    ],
+    [
+     "Often",
+     3
+    ],
+    [
+     "Nearly always",
+     4
+    ]
+   ],
+   "p": "Fréquence"
+  },
+  {
+   "n": "41",
+   "t": "Do you ever feel as if a double has taken the place of a family member, friend or acquaintance?",
+   "o": [
+    [
+     "Not distressed",
+     1
+    ],
+    [
+     "A bit distressed",
+     2
+    ],
+    [
+     "Quite distressed",
+     3
+    ],
+    [
+     "Very distressed",
+     4
+    ]
+   ],
+   "p": "Détresse : « Please indicate how distressed you are by this experience: »",
+   "c": {
+    "anyOf": [
+     80
+    ],
+    "gt": 1
+   }
+  },
+  {
+   "n": "42",
+   "t": "Do you ever see objects, people or animals that other people cannot see?",
+   "o": [
+    [
+     "Never",
+     1
+    ],
+    [
+     "Sometimes",
+     2
+    ],
+    [
+     "Often",
+     3
+    ],
+    [
+     "Nearly always",
+     4
+    ]
+   ],
+   "p": "Fréquence"
+  },
+  {
+   "n": "42",
+   "t": "Do you ever see objects, people or animals that other people cannot see?",
+   "o": [
+    [
+     "Not distressed",
+     1
+    ],
+    [
+     "A bit distressed",
+     2
+    ],
+    [
+     "Quite distressed",
+     3
+    ],
+    [
+     "Very distressed",
+     4
+    ]
+   ],
+   "p": "Détresse : « Please indicate how distressed you are by this experience: »",
+   "c": {
+    "anyOf": [
+     82
+    ],
+    "gt": 1
+   }
+  }
+ ],
+ "opts": [],
+ "scores": [
+  {
+   "label": "Fréquence : score total (42 items)",
+   "items": [
+    0,
+    2,
+    4,
+    6,
+    8,
+    10,
+    12,
+    14,
+    16,
+    18,
+    20,
+    22,
+    24,
+    26,
+    28,
+    30,
+    32,
+    34,
+    36,
+    38,
+    40,
+    42,
+    44,
+    46,
+    48,
+    50,
+    52,
+    54,
+    56,
+    58,
+    60,
+    62,
+    64,
+    66,
+    68,
+    70,
+    72,
+    74,
+    76,
+    78,
+    80,
+    82
+   ],
+   "method": "sum",
+   "max": 168
+  },
+  {
+   "label": "Fréquence : dimension positive (20 items)",
+   "items": [
+    2,
+    8,
+    10,
+    12,
+    18,
+    20,
+    24,
+    28,
+    32,
+    38,
+    42,
+    46,
+    50,
+    54,
+    58,
+    60,
+    64,
+    66,
+    80,
+    82
+   ],
+   "method": "mean",
+   "range": "1 à 4"
+  },
+  {
+   "label": "Fréquence : dimension négative (14 items)",
+   "items": [
+    4,
+    6,
+    14,
+    30,
+    34,
+    40,
+    44,
+    48,
+    52,
+    56,
+    62,
+    68,
+    70,
+    72
+   ],
+   "method": "mean",
+   "range": "1 à 4"
+  },
+  {
+   "label": "Fréquence : dimension dépressive (8 items)",
+   "items": [
+    0,
+    16,
+    22,
+    26,
+    36,
+    74,
+    76,
+    78
+   ],
+   "method": "mean",
+   "range": "1 à 4"
+  },
+  {
+   "label": "Détresse : score total (42 items)",
+   "items": [
+    1,
+    3,
+    5,
+    7,
+    9,
+    11,
+    13,
+    15,
+    17,
+    19,
+    21,
+    23,
+    25,
+    27,
+    29,
+    31,
+    33,
+    35,
+    37,
+    39,
+    41,
+    43,
+    45,
+    47,
+    49,
+    51,
+    53,
+    55,
+    57,
+    59,
+    61,
+    63,
+    65,
+    67,
+    69,
+    71,
+    73,
+    75,
+    77,
+    79,
+    81,
+    83
+   ],
+   "method": "sum",
+   "max": 168,
+   "inactiveVal": 1
+  },
+  {
+   "label": "Détresse : dimension positive (20 items)",
+   "items": [
+    3,
+    9,
+    11,
+    13,
+    19,
+    21,
+    25,
+    29,
+    33,
+    39,
+    43,
+    47,
+    51,
+    55,
+    59,
+    61,
+    65,
+    67,
+    81,
+    83
+   ],
+   "method": "mean",
+   "range": "1 à 4",
+   "inactiveVal": 1
+  },
+  {
+   "label": "Détresse : dimension négative (14 items)",
+   "items": [
+    5,
+    7,
+    15,
+    31,
+    35,
+    41,
+    45,
+    49,
+    53,
+    57,
+    63,
+    69,
+    71,
+    73
+   ],
+   "method": "mean",
+   "range": "1 à 4",
+   "inactiveVal": 1
+  },
+  {
+   "label": "Détresse : dimension dépressive (8 items)",
+   "items": [
+    1,
+    17,
+    23,
+    27,
+    37,
+    75,
+    77,
+    79
+   ],
+   "method": "mean",
+   "range": "1 à 4",
+   "inactiveVal": 1,
+   "note": "Aucun seuil clinique officiel : le CAPE-42 est un outil dimensionnel de population générale."
+  },
+  {
+   "label": "item14",
+   "items": [
+    26
+   ],
+   "method": "sum",
+   "max": 4,
+   "flag": true,
+   "flagMin": 2,
+   "flagOnly": true,
+   "flagLabel": "L'item 14 (ne plus vouloir vivre) est coté au-delà de « Never » : à explorer cliniquement avec la personne. Question"
+  }
+ ],
+ "qword": "Question",
+ "next": "Suivant",
+ "seeResult": "Voir le résultat"
+};
+  var items = CFG.items;
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function active(i){
+    var c = items[i].c;
+    if(!c) return true;
+    return c.anyOf.some(function(j){ return answers[j] !== null && answers[j] > (c.gt || 0); });
+  }
+  function nextIdx(i){ var j = i + 1; while(j < items.length && !active(j)) j++; return j; }
+  function prevIdx(i){ var j = i - 1; while(j >= 0 && !active(j)) j--; return j; }
+  function position(i){
+    var k = 0, tot = 0;
+    for(var j = 0; j < items.length; j++){ if(active(j)){ tot++; if(j <= i) k++; } }
+    return [k, tot];
+  }
+  function optsOf(i){ return items[i].o || CFG.opts; }
+
+  function renderQuestion(){
+    var pos = position(idx);
+    var it = items[idx];
+    document.getElementById('progress-text').textContent = (it.n ? CFG.qword + ' ' + it.n + ' : ' : '') + pos[0] + ' / ' + pos[1];
+    document.getElementById('period-text').textContent = it.p || '';
+    document.getElementById('q-text').textContent = it.t;
+    document.getElementById('q-ex').textContent = it.x || '';
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    if(it.num){
+      var inp = document.createElement('input');
+      inp.type = 'number'; inp.min = 0; inp.max = 365; inp.step = 1; inp.className = 'num-in';
+      inp.value = answers[idx] === null ? '' : answers[idx];
+      inp.addEventListener('input', function(){
+        var v = inp.value.trim();
+        if(v === '' || !/^\d+$/.test(v) || +v > 365){ answers[idx] = null; } else { answers[idx] = +v; }
+        document.getElementById('btn-next').disabled = answers[idx] === null;
+      });
+      row.appendChild(inp);
+      var lab = document.createElement('span'); lab.className = 'num-lab'; lab.textContent = it.num; row.appendChild(lab);
+    } else {
+      optsOf(idx).forEach(function(o){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx] === o[1] ? ' selected' : '');
+        d.textContent = o[0];
+        d.addEventListener('click', function(){ answers[idx] = o[1]; renderQuestion(); });
+        row.appendChild(d);
+      });
+    }
+    document.getElementById('btn-prev').disabled = prevIdx(idx) < 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = nextIdx(idx) >= items.length ? CFG.seeResult : CFG.next;
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    var p = prevIdx(idx);
+    if (p >= 0){ idx = p; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    var n = nextIdx(idx);
+    if (n < items.length){ idx = n; renderQuestion(); } else { showResult(); }
+  });
+
+  function fmt(v, d){ return v.toFixed(d).replace('.', ','); }
+  function compute(def){
+    var s = 0, k = 0, flagged = [];
+    def.items.forEach(function(i, pos){
+      if(!active(i)){ if(def.inactiveVal !== undefined){ s += def.inactiveVal; k++; } return; }
+      if(answers[i] === null || answers[i] === -1) return;
+      var v = answers[i];
+      if(def.rev && def.rev.indexOf(i) >= 0) v = def.revSum - v;
+      if(def.weights) v = v * def.weights[pos];
+      s += v; k++;
+      if(def.flag && v >= (def.flagMin || 1)) flagged.push(items[i].n);
+    });
+    return {sum: s, n: k, flagged: flagged};
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var box = document.getElementById('rows-all');
+    box.innerHTML = '';
+    function row(a, b){
+      var d = document.createElement('div'); d.className = 'sc-row';
+      var x = document.createElement('span'); x.textContent = a;
+      var y = document.createElement('b'); y.textContent = b;
+      d.appendChild(x); d.appendChild(y); box.appendChild(d);
+    }
+    function read(t){
+      var p = document.createElement('p'); p.className = 'sc-read'; p.textContent = t; box.appendChild(p);
+    }
+    var results = [];
+    CFG.scores.forEach(function(def, di){
+      if(def.title){
+        var t = document.createElement('p'); t.className = 'sc-title'; t.textContent = def.title; box.appendChild(t);
+      }
+      var val = null, txt = '';
+      if(def.combine){
+        var okc = def.combine.every(function(c){ return results[c] !== null && results[c] !== undefined; });
+        if(!okc){ row(def.label, '-'); results[di] = null; return; }
+        val = 0; def.combine.forEach(function(c){ val += results[c]; });
+        txt = fmt(val, def.dec || 0) + ' / ' + def.max;
+      } else {
+        var r = compute(def);
+        if(def.flagOnly){ if(r.flagged.length){ read(def.flagLabel + ' ' + r.flagged.join(', ') + '.'); } results[di] = null; return; }
+        if(def.flag && !def.flagOnly && r.flagged.length){ /* affichage plus bas */ }
+        if(!r.n || (def.minN && r.n < def.minN)){ row(def.label, '-'); results[di] = null; return; }
+        if(def.impute !== undefined){
+          var tot = def.items.length;
+          if(tot - r.n > def.impute){ row(def.label, ': (trop de réponses « ne sait pas »)'); results[di] = null; return; }
+          r.sum = r.sum * tot / r.n; r.n = tot;
+        }
+        if(def.method === 'mean'){
+          val = r.sum / r.n * (def.factor || 1);
+          txt = fmt(val, def.dec === undefined ? 2 : def.dec) + (def.suffix || (' (moyenne, ' + def.range + ')'));
+        } else {
+          val = r.sum / (def.div || 1);
+          txt = fmt(val, def.dec || 0) + ' / ' + def.max;
+        }
+        if(def.flag && r.flagged.length){ /* conservé pour compat */ }
+      }
+      results[di] = val;
+      row(def.label, txt);
+      if(def.bands){
+        def.bands.forEach(function(b){ if(val >= b[0] && val <= b[1]){ read(b[2]); } });
+      }
+      if(def.note){ read(def.note); }
+    });
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Évaluation communautaire des expériences psychiques (CAPE-42)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#3F7F6B 0%,#B9DCCF 55%,#1A4034 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,245,235,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#123B4F;background:#E3F0F6;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#2F6F8F;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#123B4F;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">CAPE-42</span></div>
+
+  <h1 class="serif">Évaluation communautaire des expériences psychiques (CAPE-42)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Community Assessment of Psychic Experiences, forme à 42 items (Stefanis et al., 2002) : fréquence et détresse d&#x27;expériences psychotiques, négatives et dépressives</p>
+  <div class="meta-row">
+    <span class="pill">42 questions</span>
+    <span class="pill">fréquence puis détresse</span>
+    <span class="pill">trois dimensions</span>
+    <span class="pill">Anglais</span>
+    <span class="pill">Licence requise : non</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="cape-42.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>Le CAPE-42 évalue 42 expériences en trois dimensions : positive (20 items : idées de référence, persécution, pensée télépathique, voix, impression de contrôle externe), négative (14 items : manque d&#x27;animation, émoussement affectif, baisse de motivation, retrait) et dépressive (8 items : tristesse, culpabilité, sentiment d&#x27;échec, tension, perte d&#x27;espoir). Pour chaque item, deux réponses de 1 à 4 : la fréquence (« Never », « Sometimes », « Often », « Nearly always »), puis, si l&#x27;expérience est présente, la détresse (« Not distressed », « A bit distressed », « Quite distressed », « Very distressed »). C&#x27;est un outil dimensionnel pour la population générale.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Pour chaque dimension, la fréquence est la somme (ou la moyenne par item, de 1 à 4) des réponses ; il en va de même pour la détresse, un item jamais vécu comptant 1. Plages des sommes : total 42-168, positive 20-80, négative 14-56, dépressive 8-32. Appartenance des items aux dimensions : lue dans le code du logiciel CamCOPS et recoupée item par item avec le tableau 5 de la validation coréenne (Sim et al., 2023), concordante pour les 42 items. Aucun seuil officiel n&#x27;existe ; une moyenne de 1,75 sur la dimension positive est citée en seuil de dépistage dans la littérature secondaire (non vérifiée), et n&#x27;est pas affichée.</p>
+    <p>Prudence : l&#x27;item 14 porte sur le fait de ne plus vouloir vivre ; la page le signale lorsqu&#x27;il est coté au-delà de « Never ».</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p><strong>Licence requise : non.</strong> Dans le fichier de chaînes du logiciel libre CamCOPS, J. van Os est cité comme ayant indiqué que l&#x27;instrument est « totally freeware » (communication personnelle, 2014 : source secondaire). Instrument construit conformément à la décision de Max du 12/10/2026 (tests à licence inclus) ; la diffusion publique reste soumise à vérification des droits.</p>
+    <p class="source-note">Les 42 libellés et les options de réponse viennent du fichier de chaînes CamCOPS (cape42.xml), recoupé avec la forme du site psytests.org. Seule l&#x27;invite de détresse (« Please indicate how distressed you are by this experience: ») est sourcée comme consigne ; le préambule officiel n&#x27;a pas pu être lu (site officiel désactivé, article de 2002 non accessible), il n&#x27;est donc pas reproduit. Une version française validée existe (Brenner et al., 2007, Schizophrenia Research, 95, 86-95) mais n&#x27;est pas accessible librement.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

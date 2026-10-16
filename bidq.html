@@ -1,0 +1,539 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Body Image Disturbance Questionnaire (BIDQ)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 14px;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#9C5F3B;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .period{font-size:12.5px;font-weight:600;color:#9C5F3B;margin:0 0 8px;}
+  .q-text{font-size:16px;margin:0 0 6px;}
+  .q-ex{font-size:13px;color:#63695D;margin:0 0 20px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;margin-top:14px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#9C5F3B;background:#F3E6DD;}
+  .num-in{width:140px;font-family:'Inter',sans-serif;font-size:16px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;background:#F4F1EA;color:#20241E;}
+  .num-lab{font-size:13px;color:#63695D;margin-left:8px;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#1E3A5F;border-color:#E0D9C9;}
+  .btn-primary{background:#9C5F3B;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 16px;}
+  .sc-title{font-size:13px;font-weight:700;color:#9C5F3B;margin:18px 0 6px;}
+  .sc-row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-top:1px solid #EFEBE1;font-size:14px;}
+  .sc-row b{font-variant-numeric:tabular-nums;text-align:right;}
+  .sc-read{font-size:13px;color:#63695D;margin:0 0 6px;padding-left:2px;}
+  .footnote{margin-top:32px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">Body Image Disturbance Questionnaire (BIDQ)</h1>
+    <p class="lead">Please answer the following questions about how you feel about your body</p>
+    <p class="lang-note">Items en anglais (Cash et al., 2004) : version française non retrouvée. Licence requise : incertaine. Les questions ouvertes de suivi du questionnaire d&#x27;origine ne sont pas cotées et ne figurent pas dans la passation.</p>
+    <div class="pill-row">
+    <span class="pill">7 questions</span><span class="pill">échelle 1 à 5</span><span class="pill">score moyen de 1 à 5</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="period" id="period-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <p class="q-ex" id="q-ex"></p>
+    <div class="opt-row" id="opt-row"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="rows-all"></div>
+    <p class="result-text">Score = moyenne des 7 items (1 à 5) ; plus le score est élevé, plus la perturbation de l&#x27;image corporelle est importante. Aucun item inversé. Aucun seuil clinique officiel n&#x27;a été trouvé.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+    <p class="footnote">BIDQ : Cash, T. F., Phillips, K. A., Santos, M. T., &amp; Hrabosky, J. I. (2004). Measuring « negative body image »: validation of the Body Image Disturbance Questionnaire in a nonclinical population. Body Image, 1(4), 363-372. Outil de repérage, ne remplace pas une évaluation clinique.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var CFG = {
+ "items": [
+  {
+   "n": "1",
+   "t": "Are you concerned about the appearance of some part(s) of your body which you consider especially unattractive?",
+   "o": [
+    [
+     "Not at all concerned",
+     1
+    ],
+    [
+     "Somewhat concerned",
+     2
+    ],
+    [
+     "Moderately concerned",
+     3
+    ],
+    [
+     "Very concerned",
+     4
+    ],
+    [
+     "Extremely concerned",
+     5
+    ]
+   ],
+   "p": "Suivi (non coté) : « What are these concerns? What specifically bothers you about the appearance of these body parts? »"
+  },
+  {
+   "n": "2",
+   "t": "If you are at least somewhat concerned, do these concerns preoccupy you? That is, you think about them a lot and they're hard to stop thinking about?",
+   "o": [
+    [
+     "Not at all preoccupied",
+     1
+    ],
+    [
+     "Somewhat preoccupied",
+     2
+    ],
+    [
+     "Moderately preoccupied",
+     3
+    ],
+    [
+     "Very preoccupied",
+     4
+    ],
+    [
+     "Extremely preoccupied",
+     5
+    ]
+   ],
+   "p": "Suivi (non coté) : « What effect has your preoccupation with your appearance had on your life? »"
+  },
+  {
+   "n": "3",
+   "t": "Has your physical \"defect\" often caused you a lot of distress, torment, or pain? How much?",
+   "o": [
+    [
+     "Not at all distressed",
+     1
+    ],
+    [
+     "Somewhat distressed",
+     2
+    ],
+    [
+     "Moderately distressed",
+     3
+    ],
+    [
+     "Very distressed",
+     4
+    ],
+    [
+     "Extremely distressed",
+     5
+    ]
+   ]
+  },
+  {
+   "n": "4",
+   "t": "Has your physical \"defect\" caused you impairment in social, occupational or other important areas of functioning? How much?",
+   "o": [
+    [
+     "No limitation",
+     1
+    ],
+    [
+     "Mild interference",
+     2
+    ],
+    [
+     "Moderate, still manageable",
+     3
+    ],
+    [
+     "Severe interference",
+     4
+    ],
+    [
+     "Extremely incapacitating",
+     5
+    ]
+   ]
+  },
+  {
+   "n": "5",
+   "t": "Has your physical \"defect\" significantly interfered with your social life? How much",
+   "o": [
+    [
+     "Never",
+     1
+    ],
+    [
+     "Occasionally",
+     2
+    ],
+    [
+     "Moderately often",
+     3
+    ],
+    [
+     "Often",
+     4
+    ],
+    [
+     "Very often",
+     5
+    ]
+   ],
+   "p": "Suivi (non coté) : « If so, how? »"
+  },
+  {
+   "n": "6",
+   "t": "Has your physical \"defect\" significantly interfered with your schoolwork, your job, or your ability to function in your role?",
+   "o": [
+    [
+     "Never",
+     1
+    ],
+    [
+     "Occasionally",
+     2
+    ],
+    [
+     "Moderately often",
+     3
+    ],
+    [
+     "Often",
+     4
+    ],
+    [
+     "Very often",
+     5
+    ]
+   ],
+   "p": "Suivi (non coté) : « If so, how? »"
+  },
+  {
+   "n": "7",
+   "t": "Do you ever avoid things because of your physical \"defect\"? How often?",
+   "o": [
+    [
+     "Never",
+     1
+    ],
+    [
+     "Occasionally",
+     2
+    ],
+    [
+     "Moderately often",
+     3
+    ],
+    [
+     "Often",
+     4
+    ],
+    [
+     "Very often",
+     5
+    ]
+   ],
+   "p": "Suivi (non coté) : « If so, what do you avoid? »"
+  }
+ ],
+ "opts": [],
+ "scores": [
+  {
+   "label": "Score BIDQ (moyenne des 7 items)",
+   "items": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "method": "mean",
+   "range": "1 à 5"
+  }
+ ],
+ "qword": "Question",
+ "next": "Suivant",
+ "seeResult": "Voir le résultat"
+};
+  var items = CFG.items;
+  var VAR = null;
+  function rep(s){ if(!VAR || !s) return s; Object.keys(VAR.rep).forEach(function(k){ s = s.split(k).join(VAR.rep[k]); }); return s; }
+  var answers = new Array(items.length).fill(null);
+  var idx = 0;
+
+  function active(i){
+    var c = items[i].c;
+    if(!c) return true;
+    return c.anyOf.some(function(j){ return answers[j] !== null && answers[j] > (c.gt || 0); });
+  }
+  function nextIdx(i){ var j = i + 1; while(j < items.length && !active(j)) j++; return j; }
+  function prevIdx(i){ var j = i - 1; while(j >= 0 && !active(j)) j--; return j; }
+  function position(i){
+    var k = 0, tot = 0;
+    for(var j = 0; j < items.length; j++){ if(active(j)){ tot++; if(j <= i) k++; } }
+    return [k, tot];
+  }
+  function optsOf(i){ return items[i].o || CFG.opts; }
+
+  function renderQuestion(){
+    var pos = position(idx);
+    var it = items[idx];
+    document.getElementById('progress-text').textContent = (it.n ? CFG.qword + ' ' + it.n + ' : ' : '') + pos[0] + ' / ' + pos[1];
+    document.getElementById('period-text').textContent = it.p || '';
+    document.getElementById('q-text').textContent = rep(it.t);
+    document.getElementById('q-ex').textContent = it.x || '';
+    var row = document.getElementById('opt-row');
+    row.innerHTML = '';
+    if(it.num){
+      var inp = document.createElement('input');
+      inp.type = 'number'; inp.min = 0; inp.max = 365; inp.step = 1; inp.className = 'num-in';
+      inp.value = answers[idx] === null ? '' : answers[idx];
+      inp.addEventListener('input', function(){
+        var v = inp.value.trim();
+        if(v === '' || !/^\d+$/.test(v) || +v > 365){ answers[idx] = null; } else { answers[idx] = +v; }
+        document.getElementById('btn-next').disabled = answers[idx] === null;
+      });
+      row.appendChild(inp);
+      var lab = document.createElement('span'); lab.className = 'num-lab'; lab.textContent = it.num; row.appendChild(lab);
+    } else {
+      optsOf(idx).forEach(function(o){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx] === o[1] ? ' selected' : '');
+        d.textContent = rep(o[0]);
+        d.addEventListener('click', function(){ answers[idx] = o[1]; renderQuestion(); });
+        row.appendChild(d);
+      });
+    }
+    document.getElementById('btn-prev').disabled = prevIdx(idx) < 0;
+    document.getElementById('btn-next').disabled = answers[idx] === null;
+    document.getElementById('btn-next').textContent = nextIdx(idx) >= items.length ? CFG.seeResult : CFG.next;
+  }
+
+  if(CFG.variants){
+    var vb = document.getElementById('variants');
+    var sb = document.getElementById('btn-start');
+    sb.disabled = true; sb.style.opacity = '.4';
+    CFG.variants.forEach(function(v){
+      var d = document.createElement('div'); d.className = 'opt'; d.textContent = v.label;
+      d.addEventListener('click', function(){
+        VAR = v; sb.disabled = false; sb.style.opacity = '1';
+        Array.prototype.forEach.call(vb.children, function(c){ c.className = 'opt'; });
+        d.className = 'opt selected';
+      });
+      vb.appendChild(d);
+    });
+  }
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    var p = prevIdx(idx);
+    if (p >= 0){ idx = p; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (answers[idx] === null) return;
+    var n = nextIdx(idx);
+    if (n < items.length){ idx = n; renderQuestion(); } else { showResult(); }
+  });
+
+  function compute(def){
+    var s = 0, k = 0, flagged = [];
+    def.items.forEach(function(i){
+      if(!active(i) || answers[i] === null) return;
+      var v = answers[i];
+      if(def.rev && def.rev.indexOf(i) >= 0) v = def.revSum - v;
+      if(def.thr != null){ s += (v >= def.thr ? 1 : 0); } else { s += v; }
+      k++;
+      if(def.flag && v >= 1) flagged.push(items[i].n);
+    });
+    return {sum: s, n: k, flagged: flagged};
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    var box = document.getElementById('rows-all');
+    box.innerHTML = '';
+    function row(a, b){
+      var d = document.createElement('div'); d.className = 'sc-row';
+      var x = document.createElement('span'); x.textContent = a;
+      var y = document.createElement('b'); y.textContent = b;
+      d.appendChild(x); d.appendChild(y); box.appendChild(d);
+    }
+    function read(t){
+      var p = document.createElement('p'); p.className = 'sc-read'; p.textContent = t; box.appendChild(p);
+    }
+    CFG.scores.forEach(function(def){
+      if(def.title){
+        var t = document.createElement('p'); t.className = 'sc-title'; t.textContent = def.title; box.appendChild(t);
+      }
+      var r = compute(def);
+      if(def.flagOnly){ row(def.label, r.flagged.length + ' item(s)'); if(r.flagged.length){ read(def.flagLabel + ' ' + r.flagged.map(function(x){ return String(x).replace(' – détresse',''); }).join(', ') + '.'); } if(def.note){ read(def.note); } return; }
+      if(!r.n){ row(def.label, '-'); return; }
+      var val, txt;
+      if(def.method === 'mean'){
+        val = r.sum / r.n; txt = val.toFixed(2).replace('.', ',') + ' (moyenne, ' + def.range + ')';
+      } else {
+        val = r.sum; var mx = def.maxItem ? r.n * def.maxItem : def.max; txt = val + ' / ' + mx;
+        if(def.norm){
+          var nv = Math.round((val - def.norm.min) / (def.norm.max - def.norm.min) * 100);
+          txt = val + ' / ' + def.max + ' : transformé 0-100 : ' + nv;
+        }
+      }
+      if(def.raw){ txt = val + (def.unit || ''); }
+      row(def.label, txt);
+      if(def.flag && r.flagged.length){ read(def.flagLabel + ' ' + r.flagged.join(', ') + '.'); }
+      if(def.bands){
+        def.bands.forEach(function(b){ if(val >= b[0] && val <= b[1]){ read(b[2]); } });
+      }
+      if(def.note){ read(def.note); }
+    });
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = new Array(items.length).fill(null);
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Body Image Disturbance Questionnaire (BIDQ)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#9C5F3B 0%,#E4C6B3 55%,#4F2C18 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,245,235,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#4F2C18;background:#F3E6DD;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#9C5F3B;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#4F2C18;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">BIDQ</span></div>
+
+  <h1 class="serif">Body Image Disturbance Questionnaire (BIDQ)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Body Image Disturbance Questionnaire (Cash et al., 2004) : perturbation de l&#x27;image corporelle, repérage de préoccupations de type dysmorphophobie</p>
+  <div class="meta-row">
+    <span class="pill">7 questions</span>
+    <span class="pill">échelle 1 à 5</span>
+    <span class="pill">moyenne de 1 à 5</span>
+    <span class="pill">Anglais</span>
+    <span class="pill">Licence requise : incertaine</span>
+    
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="bidq.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>Le BIDQ est un auto-questionnaire de 7 items qui explore les préoccupations concernant l&#x27;apparence d&#x27;une partie du corps jugée peu attrayante, la détresse, l&#x27;interférence sociale et professionnelle et l&#x27;évitement qui en découlent.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque item est coté de 1 à 5 selon la case cochée, sans item inversé ; le score est la moyenne des 7 items (1 à 5), un score élevé indiquant une perturbation importante de l&#x27;image corporelle (une seule source mentionne une somme de 7 à 35, équivalente). Les questions ouvertes de suivi ne sont pas cotées. Aucun seuil clinique officiel n&#x27;a été trouvé. Repères de population saine (d&#x27;après Cash et al., 2004, cités par Nutrients 2023) : moyenne 1,57 (écart type 0,6) chez les hommes et 1,81 (écart type 0,67) chez les femmes.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits</h2>
+    <p>Licence requise : incertaine. Aucune mention de licence n&#x27;a été trouvée dans la figure source. Le questionnaire est © Cash et al. ; la reproduction a été relevée dans un article en accès libre (CC BY 4.0). À vérifier auprès de l&#x27;auteur avant diffusion.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Sources</h2>
+    <p class="source-note">Texte des 7 items et options : reproduction du questionnaire (Figure) dans Nutrients 2023, 15, 3938 (PMC10534710, CC BY 4.0), lue visuellement ; les items 1 et 2 sont recoupés mot à mot avec d&#x27;autres articles ; les ancrages des items 3 et 4 peuvent différer légèrement de la version de Cash. Cotation (moyenne, 1 à 5) confirmée par trois articles. Version française non retrouvée.</p>
+  </div>
+
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

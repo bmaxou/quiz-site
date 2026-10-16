@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DCI : coping dyadique du couple</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #326A85;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#326A85;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#163341;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#326A85;background:#E6F0F4;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#163341;border-color:#E0D9C9;}
+  .btn-primary{background:#326A85;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#326A85;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#163341;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">DCI : gérer le stress à deux face à la maladie</h1>
+    <p class="lead">37 affirmations sur la façon dont vous et votre partenaire gérez le stress face à la maladie ; réponses de « très rarement » à « très souvent ». À remplir par chacun des deux partenaires séparément.</p>
+    <p class="consigne">Dans ce questionnaire, il est question de savoir comment vous et votre partenaire gérez le stress face à la maladie. Répondez aux questions le plus spontanément possible et sans réfléchir trop longtemps, et cochez la réponse qui vous convient le mieux.</p>
+    <p class="lang-note">Questions en français (annexe d'une thèse de l'Université Paris Cité, formulation « face à la maladie »). Licence : requise (éditeur du test).</p>
+    <div class="pill-row">
+      <span class="pill">37 questions</span>
+      <span class="pill">10 minutes</span>
+      <span class="pill">Très rarement à très souvent</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Bodenmann (2008) ; Stulz (2020). Outil d'auto-évaluation : ne remplace pas un entretien clinique ni un bilan.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["Que faites-vous lorsque vous vous sentez stressé(e) par la maladie ?\nJe dis à mon/ma partenaire que je serais content(e) d’obtenir de sa part du soutien pratique ou des conseils concrets.", "Que faites-vous lorsque vous vous sentez stressé(e) par la maladie ?\nQuand je me sens surchargé(e), je demande à mon/ma partenaire de prendre en charge certaines de mes tâches.", "Que faites-vous lorsque vous vous sentez stressé(e) par la maladie ?\nJe montre à mon/ma partenaire, par mon comportement, que je suis dépassé(e) et que je ne me sens pas bien.", "Que faites-vous lorsque vous vous sentez stressé(e) par la maladie ?\nJ’exprime clairement à mon/ma partenaire comment je me sens et que j’ai besoin de son soutien émotionnel.", "Que fait votre partenaire lorsque vous vous sentez stressé(e) par la maladie ?\nIl/elle me donne le sentiment qu’il/elle me comprend et s’intéresse à mon stress.", "Que fait votre partenaire lorsque vous vous sentez stressé(e) par la maladie ?\nIl/elle est solidaire envers moi, me dit qu’il/elle connaît aussi ce sentiment et qu’il/elle est à mes côtés.", "Que fait votre partenaire lorsque vous vous sentez stressé(e) par la maladie ?\nIl/elle me reproche de ne pas pouvoir assez bien réagir face au stress.", "Que fait votre partenaire lorsque vous vous sentez stressé(e) par la maladie ?\nIl/elle m’aide à voir la situation sous un autre angle et à relativiser le problème.", "Que fait votre partenaire lorsque vous vous sentez stressé(e) par la maladie ?\nIl/elle m’écoute, me donne l’occasion de m’exprimer, me console et m’encourage.", "Que fait votre partenaire lorsque vous vous sentez stressé(e) par la maladie ?\nIl/elle ne prend pas mon stress au sérieux.", "Que fait votre partenaire lorsque vous vous sentez stressé(e) par la maladie ?\nIl/elle m’aide, mais le fait à contrecoeur et sans motivation.", "Que fait votre partenaire lorsque vous vous sentez stressé(e) par la maladie ?\nAfin de me décharger, il/elle assume des tâches dont je m’occupe habituellement.", "Que fait votre partenaire lorsque vous vous sentez stressé(e) par la maladie ?\nIl/elle m’aide à analyser la situation pour pouvoir mieux la prendre en main.", "Que fait votre partenaire lorsque vous vous sentez stressé(e) par la maladie ?\nIl/elle me donne un coup de main, quand j’ai trop à faire, afin de me décharger.", "Que fait votre partenaire lorsque vous vous sentez stressé(e) par la maladie ?\nLosque je suis stressé(e), mon/ma partenaire m’évite.", "Que fait votre partenaire lorsqu’il/elle se sent stressé(e) par la maladie ?\nIl/elle me dit qu’il/elle serait content(e) d’obtenir de ma part du soutien pratique ou des conseils concrets.", "Que fait votre partenaire lorsqu’il/elle se sent stressé(e) par la maladie ?\nIl/elle me demande de prendre en charge certaines de ses tâches.", "Que fait votre partenaire lorsqu’il/elle se sent stressé(e) par la maladie ?\nIl/elle me montre, par son comportement, qu’il/elle est dépassé(e) et ne se sent pas bien.", "Que fait votre partenaire lorsqu’il/elle se sent stressé(e) par la maladie ?\nIl/elle m’exprime clairement comment il/elle se sent et qu’il/elle a besoin de mon soutien émotionnel.", "Que faites-vous lorsque votre partenaire est stressé(e) par la maladie ?\nJ’induis chez mon/ma partenaire le sentiment que je le/la comprends et que je m’intéresse à son stress.", "Que faites-vous lorsque votre partenaire est stressé(e) par la maladie ?\nJe suis solidaire envers lui/elle, je lui dis que je connais aussi ce sentiment et que je suis à ses côtés.", "Que faites-vous lorsque votre partenaire est stressé(e) par la maladie ?\nJe lui reproche de ne pas pouvoir assez bien réagir face au stress.", "Que faites-vous lorsque votre partenaire est stressé(e) par la maladie ?\nJe dis à mon/ma partenaire que ce n’est pas si grave et l’aide à voir la situation sous un autre angle.", "Que faites-vous lorsque votre partenaire est stressé(e) par la maladie ?\nJe l’écoute, lui offre un espace pour s’exprimer, je le/la console et l’encourage.", "Que faites-vous lorsque votre partenaire est stressé(e) par la maladie ?\nJe ne prends pas son stress au sérieux.", "Que faites-vous lorsque votre partenaire est stressé(e) par la maladie ?\nLorsque mon/ma partenaire est stressé(e), je l’évite.", "Que faites-vous lorsque votre partenaire est stressé(e) par la maladie ?\nJe l’aide, mais sans motivation et pense qu’il/elle devrait pouvoir mieux gérer lui/elle-même ses problèmes.", "Que faites-vous lorsque votre partenaire est stressé(e) par la maladie ?\nAfin de le/la décharger, j’assume des tâches dont il/elle s’occupe habituellement.", "Que faites-vous lorsque votre partenaire est stressé(e) par la maladie ?\nJ’essaie d’analyser la situation avec mon/ma partenaire et de l’aider à comprendre le problème.", "Que faites-vous lorsque votre partenaire est stressé(e) par la maladie ?\nJe lui donne un coup de main, quand il/elle a trop à faire, afin de le/la décharger.", "Comment parvenez-vous, vous-même et votre partenaire, à gérer le stress qui vous concerne tous les deux ?\nNous essayons de résoudre le problème ensemble et de chercher des solutions concrètes.", "Comment parvenez-vous, vous-même et votre partenaire, à gérer le stress qui vous concerne tous les deux ?\nNous réfléchissons sérieusement au problème et discutons de ce que nous pourrions faire.", "Comment parvenez-vous, vous-même et votre partenaire, à gérer le stress qui vous concerne tous les deux ?\nNous nous aidons mutuellement à relativiser le problème et à le regarder sous un autre angle.", "Comment parvenez-vous, vous-même et votre partenaire, à gérer le stress qui vous concerne tous les deux ?\nNous nous aidons mutuellement à nous relaxer, par des massages, en prenant un bain, ou en écoutant de la musique ensemble.", "Comment parvenez-vous, vous-même et votre partenaire, à gérer le stress qui vous concerne tous les deux ?\nNous sommes tendres et affectueux l’un envers l’autre; nous faisons l’amour et essayons de gérer le stress de cette façon.", "Comment évaluez-vous votre façon de gérer le stress en tant que couple ?\nJe suis satisfait(e) du soutien de mon/ma partenaire et de notre gestion commune du stress.", "Comment évaluez-vous votre façon de gérer le stress en tant que couple ?\nLe soutien de mon/ma partenaire et notre gestion commune du stress me semblent efficaces."];
+  var G = [{"label": "", "opts": ["très rarement", "rarement", "parfois", "souvent", "très souvent"], "vals": [1, 2, 3, 4, 5]}];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = null;              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var INV = [7, 10, 11, 15, 22, 25, 26, 27], LO = 1, HI = 5;
+    function val(k){ var v = answers[k-1][0]; if (v === 'NA') return null; return INV.indexOf(k) >= 0 ? (LO + HI - v) : v; }
+    function agg(list, m){ var s = 0, n = 0; list.forEach(function(k){ var v = val(k); if (v !== null){ s += v; n++; } }); if (n === 0) return null; return m === 'mean' ? s / n : s; }
+    var BL = [{"l": "Score total (items 1 à 35, items 7, 10, 11, 15, 22, 25, 26 et 27 inversés)", "it": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35], "m": "sum", "d": 0, "r": "35 à 175", "x": 1}, {"l": "Communication autour du stress : vous (items 1 à 4)", "it": [1, 2, 3, 4], "m": "sum", "d": 0, "r": "4 à 20", "x": 1}, {"l": "Communication autour du stress : votre partenaire (items 16 à 19)", "it": [16, 17, 18, 19], "m": "sum", "d": 0, "r": "4 à 20", "x": 1}, {"l": "Coping dyadique commun (items 31 à 35)", "it": [31, 32, 33, 34, 35], "m": "sum", "d": 0, "r": "5 à 25", "x": 1}, {"l": "Évaluation de la gestion du stress en couple (items 36 et 37, hors total)", "it": [36, 37], "m": "sum", "d": 0, "r": "2 à 10", "x": 1}];
+    var res = [], rows = '';
+    BL.forEach(function(b){ var v = agg(b.it, b.m); if (v !== null) v = v * b.x; res.push(v); rows += row(b.l + (b.r ? ' (' + b.r + ')' : ''), v === null ? '-' : v.toFixed(b.d).replace('.', ',')); });
+    html += '<table class=\"result-table\">' + rows + '</table>';
+    var T = res[0];
+    var lib = T < 111 ? 'Score total inférieur à 111 : coping dyadique inférieur à la moyenne générale selon le repère attribué à Bodenmann (2007).' : (T <= 145 ? 'Score total de 111 à 145 : coping dyadique dans la moyenne générale selon le repère attribué à Bodenmann (2007).' : 'Score total supérieur à 145 : coping dyadique supérieur à la moyenne générale selon le repère attribué à Bodenmann (2007).');
+    html += '<p class="result-text">' + lib + ' Plus le score est élevé, plus le coping dyadique est fréquent. Ce repère n\'est pas une norme française ; il ne sert pas à poser un diagnostic.</p>';
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DCI : coping dyadique du couple</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#356F8D 0%,#B5D4E3 55%,#163341 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#163341;background:#E6F0F4;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #326A85;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#326A85;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#163341;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">DCI</span></div>
+
+  <h1 class="serif">Inventaire du coping dyadique (DCI), version française à 37 items</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">DCI : Bodenmann (2008) ; version française reproduite dans la thèse de Stulz (2020), formulation « face à la maladie ».</p>
+  <div class="meta-row">
+    <span class="pill">37 questions</span>
+    <span class="pill">10 minutes</span>
+    <span class="pill">Très rarement à très souvent</span>
+    <span class="pill">Français</span>
+    <span class="pill">Couple, maladie</span>
+    <span class="pill">Licence : requise</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="dci-coping-dyadique-couple.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>Le DCI décrit la manière dont les deux membres d'un couple font face ensemble au stress : ce que chacun fait lorsqu'il est stressé (communication de son stress), ce que fait le partenaire, ce que fait le répondant lorsque son partenaire est stressé, et ce que le couple fait en commun, puis deux questions d'évaluation de cette gestion du stress. Chaque partenaire répond seul.</p>
+    <p>Cette page reprend le texte français de l'annexe d'une thèse consacrée aux couples face au cancer du côlon : le stress y est formulé « par la maladie » (adaptation de la thèse). L'annexe comporte aussi une question sur le degré de bonheur de la relation, qui ne fait pas partie des 37 items et n'est pas reprise ici.</p>
+    <p class="source-note">Le libellé de l'item 15 contient une faute de frappe de la source (« Losque »), conservée telle quelle.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Réponses de 1 (très rarement) à 5 (très souvent). Score total : somme des items 1 à 35 après inversion des items à formulation négative 7, 10, 11, 15, 22, 25, 26 et 27 (inversion = 6 moins la réponse), soit 35 à 175 ; les items 36 et 37 (évaluation de la gestion du stress en couple, 2 à 10) sont exclus du total. La page donne aussi la communication autour du stress du répondant (items 1 à 4) et celle du partenaire (items 16 à 19), de 4 à 20, et le coping dyadique commun (items 31 à 35, 5 à 25), d'après les rubriques de l'annexe.</p>
+    <p>Repères sur le seul score total, attribués à Bodenmann (2007) par la thèse et par un article de 2025 : moins de 111 = inférieur à la moyenne générale ; de 111 à 145 = dans la moyenne générale ; plus de 145 = supérieur à la moyenne générale.</p>
+    <p class="reserve">Non repris : les sous-scores de coping dyadique soutenant, négatif et délégué, car l'attribution des items à ces sous-échelles n'est pas écrite dans les sources lues. Les seuils 111 et 145 viennent de sources secondaires et ne sont pas établis sur une population française.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Licence : requise. Le DCI est un test publié (Bodenmann, 2008, Huber/Hogrefe) ; aucune permission d'utilisation n'a été retrouvée et la source lue (annexe de thèse) ne mentionne aucun droit.</p>
+    <p class="reserve">Étalonnage : aucune norme française trouvée. La thèse lue donne des moyennes descriptives de 27 patients et 14 partenaires (cancer du côlon) ; la version française a une cohérence interne de 0,64 à 0,89 (0,50 et 0,53 pour les sous-échelles négatives) selon Ledermann et coll. (2010), cités par la thèse et non lus.</p>
+    <p class="source-note">Références : Bodenmann G (2008). Dyadisches Coping Inventar : Testmanual. Bern : Huber. Stulz A (2020). Ajustement affectif et sexuel des couples face au cancer du côlon. Thèse, Université Paris Cité (HAL tel-04149974). Ledermann T et coll. (2010). Psychometrics of the Dyadic Coping Inventory in three language groups. Swiss Journal of Psychology 69(4):201-212.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

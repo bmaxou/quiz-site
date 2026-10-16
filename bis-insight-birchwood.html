@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Échelle d’insight de Birchwood (IS)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #5F3285;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#5F3285;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#2D1641;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#5F3285;background:#EEE6F4;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#2D1641;border-color:#E0D9C9;}
+  .btn-primary{background:#5F3285;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#5F3285;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#2D1641;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">Échelle d’insight actuel de Birchwood (IS)</h1>
+    <p class="lead">8 énoncés sur la perception de ses symptômes, de sa maladie et du besoin de traitement. Trois réponses possibles : d’accord, pas d’accord, incertain(e). Auto-questionnaire.</p>
+    <p class="consigne">Lisez, s’il vous plaît les énoncés suivants attentivement et cochez ensuite la case qui vous correspond le mieux.</p>
+    <p class="lang-note">Questions en français, reprises mot pour mot d’une annexe de thèse. La clé de cotation vient d’une validation espagnole (texte anglais). Licence : incertaine.</p>
+    <div class="pill-row">
+      <span class="pill">8 questions</span>
+      <span class="pill">3 minutes</span>
+      <span class="pill">D’accord / Pas d’accord / Incertain(e)</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Birchwood M et al., Acta Psychiatr Scand 1994 ; Nicolas E., thèse de médecine, 2020 ; Camprubí N et al., Actas Esp Psiquiatr 2008. Outil d’auto-évaluation : ne remplace pas un entretien clinique ni un bilan.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["Certains des symptômes ont été créés par mon imagination", "Je me sens psychologiquement bien", "Je n’ai pas besoin de traitement médicamenteux", "Mon séjour à l’hôpital était nécessaire", "Le médecin a raison de me prescrire un traitement médicamenteux", "Je n’ai pas besoin d’être vu(e) par un médecin ou un psychiatre", "Si quelqu’un disait que j’avais une maladie nerveuse ou mentale il aurait raison", "Aucune des choses inhabituelles que j’ai vécues n’est due à une maladie"];
+  var G = [];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = [[{"label": "", "opts": ["D'accord", "Pas d'accord", "Incertain(e)"], "vals": [2, 0, 1]}], [{"label": "", "opts": ["D'accord", "Pas d'accord", "Incertain(e)"], "vals": [0, 2, 1]}], [{"label": "", "opts": ["D'accord", "Pas d'accord", "Incertain(e)"], "vals": [0, 2, 1]}], [{"label": "", "opts": ["D'accord", "Pas d'accord", "Incertain(e)"], "vals": [2, 0, 1]}], [{"label": "", "opts": ["D'accord", "Pas d'accord", "Incertain(e)"], "vals": [2, 0, 1]}], [{"label": "", "opts": ["D'accord", "Pas d'accord", "Incertain(e)"], "vals": [0, 2, 1]}], [{"label": "", "opts": ["D'accord", "Pas d'accord", "Incertain(e)"], "vals": [2, 0, 1]}], [{"label": "", "opts": ["D'accord", "Pas d'accord", "Incertain(e)"], "vals": [0, 2, 1]}]];              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var a = answers.map(function(x){ return x[0]; });
+    var sym = a[0] + a[7], ill = a[1] + a[6], need = (a[2] + a[3] + a[4] + a[5]) / 2;
+    var tot = sym + ill + need;
+    function f1(v){ return v.toFixed(1).replace('.', ','); }
+    html += '<table class="result-table">' + row('Score total (0 à 12)', f1(tot)) + row('Conscience des symptômes (items 1 et 8, 0 à 4)', String(sym)) + row('Conscience de la maladie (items 2 et 7, 0 à 4)', String(ill)) + row('Besoin de traitement (items 3 à 6 additionnés puis divisés par 2, 0 à 4)', f1(need)) + '</table>';
+    html += '<p class="result-text">' + (tot >= 9 ? 'Score de 9 ou plus : bon insight, selon le seuil indiqué par la source.' : 'Score inférieur à 9 : en dessous du seuil de bon insight indiqué par la source.') + '</p>';
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Échelle d’insight de Birchwood (IS)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#64358D 0%,#CEB5E3 55%,#2D1641 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#2D1641;background:#EEE6F4;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #5F3285;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#5F3285;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#2D1641;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">BIS-Insight</span></div>
+
+  <h1 class="serif">Échelle d’insight actuel de Birchwood (IS, Insight Scale ; BIS)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">IS / BIS : Birchwood, Smith, Drury, Healy, Macmillan et Slade (1994) ; version française reproduite dans la thèse de médecine de E. Nicolas (2020).</p>
+  <div class="meta-row">
+    <span class="pill">8 questions</span>
+    <span class="pill">3 minutes</span>
+    <span class="pill">D’accord / Pas d’accord / Incertain(e)</span>
+    <span class="pill">Français (France)</span>
+    <span class="pill">Psychose</span>
+    <span class="pill">Insight</span>
+    <span class="pill">Auto-questionnaire</span>
+    <span class="pill">Licence : incertaine</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="bis-insight-birchwood.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>L’échelle d’insight de Birchwood (IS) est un auto-questionnaire de 8 énoncés qui évalue l’insight (la conscience de ses symptômes, de sa maladie et du besoin de traitement) chez les personnes souffrant d’un trouble psychotique. Elle explore trois dimensions : la conscience des symptômes, la conscience de la maladie et le besoin de traitement.</p>
+    <p class="source-note">La page reprend l’annexe française de la thèse, intitulée « IS – (échelle d’insight actuel) ».</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque énoncé reçoit 0, 1 ou 2 points selon la réponse et selon l’énoncé (clé lue dans l’annexe de la validation espagnole) : pour les énoncés 1, 4, 5 et 7, « d’accord » vaut 2 et « pas d’accord » vaut 0 ; pour les énoncés 2, 3, 6 et 8, « d’accord » vaut 0 et « pas d’accord » vaut 2 ; « incertain(e) » vaut 1 partout. Sous-échelles : conscience des symptômes = énoncés 1 et 8 ; conscience de la maladie = énoncés 2 et 7 ; besoin de traitement = énoncés 3, 4, 5 et 6 additionnés puis divisés par 2. Chaque sous-échelle va de 0 à 4 (3 ou 4 : bon insight ; 1 ou 2 : insight faible). Score total de 0 (aucun insight) à 12 (insight complet) ; 9 et plus : bon insight.</p>
+    <p class="reserve">La thèse française décrit l’échelle comme ayant « 6 items » alors que l’annexe en reproduit 8 ; la cotation retenue est celle de l’annexe espagnole (8 énoncés, total sur 12), qui correspond à l’étendue 0 à 12 et au seuil 9. Le seuil 9 est donné par la thèse, l’article espagnol et une étude francophone (RDC). Étalonnage français : non (FR-, provisoire).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Les 8 énoncés français viennent de l’annexe 4 de la thèse de E. Nicolas (2020), lue sur l’image du document ; la clé de cotation et les sous-échelles viennent de l’annexe 1 de la validation espagnole (Camprubí et al., 2008), en anglais, comparée énoncé par énoncé. La traduction française n’a pas été vérifiée par l’auteur de l’échelle.</p>
+    <p class="reserve">Licence : incertaine. Aucune mention d’autorisation retrouvée dans l’annexe française ni dans l’article espagnol.</p>
+    <p class="source-note">Birchwood M, Smith J, Drury V, Healy J, Macmillan F, Slade M. A self-report Insight Scale for psychosis: reliability, validity and sensitivity to change. Acta Psychiatr Scand. 1994;89:62-67. Camprubí N, Almela A, Garre-Olmo J. Psychometric properties of the Spanish validation of the Insight Scale. Actas Esp Psiquiatr. 2008;36(6):323-330. Nicolas E. Thèse d’exercice de médecine, 2020 (dumas-03033849).</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

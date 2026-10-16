@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CITES-II : Soutien social et maternel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #32856A;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#32856A;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#164133;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#32856A;background:#E6F4F0;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#164133;border-color:#E0D9C9;}
+  .btn-primary{background:#32856A;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#32856A;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#164133;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">CITES-II : Soutien social et soutien maternel (6 questions)</h1>
+    <p class="lead">Six énoncés sur le soutien perçu après avoir parlé d'un événement vécu : trois sur les personnes en général, trois sur la mère. Trois réponses possibles : Faux, Un peu vrai, Très vrai. À remplir avec un professionnel.</p>
+    <p class="consigne">Je vais maintenant te poser des questions concernant ce qui t’est arrivé. Je ne vais pas te demander de me décrire ce qui s’est passé, j’aimerais plutôt connaître les pensées et les sentiments que tu as eus AU COURANT DU DERNIER MOIS à propos de ce qui t’est arrivé. Je vais te lire une phrase et tu me diras si pour toi cette phrase est très vraie, un peu vraie ou fausse / pas vraie du tout. Tu as peut-être eu certaines de ces pensées ou sentiments dans le passé, mais j’aimerais que tu me dises seulement celles que tu as eues AU COURS DU DERNIER MOIS. Il n’y a pas de bonnes ou de mauvaises réponses aux questions que je vais te poser. Il est possible que certaines questions te rappellent des événements désagréables. Si une question te rend mal à l’aise, dis-le-moi et je passerai à la suivante.</p>
+    <p class="lang-note">Questions en français du Québec (traduction de travail de l'équipe de Martine Hébert, UQAM). Sujet sensible. Licence incertaine.</p>
+    <div class="pill-row">
+      <span class="pill">6 questions</span>
+      <span class="pill">Faux / Un peu vrai / Très vrai</span>
+      <span class="pill">Au courant du dernier mois</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Wolfe (2002, CITES-II) ; Hébert et al. (2019, trousse UQAM). Outil d'auto-évaluation : ne remplace pas un entretien clinique ni un bilan.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["La plupart des gens me croyaient quand je parlais de ce qui est arrivé.", "Je connaissais quelqu’un avec qui je me sentais à l’aise de parler de ce qui est arrivé.", "Depuis que j’ai parlé de ce qui est arrivé, j’ai senti que les travailleurs sociaux, les policiers ou les médecins que j’ai rencontrés m’ont aidé.e.", "J’ai senti que ma mère me protégerait pour que ce qui m’est arrivé n’arrive plus.", "Quand j’ai parlé de ce qui est arrivé à ma mère, j’ai trouvé qu’elle s’était bien occupée de moi.", "J'ai senti que si j'avais besoin d'en parler, ma mère m'écouterait."];
+  var G = [{"label": "", "opts": ["Faux", "Un peu vrai", "Très vrai"], "vals": [0, 1, 2]}];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = null;              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var INV = [], LO = 0, HI = 2;
+    function val(k){ var v = answers[k-1][0]; if (v === 'NA') return null; return INV.indexOf(k) >= 0 ? (LO + HI - v) : v; }
+    function agg(list, m){ var s = 0, n = 0; list.forEach(function(k){ var v = val(k); if (v !== null){ s += v; n++; } }); if (n === 0) return null; return m === 'mean' ? s / n : s; }
+    var BL = [{"l": "Soutien social (items 1 à 3)", "it": [1, 2, 3], "m": "sum", "d": 0, "r": "0 à 6", "x": 1}, {"l": "Soutien maternel (items 4 à 6)", "it": [4, 5, 6], "m": "sum", "d": 0, "r": "0 à 6", "x": 1}];
+    var res = [], rows = '';
+    BL.forEach(function(b){ var v = agg(b.it, b.m); if (v !== null) v = v * b.x; res.push(v); rows += row(b.l + (b.r ? ' (' + b.r + ')' : ''), v === null ? '-' : v.toFixed(b.d).replace('.', ',')); });
+    html += '<table class=\"result-table\">' + rows + '</table>';
+    html += '<p class=\"result-text\">' + "Un score élevé indique la perception d'un plus grand soutien. La source ne fournit aucun seuil clinique ; les moyennes d'échantillons de jeunes victimes sont données dans la fiche de l'outil." + '</p>';
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CITES-II : Soutien social et maternel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#358D6F 0%,#B5E3D4 55%,#164133 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#164133;background:#E6F4F0;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #32856A;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#32856A;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#164133;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">CITES-II SS</span></div>
+
+  <h1 class="serif">Children&#x27;s Impact of Traumatic Events Scale II (CITES-II) : soutien social et soutien maternel</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">CITES-II (Wolfe, 2002) : sous-échelles Soutien social et Soutien maternel, 6 items ; version française de la trousse d'évaluation de l'UQAM (Hébert, Robichaud, Amédée et Smith, 2019).</p>
+  <div class="meta-row">
+    <span class="pill">6 questions</span>
+    <span class="pill">Faux / Un peu vrai / Très vrai</span>
+    <span class="pill">Au courant du dernier mois</span>
+    <span class="pill">Français (Québec)</span>
+    <span class="pill">Trauma</span>
+    <span class="pill">Soutien social</span>
+    <span class="pill">Enfant et adolescent</span>
+    <span class="pill">Sujet sensible</span>
+    <span class="pill">Licence incertaine</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="cites-ii-soutien-maternel-social.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>Le CITES-II est un instrument de Vicky V. Wolfe qui mesure la perception, par l'enfant ou l'adolescent de 8 à 16 ans, de l'impact d'un événement traumatique. La trousse de l'UQAM en retient deux sous-échelles de soutien : le soutien social (trois énoncés tirés du CITES-R et du CITES-II : être cru, avoir quelqu'un à qui parler, aide des professionnels) et le soutien maternel (trois énoncés adaptés du CITES-R).</p>
+    <p>Version utilisée : 6 énoncés ; enfants de 6 à 12 ans et adolescents de 13 à 18 ans ; réponses sur trois points. Les énoncés 4 à 6 parlent de la mère : ils ne conviennent pas à un jeune qui n'a pas de mère présente (la source ne propose pas d'alternative).</p>
+    <p class="source-note">Page distincte de la sous-échelle Culpabilité / Blâme.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Somme des réponses (Faux = 0, Un peu vrai = 1, Très vrai = 2), sans inversion. Soutien social : items 1, 2 et 3 (plage 0 à 6) ; soutien maternel : items 4, 5 et 6 (plage 0 à 6). Un score élevé indique un plus grand soutien perçu.</p>
+    <p>Aucun seuil clinique dans la source. Normes (jeunes victimes d'agression sexuelle) : enfants de 6 à 12 ans, 1 044 : soutien général M = 4,63 (ET 1,52) filles et 3,97 (ET 1,84) garçons ; soutien maternel M = 5,42 (ET 1,27) filles et 5,26 (ET 1,40) garçons ; adolescentes de 13 à 17 ans, 196 : soutien général M = 4,38 (ET 1,48), soutien maternel M = 4,12 (ET 2,13).</p>
+    <p class="reserve">FR- (provisoire, aucune norme française trouvée) : normes québécoises seulement (échantillons de jeunes victimes d&#x27;agression sexuelle ou d&#x27;élèves du secondaire du Québec). Recherches dans les archives ouvertes HAL sur le nom de l&#x27;instrument : aucune validation ni norme française pertinente.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Sujet sensible : les énoncés portent sur un événement traumatique vécu et, dans cette version, sur l'agression sexuelle. À proposer dans un cadre clinique, avec un temps d'échange après la passation (avertissement ajouté par le cabinet, absent de la source).</p>
+    <p class="reserve">Traduction non validée : les énoncés sont une traduction française de travail de l'équipe de Martine Hébert (documents inédits de 1999 et de 2017), sans étude de validation lue. Les libellés de réponses viennent de l'annexe du formulaire ; le texte de la fiche en donne d'autres (« Faux / Pas vrai », « Parfois vrai », « Souvent vrai »).</p>
+    <p class="reserve">La consigne imprimée est écrite pour une passation orale (« Je vais te lire une phrase… ») ; elle est reprise telle quelle. L'outil est décrit comme auto-complété ou administré en entretien structuré, pour les 6 à 12 ans et les 13 à 18 ans (mêmes énoncés).</p>
+    <p class="reserve">Licence : incertaine. Phrase de la source : « Le CITES II est du domaine public, il peut être utilisé gratuitement. La version originale de l’instrument peut être obtenue dans Wekerle et al. (2006). » Cette mention figure sur le site de la trousse (UQAM) et n&#x27;a pas pu être vérifiée par ailleurs ; aucune autorisation écrite n&#x27;a été obtenue.</p>
+    <p class="source-note">Références : Hébert, M., Robichaud, M., Amédée, L. M., &amp; Smith, K. (2019). Trousse d’évaluation pour les enfants et les adolescent.e.s victimes d’agression sexuelle. Montréal, QC : Université du Québec à Montréal (révision d’octobre 2020), 244 p. https://martinehebert.uqam.ca (outils de diffusion). Wolfe, V. V. (2002). The Children&#x27;s Impact of Traumatic Events Scale II (CITES-II). Unpublished assessment instrument. (Available from V. V. Wolfe, Child and Adolescent Centre, London Health Sciences Centre, 346 South St., London, Ontario N6A 4G5, Canada). Hébert, M., &amp; Parent, N. (1999). Traduction française du Children’s Impact of Traumatic Events Scale-Revised (CITES-R; Wolfe, Wolfe, Gentile, LaRose, 1987). Document inédit. Ste-Foy, QC: Département de mesure et évaluation, Université Laval. Wekerle, C., Miller, A. L., Wolfe, D. A., &amp; Spindel, C. B. (2006). Childhood Maltreatment. Cambridge, MA: Hogrefe &amp; Huber Publishers.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

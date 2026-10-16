@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ASCQ : Questionnaire de classification des styles d&#x27;attachement (enfants de 7 à 14 ans)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #9C4F3A;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#9C4F3A;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;}
+  .g-label{font-size:12.5px;font-weight:700;color:#6B2F1F;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#9C4F3A;background:#F6E0D8;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#6B2F1F;border-color:#E0D9C9;}
+  .btn-primary{background:#9C4F3A;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#9C4F3A;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#6B2F1F;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">ASCQ : Styles d&#x27;attachement de l&#x27;enfant</h1>
+    <p class="lead">Ce questionnaire pour enfants de 7 à 14 ans propose 15 phrases sur les relations avec les autres enfants. Pour chacune, l'enfant indique dans quelle mesure elle lui correspond.</p>
+    <p class="consigne">Here are 15 sentences. How true is each of the sentences for you? Everyone has his or her own answer. Try to answer only what you feel. This is not a test, and there are no right or wrong answers. Read each sentence carefully. Then choose one of the five answers in the box below. Every answer has a number. Circle the number of the answer that best describes you.</p>
+    <p class="lang-note">Items et consigne en anglais (traduction anglaise de la version hébraïque) : aucune version française n'a été retrouvée. Licence requise : incertaine.</p>
+    <div class="pill-row">
+      <span class="pill">15 phrases</span>
+      <span class="pill">5 minutes</span>
+      <span class="pill">Échelle 1-5</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Finzi, R., Har-Even, D., Weizman, A., Tyano, S., &amp; Shnit, D. (1996). Psychologia: Israel Journal of Psychology, 5(2), 167-177. Adapté du questionnaire d'attachement adulte de Hazan &amp; Shaver (1987). Ce résultat est un repère, il ne constitue pas un diagnostic.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["I make friends with other children easily", "I don’t feel comfortable trying to make friends", "It is easy for me to depend on others, if they’re good friends of mine", "Sometimes others get too friendly and too close to me", "Sometimes I’m afraid that other kids won’t want to be with me", "I’d like to be really close to some children and always be with them", "It’s all right with me if good friends trust and depend on me", "It’s hard for me to trust others completely", "I sometimes feel that others don’t want to be good friends with me as much as I do with them", "I usually believe that others who are close to me will not leave me", "I’m sometimes afraid that no one really loves me", "I find it uncomfortable and get annoyed when someone tries to get too close to me", "It’s hard for me to really trust others, even if they’re good friends of mine", "Children sometimes avoid me when I want to get close and be a good friend of theirs", "Usually, when anyone tries to get too close to me it does not bother me"];
+  var G = [{"label": "", "opts": ["1 : All wrong", "2 : Wrong", "3 : A bit wrong / a bit right", "4 : Right", "5 : Very right"], "vals": [1, 2, 3, 4, 5]}];           /* groupes de réponses par item : [{label, opts:[...], vals:[...]}] */
+  var answers = items.map(function(){ return G.map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    G.forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      var row = document.createElement('div'); row.className = 'opt-row';
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var S = {'Sécure (secure)': [1,3,7,10,15], 'Anxieux-ambivalent (anxious/ambivalent)': [5,6,9,11,14], 'Évitant (avoidant)': [2,4,8,12,13]};
+    var names = Object.keys(S), sums = {};
+    names.forEach(function(n){ sums[n] = S[n].reduce(function(a, k){ return a + answers[k-1][0]; }, 0); });
+    var rows = '';
+    names.forEach(function(n){ rows += row(n + ' (5-25)', sums[n]); });
+    html += '<table class="result-table">' + rows + '</table>';
+    var best = Math.max.apply(null, names.map(function(n){ return sums[n]; }));
+    var top = names.filter(function(n){ return sums[n] === best; });
+    if (top.length === 1){
+      html += '<p class="result-text">Style dominant (score le plus élevé) : <strong>' + top[0] + '</strong>.</p>';
+    } else {
+      html += '<p class="result-text">Égalité entre plusieurs styles (' + top.join(' ; ') + ') : la règle de classification en cas d\'égalité n\'est pas publiée, aucune catégorie n\'est donc attribuée.</p>';
+    }
+    html += '<p class="result-text">Le style d\'attachement est classé selon le facteur dont le score est le plus élevé. Aucun seuil publié ; résultat à interpréter dans le contexte clinique, avec prudence.</p>';
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(){ return G.map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ASCQ : Questionnaire de classification des styles d&#x27;attachement (enfants de 7 à 14 ans)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#9C4F3A 0%,#EBC4B6 55%,#531F12 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#6B2F1F;background:#F6E0D8;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #9C4F3A;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#9C4F3A;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#6B2F1F;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">ASCQ</span></div>
+
+  <h1 class="serif">Questionnaire de classification des styles d&#x27;attachement, âge de latence (ASCQ)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">Finzi, Har-Even, Weizman, Tyano &amp; Shnit (1996) : Attachment Style Classification Questionnaire for Latency Age Children</p>
+  <div class="meta-row">
+    <span class="pill">15 phrases</span>
+    <span class="pill">5 minutes</span>
+    <span class="pill">Échelle 1-5</span>
+    <span class="pill">Anglais</span>
+    <span class="pill">Enfants 7-14 ans</span>
+    <span class="pill">Licence requise : incertaine</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="ascq.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>L'ASCQ est un auto-questionnaire de 15 phrases destiné aux enfants de 7 à 14 ans (âge de latence), adapté du questionnaire d'attachement adulte de Hazan &amp; Shaver (1987). Il permet de situer l'enfant dans l'un des trois styles d'attachement : sécure, anxieux-ambivalent ou évitant. Il a été utilisé notamment dans des études sur la maltraitance, le divorce et le trouble déficitaire de l'attention.</p>
+    <p class="source-note">L'ASCQ est appelé « ASQQ » dans la fiche NCTSN. Ne pas confondre avec les entretiens d'attachement (AAI, CAI).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Réponses de 1 (All wrong) à 5 (Very right) ; aucun item inversé. Trois facteurs de 5 items : sécure = items 1, 3, 7, 10, 15 ; anxieux-ambivalent = items 5, 6, 9, 11, 14 ; évitant = items 2, 4, 8, 12, 13. Le score de chaque facteur est la somme (5 à 25) de ses items ; l'enfant est classé dans la catégorie du facteur dont le score est le plus élevé (« The highest score obtained in one of the three factors determines the category of attachment », Richaud et al., 2019).</p>
+    <p>La règle en cas d'égalité n'est pas publiée : la page n'attribue alors aucune catégorie. Aucun seuil publié. Une version à 12 items (items 6, 13 et 15 retirés) a été utilisée en Argentine ; elle n'est pas reprise ici.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Items, consigne et clé : lus sur un agrégateur secondaire (db.arabpsychology.com) ; la structure et la clé sont recoupées avec un article en accès libre (Richaud, Mesurado &amp; Minzi, 2019, Int J Psychol Res, CC BY-NC-SA) et avec la fiche NCTSN (15 items, trois catégories). Les libellés de cet article argentin diffèrent légèrement (retraduction) : l'appariement mot pour mot n'est pas prouvé. Ni la publication hébraïque de 1996 ni Finzi et al. (2000) n'ont pu être lues.</p>
+    <p class="reserve">Licence incertaine : la fiche NCTSN indique « Cost: Free » et « Copyrighted: No », mais l'agrégateur précise que les chercheurs doivent contacter l'auteur principal (Ricky Finzi-Dottan) pour obtenir l'autorisation d'usage. Pas de version française trouvée.</p>
+    <p class="source-note">Finzi, R., Har-Even, D., Weizman, A., Tyano, S., &amp; Shnit, D. (1996). <em>Psychologia: Israel Journal of Psychology, 5</em>(2), 167-177. Richaud, M. C., Mesurado, B., &amp; Minzi, M. C. (2019). <em>International Journal of Psychological Research, 12</em>(2).</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ECIPQ : cyberharcèlement subi et commis (adolescents)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #633285;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#633285;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#2F1641;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#633285;background:#EEE6F4;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#2F1641;border-color:#E0D9C9;}
+  .btn-primary{background:#633285;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#633285;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#2F1641;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">ECIPQ : Cyberharcèlement : subi et commis</h1>
+    <p class="lead">Questionnaire <strong>rempli par l’adolescent</strong> : 22 situations en ligne, onze subies et onze commises, avec la fréquence de chacune.</p>
+    <p class="consigne">Pour chaque phrase (en anglais), indique à quelle fréquence la situation s’est produite. La période de référence n’est pas reproduite dans la source lue pour les items ; une étude indique « over the last two months » (les deux derniers mois). Libellé de création de la page.</p>
+    <p class="lang-note">Questions en anglais, non traduites (aucune version française lue). Licence : incertaine.</p>
+    <div class="pill-row">
+      <span class="pill">22 questions</span>
+      <span class="pill">5 minutes</span>
+      <span class="pill">Auto-questionnaire adolescent</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Brighi et coll. (2012) ; Del Rey et coll. (2015) ; Álvarez-Marín et coll. (2022). Outil d'auto-évaluation : ne remplace pas un entretien clinique ni un bilan.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["Someone said nasty things to me or called me names using texts or online messages.", "Someone said nasty things about me to others either online or through text messages.", "Someone threatened me through texts or online messages.", "Someone hacked into my account and stole personal information.", "Someone hacked into my account and pretended to be me.", "Someone created a fake account, pretending to be me.", "Someone posted personal information about me online.", "Someone posted embarrassing videos or pictures of me online.", "Someone altered pictures or videos of me that I had posted online", "I was excluded or ignored by others in a social networking site or Internet chatroom.", "Someone spread rumors about me on the Internet", "I said nasty things to someone or called them names using texts or online messages].", "I said nasty things about someone to other people either online or through text messages.", "I threatened someone through texts or online messages.", "I hacked into someone’s account and stole personal information.", "I hacked into someone’s account and pretended to be them.", "I created a fake account, pretending to be someone else.", "I posted personal information about someone online.", "I posted embarrassing videos or pictures of someone online", "I altered pictures or videos of another person that had been posted online.", "I excluded or ignored someone in a social networking site or Internet chatroom", "I spread rumors about someone on the Internet"];
+  var G = [{"label": "", "opts": ["never", "once or twice", "once or twice a month", "about once a week", "more than once a week"], "vals": [0, 1, 2, 3, 4]}];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = null;              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var A = answers.map(function(a){ return a[0]; });
+    function sum(a, b){ var s = 0; for (var k = a; k <= b; k++) s += A[k-1]; return s; }
+    function anyge(a, b){ for (var k = a; k <= b; k++) if (A[k-1] >= 2) return true; return false; }
+    var sv = sum(1, 11), sa = sum(12, 22), v = anyge(1, 11), g = anyge(12, 22);
+    html += '<table class="result-table">' + row('Cyber-victimisation, questions 1 à 11 (0 à 44)', sv) + row('Cyber-agression, questions 12 à 22 (0 à 44)', sa) + row('Au moins une situation subie à « once or twice a month » ou plus', v ? 'oui' : 'non') + row('Au moins une situation commise à « once or twice a month » ou plus', g ? 'oui' : 'non') + '</table>';
+    var cls = (v && !g) ? 'Selon la définition de l’étude de validation espagnole, ce profil correspond à une victime (au moins une situation subie à cette fréquence, aucune commise).' : (g && !v) ? 'Selon la définition de l’étude de validation espagnole, ce profil correspond à un agresseur (au moins une situation commise à cette fréquence, aucune subie).' : (v && g) ? 'Des situations subies et commises à cette fréquence : ce profil n’entre ni dans la catégorie victime, ni dans la catégorie agresseur de l’étude de validation espagnole.' : 'Aucune situation subie ou commise à la fréquence « once or twice a month » ou plus.';
+    html += '<p class="result-text">' + cls + ' Il n’existe pas de seuil clinique pour ce questionnaire.</p>';
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ECIPQ : cyberharcèlement subi et commis (adolescents)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#68358D 0%,#D0B5E3 55%,#2F1641 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#2F1641;background:#EEE6F4;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #633285;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#633285;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#2F1641;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">ECIPQ</span></div>
+
+  <h1 class="serif">European Cyberbullying Intervention Project Questionnaire (ECIPQ)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">ECIPQ : Brighi, Ortega, Pyzalski, Scheithauer, Smith et Tsormpatzoudis (2012) ; items anglais lus dans Álvarez-Marín et coll. (2022).</p>
+  <div class="meta-row">
+    <span class="pill">22 questions</span>
+    <span class="pill">5 minutes</span>
+    <span class="pill">Auto-questionnaire adolescent</span>
+    <span class="pill">Anglais</span>
+    <span class="pill">Cyberharcèlement</span>
+    <span class="pill">Licence : incertaine</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="ecipq-cyberharcelement.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>L’ECIPQ est un questionnaire de 22 questions sur le cyberharcèlement : les onze premières décrivent des situations subies (insultes, rumeurs, usurpation d’identité, piratage de compte, diffusion de photos ou de vidéos, exclusion en ligne, etc.), les onze suivantes les mêmes situations commises envers d’autres personnes. Chaque question est cotée de 0 (never) à 4 (more than once a week).</p>
+    <p class="source-note">Questionnaire rempli par l’<strong>adolescent</strong> ; l’étude de validation lue porte sur 1972 élèves âgés de 14 à 30 ans (enseignement secondaire, lycée et formation professionnelle, Espagne).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Options de réponse : never (0), once or twice (1), once or twice a month (2), about once a week (3), more than once a week (4). Les onze premières questions forment la sous-échelle de cyber-victimisation et les onze suivantes celle de cyber-agression ; la page additionne les onze questions de chaque sous-échelle (0 à 44).</p>
+    <p>Dans l’étude de validation espagnole, un participant est classé « victime » s’il a subi au moins une des situations avec une fréquence minimale de « once or twice a month » sans avoir commis de situation à cette fréquence, et « agresseur » dans le cas inverse.</p>
+    <p class="reserve">Aucun seuil clinique ni norme française n’a été trouvé (FR- provisoire). La somme par sous-échelle est déduite du nombre de questions et de l’échelle de réponse ; l’article lu ne détaille pas de formule de somme. La période de référence de la consigne est un libellé de création (voir Source et droits).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Les 22 questions anglaises sont lues dans le tableau 1 de Álvarez-Marín et coll. (2022, accès libre, CC BY) ; la consigne d’origine n’y figure pas. La période « over the last two months » provient d’une autre étude (adolescents italiens) qui décrit le questionnaire. Dans le tableau source, la question 12 contient un crochet fermant parasite et plusieurs questions n’ont pas de point final : ces graphies sont conservées. Aucune version française n’a été lue : questions non traduites.</p>
+    <p class="reserve">Licence : incertaine. Aucune mention de licence de l’outil n’a été trouvée.</p>
+    <p class="source-note">Références : Álvarez-Marín I, Pérez-Albéniz A, Lucas-Molina B, Martínez-Valderrey V, Fonseca-Pedrero E (2022). Assessing cyberbullying in adolescence: new evidence for the Spanish version of the European Cyberbullying Intervention Project Questionnaire (ECIP-Q). Int J Environ Res Public Health, 19(21), 14196. Brighi A, Ortega R, Pyzalski J, Scheithauer H, Smith PK, Tsormpatzoudis H (2012). European Cyberbullying Intervention Project Questionnaire (ECIPQ). Del Rey R, Casas JA, Ortega-Ruiz R, et al. (2015). Structural validation and cross-cultural robustness of the European Cyberbullying Intervention Project Questionnaire. Computers in Human Behavior, 50, 141-147.</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

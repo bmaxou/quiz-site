@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BDI-II : Inventaire de dépression de Beck</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #323E85;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#323E85;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#161B41;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#323E85;background:#E6E8F4;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#161B41;border-color:#E0D9C9;}
+  .btn-primary{background:#323E85;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#323E85;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#161B41;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">BDI-II : Inventaire de dépression de Beck (2e édition)</h1>
+    <p class="lead">21 groupes d’énoncés : dans chaque groupe, choisir l’énoncé qui décrit le mieux les deux dernières semaines, aujourd’hui inclus. Auto-questionnaire pour adulte.</p>
+    <p class="consigne">Ce questionnaire comporte 21 groupes d&#x27;énoncés. Veuillez lire avec soin chacun de ces groupes puis, dans chaque groupe, choisissez l&#x27;énoncé qui décrit le mieux comment vous vous êtes senti(e) au cours des deux dernières semaines, incluant aujourd&#x27;hui. Encerclez alors le chiffre placé devant l&#x27;énoncé que vous avez choisi. Si, dans un groupe d&#x27;énoncés, vous en trouvez plusieurs qui semblent décrire également bien ce que vous ressentez, choisissez celui qui a le chiffre le plus élevé et encerclez ce chiffre. Assurez-vous bien de ne choisir qu&#x27;un seul énoncé dans chaque groupe, y compris le groupe #16 et #18.</p>
+    <p class="lang-note">Questions en français (version reproduite dans un mémoire de médecine ; traducteur non indiqué). Licence requise : le BDI-II est un test commercialisé.</p>
+    <div class="pill-row">
+      <span class="pill">21 groupes d’énoncés</span>
+      <span class="pill">Un énoncé par groupe</span>
+      <span class="pill">Score de 0 à 63</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Beck, Steer et Brown (1996), BDI-II ; version française de l’annexe du mémoire de Paryl (Montpellier, 2024) ; catégories d’après Barateau et coll. (Neurology, 2020). Outil de dépistage/d’auto-évaluation : ne remplace pas un entretien clinique ni un bilan.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["Tristesse", "Pessimisme", "Échecs dans le passé", "Perte de plaisir", "Sentiments de culpabilité", "Sentiment d'être puni(e)", "Sentiments négatifs envers soi-même", "Attitude critique envers soi", "Pensées ou désirs de suicide", "Pleurs", "Agitation", "Perte d'intérêt", "Indécision", "Dévalorisation", "Perte d'énergie", "Modifications dans les habitudes de sommeil", "Irritabilité", "Modifications de l'appétit", "Difficulté à se concentrer", "Fatigue", "Perte d'intérêt pour le sexe"];
+  var G = [];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = [[{"label": "", "opts": ["Je ne me sens pas triste.", "Je me sens très souvent triste.", "Je suis tout le temps triste.", "Je suis si triste ou si malheureux(se) que ce n'est pas supportable."], "vals": [0, 10, 20, 30]}], [{"label": "", "opts": ["Je ne suis pas découragé(e) face à mon avenir.", "Je me sens plus découragé(e) qu'avant face à mon avenir.", "Je ne m'attends pas à ce que les choses s'arrangent pour moi.", "J'ai le sentiment que mon avenir est sans espoir et qu'il ne peut qu'empirer."], "vals": [0, 10, 20, 30]}], [{"label": "", "opts": ["Je n'ai pas le sentiment d'avoir échoué dans la vie, d'être un(e) raté(e).", "J'ai échoué plus souvent que je n'aurais dû.", "Quand je pense à mon passé, je constate un grand nombre d'échecs.", "J'ai le sentiment d'avoir complètement raté ma vie."], "vals": [0, 10, 20, 30]}], [{"label": "", "opts": ["J'éprouve toujours autant de plaisir qu'avant aux choses qui me plaisent.", "Je n'éprouve pas autant de plaisir aux choses qu'avant.", "J'éprouve très peu de plaisir aux choses qui me plaisaient habituellement.", "Je n'éprouve aucun plaisir aux choses qui me plaisaient habituellement."], "vals": [0, 10, 20, 30]}], [{"label": "", "opts": ["Je ne me sens pas particulièrement coupable.", "Je me sens coupable pour bien des choses que j'ai faites ou que j'aurais dû faire.", "Je me sens coupable la plupart du temps.", "Je me sens tout le temps coupable."], "vals": [0, 10, 20, 30]}], [{"label": "", "opts": ["Je n'ai pas le sentiment d'être puni(e).", "Je sens que je pourrais être puni(e).", "Je m'attends à être puni(e).", "J'ai le sentiment d'être puni(e)."], "vals": [0, 10, 20, 30]}], [{"label": "", "opts": ["Mes sentiments envers moi-même n'ont pas changé.", "J'ai perdu confiance en moi.", "Je suis déçu(e) par moi-même.", "Je ne m'aime pas du tout."], "vals": [0, 10, 20, 30]}], [{"label": "", "opts": ["Je ne me blâme pas ou ne me critique pas plus que d'habitude.", "Je suis plus critique envers moi-même que je ne l'étais.", "Je me reproche tous mes défauts.", "Je me reproche tous les malheurs qui arrivent."], "vals": [0, 10, 20, 30]}], [{"label": "", "opts": ["Je ne pense pas du tout à me suicider.", "Il m'arrive de penser à me suicider, mais je ne le ferai pas.", "J'aimerais me suicider.", "Je me suiciderais si l'occasion se présentait."], "vals": [0, 10, 20, 30]}], [{"label": "", "opts": ["Je ne pleure pas plus qu'avant.", "Je pleure plus qu'avant.", "Je pleure pour la moindre petite chose.", "Je voudrais pleurer mais je ne suis pas capable."], "vals": [0, 10, 20, 30]}], [{"label": "", "opts": ["Je ne suis pas plus agité(e) ou plus tendu(e) que d'habitude.", "Je me sens plus agité(e) ou plus tendu(e) que d'habitude.", "Je suis si agité(e) ou tendu(e) que j'ai du mal à rester tranquille.", "Je suis si agité(e) ou tendu(e) que je dois continuellement bouger ou faire quelque chose."], "vals": [0, 10, 20, 30]}], [{"label": "", "opts": ["Je n'ai pas perdu d'intérêt pour les gens ou pour les activités.", "Je m'intéresse moins qu'avant aux gens et aux choses.", "Je ne m'intéresse presque plus aux gens et aux choses.", "J'ai du mal à m'intéresser à quoique ce soit."], "vals": [0, 10, 20, 30]}], [{"label": "", "opts": ["Je prends des décisions toujours aussi bien qu'avant.", "Il m'est plus difficile que d'habitude de prendre des décisions.", "J'ai beaucoup plus de mal qu'avant à prendre des décisions.", "J'ai du mal à prendre n'importe quelle décision."], "vals": [0, 10, 20, 30]}], [{"label": "", "opts": ["Je pense être quelqu'un de valable.", "Je ne crois pas avoir autant de valeur ni être aussi utile qu'avant.", "Je me sens moins valable que les autres.", "Je sens que je ne vaux absolument rien."], "vals": [0, 10, 20, 30]}], [{"label": "", "opts": ["J'ai toujours autant d'énergie qu'avant.", "J'ai moins d'énergie qu'avant.", "Je n'ai pas assez d'énergie pour pouvoir faire grand-chose.", "J'ai trop peu d'énergie pour faire quoi que ce soit."], "vals": [0, 10, 20, 30]}], [{"label": "", "opts": ["Mes habitudes de sommeil n'ont pas changé.", "Je dors un peu plus que d'habitude.", "Je dors un peu moins que d'habitude.", "Je dors beaucoup plus que d'habitude.", "Je dors beaucoup moins que d'habitude.", "Je dors presque toute la journée.", "Je me réveille une ou deux heures plus tôt et je suis incapable de me rendormir."], "vals": [0, 10, 11, 20, 21, 30, 31]}], [{"label": "", "opts": ["Je ne suis pas plus irritable que d'habitude.", "Je suis plus irritable que d'habitude.", "Je suis beaucoup plus irritable que d'habitude.", "Je suis constamment irritable."], "vals": [0, 10, 20, 30]}], [{"label": "", "opts": ["Mon appétit n'a pas changé.", "J'ai un peu moins d'appétit que d'habitude.", "J'ai un peu plus d'appétit que d'habitude.", "J'ai beaucoup moins d'appétit que d'habitude.", "J'ai beaucoup plus d'appétit que d'habitude.", "Je n'ai pas d'appétit du tout.", "J'ai constamment envie de manger."], "vals": [0, 10, 11, 20, 21, 30, 31]}], [{"label": "", "opts": ["Je parviens à me concentrer toujours aussi bien qu'avant.", "Je ne parviens pas à me concentrer aussi bien que d'habitude.", "J'ai du mal à me concentrer longtemps sur quoi que ce soit.", "Je me trouve incapable de me concentrer sur quoi que ce soit."], "vals": [0, 10, 20, 30]}], [{"label": "", "opts": ["Je ne suis pas plus fatigué(e) que d'habitude.", "Je me fatigue plus facilement que d'habitude.", "Je suis trop fatigué(e) pour faire un grand nombre de choses que je faisais avant.", "Je suis trop fatigué(e) pour faire la plupart des choses que je faisais avant."], "vals": [0, 10, 20, 30]}], [{"label": "", "opts": ["Je n'ai pas noté de changement récent dans mon intérêt pour le sexe.", "Le sexe m'intéresse moins qu'avant.", "Le sexe m'intéresse beaucoup moins maintenant.", "J'ai perdu tout intérêt pour le sexe."], "vals": [0, 10, 20, 30]}]];              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var tot = 0;
+    answers.forEach(function(a){ tot += Math.floor(a[0] / 10); });
+    var g9 = Math.floor(answers[8][0] / 10);
+    var cat = tot <= 13 ? "0 à 13 : symptômes absents ou minimes" : (tot <= 19 ? "14 à 19 : symptômes légers" : "20 à 63 : symptômes modérés à sévères");
+    html += '<table class="result-table">' + row('Score total (0 à 63)', tot) + row('Groupe 9 : pensées ou désirs de suicide (0 à 3)', g9) + '</table>';
+    html += '<p class="result-text">Catégorie du mémoire de Montpellier (2024), d’après Barateau et coll. (2020) : ' + cat + '.</p>';
+    if (g9 > 0) html += '<p class="result-text">Une réponse supérieure à 0 au groupe 9 (pensées ou désirs de suicide) est à explorer en entretien.</p>';
+    html += '<p class="result-text">Ces catégories viennent d’un mémoire de médecine ; aucune norme française n’a été trouvée.</p>';
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BDI-II : Inventaire de dépression de Beck</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#35418D 0%,#B5BBE3 55%,#161B41 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#161B41;background:#E6E8F4;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #323E85;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#323E85;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#161B41;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">BDI-II</span></div>
+
+  <h1 class="serif">Inventaire de dépression de Beck, deuxième édition (BDI-II)</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">BDI-II : Beck, Steer et Brown (1996) ; version française reproduite en annexe d’un mémoire de médecine (Université de Montpellier, 2024).</p>
+  <div class="meta-row">
+    <span class="pill">21 groupes d’énoncés</span>
+    <span class="pill">Un énoncé par groupe</span>
+    <span class="pill">Score de 0 à 63</span>
+    <span class="pill">Français</span>
+    <span class="pill">Dépression</span>
+    <span class="pill">Auto-questionnaire</span>
+    <span class="pill">Licence : requise</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="bdi-ii-inventaire-depression-beck.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>Le BDI-II est un auto-questionnaire de 21 groupes d’énoncés qui explore les symptômes dépressifs des deux dernières semaines (tristesse, pessimisme, sentiment d’échec, culpabilité, pensées ou désirs de suicide, modifications du sommeil et de l’appétit, fatigue, etc.). Pour chaque groupe, la personne choisit l’énoncé qui décrit le mieux son état, aujourd’hui inclus.</p>
+    <p class="source-note">Chaque groupe est affiché avec son intitulé tel qu’il figure dans l’annexe (par exemple « Tristesse »), puis les énoncés proposés.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>Chaque groupe est coté par le chiffre de l’énoncé choisi (0 à 3). Pour les groupes 16 (modifications du sommeil) et 18 (modifications de l’appétit), qui comptent sept énoncés cotés 0, 1, 1, 2, 2, 3, 3, les deux énoncés d’une même valeur comptent la même valeur. Le total est la somme des 21 groupes (0 à 63).</p>
+    <p>Le mémoire de Montpellier (2024) utilise trois catégories, qu’il emprunte à Barateau et coll. (Neurology, 2020) : 0 à 13 (symptômes absents ou minimes), 14 à 19 (symptômes légers), 20 à 63 (symptômes modérés à sévères). Il étudie aussi le groupe 9 (pensées ou désirs de suicide) isolément (0 à 3) : la page l’affiche à part.</p>
+    <p class="reserve">Les catégories sont celles d’un mémoire de médecine qui les cite d’un article de neurologie : source secondaire, aucune norme de population française n’a été trouvée. Dans ce mémoire, les scores moyens étaient de 5,70 (écart-type 6,04) chez des témoins (n = 464) et de 12,80 (9,27) chez des patients atteints d’hypersomnie idiopathique non traités (n = 265) : ce sont des moyennes descriptives, pas des normes.</p>
+    <p class="reserve">La page affiche à part la réponse au groupe 9 : toute réponse supérieure à 0 est à explorer en entretien (rappel de la page, pas une règle du mémoire).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Le texte intégral des 21 groupes est lu dans l’annexe d’un mémoire de médecine (Université de Montpellier, 2024) et comparé énoncé par énoncé avec l’annexe d’un autre mémoire de médecine : tous les énoncés et toutes les valeurs coïncident, sauf deux détails de rédaction (groupe 9 : « je ne le ferai pas » dans la source principale, « je ne le ferais pas » dans l’autre ; groupe 20 : faute de frappe « fatiqué(e) » de la source principale corrigée en « fatigué(e) »). Les étiquettes a/b des groupes 16 et 18 ne sont pas affichées (fautes de frappe dans la source). La source ne dit pas qui a traduit cette version ; une autre version française existe (adaptation québécoise de Chaloult et Goulet, 2001), au texte différent, non utilisée ici.</p>
+    <p class="reserve">Licence : requise. Aucune mention de licence ni de droits dans le mémoire (référence citée : Beck Depression Inventory–II, psycnet.apa.org, PsycTESTS). Le BDI-II est un test commercialisé (Pearson). Aucune mention de droits n’a été trouvée dans les annexes lues ; la reproduction doit être autorisée par l’éditeur.</p>
+    <p class="source-note">Références : Paryl M-G. Depressive symptoms and suicidal thoughts in idiopathic hypersomnia. Mémoire de médecine, Université de Montpellier, 2024. HAL dumas-05069334 (annexe : BDI-II en français, 21 groupes). Beck AT, Steer RA, Brown GK. Beck Depression Inventory–II. 1996 (PsycTESTS, doi 10.1037/t00742-000, cité par le mémoire). Barateau L, Lopez R, Chenini S, Pesenti C, Rassu AL, Jaussent I, et al. Depression and suicidal thoughts in untreated and treated narcolepsy: Systematic analysis. Neurology. 2020;95(20):e2755-e2768 (source des catégories citée par le mémoire). Quelles sont les échelles utilisées pour le dépistage de la dépression chez l&#x27;adolescent ? Mémoire de médecine, HAL dumas-03540718 (annexe 2 : BDI-II en français, utilisé pour la vérification croisée du texte).</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>

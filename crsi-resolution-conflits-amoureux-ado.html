@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<script>if(/[?&]fiche(=|&|$)/.test(location.search)){document.documentElement.className+=" vue-fiche";}</script>
+<style>html.vue-fiche body{visibility:hidden}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CRSI : résolution de conflits amoureux (ado)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .card{background:#FFFFFF;border:1px solid #E0D9C9;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgba(20,26,32,.06), 0 18px 34px -20px rgba(20,26,32,.28);}
+  h1{font-size:26px;margin:0 0 12px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 20px;}
+  .consigne{font-size:13.5px;color:#20241E;background:#F4F1EA;border-left:3px solid #857032;border-radius:6px;padding:12px 14px;margin:0 0 18px;white-space:pre-line;}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#F4F1EA;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .start-btn{background:#857032;color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .lang-note{font-size:12px;color:#9A9E90;font-style:italic;margin:0 0 20px;}
+  .progress{font-size:12px;color:#9A9E90;margin:0 0 14px;}
+  .q-text{font-size:16px;margin:0 0 20px;white-space:pre-line;}
+  .g-label{font-size:12.5px;font-weight:700;color:#413616;margin:16px 0 8px;}
+  .opt-row{display:flex;flex-direction:column;gap:8px;}
+  .opt-row.compact{flex-direction:row;flex-wrap:wrap;}
+  .opt-row.compact .opt{padding:10px 14px;min-width:46px;justify-content:center;}
+  .opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid #E0D9C9;border-radius:10px;cursor:pointer;font-size:14px;}
+  .opt.selected{border-color:#857032;background:#F4F1E6;}
+  .num-in{width:120px;padding:10px 12px;border:1px solid #E0D9C9;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;}
+  .nav-row{display:flex;justify-content:space-between;margin-top:24px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid transparent;}
+  .btn-secondary{background:#F4F1EA;color:#413616;border-color:#E0D9C9;}
+  .btn-primary{background:#857032;color:#fff;}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;}
+  .result-score{font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;color:#857032;margin:0 0 4px;}
+  .result-max{font-size:14px;color:#9A9E90;margin:0 0 18px;}
+  .result-text{font-size:14.5px;color:#20241E;margin:0 0 12px;}
+  .result-table{width:100%;border-collapse:collapse;margin:0 0 12px;}
+  .result-table td{padding:9px 0;border-bottom:1px solid #E0D9C9;font-size:14px;}
+  .result-table td:last-child{text-align:right;font-weight:700;color:#413616;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;}
+  .footnote{margin-top:24px;font-size:11.5px;color:#63695D;border-top:1px solid #E0D9C9;padding-top:16px;}
+  @media print{ .no-print{display:none!important;} body{background:#fff;} .card{box-shadow:none;border:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow no-print">Cabinet Bouche &amp; Chmura</div>
+
+  <div id="screen-start" class="card">
+    <h1 class="serif">CRSI : stratégies de résolution de conflit dans le couple (adolescent)</h1>
+    <p class="lead">16 comportements possibles lors d’un conflit avec son chum ou sa blonde. Pour chacun, l’adolescent dit à quelle fréquence il l’a adopté, puis à quelle fréquence son partenaire l’a adopté, au cours de la dernière année.</p>
+    <p class="consigne">Même si un couple s’entend bien, il arrive que les partenaires aient des attentes différentes, qu’ils se contrarient ou qu’ils se disputent simplement parce qu’ils sont de mauvaise humeur, qu’ils sont fatigués ou pour d’autres raisons. Réfléchis à ta façon d’agir lors d’un conflit avec ton chum / ta blonde (c’est-à-dire lorsque vous n’êtes pas en accord à propos de quelque chose). Pour chacune des affirmations ci-dessous, indique 1) à quelle fréquence as-tu adopté l’un de ces comportements au cours de la dernière année; 2) à quelle fréquence ton chum / ta blonde a adopté l’un de ces comportements au cours de la dernière année.
+1 = Jamais   2 = Parfois   3 = Souvent   4 = Presque toujours   5 = Toujours</p>
+    <p class="lang-note">Questions en français (Québec), adaptation de la capsule ÉVISSA, non validée en France. Cotation déduite (voir la fiche). Licence : incertaine.</p>
+    <div class="pill-row">
+      <span class="pill">16 questions × 2 réponses</span>
+      <span class="pill">6 minutes</span>
+      <span class="pill">Jamais à Toujours</span>
+    </div>
+    <button class="start-btn" id="btn-start">Commencer</button>
+  </div>
+
+  <div id="screen-quiz" class="card" hidden>
+    <p class="progress" id="progress-text"></p>
+    <p class="q-text" id="q-text"></p>
+    <div id="groups"></div>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-prev">Précédent</button>
+      <button class="btn btn-primary" id="btn-next" disabled>Suivant</button>
+    </div>
+  </div>
+
+  <div id="screen-result" class="card" hidden>
+    <h1 class="serif">Résultat</h1>
+    <div id="result-body"></div>
+    <p class="footnote">Kurdek LA. J Marriage Fam 1994 ;56(3):705-722 ; Fortin A, Paradis A, Lapierre A, Hébert M (2019). Capsule de mesure #9, ÉVISSA, UQAM. Outil d’auto-évaluation : ne remplace pas un entretien clinique ni un bilan.</p>
+    <div class="nav-row no-print">
+      <button class="btn btn-secondary" id="btn-restart">Recommencer</button>
+      <button class="btn btn-primary" id="btn-print">Imprimer / PDF</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var items = ["Attaquer l’autre dans ses faiblesses.", "Se concentrer sur le problème en question.", "Rester en silence pendant une longue période.", "Discuter ouvertement du problème pour trouver une solution.", "Exploser et perdre le contrôle.", "S’asseoir e et discuter de nos désaccords de façon constructive.", "Se fermer et décider de ne pas discuter davantage.", "Identifier les préoccupations et les inquiétudes de chacun et les prendre en compte.", "S’emporter et dire des choses qu’on ne pense pas.", "Trouver des solutions acceptables pour chacun.", "Ignorer l’autre.", "Accepter de faire des concessions.", "Insulter ou faire des remarques blessantes.", "Négocier et faire des compromis.", "Se retirer, être distant.e et se montrer désintéressé.e.", "Trouver le juste milieu entre sa position et celle de l’autre."];
+  var G = [{"label": "TOI", "opts": ["Jamais", "Parfois", "Souvent", "Presque toujours", "Toujours"], "vals": [1, 2, 3, 4, 5]}, {"label": "TON CHUM / TA BLONDE A FAIT CELA.", "opts": ["Jamais", "Parfois", "Souvent", "Presque toujours", "Toujours"], "vals": [1, 2, 3, 4, 5]}];           /* groupes de réponses communs : [{label, opts:[...], vals:[...]}] ; ou {type:'num', min, max} */
+  var GI = null;              /* null, ou liste (une entrée par item) de listes de groupes propres à l'item */
+  function gof(i){ return GI ? GI[i] : G; }
+  var answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+  var idx = 0;
+
+  function complete(i){ return answers[i].every(function(a){ return a !== null; }); }
+
+  function renderQuestion(){
+    document.getElementById('progress-text').textContent = 'Question ' + (idx+1) + ' / ' + items.length;
+    document.getElementById('q-text').textContent = items[idx];
+    var box = document.getElementById('groups');
+    box.innerHTML = '';
+    gof(idx).forEach(function(g, gi){
+      if (g.label){
+        var l = document.createElement('p'); l.className = 'g-label'; l.textContent = g.label; box.appendChild(l);
+      }
+      if (g.type === 'num'){
+        var inp = document.createElement('input'); inp.type = 'number'; inp.className = 'num-in'; inp.min = g.min; inp.max = g.max; inp.step = 1;
+        inp.setAttribute('inputmode', 'numeric');
+        if (answers[idx][gi] !== null) inp.value = answers[idx][gi];
+        inp.addEventListener('input', function(){
+          var t = inp.value.trim(), n = Number(t);
+          answers[idx][gi] = (t !== '' && isFinite(n) && Math.floor(n) === n && n >= g.min && n <= g.max) ? n : null;
+          document.getElementById('btn-next').disabled = !complete(idx);
+        });
+        box.appendChild(inp);
+        return;
+      }
+      var row = document.createElement('div'); row.className = 'opt-row' + (g.opts.length > 6 ? ' compact' : '');
+      g.opts.forEach(function(label, v){
+        var d = document.createElement('div');
+        d.className = 'opt' + (answers[idx][gi] === g.vals[v] ? ' selected' : '');
+        d.textContent = label;
+        d.addEventListener('click', function(){ answers[idx][gi] = g.vals[v]; renderQuestion(); });
+        row.appendChild(d);
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('btn-prev').disabled = idx === 0;
+    document.getElementById('btn-next').disabled = !complete(idx);
+    document.getElementById('btn-next').textContent = idx === items.length - 1 ? 'Voir le résultat' : 'Suivant';
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function(){
+    document.getElementById('screen-start').hidden = true;
+    document.getElementById('screen-quiz').hidden = false;
+    renderQuestion();
+  });
+  document.getElementById('btn-prev').addEventListener('click', function(){
+    if (idx > 0){ idx--; renderQuestion(); }
+  });
+  document.getElementById('btn-next').addEventListener('click', function(){
+    if (!complete(idx)) return;
+    if (idx < items.length - 1){ idx++; renderQuestion(); } else { showResult(); }
+  });
+
+  function row(label, val){ return '<tr><td>' + label + '</td><td>' + val + '</td></tr>'; }
+
+  function computeResult(){
+    var html = '';
+    var rows = '';
+    function mean(list, g){ var s = 0; list.forEach(function(k){ s += answers[k - 1][g]; }); return (s / list.length).toFixed(2).replace('.', ','); }
+    rows += row("Toi : résolution positive, moyenne (items 2, 4, 6, 8, 10, 12, 14, 16 ; 1 à 5)", mean([2, 4, 6, 8, 10, 12, 14, 16], 0));
+    rows += row("Toi : confrontation, moyenne (items 1, 5, 9, 13 ; 1 à 5)", mean([1, 5, 9, 13], 0));
+    rows += row("Toi : évitement, moyenne (items 3, 7, 11, 15 ; 1 à 5)", mean([3, 7, 11, 15], 0));
+    rows += row("Ton chum / ta blonde : résolution positive, moyenne (items 2, 4, 6, 8, 10, 12, 14, 16 ; 1 à 5)", mean([2, 4, 6, 8, 10, 12, 14, 16], 1));
+    rows += row("Ton chum / ta blonde : confrontation, moyenne (items 1, 5, 9, 13 ; 1 à 5)", mean([1, 5, 9, 13], 1));
+    rows += row("Ton chum / ta blonde : évitement, moyenne (items 3, 7, 11, 15 ; 1 à 5)", mean([3, 7, 11, 15], 1));
+    html += '<table class="result-table">' + rows + '</table>';
+    html += '<p class="result-text">Moyenne des réponses de chaque sous-échelle (de 1 à 5). La source ne donne ni seuil ni norme ; la composition des sous-échelles est déduite de l’analyse factorielle de la source (voir la fiche).</p>';
+    document.getElementById('result-body').innerHTML = html;
+  }
+
+  function showResult(){
+    document.getElementById('screen-quiz').hidden = true;
+    document.getElementById('screen-result').hidden = false;
+    computeResult();
+  }
+
+  document.getElementById('btn-restart').addEventListener('click', function(){
+    answers = items.map(function(x, i){ return gof(i).map(function(){ return null; }); });
+    idx = 0;
+    document.getElementById('screen-result').hidden = true;
+    document.getElementById('screen-start').hidden = false;
+  });
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  window.__test = {answers: function(){ return answers; }, items: items, G: G, GI: GI};
+})();
+</script>
+
+<!-- Fiche (vue praticien) intégrée : affichée à la place du questionnaire quand l'adresse se termine par ?fiche -->
+<template id="fiche-src">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CRSI : résolution de conflits amoureux (ado)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box;}
+  body{margin:0;padding:0;background:#F4F1EA;color:#20241E;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;}
+  h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;color:#20241E;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px 80px;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#63695D;font-weight:600;display:flex;align-items:center;gap:10px;margin:32px 0 22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:#63695D;display:inline-block;}
+  .fiche-photo{position:relative;height:180px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#8D7735 0%,#E3D7B5 55%,#413616 100%);margin-bottom:26px;}
+  .fiche-photo::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.5),transparent 70%);top:-80px;right:-60px;}
+  .fiche-photo .acronym{position:absolute;left:24px;bottom:18px;font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:26px;color:#fff;}
+  h1{font-size:27px;margin:0 0 6px;}
+  .badge-standard{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#413616;background:#F4F1E6;padding:4px 10px;border-radius:999px;margin:0 0 14px;}
+  .lead{font-size:14.5px;color:#63695D;margin:0 0 8px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;}
+  .pill{font-size:12px;font-weight:600;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-radius:999px;padding:5px 12px;}
+  .section{margin-bottom:28px;}
+  .section h2{font-size:18px;margin:0 0 12px;}
+  .section p{font-size:14.5px;margin:0 0 10px;}
+  .source-note{font-size:12.5px;color:#9A9E90;}
+  .reserve{font-size:13px;color:#63695D;background:#FFFFFF;border:1px solid #E0D9C9;border-left:3px solid #857032;border-radius:8px;padding:10px 14px;margin:0 0 10px;}
+  .actions{display:flex;gap:12px;margin:0 0 30px;}
+  .btn{appearance:none;text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;border-radius:10px;padding:11px 20px;cursor:pointer;border:1px solid transparent;}
+  .btn-primary{background:#857032;color:#fff;}
+  .btn-secondary{background:#FFFFFF;color:#413616;border-color:#E0D9C9;}
+</style>
+<div class="wrap">
+  <div class="eyebrow">Cabinet Bouche &amp; Chmura</div>
+
+  <div class="fiche-photo"><span class="acronym">CRSI</span></div>
+
+  <h1 class="serif">Conflict Resolution Styles Inventory (CRSI), adaptation franco-canadienne pour adolescents</h1>
+  <span class="badge-standard">&#10003; Standardisé</span>
+  <p class="lead">CRSI : Kurdek (1994) ; adaptation franco-canadienne de Fortin, Paradis, Lapierre et Hébert, capsule de mesure #9 de l’équipe ÉVISSA (UQAM, novembre 2019).</p>
+  <div class="meta-row">
+    <span class="pill">16 questions × 2 réponses</span>
+    <span class="pill">6 minutes</span>
+    <span class="pill">Jamais à Toujours</span>
+    <span class="pill">Français (Québec)</span>
+    <span class="pill">Adolescent 14 à 19 ans</span>
+    <span class="pill">Cotation déduite</span>
+    <span class="pill">Licence : incertaine</span>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="crsi-resolution-conflits-amoureux-ado.html">Passer le test</a>
+    <a class="btn btn-secondary" href="index.html">Retour au catalogue</a>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Présentation de l&#x27;outil</h2>
+    <p>Le Conflict Resolution Styles Inventory (CRSI) de Kurdek (1994) repère les stratégies de résolution de conflit utilisées dans le couple. L’adaptation franco-canadienne (Fortin, Paradis, Lapierre et Hébert) vise les adolescents en relation amoureuse ; la capsule de mesure #9 publie en annexe les 16 énoncés de la structure retenue à trois facteurs : résolution positive, confrontation et évitement.</p>
+    <p>Chaque énoncé est coté deux fois, de « Jamais » (1) à « Toujours » (5) : « TOI » (le répondant) et « TON CHUM / TA BLONDE A FAIT CELA. » (le partenaire), pour la dernière année. Le vocabulaire est celui du Québec.</p>
+    <p class="source-note">L’énoncé 6 reprend la coquille de la source (« S’asseoir e et discuter… »). La capsule précise que l’étude complète portait sur 20 énoncés (16 du CRSI et 4 inspirés d’un autre outil) ; seuls les 16 de l’annexe sont donnés en français.</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Cotation et interprétation</h2>
+    <p>La capsule ne décrit pas de formule de cotation pour l’adaptation. Pour l’outil original, elle écrit seulement : « Un score moyen est calculé pour chacune des sous-échelles ». La page calcule donc la moyenne des réponses de chaque sous-échelle, pour le répondant et pour le partenaire.</p>
+    <p>Composition des sous-échelles lue dans le Tableau 1 de la capsule (analyse factorielle) : résolution positive (2, 4, 6, 8, 10, 12, 14, 16) ; confrontation (1, 5, 9, 13) ; évitement (3, 7, 11, 15). Les énoncés 11 et 15 ont des saturations complexes ; la capsule dit seulement qu’ils saturent « plus fortement sur leur facteur théorique », et c’est l’évitement qui a été retenu.</p>
+    <p class="reserve">Cotation déduite, non écrite dans la source. Aucun seuil ni norme n’est donné. Étalonnage français : non (FR-, provisoire : validation québécoise sans normes).</p>
+  </div>
+
+  <div class="section">
+    <h2 class="serif">Source et droits (réserves)</h2>
+    <p class="reserve">Les 16 énoncés, la consigne et les réponses sont lus dans l’annexe 2 de la capsule de mesure #9 (Fortin, Paradis, Lapierre et Hébert, novembre 2019). L’article de validation cité par la capsule est indiqué comme « soumis » ; il n’a pas été lu. La validation porte sur 262 puis 224 adolescents québécois de 14 à 19 ans.</p>
+    <p class="reserve">Licence : incertaine. La capsule ne contient aucune phrase de licence ni de permission d’utilisation.</p>
+    <p class="source-note">Fortin A, Paradis A, Lapierre A, Hébert M. Capsule de mesure #9 : Conflict Resolution Styles Inventory, Questionnaire sur les stratégies de résolution de conflit (CRSI ; Kurdek, 1994). Équipe de recherche FQRSC Violence sexuelle et santé (ÉVISSA), UQAM, Montréal ; novembre 2019. Kurdek LA. Conflict resolution styles in gay, lesbian, heterosexual nonparent, and heterosexual parent couples. J Marriage Fam 1994 ;56(3):705-722. Fortin A, Paradis A, Lapierre A, Hébert M. Validation of the French-Canadian adaptation of the Conflict Resolution Styles Inventory for adolescents in dating relationships. Can J Behav Sci (soumis).</p>
+  </div>
+</div>
+</template>
+<script>
+(function(){
+  if(!/[?&]fiche(=|&|$)/.test(location.search)) return;
+  function afficherFiche(){
+    var t = document.getElementById('fiche-src');
+    if(!t) return;
+    var html = '<!doctype html><html lang="fr">' + t.innerHTML + '</html>';
+    document.open(); document.write(html); document.close();
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', afficherFiche); }
+  else { afficherFiche(); }
+})();
+</script>
+</body>
+</html>
